@@ -15,7 +15,7 @@
 最基本的提示，默认在 3 秒后消失。
 
 ```js
-$message().info("这是一条消息提示");
+Rbt.Message.info("这是一条消息提示");
 ```
 
 提示类型
@@ -23,10 +23,10 @@ $message().info("这是一条消息提示");
 不同的提示状态：成功、警告、错误。
 
 ```js
-$message().info("这是一条消息提示");
-$message().success("这是一条消息提示");
-$message().warning("这是一条消息提示");
-$message().error("这是一条消息提示");
+Rbt.Message.info("这是一条消息提示");
+Rbt.Message.success("这是一条消息提示");
+Rbt.Message.warning("这是一条消息提示");
+Rbt.Message.error("这是一条消息提示");
 ```
 
 加载中
@@ -35,12 +35,12 @@ Loading 的状态，并异步在某个时机移除。
 
 ```js
 const key = "updata";
-$message().loading("正在加载中...", {
+Rbt.Message.loading("正在加载中...", {
   duration: 0,
   key,
 });
 setTimeout(() => {
-  $message().destroy(key);
+  Rbt.Message.destroy(key);
 }, 2000);
 ```
 
@@ -49,10 +49,10 @@ setTimeout(() => {
 自定义时长 10s，默认时长为 3s。
 
 ```js
-$message().open(" 我将在10秒后消失", {
+Rbt.Message.open(" 我将在10秒后消失", {
   duration: 10,
   afterClose() {
-    $message().success("我成功消失了");
+    Rbt.Message.success("我成功消失了");
   },
 });
 ```
@@ -62,7 +62,7 @@ $message().open(" 我将在10秒后消失", {
 将参数设置为一个对象，并指定 `closable` 为 true 后可以手动关闭提示
 
 ```js
-$message().info("这是一条消息提示", {
+Rbt.Message.info("这是一条消息提示", {
   closable: true,
 });
 ```
@@ -72,7 +72,7 @@ $message().info("这是一条消息提示", {
 设置参数属性 `background` 为 true 让 message 带背景色
 
 ```js
-$message().info("这是一条消息提示", {
+Rbt.Message.info("这是一条消息提示", {
   background: true,
 });
 ```
@@ -81,11 +81,11 @@ $message().info("这是一条消息提示", {
 
 通过直接调用以下方法来使用组件：
 
-- \$message().info(content,config)
-- \$message().success(content,config)
-- \$message().warning(content,config)
-- \$message().error(content,config)
-- \$message().loading(content,config)
+- \Rbt.Message.info(content,config)
+- \Rbt.Message.success(content,config)
+- \Rbt.Message.warning(content,config)
+- \Rbt.Message.error(content,config)
+- \Rbt.Message.loading(content,config)
 
 以上方法隐式的创建及维护组件。参数 content 为字符串，即显示的内容，参数 config 为对象配置项
 
