@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/alert.css" />
+</head>
+<style>
+    .demo {
+        width: 430px;
+        margin: 20px auto;
+    }
+    
+    .demo .rbt-alert {
+        margin-bottom: 16px;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <div class="rbt-alert rbt-alert-info rbt-alert-with-desc" role="alert">
+            <span class="rbt-alert-icon">
+          <i class="rbt-icon rbt-icon-ios-information-circle-outline"></i>
+        </span>
+            <span class="rbt-alert-message">Success Text</span>
+            <span class="rbt-alert-desc">Content of prompt. Content of prompt. Content of prompt. Content of
+          prompt.</span
+        >
+        <a class="rbt-alert-close">
+          <i class="rbt-icon rbt-icon-ios-close"></i>
+        </a>
+      </div>
+      <div class="rbt-alert rbt-alert-success rbt-alert-no-icon" role="alert">
+        <span class="rbt-alert-message">Success Text</span>
+            <span class="rbt-alert-desc"></span>
+            <a class="rbt-alert-close">
+                <i class="rbt-icon rbt-icon-ios-close"></i>
+            </a>
+        </div>
+        <div class="rbt-alert rbt-alert-warning rbt-alert-no-icon" role="alert">
+            <span class="rbt-alert-message">Success Text</span>
+            <span class="rbt-alert-desc"></span>
+            <a class="rbt-alert-close">
+                <i class="rbt-icon rbt-icon-ios-close"></i>
+            </a>
+        </div>
+        <div class="rbt-alert rbt-alert-error" role="alert">
+            <span class="rbt-alert-icon">
+          <i class="rbt-icon rbt-icon-ios-information-circle"></i>
+        </span>
+            <span class="rbt-alert-message">Success Text</span>
+            <span class="rbt-alert-desc"></span>
+            <a class="rbt-alert-close">
+                <i class="rbt-icon rbt-icon-ios-close"></i>
+            </a>
+        </div> -->
+        <div data-component="alert" id="alert1">
+            <div slot="message">消息提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert2">
+            <div slot="message">成功提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert3">
+            <div slot="message">警告提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert4">
+            <div slot="message">错误提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert5">
+            <div slot="message">消息提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert6">
+            <div slot="message">成功提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert7">
+            <div slot="message">警告提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert8">
+            <div slot="message">错误提示的文案</div>
+        </div>
+
+        <div data-component="alert" id="alert9">
+            <div slot="message">错误提示的文案</div>
+            <div slot="desc">
+                描述的内容描述的内容描述的内容描述的内容描述的内容描述的内容
+            </div>
+        </div>
+        <div data-component="alert" id="alert10">
+            <div slot="message">错误提示的文案</div>
+            <div slot="desc">
+                描述的内容描述的内容描述的内容描述的内容描述的内容描述的内容
+            </div>
+        </div>
+        <div data-component="alert" id="alert11">
+            <div slot="message">错误提示的文案</div>
+            <div slot="desc">
+                描述的内容描述的内容描述的内容描述的内容描述的内容描述的内容
+            </div>
+        </div>
+        <div data-component="alert" id="alert12">
+            <div slot="message">错误提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert13">
+            <div slot="message">错误提示的文案</div>
+            <div slot="desc">
+                描述的内容描述的内容描述的内容描述的内容描述的内容描述的内容
+            </div>
+        </div>
+        <div data-component="alert" id="alert14">
+            <div slot="message">错误提示的文案</div>
+        </div>
+        <div data-component="alert" id="alert15">
+            <div slot="message">错误提示的文案</div>
+            <div slot="desc">
+                描述的内容描述的内容描述的内容描述的内容描述的内容描述的内容
+            </div>
+            <div slot="icon">
+                <i class="rbt-icon rbt-icon-md-heart-empty"></i>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/destory.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./alert.js"></script>
+<script>
+    const rabbit = new Rabbit();
+    rabbit.createComps("#alert1");
+
+    rabbit.createComps("#alert2", {
+        type: "success",
+    });
+
+    rabbit.createComps("#alert3", {
+        type: "warning",
+    });
+
+    rabbit.createComps("#alert4", {
+        type: "error",
+    });
+
+    rabbit.createComps("#alert5", {
+        showIcon: true,
+    });
+
+    rabbit.createComps("#alert6", {
+        type: "success",
+        showIcon: true,
+    });
+
+    rabbit.createComps("#alert7", {
+        type: "warning",
+        showIcon: true,
+    });
+
+    rabbit.createComps("#alert8", {
+        type: "error",
+        showIcon: true,
+    });
+
+    rabbit.createComps("#alert9");
+
+    rabbit.createComps("#alert10", {
+        type: "warning",
+        showIcon: true,
+    });
+
+    rabbit.createComps("#alert11", {
+        type: "success",
+        showIcon: true,
+    });
+
+    rabbit.createComps("#alert12", {
+        closable: true,
+    });
+
+    rabbit.createComps("#alert13", {
+        type: "success",
+        closable: true,
+    });
+
+    rabbit.createComps("#alert14", {
+        type: "warning",
+        closable: true,
+        closeText: "知道了",
+    });
+
+    rabbit.createComps("#alert15", {
+        showIcon: true,
+    });
+</script>
+
+</html>

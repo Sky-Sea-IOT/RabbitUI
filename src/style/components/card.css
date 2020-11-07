@@ -1,0 +1,50 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-card {
+  color: #55585e;
+  font-size: 14px;
+  line-height: 1.5715;
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.rbt-card-bordered {
+  border: 1px solid #e8eaec;
+}
+.rbt-card-hoverable {
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.rbt-card-hoverable:hover {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+.rbt-card-head {
+  min-height: 48px;
+  margin-bottom: -1px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 2px 2px 0 0;
+  color: #2c3e50;
+  border-bottom: 1px solid #e8eaec;
+  padding: 16px 24px;
+}
+.rbt-card-head,
+.rbt-card-head * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rbt-card-extra {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+}
+.rbt-card-body {
+  padding: 24px;
+}
+.rbt-card-body img {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+}

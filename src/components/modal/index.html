@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/modal.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    body {
+        height: 1000px;
+    }
+</style>
+
+<body>
+    <!-- <div class="rbt-modal-root">
+        <div class="rbt-modal-mask rbt-modal-mask-enter-in"></div>
+        <div class="rbt-modal-wrap rbt-modal-enter-in">
+            <div class="rbt-modal" style="width: 520px">
+                <div class="rbt-modal-content">
+                    <a class="rbt-modal-close">
+                        <i class="rbt-icon rbt-icon-ios-close"></i>
+                    </a>
+                    <div class="rbt-modal-header">
+                        <div class="rbt-modal-title">标题</div>
+                    </div>
+                    <div class="rbt-modal-body">
+                        <p>Modal对话框内容</p>
+                    </div>
+                    <div class="rbt-modal-footer">
+                        <button>取消</button>
+                        <button>确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <button onclick="a()" class="rbt-btn">显示</button>
+    <div data-component="modal" id="modal1">
+        <div slot="header">基本对话框</div>
+        <div slot="content">
+            <p>对话框内容</p>
+            <p>对话框内容</p>
+            <p>对话框内容</p>
+        </div>
+        <div slot="footer">
+            <button class="rbt-btn" data-click-action="close">取消</button>
+            <button class="rbt-btn rbt-btn-primary" data-click-action="confirm">
+          确定
+        </button>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/destory.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="./getConfigs.js"></script>
+<script src="../../mixins/modal.js"></script>
+<script src="../../utils/clickAction.js"></script>
+<script src="./modal.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#modal1", {
+        onOk() {
+            alert(1);
+        },
+    });
+
+    a = () => {
+        Modal.visible("#modal1");
+    };
+</script>
+
+</html>

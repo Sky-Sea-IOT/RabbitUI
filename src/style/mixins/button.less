@@ -1,0 +1,23 @@
+.button-size(@padding, @font-size, @border-radius,@height) {
+  padding: @padding;
+  font-size: @font-size;
+  border-radius: @border-radius;
+  height: @height;
+}
+
+.button-color(@color,@background) {
+  color: @color;
+  background-color: @background;
+  border-color: @background;
+}
+
+.button-hover(@color,@background) {
+  color: @color;
+  border-color: @background;
+}
+
+.button-focusd(@color,@shadow-color,@background) {
+  color: @color;
+  box-shadow: 0 0 0 3px @shadow-color;
+  border-color: @background;
+}

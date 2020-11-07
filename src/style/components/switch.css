@@ -1,0 +1,107 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-switch {
+  color: #55585e;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  font-feature-settings: "tnum";
+  line-height: 1.5715;
+  position: relative;
+  display: inline-block;
+  min-width: 44px;
+  height: 22px;
+  line-height: 22px;
+  vertical-align: middle;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.rbt-switch:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+}
+.rbt-switch:hover {
+  box-shadow: none;
+}
+.rbt-switch-handle,
+.rbt-switch-handle::before {
+  position: absolute;
+  transition: all 0.2s ease-in-out;
+}
+.rbt-switch-handle {
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+}
+.rbt-switch-handle::before {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  border-radius: 9px;
+  box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+  content: "";
+}
+.rbt-switch-inner {
+  display: block;
+  margin: 0 7px 0 25px;
+  color: #fff;
+  font-size: 12px;
+  transition: margin 0.25s;
+}
+.rbt-switch-large {
+  min-width: 56px;
+}
+.rbt-switch-small {
+  min-width: 28px;
+  height: 16px;
+  line-height: 16px;
+}
+.rbt-switch-small .rbt-switch-handle {
+  width: 12px;
+  height: 12px;
+}
+.rbt-switch-small .rbt-switch-inner {
+  margin: 0 5px 0 18px;
+  font-size: 12px;
+}
+.rbt-switch-checked {
+  background-color: #1890ff;
+}
+.rbt-switch-checked:focus {
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.2);
+}
+.rbt-switch-checked:hover {
+  box-shadow: none;
+}
+.rbt-switch-checked .rbt-switch-handle {
+  left: calc(100% - 20px);
+}
+.rbt-switch-checked .rbt-switch-inner {
+  margin: 0 25px 0 7px;
+}
+.rbt-switch-checked.rbt-switch-small .rbt-switch-handle {
+  left: calc(100% - 14px);
+}
+.rbt-switch-checked.rbt-switch-small .rbt-switch-inner {
+  margin: 0 18px 0 5px;
+}
+.rbt-switch-disabled.rbt-switch {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.rbt-switch-disabled.rbt-switch * {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.rbt-switch-disabled.rbt-switch:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/empty.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    .demo {
+        width: 966px;
+        margin: 10px auto;
+        padding: 46px 24px 50px;
+        border: 1px solid #f0f0f0;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <div class="rbt-empty">
+            <div class="rbt-empty-img"></div>
+            <div class="rbt-empty-desc"></div>
+        </div> -->
+        <div data-component="empty" id="empty1"></div>
+    </div>
+
+    <div class="demo">
+        <div data-component="empty" id="empty2"></div>
+    </div>
+
+    <div class="demo">
+        <div data-component="empty" id="empty3"></div>
+    </div>
+
+    <div class="demo">
+        <div data-component="empty" id="empty4">
+            <div slot="footer">
+                <button class="rbt-btn rbt-btn-primary">立即创建</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./svg.js"></script>
+<script src="./empty.js"></script>
+<script>
+    const rbt = new Rabbit();
+
+    rbt.createComps("#empty1");
+
+    rbt.createComps("#empty2", {
+        image: "simple",
+    });
+
+    rbt.createComps("#empty3", {
+        desc: false,
+    });
+
+    rbt.createComps("#empty4", {
+        desc: "自定义的 <a href='#'>描述</a>",
+        image: "https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg",
+        imageStyle: {
+            height: "60px",
+        },
+    });
+</script>
+
+</html>

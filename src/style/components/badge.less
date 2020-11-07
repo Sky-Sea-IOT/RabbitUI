@@ -1,0 +1,235 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+@normal-color: #e6ebf1;
+
+.@{prefix}badge {
+  position: @rel;
+  display: @inlb;
+
+  &:not(&-not-wrapper) {
+    margin-right: @margin-sm;
+  }
+
+  &-not-wrapper {
+    margin-right: @margin-xs;
+  }
+
+  &-count,
+  &-dot {
+    position: @abs;
+    background: @error-color;
+    z-index: 11;
+  }
+
+  &-count {
+    top: -10px;
+    right: 0;
+    transform: translateX(50%);
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    color: @white;
+    font-weight: 400;
+    font-size: @font-size-xs;
+    line-height: 20px;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px @white;
+
+    &.alone {
+      top: @auto;
+      display: @bl;
+      position: @rel;
+      transform: translateX(0);
+    }
+
+    &.custom {
+      background: 0 0;
+      color: inherit;
+      border-color: transparent;
+      box-shadow: @none;
+      i {
+        font-size: @font-size-md;
+      }
+    }
+  }
+
+  // Type dot
+  &-dot {
+    .size(8px,8px);
+    transform-origin: 0 center;
+    transform: translateX(-50%);
+    top: -4px;
+    right: -8px;
+    border-radius: @round-radius;
+    box-shadow: 0 0 0 1px @white;
+  }
+
+  // Background the count and dot
+  &-count.primary,
+  &-dot.primary {
+    background: @primary-color;
+  }
+
+  &-count.info,
+  &-dot.info {
+    background: @info-color;
+  }
+
+  &-count.success,
+  &-dot.success {
+    background: @success-color;
+  }
+
+  &-count.warning,
+  &-dot.warning {
+    background: @warning-color;
+  }
+
+  &-count.error,
+  &-dot.error {
+    background: @error-color;
+  }
+
+  &-count.normal,
+  &-dot.normal {
+    background: @normal-color;
+    color: @sub-color;
+  }
+
+  // status
+  &-status {
+    line-height: inherit;
+    vertical-align: baseline;
+
+    &-dot {
+      position: @rel;
+      .size(6px,6px);
+      top: -1px;
+      display: @inlb;
+      border-radius: 50%;
+      vertical-align: middle;
+
+      &.default {
+        background-color: @normal-color;
+      }
+
+      &.processing {
+        position: @rel;
+        background-color: @primary-color;
+
+        &::after {
+          position: @abs;
+          top: 0;
+          left: 0;
+          .size(100%,100%);
+          border-radius: 50%;
+          border: @border-width-base @border-style-base @dark-primary-color;
+          content: "";
+          -webkit-animation: rbtStatusProcessing 1.2s @ease-in-out infinite;
+          animation: rbtStatusProcessing 1.2s @ease-in-out infinite;
+        }
+      }
+
+      &.success {
+        background-color: @success-color;
+      }
+
+      &.warning {
+        background-color: @warning-color;
+      }
+
+      &.error {
+        background-color: @error-color;
+      }
+
+      &-text {
+        display: @inlb;
+        color: @text-color;
+        font-size: @font-size-sm;
+        margin-left: 6px;
+      }
+
+      &.pink {
+        background-color: @pink;
+      }
+
+      &.red {
+        background-color: @red;
+      }
+
+      &.yellow {
+        background-color: @yellow;
+      }
+
+      &.orange {
+        background-color: @orange;
+      }
+
+      &.cyan {
+        background-color: @cyan;
+      }
+
+      &.green {
+        background-color: @green;
+      }
+
+      &.blue {
+        background-color: @blue;
+      }
+
+      &.purple {
+        background-color: @purple;
+      }
+
+      &.geekblue {
+        background-color: @geekblue;
+      }
+
+      &.magenta {
+        background-color: @magenta;
+      }
+
+      &.volcano {
+        background-color: @volcano;
+      }
+
+      &.gold {
+        background-color: @gold;
+      }
+
+      &.lime {
+        background-color: @lime;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes rbtStatusProcessing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes rbtStatusProcessing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}

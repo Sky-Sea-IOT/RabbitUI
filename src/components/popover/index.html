@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/popover.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    .demo {
+        width: 400px;
+        margin: 120px auto;
+    }
+    
+    .demo .rbt-btn {
+        margin: 0 8px;
+    }
+    
+    .top,
+    .bottom {
+        text-align: center;
+        clear: both;
+    }
+    
+    .left {
+        float: left;
+        width: 60px;
+    }
+    
+    .right {
+        float: right;
+        width: 60px;
+    }
+    
+    .left .rbt-btn,
+    .right .rbt-btn {
+        margin-bottom: 12px;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <div class="rbt-popover">
+        <div class="rbt-popover-rel">
+          <button class="rbt-btn">Hover me</button>
+        </div>
+        <div
+          class="rbt-popover-popover rbt-popover-fade-enter"
+          x-placement="top"
+        >
+          <div class="rbt-popover-popover-content">
+            <div class="rbt-popover-popover-arrow">
+              <span class="rbt-popover-popover-arrow-content"></span>
+            </div>
+            <div class="rbt-popover-popover-inner">
+              <div class="rbt-popover-popover-inner-title">Title</div>
+              <div class="rbt-popover-popover-inner-content">提示内容</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+        <div data-component="popover" id="popover1">
+            <button class="rbt-btn" slot="ref">Hover 触发</button>
+            <div slot="title">Title</div>
+            <div slot="content">
+                <p>Content</p>
+                <p>Content</p>
+            </div>
+        </div>
+        <div data-component="popover" id="popover2">
+            <button class="rbt-btn" id="aaa" slot="ref">Focus 触发</button>
+            <div slot="title">Title</div>
+            <div slot="content">
+                <p>Content</p>
+                <p>Content</p>
+            </div>
+        </div>
+        <div data-component="popover" id="popover3">
+            <button class="rbt-btn" slot="ref">Click 触发</button>
+            <div slot="title">Title</div>
+            <div slot="content">
+                <p>Content</p>
+                <p>Content</p>
+            </div>
+        </div>
+    </div>
+    <div class="demo">
+        <div class="top">
+            <div data-component="popover" id="popover4">
+                <button class="rbt-btn" slot="ref">上左</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover5">
+                <button class="rbt-btn" slot="ref">上边</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover6">
+                <button class="rbt-btn" slot="ref">上左</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+        </div>
+        <div class="left">
+            <div data-component="popover" id="popover7">
+                <button class="rbt-btn" slot="ref">左上</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover8">
+                <button class="rbt-btn" slot="ref">左边</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover9">
+                <button class="rbt-btn" slot="ref">左下</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div data-component="popover" id="popover10">
+                <button class="rbt-btn" slot="ref">右上</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover11">
+                <button class="rbt-btn" slot="ref">右边</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover12">
+                <button class="rbt-btn" slot="ref">右下</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div data-component="popover" id="popover13">
+                <button class="rbt-btn" slot="ref">下左</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover14">
+                <button class="rbt-btn" slot="ref">下边</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+            <div data-component="popover" id="popover15">
+                <button class="rbt-btn" slot="ref">下右</button>
+                <div slot="title">Title</div>
+                <div slot="content">
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="demo">
+        <div data-component="popover" id="popover16">
+            <button class="rbt-btn" slot="ref">浮层内关闭</button>
+            <div slot="title">Title</div>
+            <a id="close" slot="content">关闭提示框</a>
+        </div>
+    </div>
+</body>
+
+<script src="../../utils/typeof.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="../../utils/detect-direction.js"></script>
+<script src="../../utils/hasClass.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../plugins/popper.js"></script>
+<script src="../../mixins/_popover.js"></script>
+<script src="./_popover.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#popover1", {
+        trigger: "hover",
+    });
+    rbt.createComps("#popover2", {
+        trigger: "focus",
+    });
+    rbt.createComps("#popover3");
+    rbt.createComps("#popover4", {
+        placement: "top-start",
+    });
+    rbt.createComps("#popover5");
+    rbt.createComps("#popover6", {
+        placement: "top-end",
+    });
+    rbt.createComps("#popover7", {
+        placement: "left-start",
+    });
+    rbt.createComps("#popover8", {
+        placement: "left",
+    });
+    rbt.createComps("#popover9", {
+        placement: "left-end",
+    });
+    rbt.createComps("#popover10", {
+        placement: "right-start",
+    });
+    rbt.createComps("#popover11", {
+        placement: "right",
+    });
+    rbt.createComps("#popover12", {
+        placement: "right-end",
+    });
+    rbt.createComps("#popover13", {
+        placement: "bottom-start",
+    });
+    rbt.createComps("#popover14", {
+        placement: "bottom",
+    });
+    rbt.createComps("#popover15", {
+        placement: "bottom-end",
+    });
+    rbt.createComps("#popover16", {
+        className: "my",
+    });
+
+    let closeBtn = document.querySelector("#close");
+    closeBtn.onclick = () => $popover.hide(".my");
+</script>
+
+</html>

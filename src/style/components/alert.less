@@ -1,0 +1,164 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../animation/slide.less";
+@import "../mixins/close.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}alert {
+  color: @text-color;
+  font-size: @font-size-sm;
+  line-height: @base-line-height;
+  @font-variant-with-font-feature-settings-num();
+  position: @rel;
+  padding: @padding-xs 15px @padding-xs 37px;
+  word-wrap: break-word;
+  border-radius: @xm-radius;
+
+  // 不带图标
+  &&-no-icon {
+    padding: @padding-xs 15px;
+  }
+
+  // 带图标
+  &-icon {
+    position: @abs;
+    font-size: @font-size-md;
+    top: 4.5px;
+    left: 13px;
+  }
+
+  &-info {
+    background-color: @light-info-bgc;
+    border: @border-width-base @border-style-base @dark-info-border-color;
+  }
+
+  &-info &-icon {
+    color: @primary-color;
+  }
+
+  &-success {
+    background-color: @light-success-bgc;
+    border: @border-width-base @border-style-base @dark-success-border-color;
+  }
+
+  &-success &-icon {
+    color: @success-color;
+  }
+
+  &-warning {
+    background-color: @light-warning-bgc;
+    border: @border-width-base @border-style-base @dark-warning-border-color;
+  }
+
+  &-warning &-icon {
+    color: @warning-color;
+  }
+
+  &-error {
+    background-color: @light-error-bgc;
+    border: @border-width-base @border-style-base @dark-error-border-color;
+  }
+
+  &-error &-icon {
+    color: @error-color;
+  }
+
+  &-message {
+    color: @title-color;
+  }
+
+  &-desc {
+    font-size: @font-size-sm;
+    line-height: 22px;
+    display: @none;
+  }
+
+  // 带关闭按钮
+  &&-closable {
+    padding-right: 30px;
+  }
+
+  &-close {
+    color: #ccc;
+    ._close(8px,8px,@font-size-sm);
+    font-size: @font-size-xs;
+  }
+
+  // 带描述内容
+  &-with-desc {
+    position: @rel;
+    padding: 15px 15px 15px 63px;
+    color: @text-color;
+    line-height: @base-line-height;
+    border-radius: @xm-radius;
+  }
+
+  &-with-desc&-no-icon {
+    padding: 15px;
+  }
+
+  &-with-desc&-closable {
+    padding: 15px;
+  }
+
+  &-with-desc &-icon {
+    top: 50%;
+    left: 18px;
+    transform: @translatey-center;
+    margin-top: -5px;
+
+    .@{icon-prefix} {
+      font-size: 32px;
+    }
+  }
+
+  &-with-desc &-message {
+    display: @bl;
+    margin-bottom: 4px;
+    font-size: @font-size-md;
+  }
+
+  &-with-desc &-desc {
+    display: @bl;
+  }
+
+  // banner
+  &-banner {
+    margin-bottom: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  &-slide-up {
+    -webkit-animation: AlertSlideUp 0.2s @ease;
+    animation: AlertSlideUp 0.2s @ease;
+  }
+}
+
+// 动画
+@-webkit-keyframes AlertSlideUp {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    transform: scaleY(0.5);
+  }
+}
+@keyframes AlertSlideUp {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    transform: scaleY(0.5);
+  }
+}

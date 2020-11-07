@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/avatar.css" />
+</head>
+<style>
+    .demo {
+        width: 460px;
+        margin: 20px auto;
+    }
+    
+    .demo .rbt-avatar {
+        margin-top: 16px;
+        margin-right: 16px;
+    }
+    
+    .avatar-custom {
+        width: 64px;
+        height: 64px;
+        line-height: 64px;
+        font-size: 32px !important;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <span data-component="avatar" id="avatar1"></span>
+        <span data-component="avatar" id="avatar2"></span>
+        <span data-component="avatar" id="avatar3"></span>
+        <span data-component="avatar" id="avatar4"></span>
+    </div>
+    <div class="demo">
+        <span data-component="avatar" id="avatar5"></span>
+        <span data-component="avatar" id="avatar6"></span>
+        <span data-component="avatar" id="avatar7"></span>
+        <span data-component="avatar" id="avatar8"></span>
+    </div>
+    <div class="demo">
+        <span data-component="avatar" id="avatar9"></span>
+        <span data-component="avatar" id="avatar10"></span>
+        <span data-component="avatar" id="avatar11"></span>
+        <span data-component="avatar" id="avatar12"></span>
+        <span data-component="avatar" id="avatar13"></span>
+        <span data-component="avatar" id="avatar14"></span>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./avatar.js"></script>
+<script>
+    const rbt = new Rabbit();
+
+    rbt.createComps("#avatar1", {
+        className: "avatar-custom",
+    });
+    rbt.createComps("#avatar2", {
+        size: "large",
+    });
+    rbt.createComps("#avatar3");
+    rbt.createComps("#avatar4", {
+        size: "small",
+    });
+
+    rbt.createComps("#avatar5", {
+        shape: "square",
+        styles: {
+            width: "64px",
+            height: "64px",
+            "line-height": "64px",
+            "font-size": "32px",
+        },
+    });
+    rbt.createComps("#avatar6", {
+        shape: "square",
+        size: "large",
+    });
+    rbt.createComps("#avatar7", {
+        shape: "square",
+    });
+    rbt.createComps("#avatar8", {
+        shape: "square",
+        size: "small",
+    });
+
+    rbt.createComps("#avatar9");
+    rbt.createComps("#avatar10", {
+        text: "U",
+    });
+    rbt.createComps("#avatar11", {
+        text: "USER",
+    });
+    rbt.createComps("#avatar12", {
+        src: "../../assets/avatar.jpg",
+    });
+    rbt.createComps("#avatar13", {
+        text: "U",
+        styles: {
+            color: "#f56a00",
+            background: "#fde3cf",
+        },
+    });
+    rbt.createComps("#avatar14", {
+        icon: "ios-notifications",
+        styles: {
+            "background-color": "#87d068",
+        },
+    });
+</script>
+
+</html>

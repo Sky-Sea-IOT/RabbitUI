@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/pageHeader.css" />
+</head>
+<style>
+    .demo {
+        padding: 24px;
+        border-bottom: 1px solid #dcdee2;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <div data-component="pageHeader" id="p1">
+            <div slot="header">返回</div>
+            <div slot="content">详情页面</div>
+        </div>
+        <!-- <div class="rbt-page-header">
+            <div class="rbt-page-header-back">
+                <i class="rbt-icon rbt-icon-ios-arrow-back"></i>
+                <div class="rbt-page-header-title">返回</div>
+            </div>
+            <div class="rbt-page-header-content">详情页面</div>
+        </div> -->
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./page-header.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#p1", {
+        onBack: () => {
+            console.log("back");
+        },
+    });
+</script>
+
+</html>

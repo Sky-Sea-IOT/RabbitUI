@@ -1,0 +1,68 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-result {
+  padding: 48px 32px;
+}
+.rbt-result-info {
+  color: #1890ff;
+}
+.rbt-result-info .rbt-result-icon {
+  color: #1890ff;
+}
+.rbt-result-success {
+  color: #52c41a;
+}
+.rbt-result-success .rbt-result-icon {
+  color: #52c41a;
+}
+.rbt-result-warning {
+  color: #faad14;
+}
+.rbt-result-warning .rbt-result-icon {
+  color: #faad14;
+}
+.rbt-result-error {
+  color: #ff4d4f;
+}
+.rbt-result-error .rbt-result-icon {
+  color: #ff4d4f;
+}
+.rbt-result-icon {
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 92px;
+}
+.rbt-result-img {
+  width: 250px;
+  height: 295px;
+  margin: auto;
+  margin-bottom: 24px;
+}
+.rbt-result-title {
+  color: #17233d;
+  font-size: 24px;
+  line-height: 1.8;
+  text-align: center;
+}
+.rbt-result-subtitle {
+  color: #808695;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+.rbt-result-content {
+  margin-top: 24px;
+  padding: 24px 40px;
+  background-color: #fafafa;
+  color: #55585e;
+}
+.rbt-result-footer {
+  margin: 24px 0 0;
+  text-align: center;
+}
+.rbt-result-footer * {
+  margin-right: 8px;
+}
+.rbt-result-footer *:last-child {
+  margin-right: 0;
+}

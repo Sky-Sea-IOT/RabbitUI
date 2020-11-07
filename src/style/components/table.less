@@ -1,0 +1,106 @@
+// 用于开发期间测试使用，在生产阶段去掉 @import
+@import "../common/index.css";
+@import "../custom.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@table-cell: rbt-table-cell;
+
+.@{prefix}table {
+  width: 100%;
+  max-width: 100%;
+  overflow: @hid;
+  table-layout: @fixd;
+  background-color: @white;
+  color: @text-color;
+  text-align: left;
+
+  &-header {
+    tr {
+      th {
+        position: @rel;
+        height: 100%;
+      }
+    }
+  }
+
+  th {
+    white-space: nowrap;
+    overflow: @hid;
+    background-color: #f8f8f9;
+
+    .@{table-cell} {
+      display: @inlb;
+      word-wrap: normal;
+      vertical-align: middle;
+    }
+  }
+
+  td,
+  th {
+    padding: @padding-sm 0;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    border-bottom: @border-width-base @border-style-base @split-color;
+  }
+
+  td {
+    background-color: @white;
+    transition: background-color @transtion-time @ease-in-out;
+  }
+
+  &-large {
+    font-size: @font-size-md;
+    th,
+    td {
+      padding: @padding-md 0;
+    }
+  }
+
+  &-small {
+    font-size: @font-size-xs;
+    th,
+    td {
+      padding: @padding-xs 0;
+    }
+  }
+
+  &-row-hover {
+    tr {
+      &:hover {
+        td {
+          background-color: @light-primary-bgc;
+        }
+      }
+    }
+  }
+
+  &-stripe {
+    tr {
+      &:nth-child(2n) {
+        td {
+          background-color: #f8f8f9;
+        }
+      }
+    }
+  }
+
+  &-border {
+    border: @border-width-base @border-style-base @border-color;
+    th,
+    td {
+      border: @border-width-base @border-style-base @split-color;
+    }
+  }
+}
+
+.@{table-cell} {
+  padding-left: 18px;
+  padding-right: 18px;
+  overflow: @hid;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-all;
+  box-sizing: border-box;
+}

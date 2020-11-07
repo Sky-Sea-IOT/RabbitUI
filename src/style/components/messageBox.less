@@ -1,0 +1,80 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../animation/fade.less";
+@import "../animation/bounces.less";
+@import "../mixins/shadow.less";
+@import "../mixins/close.less";
+@import "../mixins/mask.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}modal-confirm {
+  .@{prefix}modal-body {
+    padding: 20px 28px 20px;
+  }
+
+  &-wrap {
+    &::before {
+      display: @tb;
+      content: "";
+    }
+  }
+
+  &-header {
+    padding: 0 @padding-sm 0 0;
+
+    &-icon {
+      display: @inlb;
+      font-size: 28px;
+      vertical-align: middle;
+      position: @rel;
+      top: -3px;
+
+      &-info {
+        color: @primary-color;
+      }
+
+      &-success {
+        color: @success-color;
+      }
+
+      &-warning,
+      &-confirm {
+        color: @warning-color;
+      }
+
+      &-error {
+        color: @error-color;
+      }
+    }
+
+    &-title {
+      display: @inlb;
+      vertical-align: middle;
+      margin-left: @margin-sm;
+      font-size: @font-size-md;
+      color: @title-color;
+      font-weight: 500;
+    }
+  }
+
+  &-body {
+    padding-left: 40px;
+    font-size: @font-size-sm;
+    color: @text-color;
+    position: @rel;
+  }
+
+  &-footer {
+    margin-top: @margin-lg;
+    text-align: right;
+
+    button + button {
+      margin-left: 8px;
+      margin-bottom: 0;
+    }
+  }
+}

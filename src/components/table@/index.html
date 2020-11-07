@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/table.css" />
+</head>
+
+<body>
+    <div style="width: 900px; margin: 10px auto">
+        <h3>默认</h3>
+        <br />
+        <table id="tableApp1"></table>
+    </div>
+    <div style="width: 900px; margin: 10px auto">
+        <h3>斑马线</h3>
+        <br />
+        <table id="tableApp2"></table>
+    </div>
+    <div style="width: 900px; margin: 10px auto">
+        <h3>带边框</h3>
+        <br />
+        <table id="tableApp3"></table>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="./index.js"></script>
+<script>
+    const dataSource1 = {
+        $table: {
+            title: ["Name", "Age", "Address"],
+            data: [{
+                Name: "王先生",
+                Age: 28,
+                Address: "西湖区莲花公园1号",
+            }, {
+                Name: "李先生",
+                Age: 25,
+                Address: "朝阳区莲花公园1号",
+            }, {
+                Name: "康先生",
+                Age: 32,
+                Address: "越秀区莲花公园1号",
+            }, {
+                Name: "张先生",
+                Age: 36,
+                Address: "高新区莲花公园1号",
+            }, ],
+        },
+    };
+    const dataSource2 = {
+        $table: {
+            title: ["Name", "Age", "Address"],
+            data: [{
+                Name: "王先生",
+                Age: 28,
+                Address: "西湖区莲花公园1号",
+            }, {
+                Name: "李先生",
+                Age: 25,
+                Address: "朝阳区莲花公园1号",
+            }, {
+                Name: "康先生",
+                Age: 32,
+                Address: "越秀区莲花公园1号",
+            }, {
+                Name: "张先生",
+                Age: 36,
+                Address: "高新区莲花公园1号",
+            }, ],
+            stripe: true,
+        },
+    };
+    const dataSource3 = {
+        $table: {
+            title: ["Name", "Age", "Address"],
+            data: [{
+                Name: "王先生",
+                Age: 28,
+                Address: "西湖区莲花公园1号",
+            }, {
+                Name: "李先生",
+                Age: 25,
+                Address: "朝阳区莲花公园1号",
+            }, {
+                Name: "康先生",
+                Age: 32,
+                Address: "越秀区莲花公园1号",
+            }, {
+                Name: "张先生",
+                Age: 36,
+                Address: "高新区莲花公园1号",
+            }, ],
+            border: true,
+        },
+    };
+
+    const table = $table();
+
+    table.createTable("#tableApp1", dataSource1);
+
+    table.createTable("#tableApp2", dataSource2);
+
+    table.createTable("#tableApp3", dataSource3);
+</script>
+
+</html>

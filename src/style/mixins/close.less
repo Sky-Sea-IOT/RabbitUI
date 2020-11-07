@@ -1,0 +1,32 @@
+.close() {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #c0c4cc !important;
+  font-size: 24px;
+  &:hover {
+    color: #808695 !important;
+  }
+}
+
+._close(@top,@right,@font-size) {
+  font-size: @font-size;
+  position: @abs;
+  right: @right;
+  top: @top;
+  overflow: @hid;
+  cursor: @pointer;
+
+  .@{icon-prefix}-ios-close {
+    font-size: 22px;
+    color: #ccc;
+    transition: color 0.2s @ease;
+    position: @rel;
+    top: -3px;
+    &:hover {
+      color: @text-color;
+    }
+  }
+}

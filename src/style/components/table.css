@@ -1,0 +1,72 @@
+@import "../common/index.css";
+.rbt-table {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  table-layout: fixed;
+  background-color: #fff;
+  color: #55585e;
+  text-align: left;
+}
+.rbt-table-header tr th {
+  position: relative;
+  height: 100%;
+}
+.rbt-table th {
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #f8f8f9;
+}
+.rbt-table th .rbt-table-cell {
+  display: inline-block;
+  word-wrap: normal;
+  vertical-align: middle;
+}
+.rbt-table td,
+.rbt-table th {
+  padding: 12px 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  border-bottom: 1px solid #e8eaec;
+}
+.rbt-table td {
+  background-color: #fff;
+  transition: background-color 0.25s ease-in-out;
+}
+.rbt-table-large {
+  font-size: 16px;
+}
+.rbt-table-large th,
+.rbt-table-large td {
+  padding: 16px 0;
+}
+.rbt-table-small {
+  font-size: 12px;
+}
+.rbt-table-small th,
+.rbt-table-small td {
+  padding: 8px 0;
+}
+.rbt-table-row-hover tr:hover td {
+  background-color: #f0faff;
+}
+.rbt-table-stripe tr:nth-child(2n) td {
+  background-color: #f8f8f9;
+}
+.rbt-table-border {
+  border: 1px solid #dcdee2;
+}
+.rbt-table-border th,
+.rbt-table-border td {
+  border: 1px solid #e8eaec;
+}
+.rbt-table-cell {
+  padding-left: 18px;
+  padding-right: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-all;
+  box-sizing: border-box;
+}

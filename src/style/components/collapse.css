@@ -1,0 +1,83 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-collapse {
+  box-sizing: border-box;
+  color: #55585e;
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: #fafafa;
+  border: 1px solid #dcdee2;
+  border-bottom: 0;
+  border-radius: 2px;
+}
+.rbt-collapse-item {
+  border-bottom: 1px solid #dcdee2;
+}
+.rbt-collapse-item:last-child .rbt-collapse-header {
+  border-radius: 0 0 2px 2px;
+}
+.rbt-collapse-item-active .rbt-collapse-header i {
+  transform: rotate(90deg);
+}
+.rbt-collapse-header {
+  position: relative;
+  padding: 12px 16px 12px 40px;
+  color: #2c3e50;
+  line-height: 1.5715;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.rbt-collapse-header .rbt-icon {
+  display: inline-block;
+  font-size: 14px;
+  transform: translateY(-50%);
+  transition: transform 0.24s;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  margin-right: 14px;
+}
+.rbt-collapse-content {
+  overflow: hidden;
+  background-color: #fff;
+  border-top: 1px solid #dcdee2;
+}
+.rbt-collapse-content-box {
+  padding: 16px;
+}
+.rbt-collapse-no-arrow .rbt-collapse-header {
+  padding-left: 12px;
+}
+.rbt-collapse-borderless {
+  background-color: #fafafa;
+  border: 0;
+}
+.rbt-collapse-borderless .rbt-collapse-item {
+  border-bottom: 1px solid #dcdee2;
+}
+.rbt-collapse-borderless .rbt-collapse-item .rbt-collapse-content {
+  background-color: transparent;
+  border-top: 0;
+}
+.rbt-collapse-borderless .rbt-collapse-item .rbt-collapse-content-box {
+  padding-top: 4px;
+}
+.rbt-collapse-ghost {
+  background-color: transparent;
+  border: 0;
+}
+.rbt-collapse-ghost .rbt-collapse-item {
+  border-bottom: 0;
+}
+.rbt-collapse-ghost .rbt-collapse-item .rbt-collapse-content {
+  background-color: transparent;
+  border-top: 0;
+}
+.rbt-collapse-ghost .rbt-collapse-item .rbt-collapse-content-box {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

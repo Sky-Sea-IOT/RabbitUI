@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/drop-down.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    .demo {
+        width: 400px;
+        margin: 50px auto;
+    }
+    
+    .demo #dropdown1,
+    #dropdown2,
+    #dropdown3,
+    #dropdown4,
+    #dropdown5,
+    #dropdown6,
+    #dropdown7,
+    #dropdown8,
+    #dropdown9,
+    #dropdown10,
+    #dropdown11,
+    #dropdown12 {
+        margin-right: 25px;
+        margin-bottom: 8px;
+    }
+    
+    .top,
+    .bottom {
+        text-align: center;
+        clear: both;
+    }
+    
+    .left {
+        float: left;
+        width: 60px;
+    }
+    
+    .right {
+        float: right;
+        width: 60px;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <div class="top">
+            <div data-component="dropdown" id="dropdown1">
+                <button class="rbt-btn" slot="ref">上左</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown2">
+                <button class="rbt-btn" slot="ref">上边</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown3">
+                <button class="rbt-btn" slot="ref">上右</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+            </div>
+        </div>
+
+        <div class="left">
+            <div data-component="dropdown" id="dropdown4">
+                <button class="rbt-btn" slot="ref">左上</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem" disabled="true">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown5">
+                <button class="rbt-btn" slot="ref">左边</button>
+                <div slot="dropdownItem" selected="true">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown6">
+                <button class="rbt-btn" slot="ref">左下</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+        </div>
+        <div class="right">
+            <div data-component="dropdown" id="dropdown7">
+                <button class="rbt-btn" slot="ref">右上</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem" disabled="true">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown8">
+                <button class="rbt-btn" slot="ref">右边</button>
+                <div slot="dropdownItem" selected="true">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown9">
+                <button class="rbt-btn" slot="ref">右下</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div data-component="dropdown" id="dropdown10">
+                <button class="rbt-btn" slot="ref">下左</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem" disabled="true">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown11">
+                <button class="rbt-btn" slot="ref">下边</button>
+                <div slot="dropdownItem" selected="true">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+
+            <div data-component="dropdown" id="dropdown12">
+                <button class="rbt-btn" slot="ref">下右</button>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+                <div slot="dropdownItem">4st menu item</div>
+            </div>
+        </div>
+        <div class="demo">
+            <div data-component="dropdown" id="dropdown13">
+                <a href="javascript:void(0)" slot="ref">click触发</a>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+            </div>
+            <div data-component="dropdown" id="dropdown14">
+                <a href="javascript:void(0)" slot="ref">右键触发</a>
+                <div slot="dropdownItem">返回</div>
+                <div slot="dropdownItem">
+                    <a href="javascript:void(0)" style="color: #ed4014">删除</a>
+                </div>
+            </div>
+            <div data-component="dropdown" id="dropdown15">
+                <a href="javascript:void(0)" slot="ref">触发事件</a>
+                <div slot="dropdownItem">1st menu item</div>
+                <div slot="dropdownItem">2st menu item</div>
+                <div slot="dropdownItem">3st menu item</div>
+            </div>
+        </div>
+        <!-- <div class="rbt-dropdown">
+            <div class="rbt-dropdown-rel">
+                <button class="rbt-btn">Hover me</button>
+            </div>
+            <ul class="rbt-dropdown-menu" role="menu">
+                <li class="rbt-dropdown-menu-item" role="menuitem">1st menu item</li>
+                <li class="rbt-dropdown-menu-item" role="menuitem">2st menu item</li>
+                <li class="rbt-dropdown-menu-item-divider" role="menuitem"></li>
+                <li class="rbt-dropdown-menu-item" role="menuitem">3st menu item</li>
+            </ul>
+        </div> -->
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/clickAction.js"></script>
+<script src="../../utils/css-transition.js"></script>
+<script src="../../utils/dropdown.js"></script>
+<script src="./drop-down.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#dropdown1", {
+        placement: "top-start",
+    });
+    rbt.createComps("#dropdown2", {
+        placement: "top",
+    });
+    rbt.createComps("#dropdown3", {
+        placement: "top-end",
+    });
+    rbt.createComps("#dropdown4", {
+        placement: "left-start",
+    });
+    rbt.createComps("#dropdown5", {
+        placement: "left",
+    });
+    rbt.createComps("#dropdown6", {
+        placement: "left-end",
+    });
+    rbt.createComps("#dropdown7", {
+        placement: "right-start",
+    });
+    rbt.createComps("#dropdown8", {
+        placement: "right",
+    });
+    rbt.createComps("#dropdown9", {
+        placement: "right-end",
+    });
+    rbt.createComps("#dropdown10", {
+        placement: "bottom-start",
+    });
+    rbt.createComps("#dropdown11");
+    rbt.createComps("#dropdown12", {
+        placement: "bottom-end",
+    });
+    rbt.createComps("#dropdown13", {
+        trigger: "click",
+    });
+    rbt.createComps("#dropdown14", {
+        trigger: "contextMenu",
+    });
+    rbt.createComps("#dropdown15", {
+        onClick(index) {
+            alert("当前点击的索引：" + index);
+        },
+    });
+</script>
+
+</html>

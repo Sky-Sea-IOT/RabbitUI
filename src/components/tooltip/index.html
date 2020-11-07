@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/tooltip.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    body {
+        height: 1500px;
+    }
+    
+    .demo {
+        width: 400px;
+        margin: 50px auto;
+    }
+    
+    .demo #tooltip1,
+    #tooltip2,
+    #tooltip3,
+    #tooltip4,
+    #tooltip5,
+    #tooltip6,
+    #tooltip7,
+    #tooltip8,
+    #tooltip9,
+    #tooltip10,
+    #tooltip11,
+    #tooltip12 {
+        margin-bottom: 8px;
+    }
+    
+    .demo .rbt-btn {
+        margin: 0 8px;
+    }
+    
+    .top,
+    .bottom {
+        text-align: center;
+        clear: both;
+    }
+    
+    .left {
+        float: left;
+        width: 60px;
+    }
+    
+    .right {
+        float: right;
+        width: 60px;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <div class="rbt-tooltip">
+            <div class="rbt-tooltip-rel">
+                <span>当鼠标经过这段文字时，会显示一个气泡框</span>
+            </div>
+            <div class="rbt-tooltip-popper" x-placement="bottom">
+                <div class="rbt-tooltip-content">
+                    <div class="rbt-tooltip-arrow">
+                        <span class="rbt-tooltip-arrow-content" style="background-color: red"></span>
+                    </div>
+                    <div class="rbt-tooltip-inner" style="background-color: red">
+                        这里是一段提示文字
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div data-component="tooltip" id="tooltip">
+            <span slot="ref">当鼠标经过这段文字时，会显示一个气泡框</span>
+        </div>
+    </div>
+    <div class="demo">
+        <div class="top">
+            <div data-component="tooltip" id="tooltip1">
+                <button class="rbt-btn" slot="ref">上左</button>
+            </div>
+            <div data-component="tooltip" id="tooltip2">
+                <button class="rbt-btn" slot="ref">上边</button>
+            </div>
+            <div data-component="tooltip" id="tooltip3">
+                <button class="rbt-btn" slot="ref">上右</button>
+            </div>
+        </div>
+        <div class="left">
+            <div data-component="tooltip" id="tooltip4">
+                <button class="rbt-btn" slot="ref">左上</button>
+            </div>
+            <div data-component="tooltip" id="tooltip5">
+                <button class="rbt-btn" slot="ref">左边</button>
+            </div>
+            <div data-component="tooltip" id="tooltip6">
+                <button class="rbt-btn" slot="ref">左下</button>
+            </div>
+        </div>
+        <div class="right">
+            <div data-component="tooltip" id="tooltip7">
+                <button class="rbt-btn" slot="ref">右上</button>
+            </div>
+            <div data-component="tooltip" id="tooltip8">
+                <button class="rbt-btn" slot="ref">右边</button>
+            </div>
+            <div data-component="tooltip" id="tooltip9">
+                <button class="rbt-btn" slot="ref">右下</button>
+            </div>
+        </div>
+        <div class="bottom">
+            <div data-component="tooltip" id="tooltip10">
+                <button class="rbt-btn" slot="ref">下左</button>
+            </div>
+            <div data-component="tooltip" id="tooltip11">
+                <button class="rbt-btn" slot="ref">下边</button>
+            </div>
+            <div data-component="tooltip" id="tooltip12">
+                <button class="rbt-btn" slot="ref">下右</button>
+            </div>
+        </div>
+    </div>
+    <div class="demo">
+        <div data-component="tooltip" id="tooltip13">
+            <button class="rbt-btn" slot="ref">ligth</button>
+        </div>
+        <div data-component="tooltip" id="tooltip14">
+            <button class="rbt-btn" slot="ref">pink</button>
+        </div>
+        <div data-component="tooltip" id="tooltip15">
+            <button class="rbt-btn" slot="ref">red</button>
+        </div>
+        <div data-component="tooltip" id="tooltip16">
+            <button class="rbt-btn" slot="ref">yellow</button>
+        </div>
+        <br /><br />
+        <div data-component="tooltip" id="tooltip17">
+            <button class="rbt-btn" slot="ref">orange</button>
+        </div>
+        <div data-component="tooltip" id="tooltip18">
+            <button class="rbt-btn" slot="ref">cyan</button>
+        </div>
+        <div data-component="tooltip" id="tooltip19">
+            <button class="rbt-btn" slot="ref">green</button>
+        </div>
+        <div data-component="tooltip" id="tooltip20">
+            <button class="rbt-btn" slot="ref">blue</button>
+        </div>
+        <br /><br />
+        <div data-component="tooltip" id="tooltip21">
+            <button class="rbt-btn" slot="ref">purple</button>
+        </div>
+        <div data-component="tooltip" id="tooltip22">
+            <button class="rbt-btn" slot="ref">geekblue</button>
+        </div>
+        <div data-component="tooltip" id="tooltip23">
+            <button class="rbt-btn" slot="ref">volcano</button>
+        </div>
+        <div data-component="tooltip" id="tooltip24">
+            <button class="rbt-btn" slot="ref">lime</button>
+        </div>
+    </div>
+    <div class="demo">
+        <div data-component="tooltip" id="tooltip25">
+            <button class="rbt-btn" slot="ref">#f50</button>
+        </div>
+        <div data-component="tooltip" id="tooltip26">
+            <button class="rbt-btn" slot="ref">#2db7f5</button>
+        </div>
+        <div data-component="tooltip" id="tooltip27">
+            <button class="rbt-btn" slot="ref">#87d068</button>
+        </div>
+        <div data-component="tooltip" id="tooltip28">
+            <button class="rbt-btn" slot="ref">#108ee9</button>
+        </div>
+    </div>
+    <div class="demo">
+        <div data-component="tooltip" id="tooltip29">
+            <button class="rbt-btn" slot="ref">延时1秒显示</button>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="../../utils/detect-direction.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../plugins/popper.js"></script>
+<script src="./tooltip.js"></script>
+<script>
+    const rbt = new Rabbit();
+
+    rbt.createComps("#tooltip", {
+        title: "这里是一段提示文字",
+    });
+
+    rbt.createComps("#tooltip1", {
+        title: "Top Left 文字提示",
+        placement: "top-start",
+    });
+    rbt.createComps("#tooltip2", {
+        title: "Top Center 文字提示",
+    });
+    rbt.createComps("#tooltip3", {
+        title: "Top Right 文字提示",
+        placement: "top-end",
+    });
+    rbt.createComps("#tooltip4", {
+        title: "Left Top 文字提示",
+        placement: "left-start",
+    });
+    rbt.createComps("#tooltip5", {
+        title: "Left Center 文字提示",
+        placement: "left",
+    });
+    rbt.createComps("#tooltip6", {
+        title: "Left Bottom 文字提示",
+        placement: "left-end",
+    });
+    rbt.createComps("#tooltip7", {
+        title: "Right Top 文字提示",
+        placement: "right-start",
+    });
+    rbt.createComps("#tooltip8", {
+        title: "Right Center 文字提示",
+        placement: "right",
+    });
+    rbt.createComps("#tooltip9", {
+        title: "Right Bottom 文字提示",
+        placement: "right-end",
+    });
+    rbt.createComps("#tooltip10", {
+        title: "Bottom Left 文字提示",
+        placement: "bottom-start",
+    });
+    rbt.createComps("#tooltip11", {
+        title: "Bottom Center 文字提示",
+        placement: "bottom",
+    });
+    rbt.createComps("#tooltip12", {
+        title: "Bottom Right 文字提示",
+        placement: "bottom-end",
+    });
+    rbt.createComps("#tooltip13", {
+        title: "文字提示",
+        theme: "light",
+    });
+    rbt.createComps("#tooltip14", {
+        title: "文字提示",
+        theme: "pink",
+    });
+    rbt.createComps("#tooltip15", {
+        title: "文字提示",
+        theme: "red",
+    });
+    rbt.createComps("#tooltip16", {
+        title: "文字提示",
+        theme: "yellow",
+    });
+    rbt.createComps("#tooltip17", {
+        title: "文字提示",
+        theme: "orange",
+        placement: "left",
+    });
+    rbt.createComps("#tooltip18", {
+        title: "文字提示",
+        theme: "cyan",
+    });
+    rbt.createComps("#tooltip19", {
+        title: "文字提示",
+        theme: "green",
+        placement: "bottom",
+    });
+    rbt.createComps("#tooltip20", {
+        title: "文字提示",
+        theme: "blue",
+        placement: "right",
+    });
+    rbt.createComps("#tooltip21", {
+        title: "文字提示",
+        theme: "purple",
+        placement: "left",
+    });
+    rbt.createComps("#tooltip22", {
+        title: "文字提示",
+        theme: "geekblue",
+    });
+    rbt.createComps("#tooltip23", {
+        title: "文字提示",
+        theme: "volcano",
+        placement: "bottom",
+    });
+    rbt.createComps("#tooltip24", {
+        title: "文字提示",
+        theme: "lime",
+        placement: "right",
+    });
+    rbt.createComps("#tooltip25", {
+        title: "#f50",
+        color: "#f50",
+    });
+    rbt.createComps("#tooltip26", {
+        title: "#2db7f5",
+        color: "#2db7f5",
+    });
+    rbt.createComps("#tooltip27", {
+        title: "#87d068",
+        color: "#87d068",
+    });
+    rbt.createComps("#tooltip28", {
+        title: "#108ee9",
+        color: "#108ee9",
+    });
+    rbt.createComps("#tooltip29", {
+        title: "鼠标离开后延时1秒隐藏",
+        mouseEnterDelay: 1,
+        mouseLeaveDelay: 1,
+        // always,
+        // disabled,
+        // maxWidth
+    });
+</script>
+
+</html>

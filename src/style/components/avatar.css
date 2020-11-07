@@ -1,0 +1,53 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-avatar {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #ccc;
+  color: #fff;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+}
+.rbt-avatar.rbt-avatar-icon {
+  font-size: 16px;
+}
+.rbt-avatar-large {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+.rbt-avatar-large.rbt-avatar-icon {
+  font-size: 24px;
+}
+.rbt-avatar-small {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+.rbt-avatar-small.rbt-avatar-icon {
+  font-size: 14px;
+}
+.rbt-avatar-large .rbt-icon {
+  position: relative;
+  top: -2px;
+}
+.rbt-avatar-square {
+  border-radius: 2px;
+}
+.rbt-avatar img {
+  width: 100%;
+  height: 100%;
+}
+.rbt-avatar-string {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: 0 center;
+}

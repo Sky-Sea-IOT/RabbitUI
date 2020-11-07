@@ -1,0 +1,160 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/shadow.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+// size
+@switch-large-width: 56px;
+
+@switch-width: 44px;
+@switch-height: 22px;
+
+@switch-small-width: 28px;
+@switch-small-height: 16px;
+
+// handle size
+@switch-handle-width: 18px;
+@switch-handle-height: 18px;
+@switch-small-handle-width: 12px;
+@switch-small-handle-height: 12px;
+
+// handel move
+@switch-large-left: 58px;
+@switch-left: 20px;
+@switch-small-left: 14px;
+
+.@{prefix}switch {
+  color: @text-color;
+  font-size: @font-size-sm;
+  @font-variant-with-font-feature-settings-num();
+  line-height: @base-line-height;
+  position: @rel;
+  display: @inlb;
+  min-width: @switch-width;
+  height: @switch-height;
+  line-height: @switch-height;
+  vertical-align: middle;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  cursor: @pointer;
+  transition: all 0.2s @ease-in-out;
+  -webkit-user-select: @none;
+  -moz-user-select: @none;
+  -ms-user-select: @none;
+  user-select: @none;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+  }
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  // 默认尺寸
+  &-handle,
+  &-handle::before {
+    position: @abs;
+    transition: all 0.2s @ease-in-out;
+  }
+
+  &-handle {
+    top: 2px;
+    left: 2px;
+    width: @switch-handle-width;
+    height: @switch-handle-height;
+
+    &::before {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: @white;
+      border-radius: 9px;
+      box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+      content: "";
+    }
+  }
+
+  &-inner {
+    display: @bl;
+    margin: 0 7px 0 25px;
+    color: @white;
+    font-size: @font-size-xs;
+    transition: margin @transtion-time;
+  }
+
+  // large
+  &-large {
+    min-width: @switch-large-width;
+  }
+
+  // small
+  &-small {
+    min-width: @switch-small-width;
+    height: @switch-small-height;
+    line-height: @switch-small-height;
+  }
+
+  &-small &-handle {
+    width: @switch-small-handle-width;
+    height: @switch-small-handle-height;
+  }
+
+  &-small &-inner {
+    margin: 0 5px 0 18px;
+    font-size: @font-size-xs;
+  }
+
+  // 选中状态
+  &-checked {
+    background-color: @primary-color;
+
+    &:focus {
+      box-shadow: 0 0 0 3px @primary-shadow-color;
+    }
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  &-checked &-handle {
+    left: calc(100% - @switch-left);
+  }
+
+  &-checked &-inner {
+    margin: 0 25px 0 7px;
+  }
+
+  &-checked&-small &-handle {
+    left: calc(100% - @switch-small-left);
+  }
+
+  &-checked&-small &-inner {
+    margin: 0 18px 0 5px;
+  }
+
+  // disabled
+  &-disabled& {
+    cursor: not-allowed;
+    opacity: 0.4;
+
+    * {
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+  }
+
+  &-disabled& {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

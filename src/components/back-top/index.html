@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/back-top.css" />
+</head>
+<style>
+    body {
+        height: 1500px;
+    }
+    
+    .top i {
+        color: rgba(0, 153, 229, 0.7);
+        font-size: 52px;
+        transform: rotate(-44deg);
+    }
+</style>
+
+<body>
+    <p>这是测试场</p>
+    <!-- <div class="rbt-back-top">
+        <div class="rbt-back-top-inner">
+            <i class="rbt-icon rbt-icon-md-arrow-up rbt-back-top-icon"></i>
+        </div>
+    </div> -->
+    <div data-component="backTop" id="bt1"></div>
+    <div data-component="backTop" id="bt2">
+        <div slot="content" class="top">
+            <i class="rbt-icon rbt-icon-ios-rocket"></i>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./back-top.js"></script>
+<script>
+    const rbt = new Rabbit();
+
+    rbt.createComps("#bt1");
+
+    rbt.createComps("#bt2", {
+        height: 100,
+        // right,
+        bottom: 200,
+        // duration,
+        // onClick,
+    });
+</script>
+
+</html>

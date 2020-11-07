@@ -1,0 +1,114 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/close.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}collapse {
+  box-sizing: border-box;
+  color: @text-color;
+  font-size: @font-size-sm;
+  line-height: @base-line-height;
+  background-color: #fafafa;
+  border: @border-width-base @border-style-base @border-color;
+  border-bottom: 0;
+  border-radius: @xm-radius;
+
+  &-item {
+    border-bottom: @border-width-base @border-style-base @border-color;
+
+    &:last-child {
+      .@{prefix}collapse-header {
+        border-radius: 0 0 @xm-radius @xm-radius;
+      }
+    }
+
+    &-active {
+      .@{prefix}collapse-header {
+        i {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+
+  &-header {
+    position: @rel;
+    padding: @padding-sm @padding-md @padding-sm 40px;
+    color: @title-color;
+    line-height: @base-line-height;
+    cursor: @pointer;
+    transition: all 0.3s;
+
+    .rbt-icon {
+      display: @inlb;
+      font-size: @font-size-sm;
+      transform: @translatey-center;
+      transition: transform 0.24s;
+      line-height: 0;
+      text-align: center;
+      text-transform: @none;
+      vertical-align: -0.125em;
+      position: @abs;
+      top: 50%;
+      left: 16px;
+      margin-right: 14px;
+    }
+  }
+
+  &-content {
+    overflow: @hid;
+    background-color: @white;
+    border-top: @border-width-base @border-style-base @border-color;
+
+    &-box {
+      padding: @padding-md;
+    }
+  }
+
+  &-no-arrow {
+    .@{prefix}collapse-header {
+      padding-left: 12px;
+    }
+  }
+
+  &-borderless {
+    background-color: #fafafa;
+    border: 0;
+
+    .@{prefix}collapse-item {
+      border-bottom: @border-width-base @border-style-base @border-color;
+
+      .@{prefix}collapse-content {
+        background-color: transparent;
+        border-top: 0;
+
+        &-box {
+          padding-top: 4px;
+        }
+      }
+    }
+  }
+
+  &-ghost {
+    background-color: transparent;
+    border: 0;
+
+    .@{prefix}collapse-item {
+      border-bottom: 0;
+
+      .@{prefix}collapse-content {
+        background-color: transparent;
+        border-top: 0;
+
+        &-box {
+          padding-top: @padding-sm;
+          padding-bottom: @padding-sm;
+        }
+      }
+    }
+  }
+}

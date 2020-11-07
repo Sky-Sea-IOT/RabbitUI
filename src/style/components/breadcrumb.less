@@ -1,0 +1,47 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}breadcrumb {
+  line-height: @base-line-height;
+  list-style: none;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: @font-size-sm;
+
+  li {
+    display: @inlb;
+
+    &:last-child,
+    &:last-child a {
+      color: @title-color;
+    }
+
+    &:last-child {
+      .@{prefix}breadcrumb-separator {
+        display: none;
+      }
+    }
+  }
+
+  a {
+    color: rgba(0, 0, 0, 0.45);
+    transition: color 0.2s @ease-in-out;
+
+    &:hover {
+      color: @light-primary-color;
+    }
+  }
+
+  .rbt-icon {
+    vertical-align: baseline;
+    font-size: @font-size-sm;
+  }
+
+  &-separator {
+    margin: 0 @margin-xs;
+    color: @border-color;
+  }
+}

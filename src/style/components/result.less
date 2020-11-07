@@ -1,0 +1,85 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/shadow.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}result {
+  padding: 48px 32px;
+
+  &-info {
+    color: @primary-color;
+    .@{prefix}result-icon {
+      color: @primary-color;
+    }
+  }
+
+  &-success {
+    color: @success-color;
+    .@{prefix}result-icon {
+      color: @success-color;
+    }
+  }
+
+  &-warning {
+    color: @warning-color;
+    .@{prefix}result-icon {
+      color: @warning-color;
+    }
+  }
+
+  &-error {
+    color: @error-color;
+    .@{prefix}result-icon {
+      color: @error-color;
+    }
+  }
+
+  &-icon {
+    margin-bottom: @margin-xs;
+    text-align: center;
+    font-size: 92px;
+  }
+
+  &-img {
+    .size(250px,295px);
+    margin: @auto;
+    margin-bottom: @margin-lg;
+  }
+
+  &-title {
+    color: @title-color;
+    font-size: @font-size-lg;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  &-subtitle {
+    color: @sub-color;
+    font-size: @font-size-sm;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  &-content {
+    margin-top: @margin-lg;
+    padding: @padding-lg 40px;
+    background-color: #fafafa;
+    color: @text-color;
+  }
+
+  &-footer {
+    margin: @margin-lg 0 0;
+    text-align: center;
+
+    * {
+      margin-right: @margin-xs;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

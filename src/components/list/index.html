@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/list.css" />
+    <link rel="stylesheet" href="../../style/components/avatar.css" />
+</head>
+<style>
+    .demo {
+        width: 60%;
+        margin: 10px auto;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <div data-component="list" id="l1"></div>
+    </div>
+
+    <div class="demo">
+        <div data-component="list" id="l2"></div>
+    </div>
+
+    <div class="demo">
+        <div data-component="list" id="l3">
+            <div slot="header">Header</div>
+            <span slot="listItem">这是一段文本。</span>
+            <span slot="listItem">这是一段文本。</span>
+            <span slot="listItem">这是一段文本。</span>
+            <div slot="footer">Footer</div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="rbt-list rbt-list-split">
+            <ul class="rbt-list-container">
+                <li class="rbt-list-item">
+                    <div class="rbt-list-item-meta">
+                        <div class="rbt-list-item-meta-avatar">
+                            <span data-component="avatar" id="demoAvatar"></span>
+                        </div>
+                        <div class="rbt-list-item-meta-content">
+                            <div class="rbt-list-item-meta-title">这是标题</div>
+                            <div class="rbt-list-item-meta-desc">
+                                这是描述信息，这是描述信息，这是描述信息。
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="rbt-list-item-action">
+                        <li><a href="#">编辑</a></li>
+                        <li><a href="#">更多</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="rbt-list rbt-list-split">
+            <ul class="rbt-list-container">
+                <li class="rbt-list-item">
+                    <div class="rbt-list-item-meta">
+                        <div class="rbt-list-item-meta-avatar">
+                            <span data-component="avatar" id="demoAvatar"></span>
+                        </div>
+                        <div class="rbt-list-item-meta-content">
+                            <div class="rbt-list-item-meta-title">这是标题</div>
+                            <div class="rbt-list-item-meta-desc">
+                                这是描述信息，这是描述信息，这是描述信息。
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="rbt-list-item-action">
+                        <li><a href="#">编辑</a></li>
+                        <li><a href="#">更多</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="rbt-list rbt-list-split">
+            <ul class="rbt-list-container">
+                <li class="rbt-list-item">
+                    <div class="rbt-list-item-meta">
+                        <div class="rbt-list-item-meta-avatar">
+                            <span data-component="avatar" id="demoAvatar"></span>
+                        </div>
+                        <div class="rbt-list-item-meta-content">
+                            <div class="rbt-list-item-meta-title">这是标题</div>
+                            <div class="rbt-list-item-meta-desc">
+                                这是描述信息，这是描述信息，这是描述信息。
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="rbt-list-item-action">
+                        <li><a href="#">编辑</a></li>
+                        <li><a href="#">更多</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./list.js"></script>
+<script src="../avatar/avatar.js"></script>
+<script>
+    const rbt = new Rabbit();
+    // 写法1
+    const data = ["这是一段文本。", "这是一段文本。", "这是一段文本。"];
+    // 写法2
+    const data2 = [{
+        content: "这是一段文本。",
+    }, {
+        content: "这是一段文本。",
+    }, {
+        content: "这是一段文本。",
+    }, ];
+
+    rbt.createComps("#l1", {
+        header: "Header",
+        renderItem: data,
+        footer: "Footer",
+    });
+    rbt.createComps("#l2", {
+        size: "small",
+        header: "Header",
+        renderItem: data2,
+        footer: "Footer",
+    });
+    rbt.createComps("#l3", {
+        size: "large",
+    });
+    rbt.createComps("#demoAvatar", {
+        src: "../../assets/avatar.jpg",
+    });
+</script>
+
+</html>

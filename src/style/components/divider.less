@@ -1,0 +1,92 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+
+.@{prefix}divider {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: @text-color;
+  font-size: @font-size-sm;
+  @font-variant-with-font-feature-settings-num();
+  line-height: @base-line-height;
+  list-style: @none;
+  border-top: @border-width-base @border-style-base @split-color;
+
+  &-horizontal {
+    display: @flex;
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+    margin: @margin-lg 0;
+  }
+
+  &-vertical {
+    position: @rel;
+    top: -0.06em;
+    display: @inlb;
+    height: 0.9em;
+    margin: 0 @margin-xs;
+    vertical-align: middle;
+    border-top: 0;
+    border-left: @border-width-base @border-style-base @split-color;
+  }
+
+  &-dashed {
+    background: 0 0;
+    border-top: @border-width-base @border-style-dashed @split-color;
+  }
+
+  &-with-text {
+    display: @flex;
+    margin: @margin-md 0;
+    color: @title-color;
+    font-weight: 500;
+    font-size: @font-size-md;
+    white-space: nowrap;
+    text-align: center;
+    border-top: 0;
+    border-top-color: @split-color;
+  }
+
+  &-horizontal&-with-text:after,
+  &-horizontal&-with-text:before {
+    position: @rel;
+    top: 50%;
+    width: 50%;
+    border-top: @border-width-base @border-style-base transparent;
+    border-top-color: inherit;
+    border-bottom: 0;
+    transform: translateY(50%);
+    content: "";
+  }
+
+  &-horizontal&-with-text-left:after,
+  &-horizontal&-with-text-right:before {
+    top: 50%;
+    width: 95%;
+  }
+
+  &-horizontal&-with-text-left:before {
+    top: 50%;
+    width: 5%;
+  }
+
+  &-horizontal&-with-text-right:after {
+    top: 50%;
+    width: 5%;
+  }
+
+  &-inner-text {
+    display: @inlb;
+    padding: 0 @padding-md;
+  }
+
+  &-plain&-with-text {
+    color: @text-color;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

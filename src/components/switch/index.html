@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/switch.css" />
+    <link rel="stylesheet" href="../../style/components/message.css" />
+</head>
+<style>
+    .demo {
+        width: 400px;
+        margin: 10px auto;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <button aria-checked="false" class="rbt-switch rbt-switch-large">
+        <div class="rbt-switch-handle"></div>
+        <span class="rbt-switch-inner"></span>
+      </button>
+        <button aria-checked="false" class="rbt-switch">
+        <div class="rbt-switch-handle"></div>
+        <span class="rbt-switch-inner"></span>
+      </button>
+        <button aria-checked="false" class="rbt-switch rbt-switch-small">
+        <div class="rbt-switch-handle"></div>
+        <span class="rbt-switch-inner"></span>
+      </button>
+        <br /><br />
+        <button aria-checked="false" class="rbt-switch rbt-switch-checked rbt-switch-disabled">
+        <div class="rbt-switch-handle"></div>
+        <span class="rbt-switch-inner">开启</span>
+      </button>
+        <button aria-checked="false" class="rbt-switch rbt-switch-disabled">
+        <div class="rbt-switch-handle"></div>
+        <span class="rbt-switch-inner"></span>
+      </button>
+        <button aria-checked="false" class="rbt-switch rbt-switch-small rbt-switch-disabled">
+        <div class="rbt-switch-handle"></div>
+        <span class="rbt-switch-inner"></span>
+      </button> -->
+
+        <span data-component="switch" id="switch1"></span>
+        <br />
+        <br />
+        <div>
+            <span data-component="switch" id="switch2"></span>
+            <span data-component="switch" id="switch3"></span>
+            <span data-component="switch" id="switch4"></span>
+        </div>
+        <br />
+        <div>
+            <div data-component="switch" id="switch5">
+                <span slot="open">开</span>
+                <span slot="close">关</span>
+            </div>
+
+            <div data-component="switch" id="switch6">
+                <div slot="open">
+                    <i class="rbt-icon rbt-icon-md-checkmark"></i>
+                </div>
+                <div slot="close"><i class="rbt-icon rbt-icon-md-close"></i></div>
+            </div>
+        </div>
+        <br />
+        <div data-component="switch" id="switch7">
+            <span slot="open">开启</span>
+            <span slot="close">关闭</span>
+        </div>
+
+        <div data-component="switch" id="switch8">
+            <span slot="open">ON</span>
+            <span slot="close">OFF</span>
+        </div>
+        <br /><br />
+        <span data-component="switch" id="switch9"></span>
+        <span data-component="switch" id="switch10"></span>
+        <br /><br />
+        <span data-component="switch" id="switch11"></span>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./switch.js"></script>
+<script src="../../utils/destory.js"></script>
+<script src="../../mixins/message.js"></script>
+<script src="../message/message.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#switch1", {
+        onChange: (status) => {
+            $message.info("开关状态：" + status);
+        },
+    });
+    rbt.createComps("#switch2", {
+        size: "small",
+    });
+    rbt.createComps("#switch3");
+    rbt.createComps("#switch4", {
+        size: "large",
+    });
+    rbt.createComps("#switch5");
+    rbt.createComps("#switch6");
+    rbt.createComps("#switch7", {
+        size: "large",
+    });
+    rbt.createComps("#switch8", {
+        size: "large",
+    });
+    rbt.createComps("#switch9", {
+        disabled: true,
+        checked: true,
+    });
+    rbt.createComps("#switch10", {
+        disabled: true,
+        size: "small",
+    });
+    rbt.createComps("#switch11", {
+        openColor: "#13ce66",
+        offColor: "#ff4949",
+    });
+</script>
+
+</html>

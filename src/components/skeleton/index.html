@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/skeleton.css" />
+    <link rel="stylesheet" href="../../style/components/switch.css" />
+</head>
+<style>
+    .demo {
+        width: 65%;
+        padding: 42px 24px 50px;
+        border-bottom: 1px solid #f0f0f0;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <section class="demo">
+        <div data-component="skeleton" id="skeleton1"></div>
+        <!-- <div class="rbt-skeleton">
+            <div class="rbt-skeleton-body">
+                <h3 class="rbt-skeleton-title"></h3>
+                <ul class="rbt-skeleton-paragraph">
+                    <li></li>
+                    <li></li>
+                    <li style="width: 61%"></li>
+                </ul>
+            </div>
+        </div> -->
+    </section>
+
+    <section class="demo">
+        <div data-component="skeleton" id="skeleton2"></div>
+    </section>
+
+    <section class="demo">
+        <div data-component="skeleton" id="skeleton3"></div>
+    </section>
+
+    <section class="demo">
+        <span data-component="switch" id="switch1"></span>
+        <br /><br />
+        <div class="loading">
+            <div data-component="skeleton" id="skeleton4"></div>
+            <br /><br />
+            <div data-component="skeleton" id="skeleton5"></div>
+            <br /><br />
+            <div data-component="skeleton" id="skeleton6"></div>
+        </div>
+        <div class="main-content" style="display: none">
+            <ul>
+                <li>
+                    这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容
+                </li>
+                <li>
+                    这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容
+                </li>
+                <li>
+                    这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./skeleton.js"></script>
+<script src="../switch/switch.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#skeleton1");
+    rbt.createComps("#skeleton2", {
+        avatar: true,
+        rows: 4,
+    });
+    rbt.createComps("#skeleton3", {
+        active: true,
+    });
+    rbt.createComps("#skeleton4", {
+        active: true,
+        avatar: true,
+        rows: 2,
+    });
+    rbt.createComps("#skeleton5", {
+        active: true,
+        avatar: true,
+        rows: 2,
+    });
+    rbt.createComps("#skeleton6", {
+        active: true,
+        avatar: true,
+        rows: 2,
+    });
+    rbt.createComps("#switch1", {
+        onChange: (status) => {
+            if (status) {
+                document.querySelector(".loading").style.display = "none";
+                document.querySelector(".main-content").style.display = "block";
+            } else {
+                document.querySelector(".loading").style.display = "block";
+                document.querySelector(".main-content").style.display = "none";
+            }
+        },
+    });
+</script>
+
+</html>

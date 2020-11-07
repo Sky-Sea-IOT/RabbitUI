@@ -1,0 +1,105 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../animation/slide.less";
+@import "../mixins/shadow.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}dropdown {
+  display: @inlb;
+  position: @rel;
+
+  &-rel {
+    position: @rel;
+    margin: 5px;
+  }
+
+  &-menu {
+    width: inherit;
+    min-width: 100px;
+    position: @abs;
+    margin: 0;
+    top: 0;
+    left: 0;
+    padding: 5px 0;
+    text-align: left;
+    list-style-type: @none;
+    background-color: @white;
+    background-clip: padding-box;
+    border-radius: @xm-radius;
+    display: @none;
+    outline: @none;
+    .box-shadow-all();
+    z-index: 900;
+
+    &-item,
+    &-submenu-title {
+      clear: both;
+      margin: 0;
+      padding: 5px @padding-sm;
+      color: @text-color;
+      font-weight: 400;
+      font-size: @font-size-sm;
+      line-height: 22px;
+      white-space: nowrap;
+      cursor: @pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+
+      &-disabled {
+        color: @disabled-color;
+        cursor: @cursor-not-allowed;
+
+        &:hover {
+          background-color: @white;
+        }
+      }
+
+      &-selected {
+        background-color: #f5f5f5;
+      }
+
+      .rbt-icon {
+        &:first-child {
+          min-width: 12px;
+          margin-right: 8px;
+          font-size: 12px;
+          vertical-align: -0.1em;
+        }
+      }
+
+      a {
+        display: @bl;
+        margin: -5px -@margin-sm;
+        padding: 5px @padding-sm;
+        color: @text-color;
+        transition: all 0.3s;
+      }
+
+      a,
+      span {
+        .rbt-icon {
+          &:first-child {
+            min-width: 12px;
+            margin-right: 8px;
+            font-size: 12px;
+            vertical-align: -0.1em;
+          }
+        }
+      }
+    }
+  }
+
+  &-drop-in {
+    .drop-in();
+  }
+
+  &-drop-out {
+    .drop-out();
+  }
+}

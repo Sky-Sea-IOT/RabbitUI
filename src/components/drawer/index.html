@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/drawer.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    #demo {
+        position: relative;
+        width: 500px;
+        height: 200px;
+        padding: 48px;
+        overflow: hidden;
+        background: #fafafa;
+        border: 1px solid #ebedf0;
+        border-radius: 2px;
+    }
+    
+    body {
+        height: 1000px;
+    }
+</style>
+
+<body>
+    <!-- <div class="rbt-drawer rbt-drawer-right rbt-drawer-open">
+        <div class="rbt-drawer-mask"></div>
+        <div class="rbt-drawer-wrap" style="width: 256px">
+            <div class="rbt-drawer-content">
+                <div class="rbt-drawer-wrap-content">
+                    <a class="rbt-drawer-close">
+                        <i class="rbt-icon rbt-icon-md-close"></i>
+                    </a>
+                    <div class="rbt-drawer-header">
+                        <div class="rbt-drawer-title">基础抽屉</div>
+                    </div>
+                    <div class="rbt-drawer-body">
+                        <p>一些内容...</p>
+                        <p>一些内容...</p>
+                        <p>一些内容...</p>
+                    </div>
+                    <div class="rbt-drawer-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <button class="rbt-btn" onclick="a()">显示</button>
+    <br /><br />
+    <button class="rbt-btn" onclick="b()">右边</button>
+    <button class="rbt-btn" onclick="c()">左边</button>
+    <button class="rbt-btn" onclick="d()">上边</button>
+    <button class="rbt-btn" onclick="e()">下边</button>
+    <br /><br />
+    <button class="rbt-btn" onclick="f()">嵌套抽屉</button>
+
+    <div data-component="drawer" id="mydarwer">
+        <div slot="header">基础抽屉</div>
+        <div slot="content">
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+        </div>
+        <!-- <div slot="footer">
+            <button data-click-action="close">取消</button>
+            <button data-click-action="confirm">确定</button>
+        </div> -->
+    </div>
+
+    <div data-component="drawer" id="mydarwer2">
+        <div slot="header">基础抽屉</div>
+        <div slot="content">
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+        </div>
+    </div>
+    <div data-component="drawer" id="mydarwer3">
+        <div slot="header">基础抽屉</div>
+        <div slot="content">
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+        </div>
+    </div>
+    <div data-component="drawer" id="mydarwer4">
+        <div slot="header">基础抽屉</div>
+        <div slot="content">
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+        </div>
+    </div>
+    <div data-component="drawer" id="mydarwer5">
+        <div slot="header">基础抽屉</div>
+        <div slot="content">
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+            <p>一些内容...</p>
+        </div>
+    </div>
+    <div data-component="drawer" id="mydarwer6">
+        <div slot="header">基础抽屉</div>
+        <div slot="content">
+            <button class="rbt-btn" onclick="c()">左边</button>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/destory.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/clickAction.js"></script>
+<script src="./drawer.js"></script>
+<script>
+    const rbt = new Rabbit();
+
+    rbt.createComps("#mydarwer", {
+        onClose() {},
+    });
+
+    rbt.createComps("#mydarwer2", {
+        onClose() {},
+    });
+
+    rbt.createComps("#mydarwer3", {
+        placement: "left",
+        onClose() {},
+    });
+
+    rbt.createComps("#mydarwer4", {
+        placement: "top",
+        onClose() {},
+    });
+
+    rbt.createComps("#mydarwer5", {
+        placement: "bottom",
+        onClose() {},
+    });
+
+    rbt.createComps("#mydarwer6", {
+        onClose() {},
+    });
+    a = () => {
+        Drawer.visible("#mydarwer");
+    };
+    b = () => {
+        Drawer.visible("#mydarwer2");
+    };
+    c = () => {
+        Drawer.visible("#mydarwer3");
+    };
+    d = () => {
+        Drawer.visible("#mydarwer4");
+    };
+    e = () => {
+        Drawer.visible("#mydarwer5");
+    };
+
+    f = () => {
+        Drawer.visible("#mydarwer6");
+    };
+</script>
+
+</html>

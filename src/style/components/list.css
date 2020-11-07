@@ -1,0 +1,122 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-list {
+  position: relative;
+}
+.rbt-list-header,
+.rbt-list-footer {
+  color: #2c3e50;
+  background: 0 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.rbt-list-container {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rbt-list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+}
+.rbt-list-item-meta {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  font-size: 0;
+}
+.rbt-list-item-meta-avatar {
+  margin-right: 16px;
+}
+.rbt-list-item-meta-content {
+  flex: 1 0;
+}
+.rbt-list-item-meta-title,
+.rbt-list-item-meta-content {
+  font-size: 14px;
+  line-height: 22px;
+}
+.rbt-list-item-meta-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #2c3e50;
+}
+.rbt-list-item-meta-desc {
+  color: rgba(0, 0, 0, 0.45);
+}
+.rbt-list-item-action {
+  flex: 0 0 auto;
+  margin-left: 48px;
+  padding: 0;
+  font-size: 0;
+  list-style: none;
+}
+.rbt-list-item-action li {
+  position: relative;
+  display: inline-block;
+  padding: 0 8px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+.rbt-list-item-action li:not(:last-child) ::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 14px;
+  margin-top: -7px;
+  background-color: #e8eaec;
+}
+.rbt-list-item-action li:first-child {
+  padding-left: 0;
+}
+.rbt-list-large .rbt-list-item {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.rbt-list-small .rbt-list-item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.rbt-list-bordered {
+  border-radius: 6px;
+  border: 1px solid #dcdee2;
+}
+.rbt-list-bordered .rbt-list-header,
+.rbt-list-bordered .rbt-list-footer,
+.rbt-list-bordered .rbt-list-item {
+  padding-right: 24px;
+  padding-left: 24px;
+}
+.rbt-list-bordered .rbt-list-item {
+  border-bottom: 1px solid #dcdee2;
+}
+.rbt-list-bordered.rbt-list-large .rbt-list-header,
+.rbt-list-bordered.rbt-list-large .rbt-list-footer {
+  font-size: 16px;
+  padding: 16px 24px;
+}
+.rbt-list-bordered.rbt-list-small .rbt-list-header,
+.rbt-list-bordered.rbt-list-small .rbt-list-footer {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+.rbt-list-bordered.rbt-list-small .rbt-list-item {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+.rbt-list-split .rbt-list-header,
+.rbt-list-split .rbt-list-item {
+  border-bottom: 1px solid #e8eaec;
+}
+.rbt-list-split .rbt-list-item:last-child {
+  border-bottom: none;
+}
+.rbt-list-split .rbt-list-footer {
+  border-top: 1px solid #e8eaec;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/collapse.css" />
+</head>
+<style>
+    .demo {
+        width: 51%;
+        margin: 20px auto;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <div class="rbt-collapse rbt-collapse-active">
+            <div class="rbt-collapse-item">
+                <div class="rbt-collapse-header">
+                    <i class="rbt-icon rbt-icon-ios-arrow-forward"></i> 折叠面板标题 1
+                </div>
+                <div class="rbt-collapse-content">
+                    <div class="rbt-collapse-content-box">
+                        A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div data-component="collapse" id="c1">
+            <div slot="panel">
+                <div slot="header">Steve Jobs</div>
+                <div slot="content">
+                    Steve Jobs (Born 24 February 1955 in San Francisco, California) is an American inventor, entrepreneur and co-founder of Apple inc
+                </div>
+            </div>
+            <div slot="panel">
+                <div slot="header">Steve Gary Wozniak</div>
+                <div slot="content">
+                    Stephen Gary Wozniak was an American computer engineer who co-founded Apple Computer with Steve Jobs. Steve Gary Wozniak attended the University of Colorado and later transferred to UC Berkeley, where he received his undergraduate degree in electrical
+                    Engineering and Computing (EECS) in 1987.
+                </div>
+            </div>
+            <div slot="panel">
+                <div slot="header">Jonathan Ive</div>
+                <div slot="content">
+                    Sir Jonathan Ive is an industrial designer and senior vice President of Design at Apple. He has been involved in the design of the iPod, iMac, iPhone, iPad and many other Apple products. Aside from Steve Jobs, he was the most influential person on Apple's
+                    famous products.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="demo">
+        <div data-component="collapse" id="c2">
+            <div slot="panel">
+                <div slot="header">Steve Jobs</div>
+                <div slot="content">
+                    Steve Jobs (Born 24 February 1955 in San Francisco, California) is an American inventor, entrepreneur and co-founder of Apple inc
+                </div>
+            </div>
+            <div slot="panel">
+                <div slot="header">Steve Gary Wozniak</div>
+                <div slot="content">
+                    Stephen Gary Wozniak was an American computer engineer who co-founded Apple Computer with Steve Jobs. Steve Gary Wozniak attended the University of Colorado and later transferred to UC Berkeley, where he received his undergraduate degree in electrical
+                    Engineering and Computing (EECS) in 1987.
+                </div>
+            </div>
+            <div slot="panel">
+                <div slot="header">Jonathan Ive</div>
+                <div slot="content">
+                    Sir Jonathan Ive is an industrial designer and senior vice President of Design at Apple. He has been involved in the design of the iPod, iMac, iPhone, iPad and many other Apple products. Aside from Steve Jobs, he was the most influential person on Apple's
+                    famous products.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../common/expand.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./collapse.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#c1", {
+        defaultActiveKey: [1],
+        key: [1, 2, 3],
+        onChange(key) {
+            console.log(key);
+        },
+    });
+    rbt.createComps("#c2", {
+        accordion: true,
+    });
+</script>
+
+</html>
+.

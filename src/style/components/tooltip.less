@@ -1,0 +1,144 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../mixins/shadow.less";
+@import "../mixins/size.less";
+@import "../mixins/arrow.less";
+@import "../mixins/tooltip.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+@tooltip: .rbt-tooltip-popper;
+@tooltip-arrow: .rbt-tooltip-arrow;
+@tooltip-arrow-content: .rbt-tooltip-arrow-content;
+@tooltip-inner: .rbt-tooltip-inner;
+
+@border-width: 5px;
+
+@tooltip-dark-color: rgba(0, 0, 0, 0.7);
+
+.@{prefix}tooltip {
+  &,
+  &-rel {
+    display: @inlb;
+  }
+
+  &-rel {
+    position: @rel;
+    width: inherit;
+  }
+
+  &-popper {
+    max-width: 250px;
+    color: @white;
+    display: @bl;
+    position: @abs;
+    font-size: @font-size-sm;
+    line-height: @base-line-height;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: @none;
+    z-index: 1080;
+  }
+
+  &-arrow {
+    position: @abs;
+    display: @bl;
+    .arrow(13px,13px,0,0);
+    overflow: @hid;
+    pointer-events: @none;
+
+    &-content {
+      position: @abs;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      .size(@border-width,@border-width);
+      margin: @auto;
+      background-color: @tooltip-dark-color;
+      content: "";
+      pointer-events: @auto;
+    }
+  }
+
+  &-inner {
+    min-width: 30px;
+    min-height: 34px;
+    padding: 6px @padding-sm;
+    text-align: left;
+    -webkit-text-decoration: @none;
+    text-decoration: @none;
+    word-wrap: break-word;
+    background-color: @tooltip-dark-color;
+    border-radius: @xm-radius;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+      0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  &-always {
+    .tooltip-fade-enter();
+    transition: none;
+  }
+
+  &-fade-enter {
+    .tooltip-fade-enter();
+  }
+
+  &-fade-leave {
+    .tooltip-fade-leave();
+  }
+
+  &-light {
+    @{tooltip-inner} {
+      color: @text-color;
+    }
+    .tooltip-color(@white,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-pink {
+    .tooltip-color(@pink,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-red {
+    .tooltip-color(@red,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-yellow {
+    .tooltip-color(@yellow,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-orange {
+    .tooltip-color(@orange,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-cyan {
+    .tooltip-color(@cyan,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-green {
+    .tooltip-color(@green,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-blue {
+    .tooltip-color(@blue,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-purple {
+    .tooltip-color(@purple,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-geekblue {
+    .tooltip-color(@geekblue,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-volcano {
+    .tooltip-color(@volcano,@tooltip-arrow-content,@tooltip-inner);
+  }
+
+  &-lime {
+    .tooltip-color(@lime,@tooltip-arrow-content,@tooltip-inner);
+  }
+}
+
+.tooltip-placement(@tooltip, @tooltip-arrow,@border-width, @tooltip-dark-color);

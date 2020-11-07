@@ -1,0 +1,210 @@
+.MessageMoveIn() {
+  -webkit-animation: MessageMoveIn 0.15s @cubic-bezier;
+  animation: MessageMoveIn 0.15s @cubic-bezier;
+}
+
+.MessageMoveOut() {
+  -webkit-animation: MessageMoveOut 0.3s @cubic-bezier;
+  animation: MessageMoveOut 0.3s @cubic-bezier;
+}
+
+.NoticeMoveIn() {
+  -webkit-animation: NoticeMoveIn 0.25s @cubic-bezier;
+  animation: NoticeMoveIn 0.25s @cubic-bezier;
+}
+
+.NoticeMoveOut() {
+  -webkit-animation: NoticeMoveOut 0.5s @ease;
+  animation: NoticeMoveOut 0.5s @ease;
+}
+
+.NoticeMoveInLeft() {
+  -webkit-animation: NoticeMoveInLeft 0.25s @cubic-bezier;
+  animation: NoticeMoveInLeft 0.25s @cubic-bezier;
+}
+
+.NoticeMoveOutLeft() {
+  -webkit-animation: NoticeMoveOutLeft 0.5s @ease;
+  animation: NoticeMoveOutLeft 0.5s @ease;
+}
+
+// message
+@-webkit-keyframes MessageMoveIn {
+  0% {
+    opacity: 0;
+    padding: 8px;
+    transform: translateY(-58%);
+  }
+  100% {
+    opacity: 1;
+    padding: 8px;
+    transform: translateY(0);
+  }
+}
+
+@keyframes MessageMoveIn {
+  0% {
+    opacity: 0;
+    padding: 8px;
+    transform: translateY(-58%);
+  }
+  100% {
+    opacity: 1;
+    padding: 8px;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes MessageMoveOut {
+  0% {
+    max-height: 150px;
+    padding: 8px;
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes MessageMoveOut {
+  0% {
+    max-height: 150px;
+    padding: 8px;
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
+
+// notice
+@-webkit-keyframes NoticeMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes NoticeMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes NoticeMoveOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+    margin-bottom: 0;
+  }
+}
+
+@keyframes NoticeMoveOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+    margin-bottom: 0;
+  }
+}
+
+// left
+@-webkit-keyframes NoticeMoveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes NoticeMoveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes NoticeMoveOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+    margin-bottom: 0;
+  }
+}
+
+@keyframes NoticeMoveOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+    margin-bottom: 0;
+  }
+}
+
+// modal
+@-webkit-keyframes ModalMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ModalMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

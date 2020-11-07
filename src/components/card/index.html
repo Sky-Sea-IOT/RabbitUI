@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/card.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    .demo {
+        width: 500px;
+        margin: 10px auto;
+    }
+    
+    .demo-ghost {
+        background: #ececec;
+        padding: 20px;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <div data-component="card" id="c1">
+            <p slot="title">Basic card</p>
+            <a href="#" slot="extra">更多</a>
+            <div slot="content">
+                <p>Some card content</p>
+                <p>Some card content</p>
+                <p>Some card content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div data-component="card" id="c2">
+            <div slot="content">
+                <p>Some card content</p>
+                <p>Some card content</p>
+                <p>Some card content</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo" style="width: 50%">
+        <div class="demo-ghost">
+            <div style="display: inline-block">
+                <div data-component="card" id="c3">
+                    <p slot="title">Borderless card</p>
+                    <div slot="content">
+                        <p>Some card content</p>
+                        <p>Some card content</p>
+                        <p>Some card content</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: inline-block; margin-left: 50px">
+                <div data-component="card" id="c4">
+                    <p slot="title">Use a card and hover it with a shadow</p>
+                    <div slot="content">
+                        <p>Some card content</p>
+                        <p>Some card content</p>
+                        <p>Some card content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div data-component="card" id="c5">
+            <div slot="content" style="text-align: center">
+                <img src="../../assets/card.jpg" />
+                <h4 style="padding: 16px">那些年那些事那些兔</h4>
+                <button class="rbt-btn rbt-btn-primary">前往观看</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="./card.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#c1");
+    rbt.createComps("#c2");
+    rbt.createComps("#c3", {
+        bordered: false,
+    });
+    rbt.createComps("#c4", {
+        hoverable: true,
+    });
+    rbt.createComps("#c5", {
+        width: 240,
+        padding: 0,
+        hoverable: true,
+    });
+</script>
+
+</html>

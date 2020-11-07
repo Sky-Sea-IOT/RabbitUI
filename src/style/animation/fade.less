@@ -1,0 +1,44 @@
+.fadeIn(@duration) {
+  -webkit-animation: rbtFadeIn @duration @ease;
+  animation: rbtFadeIn @duration @ease;
+}
+.fadeOut(@duration) {
+  -webkit-animation: rbtFadeOut @duration @ease-in-out;
+  animation: rbtFadeOut @duration @ease-in-out;
+}
+
+@-webkit-keyframes rbtFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes rbtFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes rbtFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rbtFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

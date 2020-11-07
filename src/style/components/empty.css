@@ -1,0 +1,25 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-empty {
+  margin: 0 8px;
+  font-size: 14px;
+  line-height: 1.5715;
+  text-align: center;
+  margin: 32px 0;
+  color: rgba(0, 0, 0, 0.25);
+}
+.rbt-empty-img {
+  height: 100px;
+  margin-bottom: 8px;
+}
+.rbt-empty-img img,
+.rbt-empty-img svg {
+  height: 100%;
+  margin: auto;
+}
+.rbt-empty-desc {
+  margin: 0;
+}
+.rbt-empty-footer {
+  margin-top: 16px;
+}

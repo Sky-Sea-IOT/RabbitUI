@@ -1,0 +1,157 @@
+@import "../custom.less";
+
+[class*="rbt-"],
+[class*="rbt-"] *,
+[class*="rbt-"] :after,
+[class*="rbt-"] :before,
+[class^="rbt-"],
+[class^="rbt-"] *,
+[class^="rbt-"] :after,
+[class^="rbt-"] :before {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  font-size: @font-size-sm;
+  overflow-x: @hid;
+  font-family: @base-font-family;
+  background: @white;
+  color: @text-color;
+  line-height: 1.5;
+  @font-variant-with-font-feature-settings-num();
+  -webkit-font-smoothing: antialiased;
+  transition: background @transtion-time-fast
+    cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+article,
+aside,
+blockquote,
+body,
+button,
+dd,
+details,
+div,
+dl,
+dt,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+hr,
+input,
+legend,
+li,
+menu,
+nav,
+ol,
+p,
+section,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: @bl;
+}
+ol,
+ul {
+  list-style: @none;
+}
+blockquote,
+q {
+  quotes: @none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: @none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  outline: 0;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+  display: @none;
+}
+
+a {
+  color: @primary-color;
+  background: transparent;
+  -webkit-text-decoration: @none;
+  text-decoration: @none;
+  outline: @none;
+  cursor: @cursor-pointer;
+  transition: color @transtion-time @ease;
+
+  &:hover {
+    color: @primary-color;
+  }
+
+  &:active {
+    color: @primary-color;
+  }
+
+  &:active,
+  &:hover {
+    outline: 0;
+    -webkit-text-decoration: @none;
+    text-decoration: @none;
+  }
+
+  &[disabled] {
+    color: @ccc;
+    cursor: @cursor-not-allowed;
+    pointer-events: @none;
+  }
+}
+
+[data-component="dropdown"],
+[data-component="tooltip"],
+[data-component="popover"] {
+  display: @inlb;
+}

@@ -1,0 +1,90 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}timeline {
+  list-style: @none;
+  margin: 0;
+  padding: 0;
+
+  &-item {
+    margin: 0;
+    padding: 0 0 @padding-sm;
+    list-style: @none;
+    position: @rel;
+
+    &:last-child {
+      .@{prefix}timeline-item-tail {
+        display: @none;
+      }
+    }
+
+    &-tail {
+      position: @abs;
+      top: 10px;
+      left: 4px;
+      height: calc(100% - 10px);
+      border-left: @border-width-base @border-style-base @split-color;
+    }
+
+    &-head {
+      .size(12px,12px);
+      background-color: @white;
+      border-radius: 100px;
+      border: @border-width-base @border-style-base transparent;
+      position: @abs;
+
+      &-custom {
+        position: @abs;
+        top: 5.5px;
+        left: 5px;
+        .size(auto,auto);
+        margin-top: 0;
+        padding: 3px 1px;
+        line-height: 1;
+        text-align: center;
+        border: 0;
+        border-radius: 0;
+        transform: @translate-center;
+      }
+
+      &-blue {
+        border-color: @dark-primary-color;
+        color: @dark-primary-color;
+      }
+      &-green {
+        border-color: @success-color;
+        color: @success-color;
+      }
+      &-red {
+        border-color: @error-color;
+        color: @error-color;
+      }
+      &-gray {
+        border-color: @disabled-color;
+        color: @disabled-color;
+      }
+    }
+
+    &-content {
+      padding: 1px 1px 10px @padding-lg;
+      font-size: @font-size-sm;
+      position: @rel;
+      top: -6px;
+    }
+  }
+
+  &&-pending {
+    .@{prefix}timeline-item {
+      &:nth-last-of-type(2) {
+        .@{prefix}timeline-item-content {
+          min-height: 48px;
+        }
+      }
+    }
+  }
+}

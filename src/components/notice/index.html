@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/notice.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+
+<body>
+    <!-- <div class="rbt-notice rbt-notice-topRight">
+        <div class="rbt-notice-notice rbt-notice-closable">
+            <div class="rbt-notice-content">
+                <div class="rbt-notice-notice-with-icon">
+                    <i class="rbt-icon rbt-icon-md-information-circle-outline rbt-notice-notice-icon rbt-notice-notice-icon-info"></i>
+                    <div class="rbt-notice-notice-title">这是通知标题</div>
+                    <div class="rbt-notice-notice-desc">
+                        这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述
+                    </div>
+                </div>
+            </div>
+            <a class="rbt-notice-notice-close" tabindex="0">
+                <i class="rbt-icon rbt-icon-ios-close"></i>
+            </a>
+        </div>
+    </div> -->
+    <h3>基础用法</h3>
+    <br />
+    <button class="rbt-btn" onclick="a()">打开提醒</button>
+    <h3>带有图标的通知提醒框</h3>
+    <br />
+    <button class="rbt-btn" onclick="b()">消息</button>
+    <button class="rbt-btn" onclick="c()">成功</button>
+    <button class="rbt-btn" onclick="d()">警告</button>
+    <button class="rbt-btn" onclick="e()">错误</button>
+    <h3>自定义时长</h3>
+    <br />
+    <button class="rbt-btn" onclick="f()">打开提醒</button>
+    <h3>位置</h3>
+    <button class="rbt-btn" onclick="g()">右上角</button>
+    <button class="rbt-btn" onclick="h()">右下角</button>
+    <button class="rbt-btn" onclick="i()">左上角</button>
+    <button class="rbt-btn" onclick="j()">左下角</button>
+    <h3>自定义图标</h3>
+    <br />
+    <button class="rbt-btn" onclick="k()">打开提醒</button>
+    <h3>自定义样式</h3>
+    <br />
+    <button class="rbt-btn" onclick="l()">打开提醒</button>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/destory.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="../../mixins/notice.js"></script>
+<script src="../../common/main.js"></script>
+<script src="./notice.js"></script>
+<script>
+    a = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+        });
+    };
+    b = () => {
+        Rbt.Notice.info({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+        });
+    };
+    c = () => {
+        Rbt.Notice.success({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+        });
+    };
+    d = () => {
+        Rbt.Notice.warning({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+        });
+    };
+    e = () => {
+        Rbt.Notice.error({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+        });
+    };
+    f = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            duration: 0,
+        });
+    };
+    g = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+        });
+    };
+    h = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            placement: "bottomRight",
+        });
+    };
+    i = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            placement: "topLeft",
+        });
+    };
+    j = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            placement: "bottomLeft",
+        });
+    };
+    k = () => {
+        Rbt.Notice.info({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            customIcon: `<i class="rbt-icon rbt-icon-md-heart-empty rbt-notice-notice-icon rbt-notice-notice-icon-info"></i>`,
+        });
+    };
+    l = () => {
+        Rbt.Notice.open({
+            title: "这是通知标题",
+            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            className: "my-notice",
+            styles: {
+                width: "600px",
+                background: "#999",
+            },
+        });
+    };
+</script>
+
+</html>

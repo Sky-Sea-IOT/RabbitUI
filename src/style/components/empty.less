@@ -1,0 +1,36 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/shadow.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}empty {
+  margin: 0 @margin-xs;
+  font-size: @font-size-sm;
+  line-height: @base-line-height;
+  text-align: center;
+  margin: 32px 0;
+  color: rgba(0, 0, 0, 0.25);
+
+  &-img {
+    height: 100px;
+    margin-bottom: @margin-xs;
+
+    img,
+    svg {
+      height: 100%;
+      margin: @auto;
+    }
+  }
+
+  &-desc {
+    margin: 0;
+  }
+
+  &-footer {
+    margin-top: @margin-md;
+  }
+}

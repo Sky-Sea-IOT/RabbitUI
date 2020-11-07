@@ -1,0 +1,221 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../animation/fade.less";
+@import "../mixins/shadow.less";
+@import "../mixins/close.less";
+@import "../mixins/mask.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+@transition-timing-function: cubic-bezier(0.7, 0.3, 0.1, 1);
+@transition-transform: transform 0.4s @transition-timing-function;
+
+.@{prefix}drawer {
+  * {
+    transition: @transition-transform,
+      box-shadow @transtion-time @transition-timing-function;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .size(0,100%);
+  position: @fixd;
+  z-index: 1000;
+  overflow: @hid;
+  -webkit-overflow-scrolling: touch;
+  transition: @transition-transform, height 0s @ease @transtion-time,
+    width 0s @ease @transtion-time;
+
+  // drawer-wrap
+  &-wrap {
+    position: @fixd;
+    .size(100%,100%);
+  }
+
+  // mask
+  &-mask {
+    .mask(rgba(0,0,0,0.45));
+    position: @fixd;
+    transition: opacity @transtion-time @linear, height 0s @ease @transtion-time;
+    pointer-events: @none;
+    opacity: 0;
+  }
+
+  // drawer打开状态下的mask
+  &-open {
+    .@{prefix}drawer-mask {
+      height: 100%;
+      opacity: 1;
+      transition: @none;
+      .fadeIn(@transtion-time);
+      .fadeOut(@transtion-time);
+      pointer-events: @auto;
+    }
+  }
+
+  // drawer 方向
+  // 上下方向
+  &-top,
+  &-bottom {
+    left: 0;
+    width: 100%;
+    height: 0%;
+
+    .@{prefix}drawer-wrap {
+      width: 100%;
+    }
+
+    // open状态下
+    &.@{prefix}drawer-open {
+      height: 100%;
+      transition: @transition-transform;
+    }
+  }
+
+  &-top {
+    top: 0;
+
+    .@{prefix}drawer-wrap {
+      top: 0;
+    }
+
+    // 方向为top的drawer阴影
+    &.@{prefix}drawer-open {
+      .@{prefix}drawer-wrap {
+        box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.08),
+          0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 12px 48px 16px rgba(0, 0, 0, 0.03);
+      }
+    }
+  }
+
+  &-bottom {
+    bottom: 0;
+
+    .@{prefix}drawer-wrap {
+      bottom: 0;
+    }
+
+    // 方向为bottom的drawer阴影
+    &.@{prefix}drawer-open {
+      .@{prefix}drawer-wrap {
+        box-shadow: 0 -6px 16px -8px rgba(0, 0, 0, 0.08),
+          0 -9px 28px 0 rgba(0, 0, 0, 0.05),
+          0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+      }
+    }
+  }
+
+  // 左右方向
+  &-right,
+  &-left {
+    top: 0;
+    width: 0;
+    height: 100%;
+
+    .@{prefix}drawer-wrap {
+      height: 100%;
+    }
+
+    // open状态下
+    &.@{prefix}drawer-open {
+      width: 100%;
+      transition: transform 0.3s @transition-timing-function;
+    }
+  }
+
+  &-right {
+    right: 0;
+
+    .@{prefix}drawer-wrap {
+      right: 0;
+    }
+
+    .@{prefix}drawer-open {
+      .@{prefix}drawer-wrap {
+        box-shadow: -6px 0 16px -8px rgba(0, 0, 0, 0.08),
+          -9px 0 28px 0 rgba(0, 0, 0, 0.05),
+          -12px 0 48px 16px rgba(0, 0, 0, 0.03);
+      }
+    }
+  }
+
+  &-left {
+    left: 0;
+
+    .@{prefix}drawer-wrap {
+      left: 0;
+    }
+  }
+
+  &-content {
+    .size(100%,100%);
+    position: @rel;
+    z-index: 1;
+    overflow: @auto;
+    background-color: @white;
+    background-clip: padding-box;
+    border: 0;
+  }
+
+  &-wrap-content {
+    display: @flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    .size(100%,100%);
+  }
+
+  &-close {
+    z-index: 1;
+    font-size: @font-size-sm;
+    position: @abs;
+    right: 8px;
+    top: 8px;
+    overflow: @hid;
+    cursor: @pointer;
+
+    .rbt-icon-md-close {
+      font-size: 20px;
+      color: #ccc;
+      transition: color @transtion-time @ease;
+      position: @rel;
+      top: 5px;
+      &:hover {
+        color: @text-color;
+      }
+    }
+  }
+  &-header {
+    position: @rel;
+    padding: @padding-md;
+    border-bottom: @border-width-base @border-style-base @split-color;
+  }
+
+  &-title {
+    display: @inlb;
+    color: @title-color;
+    font-weight: 500;
+    font-size: @font-size-md;
+    line-height: 20px;
+    overflow: @hid;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-body {
+    height: calc(100% - 51px);
+    flex-grow: 1;
+    padding: @padding-md;
+    overflow: @auto;
+    font-size: @font-size-sm;
+    line-height: @base-line-height;
+    word-wrap: break-word;
+  }
+
+  &-footer {
+    flex-shrink: 0;
+    padding: 10px;
+    border-top: 1px solid @split-color;
+  }
+}

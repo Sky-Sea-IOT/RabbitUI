@@ -1,0 +1,39 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-page-header {
+  display: flex;
+  line-height: 24px;
+}
+.rbt-page-header-back {
+  display: flex;
+  cursor: pointer;
+  margin-right: 40px;
+  position: relative;
+  transition: color 0.2s ease-in-out;
+}
+.rbt-page-header-back:hover {
+  color: #1890ff;
+}
+.rbt-page-header-back i {
+  font-size: 18px;
+  margin-right: 6px;
+  align-self: center;
+}
+.rbt-page-header-back-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+.rbt-page-header-back::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 16px;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #dcdee2;
+}
+.rbt-page-header-content {
+  font-size: 18px;
+  color: #2c3e50;
+}

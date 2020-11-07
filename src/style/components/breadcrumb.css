@@ -1,0 +1,33 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-breadcrumb {
+  line-height: 1.5715;
+  list-style: none;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+.rbt-breadcrumb li {
+  display: inline-block;
+}
+.rbt-breadcrumb li:last-child,
+.rbt-breadcrumb li:last-child a {
+  color: #2c3e50;
+}
+.rbt-breadcrumb li:last-child .rbt-breadcrumb-separator {
+  display: none;
+}
+.rbt-breadcrumb a {
+  color: rgba(0, 0, 0, 0.45);
+  transition: color 0.2s ease-in-out;
+}
+.rbt-breadcrumb a:hover {
+  color: #5cadff;
+}
+.rbt-breadcrumb .rbt-icon {
+  vertical-align: baseline;
+  font-size: 14px;
+}
+.rbt-breadcrumb-separator {
+  margin: 0 8px;
+  color: #dcdee2;
+}

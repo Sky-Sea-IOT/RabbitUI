@@ -1,0 +1,63 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/shadow.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}card {
+  color: @text-color;
+  font-size: @font-size-sm;
+  line-height: @base-line-height;
+  position: @rel;
+  background: @white;
+  overflow: @hid;
+  border-radius: @xm-radius;
+
+  &-bordered {
+    border: @border-width-base @border-style-base @split-color;
+  }
+
+  &-hoverable {
+    transition: box-shadow 0.3s, border-color 0.3s;
+    &:hover {
+      position: @rel;
+      z-index: 1;
+      .box-shadow-all();
+    }
+  }
+
+  &-head {
+    min-height: 48px;
+    margin-bottom: -1px;
+    font-size: @font-size-md;
+    font-weight: 500;
+    border-radius: @xm-radius @xm-radius 0 0;
+    color: @title-color;
+    border-bottom: @border-width-base @border-style-base @split-color;
+    padding: @padding-md @padding-lg;
+
+    &,
+    * {
+      overflow: @hid;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &-extra {
+    position: @abs;
+    top: 18px;
+    right: 16px;
+  }
+
+  &-body {
+    padding: @padding-lg;
+
+    img {
+      width: 100%;
+      border-radius: @xm-radius @xm-radius 0 0;
+    }
+  }
+}

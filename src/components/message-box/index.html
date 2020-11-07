@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/modal.css" />
+    <link rel="stylesheet" href="../../style/components/messageBox.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
+</head>
+<style>
+    body {
+        height: 1000px;
+    }
+</style>
+
+<body>
+    <!-- <div class="rbt-modal-root">
+        <div class="rbt-modal-mask rbt-modal-mask-enter-in"></div>
+        <div class="rbt-modal-wrap rbt-modal-enter-in">
+            <div class="rbt-modal rbt-modal-confirm" style="width: 416px">
+                <div class="rbt-modal-content">
+                    <div class="rbt-modal-body">
+                        <div class="rbt-modal-confirm-wrap">
+                            <div class="rbt-modal-confirm-header">
+                                <div class="rbt-modal-confirm-header-icon rbt-modal-confirm-header-icon-info">
+                                    <i class="rbt-icon rbt-icon-ios-information-circle"></i>
+                                </div>
+                                <div class="rbt-modal-confirm-header-title">标题</div>
+                            </div>
+                            <div class="rbt-modal-confirm-body">
+                                <p>Modal对话框内容</p>
+                            </div>
+                            <div class="rbt-modal-confirm-footer">
+                                <button>确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <button class="rbt-btn" onclick="a()">消息</button>
+    <button class="rbt-btn" onclick="b()">成功</button>
+    <button class="rbt-btn" onclick="c()">警告</button>
+    <button class="rbt-btn" onclick="d()">错误</button>
+    <button class="rbt-btn" onclick="e()">确认</button>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/getIconTypes.js"></script>
+<script src="../../utils/destory.js"></script>
+<script src="../../mixins/modal.js"></script>
+<script src="../../mixins/messageBox.js"></script>
+<script src="../../common/main.js"></script>
+<script src="./message-box.js"></script>
+<script>
+    a = () => {
+        Rbt.MessageBox.info({
+            title: "这是一条通知消息",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+        });
+    };
+    b = () => {
+        Rbt.MessageBox.success({
+            title: "这是一条通知消息",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+        });
+    };
+    c = () => {
+        Rbt.MessageBox.warning({
+            title: "这是一条通知消息",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+        });
+    };
+    d = () => {
+        Rbt.MessageBox.error({
+            title: "这是一条通知消息",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+        });
+    };
+    e = () => {
+        Rbt.MessageBox.confirm({
+            title: "确认对话框标题",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+        });
+    };
+</script>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/breadcrumb.css" />
+</head>
+<style>
+    .demo {
+        width: 500px;
+        margin: 10px auto;
+    }
+    
+    .demo-breadcrumb-separator {
+        color: #ff5500;
+        padding: 0 5px;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <ul class="rbt-breadcrumb">
+            <li>
+                <a href="#" class="rbt-breadcrumb-link">
+                    <i class="rbt-icon rbt-icon-ios-home"></i> Home
+                </a>
+                <span class="rbt-breadcrumb-separator" role="separator">/</span>
+            </li>
+            <li>
+                <a href="#" class="rbt-breadcrumb-link">
+                    <i class="rbt-icon rbt-icon-logo-buffer"></i> Components
+                </a>
+                <span class="rbt-breadcrumb-separator" role="separator">/</span>
+            </li>
+            <li>
+                <a href="#" class="rbt-breadcrumb-link">Components Docs</a>
+                <span class="rbt-breadcrumb-separator" role="separator">/</span>
+            </li>
+            <li>
+                <span class="rbt-breadcrumb-link">Breadcrumb</span>
+                <span class="rbt-breadcrumb-separator" role="separator">/</span>
+            </li>
+        </ul> -->
+
+        <nav data-component="breadcrumb" id="b1">
+            <a href="#" slot="breadcrumbItem">Home</a>
+            <a href="#" slot="breadcrumbItem">Components Docs</a>
+            <a href="#" slot="breadcrumbItem">Components List</a>
+            <span slot="breadcrumbItem">Components</span>
+        </nav>
+    </div>
+
+    <div class="demo">
+        <nav data-component="breadcrumb" id="b2">
+            <a href="#" slot="breadcrumbItem">
+                <i class="rbt-icon rbt-icon-ios-home"></i> Home
+            </a>
+            <a href="#" slot="breadcrumbItem">
+                <i class="rbt-icon rbt-icon-logo-buffer"></i> Components Docs
+            </a>
+            <span slot="breadcrumbItem"> Components </span>
+        </nav>
+    </div>
+
+    <div class="demo">
+        <nav data-component="breadcrumb" id="b3">
+            <a href="#" slot="breadcrumbItem">Home</a>
+            <a href="#" slot="breadcrumbItem">Components Docs</a>
+            <a href="#" slot="breadcrumbItem">Components List</a>
+            <span slot="breadcrumbItem">Components</span>
+        </nav>
+    </div>
+
+    <div class="demo">
+        <nav data-component="breadcrumb" id="b4">
+            <a href="#" slot="breadcrumbItem">Home</a>
+            <a href="#" slot="breadcrumbItem">Components Docs</a>
+            <a href="#" slot="breadcrumbItem">Components List</a>
+            <span slot="breadcrumbItem">Components</span>
+        </nav>
+    </div>
+</body>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="./breadcrumb.js"></script>
+<script>
+    const rbt = new Rabbit();
+    rbt.createComps("#b1");
+    rbt.createComps("#b2");
+    rbt.createComps("#b3", {
+        separator: ">",
+    });
+    rbt.createComps("#b4", {
+        separator: "<b class='demo-breadcrumb-separator'>-></b>",
+    });
+</script>
+
+</html>
