@@ -124,3 +124,5 @@ const clickDestroy = ({
         }, 400);
     };
 };
+
+// export { destroy, destoryAll, destroyByKey, clickDestroy };

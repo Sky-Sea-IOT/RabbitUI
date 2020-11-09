@@ -8,3 +8,5 @@ const hasClass = (el, class1, class2) => {
         el.classList.replace(class2, class1);
     }
 };
+
+// export default hasClass;

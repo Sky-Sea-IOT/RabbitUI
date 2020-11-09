@@ -3,7 +3,7 @@
  * 基础容器，用来显示文字、列表、图文等内容
  */
 
-const Card = {
+rabbit.Card = {
     createCard(config, slot) {
         const prefixCls = "rbt-card";
         const {

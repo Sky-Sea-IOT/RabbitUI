@@ -94,36 +94,35 @@
 <script src="../../mixins/message.js"></script>
 <script src="../message/message.js"></script>
 <script>
-    const rbt = new Rabbit();
-    rbt.createComps("#switch1", {
-        onChange: (status) => {
-            $message.info("开关状态：" + status);
+    rabbit.createComps("#switch1", {
+        onChange(status) {
+            rabbit.Message.info("开关状态：" + status);
         },
     });
-    rbt.createComps("#switch2", {
+    rabbit.createComps("#switch2", {
         size: "small",
     });
-    rbt.createComps("#switch3");
-    rbt.createComps("#switch4", {
+    rabbit.createComps("#switch3");
+    rabbit.createComps("#switch4", {
         size: "large",
     });
-    rbt.createComps("#switch5");
-    rbt.createComps("#switch6");
-    rbt.createComps("#switch7", {
+    rabbit.createComps("#switch5");
+    rabbit.createComps("#switch6");
+    rabbit.createComps("#switch7", {
         size: "large",
     });
-    rbt.createComps("#switch8", {
+    rabbit.createComps("#switch8", {
         size: "large",
     });
-    rbt.createComps("#switch9", {
+    rabbit.createComps("#switch9", {
         disabled: true,
         checked: true,
     });
-    rbt.createComps("#switch10", {
+    rabbit.createComps("#switch10", {
         disabled: true,
         size: "small",
     });
-    rbt.createComps("#switch11", {
+    rabbit.createComps("#switch11", {
         openColor: "#13ce66",
         offColor: "#ff4949",
     });

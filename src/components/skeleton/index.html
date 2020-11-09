@@ -75,31 +75,30 @@
 <script src="./skeleton.js"></script>
 <script src="../switch/switch.js"></script>
 <script>
-    const rbt = new Rabbit();
-    rbt.createComps("#skeleton1");
-    rbt.createComps("#skeleton2", {
+    rabbit.createComps("#skeleton1");
+    rabbit.createComps("#skeleton2", {
         avatar: true,
         rows: 4,
     });
-    rbt.createComps("#skeleton3", {
+    rabbit.createComps("#skeleton3", {
         active: true,
     });
-    rbt.createComps("#skeleton4", {
-        active: true,
-        avatar: true,
-        rows: 2,
-    });
-    rbt.createComps("#skeleton5", {
+    rabbit.createComps("#skeleton4", {
         active: true,
         avatar: true,
         rows: 2,
     });
-    rbt.createComps("#skeleton6", {
+    rabbit.createComps("#skeleton5", {
         active: true,
         avatar: true,
         rows: 2,
     });
-    rbt.createComps("#switch1", {
+    rabbit.createComps("#skeleton6", {
+        active: true,
+        avatar: true,
+        rows: 2,
+    });
+    rabbit.createComps("#switch1", {
         onChange: (status) => {
             if (status) {
                 document.querySelector(".loading").style.display = "none";

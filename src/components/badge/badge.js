@@ -3,7 +3,7 @@
  * @description 用于通知未读数的角标，提醒用户点击。
  */
 
-const Badge = {
+rabbit.Badge = {
     listenCount: ({ el, showZero = false, overflowCount = 99 } = {}) => {
         if (isArr(el)) {
             el.map((item) => setInterval(() => change(item), 100));
@@ -39,4 +39,4 @@ const Badge = {
     },
 };
 
-Badge.dot();
+rabbit.Badge.dot();

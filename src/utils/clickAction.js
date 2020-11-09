@@ -6,8 +6,6 @@
  */
 
 const clickActions = (el, okCb, cancelCb) => {
-    const prefixCls = "rbt-modal";
-
     const thisEle = document.querySelector(el);
 
     const { component } = thisEle.dataset;
@@ -26,11 +24,11 @@ const clickActions = (el, okCb, cancelCb) => {
                         // 不同组件的关闭方法
                         switch (component) {
                             case "drawer":
-                                Drawer.visible(el);
+                                rabbit.Drawer.visible(el);
                                 break;
 
                             case "modal":
-                                Modal.visible(el);
+                                rabbit.Modal.visible(el);
                                 break;
                         }
 
@@ -42,11 +40,11 @@ const clickActions = (el, okCb, cancelCb) => {
                     item.onclick = () => {
                         switch (component) {
                             case "drawer":
-                                Drawer.visible(el);
+                                rabbit.Drawer.visible(el);
                                 break;
 
                             case "modal":
-                                Modal.visible(el);
+                                rabbit.Modal.visible(el);
                                 break;
                         }
 
@@ -57,3 +55,5 @@ const clickActions = (el, okCb, cancelCb) => {
         });
     }
 };
+
+// export default clickActions;

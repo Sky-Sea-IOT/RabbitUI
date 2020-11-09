@@ -28,3 +28,5 @@ const CSSTransition = (
         }, timeout);
     }
 };
+
+// export default CSSTransition;

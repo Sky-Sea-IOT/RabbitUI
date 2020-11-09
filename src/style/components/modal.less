@@ -14,7 +14,7 @@
 .@{prefix}modal {
   &-mask {
     .mask(rgba(0,0,0,0.45));
-    z-index: 1000;
+    z-index: @zindex-modal;
     pointer-events: none;
     opacity: 0;
   }
@@ -26,14 +26,13 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1000;
+    z-index: @zindex-modal;
     -webkit-overflow-scrolling: touch;
     outline: 0;
     opacity: 0;
-    pointer-events: none;
+    pointer-events: @none;
   }
 
-  box-sizing: border-box;
   color: @text-color;
   font-size: @font-size-sm;
   line-height: @base-line-height;
@@ -65,7 +64,7 @@
     .@{icon-prefix}-ios-close {
       font-size: 31px;
       color: #999;
-      transition: color 0.2s ease;
+      transition: color @transition-time @ease;
       position: @rel;
       top: 1px;
       &:hover {
@@ -106,13 +105,13 @@
 
     button + button {
       margin-bottom: 0;
-      margin-left: 8px;
+      margin-left: @margin-xs;
     }
   }
 
   // 全屏modal
   &-fullscreen {
-    display: none;
+    display: @none;
     .@{prefix}modal {
       width: 100% !important;
       top: 0;
@@ -150,7 +149,7 @@
   // 动画
   &-mask-enter-in,
   &-enter-in {
-    .fadeIn(0.3s);
+    .fadeIn(@animation-time);
     opacity: 1;
   }
   &-mask-enter-in {
@@ -159,18 +158,18 @@
 
   &-mask-leave-out,
   &-leave-out {
-    .fadeOut(0.25s);
+    .fadeOut(@transtion-time);
   }
 
   &-enter-in {
     .@{prefix}modal {
-      .ani-bounces(0.3s);
+      .ani-bounces(@animation-time);
     }
   }
 
   &-leave-out {
     .@{prefix}modal {
-      .ani-bounces-out(0.2s);
+      .ani-bounces-out(@transition-time);
     }
   }
 }

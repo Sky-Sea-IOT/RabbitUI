@@ -3,7 +3,7 @@
  * 用于反馈一系列操作任务的处理结果。
  */
 
-const Result = {
+rabbit.Result = {
     createResult: (config, slot) => {
         const prefixCls = "rbt-result";
         const prefixIconCls = "rbt-icon";

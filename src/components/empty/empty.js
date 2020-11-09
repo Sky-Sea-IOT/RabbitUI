@@ -3,7 +3,7 @@
  * 空状态时的展示占位图。
  */
 
-const Empty = {
+rabbit.Empty = {
     createEmpty: (config, slot) => {
         const prefixCls = "rbt-empty";
 

@@ -1,6 +1,4 @@
-const Rbt = new Rabbit();
-
-Rbt.MessageBox = {
+rabbit.MessageBox = {
     info: ({ title, content, width, okText, onOk } = {}) => {
         createMsgBoxInstance({
             type: "info",

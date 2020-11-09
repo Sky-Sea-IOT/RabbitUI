@@ -5,7 +5,7 @@
 
 let drawerZIndex = 1000;
 
-const Drawer = {
+rabbit.Drawer = {
     creatDrawer(el, config, slot) {
         const prefixCls = "rbt-drawer";
         const prefixIconCls = "rbt-icon";

@@ -17,36 +17,36 @@
   font-size: @font-size-sm;
   line-height: @base-line-height;
   @font-variant-with-font-feature-settings-num();
-  z-index: 1010;
+  z-index: @zindex-notification;
 
   // notice方向
   &-topRight {
     right: 0px;
     top: 24px;
-    bottom: auto;
+    bottom: @auto;
   }
 
   &-bottomRight {
     right: 0px;
-    top: auto;
+    top: @auto;
     bottom: 24px;
   }
 
   &-topLeft,
   &-bottomLeft {
     margin-right: 0;
-    margin-left: 24px;
+    margin-left: @margin-lg;
   }
 
   &-topLeft {
     left: 0px;
     top: 24px;
-    bottom: auto;
+    bottom: @auto;
   }
 
   &-bottomLeft {
     left: 0px;
-    top: auto;
+    top: @auto;
     bottom: 24px;
   }
 
@@ -57,7 +57,7 @@
     padding: @padding-md @padding-lg;
     line-height: @base-line-height;
     margin-bottom: @margin-md;
-    margin-left: @auto;
+    margin-left: @@auto;
     overflow: @hid;
     background: @white;
     border-radius: @sm-radius;
@@ -79,7 +79,7 @@
 
     &-closable {
       .@{prefix}notice-notice-title {
-        padding-right: 24px;
+        padding-right: @padding-lg;
       }
     }
 
@@ -88,12 +88,12 @@
       .@{prefix}notice-notice-title {
         margin-bottom: 4px;
         margin-left: 48px;
-        font-size: 16px;
+        font-size: @font-size-md;
       }
 
       .@{prefix}notice-notice-desc {
         margin-left: 48px;
-        font-size: 14px;
+        font-size: @font-size-sm;
       }
     }
 
@@ -130,8 +130,8 @@
       top: 0;
       right: 22px;
       font-size: @font-size-lg;
-      color: #ccc;
-      outline: none;
+      color: @ccc;
+      outline: @none;
       &:hover {
         color: #999;
       }

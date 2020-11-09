@@ -70,8 +70,8 @@
   transition: none;
   -webkit-animation: rbtFadeIn 0.25s ease;
   animation: rbtFadeIn 0.25s ease;
-  -webkit-animation: rbtFadeIn 0.25s ease-in-out;
-  animation: rbtFadeIn 0.25s ease-in-out;
+  -webkit-animation: rbtFadeOut 0.25s ease-in-out;
+  animation: rbtFadeOut 0.25s ease-in-out;
   pointer-events: auto;
 }
 .rbt-drawer-top,
@@ -180,7 +180,7 @@
 }
 .rbt-drawer-title {
   display: inline-block;
-  color: #17233d;
+  color: #2c3e50;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;

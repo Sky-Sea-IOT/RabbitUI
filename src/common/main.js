@@ -63,3 +63,5 @@ class Rabbit {
         return getComps(el, compsName, config, slot);
     }
 }
+
+const rabbit = new Rabbit();

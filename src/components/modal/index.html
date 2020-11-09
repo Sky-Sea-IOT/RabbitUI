@@ -65,15 +65,14 @@
 <script src="../../utils/clickAction.js"></script>
 <script src="./modal.js"></script>
 <script>
-    const rbt = new Rabbit();
-    rbt.createComps("#modal1", {
+    rabbit.createComps("#modal1", {
         onOk() {
             alert(1);
         },
     });
 
     a = () => {
-        Modal.visible("#modal1");
+        rabbit.Modal.visible("#modal1");
     };
 </script>
 

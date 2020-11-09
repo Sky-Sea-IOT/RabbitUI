@@ -3,7 +3,7 @@
  * @description 用来代表用户或事物，支持图片、图标或字符展示。
  */
 
-const Avatar = {
+rabbit.Avatar = {
     createAvatar: (config) => {
         const prefixCls = "rbt-avatar";
         const prefixIconCls = "rbt-icon";

@@ -3,7 +3,7 @@
  * @description 模态对话框，在浮层中显示，引导用户进行相关操作。
  */
 
-const Modal = {
+rabbit.Modal = {
     createModal(el, config, slot) {
         const prefixCls = "rbt-modal";
         const prefixIconCls = "rbt-icon";

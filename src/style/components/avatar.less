@@ -6,27 +6,18 @@
 @prefix: @css-prefix;
 @icon-prefix: @css-prefix-iconfont;
 
-@avatar-width-lg: 40px;
-@avatar-height-lg: 40px;
-
-@avatar-width: 32px;
-@avatar-height: 32px;
-
-@avatar-width-sm: 24px;
-@avatar-height-sm: 24px;
-
 .@{prefix}avatar {
   display: @inl-flex;
   justify-content: center;
   align-items: center;
   background: @ccc;
-  color: @white;
+  color: @avatar-color;
   white-space: nowrap;
   position: @rel;
   overflow: @hid;
   vertical-align: middle;
-  .size(@avatar-width,@avatar-height);
-  line-height: @avatar-height;
+  .size(@avatar-size-base,@avatar-size-base);
+  line-height: @avatar-size-base;
   border-radius: 50%;
 
   &&-icon {
@@ -34,21 +25,21 @@
   }
 
   &-large {
-    .size(@avatar-width-lg,@avatar-height-lg);
-    line-height: @avatar-height-lg;
+    .size(@avatar-size-lg,@avatar-size-lg);
+    line-height: @avatar-size-lg;
   }
 
   &-large&-icon {
-    font-size: @font-size-lg;
+    font-size: @avatar-font-size-lg;
   }
 
   &-small {
-    .size(@avatar-width-sm,@avatar-height-sm);
-    line-height: @avatar-height-sm;
+    .size(@avatar-size-sm,@avatar-size-sm);
+    line-height: @avatar-size-sm;
   }
 
   &-small&-icon {
-    font-size: @font-size-sm;
+    font-size: @avatar-font-size-sm;
   }
 
   &-large .rbt-icon {
@@ -57,7 +48,7 @@
   }
 
   &-square {
-    border-radius: @xm-radius;
+    border-radius: @avatar-border-radius;
   }
 
   img {

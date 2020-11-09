@@ -3,7 +3,7 @@
  * 返回页面顶部的操作按钮。
  */
 
-const BackTop = {
+rabbit.BackTop = {
     createBackTop(config, slot) {
         const prefixCls = "rbt-back-top";
         const prefixIconCls = "rbt-icon";

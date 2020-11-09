@@ -1,4 +1,4 @@
-const Alert = {
+rabbit.Alert = {
     createAlert: (config, slot) => {
         const prefixCls = "rbt-alert";
         const prefixIconCls = "rbt-icon";

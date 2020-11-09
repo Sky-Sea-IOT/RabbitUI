@@ -3,7 +3,7 @@
  * @description 显示当前页面在系统层级结构中的位置，并能向上返回。
  */
 
-const Breadcrumb = {
+rabbit.Breadcrumb = {
     createBreadcrumb(config, slot) {
         const prefixCls = "rbt-breadcrumb";
         const { separator = "/" } = config;

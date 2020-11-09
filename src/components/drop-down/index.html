@@ -192,48 +192,47 @@
 <script src="../../utils/dropdown.js"></script>
 <script src="./drop-down.js"></script>
 <script>
-    const rbt = new Rabbit();
-    rbt.createComps("#dropdown1", {
+    rabbit.createComps("#dropdown1", {
         placement: "top-start",
     });
-    rbt.createComps("#dropdown2", {
+    rabbit.createComps("#dropdown2", {
         placement: "top",
     });
-    rbt.createComps("#dropdown3", {
+    rabbit.createComps("#dropdown3", {
         placement: "top-end",
     });
-    rbt.createComps("#dropdown4", {
+    rabbit.createComps("#dropdown4", {
         placement: "left-start",
     });
-    rbt.createComps("#dropdown5", {
+    rabbit.createComps("#dropdown5", {
         placement: "left",
     });
-    rbt.createComps("#dropdown6", {
+    rabbit.createComps("#dropdown6", {
         placement: "left-end",
     });
-    rbt.createComps("#dropdown7", {
+    rabbit.createComps("#dropdown7", {
         placement: "right-start",
     });
-    rbt.createComps("#dropdown8", {
+    rabbit.createComps("#dropdown8", {
         placement: "right",
     });
-    rbt.createComps("#dropdown9", {
+    rabbit.createComps("#dropdown9", {
         placement: "right-end",
     });
-    rbt.createComps("#dropdown10", {
+    rabbit.createComps("#dropdown10", {
         placement: "bottom-start",
     });
-    rbt.createComps("#dropdown11");
-    rbt.createComps("#dropdown12", {
+    rabbit.createComps("#dropdown11");
+    rabbit.createComps("#dropdown12", {
         placement: "bottom-end",
     });
-    rbt.createComps("#dropdown13", {
+    rabbit.createComps("#dropdown13", {
         trigger: "click",
     });
-    rbt.createComps("#dropdown14", {
+    rabbit.createComps("#dropdown14", {
         trigger: "contextMenu",
     });
-    rbt.createComps("#dropdown15", {
+    rabbit.createComps("#dropdown15", {
         onClick(index) {
             alert("当前点击的索引：" + index);
         },

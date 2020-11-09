@@ -6,9 +6,8 @@
  * 带有交互的通知，给出用户下一步的行动点。
  * 系统主动推送。
  */
-const Rbt = new Rabbit();
 
-Rbt.Notice = {
+rabbit.Notice = {
     open: ({
         key,
         top,

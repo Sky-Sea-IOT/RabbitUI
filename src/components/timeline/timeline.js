@@ -3,7 +3,7 @@
  * @description 垂直展示的时间流信息。
  */
 
-const Timeline = {
+rabbit.Timeline = {
     createTimeline(config, slot) {
         const prefixCls = "rbt-timeline";
         const { color = [], pending = false } = config;

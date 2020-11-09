@@ -45,3 +45,5 @@ const getIconTypes = (type) => {
             return iconTypes.close;
     }
 };
+
+// export default getIconTypes;

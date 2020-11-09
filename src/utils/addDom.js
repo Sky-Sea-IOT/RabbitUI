@@ -12,3 +12,5 @@ const addElemetsOfSlots = (slot, targetEle) => {
         setTimeout(() => slot.removeAttribute("slot"), 200);
     }
 };
+
+// export default addElemetsOfSlots;

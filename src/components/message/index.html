@@ -37,28 +37,28 @@
     let key = "updata";
 
     a = () => {
-        Rbt.Message.info("这是一条消息提示");
+        rabbit.Message.info("这是一条消息提示");
     };
 
     b = () => {
-        Rbt.Message.success("这是一条消息提示");
+        rabbit.Message.success("这是一条消息提示");
     };
 
     c = () => {
-        Rbt.Message.warning("这是一条消息提示");
+        rabbit.Message.warning("这是一条消息提示");
     };
 
     d = () => {
-        Rbt.Message.error("这是一条消息提示");
+        rabbit.Message.error("这是一条消息提示");
     };
 
     e = () => {
-        Rbt.Message.loading("正在加载中...", {
+        rabbit.Message.loading("正在加载中...", {
             duration: 0,
             key,
         });
         setTimeout(() => {
-            Rbt.Message.destroy(key);
+            rabbit.Message.destroy(key);
         }, 3000);
     };
 </script>

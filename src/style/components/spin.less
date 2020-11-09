@@ -1,0 +1,115 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../animation/fade.less";
+@import "../animation/spin.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}spin {
+  color: @primary-color;
+  vertical-align: middle;
+  text-align: center;
+
+  &-show-text &-text {
+    display: @bl;
+    position: @abs;
+    top: 50%;
+    left: 50%;
+    transform: @translate-center;
+  }
+
+  &-loading {
+    font-size: @font-size-lg;
+    .ani-spin-loading();
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+
+    &.small {
+      font-size: @font-size-md;
+    }
+
+    &.large {
+      font-size: 36px;
+    }
+  }
+
+  &-dot {
+    position: @rel;
+    display: @inlb;
+    background-color: @primary-color !important;
+    border-radius: 50%;
+    .size(26px,26px);
+    .ani-spin-bounce();
+
+    &.small {
+      .size(12px,12px);
+    }
+
+    &.large {
+      .size(36px,36px);
+    }
+
+    &.bg {
+      &-primary {
+        background-color: @primary-color !important;
+      }
+
+      &-success {
+        background-color: @success-color !important;
+      }
+
+      &-info {
+        background-color: @info-color !important;
+      }
+
+      &-warning {
+        background-color: @warning-color !important;
+      }
+
+      &-error {
+        background-color: @error-color !important;
+      }
+    }
+  }
+
+  &-fix {
+    position: @abs;
+    top: 0;
+    left: 0;
+    z-index: @zindex-spin;
+    .size(100%,100%);
+    background-color: hsla(0, 0%, 100%, 0.9);
+  }
+
+  &-fix &-main {
+    position: @abs;
+    top: 50%;
+    left: 50%;
+    transform: @translate-center;
+  }
+
+  &-fullscreen {
+    z-index: @zindex-spin-fullscreen;
+
+    &-wrapper {
+      position: @fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  &-fade {
+    &-enter {
+      .fadeIn(0.25s);
+    }
+
+    &-leave {
+      .fadeOut(0.25s);
+    }
+  }
+}

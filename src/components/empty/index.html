@@ -53,19 +53,17 @@
 <script src="./svg.js"></script>
 <script src="./empty.js"></script>
 <script>
-    const rbt = new Rabbit();
+    rabbit.createComps("#empty1");
 
-    rbt.createComps("#empty1");
-
-    rbt.createComps("#empty2", {
+    rabbit.createComps("#empty2", {
         image: "simple",
     });
 
-    rbt.createComps("#empty3", {
+    rabbit.createComps("#empty3", {
         desc: false,
     });
 
-    rbt.createComps("#empty4", {
+    rabbit.createComps("#empty4", {
         desc: "自定义的 <a href='#'>描述</a>",
         image: "https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg",
         imageStyle: {

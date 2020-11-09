@@ -3,7 +3,7 @@
  * 在需要等待加载内容的位置提供一个占位图形组合。
  */
 
-const Skeleton = {
+rabbit.Skeleton = {
     createSkeleton: (config) => {
         const prefixCls = "rbt-skeleton";
 

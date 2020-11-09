@@ -5,7 +5,7 @@
 
 let dropDownState = false;
 
-const Dropdown = {
+rabbit.Dropdown = {
     createDropDown(config, slot) {
         const prefixCls = "rbt-dropdown";
         const animationEnterCls = `${prefixCls}-drop-in`;

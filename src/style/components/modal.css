@@ -73,7 +73,6 @@
   }
 }
 .rbt-modal {
-  box-sizing: border-box;
   color: #55585e;
   font-size: 14px;
   line-height: 1.5715;
@@ -146,7 +145,7 @@
 }
 .rbt-modal-title {
   margin: 0;
-  color: #17233d;
+  color: #2c3e50;
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
@@ -215,10 +214,10 @@
   animation: rbtFadeOut 0.25s ease-in-out;
 }
 .rbt-modal-enter-in .rbt-modal {
-  -webkit-animation: ani-bounces 0.3s ease;
-  animation: ani-bounces 0.3s ease;
+  -webkit-animation: ani-bounces 0.3s ease infinite;
+  animation: ani-bounces 0.3s ease infinite;
 }
 .rbt-modal-leave-out .rbt-modal {
-  -webkit-animation: ani-bounces-out 0.2s ease;
-  animation: ani-bounces-out 0.2s ease;
+  -webkit-animation: ani-bounces-out 0.2s ease infinite;
+  animation: ani-bounces-out 0.2s ease infinite;
 }

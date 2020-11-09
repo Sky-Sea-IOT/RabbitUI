@@ -144,6 +144,26 @@
     margin-bottom: 0;
   }
 }
+@-webkit-keyframes ModalMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ModalMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .rbt-notice {
   position: fixed;
   max-width: calc(100vw - 32px);
@@ -195,7 +215,7 @@
 .rbt-notice-notice-title {
   display: inline-block;
   margin-bottom: 8px;
-  color: #263238;
+  color: #2c3e50;
   font-size: 16px;
   line-height: 24px;
 }
@@ -223,7 +243,7 @@
   color: #1890ff;
 }
 .rbt-notice-notice-icon-success {
-  color: #52c41a;
+  color: #05cc72;
 }
 .rbt-notice-notice-icon-warning {
   color: #faad14;

@@ -88,13 +88,12 @@
 <script src="../../common/main.js"></script>
 <script src="./breadcrumb.js"></script>
 <script>
-    const rbt = new Rabbit();
-    rbt.createComps("#b1");
-    rbt.createComps("#b2");
-    rbt.createComps("#b3", {
+    rabbit.createComps("#b1");
+    rabbit.createComps("#b2");
+    rabbit.createComps("#b3", {
         separator: ">",
     });
-    rbt.createComps("#b4", {
+    rabbit.createComps("#b4", {
         separator: "<b class='demo-breadcrumb-separator'>-></b>",
     });
 </script>

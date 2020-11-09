@@ -3,7 +3,7 @@
  * 基础的列表展示，可承载文字、列表、图片、段落
  */
 
-const List = {
+rabbit.List = {
     createList(config, slot) {
         const prefixCls = "rbt-list";
 

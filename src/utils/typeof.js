@@ -15,3 +15,5 @@ const isObj = (o) => o.constructor === Object;
 const isArr = (a) => a.constructor === Array;
 
 const isFunc = (f) => typeof f === "function";
+
+// export { _typeof, isStr, isUndef, isNum, isObj, isArr, isFunc };

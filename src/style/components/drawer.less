@@ -22,7 +22,7 @@
 
   .size(0,100%);
   position: @fixd;
-  z-index: 1000;
+  z-index: @zindex-drawer;
   overflow: @hid;
   -webkit-overflow-scrolling: touch;
   transition: @transition-transform, height 0s @ease @transtion-time,
@@ -177,7 +177,7 @@
 
     .rbt-icon-md-close {
       font-size: 20px;
-      color: #ccc;
+      color: @ccc;
       transition: color @transtion-time @ease;
       position: @rel;
       top: 5px;

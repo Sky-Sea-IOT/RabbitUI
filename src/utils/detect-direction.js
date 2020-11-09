@@ -7,3 +7,5 @@ const detectTooltipDirection = (tooltip) => {
         tooltip.setAttribute("x-placement", b);
     }
 };
+
+// export default detectTooltipDirection;

@@ -17,7 +17,7 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1080;
+  z-index: 1060;
 }
 .rbt-tooltip-arrow {
   position: absolute;

@@ -41,11 +41,9 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./back-top.js"></script>
 <script>
-    const rbt = new Rabbit();
+    rabbit.createComps("#bt1");
 
-    rbt.createComps("#bt1");
-
-    rbt.createComps("#bt2", {
+    rabbit.createComps("#bt2", {
         height: 100,
         // right,
         bottom: 200,

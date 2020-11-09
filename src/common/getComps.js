@@ -28,58 +28,58 @@ const getComps = (el, compsName, config, slot) => {
 
     switch (compsName) {
         case components.Alert:
-            return Alert.createAlert(config, slot);
+            return rabbit.Alert.createAlert(config, slot);
 
         case components.Avatar:
-            return Avatar.createAvatar(config);
+            return rabbit.Avatar.createAvatar(config);
 
         case components.BackTop:
-            return BackTop.createBackTop(config, slot);
+            return rabbit.BackTop.createBackTop(config, slot);
 
         case components.Breadcrumb:
-            return Breadcrumb.createBreadcrumb(config, slot);
+            return rabbit.Breadcrumb.createBreadcrumb(config, slot);
 
         case components.Card:
-            return Card.createCard(config, slot);
+            return rabbit.Card.createCard(config, slot);
 
         case components.Collapse:
-            return Collapse.createCollapse(config, slot);
+            return rabbit.Collapse.createCollapse(config, slot);
 
         case components.Drawer:
-            return Drawer.creatDrawer(el, config, slot);
+            return rabbit.Drawer.creatDrawer(el, config, slot);
 
         case components.Dropdown:
-            return Dropdown.createDropDown(config, slot);
+            return rabbit.Dropdown.createDropDown(config, slot);
 
         case components.Empty:
-            return Empty.createEmpty(config, slot);
+            return rabbit.Empty.createEmpty(config, slot);
 
         case components.List:
-            return List.createList(config, slot);
+            return rabbit.List.createList(config, slot);
 
         case components.Modal:
-            return Modal.createModal(el, config, slot);
+            return rabbit.Modal.createModal(el, config, slot);
 
         case components.PageHeader:
-            return PageHeader.createPageHeader(config, slot);
+            return rabbit.PageHeader.createPageHeader(config, slot);
 
         case components.Popover:
-            return Popover.createPopover(config, slot);
+            return rabbit.Popover.createPopover(config, slot);
 
         case components.Result:
-            return Result.createResult(config, slot);
+            return rabbit.Result.createResult(config, slot);
 
         case components.Skeleton:
-            return Skeleton.createSkeleton(config);
+            return rabbit.Skeleton.createSkeleton(config);
 
         case components.Switch:
-            return Switch.createSwitch(config, slot);
+            return rabbit.Switch.createSwitch(config, slot);
 
         case components.Timeline:
-            return Timeline.createTimeline(config, slot);
+            return rabbit.Timeline.createTimeline(config, slot);
 
         case components.Tooltip:
-            return Tooltip.createTooltip(config, slot);
+            return rabbit.Tooltip.createTooltip(config, slot);
 
         default:
             throw new Error(

@@ -19,3 +19,5 @@ const isSlotsUserd = (condition, slot) => {
         );
     }
 };
+
+// export default isSlotsUserd;

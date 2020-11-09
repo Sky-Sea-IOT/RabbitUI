@@ -89,15 +89,14 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./timeline.js"></script>
 <script>
-    const rbt = new Rabbit();
-    rbt.createComps("#t1");
-    rbt.createComps("#t2", {
+    rabbit.createComps("#t1");
+    rabbit.createComps("#t2", {
         color: ["green", "green", "red", "blue", "gray"],
     });
-    rbt.createComps("#t3", {
+    rabbit.createComps("#t3", {
         pending: true,
     });
-    rbt.createComps("#t4");
+    rabbit.createComps("#t4");
 </script>
 
 </html>

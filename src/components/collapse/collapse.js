@@ -3,7 +3,7 @@
  * @deprecated 可以折叠/展开的内容区域。
  */
 
-const Collapse = {
+rabbit.Collapse = {
     createCollapse(config, slot) {
         const prefixCls = "rbt-collapse";
         const prefixIconCls = "rbt-icon";

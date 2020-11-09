@@ -1,4 +1,4 @@
-const PageHeader = {
+rabbit.PageHeader = {
     createPageHeader: (config, slot) => {
         const prefixCls = "rbt-page-header";
         const prefixIconCls = "rbt-icon";

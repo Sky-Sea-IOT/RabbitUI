@@ -242,7 +242,7 @@
   color: #1890ff;
 }
 .rbt-message-success .rbt-icon {
-  color: #52c41a;
+  color: #05cc72;
 }
 .rbt-message-warning .rbt-icon {
   color: #faad14;
@@ -263,8 +263,8 @@
   border-color: #ebeef5;
 }
 .rbt-message-with-background-info > .rbt-message-success {
-  color: #52c41a;
-  background-color: #f6ffed;
+  color: #05cc72;
+  background-color: #9cf3ca;
   border-color: #e1f3d8;
 }
 .rbt-message-with-background-info > .rbt-message-warning {
@@ -279,8 +279,8 @@
 }
 .rbt-message-with-background-success {
   box-shadow: none;
-  color: #52c41a;
-  background-color: #f6ffed;
+  color: #05cc72;
+  background-color: #9cf3ca;
   border-color: #e1f3d8;
 }
 .rbt-message-with-background-warning {
