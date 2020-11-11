@@ -94,35 +94,35 @@
 <script src="../../mixins/message.js"></script>
 <script src="../message/message.js"></script>
 <script>
-    rabbit.createComps("#switch1", {
+    rabbit.create("#switch1", {
         onChange(status) {
             rabbit.Message.info("开关状态：" + status);
         },
     });
-    rabbit.createComps("#switch2", {
+    rabbit.create("#switch2", {
         size: "small",
     });
-    rabbit.createComps("#switch3");
-    rabbit.createComps("#switch4", {
+    rabbit.create("#switch3");
+    rabbit.create("#switch4", {
         size: "large",
     });
-    rabbit.createComps("#switch5");
-    rabbit.createComps("#switch6");
-    rabbit.createComps("#switch7", {
+    rabbit.create("#switch5");
+    rabbit.create("#switch6");
+    rabbit.create("#switch7", {
         size: "large",
     });
-    rabbit.createComps("#switch8", {
+    rabbit.create("#switch8", {
         size: "large",
     });
-    rabbit.createComps("#switch9", {
+    rabbit.create("#switch9", {
         disabled: true,
         checked: true,
     });
-    rabbit.createComps("#switch10", {
+    rabbit.create("#switch10", {
         disabled: true,
         size: "small",
     });
-    rabbit.createComps("#switch11", {
+    rabbit.create("#switch11", {
         openColor: "#13ce66",
         offColor: "#ff4949",
     });

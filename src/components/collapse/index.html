@@ -86,14 +86,14 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./collapse.js"></script>
 <script>
-    rabbit.createComps("#c1", {
+    rabbit.create("#c1", {
         defaultActiveKey: [1],
         key: [1, 2, 3],
         onChange(key) {
             console.log(key);
         },
     });
-    rabbit.createComps("#c2", {
+    rabbit.create("#c2", {
         accordion: true,
     });
 </script>

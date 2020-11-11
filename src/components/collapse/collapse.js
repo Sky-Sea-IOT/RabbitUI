@@ -153,7 +153,7 @@ rabbit.Collapse = {
         // TODO: 手风琴模式下，折叠其他展开的面板并删除数组中对应key
         const accordionToggle = () => {
             if (accordion) {
-                Rbt.siblings(collapseItem).forEach((item, k) => {
+                Rbt.siblings(collapseItem).forEach((item) => {
                     const collapsePanel = item.children[1];
                     Rbt.slider().up(collapsePanel, slideSpeed);
                     item.classList.remove(`${prefixCls}-item-active`);

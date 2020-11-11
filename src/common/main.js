@@ -24,7 +24,7 @@ class Rabbit {
      * @param { String } el 获取容器
      * @param { Object } config 组件的配置选项
      */
-    createComps(el, config) {
+    create(el, config) {
         this.$el = el || "";
         this.$config = config || {};
         this.compiler(this.$el, this.$config);

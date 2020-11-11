@@ -116,35 +116,35 @@
 <script src="./svg.js"></script>
 <script src="./result.js"></script>
 <script>
-    rabbit.createComps("#result1", {
+    rabbit.create("#result1", {
         title: "您已经执行过该操作了",
     });
-    rabbit.createComps("#result2", {
+    rabbit.create("#result2", {
         status: "success",
         title: "支付成功!",
         subTitle: "订单号: 2017182818828182881 感谢您的购买，物流将在下午5点后发货。",
     });
-    rabbit.createComps("#result3", {
+    rabbit.create("#result3", {
         status: "warning",
         title: "您的操作环境出现异常，请稍后再试",
         icon: "ios-warning ",
     });
-    rabbit.createComps("#result4", {
+    rabbit.create("#result4", {
         status: "error",
         title: "无法访问此网站!",
         subTitle: "xxxwtf.com 的响应时间过长，请检查网络连接",
     });
-    rabbit.createComps("#result5", {
+    rabbit.create("#result5", {
         status: 403,
         title: "403",
         subTitle: "抱歉，您没有权限访问此页。",
     });
-    rabbit.createComps("#result6", {
+    rabbit.create("#result6", {
         status: 404,
         title: "404",
         subTitle: "抱歉，您访问的页面不存在。",
     });
-    rabbit.createComps("#result7", {
+    rabbit.create("#result7", {
         status: 500,
         title: "500",
         subTitle: "抱歉，该页面出现了些问题",

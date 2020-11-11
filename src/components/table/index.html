@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/table.css" />
+</head>
+<style>
+    .demo {
+        width: 981px;
+        margin: 30px auto;
+    }
+    
+    .rbt-table .demo-table-info-row td {
+        background-color: #2db7f5;
+        color: #fff;
+    }
+    
+    .rbt-table .demo-table-error-row td {
+        background-color: #ff6600;
+        color: #fff;
+    }
+</style>
+
+<body>
+    <!-- <div class="demo">
+        <div class="rbt-table-wrapper">
+            <div class="rbt-table">
+                <div class="rbt-table-header">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="rbt-table-cell">Name</div>
+                                </th>
+                                <th>
+                                    <div class="rbt-table-cell">Age</div>
+                                </th>
+                                <th>
+                                    <div class="rbt-table-cell">Address</div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="rbt-table-body">
+                    <table>
+                        <tbody class="rbt-table-body">
+                            <tr>
+                                <td>
+                                    <div class="rbt-table-cell">John Brown</div>
+                                </td>
+                                <td>
+                                    <div class="rbt-table-cell">18</div>
+                                </td>
+                                <td>
+                                    <div class="rbt-table-cell">New York No. 1 Lake Park</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="demo">
+        <h3>基本</h3>
+        <div data-component="table" id="t1"></div>
+    </div>
+    <div class="demo">
+        <h3>斑马纹</h3>
+        <div data-component="table" id="t2"></div>
+    </div>
+    <div class="demo">
+        <h3>带边框</h3>
+        <div data-component="table" id="t3"></div>
+    </div>
+    <div class="demo">
+        <h3>给某一行指定一个样式名称</h3>
+        <div data-component="table" id="t4"></div>
+    </div>
+    <div class="demo">
+        <h3>固定表头</h3>
+        <div data-component="table" id="t5"></div>
+    </div>
+    <div class="demo">
+        <h3>尺寸</h3>
+        <div data-component="table" id="t6"></div>
+    </div>
+    <div class="demo">
+        <div data-component="table" id="t7"></div>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../common/main.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/expand.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
+<script src="./table.js"></script>
+<script>
+    const dataSource = {
+        columns: ["Name", "Age", "Address"],
+        data: [{
+            Name: "John Brown",
+            Age: 18,
+            Address: "New York No. 1 Lake Park",
+        }, {
+            Name: "Jim Green",
+            Age: 24,
+            Address: "London No. 1 Lake Park",
+        }, {
+            Name: "Joe Black",
+            Age: 30,
+            Address: "Sydney No. 1 Lake Park",
+        }, {
+            Name: "Jon Snow",
+            Age: 26,
+            Address: "Ottawa No. 2 Lake Park",
+        }, ],
+    };
+    const dataSource2 = {
+        columns: ["Name", "Age", "Address"],
+        data: [{
+            Name: "John Brown",
+            Age: 18,
+            Address: "New York No. 1 Lake Park",
+        }, {
+            Name: "Jim Green",
+            Age: 24,
+            Address: "London No. 1 Lake Park",
+            rowClassName: "demo-table-info-row",
+        }, {
+            Name: "Joe Black",
+            Age: 30,
+            Address: "Sydney No. 1 Lake Park",
+        }, {
+            Name: "Jon Snow",
+            Age: 26,
+            Address: "Ottawa No. 2 Lake Park",
+            rowClassName: "demo-table-error-row",
+        }, ],
+    };
+    const dataSource3 = {
+        columns: ["Name", "Age", "Address"],
+        data: [{
+            Name: "John Brown",
+            Age: 18,
+            Address: "New York No. 1 Lake Park",
+        }, {
+            Name: "Jim Green",
+            Age: 24,
+            Address: "London No. 1 Lake Park",
+        }, {
+            Name: "Joe Black",
+            Age: 30,
+            Address: "Sydney No. 1 Lake Park",
+        }, {
+            Name: "Jon Snow",
+            Age: 26,
+            Address: "Ottawa No. 2 Lake Park",
+        }, {
+            Name: "Jon Black",
+            Age: 30,
+            Address: "Ottawa No. 2 Lake Park",
+        }, {
+            Name: "Jon Green",
+            Age: 24,
+            Address: "Ottawa No. 2 Lake Park",
+        }, {
+            Name: "John Brown",
+            Age: 18,
+            Address: "New York No. 1 Lake Park",
+        }, ],
+    };
+
+    rabbit.create("#t1", {
+        dataSource,
+        onRowClick(row, index) {
+            console.log(row);
+        },
+    });
+    rabbit.create("#t2", {
+        dataSource,
+        stripe: true,
+    });
+    rabbit.create("#t3", {
+        dataSource,
+        border: true,
+    });
+    rabbit.create("#t4", {
+        dataSource: dataSource2,
+    });
+    rabbit.create("#t5", {
+        dataSource: dataSource3,
+        height: "200px",
+    });
+    rabbit.create("#t6", {
+        dataSource,
+        size: "large",
+    });
+    rabbit.create("#t7", {
+        dataSource,
+        size: "small",
+    });
+</script>
+
+</html>

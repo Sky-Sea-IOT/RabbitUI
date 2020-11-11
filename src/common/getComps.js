@@ -15,6 +15,7 @@ const components = {
     Result: "result",
     Skeleton: "skeleton",
     Switch: "switch",
+    Table: "table",
     Timeline: "timeline",
     Tooltip: "tooltip",
 };
@@ -74,6 +75,9 @@ const getComps = (el, compsName, config, slot) => {
 
         case components.Switch:
             return rabbit.Switch.createSwitch(config, slot);
+
+        case components.Table:
+            return rabbit.Table.createTable(config);
 
         case components.Timeline:
             return rabbit.Timeline.createTimeline(config, slot);
