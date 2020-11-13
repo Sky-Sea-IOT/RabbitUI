@@ -23,49 +23,49 @@ rabbit.Tooltip = {
 
         let isAlwaysShow = always ? `${prefixCls}-always` : "";
 
-        const _Tooltip = document.createElement("div");
-        const _TooltipRel = document.createElement("div");
-        const _TooltipPopper = document.createElement("div");
-        const _TooltipContent = document.createElement("div");
-        const _TooltipArrow = document.createElement("div");
-        const _TooltipArrowContent = document.createElement("span");
-        const _TooltipInner = document.createElement("div");
+        const Tooltip = document.createElement("div");
+        const TooltipRel = document.createElement("div");
+        const TooltipPopper = document.createElement("div");
+        const TooltipContent = document.createElement("div");
+        const TooltipArrow = document.createElement("div");
+        const TooltipArrowContent = document.createElement("span");
+        const TooltipInner = document.createElement("div");
 
-        _Tooltip.className = `${prefixCls}`;
-        _TooltipRel.className = `${prefixCls}-rel`;
+        Tooltip.className = `${prefixCls}`;
+        TooltipRel.className = `${prefixCls}-rel`;
 
-        _TooltipPopper.className = `${prefixCls}-popper ${prefixCls}-${theme} ${isAlwaysShow}`;
-        _TooltipPopper.style.maxWidth = `${maxWidth}px`;
-        _TooltipPopper.setAttribute("x-placement", placement);
+        TooltipPopper.className = `${prefixCls}-popper ${prefixCls}-${theme} ${isAlwaysShow}`;
+        TooltipPopper.style.maxWidth = `${maxWidth}px`;
+        TooltipPopper.setAttribute("x-placement", placement);
 
-        _TooltipContent.className = `${prefixCls}-content`;
+        TooltipContent.className = `${prefixCls}-content`;
 
-        _TooltipArrow.className = `${prefixCls}-arrow`;
-        _TooltipArrowContent.className = `${prefixCls}-arrow-content`;
-        _TooltipArrowContent.style.backgroundColor = color;
+        TooltipArrow.className = `${prefixCls}-arrow`;
+        TooltipArrowContent.className = `${prefixCls}-arrow-content`;
+        TooltipArrowContent.style.backgroundColor = color;
 
-        _TooltipInner.className = `${prefixCls}-inner`;
-        _TooltipInner.innerHTML = title;
-        _TooltipInner.style.backgroundColor = color;
+        TooltipInner.className = `${prefixCls}-inner`;
+        TooltipInner.innerHTML = title;
+        TooltipInner.style.backgroundColor = color;
 
-        _Tooltip.append(_TooltipRel, _TooltipPopper);
-        addElemetsOfSlots(ref, _TooltipRel);
-        _TooltipPopper.appendChild(_TooltipContent);
-        _TooltipContent.append(_TooltipArrow, _TooltipInner);
-        _TooltipArrow.appendChild(_TooltipArrowContent);
+        Tooltip.append(TooltipRel, TooltipPopper);
+        addElemetsOfSlots(ref, TooltipRel);
+        TooltipPopper.appendChild(TooltipContent);
+        TooltipContent.append(TooltipArrow, TooltipInner);
+        TooltipArrow.appendChild(TooltipArrowContent);
 
         isSlotsUserd(true, ref);
-        Popper.createPopper(_Tooltip, _TooltipPopper, { placement });
+        Popper.createPopper(Tooltip, TooltipPopper, { placement });
         this.config(
-            _Tooltip,
-            _TooltipPopper,
+            Tooltip,
+            TooltipPopper,
             placement,
             always,
             disabled,
             mouseEnterDelay,
             mouseLeaveDelay
         );
-        return _Tooltip;
+        return Tooltip;
     },
     config(
         popcorn,

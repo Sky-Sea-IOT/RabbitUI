@@ -17,47 +17,47 @@ rabbit.Card = {
         } = config;
         const { extra, title, content } = slot;
 
-        const _Card = document.createElement("div");
-        const _CardHeader = document.createElement("div");
-        const _CardExtra = document.createElement("div");
-        const _CardBody = document.createElement("div");
+        const Card = document.createElement("div");
+        const CardHeader = document.createElement("div");
+        const CardExtra = document.createElement("div");
+        const CardBody = document.createElement("div");
 
-        _Card.className = `${prefixCls} ${className}`;
-        _CardHeader.className = `${prefixCls}-head`;
-        _CardExtra.className = `${prefixCls}-extra`;
-        _CardBody.className = `${prefixCls}-body`;
+        Card.className = `${prefixCls} ${className}`;
+        CardHeader.className = `${prefixCls}-head`;
+        CardExtra.className = `${prefixCls}-extra`;
+        CardBody.className = `${prefixCls}-body`;
 
         const HEADSTYLE = objToString(headStyle);
         const BODYSTYLE = objToString(bodyStyle);
 
-        _CardHeader.style.cssText = HEADSTYLE;
-        _CardBody.style.cssText = BODYSTYLE;
+        CardHeader.style.cssText = HEADSTYLE;
+        CardBody.style.cssText = BODYSTYLE;
 
-        if (isNum(width)) _Card.style.width = `${width}px`;
+        if (isNum(width)) Card.style.width = `${width}px`;
 
-        if (bordered) _Card.classList.add(`${prefixCls}-bordered`);
+        if (bordered) Card.classList.add(`${prefixCls}-bordered`);
 
-        if (hoverable) _Card.classList.add(`${prefixCls}-hoverable`);
+        if (hoverable) Card.classList.add(`${prefixCls}-hoverable`);
 
-        if (isNum(padding)) _CardBody.style.padding = `${padding}px`;
+        if (isNum(padding)) CardBody.style.padding = `${padding}px`;
 
         if (title && title.innerHTML) {
-            addElemetsOfSlots(title, _CardHeader);
-            _Card.appendChild(_CardHeader);
+            addElemetsOfSlots(title, CardHeader);
+            Card.appendChild(CardHeader);
         }
         if (extra && extra.innerHTML) {
-            addElemetsOfSlots(extra, _CardExtra);
-            _Card.appendChild(_CardExtra);
+            addElemetsOfSlots(extra, CardExtra);
+            Card.appendChild(CardExtra);
         }
         if (content && content.innerHTML) {
-            addElemetsOfSlots(content, _CardBody);
-            _Card.appendChild(_CardBody);
+            addElemetsOfSlots(content, CardBody);
+            Card.appendChild(CardBody);
         }
 
         isSlotsUserd(true, title);
         isSlotsUserd(true, extra);
         isSlotsUserd(true, content);
 
-        return _Card;
+        return Card;
     },
 };

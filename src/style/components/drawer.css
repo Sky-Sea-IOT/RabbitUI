@@ -70,9 +70,11 @@
   transition: none;
   -webkit-animation: rbtFadeIn 0.25s ease;
   animation: rbtFadeIn 0.25s ease;
+  pointer-events: auto;
+}
+.rbt-drawer-close .rbt-drawer-mask {
   -webkit-animation: rbtFadeOut 0.25s ease-in-out;
   animation: rbtFadeOut 0.25s ease-in-out;
-  pointer-events: auto;
 }
 .rbt-drawer-top,
 .rbt-drawer-bottom {

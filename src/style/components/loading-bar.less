@@ -1,7 +1,28 @@
 @import "../common/index.css";
+@import "../animation/fade.less";
 @import "../custom.less";
-@import "../common/iconfont/icons.css";
-@import "../mixins/size.less";
 
 @prefix: @css-prefix;
-@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}loading-bar {
+  width: 100%;
+  position: @fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  &-inner {
+    height: 100%;
+    transition: width @transition-time @linear;
+  }
+
+  &-fade {
+    &-in {
+      .fadeIn(@transition-time);
+    }
+
+    &-out {
+      .fadeOut(@transition-time);
+    }
+  }
+}

@@ -7,26 +7,26 @@
  * @param { Number } timeout  对应css的动画过渡时间
  */
 
-const CSSTransition = (
+function CSSTransition(
     el,
     mode,
     animationEnterCls,
     animationLeaveCls,
     timeout
-) => {
+) {
     if (mode === "in") {
         el.style.display = "block";
         el.classList.add(animationEnterCls);
 
         setTimeout(() => el.classList.remove(animationEnterCls), timeout);
     } else if (mode === "out") {
-        el.classList.add(animationLeaveCls);
+        el.classList.replace(animationEnterCls, animationLeaveCls);
 
         setTimeout(() => {
             el.classList.remove(animationLeaveCls);
             el.style.display = "none";
         }, timeout);
     }
-};
+}
 
 // export default CSSTransition;

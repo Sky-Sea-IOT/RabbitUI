@@ -3,7 +3,7 @@
  * @param { Boolean } condition
  * @param {DOMObject} slot
  */
-const isSlotsUserd = (condition, slot) => {
+function isSlotsUserd(condition, slot) {
     // 指定的slot的标签存在但是相关的条件没设置为true
     if (!condition && slot && slot.innerHTML) {
         console.warn(slot);
@@ -18,6 +18,6 @@ const isSlotsUserd = (condition, slot) => {
             `You used the component slot above, but didn't write anything`
         );
     }
-};
+}
 
 // export default isSlotsUserd;

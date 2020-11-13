@@ -1,4 +1,4 @@
-const getIconTypes = (type) => {
+function getIconTypes(type) {
     const iconTypes = {
         info: "ios-information-circle",
         success: "ios-checkmark-circle",
@@ -44,6 +44,6 @@ const getIconTypes = (type) => {
         case "close":
             return iconTypes.close;
     }
-};
+}
 
 // export default getIconTypes;

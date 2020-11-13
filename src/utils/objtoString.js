@@ -3,7 +3,7 @@
  * 用于将实例方法的 style 选项
  */
 
-const objToString = (obj) => {
+function objToString(obj) {
     let str, b, c, result, errorType;
 
     if (isObj(obj)) {
@@ -18,6 +18,6 @@ const objToString = (obj) => {
         );
     }
     return result;
-};
+}
 
 // export default objToString

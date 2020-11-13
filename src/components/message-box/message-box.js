@@ -1,4 +1,7 @@
 rabbit.MessageBox = {
+    /**
+     * @param {{title: string,content: string,width: string,okText: string,onOk: void}}
+     */
     info: ({ title, content, width, okText, onOk } = {}) => {
         createMsgBoxInstance({
             type: "info",
@@ -39,6 +42,9 @@ rabbit.MessageBox = {
             onOk,
         });
     },
+    /**
+     * @param {{title: string,content: string,width: string,okText: string,cancelText: string,onOk: void,onCancel: void}}
+     */
     confirm: ({
         title,
         content,

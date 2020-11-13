@@ -6,29 +6,29 @@ rabbit.PageHeader = {
         const { onBack } = config;
         const { header, content } = slot;
 
-        const PHeader = document.createElement("div");
-        const PHeaderLeft = document.createElement("div");
-        const PHeaderIcon = document.createElement("i");
-        const PHeaderTitle = document.createElement("div");
-        const PHeaderContent = document.createElement("div");
+        const PageHeader = document.createElement("div");
+        const PageHeaderLeft = document.createElement("div");
+        const PageHeaderIcon = document.createElement("i");
+        const PageHeaderTitle = document.createElement("div");
+        const PageHeaderContent = document.createElement("div");
 
-        PHeader.className = `${prefixCls}`;
-        PHeaderLeft.className = `${prefixCls}-back`;
-        PHeaderIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-arrow-back`;
-        PHeaderTitle.className = `${prefixCls}-title`;
-        PHeaderContent.className = `${prefixCls}-content`;
+        PageHeader.className = `${prefixCls}`;
+        PageHeaderLeft.className = `${prefixCls}-back`;
+        PageHeaderIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-arrow-back`;
+        PageHeaderTitle.className = `${prefixCls}-title`;
+        PageHeaderContent.className = `${prefixCls}-content`;
 
-        PHeaderLeft.onclick = () => (isFunc(onBack) ? onBack() : null);
+        PageHeaderLeft.onclick = () => (isFunc(onBack) ? onBack() : null);
 
-        PHeader.append(PHeaderLeft, PHeaderContent);
-        PHeaderLeft.append(PHeaderIcon, PHeaderTitle);
+        PageHeader.append(PageHeaderLeft, PageHeaderContent);
+        PageHeaderLeft.append(PageHeaderIcon, PageHeaderTitle);
 
-        addElemetsOfSlots(header, PHeaderTitle);
-        addElemetsOfSlots(content, PHeaderContent);
+        addElemetsOfSlots(header, PageHeaderTitle);
+        addElemetsOfSlots(content, PageHeaderContent);
 
         isSlotsUserd(true, header);
         isSlotsUserd(true, content);
 
-        return PHeader;
+        return PageHeader;
     },
 };

@@ -1,19 +1,55 @@
 //数据类型判断
-const _typeof = (data) => {
+function _typeof(data) {
     const s = Object.prototype.toString.call(data);
     return s.match(/\[object (.*?)\]/)[1].toLowerCase();
-};
+}
 
-const isStr = (s) => typeof s === "string";
+function isStr(s) {
+    if (typeof s === "string") {
+        return true;
+    } else {
+        throw TypeError(`${s} is a an string type`);
+    }
+}
 
-const isUndef = (u) => u === undefined;
+function isUndef(u) {
+    if (u === undefined) {
+        return true;
+    } else {
+        throw TypeError(`${u} is not an undefined type`);
+    }
+}
 
-const isNum = (n) => typeof n === "number";
+function isNum(n) {
+    if (typeof n === "number") {
+        return true;
+    } else {
+        throw TypeError(`${n} is not an number type`);
+    }
+}
 
-const isObj = (o) => o.constructor === Object;
+function isObj(o) {
+    if (o.constructor === Object) {
+        return true;
+    } else {
+        throw TypeError(`${o} is not an object type`);
+    }
+}
 
-const isArr = (a) => a.constructor === Array;
+function isArr(a) {
+    if (a.constructor === Array) {
+        return true;
+    } else {
+        throw TypeError(`${a} is not an array type`);
+    }
+}
 
-const isFunc = (f) => typeof f === "function";
+function isFunc(f) {
+    if (typeof f === "function") {
+        return true;
+    } else {
+        throw TypeError(`${f} is not an function type`);
+    }
+}
 
 // export { _typeof, isStr, isUndef, isNum, isObj, isArr, isFunc };

@@ -10,44 +10,44 @@ rabbit.Spin = {
         const enterAniCls = `${prefixCls}-fade-enter`;
         const leaveAniCls = `${prefixCls}-fade-leave`;
 
-        const _SpinFullscreen = document.createElement("div");
-        const _SpinFixBox = document.createElement("div");
-        const _SpinMainBox = document.createElement("div");
+        const SpinFullscreen = document.createElement("div");
+        const SpinFixBox = document.createElement("div");
+        const SpinMainBox = document.createElement("div");
 
-        const _SpinDot = document.createElement("span");
+        const SpinDot = document.createElement("span");
 
-        const _SpinShowTextBox = document.createElement("div");
-        const _SpinTextBox = document.createElement("div");
-        const _SpinBorder = document.createElement("i");
-        const _SpinText = document.createElement("span");
+        const SpinShowTextBox = document.createElement("div");
+        const SpinTextBox = document.createElement("div");
+        const SpinBorder = document.createElement("i");
+        const SpinText = document.createElement("span");
 
-        _SpinFullscreen.className = `${prefixCls}-fullscreen ${prefixCls}-fullscreen-warpper`;
-        _SpinFixBox.className = `${prefixCls}-fix ${prefixCls}-fullscreen`;
-        _SpinMainBox.className = `${prefixCls}-main`;
+        SpinFullscreen.className = `${prefixCls}-fullscreen ${prefixCls}-fullscreen-warpper`;
+        SpinFixBox.className = `${prefixCls}-fix ${prefixCls}-fullscreen`;
+        SpinMainBox.className = `${prefixCls}-main`;
 
-        _SpinDot.className = `${prefixCls}-dot bg-${color} ${size}`;
+        SpinDot.className = `${prefixCls}-dot bg-${color} ${size}`;
 
-        _SpinShowTextBox.className = `${prefixCls} ${prefixCls}-fix ${prefixCls}-show-text`;
-        _SpinTextBox.className = `${prefixCls}-text`;
-        _SpinBorder.className = `rbt-icon rbt-icon-loading-solid rbt-spin-loading ${size}`;
+        SpinShowTextBox.className = `${prefixCls} ${prefixCls}-fix ${prefixCls}-show-text`;
+        SpinTextBox.className = `${prefixCls}-text`;
+        SpinBorder.className = `rbt-icon rbt-icon-loading-solid rbt-spin-loading ${size}`;
 
-        _SpinText.innerHTML = text;
+        SpinText.innerHTML = text;
 
-        _SpinFullscreen.style.zIndex = spinZIndex++;
+        SpinFullscreen.style.zIndex = spinZIndex++;
 
-        _SpinFullscreen.appendChild(_SpinFixBox);
-        _SpinFixBox.appendChild(_SpinMainBox);
-        _SpinShowTextBox.append(_SpinTextBox);
-        _SpinTextBox.append(_SpinBorder, _SpinText);
+        SpinFullscreen.appendChild(SpinFixBox);
+        SpinFixBox.appendChild(SpinMainBox);
+        SpinShowTextBox.append(SpinTextBox);
+        SpinTextBox.append(SpinBorder, SpinText);
 
         text
             ?
-            _SpinMainBox.appendChild(_SpinShowTextBox) :
-            _SpinMainBox.appendChild(_SpinDot);
+            SpinMainBox.appendChild(SpinShowTextBox) :
+            SpinMainBox.appendChild(SpinDot);
 
-        document.body.appendChild(_SpinFullscreen);
+        document.body.appendChild(SpinFullscreen);
 
-        CSSTransition(_SpinFixBox, "in", enterAniCls, leaveAniCls, 250);
+        CSSTransition(SpinFixBox, "in", enterAniCls, leaveAniCls, 250);
     },
 
     show({ size = "large", text = "", color = "primary" } = {}) {

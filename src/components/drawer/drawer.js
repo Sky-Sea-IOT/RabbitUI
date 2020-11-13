@@ -1,210 +1,233 @@
 /**
- * Drawer 抽屉
- * @description 抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。
+ * Drawer抽屉
+ * 屏幕边缘滑出的浮层面板
  */
 
 let drawerZIndex = 1000;
 
 rabbit.Drawer = {
-    creatDrawer(el, config, slot) {
+    createDrawer(el, config, slot) {
         const prefixCls = "rbt-drawer";
-        const prefixIconCls = "rbt-icon";
-
-        // 获取指定slot内容
-        const { header, content, footer } = slot;
-
-        // 配置项
         const {
             mask = true,
+                title = "默认标题",
                 width = "256px",
-                visible = false,
+                styles,
+                zIndex = 1000,
                 onClose,
-                keyboard = true,
+                visible = false,
                 closable = true,
+                keyboard = true,
                 placement = "right",
                 className = "",
-                scrollable = true,
+                scrollable = false,
                 maskClosable = true,
-                inner,
         } = config;
+        const { header, content, footer } = slot;
 
-        // 不提供点击确定的回调，只提供组件关闭后的回调
-        clickActions(el, null, onClose);
+        drawerZIndex = zIndex;
 
-        // 创建DOM树
-        const drawer = document.createElement("div");
-        let drawerMask;
-        const drawerWrap = document.createElement("div");
-        const drawerContent = document.createElement("div");
-        const drawerBodyWrap = document.createElement("div");
-        const drawerBody = document.createElement("div");
+        const Drawer = document.createElement("div");
+        const DrawerMask = document.createElement("div");
+        const DrawerWrap = document.createElement("div");
+        const DrawerContentBox = document.createElement("div");
+        const DrawerContentWrap = document.createElement("div");
+        const DrawerClose = document.createElement("a");
+        const DrawerCloseIco = document.createElement("i");
+        const DrawerHeader = document.createElement("div");
+        const DrawerTitle = document.createElement("div");
+        const DrawerBody = document.createElement("div");
+        const DrawerFooter = document.createElement("div");
 
-        // 设置样式类名
-        drawer.className = `${prefixCls} ${prefixCls}-${placement}`;
-        drawerWrap.className = `${prefixCls}-wrap ${className}`;
-        drawerContent.className = `${prefixCls}-content`;
-        drawerBodyWrap.className = `${prefixCls}-wrap-content`;
-        drawerBody.className = `${prefixCls}-body`;
+        Drawer.className = `${prefixCls} ${prefixCls}-${placement}`;
+        DrawerMask.className = `${prefixCls}-mask`;
+        DrawerWrap.className = `${prefixCls}-wrap ${className}`;
+        DrawerContentBox.className = `${prefixCls}-content`;
+        DrawerContentWrap.className = `${prefixCls}-wrap-content`;
+        DrawerClose.className = `${prefixCls}-close`;
+        DrawerCloseIco.className = `rbt-icon rbt-icon-md-close`;
+        DrawerHeader.className = `${prefixCls}-header`;
+        DrawerTitle.className = `${prefixCls}-title`;
+        DrawerBody.className = `${prefixCls}-body`;
+        DrawerFooter.className = `${prefixCls}-footer`;
 
-        // Drawer 初始状态下是否显示
-        if (visible) {
-            const body = document.body;
-            body.style.paddingRight = "17px";
-            body.style.overflow = "hidden";
+        bindClickEv(el, null, onClose);
 
-            drawer.classList.add(`${prefixCls}-open`);
+        this.initDirection(DrawerWrap, placement);
+        this.showMask(mask, Drawer, DrawerMask);
+        this.setDrawerSize(DrawerWrap, width, placement);
+        this.setDrawerStyles(styles, DrawerBody);
+        this.setDrawerZIndex(DrawerMask, DrawerWrap, drawerZIndex);
+        this.onCloseEv(DrawerClose, Drawer, DrawerWrap, onClose, placement);
+        this.maskClose(
+            maskClosable,
+            DrawerMask,
+            Drawer,
+            DrawerWrap,
+            onClose,
+            placement
+        );
+        this.keyboardClose(keyboard, Drawer, DrawerWrap, onClose, placement);
+        this.showClose(closable, DrawerContentWrap, DrawerClose);
+
+        visible ? this.showDrawer(Drawer, DrawerWrap, placement) : "";
+
+        Drawer.appendChild(DrawerWrap);
+        DrawerWrap.appendChild(DrawerContentBox);
+        DrawerContentBox.appendChild(DrawerContentWrap);
+        DrawerClose.appendChild(DrawerCloseIco);
+        DrawerHeader.appendChild(DrawerTitle);
+
+        if (header && header.innerHTML) {
+            addElemetsOfSlots(header, DrawerTitle);
         } else {
-            // 隐藏下的样式初始状态
-            let offset = "X",
-                direction = "";
-
-            if (placement === "top" || placement === "bottom") offset = "Y";
-
-            if (placement === "top" || placement === "left") direction = "-";
-
-            drawerWrap.style.transform = `translate${offset}(${direction}100%)`;
+            DrawerTitle.innerHTML = title;
         }
 
-        // 是否显示遮罩层
+        if (content && content.innerHTML) {
+            addElemetsOfSlots(content, DrawerBody);
+        }
+
+        DrawerContentWrap.append(DrawerHeader, DrawerBody);
+
+        if (footer && footer.innerHTML) {
+            addElemetsOfSlots(footer, DrawerFooter);
+            DrawerContentWrap.appendChild(DrawerFooter);
+        }
+
+        return Drawer;
+    },
+
+    // drawer 离开的方向
+    initDirection(drawer, placement) {
+        const T = 100;
+        switch (placement) {
+            case "top":
+                drawer.style.transform = `translateY(-${T}%)`;
+                break;
+            case "right":
+                drawer.style.transform = `translateX(${T}%)`;
+                break;
+            case "bottom":
+                drawer.style.transform = `translateY(${T}%)`;
+                break;
+            case "left":
+                drawer.style.transform = `translateX(-${T}%)`;
+                break;
+        }
+    },
+
+    showDrawer(root, drawer) {
+        drawerZIndex++;
+        bodyScrollable(false);
+        drawer.style.transform = null;
+        root.style.zIndex = drawerZIndex;
+        root.classList.add("rbt-drawer-open");
+    },
+
+    hideDrawer(root, drawer, placement) {
+        bodyScrollable(true);
+        this.initDirection(drawer, placement);
+        root.classList.remove("rbt-drawer-open");
+    },
+
+    showMask(mask, drawer, drawerMask) {
         if (mask) {
-            drawerMask = document.createElement("div");
-            drawerMask.className = `${prefixCls}-mask`;
-            if (maskClosable) {
-                drawerMask.onclick = () => {
-                    this.visible(el);
-                    isFunc(onClose) ? onClose() : null;
-                };
-            }
             drawer.appendChild(drawerMask);
         }
+    },
 
-        // 用户自定义drawerWrap宽度。当方向为top或bottom时宽度设置为高度
-        if (placement === "top" || placement === "bottom") {
-            drawerWrap.style.height = `${width}`;
-        } else {
-            drawerWrap.style.width = `${width}`;
+    showClose(closable, el, closeEL) {
+        if (closable) {
+            el.appendChild(closeEL);
         }
+    },
 
-        // 是否支持键盘 esc 关闭
-        if (keyboard) {
-            window.onkeydown = (e) => {
-                if (e.keyCode === 27) {
-                    this.visible(el);
-                    isFunc(onClose) ? onClose() : null;
-                }
+    setDrawerSize(el, width, placement) {
+        if (placement === "top" || placement === "bottom") {
+            el.style.height = width;
+        } else {
+            el.style.width = width;
+        }
+    },
+
+    setDrawerStyles(el, style) {
+        if (isObj(style)) {
+            el.style.cssText = objToString(style);
+        }
+    },
+
+    setDrawerZIndex(mask, wrap, zindex) {
+        mask.style.zIndex = zindex;
+        wrap.style.zIndex = zindex;
+    },
+
+    // 关闭抽屉时触发的回调
+    onCloseEv(el, root, drawer, cb, placement) {
+        el.onclick = () => {
+            isFunc(cb) ? cb() : null;
+            this.hideDrawer(root, drawer, placement);
+        };
+    },
+
+    // 点击蒙层是否允许关闭
+    maskClose(mc, el, root, drawer, cb, placement) {
+        if (mc) {
+            el.onclick = () => {
+                isFunc(cb) ? cb() : null;
+                this.hideDrawer(root, drawer, placement);
             };
         }
-
-        // 	是否设置Drawer在当前父容器内打开
-        if (inner) {
-            drawer.style.position = "absolute";
-            drawerMask.style.position = "absolute";
-            drawerWrap.style.position = "absolute";
-        }
-
-        // 如果header存在内容则创建 div.rbt-darwer-header
-        if (header) {
-            const drawerHeader = document.createElement("div");
-            const drawerTitle = document.createElement("div");
-
-            drawerHeader.className = `${prefixCls}-header`;
-
-            drawerTitle.className = `${prefixCls}-title`;
-            drawerTitle.innerHTML = header.innerHTML;
-
-            drawerHeader.appendChild(drawerTitle);
-            drawerBodyWrap.appendChild(drawerHeader);
-
-            // 头部存在的情况下是否创建右上角的关闭按钮
-            if (closable) {
-                const drawerCloseBtn = document.createElement("a");
-                const drawerCloseIco = document.createElement("i");
-
-                drawerCloseBtn.className = `${prefixCls}-close`;
-                drawerCloseIco.className = `${prefixIconCls} ${prefixIconCls}-md-close`;
-
-                // 点击关闭按钮的回调
-                drawerCloseBtn.onclick = () => {
-                    this.visible(el);
-                    isFunc(onClose) ? onClose() : null;
-                };
-
-                drawerCloseBtn.appendChild(drawerCloseIco);
-                drawerBodyWrap.appendChild(drawerCloseBtn);
-            }
-        }
-
-        addElemetsOfSlots(content, drawerBody);
-
-        drawer.appendChild(drawerWrap);
-        drawerWrap.appendChild(drawerContent);
-        drawerContent.appendChild(drawerBodyWrap);
-        drawerBodyWrap.appendChild(drawerBody);
-
-        // 如果footer存在内容则创建 div.rbt-darwer-footer
-        if (footer) {
-            const drawerFooter = document.createElement("div");
-            drawerFooter.className = `${prefixCls}-footer`;
-
-            addElemetsOfSlots(footer, drawerFooter);
-            drawerBodyWrap.appendChild(drawerFooter);
-        }
-        return drawer;
     },
-    // 控制Drawer显示隐藏
-    visible(el) {
-        const prefixCls = "rbt-drawer";
-        const body = document.body;
 
-        let container = document.querySelector(el),
-            drawer = container.querySelector(`.${prefixCls}`),
-            drawerContentBox = drawer.querySelector(`.${prefixCls}-wrap`),
-            isDrawerOpen = drawer.classList.contains(`${prefixCls}-open`);
+    // 是否支持键盘 esc 关闭
+    keyboardClose(keyboard, root, drawer, cb, placement) {
+        if (keyboard) {
+            window.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    isFunc(cb) ? cb() : null;
+                    this.hideDrawer(root, drawer, placement);
+                }
+            });
+        }
+    },
 
-        if (!isDrawerOpen) {
-            body.style.paddingRight = "17px";
-            body.style.overflow = "hidden";
+    // 外部元素调用，用于显示隐藏 drawer
 
-            drawer.style.zIndex = drawerZIndex++;
-            drawer.classList.add(`${prefixCls}-open`);
+    show(el) {
+        const elem = this.getDrawerElement(el);
+        this.showDrawer(elem.root, elem.drawer);
+    },
 
-            // 根据placement显示不同移入方向
-            if (
-                drawer.classList.contains(`${prefixCls}-right`) ||
-                drawer.classList.contains(`${prefixCls}-left`)
-            ) {
-                drawerContentBox.style.transform = "translateX(0)";
-            }
+    hide(el) {
+        const elem = this.getDrawerElement(el);
+        this.hideDrawer(elem.root, elem.drawer, this.getDrawerPlacement(elem.root));
+    },
 
-            if (
-                drawer.classList.contains(`${prefixCls}-top`) ||
-                drawer.classList.contains(`${prefixCls}-bottom`)
-            ) {
-                drawerContentBox.style.transform = "translateY(0)";
-            }
-        } else {
-            drawer.classList.remove(`${prefixCls}-open`);
+    getDrawerElement(el) {
+        const elem = document.querySelector(el);
+        const root = elem.querySelector(".rbt-drawer");
+        const drawer = root.querySelector(".rbt-drawer-wrap");
 
-            // 根据placement显示不同移出方向
-            drawer.classList.contains(`${prefixCls}-right`) ?
-                (drawerContentBox.style.transform = "translateX(100%)") :
-                "";
+        return {
+            elem,
+            root,
+            drawer,
+        };
+    },
 
-            drawer.classList.contains(`${prefixCls}-left`) ?
-                (drawerContentBox.style.transform = "translateX(-100%)") :
-                "";
-
-            drawer.classList.contains(`${prefixCls}-top`) ?
-                (drawerContentBox.style.transform = "translateY(-100%)") :
-                "";
-
-            drawer.classList.contains(`${prefixCls}-bottom`) ?
-                (drawerContentBox.style.transform = "translateY(100%)") :
-                "";
-            setTimeout(() => {
-                body.style.paddingRight = "";
-                body.style.overflow = "";
-            }, 400);
+    getDrawerPlacement(el) {
+        if (el.classList.contains("rbt-drawer-top")) {
+            return "top";
+        }
+        if (el.classList.contains("rbt-drawer-right")) {
+            return "right";
+        }
+        if (el.classList.contains("rbt-drawer-bottom")) {
+            return "bottom";
+        }
+        if (el.classList.contains("rbt-drawer-left")) {
+            return "left";
         }
     },
 };

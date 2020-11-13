@@ -48,7 +48,6 @@
         </div>
     </div> -->
     <button class="rbt-btn" onclick="a()">显示</button>
-    <br /><br />
     <button class="rbt-btn" onclick="b()">右边</button>
     <button class="rbt-btn" onclick="c()">左边</button>
     <button class="rbt-btn" onclick="d()">上边</button>
@@ -56,112 +55,109 @@
     <br /><br />
     <button class="rbt-btn" onclick="f()">嵌套抽屉</button>
 
-    <div data-component="drawer" id="mydarwer">
+    <rab-drawer id="mydarwer">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-        <!-- <div slot="footer">
-            <button data-click-action="close">取消</button>
-            <button data-click-action="confirm">确定</button>
-        </div> -->
-    </div>
+        <!-- <button class="rbt-btn" slot="footer" data-bind="drawer-close">
+        取消
+      </button> -->
+    </rab-drawer>
 
-    <div data-component="drawer" id="mydarwer2">
+    <rab-drawer id="mydarwer2">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </div>
-    <div data-component="drawer" id="mydarwer3">
+    </rab-drawer>
+    <rab-drawer id="mydarwer3">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </div>
-    <div data-component="drawer" id="mydarwer4">
+    </rab-drawer>
+    <rab-drawer id="mydarwer4">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </div>
-    <div data-component="drawer" id="mydarwer5">
+    </rab-drawer>
+    <rab-drawer id="mydarwer5">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </div>
-    <div data-component="drawer" id="mydarwer6">
+    </rab-drawer>
+    <rab-drawer id="mydarwer6">
         <div slot="header">基础抽屉</div>
         <div slot="content">
-            <button class="rbt-btn" onclick="c()">左边</button>
+            <button class="rbt-btn" onclick="c()">嵌套抽屉</button>
         </div>
-    </div>
+    </rab-drawer>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
 <script src="../../utils/destory.js"></script>
 <script src="../../common/getComps.js"></script>
 <script src="../../common/getCompsSlot.js"></script>
-<script src="../../utils/addDom.js"></script>
 <script src="../../common/main.js"></script>
-<script src="../../utils/clickAction.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="../../mixins/bindClickEv.js"></script>
+<script src="../../mixins/scrollable.js"></script>
 <script src="./drawer.js"></script>
 <script>
     rabbit.create("#mydarwer", {
-        onClose() {},
+        onClose() {
+            // rabbit.Drawer.hide("#mydarwer");
+        },
     });
 
-    rabbit.create("#mydarwer2", {
-        onClose() {},
-    });
+    rabbit.create("#mydarwer2");
 
     rabbit.create("#mydarwer3", {
         placement: "left",
-        onClose() {},
     });
 
     rabbit.create("#mydarwer4", {
         placement: "top",
-        onClose() {},
     });
 
     rabbit.create("#mydarwer5", {
         placement: "bottom",
-        onClose() {},
     });
 
-    rabbit.create("#mydarwer6", {
-        onClose() {},
-    });
+    rabbit.create("#mydarwer6");
+
     a = () => {
-        Drawer.visible("#mydarwer");
+        rabbit.Drawer.show("#mydarwer");
     };
     b = () => {
-        Drawer.visible("#mydarwer2");
+        rabbit.Drawer.show("#mydarwer2");
     };
     c = () => {
-        Drawer.visible("#mydarwer3");
+        rabbit.Drawer.show("#mydarwer3");
     };
     d = () => {
-        Drawer.visible("#mydarwer4");
+        rabbit.Drawer.show("#mydarwer4");
     };
     e = () => {
-        Drawer.visible("#mydarwer5");
+        rabbit.Drawer.show("#mydarwer5");
     };
 
     f = () => {
-        Drawer.visible("#mydarwer6");
+        rabbit.Drawer.show("#mydarwer6");
     };
 </script>
 

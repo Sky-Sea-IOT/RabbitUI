@@ -8,25 +8,25 @@ rabbit.Breadcrumb = {
         const prefixCls = "rbt-breadcrumb";
         const { separator = "/" } = config;
         const { breadcrumbItem } = slot;
-        const _Breadcrumb = document.createElement("ol");
+        const Breadcrumb = document.createElement("ol");
 
-        _Breadcrumb.className = `${prefixCls}`;
+        Breadcrumb.className = `${prefixCls}`;
 
         for (let i = 0; i < breadcrumbItem.length; i++) {
-            const _BreadcrumbItem = document.createElement("li");
-            const _BreadcrumbSeparator = document.createElement("span");
+            const BreadcrumbItem = document.createElement("li");
+            const BreadcrumbSeparator = document.createElement("span");
 
             breadcrumbItem[i].classList.add(`${prefixCls}-link`);
 
-            _BreadcrumbSeparator.innerHTML = separator;
-            _BreadcrumbSeparator.setAttribute("role", "separator");
-            _BreadcrumbSeparator.className = `${prefixCls}-separator`;
+            BreadcrumbSeparator.innerHTML = separator;
+            BreadcrumbSeparator.setAttribute("role", "separator");
+            BreadcrumbSeparator.className = `${prefixCls}-separator`;
 
-            addElemetsOfSlots(breadcrumbItem[i], _BreadcrumbItem);
-            _BreadcrumbItem.appendChild(_BreadcrumbSeparator);
-            _Breadcrumb.appendChild(_BreadcrumbItem);
+            addElemetsOfSlots(breadcrumbItem[i], BreadcrumbItem);
+            BreadcrumbItem.appendChild(BreadcrumbSeparator);
+            Breadcrumb.appendChild(BreadcrumbItem);
         }
 
-        return _Breadcrumb;
+        return Breadcrumb;
     },
 };

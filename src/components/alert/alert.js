@@ -1,6 +1,6 @@
 rabbit.Alert = {
     createAlert: (config, slot) => {
-        const prefixCls = "rbt-alert";
+        const prefixCls = "rbt-Alert";
         const prefixIconCls = "rbt-icon";
 
         const {
@@ -17,13 +17,13 @@ rabbit.Alert = {
         let _types = "",
             Icons = "";
 
-        const alert = document.createElement("div");
-        const alertIconBox = document.createElement("span");
-        const alertIcon = document.createElement("i");
+        const Alert = document.createElement("div");
+        const AlertIconBox = document.createElement("span");
+        const AlertIcon = document.createElement("i");
         const alertMessage = document.createElement("span");
-        const alertDesc = document.createElement("span");
-        const alertCloseBox = document.createElement("span");
-        const alertCloseIcon = document.createElement("i");
+        const AlertDesc = document.createElement("span");
+        const AlertCloseBox = document.createElement("span");
+        const AlertCloseIcon = document.createElement("i");
 
         // 根据 type 属性自动添加不同图标，如果有描述内容则添加outline类型的图标
         if (showIcon && desc && desc.innerHTML) {
@@ -33,16 +33,16 @@ rabbit.Alert = {
             Icons = getIconTypes(type);
         }
 
-        alert.className = `${prefixCls} ${prefixCls}-${type} ${prefixCls}-no-icon`;
-        alertIconBox.className = `${prefixCls}-icon`;
-        alertIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons}`;
+        Alert.className = `${prefixCls} ${prefixCls}-${type} ${prefixCls}-no-icon`;
+        AlertIconBox.className = `${prefixCls}-icon`;
+        AlertIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons}`;
         alertMessage.className = `${prefixCls}-message`;
-        alertDesc.className = `${prefixCls}-desc`;
-        alertCloseBox.className = `${prefixCls}-close`;
-        alertCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
+        AlertDesc.className = `${prefixCls}-desc`;
+        AlertCloseBox.className = `${prefixCls}-close`;
+        AlertCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
 
         // 是否用作顶部公告
-        banner ? alert.classList.add(`${prefixCls}-banner`) : "";
+        banner ? Alert.classList.add(`${prefixCls}-banner`) : "";
 
         // 警告提示内容
         if (message && message.innerHTML) addElemetsOfSlots(message, alertMessage);
@@ -53,20 +53,20 @@ rabbit.Alert = {
 
         // 警告提示辅助性文字介绍
         if (desc && desc.innerHTML) {
-            alert.classList.add(`${prefixCls}-with-desc`);
-            addElemetsOfSlots(desc, alertDesc);
+            Alert.classList.add(`${prefixCls}-with-desc`);
+            addElemetsOfSlots(desc, AlertDesc);
         }
 
         // 是否显示图标
         if (showIcon) {
-            alert.appendChild(alertIconBox);
-            alert.classList.remove(`${prefixCls}-no-icon`);
-            alertIconBox.appendChild(alertIcon);
+            Alert.appendChild(AlertIconBox);
+            Alert.classList.remove(`${prefixCls}-no-icon`);
+            AlertIconBox.appendChild(AlertIcon);
 
             // 自定义图标，showIcon 为 true 时有效
             if (icon && icon.innerHTML) {
-                alertIconBox.innerHTML = "";
-                addElemetsOfSlots(icon, alertIconBox);
+                AlertIconBox.innerHTML = "";
+                addElemetsOfSlots(icon, AlertIconBox);
             }
         }
 
@@ -75,15 +75,15 @@ rabbit.Alert = {
             // 自定义关闭内容
             closeText
                 ?
-                (alertCloseBox.innerHTML = closeText) :
-                alertCloseBox.appendChild(alertCloseIcon);
+                (AlertCloseBox.innerHTML = closeText) :
+                AlertCloseBox.appendChild(AlertCloseIcon);
 
-            alert.appendChild(alertCloseBox);
+            Alert.appendChild(AlertCloseBox);
         }
 
         const handlerEv = () => {
             destroy({
-                el: alert,
+                el: Alert,
                 destroyParent: true,
                 duration: 0.1,
                 moveInCls: "",
@@ -94,13 +94,13 @@ rabbit.Alert = {
         };
 
         // 关闭时触发的回调函数
-        alertCloseBox.addEventListener("click", handlerEv);
+        AlertCloseBox.addEventListener("click", handlerEv);
 
         isSlotsUserd(true, desc);
         isSlotsUserd(showIcon, icon);
 
-        alert.append(alertMessage, alertDesc);
+        Alert.append(alertMessage, AlertDesc);
 
-        return alert;
+        return Alert;
     },
 };

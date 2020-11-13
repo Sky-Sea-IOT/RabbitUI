@@ -1,4 +1,4 @@
-const hasClass = (el, class1, class2) => {
+function hasClass(el, class1, class2) {
     let oldClass = el.className;
     let re = new RegExp("\\b" + class1 + "\\b");
     if (re.test(oldClass)) {
@@ -7,6 +7,6 @@ const hasClass = (el, class1, class2) => {
         el.classList.add(class1);
         el.classList.replace(class2, class1);
     }
-};
+}
 
 // export default hasClass;

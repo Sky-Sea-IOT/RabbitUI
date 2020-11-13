@@ -13,44 +13,44 @@ rabbit.Empty = {
 
         const imgStyle = objToString(imageStyle);
 
-        const _Empty = document.createElement("div");
-        const _EmptyImageBox = document.createElement("div");
-        const _EmptImg = document.createElement("img");
-        const _EmptyDesc = document.createElement("div");
-        const _EmptyFooter = document.createElement("div");
+        const Empty = document.createElement("div");
+        const EmptyImageBox = document.createElement("div");
+        const EmptImg = document.createElement("img");
+        const EmptyDesc = document.createElement("div");
+        const EmptyFooter = document.createElement("div");
 
-        _Empty.className = `${prefixCls}`;
-        _EmptyImageBox.className = `${prefixCls}-img`;
-        _EmptyDesc.className = `${prefixCls}-desc`;
-        _EmptyFooter.className = `${prefixCls}-footer`;
+        Empty.className = `${prefixCls}`;
+        EmptyImageBox.className = `${prefixCls}-img`;
+        EmptyDesc.className = `${prefixCls}-desc`;
+        EmptyFooter.className = `${prefixCls}-footer`;
 
         if (image !== "default" && image !== "simple") {
-            _EmptImg.src = image;
-            _EmptyImageBox.appendChild(_EmptImg);
+            EmptImg.src = image;
+            EmptyImageBox.appendChild(EmptImg);
         } else {
             const getSvg = getEmptyImg(image);
-            _EmptyImageBox.innerHTML = getSvg;
+            EmptyImageBox.innerHTML = getSvg;
         }
 
         // 	图片样式
-        _EmptyImageBox.style.cssText = imgStyle;
+        EmptyImageBox.style.cssText = imgStyle;
 
-        _EmptyDesc.innerHTML = desc;
+        EmptyDesc.innerHTML = desc;
 
-        _Empty.append(_EmptyImageBox, _EmptyDesc);
+        Empty.append(EmptyImageBox, EmptyDesc);
 
         // 不展示描述
         if (desc === false) {
-            _Empty.removeChild(_EmptyDesc);
+            Empty.removeChild(EmptyDesc);
         }
 
         if (footer && footer.innerHTML) {
-            addElemetsOfSlots(footer, _EmptyFooter);
-            _Empty.appendChild(_EmptyFooter);
+            addElemetsOfSlots(footer, EmptyFooter);
+            Empty.appendChild(EmptyFooter);
         }
 
         isSlotsUserd(true, footer);
 
-        return _Empty;
+        return Empty;
     },
 };

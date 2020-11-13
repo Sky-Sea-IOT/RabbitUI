@@ -20,26 +20,26 @@ rabbit.Dropdown = {
         let isDisabled = "",
             isSelected = "";
 
-        const _Dropdown = document.createElement("div");
-        const _DropdownRel = document.createElement("div");
-        const _DropdownMenu = document.createElement("ul");
+        const Dropdown = document.createElement("div");
+        const DropdownRel = document.createElement("div");
+        const DropdownMenu = document.createElement("ul");
 
-        _Dropdown.className = `${prefixCls}`;
-        _Dropdown.dataset.trigger = trigger;
-        _DropdownRel.className = `${prefixCls}-rel`;
-        _DropdownMenu.className = `${prefixCls}-menu`;
-        _DropdownMenu.dataset.placement = placement;
+        Dropdown.className = `${prefixCls}`;
+        Dropdown.dataset.trigger = trigger;
+        DropdownRel.className = `${prefixCls}-rel`;
+        DropdownMenu.className = `${prefixCls}-menu`;
+        DropdownMenu.dataset.placement = placement;
 
-        addElemetsOfSlots(ref, _DropdownRel);
+        addElemetsOfSlots(ref, DropdownRel);
 
-        this.setDropWidth(_DropdownRel, _DropdownMenu);
+        this.setDropWidth(DropdownRel, DropdownMenu);
 
         setTimeout(() => this.dropdownEvent(), 0);
 
         const itemClickEvent = (i, DropdownItem) => {
             dropDownState = false;
             isFunc(onClick) ? onClick(i, DropdownItem) : null;
-            this.drop("up", _DropdownMenu, animationEnterCls, animationLeaveCls);
+            this.drop("up", DropdownMenu, animationEnterCls, animationLeaveCls);
         };
 
         for (let i = 0; i < itemLens; i++) {
@@ -59,14 +59,14 @@ rabbit.Dropdown = {
             addElemetsOfSlots(dropdownItem[i], DropdownItem);
             isSlotsUserd(true, dropdownItem[i]);
 
-            _DropdownMenu.appendChild(DropdownItem);
+            DropdownMenu.appendChild(DropdownItem);
         }
 
-        _Dropdown.append(_DropdownRel, _DropdownMenu);
+        Dropdown.append(DropdownRel, DropdownMenu);
 
         isSlotsUserd(true, ref);
 
-        return _Dropdown;
+        return Dropdown;
     },
 
     setDropWidth(el, dropdownMenu) {

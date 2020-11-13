@@ -4,13 +4,13 @@
  * @param { HTMLELement } targetEle 将上面的元素插入到此目标元素
  */
 
-const addElemetsOfSlots = (slot, targetEle) => {
+function addElemetsOfSlots(slot, targetEle) {
     if (!slot) {
         throw new Error("[Rabbit] The slot you added does not exist");
     } else {
         slot.nodeType === 1 ? targetEle.appendChild(slot) : null;
         setTimeout(() => slot.removeAttribute("slot"), 200);
     }
-};
+}
 
 // export default addElemetsOfSlots;

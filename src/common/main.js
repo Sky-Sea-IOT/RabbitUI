@@ -40,15 +40,15 @@ class Rabbit {
         }
 
         const TraverseNodesReturnNewNodes = (nodes) => {
-            const { component } = nodes.dataset;
+            const componentName = nodes.tagName.toLowerCase().substring(4);
             const slot = this.getCompsSlot(nodes);
-            const HTMLComponent = this.compsStore(el, component, config, slot);
+            const RabbitComponent = this.compsStore(el, componentName, config, slot);
             // 清空旧内容
             nodes.innerHTML = null;
             // 指定的组件插入该元素
-            nodes.appendChild(HTMLComponent);
+            nodes.appendChild(RabbitComponent);
 
-            return HTMLComponent;
+            return RabbitComponent;
         };
 
         Array.from(target).map((item) => TraverseNodesReturnNewNodes(item));

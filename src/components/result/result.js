@@ -24,47 +24,47 @@ rabbit.Result = {
 
         Icons = !icon ? getIconTypes(type) : icon;
 
-        const _Result = document.createElement("div");
-        const _ResultIconBox = document.createElement("div");
-        const _ResultIcon = document.createElement("i");
-        const _ResultTitle = document.createElement("div");
-        const _ResultSubTitle = document.createElement("div");
-        const _ResultContent = document.createElement("div");
-        const _ResultFooter = document.createElement("div");
+        const Result = document.createElement("div");
+        const ResultIconBox = document.createElement("div");
+        const ResultIcon = document.createElement("i");
+        const ResultTitle = document.createElement("div");
+        const ResultSubTitle = document.createElement("div");
+        const ResultContent = document.createElement("div");
+        const ResultFooter = document.createElement("div");
 
-        _Result.className = `${prefixCls} ${prefixCls}-${type}`;
-        _ResultIconBox.className = `${prefixCls}-icon`;
-        _ResultIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons} ${prefixCls}-icon`;
-        _ResultTitle.className = `${prefixCls}-title`;
-        _ResultSubTitle.className = `${prefixCls}-subtitle`;
-        _ResultContent.className = `${prefixCls}-content`;
-        _ResultFooter.className = `${prefixCls}-footer`;
+        Result.className = `${prefixCls} ${prefixCls}-${type}`;
+        ResultIconBox.className = `${prefixCls}-icon`;
+        ResultIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons} ${prefixCls}-icon`;
+        ResultTitle.className = `${prefixCls}-title`;
+        ResultSubTitle.className = `${prefixCls}-subtitle`;
+        ResultContent.className = `${prefixCls}-content`;
+        ResultFooter.className = `${prefixCls}-footer`;
 
-        _ResultTitle.innerHTML = title;
-        _ResultSubTitle.innerHTML = subTitle;
+        ResultTitle.innerHTML = title;
+        ResultSubTitle.innerHTML = subTitle;
 
         if (status !== 404 && status !== 403 && status !== 500) {
-            _ResultIconBox.appendChild(_ResultIcon);
+            ResultIconBox.appendChild(ResultIcon);
         } else {
-            _ResultIconBox.classList.add(`${prefixCls}-img`);
-            _ResultIconBox.innerHTML = statusImage;
+            ResultIconBox.classList.add(`${prefixCls}-img`);
+            ResultIconBox.innerHTML = statusImage;
         }
 
-        _Result.append(_ResultIconBox, _ResultTitle, _ResultSubTitle);
+        Result.append(ResultIconBox, ResultTitle, ResultSubTitle);
 
         if (footer && footer.innerHTML) {
-            addElemetsOfSlots(footer, _ResultFooter);
-            _Result.appendChild(_ResultFooter);
+            addElemetsOfSlots(footer, ResultFooter);
+            Result.appendChild(ResultFooter);
         }
 
         if (content && content.innerHTML) {
-            addElemetsOfSlots(content, _ResultContent);
-            _Result.appendChild(_ResultContent);
+            addElemetsOfSlots(content, ResultContent);
+            Result.appendChild(ResultContent);
         }
 
         isSlotsUserd(true, content);
         isSlotsUserd(true, footer);
 
-        return _Result;
+        return Result;
     },
 };

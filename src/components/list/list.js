@@ -20,53 +20,53 @@ rabbit.List = {
         const SLOT_FOOTER = slot.footer;
         const SLOT_LISTITEM = slot.listItem;
 
-        const _List = document.createElement("div");
-        const _ListHeader = document.createElement("div");
-        const _ListContainer = document.createElement("ul");
-        const _ListFooter = document.createElement("div");
+        const List = document.createElement("div");
+        const ListHeader = document.createElement("div");
+        const ListContainer = document.createElement("ul");
+        const ListFooter = document.createElement("div");
 
-        _List.className = `${prefixCls} ${prefixCls}-${size} ${prefixCls}-bordered ${prefixCls}-split`;
-        _ListHeader.className = `${prefixCls}-header`;
-        _ListContainer.className = `${prefixCls}-container`;
-        _ListFooter.className = `${prefixCls}-footer`;
+        List.className = `${prefixCls} ${prefixCls}-${size} ${prefixCls}-bordered ${prefixCls}-split`;
+        ListHeader.className = `${prefixCls}-header`;
+        ListContainer.className = `${prefixCls}-container`;
+        ListFooter.className = `${prefixCls}-footer`;
 
         if (!border) {
-            _List.classList.remove(`${prefixCls}-bordered`);
+            List.classList.remove(`${prefixCls}-bordered`);
         }
         if (!split) {
-            _List.classList.remove(`${prefixCls}-split`);
-            _List.classList.remove(`${prefixCls}-bordered`);
+            List.classList.remove(`${prefixCls}-split`);
+            List.classList.remove(`${prefixCls}-bordered`);
         }
 
         if (header || SLOT_HEADER) {
-            _List.appendChild(_ListHeader);
+            List.appendChild(ListHeader);
         }
         if (header) {
-            _ListHeader.innerHTML = header;
+            ListHeader.innerHTML = header;
         } else if (SLOT_HEADER && SLOT_HEADER.innerHTML) {
-            addElemetsOfSlots(SLOT_HEADER, _ListHeader);
+            addElemetsOfSlots(SLOT_HEADER, ListHeader);
         }
 
         if (renderItem.length > 0) {
-            this._renderItem(renderItem, _ListContainer);
+            this._renderItem(renderItem, ListContainer);
         } else {
-            this.createItems(SLOT_LISTITEM, _ListContainer);
+            this.createItems(SLOT_LISTITEM, ListContainer);
         }
 
-        _List.appendChild(_ListContainer);
+        List.appendChild(ListContainer);
 
         if (footer || SLOT_FOOTER) {
-            _List.appendChild(_ListFooter);
+            List.appendChild(ListFooter);
         }
         if (footer) {
-            _ListFooter.innerHTML = footer;
+            ListFooter.innerHTML = footer;
         } else if (SLOT_HEADER && SLOT_HEADER.innerHTML) {
-            addElemetsOfSlots(SLOT_FOOTER, _ListFooter);
+            addElemetsOfSlots(SLOT_FOOTER, ListFooter);
         }
 
         isSlotsUserd(true, SLOT_HEADER);
         isSlotsUserd(true, SLOT_FOOTER);
-        return _List;
+        return List;
     },
 
     _renderItem(data, el) {

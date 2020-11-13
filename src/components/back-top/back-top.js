@@ -18,32 +18,32 @@ rabbit.BackTop = {
 
         const { content } = slot;
 
-        const _BackTop = document.createElement("div");
-        const _BackTopInner = document.createElement("div");
-        const _BackTopIcon = document.createElement("i");
+        const BackTop = document.createElement("div");
+        const BackTopInner = document.createElement("div");
+        const BackTopIcon = document.createElement("i");
 
-        _BackTop.className = `${prefixCls}`;
-        _BackTopInner.className = `${prefixCls}-inner`;
-        _BackTopIcon.className = `${prefixIconCls} ${prefixIconCls}-md-arrow-up ${prefixCls}-icon`;
+        BackTop.className = `${prefixCls}`;
+        BackTopInner.className = `${prefixCls}-inner`;
+        BackTopIcon.className = `${prefixIconCls} ${prefixIconCls}-md-arrow-up ${prefixCls}-icon`;
 
-        _BackTopInner.appendChild(_BackTopIcon);
+        BackTopInner.appendChild(BackTopIcon);
 
         // 将设置的每一个 height 作为标签属性添加到组件上
-        _BackTop.dataset.visibilityHeight = height;
+        BackTop.dataset.visibilityHeight = height;
 
         // 自定义位置
-        _BackTop.style.bottom = `${bottom}px`;
-        _BackTop.style.right = `${right}px`;
+        BackTop.style.bottom = `${bottom}px`;
+        BackTop.style.right = `${right}px`;
 
         // 如果用 slot content 自定义内容则替换掉默认的图标
         if (content && content.innerHTML) {
-            addElemetsOfSlots(content, _BackTop);
+            addElemetsOfSlots(content, BackTop);
         } else {
-            _BackTop.appendChild(_BackTopInner);
+            BackTop.appendChild(BackTopInner);
         }
 
         // 点击 backtop 返回顶部和回调
-        _BackTop.onclick = () => {
+        BackTop.onclick = () => {
             const sTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
 
@@ -57,7 +57,7 @@ rabbit.BackTop = {
 
         isSlotsUserd(true, content);
 
-        return _BackTop;
+        return BackTop;
     },
 
     backTopShow(el, top) {

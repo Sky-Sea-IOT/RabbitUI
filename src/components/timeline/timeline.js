@@ -9,43 +9,43 @@ rabbit.Timeline = {
         const { color = [], pending = false } = config;
         const { dot, timelineItem } = slot;
 
-        const _Timeline = document.createElement("ul");
+        const Timeline = document.createElement("ul");
 
-        _Timeline.className = `${prefixCls}`;
+        Timeline.className = `${prefixCls}`;
 
         if (pending) {
-            _Timeline.classList.add(`${prefixCls}-pending`);
+            Timeline.classList.add(`${prefixCls}-pending`);
         }
 
         const createItems = (i) => {
-            const _TimelineItem = document.createElement("li");
-            const _TimelineItemTail = document.createElement("div");
-            const _TimelineItemHead = document.createElement("div");
-            const _TimelineItemContent = document.createElement("div");
+            const TimelineItem = document.createElement("li");
+            const TimelineItemTail = document.createElement("div");
+            const TimelineItemHead = document.createElement("div");
+            const TimelineItemContent = document.createElement("div");
 
-            _TimelineItem.className = `${prefixCls}-item`;
-            _TimelineItemTail.className = `${prefixCls}-item-tail`;
-            _TimelineItemHead.className = `${prefixCls}-item-head`;
-            _TimelineItemContent.className = `${prefixCls}-item-content`;
+            TimelineItem.className = `${prefixCls}-item`;
+            TimelineItemTail.className = `${prefixCls}-item-tail`;
+            TimelineItemHead.className = `${prefixCls}-item-head`;
+            TimelineItemContent.className = `${prefixCls}-item-content`;
 
             if (dot[i]) {
-                addElemetsOfSlots(dot[i], _TimelineItemHead);
-                _TimelineItemHead.classList.add(`${prefixCls}-item-head-custom`);
+                addElemetsOfSlots(dot[i], TimelineItemHead);
+                TimelineItemHead.classList.add(`${prefixCls}-item-head-custom`);
             }
 
             if (isArr(color)) {
                 if (color[i] === " " || isUndef(color[i]) || color[i] === null) {
-                    _TimelineItemHead.classList.add(`${prefixCls}-item-head-blue`);
+                    TimelineItemHead.classList.add(`${prefixCls}-item-head-blue`);
                 } else if (
                     color[i] === "blue" ||
                     color[i] === "red" ||
                     color[i] === "green" ||
                     color[i] === "gray"
                 ) {
-                    _TimelineItemHead.classList.add(`${prefixCls}-item-head-${color[i]}`);
+                    TimelineItemHead.classList.add(`${prefixCls}-item-head-${color[i]}`);
                 } else {
-                    _TimelineItemHead.style.color = `${color[i]}`;
-                    _TimelineItemHead.style.borderColor = `${color[i]}`;
+                    TimelineItemHead.style.color = `${color[i]}`;
+                    TimelineItemHead.style.borderColor = `${color[i]}`;
                 }
             } else {
                 let err = `[Rabbit] The property color is an array of types instead of ${_typeof(
@@ -55,18 +55,18 @@ rabbit.Timeline = {
             }
 
             isSlotsUserd(true, timelineItem[i]);
-            addElemetsOfSlots(timelineItem[i], _TimelineItemContent);
+            addElemetsOfSlots(timelineItem[i], TimelineItemContent);
 
-            _TimelineItem.append(
-                _TimelineItemTail,
-                _TimelineItemHead,
-                _TimelineItemContent
+            TimelineItem.append(
+                TimelineItemTail,
+                TimelineItemHead,
+                TimelineItemContent
             );
-            _Timeline.appendChild(_TimelineItem);
+            Timeline.appendChild(TimelineItem);
         };
 
         for (let i = 0; i < timelineItem.length; i++) createItems(i);
 
-        return _Timeline;
+        return Timeline;
     },
 };

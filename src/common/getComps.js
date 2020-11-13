@@ -1,7 +1,7 @@
 const components = {
     Alert: "alert",
     Avatar: "avatar",
-    BackTop: "backTop",
+    BackTop: "backtop",
     Breadcrumb: "breadcrumb",
     Card: "card",
     Collapse: "collapse",
@@ -10,7 +10,7 @@ const components = {
     Empty: "empty",
     List: "list",
     Modal: "modal",
-    PageHeader: "pageHeader",
+    PageHeader: "pageheader",
     Popover: "popover",
     Result: "result",
     Skeleton: "skeleton",
@@ -23,8 +23,8 @@ const components = {
 const getComps = (el, compsName, config, slot) => {
     if (!compsName) {
         const error =
-            'You need to pass in a component name in the tag attribute "data-component". Like this, data-component="alert"';
-        throw new Error(`[Rabbit] ${error}`);
+            "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert></rab-alert>, and all component tags should come with closing tags";
+        throw ReferenceError(`[Rabbit] ${error}`);
     }
 
     switch (compsName) {
@@ -47,7 +47,7 @@ const getComps = (el, compsName, config, slot) => {
             return rabbit.Collapse.createCollapse(config, slot);
 
         case components.Drawer:
-            return rabbit.Drawer.creatDrawer(el, config, slot);
+            return rabbit.Drawer.createDrawer(el, config, slot);
 
         case components.Dropdown:
             return rabbit.Dropdown.createDropDown(config, slot);
@@ -86,8 +86,8 @@ const getComps = (el, compsName, config, slot) => {
             return rabbit.Tooltip.createTooltip(config, slot);
 
         default:
-            throw new Error(
-                `[Rabbit] You are trying to create a component "${compsName}" that does not exist in Rabbit`
+            throw Error(
+                `[Rabbit] You are trying to create a invalid component "${compsName}" and that does not exist in Rabbit`
             );
     }
 };

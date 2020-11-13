@@ -37,42 +37,50 @@
             </div>
         </div>
     </div> -->
+
     <button onclick="a()" class="rbt-btn">显示</button>
-    <div data-component="modal" id="modal1">
+    <button onclick="b()" class="rbt-btn">异步</button>
+
+    <rab-modal id="m1">
         <div slot="header">基本对话框</div>
         <div slot="content">
-            <p>对话框内容</p>
-            <p>对话框内容</p>
-            <p>对话框内容</p>
+            <p>对话框内容...</p>
+            <p>对话框内容...</p>
+            <p>对话框内容...</p>
         </div>
-        <div slot="footer">
-            <button class="rbt-btn" data-click-action="close">取消</button>
-            <button class="rbt-btn rbt-btn-primary" data-click-action="confirm">
-          确定
-        </button>
-        </div>
-    </div>
+    </rab-modal>
+
+    <rab-modal id="m2">
+        <div slot="header">对话框标题</div>
+        <p slot="content">点击确定后，对话框将在 2秒 后关闭。</p>
+    </rab-modal>
 </body>
 <script src="../../utils/typeof.js"></script>
-<script src="../../utils/getIconTypes.js"></script>
 <script src="../../utils/destory.js"></script>
 <script src="../../utils/addDom.js"></script>
+<script src="../../utils/isSlotUserd.js"></script>
 <script src="../../common/getComps.js"></script>
 <script src="../../common/getCompsSlot.js"></script>
 <script src="../../common/main.js"></script>
-<script src="./getConfigs.js"></script>
-<script src="../../mixins/modal.js"></script>
-<script src="../../utils/clickAction.js"></script>
+<script src="../../mixins/bindClickEv.js"></script>
+<script src="../../mixins/scrollable.js"></script>
+<script src="../../utils/objtoString.js"></script>
+<script src="../../utils/css-transition.js"></script>
 <script src="./modal.js"></script>
 <script>
-    rabbit.create("#modal1", {
+    rabbit.create("#m1");
+    rabbit.create("#m2", {
+        loading: true,
         onOk() {
-            alert(1);
+            setTimeout(() => rabbit.Modal.hide("#m2"), 2000);
         },
     });
 
     a = () => {
-        rabbit.Modal.visible("#modal1");
+        rabbit.Modal.show("#m1");
+    };
+    b = () => {
+        rabbit.Modal.show("#m2");
     };
 </script>
 

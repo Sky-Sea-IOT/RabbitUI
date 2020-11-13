@@ -50,8 +50,14 @@
       opacity: 1;
       transition: @none;
       .fadeIn(@transtion-time);
-      .fadeOut(@transtion-time);
       pointer-events: @auto;
+    }
+  }
+
+  // drawer离开状态下的mask
+  &-close {
+    .@{prefix}drawer-mask {
+      .fadeOut(@transtion-time);
     }
   }
 
