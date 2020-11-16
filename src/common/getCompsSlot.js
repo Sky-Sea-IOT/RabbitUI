@@ -1,4 +1,4 @@
-const _getCompsSlot = (el) => {
+function _getCompsSlot(el) {
     const ref = el.querySelector('[slot="ref"]'), // Dropdown、Tooltip、Popover slot
         dot = el.querySelectorAll('[slot="dot"]'), // timeline slot
         desc = el.querySelector('[slot="desc"]'), // Alert slot
@@ -48,4 +48,4 @@ const _getCompsSlot = (el) => {
     };
 
     return obj;
-};
+}

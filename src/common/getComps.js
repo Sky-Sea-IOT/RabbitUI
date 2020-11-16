@@ -1,4 +1,4 @@
-const components = {
+const COMPONENTS = {
     Alert: "alert",
     Avatar: "avatar",
     BackTop: "backtop",
@@ -8,6 +8,7 @@ const components = {
     Drawer: "drawer",
     Dropdown: "dropdown",
     Empty: "empty",
+    InputNumber: "input-number",
     List: "list",
     Modal: "modal",
     PageHeader: "pageheader",
@@ -19,75 +20,85 @@ const components = {
     Timeline: "timeline",
     Tooltip: "tooltip",
 };
-
-const getComps = (el, compsName, config, slot) => {
+/**
+ *
+ * @param {String} el
+ * @param {String} compsName
+ * @param {{}} config
+ * @param {HTMLSlotElement} slot
+ * @returns {HTMLElement}
+ */
+function getComps(el, compsName, config, slot) {
     if (!compsName) {
         const error =
             "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert></rab-alert>, and all component tags should come with closing tags";
-        throw ReferenceError(`[Rabbit] ${error}`);
+        throw new Error(`[Rabbit] ${error}`);
     }
 
     switch (compsName) {
-        case components.Alert:
+        case COMPONENTS.Alert:
             return rabbit.Alert.createAlert(config, slot);
 
-        case components.Avatar:
+        case COMPONENTS.Avatar:
             return rabbit.Avatar.createAvatar(config);
 
-        case components.BackTop:
+        case COMPONENTS.BackTop:
             return rabbit.BackTop.createBackTop(config, slot);
 
-        case components.Breadcrumb:
+        case COMPONENTS.Breadcrumb:
             return rabbit.Breadcrumb.createBreadcrumb(config, slot);
 
-        case components.Card:
+        case COMPONENTS.Card:
             return rabbit.Card.createCard(config, slot);
 
-        case components.Collapse:
+        case COMPONENTS.Collapse:
             return rabbit.Collapse.createCollapse(config, slot);
 
-        case components.Drawer:
+        case COMPONENTS.Drawer:
             return rabbit.Drawer.createDrawer(el, config, slot);
 
-        case components.Dropdown:
+        case COMPONENTS.Dropdown:
             return rabbit.Dropdown.createDropDown(config, slot);
 
-        case components.Empty:
+        case COMPONENTS.Empty:
             return rabbit.Empty.createEmpty(config, slot);
 
-        case components.List:
+        case COMPONENTS.InputNumber:
+            return rabbit.InputNumber.createInputNumber(config);
+
+        case COMPONENTS.List:
             return rabbit.List.createList(config, slot);
 
-        case components.Modal:
+        case COMPONENTS.Modal:
             return rabbit.Modal.createModal(el, config, slot);
 
-        case components.PageHeader:
+        case COMPONENTS.PageHeader:
             return rabbit.PageHeader.createPageHeader(config, slot);
 
-        case components.Popover:
+        case COMPONENTS.Popover:
             return rabbit.Popover.createPopover(config, slot);
 
-        case components.Result:
+        case COMPONENTS.Result:
             return rabbit.Result.createResult(config, slot);
 
-        case components.Skeleton:
+        case COMPONENTS.Skeleton:
             return rabbit.Skeleton.createSkeleton(config);
 
-        case components.Switch:
+        case COMPONENTS.Switch:
             return rabbit.Switch.createSwitch(config, slot);
 
-        case components.Table:
+        case COMPONENTS.Table:
             return rabbit.Table.createTable(config);
 
-        case components.Timeline:
+        case COMPONENTS.Timeline:
             return rabbit.Timeline.createTimeline(config, slot);
 
-        case components.Tooltip:
+        case COMPONENTS.Tooltip:
             return rabbit.Tooltip.createTooltip(config, slot);
 
         default:
-            throw Error(
+            throw new Error(
                 `[Rabbit] You are trying to create a invalid component "${compsName}" and that does not exist in Rabbit`
             );
     }
-};
+}

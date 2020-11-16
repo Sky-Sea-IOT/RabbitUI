@@ -18,40 +18,16 @@
  * 根据标签属性 data-component 传入的组件名称来决定创建何种组件，如果没有填或填错则抛出错误提醒用户
  * 它就像是一个中转站，拿到组件名称后到仓库里查看有无对应的组件并返回给使用者
  */
-
 class Rabbit {
     /**
      * @param { String } el 获取容器
-     * @param { Object } config 组件的配置选项
+     * @param { {} } config 组件的配置选项
+     * @returns { HTMLElement }
      */
     create(el, config) {
         this.$el = el || "";
         this.$config = config || {};
         this.compiler(this.$el, this.$config);
-    }
-
-    compiler(el, config) {
-        const target = document.querySelectorAll(el);
-
-        if (!target) {
-            throw new Error(
-                `[Rabbit] "${el}" this selector was not found, check if you added it to your HTML tag`
-            );
-        }
-
-        const TraverseNodesReturnNewNodes = (nodes) => {
-            const componentName = nodes.tagName.toLowerCase().substring(4);
-            const slot = this.getCompsSlot(nodes);
-            const RabbitComponent = this.compsStore(el, componentName, config, slot);
-            // 清空旧内容
-            nodes.innerHTML = null;
-            // 指定的组件插入该元素
-            nodes.appendChild(RabbitComponent);
-
-            return RabbitComponent;
-        };
-
-        Array.from(target).map((item) => TraverseNodesReturnNewNodes(item));
     }
 
     getCompsSlot(el) {
@@ -61,6 +37,31 @@ class Rabbit {
     // 根据组件名返回对应组件
     compsStore(el, compsName, config, slot) {
         return getComps(el, compsName, config, slot);
+    }
+
+    compiler(el, config) {
+        const target = document.querySelectorAll(el);
+
+        if (target.length <= 0) {
+            throw new Error(
+                `[Rabbit] "${el}" this selector was not found, check if you added it to your HTML tag`
+            );
+        }
+        const TraverseNodesReturnNewNodes = (nodes) => {
+            // 通过截取标签名获取组件名称
+            const componentName = nodes.tagName.toLowerCase().substring(4);
+            const slot = this.getCompsSlot(nodes);
+            // 创建对应组件
+            const RabbitComponent = this.compsStore(el, componentName, config, slot);
+
+            // 清空旧内容
+            nodes.innerHTML = null;
+            // 指定的组件插入该元素
+            nodes.appendChild(RabbitComponent);
+
+            return RabbitComponent;
+        };
+        Array.from(target).map((item) => TraverseNodesReturnNewNodes(item));
     }
 }
 
