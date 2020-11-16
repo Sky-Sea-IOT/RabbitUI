@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/input-number.css" />
+</head>
+<style>
+    .demo {
+        width: 400px;
+        margin: 10px auto;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <!-- <div class="rbt-input-number">
+            <div class="rbt-input-number-handler-wrap">
+                <a class="rbt-input-number-handler rbt-input-number-handler-up">
+                    <span class="rbt-input-number-handler-up-inner rbt-icon rbt-icon-ios-arrow-up"></span>
+                </a>
+                <a class="rbt-input-number-handler rbt-input-number-handler-down">
+                    <span class="rbt-input-number-handler-down-inner rbt-icon rbt-icon-ios-arrow-down"></span>
+                </a>
+            </div>
+            <div class="rbt-input-number-input-wrap">
+                <input type="number" class="rbt-input-number-input" />
+            </div>
+        </div> -->
+        <rab-input-number id="ipn"></rab-input-number>
+        <br /><br />
+        <rab-input-number id="ipn2"></rab-input-number>
+        <br /><br />
+        <rab-input-number id="ipn3"></rab-input-number>
+        <rab-input-number id="ipn"></rab-input-number>
+        <rab-input-number id="ipn4"></rab-input-number>
+        <br /><br />
+        <rab-input-number id="ipn5"></rab-input-number>
+        <br /><br />
+        <rab-input-number id="ipn6"></rab-input-number>
+        <br /><br />
+        <rab-input-number id="ipn7"></rab-input-number>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="./input-number.js"></script>
+<script>
+    rabbit.create("#ipn", {
+        min: 1,
+        max: 10,
+    });
+    rabbit.create("#ipn2", {
+        min: 1,
+        max: 10,
+        step: 1.2,
+    });
+    rabbit.create("#ipn3", {
+        size: "small",
+    });
+    rabbit.create("#ipn4", {
+        size: "large",
+    });
+    rabbit.create("#ipn5", {
+        disabled: true,
+    });
+    rabbit.create("#ipn6", {
+        readOnly: true,
+    });
+    rabbit.create("#ipn7", {
+        editable: false,
+    });
+</script>
+
+</html>

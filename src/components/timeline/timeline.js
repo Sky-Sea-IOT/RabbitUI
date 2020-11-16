@@ -4,7 +4,7 @@
  */
 
 rabbit.Timeline = {
-    createTimeline(config, slot) {
+    createTimeline: (config, slot) => {
         const prefixCls = "rbt-timeline";
         const { color = [], pending = false } = config;
         const { dot, timelineItem } = slot;
@@ -48,7 +48,7 @@ rabbit.Timeline = {
                     TimelineItemHead.style.borderColor = `${color[i]}`;
                 }
             } else {
-                let err = `[Rabbit] The property color is an array of types instead of ${_typeof(
+                const err = `[Rabbit] The property color is an array of types instead of ${_typeof(
           color
         )}`;
                 throw TypeError(err);

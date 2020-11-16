@@ -4,7 +4,7 @@
  */
 
 rabbit.Breadcrumb = {
-    createBreadcrumb(config, slot) {
+    createBreadcrumb: (config, slot) => {
         const prefixCls = "rbt-breadcrumb";
         const { separator = "/" } = config;
         const { breadcrumbItem } = slot;

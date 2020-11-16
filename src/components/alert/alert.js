@@ -1,6 +1,6 @@
 rabbit.Alert = {
     createAlert: (config, slot) => {
-        const prefixCls = "rbt-Alert";
+        const prefixCls = "rbt-alert";
         const prefixIconCls = "rbt-icon";
 
         const {

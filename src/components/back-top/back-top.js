@@ -4,7 +4,7 @@
  */
 
 rabbit.BackTop = {
-    createBackTop(config, slot) {
+    createBackTop: (config, slot) => {
         const prefixCls = "rbt-back-top";
         const prefixIconCls = "rbt-icon";
 

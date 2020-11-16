@@ -258,9 +258,8 @@ rabbit.Modal = {
     // 外部元素调用，用于显示隐藏modal
 
     show(el) {
-        const elem = document.querySelector(el);
-        const mask = elem.querySelector(".rbt-modal-mask");
-        const wrap = elem.querySelector(".rbt-modal-wrap");
+        const mask = this.getModalElement(el).mask;
+        const wrap = this.getModalElement(el).wrap;
 
         modalZIndex++;
         mask.style.zIndex = modalZIndex;
@@ -270,10 +269,23 @@ rabbit.Modal = {
     },
 
     hide(el) {
+        this.hideModal(
+            this.getModalElement(el).mask,
+            this.getModalElement(el).wrap,
+            this.getModalElement(el).okBtn
+        );
+    },
+
+    getModalElement(el) {
         const elem = document.querySelector(el);
         const mask = elem.querySelector(".rbt-modal-mask");
         const wrap = elem.querySelector(".rbt-modal-wrap");
         const okBtn = elem.querySelector(".rbt-btn-primary");
-        this.hideModal(mask, wrap, okBtn);
+        return {
+            elem,
+            mask,
+            wrap,
+            okBtn,
+        };
     },
 };

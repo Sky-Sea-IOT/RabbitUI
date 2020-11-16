@@ -4,7 +4,7 @@
  */
 
 rabbit.Card = {
-    createCard(config, slot) {
+    createCard: (config, slot) => {
         const prefixCls = "rbt-card";
         const {
             width = 320,
