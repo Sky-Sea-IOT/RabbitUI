@@ -20,7 +20,6 @@ function clearTimer() {
  * LoadingBar 加载进度条
  * 显示页面加载、异步请求、文件上传等的加载进度条。
  */
-
 rabbit.LoadingBar = {
     create() {
         const prefixCls = "rbt-loading-bar";
@@ -30,8 +29,7 @@ rabbit.LoadingBar = {
         LoadingBar.className = `${prefixCls}`;
         LoadingBarInner.className = `${prefixCls}-inner`;
 
-        // 初始化样式
-        LoadingBar.style.display = "none";
+        // 初始化
         LoadingBarInner.style.width = "0%";
 
         setTimeout(() => {
@@ -64,27 +62,23 @@ rabbit.LoadingBar = {
         const LoadingBarInner = document.querySelector(".rbt-loading-bar-inner");
 
         if (flag) {
-            LoadingBar.style.display = null;
             LoadingBar.classList.add("rbt-loading-bar-fade-in");
+            LoadingBar.classList.remove("rbt-loading-bar-fade-out");
             // LoadingBarInner.style.width = `${loadingBarProgress}%`;
         } else {
             loadingBarProgress = 100;
             LoadingBarInner.style.width = `${loadingBarProgress}%`;
+
             setTimeout(() => {
-                setTimeout(() => {
-                    loadingBarProgress = 0;
-                    LoadingBar.style.display = "none";
-                    LoadingBarInner.style.width = `${loadingBarProgress}%`;
-                }, 200);
-                if (LoadingBar.classList.contains("rbt-loading-bar-fade-in")) {
-                    CSSTransition(
-                        LoadingBar,
-                        "out",
-                        "rbt-loading-bar-fade-in",
-                        "rbt-loading-bar-fade-out",
-                        190
-                    );
-                }
+                loadingBarProgress = 0;
+                LoadingBar.classList.add("rbt-loading-bar-fade-out");
+                LoadingBar.classList.remove("rbt-loading-bar-fade-in");
+                LoadingBarInner.style.width = `${loadingBarProgress}%`;
+
+                setTimeout(
+                    () => LoadingBar.classList.remove("rbt-loading-bar-fade-out"),
+                    200
+                );
             }, loadingBarConfig.duration);
         }
     },
