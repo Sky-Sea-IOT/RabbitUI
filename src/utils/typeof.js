@@ -13,11 +13,7 @@ function isStr(s) {
 }
 
 function isUndef(u) {
-    if (u === undefined) {
-        return true;
-    } else {
-        throw TypeError(`${u} is not an undefined type`);
-    }
+    return u === undefined;
 }
 
 function isNum(n) {
@@ -45,11 +41,7 @@ function isArr(a) {
 }
 
 function isFunc(f) {
-    if (typeof f === "function") {
-        return true;
-    } else {
-        throw TypeError(`${f} is not an function type`);
-    }
+    return typeof f === "function";
 }
 
 // export { _typeof, isStr, isUndef, isNum, isObj, isArr, isFunc };

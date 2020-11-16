@@ -5,12 +5,10 @@
  * @param { Function } cancelCb
  */
 
-const bindClickEv = (el, okCb, cancelCb) => {
+function bindClickEv(el, okCb, cancelCb) {
     const elem = document.querySelector(el);
-
     // 获取组件名
     const components = elem.tagName.toLowerCase().substring(4);
-
     // 只支持 modal 和 drawer 组件
     if (components !== "modal" && components !== "drawer") {
         console.error(
@@ -58,6 +56,6 @@ const bindClickEv = (el, okCb, cancelCb) => {
     function cancelCallback() {
         isFunc(cancelCb) ? cancelCb() : null;
     }
-};
+}
 
 // export default bindClickEv;

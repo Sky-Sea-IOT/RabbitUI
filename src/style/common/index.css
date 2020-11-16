@@ -517,6 +517,13 @@ input::-ms-clear,
 input::-ms-reveal {
   display: none;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 a {
   color: #1890ff;
   background: transparent;
@@ -524,10 +531,10 @@ a {
   text-decoration: none;
   outline: none;
   cursor: pointer;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 a:hover {
-  color: #1890ff;
+  color: #5cadff;
 }
 a:active {
   color: #1890ff;

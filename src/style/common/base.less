@@ -119,6 +119,15 @@ input::-ms-reveal {
   display: @none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 a {
   color: @primary-color;
   background: transparent;
@@ -126,10 +135,10 @@ a {
   text-decoration: @none;
   outline: @none;
   cursor: @cursor-pointer;
-  transition: color @transtion-time @ease;
+  transition: color @transition-time @ease;
 
   &:hover {
-    color: @primary-color;
+    color: @light-primary-color;
   }
 
   &:active {
