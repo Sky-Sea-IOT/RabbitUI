@@ -1,104 +1,152 @@
-# Message 全局提示
+## Message 全局提示
+
+### 摘要
 
 全局展示操作反馈信息。
 
-## 何时使用
+### 何时使用
 
 - 可提供成功、警告和错误等反馈信息。
-
 - 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 
-## 代码示例
+### 代码示例
 
-普通提示
+- 普通提示
 
-最基本的提示，默认在 3 秒后消失。
+最基本的提示，默认在2.5秒后消失。
 
 ```js
-Rbt.Message.info("这是一条消息提示");
+rabbit.Message.info("这是一条消息提示");
 ```
 
-提示类型
+- 提示类型
 
 不同的提示状态：成功、警告、错误。
 
 ```js
-Rbt.Message.info("这是一条消息提示");
-Rbt.Message.success("这是一条消息提示");
-Rbt.Message.warning("这是一条消息提示");
-Rbt.Message.error("这是一条消息提示");
+rabbit.Message.success("这是一条成功提示");
+rabbit.Message.warning("这是一条警告提示");
+rabbit.Message.error("这是一条错误提示");
 ```
 
-加载中
+- 带背景色 
 
-Loading 的状态，并异步在某个时机移除。
+设置属性 `background` 后，通知提示会显示背景色。
 
 ```js
-const key = "updata";
-Rbt.Message.loading("正在加载中...", {
-  duration: 0,
-  key,
+rabbit.Message.info("这是一条带背景色的通知",{
+	background: true
 });
-setTimeout(() => {
-  Rbt.Message.destroy(key);
-}, 2000);
-```
-
-修改延时
-
-自定义时长 10s，默认时长为 3s。
-
-```js
-Rbt.Message.open(" 我将在10秒后消失", {
-  duration: 10,
-  afterClose() {
-    Rbt.Message.success("我成功消失了");
-  },
+rabbit.Message.success("这是一条带背景色的通知",{
+	background: true
+});
+rabbit.Message.warning("这是一条带背景色的通知",{
+	background: true
+});
+rabbit.Message.error("这是一条带背景色的通知",{
+	background: true
 });
 ```
 
-可关闭
+- 加载中
 
-将参数设置为一个对象，并指定 `closable` 为 true 后可以手动关闭提示
+进行全局 loading，异步自行移除。
 
 ```js
-Rbt.Message.info("这是一条消息提示", {
-  closable: true,
+rabbit.Message.loading("正在加载中...");
+```
+
+- 自定义时长 
+
+自定义时长，也可以在`rabbit.Message.config()`中全局配置
+
+```js
+rabbit.Message.info("消息提示将在10秒后消失",{
+	duration: 10,
 });
 ```
 
-背景色
+- 可关闭 
 
-设置参数属性 `background` 为 true 让 message 带背景色
+设置 `closable` 为 true 后可以手动关闭提示
 
 ```js
-Rbt.Message.info("这是一条消息提示", {
-  background: true,
+rabbit.Message.info("可手动关闭的提示",{
+	 closable: true
+});
+```
+
+- Promise 接口
+
+可以通过 then 接口在关闭后运行 callback 。以上用例将在每个 message 将要结束时通过 then 显示新的 message 。
+
+```js
+rabbit.Message.loading("正在加载中...").then(() => {
+    rabbit.Message.success("加载完成").then(() => {
+        rabbit.Message.info("加载完成后的成功提示");
+    });
 });
 ```
 
 ### API
 
+Message 实例
+
 通过直接调用以下方法来使用组件：
 
-- \Rbt.Message.info(content,config)
-- \Rbt.Message.success(content,config)
-- \Rbt.Message.warning(content,config)
-- \Rbt.Message.error(content,config)
-- \Rbt.Message.loading(content,config)
+- `rabbit.Message.info(content,config)`
+- `rabbit.Message.success(content,config)`
+- `rabbit.Message.warning(content,config)`
+- `rabbit.Message.error(content,config)`
+- `rabbit.Message.loading(content,config)`
 
-以上方法隐式的创建及维护组件。参数 content 为字符串，即显示的内容，参数 config 为对象配置项
+以上方法隐式的创建及维护组件。参数 content 是字符串而 config 是一个对象，具体说明如下：
 
-| 属性       | 说明                                   | 类型     | 默认值 |
-| ---------- | -------------------------------------- | -------- | ------ |
-| top        | 提示组件距离顶端的距离，单位像素       | Number   | 16     |
-| key        | 当前提示的唯一标志                     | String   | Number | - |
-| duration   | 自动关闭的延时，单位秒，不关闭可以写 0 | Number   | 3      |
-| closable   | 是否显示关闭按钮                       | Boolean  | false  |
-| background | 是否带背景色                           | Boolean  | false  |
-| onClose    | 点击关闭按钮关闭时的回调               | Function | -      |
-| afterClose | 组件自动关闭后的回调                   | Function | -      |
+| 属性       | 说明                                        | 类型           | 默认值 |
+| ---------- | ------------------------------------------- | -------------- | ------ |
+| content    | 提示内容                                    | String         | -      |
+| duration   | 自动关闭的延时，单位秒。设为 0 时不自动关闭 | Number         | 2.5    |
+| onClose    | 点击关闭的回调                              | Function       | -      |
+| closable   | 是否显示关闭按钮                            | Boolean        | false  |
+| background | 是否显示背景色                              | Boolean        | false  |
+| key        | 当前提示的唯一标志                          | String\|Number | -      |
 
-### 全局销毁方法
+#### 组件同时提供 promise 接口
 
-_通过 message.destroy(key) 来关闭一条消息。_
+- `rabbit.Message.[type](content,config).then(afterClose)`
+
+其中 `rabbit.Message.[type]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise。
+
+#### 另外提供了全局配置和全局销毁的方法：
+
+- `rabbit.Message.config(options)`
+- `rabbit.Message.destroy()`
+
+也可通过 `rabbit.Message.destroy(key)` 来关闭一条消息。
+
+```js
+rabbit.Message.config({
+    top: 50,
+    duration: 1.5
+});
+```
+
+| 属性     | 说明                           | 类型   | 默认值 |
+| -------- | ------------------------------ | ------ | ------ |
+| top      | 提示组件距离顶端的距离，单位px | Number | 24     |
+| duration | 默认自动关闭的延时，单位秒     | Number | 2.5    |
+
+```js
+rabbit.Message.loading("正在加载中...", {
+	key: "message",
+    duration: 0
+});
+rabbit.Message.success("这是一条成功提示");
+rabbit.Message.warning("这是一条警告提示");
+rabbit.Message.error("这是一条错误提示");
+// 关闭一条消息
+rabbit.Message.destroy('message');
+// 关闭所有消息
+rabbit.Message.destroy();
+```
+

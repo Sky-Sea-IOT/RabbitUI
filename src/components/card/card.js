@@ -2,9 +2,8 @@
  * Card 卡片
  * 基础容器，用来显示文字、列表、图文等内容
  */
-
-rabbit.Card = {
-    createCard: (config, slot) => {
+Rabbit.prototype.Card = {
+    create: (config, slot) => {
         const prefixCls = "rbt-card";
         const {
             width = 320,

@@ -1,5 +1,4 @@
 // LoadingBar 全局配置项
-
 let loadingBarProgress = 0;
 let loadingBarConfig = {
     color: "#1890ff",
@@ -20,7 +19,7 @@ function clearTimer() {
  * LoadingBar 加载进度条
  * 显示页面加载、异步请求、文件上传等的加载进度条。
  */
-rabbit.LoadingBar = {
+Rabbit.prototype.LoadingBar = {
     create() {
         const prefixCls = "rbt-loading-bar";
         const LoadingBar = document.createElement("div");
@@ -158,5 +157,3 @@ rabbit.LoadingBar = {
         document.body.removeChild(document.querySelector(".rbt-loading-bar"));
     },
 };
-
-rabbit.LoadingBar.create();

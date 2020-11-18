@@ -1,10 +1,10 @@
 /**
  * Avatar 头像
- * @description 用来代表用户或事物，支持图片、图标或字符展示。
+ * 用来代表用户或事物，支持图片、图标或字符展示。
  */
 
-rabbit.Avatar = {
-    createAvatar: (config) => {
+Rabbit.prototype.Avatar = {
+    create: (config) => {
         const prefixCls = "rbt-avatar";
         const prefixIconCls = "rbt-icon";
 

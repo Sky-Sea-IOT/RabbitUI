@@ -1,3 +1,6 @@
+/**
+ * @param {string} type
+ */
 function getIconTypes(type) {
     const iconTypes = {
         info: "ios-information-circle",
@@ -9,7 +12,7 @@ function getIconTypes(type) {
         warningOl: "md-information-circle-outline",
         errorOl: "ios-close-circle-outline",
         loadingSolid: "loading-solid",
-        loading: "loading1",
+        loading: "loading-solid",
         close: "ios-close",
     };
 
@@ -38,7 +41,7 @@ function getIconTypes(type) {
         case "error-outline":
             return iconTypes.errorOl;
 
-        case "loading-outline":
+        case "loading":
             return iconTypes.loading;
 
         case "close":

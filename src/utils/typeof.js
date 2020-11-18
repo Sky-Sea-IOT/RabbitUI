@@ -5,11 +5,7 @@ function _typeof(data) {
 }
 
 function isStr(s) {
-    if (typeof s === "string") {
-        return true;
-    } else {
-        throw TypeError(`${s} is a an string type`);
-    }
+    return typeof s === "string";
 }
 
 function isUndef(u) {
@@ -17,27 +13,15 @@ function isUndef(u) {
 }
 
 function isNum(n) {
-    if (typeof n === "number") {
-        return true;
-    } else {
-        throw TypeError(`${n} is not an number type`);
-    }
+    return typeof n === "number";
 }
 
 function isObj(o) {
-    if (o.constructor === Object) {
-        return true;
-    } else {
-        throw TypeError(`${o} is not an object type`);
-    }
+    return o.constructor === Object;
 }
 
 function isArr(a) {
-    if (a.constructor === Array) {
-        return true;
-    } else {
-        throw TypeError(`${a} is not an array type`);
-    }
+    return a.constructor === Array;
 }
 
 function isFunc(f) {

@@ -1,6 +1,6 @@
-# LoadingBar 加载进度条
+## LoadingBar 加载进度条
 
-## 摘要
+### 摘要
 
  全局创建一个显示页面加载、异步请求、文件上传等的加载进度条。
 
@@ -71,7 +71,7 @@ LoadingBar instance
 | error  | 以错误的类型结束进度条，自动补全剩余进度 | 无                        |
 | update | 精确加载到指定的进度                     | percent，指定的进度百分比 |
 
-另外提供了全局配置和全局销毁的方法：
+#### 另外提供了全局配置和全局销毁的方法：
 
 - `rabbit.Loading.config(options)`
 - `rabbit.Loading.destroy()`

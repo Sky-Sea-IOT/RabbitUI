@@ -3,8 +3,8 @@
  * @description 在两种状态间切换时用到的开关选择器。
  */
 
-rabbit.Switch = {
-    createSwitch: (config, slot) => {
+Rabbit.prototype.Switch = {
+    create: (config, slot) => {
         const prefixCls = "rbt-switch";
 
         let {

@@ -3,8 +3,8 @@
  * 空状态时的展示占位图。
  */
 
-rabbit.Empty = {
-    createEmpty: (config, slot) => {
+Rabbit.prototype.Empty = {
+    create: (config, slot) => {
         const prefixCls = "rbt-empty";
 
         const { desc = "暂无数据", image = "default", imageStyle = {} } = config;

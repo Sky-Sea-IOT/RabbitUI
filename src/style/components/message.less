@@ -20,18 +20,17 @@
     z-index: @zindex-message;
     width: 100%;
     pointer-events: @none;
-    @font-variant-with-font-feature-settings-num();
 
     &-notice {
       padding: @padding-xs;
       text-align: center;
 
       &-content {
-        min-width: 300px;
+        min-width: 330px;
         position: @rel;
         text-align: left;
         display: @inlb;
-        padding: 10px @padding-md;
+        padding: 11px 11px 11px 15px;
         border: @border-width-base @border-style-base transparent;
         color: @text-color;
         background: @white;
@@ -45,10 +44,10 @@
       }
 
       // 动画
-      &.move-up-enter {
+      &-fade-enter {
         .MessageMoveIn();
       }
-      &.move-up-leave {
+      &-fade-leave {
         .MessageMoveOut();
       }
     }
@@ -77,7 +76,7 @@
       }
     }
 
-    &-loading-outline {
+    &-loading {
       .@{icon-prefix} {
         color: @primary-color;
         .ani-spin-loading();
@@ -132,13 +131,15 @@
   }
 
   &message &icon {
-    position: @rel;
-    top: -1px;
     font-size: 18px;
-    margin: 0 @margin-xs 0 @margin-xs;
+    &:first-child {
+      position: relative;
+      top: -1px;
+      margin-right: 10px;
+    }
   }
 
-  &closeBtn {
-    .close();
+  &message &icon-ios-close {
+    ._close(10px,10px,@font-size-lg);
   }
 }

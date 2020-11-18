@@ -207,19 +207,17 @@
   z-index: 1010;
   width: 100%;
   pointer-events: none;
-  font-variant: tabular-nums;
-  font-feature-settings: "tnum";
 }
 .rbt-message-notice {
   padding: 8px;
   text-align: center;
 }
 .rbt-message-notice-content {
-  min-width: 300px;
+  min-width: 330px;
   position: relative;
   text-align: left;
   display: inline-block;
-  padding: 10px 16px;
+  padding: 11px 11px 11px 15px;
   border: 1px solid transparent;
   color: #55585e;
   background: #fff;
@@ -230,11 +228,11 @@
 .rbt-message-notice-custom-content {
   display: inline-block;
 }
-.rbt-message-notice.move-up-enter {
+.rbt-message-notice-fade-enter {
   -webkit-animation: MessageMoveIn 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
   animation: MessageMoveIn 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.rbt-message-notice.move-up-leave {
+.rbt-message-notice-fade-leave {
   -webkit-animation: MessageMoveOut 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   animation: MessageMoveOut 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
@@ -250,7 +248,7 @@
 .rbt-message-error .rbt-icon {
   color: #ff4d4f;
 }
-.rbt-message-loading-outline .rbt-icon {
+.rbt-message-loading .rbt-icon {
   color: #1890ff;
   transform: rotate(45deg);
   -webkit-animation: ani-spin 1.3s linear infinite;
@@ -264,7 +262,7 @@
 }
 .rbt-message-with-background-info > .rbt-message-success {
   color: #05cc72;
-  background-color: #9cf3ca;
+  background-color: #f0f9eb;
   border-color: #e1f3d8;
 }
 .rbt-message-with-background-info > .rbt-message-warning {
@@ -280,7 +278,7 @@
 .rbt-message-with-background-success {
   box-shadow: none;
   color: #05cc72;
-  background-color: #9cf3ca;
+  background-color: #f0f9eb;
   border-color: #e1f3d8;
 }
 .rbt-message-with-background-warning {
@@ -296,20 +294,28 @@
   border-color: #fde2e2;
 }
 .rbt-message .rbt-icon {
+  font-size: 18px;
+}
+.rbt-message .rbt-icon:first-child {
   position: relative;
   top: -1px;
-  font-size: 18px;
-  margin: 0 8px 0 8px;
+  margin-right: 10px;
 }
-.rbt-closeBtn {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #c0c4cc !important;
+.rbt-message .rbt-icon-ios-close {
   font-size: 24px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  color: #ccc;
 }
-.rbt-closeBtn:hover {
-  color: #808695 !important;
+.rbt-message .rbt-icon-ios-close:hover {
+  color: #808695;
+}
+.rbt-message .rbt-icon-ios-close .rbt-icon-ios-close {
+  font-size: 22px;
+  transition: color 0.2s ease;
+  position: relative;
+  top: -3px;
 }

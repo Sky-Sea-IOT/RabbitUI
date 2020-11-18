@@ -1,4 +1,4 @@
-rabbit.MessageBox = {
+Rabbit.prototype.MessageBox = {
     /**
      * @param {{title: string,content: string,width: string,okText: string,onOk: void}}
      */

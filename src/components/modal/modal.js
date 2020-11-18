@@ -1,12 +1,11 @@
+let modalZIndex = 1000;
+
 /**
  * Modal 对话框
  * 模态对话框，在浮层中显示，引导用户进行相关操作。
  */
-
-let modalZIndex = 1000;
-
-rabbit.Modal = {
-    createModal(el, config, slot) {
+Rabbit.prototype.Modal = {
+    create(el, config, slot) {
         const prefixCls = "rbt-modal";
         const {
             mask = true,

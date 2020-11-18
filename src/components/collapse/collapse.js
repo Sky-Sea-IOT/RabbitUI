@@ -1,10 +1,9 @@
 /**
  * Collapse 折叠面板
- * @deprecated 可以折叠/展开的内容区域。
+ * 可以折叠/展开的内容区域。
  */
-
-rabbit.Collapse = {
-    createCollapse(config, slot) {
+Rabbit.prototype.Collapse = {
+    create(config, slot) {
         const prefixCls = "rbt-collapse";
         const prefixIconCls = "rbt-icon";
 

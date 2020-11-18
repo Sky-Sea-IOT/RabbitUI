@@ -5,8 +5,8 @@
 
 let drawerZIndex = 1000;
 
-rabbit.Drawer = {
-    createDrawer(el, config, slot) {
+Rabbit.prototype.Drawer = {
+    create(el, config, slot) {
         const prefixCls = "rbt-drawer";
         const {
             mask = true,

@@ -4,7 +4,7 @@
  */
 let spinZIndex = 2010;
 
-rabbit.Spin = {
+Rabbit.prototype.Spin = {
     create(size, text, color) {
         const prefixCls = "rbt-spin";
         const enterAniCls = `${prefixCls}-fade-enter`;

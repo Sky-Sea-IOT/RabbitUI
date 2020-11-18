@@ -1,5 +1,9 @@
-rabbit.Alert = {
-    createAlert: (config, slot) => {
+/**
+ * Alert 警告提示
+ * 静态地呈现一些警告信息。
+ */
+Rabbit.prototype.Alert = {
+    create: (config, slot) => {
         const prefixCls = "rbt-alert";
         const prefixIconCls = "rbt-icon";
 

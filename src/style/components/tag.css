@@ -1,0 +1,143 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-tag {
+  box-sizing: border-box;
+  color: #55585e;
+  display: inline-block;
+  height: auto;
+  margin: 0 8px 0 0;
+  padding: 0 7px;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  background: #fafafa;
+  border: 1px solid #dcdee2;
+  border-radius: 2px;
+  cursor: default;
+  opacity: 1;
+  transition: all 0.3s;
+}
+.rbt-tag:hover {
+  opacity: 0.85;
+}
+.rbt-tag a,
+.rbt-tag a:hover {
+  color: #55585e;
+}
+.rbt-tag-close-icon {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.rbt-tag-with-color {
+  border-color: transparent;
+}
+.rbt-tag .rbt-icon {
+  font-size: 14px;
+}
+.rbt-tag .rbt-icon + span,
+.rbt-tag span + .rbt-icon {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.rbt-tag-checkable {
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+}
+.rbt-tag-checkable:not(.rbt-tag-checkable-checked):hover {
+  color: #1890ff;
+}
+.rbt-tag-checkable-checked {
+  background-color: #1890ff;
+}
+.rbt-tag-checkable-checked,
+.rbt-tag-checkable-checked:active {
+  color: #fff;
+}
+.rbt-tag-primary,
+.rbt-tag-success,
+.rbt-tag-info,
+.rbt-tag-warning,
+.rbt-tag-error {
+  color: #fff;
+  border-color: transparent;
+}
+.rbt-tag-primary a:hover,
+.rbt-tag-success a:hover,
+.rbt-tag-info a:hover,
+.rbt-tag-warning a:hover,
+.rbt-tag-error a:hover {
+  color: #fff;
+}
+.rbt-tag-primary {
+  background-color: #1890ff;
+}
+.rbt-tag-success {
+  background-color: #05cc72;
+}
+.rbt-tag-info {
+  background-color: #40c4ff;
+}
+.rbt-tag-warning {
+  background-color: #faad14;
+}
+.rbt-tag-error {
+  background-color: #ff4d4f;
+}
+.rbt-tag-magenta {
+  color: #eb2f96;
+  background: #fff0f6;
+  border-color: #ffadd2;
+}
+.rbt-tag-red {
+  color: #f5222d;
+  background: #fff1f0;
+  border-color: #ffa39e;
+}
+.rbt-tag-volcano {
+  color: #fa541c;
+  background: #fff2e8;
+  border-color: #ffbb96;
+}
+.rbt-tag-orange {
+  color: #fa8c16;
+  background: #fff7e6;
+  border-color: #ffd591;
+}
+.rbt-tag-gold {
+  color: #faad14;
+  background: #fffbe6;
+  border-color: #ffe58f;
+}
+.rbt-tag-lime {
+  color: #a0d911;
+  background: #fcffe6;
+  border-color: #eaff8f;
+}
+.rbt-tag-green {
+  color: #52c41a;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+.rbt-tag-cyan {
+  color: #13c2c2;
+  background: #e6fffb;
+  border-color: #87e8de;
+}
+.rbt-tag-blue {
+  color: #1890ff;
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+.rbt-tag-geekblue {
+  color: #2f54eb;
+  background: #f0f5ff;
+  border-color: #adc6ff;
+}
+.rbt-tag-purple {
+  color: #722ed1;
+  background: #f9f0ff;
+  border-color: #d3adf7;
+}

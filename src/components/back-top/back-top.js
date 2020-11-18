@@ -2,9 +2,8 @@
  * BackTop回到顶部
  * 返回页面顶部的操作按钮。
  */
-
-rabbit.BackTop = {
-    createBackTop: (config, slot) => {
+Rabbit.prototype.BackTop = {
+    create: (config, slot) => {
         const prefixCls = "rbt-back-top";
         const prefixIconCls = "rbt-icon";
 

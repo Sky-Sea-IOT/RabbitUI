@@ -71,7 +71,7 @@
     rabbit.create("#m1");
     rabbit.create("#m2", {
         loading: true,
-        onOk() {
+        onOk: () => {
             setTimeout(() => rabbit.Modal.hide("#m2"), 2000);
         },
     });

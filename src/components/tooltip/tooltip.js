@@ -3,8 +3,8 @@
  * @description 文字提示气泡框，在鼠标悬停时显示，代替了系统的title提示。
  */
 
-rabbit.Tooltip = {
-    createTooltip(config, slot) {
+Rabbit.prototype.Tooltip = {
+    create(config, slot) {
         const prefixCls = "rbt-tooltip";
 
         const {

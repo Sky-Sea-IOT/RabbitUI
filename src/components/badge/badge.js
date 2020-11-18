@@ -1,9 +1,8 @@
 /**
  * Badge 徽标数
- * @description 用于通知未读数的角标，提醒用户点击。
+ * 用于通知未读数的角标，提醒用户点击。
  */
-
-rabbit.Badge = {
+Rabbit.prototype.Badge = {
     listenCount: ({ el, showZero = false, overflowCount = 99 } = {}) => {
         if (isArr(el)) {
             el.map((item) => setInterval(() => change(item), 100));

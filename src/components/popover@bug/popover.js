@@ -3,8 +3,8 @@
  * 点击/鼠标移入元素，弹出气泡式的卡片浮层。
  */
 
-rabbit.Popover = {
-    createPopover(config, slot) {
+Rabbit.prototype.Popover = {
+    create(config, slot) {
         const prefixCls = "rbt-popover";
         const {
             trigger = "click",

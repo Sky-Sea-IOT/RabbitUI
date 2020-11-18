@@ -7,7 +7,7 @@
   color: #c0c4cc !important;
   font-size: 24px;
   &:hover {
-    color: #808695 !important;
+    color: @sub-color !important;
   }
 }
 
@@ -18,15 +18,16 @@
   top: @top;
   overflow: @hid;
   cursor: @pointer;
+  color: #ccc;
+
+  &:hover {
+    color: @sub-color;
+  }
 
   .@{icon-prefix}-ios-close {
     font-size: 22px;
-    color: #ccc;
     transition: color 0.2s @ease;
     position: @rel;
     top: -3px;
-    &:hover {
-      color: @text-color;
-    }
   }
 }

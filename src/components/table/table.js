@@ -3,8 +3,8 @@
  * 主要用于展示大量结构化数据
  */
 
-rabbit.Table = {
-    createTable(config) {
+Rabbit.prototype.Table = {
+    create(config) {
         const prefixCls = "rbt-table";
         const {
             size = "default",

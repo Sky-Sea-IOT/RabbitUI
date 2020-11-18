@@ -3,8 +3,8 @@
  * 用于反馈一系列操作任务的处理结果。
  */
 
-rabbit.Result = {
-    createResult: (config, slot) => {
+Rabbit.prototype.Result = {
+    create: (config, slot) => {
         const prefixCls = "rbt-result";
         const prefixIconCls = "rbt-icon";
 

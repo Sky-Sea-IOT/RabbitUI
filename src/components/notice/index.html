@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../../style/components/notice.css" />
     <link rel="stylesheet" href="../../style/components/button.css" />
 </head>
+<style>
+    .demo {
+        width: 400px;
+        margin: 10px auto;
+    }
+</style>
 
 <body>
     <!-- <div class="rbt-notice rbt-notice-topRight">
@@ -17,7 +23,7 @@
                     <i class="rbt-icon rbt-icon-md-information-circle-outline rbt-notice-notice-icon rbt-notice-notice-icon-info"></i>
                     <div class="rbt-notice-notice-title">这是通知标题</div>
                     <div class="rbt-notice-notice-desc">
-                        这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述
+                        This is the content of the notification. This is the content of the notification. This is the content of the notification.
                     </div>
                 </div>
             </div>
@@ -26,118 +32,130 @@
             </a>
         </div>
     </div> -->
-    <h3>基础用法</h3>
-    <br />
-    <button class="rbt-btn" onclick="a()">打开提醒</button>
-    <h3>带有图标的通知提醒框</h3>
-    <br />
-    <button class="rbt-btn" onclick="b()">消息</button>
-    <button class="rbt-btn" onclick="c()">成功</button>
-    <button class="rbt-btn" onclick="d()">警告</button>
-    <button class="rbt-btn" onclick="e()">错误</button>
-    <h3>自定义时长</h3>
-    <br />
-    <button class="rbt-btn" onclick="f()">打开提醒</button>
-    <h3>位置</h3>
-    <button class="rbt-btn" onclick="g()">右上角</button>
-    <button class="rbt-btn" onclick="h()">右下角</button>
-    <button class="rbt-btn" onclick="i()">左上角</button>
-    <button class="rbt-btn" onclick="j()">左下角</button>
-    <h3>自定义图标</h3>
-    <br />
-    <button class="rbt-btn" onclick="k()">打开提醒</button>
-    <h3>自定义样式</h3>
-    <br />
-    <button class="rbt-btn" onclick="l()">打开提醒</button>
+    <div class="demo">
+        <button class="rbt-btn" onclick="a()">打开提醒</button>
+        <br /><br />
+        <button class="rbt-btn" onclick="b()">消息</button>
+        <button class="rbt-btn" onclick="c()">成功</button>
+        <button class="rbt-btn" onclick="d()">警告</button>
+        <button class="rbt-btn" onclick="e()">错误</button>
+        <br /><br />
+        <button class="rbt-btn" onclick="f()">左上角</button>
+        <button class="rbt-btn" onclick="g()">右上角</button>
+        <button class="rbt-btn" onclick="h()">左下角</button>
+        <button class="rbt-btn" onclick="i()">右下角</button>
+        <br /><br />
+        <button class="rbt-btn" onclick="j()">显示顺序消息</button>
+        <br /><br />
+        <button class="rbt-btn" onclick="k()">自定义样式</button>
+        <br /><br />
+        <button class="rbt-btn" onclick="l()">自定义时长</button>
+    </div>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/destory.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
 <script src="../../utils/objtoString.js"></script>
-<script src="../../mixins/notice.js"></script>
+<script src="../../common/init.js"></script>
 <script src="../../common/main.js"></script>
+<script src="../../mixins/aferCloseCb.js"></script>
 <script src="./notice.js"></script>
 <script>
+    rabbit.init(["Notice"]);
+
     a = () => {
         rabbit.Notice.open({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+            onClick: () => console.log("点击通知的回调"),
+            onClose: () => console.log("点击关闭的回调"),
         });
     };
     b = () => {
         rabbit.Notice.info({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     c = () => {
         rabbit.Notice.success({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     d = () => {
         rabbit.Notice.warning({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     e = () => {
         rabbit.Notice.error({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     f = () => {
-        rabbit.Notice.open({
+        rabbit.Notice.info({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
-            duration: 0,
-        });
-    };
-    g = () => {
-        rabbit.Notice.open({
-            title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
-        });
-    };
-    h = () => {
-        rabbit.Notice.open({
-            title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
-            placement: "bottomRight",
-        });
-    };
-    i = () => {
-        rabbit.Notice.open({
-            title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             placement: "topLeft",
         });
     };
-    j = () => {
-        rabbit.Notice.open({
+    g = () => {
+        rabbit.Notice.info({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+            placement: "topRight",
+        });
+    };
+    h = () => {
+        rabbit.Notice.info({
+            title: "这是通知标题",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             placement: "bottomLeft",
         });
     };
-    k = () => {
+    i = () => {
         rabbit.Notice.info({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
-            customIcon: `<i class="rbt-icon rbt-icon-md-heart-empty rbt-notice-notice-icon rbt-notice-notice-icon-info"></i>`,
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+            placement: "bottomRight",
+        });
+    };
+
+    j = () => {
+        rabbit.Notice.open({
+            title: "这是第一条通知",
+            desc: "接下来将会显示第二条通知接下来将会显示第二条通知接下来将会显示第二条通知",
+        }).then(() => {
+            rabbit.Notice.info({
+                title: "这是第二条通知",
+                desc: "接下来将会显示第三条通知接下来将会显示第三条通知接下来将会显示第三条通知",
+            }).then(() => {
+                rabbit.Notice.success({
+                    title: "这是第三条通知",
+                    desc: "这是最新通知这是最新通知这是最新通知这是最新通知这是最新通知",
+                });
+            });
+        });
+    };
+    k = () => {
+        rabbit.Notice.open({
+            title: "这是通知标题",
+            desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+            styles: {
+                width: "600px",
+                background: "#ccc",
+            },
+            className: "custom-notice",
         });
     };
     l = () => {
         rabbit.Notice.open({
             title: "这是通知标题",
-            desc: "这里是通知描述这里,是通知描述这里是通知描述这里,是通知描述这里,是通知描述这里是通知描述这里是通知描述",
-            className: "my-notice",
-            styles: {
-                width: "600px",
-                background: "#999",
-            },
+            desc: "这条通知不会自动关闭，需要点击关闭按钮才可以关闭。",
+            duration: 0,
         });
     };
 </script>

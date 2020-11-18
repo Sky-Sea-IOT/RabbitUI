@@ -12,11 +12,11 @@
 <body>
     <!-- <div class="rbt-message">
         <div class="rbt-message-notice">
-            <div class="rbt-message-notice-content">
+            <div class="rbt-message-notice-content rbt-message-with-background-info">
                 <div class="rbt-message-info">
                     <i class="rbt-icon rbt-icon-ios-information-circle"></i>
                     <span>这是一条消息提示</span>
-                    <i class="rbt-closeBtn rbt-icon rbt-icon-ios-close"></i>
+                    <i class="rbt-icon rbt-icon-ios-close"></i>
                 </div>
             </div>
         </div>
@@ -25,41 +25,100 @@
     <button class="rbt-btn" onclick="b()">成功提示</button>
     <button class="rbt-btn" onclick="c()">警告提示</button>
     <button class="rbt-btn" onclick="d()">错误提示</button>
+    <br /><br />
     <button class="rbt-btn" onclick="e()">显示加载中</button>
+    <button class="rbt-btn" onclick="f()">显示一个可关闭的提示</button>
+    <button class="rbt-btn" onclick="g()">显示一个10秒的提示</button>
+    <br /><br />
+    <button class="rbt-btn" onclick="h()">背景色-消息提示</button>
+    <button class="rbt-btn" onclick="i()">背景色-成功提示</button>
+    <button class="rbt-btn" onclick="j()">背景色-警告提示</button>
+    <button class="rbt-btn" onclick="k()">背景色-错误提示</button>
+    <br /><br />
+    <button class="rbt-btn" onclick="l()">显示顺序消息</button>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
 <script src="../../utils/destory.js"></script>
-<script src="../../mixins/message.js"></script>
+<script src="../../common/init.js"></script>
 <script src="../../common/main.js"></script>
+<script src="../../mixins/aferCloseCb.js"></script>
 <script src="./message.js"></script>
 <script>
-    let key = "updata";
-
+    rabbit.init(["Message"]);
+    // rabbit.Message.config({
+    //     top: 50,
+    // });
     a = () => {
         rabbit.Message.info("这是一条消息提示");
     };
 
     b = () => {
-        rabbit.Message.success("这是一条消息提示");
+        rabbit.Message.success("这是一条成功提示");
     };
 
     c = () => {
-        rabbit.Message.warning("这是一条消息提示");
+        rabbit.Message.warning("这是一条警告提示");
     };
 
     d = () => {
-        rabbit.Message.error("这是一条消息提示");
+        rabbit.Message.error("这是一条错误提示");
     };
 
+    const key = "loadingData";
     e = () => {
         rabbit.Message.loading("正在加载中...", {
-            duration: 0,
             key,
+            duration: 0,
         });
-        setTimeout(() => {
-            rabbit.Message.destroy(key);
-        }, 3000);
+        setTimeout(() => rabbit.Message.destroy(key), 5000);
+    };
+
+    f = () => {
+        rabbit.Message.info("可手动关闭的提示", {
+            closable: true,
+            onClose: () => {
+                console.log("关闭提示");
+            },
+        });
+    };
+
+    g = () => {
+        rabbit.Message.success("这是成功提示信息，10秒后消失", {
+            duration: 10,
+        });
+    };
+
+    h = () => {
+        rabbit.Message.info(" 这是一条带背景色的通知", {
+            background: true,
+        });
+    };
+
+    i = () => {
+        rabbit.Message.success(" 这是一条带背景色的通知", {
+            background: true,
+        });
+    };
+
+    j = () => {
+        rabbit.Message.warning(" 这是一条带背景色的通知", {
+            background: true,
+        });
+    };
+
+    k = () => {
+        rabbit.Message.error(" 这是一条带背景色的通知", {
+            background: true,
+        });
+    };
+
+    l = () => {
+        rabbit.Message.loading("正在加载中...", {}).then(() => {
+            rabbit.Message.success("加载完成").then(() => {
+                rabbit.Message.info("加载完成后的成功提示");
+            });
+        });
     };
 </script>
 
