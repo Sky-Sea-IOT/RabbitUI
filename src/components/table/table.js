@@ -124,7 +124,7 @@ Rabbit.prototype.Table = {
                 theadTr.appendChild(TableHeadTh);
             });
         } else {
-            throw TypeError("[Rabbit] The type of property columns must be an array");
+            throw TypeError("The type of property columns must be an array");
         }
     },
 
@@ -152,7 +152,6 @@ Rabbit.prototype.Table = {
                 data.map((datas, i) => {
                     const TableBodyTr = document.createElement("tr");
                     tbody.appendChild(TableBodyTr);
-
                     if (isObj(datas)) {
                         Object.keys(datas).forEach((key) => {
                             if (key === "rowClassName") {
@@ -161,6 +160,7 @@ Rabbit.prototype.Table = {
                             }
                             // 排除 rowClassName
                             if (key !== "rowClassName") {
+                                // columns 的值和 rows 对象的键要相等
                                 if (columnsData.includes(key)) {
                                     const TableBodyTd = document.createElement("td");
 
@@ -169,14 +169,14 @@ Rabbit.prototype.Table = {
                                     TableBodyTr.appendChild(TableBodyTd);
                                 } else {
                                     throw ReferenceError(
-                                        `[Rabbit] ${key} is not included in the [${columnsData}] or vice versa`
+                                        `${key} is not included in the [${columnsData}] or vice versa`
                                     );
                                 }
                             }
                         });
                     } else {
                         throw TypeError(
-                            "[Rabbit] The data type that holds the content of the table must be an object"
+                            "The data type that holds the content of the table must be an object"
                         );
                     }
 
@@ -186,7 +186,7 @@ Rabbit.prototype.Table = {
                 });
             }
         } else {
-            throw TypeError("[Rabbit] The type of property data must be an array");
+            throw TypeError("The type of property data must be an array");
         }
     },
 
