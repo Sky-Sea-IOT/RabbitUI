@@ -26,7 +26,12 @@ function destroy({
     if (duration) {
         timer = setTimeout(() => {
             // 替换为出场动画
-            currentEle.classList.replace(moveInCls, moveOutCls);
+            currentEle.classList.add(moveOutCls);
+
+            if (moveInCls) {
+                currentEle.classList.remove(moveInCls);
+            }
+
             // 是否连同实例的父元素容器一起销毁
             if (destroyParent) {
                 setTimeout(() => (parentNode.style.display = "none"), 150);
@@ -40,7 +45,7 @@ function destroy({
             setTimeout(() => {
                 // 移除该元素
                 if (destroyParent) {
-                    document.body.removeChild(parentNode);
+                    parentNode.remove();
                 }
 
                 currentEle.remove();

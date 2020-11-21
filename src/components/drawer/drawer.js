@@ -6,7 +6,7 @@
 let drawerZIndex = 1000;
 
 Rabbit.prototype.Drawer = {
-    create(el, config, slot) {
+    _createInstance(el, config, slot) {
         const prefixCls = "rbt-drawer";
         const {
             mask = true,
@@ -53,13 +53,13 @@ Rabbit.prototype.Drawer = {
 
         bindClickEv(el, null, onClose);
 
-        this.initDirection(DrawerWrap, placement);
-        this.showMask(mask, Drawer, DrawerMask);
-        this.setDrawerSize(DrawerWrap, width, placement);
-        this.setDrawerStyles(styles, DrawerBody);
-        this.setDrawerZIndex(DrawerMask, DrawerWrap, drawerZIndex);
-        this.onCloseEv(DrawerClose, Drawer, DrawerWrap, onClose, placement);
-        this.maskClose(
+        this._initDirection(DrawerWrap, placement);
+        this._showMask(mask, Drawer, DrawerMask);
+        this._setDrawerSize(DrawerWrap, width, placement);
+        this._setDrawerStyles(styles, DrawerBody);
+        this._setDrawerZIndex(DrawerMask, DrawerWrap, drawerZIndex);
+        this._onCloseEv(DrawerClose, Drawer, DrawerWrap, onClose, placement);
+        this._maskClose(
             maskClosable,
             DrawerMask,
             Drawer,
@@ -67,10 +67,10 @@ Rabbit.prototype.Drawer = {
             onClose,
             placement
         );
-        this.keyboardClose(keyboard, Drawer, DrawerWrap, onClose, placement);
-        this.showClose(closable, DrawerContentWrap, DrawerClose);
+        this._keyboardClose(keyboard, Drawer, DrawerWrap, onClose, placement);
+        this._showClose(closable, DrawerContentWrap, DrawerClose);
 
-        visible ? this.showDrawer(Drawer, DrawerWrap, placement) : "";
+        visible ? this._showDrawer(Drawer, DrawerWrap, placement) : "";
 
         Drawer.appendChild(DrawerWrap);
         DrawerWrap.appendChild(DrawerContentBox);
@@ -99,7 +99,7 @@ Rabbit.prototype.Drawer = {
     },
 
     // drawer 离开的方向
-    initDirection(drawer, placement) {
+    _initDirection(drawer, placement) {
         const T = 100;
         switch (placement) {
             case "top":
@@ -117,7 +117,7 @@ Rabbit.prototype.Drawer = {
         }
     },
 
-    showDrawer(root, drawer) {
+    _showDrawer(root, drawer) {
         drawerZIndex++;
         bodyScrollable(false);
         drawer.style.transform = null;
@@ -125,25 +125,25 @@ Rabbit.prototype.Drawer = {
         root.classList.add("rbt-drawer-open");
     },
 
-    hideDrawer(root, drawer, placement) {
+    _hideDrawer(root, drawer, placement) {
         bodyScrollable(true);
-        this.initDirection(drawer, placement);
+        this._initDirection(drawer, placement);
         root.classList.remove("rbt-drawer-open");
     },
 
-    showMask(mask, drawer, drawerMask) {
+    _showMask(mask, drawer, drawerMask) {
         if (mask) {
             drawer.appendChild(drawerMask);
         }
     },
 
-    showClose(closable, el, closeEL) {
+    _showClose(closable, el, closeEL) {
         if (closable) {
             el.appendChild(closeEL);
         }
     },
 
-    setDrawerSize(el, width, placement) {
+    _setDrawerSize(el, width, placement) {
         if (placement === "top" || placement === "bottom") {
             el.style.height = width;
         } else {
@@ -151,60 +151,48 @@ Rabbit.prototype.Drawer = {
         }
     },
 
-    setDrawerStyles(el, style) {
+    _setDrawerStyles(el, style) {
         if (isObj(style)) {
             el.style.cssText = objToString(style);
         }
     },
 
-    setDrawerZIndex(mask, wrap, zindex) {
+    _setDrawerZIndex(mask, wrap, zindex) {
         mask.style.zIndex = zindex;
         wrap.style.zIndex = zindex;
     },
 
     // 关闭抽屉时触发的回调
-    onCloseEv(el, root, drawer, cb, placement) {
+    _onCloseEv(el, root, drawer, cb, placement) {
         el.onclick = () => {
             isFunc(cb) ? cb() : null;
-            this.hideDrawer(root, drawer, placement);
+            this._hideDrawer(root, drawer, placement);
         };
     },
 
     // 点击蒙层是否允许关闭
-    maskClose(mc, el, root, drawer, cb, placement) {
+    _maskClose(mc, el, root, drawer, cb, placement) {
         if (mc) {
             el.onclick = () => {
                 isFunc(cb) ? cb() : null;
-                this.hideDrawer(root, drawer, placement);
+                this._hideDrawer(root, drawer, placement);
             };
         }
     },
 
     // 是否支持键盘 esc 关闭
-    keyboardClose(keyboard, root, drawer, cb, placement) {
+    _keyboardClose(keyboard, root, drawer, cb, placement) {
         if (keyboard) {
             window.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
                     isFunc(cb) ? cb() : null;
-                    this.hideDrawer(root, drawer, placement);
+                    this._hideDrawer(root, drawer, placement);
                 }
             });
         }
     },
 
-    // 外部元素调用，用于显示隐藏 drawer
-
-    show(el) {
-        const elem = this.getDrawerElement(el);
-        this.showDrawer(elem.root, elem.drawer);
-    },
-
-    hide(el) {
-        const elem = this.getDrawerElement(el);
-        this.hideDrawer(elem.root, elem.drawer, this.getDrawerPlacement(elem.root));
-    },
-
-    getDrawerElement(el) {
+    _getDrawerElement(el) {
         const elem = document.querySelector(el);
         const root = elem.querySelector(".rbt-drawer");
         const drawer = root.querySelector(".rbt-drawer-wrap");
@@ -216,7 +204,7 @@ Rabbit.prototype.Drawer = {
         };
     },
 
-    getDrawerPlacement(el) {
+    _getDrawerPlacement(el) {
         if (el.classList.contains("rbt-drawer-top")) {
             return "top";
         }
@@ -229,5 +217,21 @@ Rabbit.prototype.Drawer = {
         if (el.classList.contains("rbt-drawer-left")) {
             return "left";
         }
+    },
+
+    // 外部元素调用，用于显示隐藏 drawer
+
+    show(el) {
+        const elem = this._getDrawerElement(el);
+        this._showDrawer(elem.root, elem.drawer);
+    },
+
+    hide(el) {
+        const elem = this._getDrawerElement(el);
+        this._hideDrawer(
+            elem.root,
+            elem.drawer,
+            this._getDrawerPlacement(elem.root)
+        );
     },
 };

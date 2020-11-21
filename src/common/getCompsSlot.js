@@ -49,3 +49,5 @@ function _getCompsSlot(el) {
 
     return obj;
 }
+
+// export default _getCompsSlot;

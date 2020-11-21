@@ -34,7 +34,7 @@ Rabbit.prototype.Message = {
      *           background: boolean }}
      * @returns {HTMLElement}
      */
-    createInstance({
+    _createInstance({
         key,
         type,
         onClose,
@@ -62,7 +62,7 @@ Rabbit.prototype.Message = {
         const MessageContentBox = document.createElement("span");
         const MessageClose = document.createElement("a");
 
-        this.addClassName(
+        this._addClassName(
             type,
             MessageIcons,
             Message,
@@ -81,16 +81,16 @@ Rabbit.prototype.Message = {
             MessageTypeBox.appendChild(MessageClose);
         }
 
-        this.setKey(key, Message);
-        this.setContent(MessageContentBox, content);
-        this.closeInstacne(Message, duration);
-        this.showBackground(background, MessageNoticeContent, type);
-        this.clickCloseHandle(MessageClose, onClose);
+        this._setKey(key, Message);
+        this._setContent(MessageContentBox, content);
+        this._closeInstacne(Message, duration);
+        this._showBackground(background, MessageNoticeContent, type);
+        this._clickCloseHandle(MessageClose, onClose);
 
         return Message;
     },
 
-    addClassName(
+    _addClassName(
         type,
         MessageIcons,
         Message,
@@ -102,14 +102,14 @@ Rabbit.prototype.Message = {
         const prefixCls = "rbt-message";
         const prefixIcon = "rbt-icon";
 
-        Message.className = `${prefixCls}-notice ${this.aniCls().moveInCls}`;
+        Message.className = `${prefixCls}-notice ${this._aniCls().moveInCls}`;
         MessageNoticeContent.className = `${prefixCls}-notice-content`;
         MessageTypeBox.className = `${prefixCls}-${type}`;
         MessageIconBox.className = `${prefixIcon} ${prefixIcon}-${MessageIcons}`;
         MessageClose.className = `${prefixIcon} ${prefixIcon}-ios-close`;
     },
 
-    aniCls() {
+    _aniCls() {
         const moveInCls = "rbt-message-notice-fade-enter";
         const moveOutCls = "rbt-message-notice-fade-leave";
         return {
@@ -118,40 +118,40 @@ Rabbit.prototype.Message = {
         };
     },
 
-    showBackground(background, el, type) {
+    _showBackground(background, el, type) {
         if (background) {
             el.classList.add(`rbt-message-with-background-${type}`);
         }
     },
 
-    setKey(key, el) {
+    _setKey(key, el) {
         if (isNum(key) || isStr(key)) {
             el.dataset.key = key;
         }
     },
 
-    setContent(el, content) {
+    _setContent(el, content) {
         if (content) {
             el.innerHTML = content;
         }
     },
 
-    closeInstacne(el, duration) {
+    _closeInstacne(el, duration) {
         // 销毁实例
         destroy({
             el,
             duration,
-            moveInCls: this.aniCls().moveInCls,
-            moveOutCls: this.aniCls().moveOutCls,
+            moveInCls: this._aniCls().moveInCls,
+            moveOutCls: this._aniCls().moveOutCls,
             whenToDestroy: 0.25,
         });
     },
 
-    clickCloseHandle(el, cb) {
+    _clickCloseHandle(el, cb) {
         clickDestroy({
             el,
-            moveInCls: this.aniCls().moveInCls,
-            moveOutCls: this.aniCls().moveOutCls,
+            moveInCls: this._aniCls().moveInCls,
+            moveOutCls: this._aniCls().moveOutCls,
             destroyTarget: document.querySelector(".rbt-message-notice"),
             onClose: cb,
         });
@@ -166,7 +166,7 @@ Rabbit.prototype.Message = {
     info(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this.createInstance({
+        this._createInstance({
             key,
             type: "info",
             content,
@@ -181,7 +181,7 @@ Rabbit.prototype.Message = {
     success(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this.createInstance({
+        this._createInstance({
             key,
             type: "success",
             content,
@@ -196,7 +196,7 @@ Rabbit.prototype.Message = {
     warning(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this.createInstance({
+        this._createInstance({
             key,
             type: "warning",
             content,
@@ -211,7 +211,7 @@ Rabbit.prototype.Message = {
     error(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this.createInstance({
+        this._createInstance({
             key,
             type: "error",
             content,
@@ -226,7 +226,7 @@ Rabbit.prototype.Message = {
     loading(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this.createInstance({
+        this._createInstance({
             key,
             type: "loading",
             content,
@@ -266,15 +266,15 @@ Rabbit.prototype.Message = {
             destroyByKey({
                 key,
                 target: document.querySelectorAll(".rbt-message-notice"),
-                moveInCls: this.aniCls().moveInCls,
-                moveOutCls: this.aniCls().moveOutCls,
+                moveInCls: this._aniCls().moveInCls,
+                moveOutCls: this._aniCls().moveOutCls,
                 whenToDestroy: 0.25,
             });
         } else {
             destoryAll({
                 el: document.querySelectorAll(".rbt-message-notice"),
-                moveInCls: this.aniCls().moveInCls,
-                moveOutCls: this.aniCls().moveOutCls,
+                moveInCls: this._aniCls().moveInCls,
+                moveOutCls: this._aniCls().moveOutCls,
                 whenToDestroy: 0.25,
             });
         }

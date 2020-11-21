@@ -71,7 +71,7 @@ module.exports = {
                     options: {
                         // 文件命名
                         name: "[name].[ext]",
-                        outputPath: "style/images/",
+                        outputPath: "images/",
                         // 小于 2k 的图片转成 base64 编码
                         limit: 2024,
                     },

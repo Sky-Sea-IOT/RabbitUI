@@ -6,7 +6,7 @@
 let dropDownState = false;
 
 Rabbit.prototype.Dropdown = {
-    create(config, slot) {
+    _createInstance(config, slot) {
         const prefixCls = "rbt-dropdown";
         const animationEnterCls = `${prefixCls}-drop-in`;
         const animationLeaveCls = `${prefixCls}-drop-out`;
@@ -32,14 +32,14 @@ Rabbit.prototype.Dropdown = {
 
         addElemetsOfSlots(ref, DropdownRel);
 
-        this.setDropWidth(DropdownRel, DropdownMenu);
+        this._setDropWidth(DropdownRel, DropdownMenu);
 
-        setTimeout(() => this.dropdownEvent(), 0);
+        setTimeout(() => this._dropdownEvent(), 0);
 
         const itemClickEvent = (i, DropdownItem) => {
             dropDownState = false;
             isFunc(onClick) ? onClick(i, DropdownItem) : null;
-            this.drop("up", DropdownMenu, animationEnterCls, animationLeaveCls);
+            this._drop("up", DropdownMenu, animationEnterCls, animationLeaveCls);
         };
 
         for (let i = 0; i < itemLens; i++) {
@@ -69,18 +69,18 @@ Rabbit.prototype.Dropdown = {
         return Dropdown;
     },
 
-    setDropWidth(el, dropdownMenu) {
+    _setDropWidth(el, dropdownMenu) {
         setTimeout(() => {
             let elWidth = Math.floor(el.offsetWidth);
             elWidth <= 100 ? null : (dropdownMenu.style.minWidth = `${elWidth}px`);
         }, 0);
     },
 
-    setPlacement(el, dropdown) {
+    _setPlacement(el, dropdown) {
         $DropDown.setDirection(el, dropdown, 5);
     },
 
-    dropdownEvent() {
+    _dropdownEvent() {
         const prefixCls = "rbt-dropdown";
         const animationEnterCls = `${prefixCls}-drop-in`;
         const animationLeaveCls = `${prefixCls}-drop-out`;
@@ -108,7 +108,7 @@ Rabbit.prototype.Dropdown = {
             } else {
                 dropDownState = true;
                 state = "down";
-                this.setDropWidth(
+                this._setDropWidth(
                     dropdownRels[currentIndex],
                     dropdownMenus[currentIndex]
                 );
@@ -121,7 +121,7 @@ Rabbit.prototype.Dropdown = {
                 animationLeaveCls
             );
 
-            this.setPlacement(
+            this._setPlacement(
                 dropdownRels[currentIndex],
                 dropdownMenus[currentIndex]
             );
@@ -131,24 +131,24 @@ Rabbit.prototype.Dropdown = {
             const { trigger } = dropdown.dataset;
             if (trigger === "hover") {
                 dropdown.onmouseenter = () => {
-                    this.drop(
+                    this._drop(
                         "down",
                         dropdownMenus[dropdownIndex],
                         animationEnterCls,
                         animationLeaveCls
                     );
-                    this.setDropWidth(
+                    this._setDropWidth(
                         dropdownRels[dropdownIndex],
                         dropdownMenus[dropdownIndex]
                     );
-                    this.setPlacement(
+                    this._setPlacement(
                         dropdownRels[dropdownIndex],
                         dropdownMenus[dropdownIndex]
                     );
                 };
 
                 dropdown.onmouseleave = () =>
-                    this.drop(
+                    this._drop(
                         "up",
                         dropdownMenus[dropdownIndex],
                         animationEnterCls,
@@ -177,7 +177,7 @@ Rabbit.prototype.Dropdown = {
         });
     },
 
-    drop(mode, dropdownMenu, animationEnterCls, animationLeaveCls) {
+    _drop(mode, dropdownMenu, animationEnterCls, animationLeaveCls) {
         if (mode === "down") {
             CSSTransition(
                 dropdownMenu,

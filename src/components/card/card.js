@@ -3,7 +3,7 @@
  * 基础容器，用来显示文字、列表、图文等内容
  */
 Rabbit.prototype.Card = {
-    create: (config, slot) => {
+    _createInstance: (config, slot) => {
         const prefixCls = "rbt-card";
         const {
             width = 320,

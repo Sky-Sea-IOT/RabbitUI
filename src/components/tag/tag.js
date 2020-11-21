@@ -1,4 +1,4 @@
-rabbit.Tag = {
+Rabbit.prototype.Tag = {
     toogle: () => {
         const tags = document.querySelectorAll(".rbt-tag-checkable");
         Array.from(tags).map((tag) => {
@@ -10,4 +10,4 @@ rabbit.Tag = {
         });
     },
 };
-rabbit.Tag.toogle();
+Rabbit.prototype.Tag.toogle();

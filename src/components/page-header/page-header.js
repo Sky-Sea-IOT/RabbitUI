@@ -1,5 +1,5 @@
 Rabbit.prototype.PageHeader = {
-    create: (config, slot) => {
+    _createInstance: (config, slot) => {
         const prefixCls = "rbt-page-header";
         const prefixIconCls = "rbt-icon";
 

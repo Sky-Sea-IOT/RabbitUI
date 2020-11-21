@@ -1,0 +1,102 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-slider {
+  width: 100%;
+  height: 4px;
+  background: #e8eaec;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  touch-action: none;
+}
+.rbt-slider-tips {
+  position: absolute;
+  top: -45px;
+  z-index: 4080;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 2px;
+  min-width: 30px;
+  min-height: 32px;
+  padding: 6px 8px;
+  text-align: center;
+  cursor: default;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.2s ease-in-out;
+}
+.rbt-slider-tips::after {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  margin-left: -6px;
+  width: 0;
+  height: 0;
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.75) transparent transparent;
+}
+.rbt-slider-tips-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.rbt-slider-bar {
+  height: 100%;
+  background: #5cadff;
+  border-radius: 3px;
+  position: absolute;
+}
+.rbt-slider-wrap {
+  width: 18px;
+  height: 18px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  transform: translateX(-36%);
+  z-index: 10;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  pointer-events: none;
+}
+.rbt-slider-wrap-handle {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #5cadff;
+  border-radius: 50%;
+  background-color: #fff;
+  pointer-events: auto;
+  transition: all 0.2s linear;
+  outline: 0;
+}
+.rbt-slider-wrap-handle:hover {
+  cursor: -webkit-grab;
+  cursor: grab;
+  border-color: #1890ff;
+  transform: scale(1.5);
+}
+.rbt-slider-disabled {
+  cursor: not-allowed;
+}
+.rbt-slider-disabled .rbt-slider-wrap {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.rbt-slider-disabled .rbt-slider-wrap-handle {
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+.rbt-slider-disabled .rbt-slider-wrap-handle:hover {
+  cursor: not-allowed;
+  border-color: #ccc;
+  transform: scale(1);
+}
+.rbt-slider-disabled .rbt-slider-bar {
+  background-color: #ccc;
+}

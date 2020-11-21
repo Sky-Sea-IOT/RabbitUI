@@ -1,15 +1,32 @@
 {
-    "name": "rabbit-ui",
-    "version": "2.0.0",
-    "description": "Rabbit UI, formerly Known as JView, is an open source Javascript based UI component library",
+    "name": "rabbit-ui-design",
+    "version": "0.7.7",
+    "title": "RabbitUI",
+    "description": "A high quality open source UI component library based on Javascript",
+    "homepage": "",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack --config config/webpack.config.js --progress"
     },
-    "keywords": [],
+    "keywords": [
+        "ui",
+        "jsui",
+        "jsUI库",
+        "jsUI组件库",
+        "rabbitui",
+        "rabbit-ui",
+        "RabbitUI",
+        "component",
+        "javascript",
+        "components",
+        "framework"
+    ],
     "author": "Ryan John",
     "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/niu-grandpa/RabbitUI/issues"
+    },
     "devDependencies": {
         "@babel/core": "^7.11.5",
         "@babel/preset-env": "^7.11.5",
@@ -31,5 +48,19 @@
     },
     "dependencies": {
         "url-loader": "^4.1.1"
-    }
+    },
+    "engines": {
+        "node": ">=6.5",
+        "npm": ">=5.5.1",
+        "yarn": ">=1.3.2"
+    },
+    "browserslist": [
+        "Chrome >= 51",
+        "Firefox >= 53",
+        "Safari >= 10",
+        "Explorer >= 11",
+        "Edge >= 12",
+        "iOS >= 10",
+        "Android >= 6"
+    ]
 }

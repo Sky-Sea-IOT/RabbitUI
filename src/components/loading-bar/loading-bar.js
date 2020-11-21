@@ -20,7 +20,7 @@ function clearTimer() {
  * 显示页面加载、异步请求、文件上传等的加载进度条。
  */
 Rabbit.prototype.LoadingBar = {
-    create() {
+    _createInstance() {
         const prefixCls = "rbt-loading-bar";
         const LoadingBar = document.createElement("div");
         const LoadingBarInner = document.createElement("div");
@@ -32,7 +32,7 @@ Rabbit.prototype.LoadingBar = {
         LoadingBarInner.style.width = "0%";
 
         setTimeout(() => {
-            this.status("primary");
+            this._status("primary");
             LoadingBar.style.height = `${loadingBarConfig.height}px`;
         }, 0);
 
@@ -40,7 +40,7 @@ Rabbit.prototype.LoadingBar = {
         document.body.appendChild(LoadingBar);
     },
 
-    status(_status) {
+    _status(_status) {
         const LoadingBarInner = document.querySelector(".rbt-loading-bar-inner");
 
         if (_status === "primary") {
@@ -56,7 +56,7 @@ Rabbit.prototype.LoadingBar = {
         }
     },
 
-    visible(flag) {
+    _visible(flag) {
         const LoadingBar = document.querySelector(".rbt-loading-bar");
         const LoadingBarInner = document.querySelector(".rbt-loading-bar-inner");
 
@@ -95,13 +95,13 @@ Rabbit.prototype.LoadingBar = {
             ).style.width = `${percent}%`;
         }
 
-        this.visible(true);
+        this._visible(true);
     },
 
     start() {
         if (timer) return;
 
-        this.visible(true);
+        this._visible(true);
 
         timer = setInterval(() => {
             loadingBarProgress += Math.floor(Math.random() * 3 + 1);
@@ -116,13 +116,13 @@ Rabbit.prototype.LoadingBar = {
 
     error() {
         clearTimer();
-        this.status("error");
-        this.visible(false);
+        this._status("error");
+        this._visible(false);
     },
 
     finish() {
         clearTimer();
-        this.visible(false);
+        this._visible(false);
     },
 
     /**

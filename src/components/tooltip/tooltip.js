@@ -1,10 +1,10 @@
 /**
  * Tooltip 文字提示
- * @description 文字提示气泡框，在鼠标悬停时显示，代替了系统的title提示。
+ * 文字提示气泡框，在鼠标悬停时显示，代替了系统的title提示。
  */
 
 Rabbit.prototype.Tooltip = {
-    create(config, slot) {
+    _createInstance(config, slot) {
         const prefixCls = "rbt-tooltip";
 
         const {
@@ -49,14 +49,18 @@ Rabbit.prototype.Tooltip = {
         TooltipInner.style.backgroundColor = color;
 
         Tooltip.append(TooltipRel, TooltipPopper);
+
         addElemetsOfSlots(ref, TooltipRel);
+
         TooltipPopper.appendChild(TooltipContent);
         TooltipContent.append(TooltipArrow, TooltipInner);
         TooltipArrow.appendChild(TooltipArrowContent);
 
         isSlotsUserd(true, ref);
+
         Popper.createPopper(Tooltip, TooltipPopper, { placement });
-        this.config(
+
+        this._config(
             Tooltip,
             TooltipPopper,
             placement,
@@ -67,7 +71,8 @@ Rabbit.prototype.Tooltip = {
         );
         return Tooltip;
     },
-    config(
+
+    _config(
         popcorn,
         tooltip,
         placement,

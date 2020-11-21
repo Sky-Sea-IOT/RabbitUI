@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Popover = {
-    create(config, slot) {
+    _createInstance(config, slot) {
         const prefixCls = "rbt-popover";
         const {
             trigger = "click",
@@ -70,7 +70,7 @@ Rabbit.prototype.Popover = {
 
         Popper.createPopper(_Popover, _Popover_p, { placement });
 
-        this.handleConfig(
+        this._handleConfig(
             _Popover,
             _PopoverRel,
             _Popover_p,
@@ -84,7 +84,7 @@ Rabbit.prototype.Popover = {
         return _Popover;
     },
 
-    handleConfig(
+    _handleConfig(
         popcorn,
         popcornRef,
         popover,

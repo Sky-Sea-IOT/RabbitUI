@@ -1,4 +1,4 @@
-function initComps(c) {
+function _initComps(c) {
     switch (c) {
         case "Message":
             Rabbit.prototype.Message.container();
@@ -9,7 +9,7 @@ function initComps(c) {
             break;
 
         case "LoadingBar":
-            Rabbit.prototype.LoadingBar.create();
+            Rabbit.prototype.LoadingBar._createInstance();
             break;
 
         default:

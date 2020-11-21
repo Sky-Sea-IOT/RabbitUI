@@ -3,7 +3,7 @@
  * 通过鼠标或键盘，输入范围内的数值
  */
 Rabbit.prototype.InputNumber = {
-    create(config) {
+    _createInstance(config) {
         const {
             max = Infinity,
                 min = -Infinity,
@@ -29,7 +29,7 @@ Rabbit.prototype.InputNumber = {
         const InputNumberInputWrap = document.createElement("div");
         const InputNumberInput = document.createElement("input");
 
-        this.addClassName(
+        this._addClassName(
             InputNumber,
             InputNumberHandlerWrap,
             InputNumberHandlerUp,
@@ -41,7 +41,7 @@ Rabbit.prototype.InputNumber = {
             size
         );
 
-        this.setInputAttr(InputNumberInput, {
+        this._setInputAttr(InputNumberInput, {
             value,
             step,
             max,
@@ -50,11 +50,11 @@ Rabbit.prototype.InputNumber = {
             readOnly,
             placeholder,
         });
-        this.setDisabled(InputNumber, disabled);
-        this.inputEditable(InputNumberInput, editable);
-        this.focusHandler(InputNumber, InputNumberInput, onFocus);
-        this.blurHandler(InputNumber, InputNumberInput, onBlur);
-        this.upHandler(
+        this._setDisabled(InputNumber, disabled);
+        this._inputEditable(InputNumberInput, editable);
+        this._focusHandler(InputNumber, InputNumberInput, onFocus);
+        this._blurHandler(InputNumber, InputNumberInput, onBlur);
+        this._upHandler(
             InputNumberHandlerUp,
             InputNumberInput,
             step,
@@ -63,7 +63,7 @@ Rabbit.prototype.InputNumber = {
             max,
             precision
         );
-        this.downHandler(
+        this._downHandler(
             InputNumberHandlerDown,
             InputNumberInput,
             step,
@@ -72,7 +72,7 @@ Rabbit.prototype.InputNumber = {
             min,
             precision
         );
-        this.keyboardChangeVal(InputNumberInput, min, max);
+        this._keyboardChangeVal(InputNumberInput, min, max);
 
         InputNumber.append(InputNumberHandlerWrap, InputNumberInputWrap);
         InputNumberHandlerWrap.append(InputNumberHandlerUp, InputNumberHandlerDown);
@@ -83,7 +83,7 @@ Rabbit.prototype.InputNumber = {
         return InputNumber;
     },
 
-    addClassName(
+    _addClassName(
         InputNumber,
         InputNumberHandlerWrap,
         InputNumberHandlerUp,
@@ -108,7 +108,7 @@ Rabbit.prototype.InputNumber = {
         InputNumberInput.className = `${prefixCls}-input`;
     },
 
-    setInputAttr(
+    _setInputAttr(
         input, { value, step, max, min, disabled, readOnly, placeholder } = {}
     ) {
         input.type = "number";
@@ -174,21 +174,21 @@ Rabbit.prototype.InputNumber = {
         }
     },
 
-    focusHandler(el, input, cb) {
+    _focusHandler(el, input, cb) {
         input.onfocus = (e) => {
             isFunc(cb) ? cb(e) : null;
             el.classList.add("rbt-input-number-focused");
         };
     },
 
-    blurHandler(el, input, cb) {
+    _blurHandler(el, input, cb) {
         input.onblur = () => {
             isFunc(cb) ? cb() : null;
             el.classList.remove("rbt-input-number-focused");
         };
     },
 
-    upHandler(el, input, step, cb, readOnly, max, precision) {
+    _upHandler(el, input, step, cb, readOnly, max, precision) {
         el.onclick = () => {
             // 记录当前输入框值
             let currentVal = Number(input.value);
@@ -196,7 +196,7 @@ Rabbit.prototype.InputNumber = {
         };
     },
 
-    downHandler(el, input, step, cb, readOnly, min, precision) {
+    _downHandler(el, input, step, cb, readOnly, min, precision) {
         el.onclick = () => {
             // 记录当前输入框值
             let currentVal = Number(input.value);
@@ -204,7 +204,7 @@ Rabbit.prototype.InputNumber = {
         };
     },
 
-    keyboardChangeVal(input, min, max) {
+    _keyboardChangeVal(input, min, max) {
         input.oninput = (e) => {
             // 记录当前输入框值
             let currentVal = Number(e.target.value);
@@ -222,13 +222,13 @@ Rabbit.prototype.InputNumber = {
         };
     },
 
-    inputEditable(input, editable) {
+    _inputEditable(input, editable) {
         if (!editable) {
             input.readOnly = true;
         }
     },
 
-    setDisabled(el, disabled) {
+    _setDisabled(el, disabled) {
         if (disabled) {
             el.classList.add("rbt-input-number-disabled");
         }

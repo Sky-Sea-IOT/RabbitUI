@@ -5,7 +5,7 @@
 let spinZIndex = 2010;
 
 Rabbit.prototype.Spin = {
-    create(size, text, color) {
+    _createInstance(size, text, color) {
         const prefixCls = "rbt-spin";
         const enterAniCls = `${prefixCls}-fade-enter`;
         const leaveAniCls = `${prefixCls}-fade-leave`;
@@ -51,7 +51,7 @@ Rabbit.prototype.Spin = {
     },
 
     show({ size = "large", text = "", color = "primary" } = {}) {
-        this.create(size, text, color);
+        this._createInstance(size, text, color);
     },
 
     hide() {

@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Table = {
-    create(config) {
+    _createInstance(config) {
         const prefixCls = "rbt-table";
         const {
             size = "default",
@@ -17,8 +17,8 @@ Rabbit.prototype.Table = {
                 dataSource = {},
                 onRowClick,
                 noDataText = "暂无数据",
-                highlightRow = false,
-                disabledHover = false,
+                _highlightRow = false,
+                _disabledHover = false,
         } = config;
 
         const Table = document.createElement("div");
@@ -71,13 +71,13 @@ Rabbit.prototype.Table = {
         TableBodyBox.appendChild(TableBodyTable);
         TableBodyTable.appendChild(TableBodyTableBody);
 
-        this.render(
+        this._render(
             dataSource,
             TableHeadTableTr,
             TableBodyTableBody,
             align,
-            highlightRow,
-            disabledHover,
+            _highlightRow,
+            _disabledHover,
             noDataText,
             onRowClick
         );
@@ -85,35 +85,35 @@ Rabbit.prototype.Table = {
         return Table;
     },
 
-    render(
+    _render(
         dataSource,
         theadTr,
         tbody,
         align,
-        highlightRow,
-        disabledHover,
+        _highlightRow,
+        _disabledHover,
         noDataText,
         onRowClick
     ) {
         const data = {
             columns: dataSource["columns"],
-            tableItems: dataSource["data"],
+            rows: dataSource["rows"],
         };
 
-        this.renderHeader(data.columns, theadTr, align);
-        this.renderTBodyCell(
+        this._renderHeader(data.columns, theadTr, align);
+        this._renderTBodyCell(
             data.columns,
-            data.tableItems,
+            data.rows,
             tbody,
             align,
-            highlightRow,
-            disabledHover,
+            _highlightRow,
+            _disabledHover,
             noDataText,
             onRowClick
         );
     },
 
-    renderHeader(data, theadTr, align) {
+    _renderHeader(data, theadTr, align) {
         if (isArr(data)) {
             data.map((item) => {
                 const TableHeadTh = document.createElement("th");
@@ -128,13 +128,13 @@ Rabbit.prototype.Table = {
         }
     },
 
-    renderTBodyCell(
+    _renderTBodyCell(
         columnsData,
         data,
         tbody,
         align,
-        highlightRow,
-        disabledHover,
+        _highlightRow,
+        _disabledHover,
         noDataText,
         onRowClick
     ) {
@@ -180,9 +180,9 @@ Rabbit.prototype.Table = {
                         );
                     }
 
-                    this.disabledHover(disabledHover, TableBodyTr);
-                    this.highlightRow(highlightRow, TableBodyTr);
-                    this.rowClickEv(TableBodyTr, onRowClick, datas, i);
+                    this._disabledHover(_disabledHover, TableBodyTr);
+                    this._highlightRow(_highlightRow, TableBodyTr);
+                    this._rowClickEv(TableBodyTr, onRowClick, datas, i);
                 });
             }
         } else {
@@ -190,7 +190,7 @@ Rabbit.prototype.Table = {
         }
     },
 
-    disabledHover(d, tr) {
+    _disabledHover(d, tr) {
         if (!d) {
             tr.onmouseenter = () => {
                 tr.classList.add("rbt-table-row-hover");
@@ -204,7 +204,7 @@ Rabbit.prototype.Table = {
         }
     },
 
-    highlightRow(h, tr) {
+    _highlightRow(h, tr) {
         if (h) {
             tr.onclick = () => {
                 tr.classList.add("rbt-table-heightlight");
@@ -217,7 +217,7 @@ Rabbit.prototype.Table = {
         }
     },
 
-    rowClickEv(tr, cb, row, index) {
+    _rowClickEv(tr, cb, row, index) {
         tr.onclick = () => {
             isFunc(cb) ? cb(row, index) : null;
         };

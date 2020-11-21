@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Skeleton = {
-    create: (config) => {
+    _createInstance: (config) => {
         const prefixCls = "rbt-skeleton";
 
         const {

@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Timeline = {
-    create: (config, slot) => {
+    _createInstance: (config, slot) => {
         const prefixCls = "rbt-timeline";
         const { color = [], pending = false } = config;
         const { dot, timelineItem } = slot;

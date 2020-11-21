@@ -3,7 +3,7 @@
  * 返回页面顶部的操作按钮。
  */
 Rabbit.prototype.BackTop = {
-    create: (config, slot) => {
+    _createInstance(config, slot) {
         const prefixCls = "rbt-back-top";
         const prefixIconCls = "rbt-icon";
 
@@ -46,20 +46,20 @@ Rabbit.prototype.BackTop = {
             const sTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
 
-            this.scrollTop(window, sTop, 0, duration);
+            this._scrollTop(window, sTop, 0, duration);
 
             isFunc(onClick) ? onClick() : null;
         };
 
         // 滚动到指定距离显示 backtop
-        window.onscroll = () => this.backTopShow(`.${prefixCls}`, window.scrollY);
+        window.onscroll = () => this._backTopShow(`.${prefixCls}`, window.scrollY);
 
         isSlotsUserd(true, content);
 
         return BackTop;
     },
 
-    backTopShow(el, top) {
+    _backTopShow(el, top) {
         const scrollY = Math.floor(top);
         const backTops = document.querySelectorAll(el);
 
@@ -79,7 +79,7 @@ Rabbit.prototype.BackTop = {
         });
     },
 
-    scrollTop(el, from = 0, to, duration, endCallback) {
+    _scrollTop(el, from = 0, to, duration, endCallback) {
         if (!window.requestAnimationFrame) {
             window.requestAnimationFrame =
                 window.webkitRequestAnimationFrame ||

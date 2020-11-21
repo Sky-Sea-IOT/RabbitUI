@@ -3,9 +3,8 @@
  * 静态地呈现一些警告信息。
  */
 Rabbit.prototype.Alert = {
-    create: (config, slot) => {
+    _createInstance(config, slot) {
         const prefixCls = "rbt-alert";
-        const prefixIconCls = "rbt-icon";
 
         const {
             type = "info",
@@ -24,7 +23,7 @@ Rabbit.prototype.Alert = {
         const Alert = document.createElement("div");
         const AlertIconBox = document.createElement("span");
         const AlertIcon = document.createElement("i");
-        const alertMessage = document.createElement("span");
+        const AlertMessage = document.createElement("span");
         const AlertDesc = document.createElement("span");
         const AlertCloseBox = document.createElement("span");
         const AlertCloseIcon = document.createElement("i");
@@ -37,23 +36,28 @@ Rabbit.prototype.Alert = {
             Icons = getIconTypes(type);
         }
 
-        Alert.className = `${prefixCls} ${prefixCls}-${type} ${prefixCls}-no-icon`;
-        AlertIconBox.className = `${prefixCls}-icon`;
-        AlertIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons}`;
-        alertMessage.className = `${prefixCls}-message`;
-        AlertDesc.className = `${prefixCls}-desc`;
-        AlertCloseBox.className = `${prefixCls}-close`;
-        AlertCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
+        this.addClassName(
+            type,
+            Icons,
+            Alert,
+            AlertIconBox,
+            AlertIcon,
+            AlertMessage,
+            AlertDesc,
+            AlertCloseBox,
+            AlertCloseIcon
+        );
 
-        // 是否用作顶部公告
-        banner ? Alert.classList.add(`${prefixCls}-banner`) : "";
+        this.setBanner(banner, Alert);
 
         // 警告提示内容
-        if (message && message.innerHTML) addElemetsOfSlots(message, alertMessage);
-        else
+        if (message && message.innerHTML) {
+            addElemetsOfSlots(message, AlertMessage);
+        } else {
             throw new Error(
                 "creating an alert component requires at least a basic prompt"
             );
+        }
 
         // 警告提示辅助性文字介绍
         if (desc && desc.innerHTML) {
@@ -61,50 +65,87 @@ Rabbit.prototype.Alert = {
             addElemetsOfSlots(desc, AlertDesc);
         }
 
-        // 是否显示图标
-        if (showIcon) {
-            Alert.appendChild(AlertIconBox);
-            Alert.classList.remove(`${prefixCls}-no-icon`);
-            AlertIconBox.appendChild(AlertIcon);
+        this.showIcon(showIcon, Alert, AlertIconBox, AlertIcon, icon);
+        this.closable(closable, closeText, Alert, AlertCloseBox, AlertCloseIcon);
 
-            // 自定义图标，showIcon 为 true 时有效
-            if (icon && icon.innerHTML) {
-                AlertIconBox.innerHTML = "";
-                addElemetsOfSlots(icon, AlertIconBox);
-            }
-        }
-
-        // 是否可关闭
-        if (closable) {
-            // 自定义关闭内容
-            closeText
-                ?
-                (AlertCloseBox.innerHTML = closeText) :
-                AlertCloseBox.appendChild(AlertCloseIcon);
-
-            Alert.appendChild(AlertCloseBox);
-        }
-
-        const handlerEv = () => {
-            destroy({
-                el: Alert,
-                destroyParent: true,
-                duration: 0.1,
-                moveInCls: "",
-                moveOutCls: `${prefixCls}-slide-up `,
-                whenToDestroy: 0.3,
-            });
-            isFunc(onClose) ? onClose() : null;
-        };
-
-        // 关闭时触发的回调函数
-        AlertCloseBox.addEventListener("click", handlerEv);
+        AlertCloseBox.addEventListener("click", () =>
+            this.clickHandle(Alert, onClose)
+        );
 
         isSlotsUserd(true, desc);
         isSlotsUserd(showIcon, icon);
 
-        Alert.append(alertMessage, AlertDesc);
+        Alert.append(AlertMessage, AlertDesc);
 
         return Alert;
+    },
+
+    addClassName(
+        type,
+        Icons,
+        alert,
+        alertIconBox,
+        alertIcon,
+        alertMessage,
+        alertDesc,
+        alertCloseBox,
+        alertCloseIcon
+    ) {
+        const prefixCls = "rbt-alert";
+        const prefixIconCls = "rbt-icon";
+
+        alert.className = `${prefixCls} ${prefixCls}-${type} ${prefixCls}-no-icon`;
+        alertIconBox.className = `${prefixCls}-icon`;
+        alertIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons}`;
+        alertMessage.className = `${prefixCls}-message`;
+        alertDesc.className = `${prefixCls}-desc`;
+        alertCloseBox.className = `${prefixCls}-close`;
+        alertCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
+    },
+
+    // 是否用作顶部公告
+    setBanner(banner, alert) {
+        if (banner) {
+            alert.classList.add("rbt-alert-banner");
+        }
+    },
+
+    // 是否显示图标
+    showIcon(show, alert, alertIconBox, alertIcon, iconSlot) {
+        if (show) {
+            alert.appendChild(alertIconBox);
+            alert.classList.remove("rbt-alert-no-icon");
+            alertIconBox.appendChild(alertIcon);
+            // 自定义图标，showIcon 为 true 时有效
+            if (iconSlot && iconSlot.innerHTML) {
+                alertIconBox.innerHTML = null;
+                addElemetsOfSlots(iconSlot, alertIconBox);
+            }
+        }
+    },
+
+    // 是否显示关闭按钮
+    closable(_closable, closeText, alert, alertCloseBox, alertCloseIcon) {
+        if (_closable) {
+            // 自定义关闭内容
+            if (closeText) {
+                alertCloseBox.innerHTML = closeText;
+            } else {
+                alertCloseBox.appendChild(alertCloseIcon);
+            }
+            alert.appendChild(alertCloseBox);
+        }
+    },
+
+    clickHandle(alert, cb) {
+        destroy({
+            el: alert,
+            destroyParent: true,
+            duration: 0.1,
+            moveInCls: "",
+            moveOutCls: "rbt-alert-slide-up",
+            whenToDestroy: 0.3,
+        });
+        isFunc(cb) ? cb() : null;
     },
 };

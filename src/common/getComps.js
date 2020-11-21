@@ -28,73 +28,73 @@ const COMPONENTS = {
  * @param {HTMLSlotElement} slot
  * @returns {HTMLElement}
  */
-function getComps(el, compsName, config, slot) {
+function _getComps(el, compsName, config, slot) {
     if (!compsName) {
         const error =
-            "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert></rab-alert>, and all component tags should come with closing tags";
-        throw new Error(`[Rabbit warn] ${error}`);
+            "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert>...</rab-alert>, and all component tags should come with closing tags";
+        throw new Error(`${error}`);
     }
 
     switch (compsName) {
         case COMPONENTS.Alert:
-            return Rabbit.prototype.Alert.create(config, slot);
+            return Rabbit.prototype.Alert._createInstance(config, slot);
 
         case COMPONENTS.Avatar:
-            return Rabbit.prototype.Avatar.create(config);
+            return Rabbit.prototype.Avatar._createInstance(config);
 
         case COMPONENTS.BackTop:
-            return Rabbit.prototype.BackTop.create(config, slot);
+            return Rabbit.prototype.BackTop._createInstance(config, slot);
 
         case COMPONENTS.Breadcrumb:
-            return Rabbit.prototype.Breadcrumb.create(config, slot);
+            return Rabbit.prototype.Breadcrumb._createInstance(config, slot);
 
         case COMPONENTS.Card:
-            return Rabbit.prototype.Card.create(config, slot);
+            return Rabbit.prototype.Card._createInstance(config, slot);
 
         case COMPONENTS.Collapse:
-            return Rabbit.prototype.Collapse.create(config, slot);
+            return Rabbit.prototype.Collapse._createInstance(config, slot);
 
         case COMPONENTS.Drawer:
-            return Rabbit.prototype.Drawer.create(el, config, slot);
+            return Rabbit.prototype.Drawer._createInstance(el, config, slot);
 
         case COMPONENTS.Dropdown:
-            return Rabbit.prototype.Dropdown.create(config, slot);
+            return Rabbit.prototype.Dropdown._createInstance(config, slot);
 
         case COMPONENTS.Empty:
-            return Rabbit.prototype.Empty.create(config, slot);
+            return Rabbit.prototype.Empty._createInstance(config, slot);
 
         case COMPONENTS.InputNumber:
-            return Rabbit.prototype.InputNumber.create(config);
+            return Rabbit.prototype.InputNumber._createInstance(config);
 
         case COMPONENTS.List:
-            return Rabbit.prototype.List.create(config, slot);
+            return Rabbit.prototype.List._createInstance(config, slot);
 
         case COMPONENTS.Modal:
-            return Rabbit.prototype.Modal.create(el, config, slot);
+            return Rabbit.prototype.Modal._createInstance(el, config, slot);
 
         case COMPONENTS.PageHeader:
-            return Rabbit.prototype.PageHeader.create(config, slot);
+            return Rabbit.prototype.PageHeader._createInstance(config, slot);
 
         case COMPONENTS.Popover:
-            return Rabbit.prototype.Popover.create(config, slot);
+            return Rabbit.prototype.Popover._createInstance(config, slot);
 
         case COMPONENTS.Result:
-            return Rabbit.prototype.Result.create(config, slot);
+            return Rabbit.prototype.Result._createInstance(config, slot);
 
         case COMPONENTS.Skeleton:
-            return Rabbit.prototype.Skeleton.create(config);
+            return Rabbit.prototype.Skeleton._createInstance(config);
 
         case COMPONENTS.Switch:
-            return Rabbit.prototype.Switch.create(config, slot);
+            return Rabbit.prototype.Switch._createInstance(config, slot);
 
         case COMPONENTS.Table:
-            return Rabbit.prototype.Table.create(config);
+            return Rabbit.prototype.Table._createInstance(config);
 
         case COMPONENTS.Timeline:
-            return Rabbit.prototype.Timeline.create(config, slot);
+            return Rabbit.prototype.Timeline._createInstance(config, slot);
 
         case COMPONENTS.Tooltip:
-            return Rabbit.prototype.Tooltip.create(config, slot);
+            return Rabbit.prototype.Tooltip._createInstance(config, slot);
 
         default:
             console.error(
@@ -102,3 +102,5 @@ function getComps(el, compsName, config, slot) {
             );
     }
 }
+
+// export default _getComps;

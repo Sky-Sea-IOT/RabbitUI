@@ -53,7 +53,7 @@ Rabbit.prototype.Notice = {
      * @returns {HTMLElement}
      */
 
-    createInstance({
+    _createInstance({
         key,
         top,
         type,
@@ -99,7 +99,7 @@ Rabbit.prototype.Notice = {
         const NoticeClose = document.createElement("a");
         const NoticeCloseIcon = document.createElement("i");
 
-        this.addClassName(
+        this._addClassName(
             type,
             closable,
             placement,
@@ -113,14 +113,14 @@ Rabbit.prototype.Notice = {
             NoticeCloseIcon
         );
 
-        this.setKey(key, Notice);
-        this.addStyles(styles, Notice);
-        this.addContent(title, desc, NoticeTitle, NoticeDesc);
-        this.customClassName(className, Notice);
-        this.putInDiffPlacement(Notice, placement, top, bottom);
-        this.clickHandle(NoticeBox, onClick);
-        this.clickCloseHandle(NoticeClose, Notice, placement, onClose);
-        this.closeInstance(Notice, placement, duration);
+        this._setKey(key, Notice);
+        this._addStyles(styles, Notice);
+        this._addContent(title, desc, NoticeTitle, NoticeDesc);
+        this._customClassName(className, Notice);
+        this._putInDiffPlacement(Notice, placement, top, bottom);
+        this._clickHandle(NoticeBox, onClick);
+        this._clickCloseHandle(NoticeClose, Notice, placement, onClose);
+        this._closeInstance(Notice, placement, duration);
 
         Notice.appendChild(NoticeBox);
         NoticeBox.append(NoticeContentBox);
@@ -142,7 +142,7 @@ Rabbit.prototype.Notice = {
         return Notice;
     },
 
-    putInDiffPlacement(notice, placement, top, bottom) {
+    _putInDiffPlacement(notice, placement, top, bottom) {
         const prefixCls = "rbt-notice";
         const NoticeWrap = document.querySelector(`.${prefixCls}-${placement}`);
 
@@ -156,7 +156,7 @@ Rabbit.prototype.Notice = {
         NoticeWrap.appendChild(notice);
     },
 
-    addClassName(
+    _addClassName(
         type,
         closable,
         placement,
@@ -188,7 +188,7 @@ Rabbit.prototype.Notice = {
         NoticeCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
     },
 
-    closeInstance(notice, placement, duration) {
+    _closeInstance(notice, placement, duration) {
         // 销毁实例
         destroy({
             el: notice,
@@ -199,23 +199,23 @@ Rabbit.prototype.Notice = {
         });
     },
 
-    setKey(key, notice) {
+    _setKey(key, notice) {
         if (isNum(key) || isStr(key)) {
             notice.dataset.key = key;
         }
     },
 
-    addStyles(styles, notice) {
+    _addStyles(styles, notice) {
         notice.style.cssText = objToString(styles);
     },
 
-    customClassName(cls, notice) {
+    _customClassName(cls, notice) {
         if (cls && isStr(cls)) {
             notice.classList.add(cls);
         }
     },
 
-    addContent(title, desc, noticeTitle, noticeDes) {
+    _addContent(title, desc, noticeTitle, noticeDes) {
         if (!title) {
             throw Error("The title of the notification reminder is mandatory");
         }
@@ -226,11 +226,11 @@ Rabbit.prototype.Notice = {
         noticeDes.innerHTML = desc;
     },
 
-    clickHandle(notice, cb) {
+    _clickHandle(notice, cb) {
         notice.onclick = () => (isFunc(cb) ? cb() : null);
     },
 
-    clickCloseHandle(el, notice, placement, cb) {
+    _clickCloseHandle(el, notice, placement, cb) {
         clickDestroy({
             el,
             destroyTarget: notice,
@@ -276,7 +276,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this.createInstance({
+        this._createInstance({
             key,
             top,
             type: "open",
@@ -308,7 +308,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this.createInstance({
+        this._createInstance({
             key,
             top,
             type: "info",
@@ -340,7 +340,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this.createInstance({
+        this._createInstance({
             key,
             top,
             type: "success",
@@ -372,7 +372,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this.createInstance({
+        this._createInstance({
             key,
             top,
             type: "warning",
@@ -404,7 +404,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this.createInstance({
+        this._createInstance({
             key,
             top,
             type: "error",

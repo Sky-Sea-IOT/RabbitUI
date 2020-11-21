@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Empty = {
-    create: (config, slot) => {
+    _createInstance: (config, slot) => {
         const prefixCls = "rbt-empty";
 
         const { desc = "暂无数据", image = "default", imageStyle = {} } = config;

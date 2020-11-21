@@ -13,10 +13,15 @@
     body {
         height: 1000px;
     }
+    
+    .demo {
+        width: 450px;
+        margin: 20px auto;
+    }
 </style>
 
 <body>
-    <div class="rbt-modal-root">
+    <!-- <div class="rbt-modal-root">
         <div class="rbt-modal-mask rbt-modal-mask-enter-in"></div>
         <div class="rbt-modal-wrap rbt-modal-enter-in">
             <div class="rbt-modal rbt-modal-confirm" style="width: 416px">
@@ -27,61 +32,96 @@
                                 <div class="rbt-modal-confirm-header-icon rbt-modal-confirm-header-icon-info">
                                     <i class="rbt-icon rbt-icon-md-information-circle-outline"></i>
                                 </div>
-                                <div class="rbt-modal-confirm-header-title">标题</div>
+                                <div class="rbt-modal-confirm-header-title">对话框消息</div>
                             </div>
                             <div class="rbt-modal-confirm-body">
-                                <p>Modal对话框内容</p>
+                                <p>一些对话框内容</p>
+                                <p>一些对话框内容</p>
                             </div>
                             <div class="rbt-modal-confirm-footer">
-                                <button class="rbt-btn rbt-btn-primary">确定</button>
+                                <button class="rbt-btn rbt-btn-primary rbt-btn-loading">
+                    <i class="rbt-icon rbt-icon-loading-solid"></i> 确定
+                  </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="demo">
+        <button class="rbt-btn" onclick="a()">消息</button>
+        <button class="rbt-btn" onclick="b()">成功</button>
+        <button class="rbt-btn" onclick="c()">警告</button>
+        <button class="rbt-btn" onclick="d()">错误</button>
+        <button class="rbt-btn" onclick="e()">确认</button>
     </div>
-    <button class="rbt-btn" onclick="a()">消息</button>
-    <button class="rbt-btn" onclick="b()">成功</button>
-    <button class="rbt-btn" onclick="c()">警告</button>
-    <button class="rbt-btn" onclick="d()">错误</button>
-    <button class="rbt-btn" onclick="e()">确认</button>
+    <div class="demo">
+        <button class="rbt-btn" onclick="f()">自定义文字</button>
+        <button class="rbt-btn" onclick="g()">自定义宽度</button>
+        <button class="rbt-btn" onclick="h()">异步关闭</button>
+    </div>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
-<script src="../../utils/destory.js"></script>
 <script src="../../common/main.js"></script>
-<script src="../../mixins/aferCloseCb.js"></script>
-<script src="./message-box@.js"></script>
+<script src="../../mixins/scrollable.js"></script>
+<script src="./message-box.js"></script>
 <script>
     a = () => {
-        rabbit.MessageBox.info({
-            title: "这是一条通知消息",
+        rabbit.MsgBox.info({
+            title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     b = () => {
-        rabbit.MessageBox.success({
-            title: "这是一条通知消息",
+        rabbit.MsgBox.success({
+            title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     c = () => {
-        rabbit.MessageBox.warning({
-            title: "这是一条通知消息",
+        rabbit.MsgBox.warning({
+            title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     d = () => {
-        rabbit.MessageBox.error({
-            title: "这是一条通知消息",
+        rabbit.MsgBox.error({
+            title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     e = () => {
-        rabbit.MessageBox.confirm({
+        rabbit.MsgBox.confirm({
             title: "确认对话框标题",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+        });
+    };
+    f = () => {
+        rabbit.MsgBox.confirm({
+            title: "This is a notification message",
+            content: `<p>some messages...some messages...</p>
+                      <p>some messages...some messages...</p>`,
+            okText: "OK",
+            cancelText: "Cancel",
+        });
+    };
+    g = () => {
+        rabbit.MsgBox.confirm({
+            title: "对话框消息",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            width: 600,
+        });
+    };
+    h = () => {
+        rabbit.MsgBox.confirm({
+            title: "对话框消息",
+            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            loading: true,
+            onOk() {
+                setTimeout(() => rabbit.MsgBox.destroy(), 3000);
+            },
         });
     };
 </script>

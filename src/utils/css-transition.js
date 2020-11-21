@@ -20,7 +20,8 @@ function CSSTransition(
 
         setTimeout(() => el.classList.remove(animationEnterCls), timeout);
     } else if (mode === "out") {
-        el.classList.replace(animationEnterCls, animationLeaveCls);
+        el.classList.add(animationLeaveCls);
+        el.classList.remove(animationEnterCls);
 
         setTimeout(() => {
             el.classList.remove(animationLeaveCls);

@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Result = {
-    create: (config, slot) => {
+    _createInstance: (config, slot) => {
         const prefixCls = "rbt-result";
         const prefixIconCls = "rbt-icon";
 

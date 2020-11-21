@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Switch = {
-    create: (config, slot) => {
+    _createInstance: (config, slot) => {
         const prefixCls = "rbt-switch";
 
         let {
