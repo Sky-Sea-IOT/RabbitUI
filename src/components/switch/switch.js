@@ -1,8 +1,7 @@
 /**
  * Switch 开关
- * @description 在两种状态间切换时用到的开关选择器。
+ * 在两种状态间切换时用到的开关选择器。
  */
-
 Rabbit.prototype.Switch = {
     _createInstance: (config, slot) => {
         const prefixCls = "rbt-switch";

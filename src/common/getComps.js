@@ -15,6 +15,7 @@ const COMPONENTS = {
     Popover: "popover",
     Result: "result",
     Skeleton: "skeleton",
+    Steps: "steps",
     Switch: "switch",
     Table: "table",
     Timeline: "timeline",
@@ -86,6 +87,9 @@ function _getComps(el, compsName, config, slot) {
 
         case COMPONENTS.Switch:
             return Rabbit.prototype.Switch._createInstance(config, slot);
+
+        case COMPONENTS.Steps:
+            return Rabbit.prototype.Steps._createInstance(config, slot);
 
         case COMPONENTS.Table:
             return Rabbit.prototype.Table._createInstance(config);

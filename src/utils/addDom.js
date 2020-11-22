@@ -5,9 +5,7 @@
  */
 
 function addElemetsOfSlots(slot, targetEle) {
-    if (!slot) {
-        throw new Error("[Rabbit] The slot you added does not exist");
-    } else {
+    if (slot) {
         slot.nodeType === 1 ? targetEle.appendChild(slot) : null;
         setTimeout(() => slot.removeAttribute("slot"), 200);
     }

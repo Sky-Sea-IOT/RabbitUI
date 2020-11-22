@@ -12,6 +12,8 @@ function _getCompsSlot(el) {
         footer = el.querySelector('[slot="footer"]'), // common slot
         content = el.querySelector('[slot="content"]'), // common slot
         message = el.querySelector('[slot="message"]'), // Alert slot
+        // querySelectorAll
+        step = el.querySelectorAll('[slot="step"]'), // Steps slot
         listItem = el.querySelectorAll('[slot="listItem"]'), // list slot
         action = el.querySelectorAll('[slot="action"]'), // list slot
         listItemMeta = el.querySelectorAll('[slot="listItemMeta"]'), // list slot
@@ -27,6 +29,7 @@ function _getCompsSlot(el) {
         ref,
         desc,
         icon,
+        step,
         open,
         close,
         extra,

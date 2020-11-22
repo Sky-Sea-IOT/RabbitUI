@@ -1,0 +1,264 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-steps {
+  display: flex;
+  width: 100%;
+  font-size: 0;
+  line-height: 1.5715;
+}
+.rbt-steps-item {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  flex: 1;
+  overflow: hidden;
+}
+.rbt-steps-item:last-child {
+  flex: none;
+}
+.rbt-steps-item:last-child .rbt-steps-tail {
+  display: none;
+}
+.rbt-steps-tail {
+  width: 100%;
+  padding: 0 10px;
+  position: absolute;
+  left: 0;
+  top: 13px;
+}
+.rbt-steps-tail i {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  vertical-align: top;
+  background: #e8eaec;
+  border-radius: 1px;
+  position: relative;
+}
+.rbt-steps-tail i::after {
+  content: "";
+  width: 0;
+  height: 100%;
+  background: #e8eaec;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+}
+.rbt-steps-head,
+.rbt-steps-main {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.rbt-steps-head {
+  background-color: #fff;
+}
+.rbt-steps-head-inner {
+  display: block;
+  width: 26px;
+  height: 26px;
+  line-height: 22px;
+  margin-right: 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+.rbt-steps-head-inner .rbt-steps-icon {
+  line-height: 1;
+  position: relative;
+}
+.rbt-steps-head-inner .rbt-steps-icon.rbt-icon {
+  font-size: 24px;
+}
+.rbt-steps-item.rbt-steps-status-finish .rbt-steps-head-inner {
+  background-color: #fff;
+  border-color: #1890ff;
+}
+.rbt-steps-main {
+  margin-top: 2.5px;
+  display: inline;
+}
+.rbt-steps-title {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #666;
+  background: #fff;
+}
+.rbt-steps-content {
+  font-size: 12px;
+  color: #999;
+}
+.rbt-steps-horizontal .rbt-steps-content {
+  padding-left: 35px;
+}
+.rbt-steps-horizontal .rbt-steps-item:not(:first-child) .rbt-steps-horizontal .rbt-steps-head {
+  padding-left: 10px;
+  margin-left: -10px;
+}
+.rbt-steps-item.rbt-steps-status-finish .rbt-steps-tail i::after {
+  width: 100%;
+  background: #1890ff;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+.rbt-steps-item.rbt-steps-status-finish .rbt-steps-head-inner .rbt-steps-icon,
+.rbt-steps-item.rbt-steps-status-finish .rbt-steps-head-inner span {
+  color: #1890ff;
+}
+.rbt-steps-item.rbt-steps-status-finish .rbt-steps-content,
+.rbt-steps-item.rbt-steps-status-finish .rbt-steps-title {
+  color: #55585e;
+}
+.rbt-steps-item.rbt-steps-status-process .rbt-steps-tail i {
+  background-color: #e8eaec;
+}
+.rbt-steps-item.rbt-steps-status-process .rbt-steps-head-inner {
+  border-color: #1890ff;
+  background-color: #1890ff;
+}
+.rbt-steps-item.rbt-steps-status-process .rbt-steps-head-inner .rbt-steps-icon,
+.rbt-steps-item.rbt-steps-status-process .rbt-steps-head-inner span {
+  color: #fff;
+}
+.rbt-steps-item.rbt-steps-status-process .rbt-steps-content,
+.rbt-steps-item.rbt-steps-status-process .rbt-steps-title {
+  color: #55585e;
+}
+.rbt-steps-item.rbt-steps-status-wait .rbt-steps-tail i {
+  background-color: #e8eaec;
+}
+.rbt-steps-item.rbt-steps-status-wait .rbt-steps-head-inner {
+  background-color: #fff;
+}
+.rbt-steps-item.rbt-steps-status-wait .rbt-steps-head-inner .rbt-steps-icon,
+.rbt-steps-item.rbt-steps-status-wait .rbt-steps-head-inner span {
+  color: #ccc;
+}
+.rbt-steps-item.rbt-steps-status-wait .rbt-steps-content,
+.rbt-steps-item.rbt-steps-status-wait .rbt-steps-title {
+  color: #999;
+}
+.rbt-steps-item.rbt-steps-status-error .rbt-steps-tail i {
+  background-color: #e8eaec;
+}
+.rbt-steps-item.rbt-steps-status-error .rbt-steps-head-inner {
+  background-color: #fff;
+  border-color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-error .rbt-steps-head-inner .rbt-steps-icon,
+.rbt-steps-item.rbt-steps-status-error .rbt-steps-head-inner span {
+  color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-error .rbt-steps-content,
+.rbt-steps-item.rbt-steps-status-error .rbt-steps-title {
+  color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-tail i {
+  background-color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-tail i::after {
+  background-color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-head-inner {
+  background-color: #fff;
+  border-color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-head-inner .rbt-steps-icon,
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-head-inner span {
+  color: #ff4d4f;
+}
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-content,
+.rbt-steps-item.rbt-steps-status-next-error .rbt-steps-title {
+  color: #ff4d4f;
+}
+.rbt-steps.rbt-steps-small .rbt-steps-tail {
+  top: 8px;
+  padding: 0 8px;
+}
+.rbt-steps.rbt-steps-small .rbt-steps-tail i {
+  width: 100%;
+  height: 1px;
+  border-radius: 1px;
+}
+.rbt-steps.rbt-steps-small .rbt-steps-head-inner {
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+}
+.rbt-steps.rbt-steps-small .rbt-steps-head-inner .rbt-steps-icon.rbt-icon {
+  font-size: 16px;
+  top: 0;
+}
+.rbt-steps.rbt-steps-small .rbt-steps-main {
+  margin-top: 0;
+}
+.rbt-steps.rbt-steps-small .rbt-steps-title {
+  margin-bottom: 4px;
+  margin-top: 0;
+  font-size: 12px;
+}
+.rbt-steps-vertical {
+  display: block;
+}
+.rbt-steps-vertical .rbt-steps-item {
+  display: block;
+  overflow: visible;
+}
+.rbt-steps-vertical .rbt-steps-tail {
+  position: absolute;
+  top: 3px;
+  left: 14px;
+  width: 1px;
+  height: 100%;
+  padding: 30px 0 4px;
+}
+.rbt-steps-vertical .rbt-steps-tail i {
+  width: 1px;
+  height: 100%;
+}
+.rbt-steps-vertical .rbt-steps-head {
+  float: left;
+}
+.rbt-steps-vertical .rbt-steps-main {
+  min-height: 47px;
+  overflow: hidden;
+  display: block;
+}
+.rbt-steps-vertical .rbt-steps-title {
+  line-height: 26px;
+}
+.rbt-steps-vertical .rbt-steps-content {
+  padding-bottom: 12px;
+  padding-left: 0;
+}
+.rbt-steps-vertical.rbt-steps-small .rbt-steps-tail {
+  position: absolute;
+  left: 11px;
+  top: 3px;
+  padding: 22px 0 4px;
+}
+.rbt-steps-vertical.rbt-steps-small .rbt-steps-tail i {
+  height: 100%;
+}
+.rbt-steps-item.rbt-steps-custom .rbt-steps-head-inner,
+.rbt-steps-small .rbt-steps-custom .rbt-steps-head-inner {
+  width: inherit;
+  height: inherit;
+  line-height: inherit;
+  border-radius: 0;
+  border: 0;
+  background: 0 0;
+}
+.rbt-steps-item.rbt-steps-custom.rbt-steps-status-process .rbt-steps-head-inner > span,
+.rbt-steps-item.rbt-steps-custom.rbt-steps-status-process .rbt-steps-head-inner .rbt-steps-icon {
+  color: #1890ff;
+}
