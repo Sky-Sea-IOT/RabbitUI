@@ -46,20 +46,22 @@ Rabbit.prototype.Modal = {
         const ModalCancelButton = document.createElement("button");
         const ModalButtonLoading = document.createElement("i");
 
-        Modal.className = `${prefixCls}-root`;
-        ModalMask.className = `${prefixCls}-mask`;
-        ModalWrap.className = `${prefixCls}-wrap ${className}`;
-        ModalBox.className = `${prefixCls}`;
-        ModalContent.className = `${prefixCls}-content`;
-        ModalClose.className = `${prefixCls}-close`;
-        ModalCloseIco.className = `rbt-icon rbt-icon-ios-close`;
-        ModalHeader.className = `${prefixCls}-header`;
-        ModalTitle.className = `${prefixCls}-title`;
-        ModalBody.className = `${prefixCls}-body`;
-        ModalFooter.className = `${prefixCls}-footer`;
-        ModalOkButton.className = "rbt-btn rbt-btn-primary";
-        ModalCancelButton.className = "rbt-btn";
-
+        this._addClassName(
+            className,
+            Modal,
+            ModalMask,
+            ModalWrap,
+            ModalBox,
+            ModalContent,
+            ModalClose,
+            ModalCloseIco,
+            ModalHeader,
+            ModalTitle,
+            ModalBody,
+            ModalFooter,
+            ModalOkButton,
+            ModalCancelButton
+        );
         this._show(visible, ModalMask, ModalWrap);
         this._showMask(mask, ModalMask);
         this._setModalStyle(ModalBox, width, styles);
@@ -133,6 +135,38 @@ Rabbit.prototype.Modal = {
         ModalHeader.appendChild(ModalTitle);
 
         return Modal;
+    },
+
+    _addClassName(
+        className,
+        modal,
+        modalMask,
+        modalWrap,
+        modalBox,
+        modalContent,
+        modalClose,
+        modalCloseIco,
+        modalHeader,
+        modalTitle,
+        modalBody,
+        modalFooter,
+        modalOkButton,
+        modalCancelButton
+    ) {
+        const prefixCls = "rbt-modal";
+        modal.className = `${prefixCls}-root`;
+        modalMask.className = `${prefixCls}-mask`;
+        modalWrap.className = `${prefixCls}-wrap ${className}`;
+        modalBox.className = `${prefixCls}`;
+        modalContent.className = `${prefixCls}-content`;
+        modalClose.className = `${prefixCls}-close`;
+        modalCloseIco.className = `rbt-icon rbt-icon-ios-close`;
+        modalHeader.className = `${prefixCls}-header`;
+        modalTitle.className = `${prefixCls}-title`;
+        modalBody.className = `${prefixCls}-body`;
+        modalFooter.className = `${prefixCls}-footer`;
+        modalOkButton.className = "rbt-btn rbt-btn-primary";
+        modalCancelButton.className = "rbt-btn";
     },
 
     // 展示遮盖层

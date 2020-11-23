@@ -17,7 +17,6 @@ function CSSTransition(
     if (mode === "in") {
         el.style.display = "block";
         el.classList.add(animationEnterCls);
-
         setTimeout(() => el.classList.remove(animationEnterCls), timeout);
     } else if (mode === "out") {
         el.classList.add(animationLeaveCls);

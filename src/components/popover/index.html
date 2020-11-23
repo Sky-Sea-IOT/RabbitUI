@@ -38,6 +38,29 @@
     .right .rbt-btn {
         margin-bottom: 12px;
     }
+    
+    .custom-table table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: 1px solid #e9e9e9;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+    
+    .custom-table table th {
+        background: #f7f7f7;
+        white-space: nowrap;
+        color: #5c6b77;
+        font-weight: 600;
+    }
+    
+    .custom-table table td,
+    .custom-table table th {
+        border: 1px solid #e9e9e9;
+        padding: 8px 16px;
+        text-align: left;
+    }
 </style>
 
 <body>
@@ -64,203 +87,194 @@
 
         <rab-popover id="popover1">
             <button class="rbt-btn" slot="ref">Hover 触发</button>
-            <div slot="title">Title</div>
-            <div slot="content">
-                <p>Content</p>
-                <p>Content</p>
-            </div>
         </rab-popover>
         <rab-popover id="popover2">
-            <button class="rbt-btn" id="aaa" slot="ref">Focus 触发</button>
-            <div slot="title">Title</div>
-            <div slot="content">
-                <p>Content</p>
-                <p>Content</p>
-            </div>
+            <button class="rbt-btn" slot="ref">Focus 触发</button>
         </rab-popover>
         <rab-popover id="popover3">
             <button class="rbt-btn" slot="ref">Click 触发</button>
-            <div slot="title">Title</div>
-            <div slot="content">
-                <p>Content</p>
-                <p>Content</p>
-            </div>
         </rab-popover>
     </div>
     <div class="demo">
         <div class="top">
             <rab-popover id="popover4">
                 <button class="rbt-btn" slot="ref">上左</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover5">
                 <button class="rbt-btn" slot="ref">上边</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover6">
                 <button class="rbt-btn" slot="ref">上左</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
         </div>
         <div class="left">
             <rab-popover id="popover7">
                 <button class="rbt-btn" slot="ref">左上</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover8">
                 <button class="rbt-btn" slot="ref">左边</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover9">
                 <button class="rbt-btn" slot="ref">左下</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
         </div>
         <div class="right">
             <rab-popover id="popover10">
                 <button class="rbt-btn" slot="ref">右上</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover11">
                 <button class="rbt-btn" slot="ref">右边</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover12">
                 <button class="rbt-btn" slot="ref">右下</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
         </div>
         <div class="bottom">
             <rab-popover id="popover13">
                 <button class="rbt-btn" slot="ref">下左</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover14">
                 <button class="rbt-btn" slot="ref">下边</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
             <rab-popover id="popover15">
                 <button class="rbt-btn" slot="ref">下右</button>
-                <div slot="title">Title</div>
-                <div slot="content">
-                    <p>Content</p>
-                    <p>Content</p>
-                </div>
             </rab-popover>
         </div>
     </div>
     <div class="demo">
         <rab-popover id="popover16">
             <button class="rbt-btn" slot="ref">浮层内关闭</button>
-            <div slot="title">Title</div>
-            <a id="close" slot="content">关闭提示框</a>
+        </rab-popover>
+        <rab-popover id="popover17">
+            <button class="rbt-btn" slot="ref">嵌套复杂内容</button>
+            <div class="custom-table" slot="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>姓名</th>
+                            <th>地址</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2020-08-22</td>
+                            <td>李康</td>
+                            <td>深圳市南山区步行街</td>
+                        </tr>
+                        <tr>
+                            <td>2020-10-02</td>
+                            <td>李康</td>
+                            <td>深圳市南山区步行街</td>
+                        </tr>
+                        <tr>
+                            <td>2020-12-24</td>
+                            <td>李康</td>
+                            <td>深圳市南山区步行街</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </rab-popover>
     </div>
 </body>
 
 <script src="../../utils/typeof.js"></script>
-<script src="../../common/getComps.js"></script>
-<script src="../../common/getCompsSlot.js"></script>
 <script src="../../utils/addDom.js"></script>
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="../../utils/detect-direction.js"></script>
-<script src="../../utils/hasClass.js"></script>
+<script src="../../utils/css-transition.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
 <script src="../../common/main.js"></script>
 <script src="../../plugins/popper.js"></script>
-<script src="../../mixins/_popover.js"></script>
+<script src="../../mixins/clickoutside.js"></script>
 <script src="./popover.js"></script>
 <script>
     rabbit.create("#popover1", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         trigger: "hover",
     });
     rabbit.create("#popover2", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         trigger: "focus",
     });
-    rabbit.create("#popover3");
+    rabbit.create("#popover3", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
+    });
+
     rabbit.create("#popover4", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "top-start",
     });
-    rabbit.create("#popover5");
+    rabbit.create("#popover5", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
+    });
+
     rabbit.create("#popover6", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "top-end",
     });
     rabbit.create("#popover7", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "left-start",
     });
     rabbit.create("#popover8", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "left",
     });
     rabbit.create("#popover9", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "left-end",
     });
     rabbit.create("#popover10", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "right-start",
     });
     rabbit.create("#popover11", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "right",
     });
     rabbit.create("#popover12", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "right-end",
     });
     rabbit.create("#popover13", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "bottom-start",
     });
     rabbit.create("#popover14", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "bottom",
     });
     rabbit.create("#popover15", {
+        title: "标题",
+        content: `提示内容<br />提示内容`,
         placement: "bottom-end",
     });
     rabbit.create("#popover16", {
-        className: "my",
+        title: `<em>自定义标题</em>`,
+        content: `<a id="close">关闭提示框</a>`,
+        triggerHide: "#close",
     });
-
-    let closeBtn = document.querySelector("#close");
-    closeBtn.onclick = () => $popover.hide(".my");
+    rabbit.create("#popover17", {
+        placement: "right",
+        width: 400,
+    });
 </script>
 
 </html>

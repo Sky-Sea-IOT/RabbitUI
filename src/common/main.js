@@ -1,19 +1,3 @@
-/*!
- * RabbitUI 是一款基于原生 Javascript 编写的开源 UI 组件库
- *
- * RabbitUI is an open source UI component library based on native Javascript
- *
- * RabbitUI v1.0
- * https://github.com/niu-grandpa/RabbitUI
- *
- * Licensed under MIT
- * https://github.com/niu-grandpa/RabbitUI/blob/master/LICENSE
- *
- * Copyright (c) 2020 Ryan John
- *
- * Date: 2020-12-24
- */
-
 /**
  * @classdesc
  * 创建标签插入式组件（在指定的容器插入，并且这个容器已经指定了何种组件）
