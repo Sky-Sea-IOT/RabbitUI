@@ -61,10 +61,10 @@
 <script src="../../mixins/aferCloseCb.js"></script>
 <script src="./notice.js"></script>
 <script>
-    rabbit.init(["Notice"]);
+    RabbitUI.init(["Notice"]);
 
     a = () => {
-        rabbit.Notice.open({
+        RabbitUI.Notice.open({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             onClick: () => console.log("点击通知的回调"),
@@ -72,52 +72,52 @@
         });
     };
     b = () => {
-        rabbit.Notice.info({
+        RabbitUI.Notice.info({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     c = () => {
-        rabbit.Notice.success({
+        RabbitUI.Notice.success({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     d = () => {
-        rabbit.Notice.warning({
+        RabbitUI.Notice.warning({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     e = () => {
-        rabbit.Notice.error({
+        RabbitUI.Notice.error({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
         });
     };
     f = () => {
-        rabbit.Notice.info({
+        RabbitUI.Notice.info({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             placement: "topLeft",
         });
     };
     g = () => {
-        rabbit.Notice.info({
+        RabbitUI.Notice.info({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             placement: "topRight",
         });
     };
     h = () => {
-        rabbit.Notice.info({
+        RabbitUI.Notice.info({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             placement: "bottomLeft",
         });
     };
     i = () => {
-        rabbit.Notice.info({
+        RabbitUI.Notice.info({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             placement: "bottomRight",
@@ -125,15 +125,15 @@
     };
 
     j = () => {
-        rabbit.Notice.open({
+        RabbitUI.Notice.open({
             title: "这是第一条通知",
             desc: "接下来将会显示第二条通知接下来将会显示第二条通知接下来将会显示第二条通知",
         }).then(() => {
-            rabbit.Notice.info({
+            RabbitUI.Notice.info({
                 title: "这是第二条通知",
                 desc: "接下来将会显示第三条通知接下来将会显示第三条通知接下来将会显示第三条通知",
             }).then(() => {
-                rabbit.Notice.success({
+                RabbitUI.Notice.success({
                     title: "这是第三条通知",
                     desc: "这是最新通知这是最新通知这是最新通知这是最新通知这是最新通知",
                 });
@@ -141,7 +141,7 @@
         });
     };
     k = () => {
-        rabbit.Notice.open({
+        RabbitUI.Notice.open({
             title: "这是通知标题",
             desc: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
             styles: {
@@ -152,7 +152,7 @@
         });
     };
     l = () => {
-        rabbit.Notice.open({
+        RabbitUI.Notice.open({
             title: "这是通知标题",
             desc: "这条通知不会自动关闭，需要点击关闭按钮才可以关闭。",
             duration: 0,

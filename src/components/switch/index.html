@@ -95,37 +95,37 @@
 <script src="../../mixins/aferCloseCb.js"></script>
 <script src="../message/message.js"></script>
 <script>
-    rabbit.init(["Message"]);
-    rabbit.create("#switch1", {
+    RabbitUI.init(["Message"]);
+    RabbitUI.create("#switch1", {
         onChange(status) {
-            rabbit.Message.info("开关状态：" + status);
+            RabbitUI.Message.info("开关状态：" + status);
         },
     });
 
-    rabbit.create("#switch2", {
+    RabbitUI.create("#switch2", {
         size: "small",
     });
-    rabbit.create("#switch3");
-    rabbit.create("#switch4", {
+    RabbitUI.create("#switch3");
+    RabbitUI.create("#switch4", {
         size: "large",
     });
-    rabbit.create("#switch5");
-    rabbit.create("#switch6");
-    rabbit.create("#switch7", {
+    RabbitUI.create("#switch5");
+    RabbitUI.create("#switch6");
+    RabbitUI.create("#switch7", {
         size: "large",
     });
-    rabbit.create("#switch8", {
+    RabbitUI.create("#switch8", {
         size: "large",
     });
-    rabbit.create("#switch9", {
+    RabbitUI.create("#switch9", {
         disabled: true,
         checked: true,
     });
-    rabbit.create("#switch10", {
+    RabbitUI.create("#switch10", {
         disabled: true,
         size: "small",
     });
-    rabbit.create("#switch11", {
+    RabbitUI.create("#switch11", {
         openColor: "#13ce66",
         offColor: "#ff4949",
     });

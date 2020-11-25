@@ -14,9 +14,11 @@
         <div class="rbt-loading-bar-inner rbt-loading-bar-inner-primary"></div>
     </div> -->
     <br /><br />
-    <button class="rbt-btn" onclick="rabbit.LoadingBar.start()">Start</button>
-    <button class="rbt-btn" onclick="rabbit.LoadingBar.finish()">Finish</button>
-    <button class="rbt-btn" onclick="rabbit.LoadingBar.error()">Error</button>
+    <button class="rbt-btn" onclick="RabbitUI.LoadingBar.start()">Start</button>
+    <button class="rbt-btn" onclick="RabbitUI.LoadingBar.finish()">
+      Finish
+    </button>
+    <button class="rbt-btn" onclick="RabbitUI.LoadingBar.error()">Error</button>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../common/getComps.js"></script>
@@ -26,9 +28,9 @@
 <script src="../../utils/css-transition.js"></script>
 <script src="./loading-bar.js"></script>
 <script>
-    rabbit.init(["LoadingBar"]);
+    RabbitUI.init(["LoadingBar"]);
 
-    // rabbit.LoadingBar.config({});
+    // RabbitUI.LoadingBar.config({});
 </script>
 
 </html>

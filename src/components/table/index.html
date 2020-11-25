@@ -177,32 +177,32 @@
         }, ],
     };
 
-    rabbit.create("#t1", {
+    RabbitUI.create("#t1", {
         dataSource,
         onRowClick(row, index) {
             console.log(row);
         },
     });
-    rabbit.create("#t2", {
+    RabbitUI.create("#t2", {
         dataSource,
         stripe: true,
     });
-    rabbit.create("#t3", {
+    RabbitUI.create("#t3", {
         dataSource,
         border: true,
     });
-    rabbit.create("#t4", {
+    RabbitUI.create("#t4", {
         dataSource: dataSource2,
     });
-    rabbit.create("#t5", {
+    RabbitUI.create("#t5", {
         dataSource: dataSource3,
         height: "200px",
     });
-    rabbit.create("#t6", {
+    RabbitUI.create("#t6", {
         dataSource,
         size: "large",
     });
-    rabbit.create("#t7", {
+    RabbitUI.create("#t7", {
         dataSource,
         size: "small",
     });

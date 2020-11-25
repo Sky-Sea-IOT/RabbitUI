@@ -68,19 +68,19 @@
 <script src="../../utils/css-transition.js"></script>
 <script src="./modal.js"></script>
 <script>
-    rabbit.create("#m1");
-    rabbit.create("#m2", {
+    RabbitUI.create("#m1");
+    RabbitUI.create("#m2", {
         loading: true,
         onOk: () => {
-            setTimeout(() => rabbit.Modal.hide("#m2"), 2000);
+            setTimeout(() => RabbitUI.Modal.hide("#m2"), 2000);
         },
     });
 
     a = () => {
-        rabbit.Modal.show("#m1");
+        RabbitUI.Modal.show("#m1");
     };
     b = () => {
-        rabbit.Modal.show("#m2");
+        RabbitUI.Modal.show("#m2");
     };
 </script>
 

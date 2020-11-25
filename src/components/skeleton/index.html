@@ -75,30 +75,30 @@
 <script src="./skeleton.js"></script>
 <script src="../switch/switch.js"></script>
 <script>
-    rabbit.create("#skeleton1");
-    rabbit.create("#skeleton2", {
+    RabbitUI.create("#skeleton1");
+    RabbitUI.create("#skeleton2", {
         avatar: true,
         rows: 4,
     });
-    rabbit.create("#skeleton3", {
+    RabbitUI.create("#skeleton3", {
         active: true,
     });
-    rabbit.create("#skeleton4", {
-        active: true,
-        avatar: true,
-        rows: 2,
-    });
-    rabbit.create("#skeleton5", {
+    RabbitUI.create("#skeleton4", {
         active: true,
         avatar: true,
         rows: 2,
     });
-    rabbit.create("#skeleton6", {
+    RabbitUI.create("#skeleton5", {
         active: true,
         avatar: true,
         rows: 2,
     });
-    rabbit.create("#switch1", {
+    RabbitUI.create("#skeleton6", {
+        active: true,
+        avatar: true,
+        rows: 2,
+    });
+    RabbitUI.create("#switch1", {
         onChange: (status) => {
             if (status) {
                 document.querySelector(".loading").style.display = "none";

@@ -69,37 +69,37 @@
 <script src="./message-box.js"></script>
 <script>
     a = () => {
-        rabbit.MsgBox.info({
+        RabbitUI.MsgBox.info({
             title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     b = () => {
-        rabbit.MsgBox.success({
+        RabbitUI.MsgBox.success({
             title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     c = () => {
-        rabbit.MsgBox.warning({
+        RabbitUI.MsgBox.warning({
             title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     d = () => {
-        rabbit.MsgBox.error({
+        RabbitUI.MsgBox.error({
             title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     e = () => {
-        rabbit.MsgBox.confirm({
+        RabbitUI.MsgBox.confirm({
             title: "确认对话框标题",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
         });
     };
     f = () => {
-        rabbit.MsgBox.confirm({
+        RabbitUI.MsgBox.confirm({
             title: "This is a notification message",
             content: `<p>some messages...some messages...</p>
                       <p>some messages...some messages...</p>`,
@@ -108,19 +108,19 @@
         });
     };
     g = () => {
-        rabbit.MsgBox.confirm({
+        RabbitUI.MsgBox.confirm({
             title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
             width: 600,
         });
     };
     h = () => {
-        rabbit.MsgBox.confirm({
+        RabbitUI.MsgBox.confirm({
             title: "对话框消息",
             content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
             loading: true,
             onOk() {
-                setTimeout(() => rabbit.MsgBox.destroy(), 3000);
+                setTimeout(() => RabbitUI.MsgBox.destroy(), 3000);
             },
         });
     };

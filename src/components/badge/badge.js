@@ -38,4 +38,4 @@ Rabbit.prototype.Badge = {
     },
 };
 
-rabbit.Badge.dot();
+RabbitUI.Badge.dot();

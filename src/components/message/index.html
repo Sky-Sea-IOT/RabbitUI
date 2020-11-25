@@ -45,37 +45,37 @@
 <script src="../../mixins/aferCloseCb.js"></script>
 <script src="./message.js"></script>
 <script>
-    rabbit.init(["Message"]);
-    // rabbit.Message.config({
+    RabbitUI.init(["Message"]);
+    // RabbitUI.Message.config({
     //     top: 50,
     // });
     a = () => {
-        rabbit.Message.info("这是一条消息提示");
+        RabbitUI.Message.info("这是一条消息提示");
     };
 
     b = () => {
-        rabbit.Message.success("这是一条成功提示");
+        RabbitUI.Message.success("这是一条成功提示");
     };
 
     c = () => {
-        rabbit.Message.warning("这是一条警告提示");
+        RabbitUI.Message.warning("这是一条警告提示");
     };
 
     d = () => {
-        rabbit.Message.error("这是一条错误提示");
+        RabbitUI.Message.error("这是一条错误提示");
     };
 
     const key = "loadingData";
     e = () => {
-        rabbit.Message.loading("正在加载中...", {
+        RabbitUI.Message.loading("正在加载中...", {
             key,
             duration: 0,
         });
-        setTimeout(() => rabbit.Message.destroy(key), 5000);
+        setTimeout(() => RabbitUI.Message.destroy(key), 5000);
     };
 
     f = () => {
-        rabbit.Message.info("可手动关闭的提示", {
+        RabbitUI.Message.info("可手动关闭的提示", {
             closable: true,
             onClose: () => {
                 console.log("关闭提示");
@@ -84,39 +84,39 @@
     };
 
     g = () => {
-        rabbit.Message.success("这是成功提示信息，10秒后消失", {
+        RabbitUI.Message.success("这是成功提示信息，10秒后消失", {
             duration: 10,
         });
     };
 
     h = () => {
-        rabbit.Message.info(" 这是一条带背景色的通知", {
+        RabbitUI.Message.info(" 这是一条带背景色的通知", {
             background: true,
         });
     };
 
     i = () => {
-        rabbit.Message.success(" 这是一条带背景色的通知", {
+        RabbitUI.Message.success(" 这是一条带背景色的通知", {
             background: true,
         });
     };
 
     j = () => {
-        rabbit.Message.warning(" 这是一条带背景色的通知", {
+        RabbitUI.Message.warning(" 这是一条带背景色的通知", {
             background: true,
         });
     };
 
     k = () => {
-        rabbit.Message.error(" 这是一条带背景色的通知", {
+        RabbitUI.Message.error(" 这是一条带背景色的通知", {
             background: true,
         });
     };
 
     l = () => {
-        rabbit.Message.loading("正在加载中...", {}).then(() => {
-            rabbit.Message.success("加载完成").then(() => {
-                rabbit.Message.info("加载完成后的成功提示");
+        RabbitUI.Message.loading("正在加载中...", {}).then(() => {
+            RabbitUI.Message.success("加载完成").then(() => {
+                RabbitUI.Message.info("加载完成后的成功提示");
             });
         });
     };
