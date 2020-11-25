@@ -87,4 +87,4 @@ class Rabbit {
     }
 }
 
-const rabbit = new Rabbit();
+const RabbitUI = new Rabbit();

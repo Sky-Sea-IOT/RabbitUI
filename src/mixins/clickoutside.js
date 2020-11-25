@@ -4,9 +4,10 @@
  */
 function clickOutSide(elem, callback) {
     document.addEventListener("click", (e) => {
-        const _con = elem;
-        if (_con) {
-            if (!_con.contains(e.target)) {
+        e.stopPropagation();
+        const target = elem;
+        if (target) {
+            if (!target.contains(e.target)) {
                 callback();
             }
         }

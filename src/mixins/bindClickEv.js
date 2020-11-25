@@ -12,7 +12,7 @@ function bindClickEv(el, okCb, cancelCb) {
     // 只支持 modal 和 drawer 组件
     if (components !== "modal" && components !== "drawer") {
         console.error(
-            `[Rabbit] ${components} does not support binding component associated events`
+            `[Rabbit warn] ${components} does not support binding component associated events`
         );
         return false;
     }

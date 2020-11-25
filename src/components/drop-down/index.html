@@ -11,174 +11,150 @@
 <style>
     .demo {
         width: 400px;
-        margin: 50px auto;
+        margin: 100px auto;
     }
     
-    .demo #dropdown1,
-    #dropdown2,
-    #dropdown3,
-    #dropdown4,
-    #dropdown5,
-    #dropdown6,
-    #dropdown7,
-    #dropdown8,
-    #dropdown9,
-    #dropdown10,
-    #dropdown11,
-    #dropdown12 {
+    .demo #d1,
+    #d2,
+    #d3,
+    #d4,
+    #d5,
+    #d6,
+    #d7,
+    #d8,
+    #d9,
+    #d10,
+    #d11,
+    #d12 {
         margin-right: 25px;
         margin-bottom: 8px;
-    }
-    
-    .top,
-    .bottom {
-        text-align: center;
-        clear: both;
-    }
-    
-    .left {
-        float: left;
-        width: 60px;
-    }
-    
-    .right {
-        float: right;
-        width: 60px;
     }
 </style>
 
 <body>
     <div class="demo">
-        <div class="top">
-            <rab-dropdown id="dropdown1">
-                <button class="rbt-btn" slot="ref">上左</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown2">
-                <button class="rbt-btn" slot="ref">上边</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown3">
-                <button class="rbt-btn" slot="ref">上右</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-            </rab-dropdown>
-        </div>
-
-        <div class="left">
-            <rab-dropdown id="dropdown4">
-                <button class="rbt-btn" slot="ref">左上</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem" disabled="true">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown5">
-                <button class="rbt-btn" slot="ref">左边</button>
-                <div slot="dropdownItem" selected="true">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown6">
-                <button class="rbt-btn" slot="ref">左下</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-        </div>
-        <div class="right">
-            <rab-dropdown id="dropdown7">
-                <button class="rbt-btn" slot="ref">右上</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem" disabled="true">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown8">
-                <button class="rbt-btn" slot="ref">右边</button>
-                <div slot="dropdownItem" selected="true">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown9">
-                <button class="rbt-btn" slot="ref">右下</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-        </div>
-        <div class="bottom">
-            <rab-dropdown id="dropdown10">
-                <button class="rbt-btn" slot="ref">下左</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem" disabled="true">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown11">
-                <button class="rbt-btn" slot="ref">下边</button>
-                <div slot="dropdownItem" selected="true">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-
-            <rab-dropdown id="dropdown12">
-                <button class="rbt-btn" slot="ref">下右</button>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-                <div slot="dropdownItem">4st menu item</div>
-            </rab-dropdown>
-        </div>
-        <div class="demo">
-            <rab-dropdown id="dropdown13">
-                <a href="javascript:void(0)" slot="ref">click触发</a>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-            </rab-dropdown>
-            <rab-dropdown id="dropdown14">
-                <a href="javascript:void(0)" slot="ref">右键触发</a>
-                <div slot="dropdownItem">返回</div>
-                <div slot="dropdownItem">
-                    <a href="javascript:void(0)" style="color: #ed4014">删除</a>
-                </div>
-            </rab-dropdown>
-            <rab-dropdown id="dropdown15">
-                <a href="javascript:void(0)" slot="ref">触发事件</a>
-                <div slot="dropdownItem">1st menu item</div>
-                <div slot="dropdownItem">2st menu item</div>
-                <div slot="dropdownItem">3st menu item</div>
-            </rab-dropdown>
-        </div>
         <!-- <div class="rbt-dropdown">
             <div class="rbt-dropdown-rel">
                 <button class="rbt-btn">Hover me</button>
             </div>
-            <ul class="rbt-dropdown-menu" role="menu">
-                <li class="rbt-dropdown-menu-item" role="menuitem">1st menu item</li>
-                <li class="rbt-dropdown-menu-item" role="menuitem">2st menu item</li>
-                <li class="rbt-dropdown-menu-item-divider" role="menuitem"></li>
-                <li class="rbt-dropdown-menu-item" role="menuitem">3st menu item</li>
+            <ul class="rbt-dropdown-menu">
+                <li class="rbt-dropdown-item">1st menu item</li>
+                <li class="rbt-dropdown-item rbt-dropdown-item-disabled">
+                    2st menu item
+                </li>
+                <li class="rbt-dropdown-item-divider"></li>
+                <li class="rbt-dropdown-item">3st menu item</li>
             </ul>
         </div> -->
+    </div>
+    <div class="demo">
+        <rab-dropdown id="d1">
+            <a href="javascript:void(0)" slot="ref">
+          下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">菜单项 1</span>
+            <span slot="dropdownItem">菜单项 2</span>
+            <span slot="dropdownItem">菜单项 3</span>
+            <span slot="dropdownItem">菜单项 4</span>
+            <span slot="dropdownItem">菜单项 5</span>
+        </rab-dropdown>
+
+        <rab-dropdown id="d2">
+            <button class="rbt-btn rbt-btn-primary" slot="ref">
+          下拉菜单 <i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </button>
+            <span slot="dropdownItem">菜单项 1</span>
+            <span slot="dropdownItem">菜单项 2</span>
+            <span slot="dropdownItem">菜单项 3</span>
+            <span slot="dropdownItem">菜单项 4</span>
+            <span slot="dropdownItem">菜单项 5</span>
+        </rab-dropdown>
+    </div>
+
+    <div class="demo">
+        <rab-dropdown id="d3">
+            <a href="javascript:void(0)" slot="ref">
+          hover 触发<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">菜单项 1</span>
+            <span slot="dropdownItem">菜单项 2</span>
+            <span slot="dropdownItem">菜单项 3</span>
+            <span slot="dropdownItem">菜单项 4</span>
+        </rab-dropdown>
+
+        <rab-dropdown id="d4">
+            <a href="javascript:void(0)" slot="ref">
+          click 触发<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">菜单项 1</span>
+            <span slot="dropdownItem">菜单项 2</span>
+            <span slot="dropdownItem">菜单项 3</span>
+            <span slot="dropdownItem">菜单项 4</span>
+        </rab-dropdown>
+
+        <rab-dropdown id="d5">
+            <a href="javascript:void(0)" slot="ref">
+          右键触发<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">取消</span>
+            <span slot="dropdownItem" style="color: #ff4d4f">删除</span>
+        </rab-dropdown>
+    </div>
+
+    <div class="demo">
+        <rab-dropdown id="d6">
+            <a href="javascript:void(0)" slot="ref">
+          菜单(下左)<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">第一个菜单项</span>
+            <span slot="dropdownItem">第二个菜单项</span>
+            <span slot="dropdownItem">第三个菜单项</span>
+            <span slot="dropdownItem">第四个菜单项</span>
+        </rab-dropdown>
+
+        <rab-dropdown id="d7">
+            <a href="javascript:void(0)" slot="ref">
+          菜单(居中)<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">第一个菜单项</span>
+            <span slot="dropdownItem">第二个菜单项</span>
+            <span slot="dropdownItem">第三个菜单项</span>
+            <span slot="dropdownItem">第四个菜单项</span>
+        </rab-dropdown>
+
+        <rab-dropdown id="d8">
+            <a href="javascript:void(0)" slot="ref">
+          菜单(下右)<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">第一个菜单项</span>
+            <span slot="dropdownItem">第二个菜单项</span>
+            <span slot="dropdownItem">第三个菜单项</span>
+            <span slot="dropdownItem">第四个菜单项</span>
+        </rab-dropdown>
+    </div>
+
+    <div class="demo">
+        <rab-dropdown id="d9">
+            <button class="rbt-btn rbt-btn-primary" slot="ref">
+          下拉菜单 <i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </button>
+            <span slot="dropdownItem">菜单项 1</span>
+            <span slot="dropdownItem">菜单项 2</span>
+            <span slot="dropdownItem">菜单项 3</span>
+            <span slot="dropdownItem">菜单项 4</span>
+            <span slot="dropdownItem">菜单项 5</span>
+        </rab-dropdown>
+
+        <rab-dropdown id="d10">
+            <a href="javascript:void(0)" slot="ref">
+          下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
+        </a>
+            <span slot="dropdownItem">菜单项 1</span>
+            <span slot="dropdownItem">菜单项 2</span>
+            <span slot="dropdownItem">菜单项 3</span>
+            <span slot="dropdownItem">菜单项 4</span>
+            <span slot="dropdownItem">菜单项 5</span>
+        </rab-dropdown>
     </div>
 </body>
 <script src="../../utils/typeof.js"></script>
@@ -188,53 +164,43 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="../../common/main.js"></script>
 <script src="../../utils/css-transition.js"></script>
-<script src="../../utils/dropdown.js"></script>
+<script src="./set-placement.js"></script>
 <script src="./drop-down.js"></script>
+
 <script>
-    rabbit.create("#dropdown1", {
-        placement: "top-start",
+    RabbitUI.create("#d1", {
+        divided: [, , , , true],
+        itemDisabled: [, , true, , ],
+        onUnfold() {
+            console.log("菜单展开");
+        },
     });
-    rabbit.create("#dropdown2", {
-        placement: "top",
+    RabbitUI.create("#d2", {
+        divided: [, , , , true],
+        itemDisabled: [, , true, , ],
     });
-    rabbit.create("#dropdown3", {
-        placement: "top-end",
-    });
-    rabbit.create("#dropdown4", {
-        placement: "left-start",
-    });
-    rabbit.create("#dropdown5", {
-        placement: "left",
-    });
-    rabbit.create("#dropdown6", {
-        placement: "left-end",
-    });
-    rabbit.create("#dropdown7", {
-        placement: "right-start",
-    });
-    rabbit.create("#dropdown8", {
-        placement: "right",
-    });
-    rabbit.create("#dropdown9", {
-        placement: "right-end",
-    });
-    rabbit.create("#dropdown10", {
-        placement: "bottom-start",
-    });
-    rabbit.create("#dropdown11");
-    rabbit.create("#dropdown12", {
-        placement: "bottom-end",
-    });
-    rabbit.create("#dropdown13", {
+    RabbitUI.create("#d3");
+    RabbitUI.create("#d4", {
         trigger: "click",
+        onClick(index) {
+            console.log(`当前点击的索引：${index}`);
+        },
     });
-    rabbit.create("#dropdown14", {
+    RabbitUI.create("#d5", {
         trigger: "contextMenu",
     });
-    rabbit.create("#dropdown15", {
-        onClick(index) {
-            alert("当前点击的索引：" + index);
-        },
+    RabbitUI.create("#d6", {
+        placement: "bottom-start",
+    });
+    RabbitUI.create("#d7");
+    RabbitUI.create("#d8", {
+        placement: "bottom-end",
+    });
+    RabbitUI.create("#d9", {
+        disabled: true,
+    });
+    RabbitUI.create("#d10", {
+        disabled: true,
     });
 </script>
 

@@ -1,10 +1,9 @@
+let drawerZIndex = 1000;
+
 /**
  * Drawer抽屉
  * 屏幕边缘滑出的浮层面板
  */
-
-let drawerZIndex = 1000;
-
 Rabbit.prototype.Drawer = {
     _createInstance(el, config, slot) {
         const prefixCls = "rbt-drawer";

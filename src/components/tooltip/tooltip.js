@@ -2,7 +2,6 @@
  * Tooltip 文字提示
  * 文字提示气泡框，在鼠标悬停时显示，代替了系统的title提示。
  */
-
 Rabbit.prototype.Tooltip = {
     _createInstance(config, slot) {
         const prefixCls = "rbt-tooltip";
@@ -83,6 +82,8 @@ Rabbit.prototype.Tooltip = {
     ) {
         const prefixCls = "rbt-tooltip";
 
+        let timer = null;
+
         setInterval(() => detectTooltipDirection(tooltip), 500);
 
         const showHidden = (flag) => {
@@ -100,10 +101,13 @@ Rabbit.prototype.Tooltip = {
             }
         };
 
-        popcorn.onmouseenter = () =>
-            setTimeout(() => showHidden("in"), mouseEnterDelay * 1000);
+        popcorn.addEventListener("mouseenter", () => {
+            timer = setTimeout(() => showHidden("in"), mouseEnterDelay * 1000);
+        });
 
-        popcorn.onmouseleave = () =>
+        popcorn.addEventListener("mouseleave", () => {
+            clearTimeout(timer);
             setTimeout(() => showHidden("out"), mouseLeaveDelay * 1000);
+        });
     },
 };

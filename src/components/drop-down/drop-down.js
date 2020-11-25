@@ -2,199 +2,263 @@
  * Dropdown 下拉菜单
  * 展示一组折叠的下拉菜单。
  */
-
-let dropDownState = false;
-
 Rabbit.prototype.Dropdown = {
     _createInstance(config, slot) {
-        const prefixCls = "rbt-dropdown";
-        const animationEnterCls = `${prefixCls}-drop-in`;
-        const animationLeaveCls = `${prefixCls}-drop-out`;
-
-        const { trigger = "hover", placement = "bottom", onClick } = config;
+        const {
+            onClick,
+            onUnfold,
+            trigger = "hover",
+            divided = [],
+            selected = [],
+            disabled = false,
+            className = "",
+            placement = "bottom",
+            itemDisabled = [],
+        } = config;
 
         const { ref, dropdownItem } = slot;
 
-        const itemLens = dropdownItem.length;
+        const DropDown = document.createElement("div");
+        const DropDownRef = document.createElement("div");
+        const DropDownMenu = document.createElement("ul");
+        const DrpDownDivided = document.createElement("li");
 
-        let isDisabled = "",
-            isSelected = "";
+        this._addClassName(
+            className,
+            DropDown,
+            DropDownRef,
+            DropDownMenu,
+            DrpDownDivided
+        );
 
-        const Dropdown = document.createElement("div");
-        const DropdownRel = document.createElement("div");
-        const DropdownMenu = document.createElement("ul");
+        let itemList = [];
 
-        Dropdown.className = `${prefixCls}`;
-        Dropdown.dataset.trigger = trigger;
-        DropdownRel.className = `${prefixCls}-rel`;
-        DropdownMenu.className = `${prefixCls}-menu`;
-        DropdownMenu.dataset.placement = placement;
+        for (let i = 0; i < dropdownItem.length; i++) {
+            const DropDownItem = document.createElement("li");
 
-        addElemetsOfSlots(ref, DropdownRel);
+            DropDownItem.className = "rbt-dropdown-item";
+            DropDownMenu.appendChild(DropDownItem);
 
-        this._setDropWidth(DropdownRel, DropdownMenu);
+            addElemetsOfSlots(dropdownItem[i], DropDownItem);
 
-        setTimeout(() => this._dropdownEvent(), 0);
+            this._itemClickHandle(
+                DropDown,
+                DropDownMenu,
+                DropDownItem,
+                placement,
+                onClick,
+                i
+            );
 
-        const itemClickEvent = (i, DropdownItem) => {
-            dropDownState = false;
-            isFunc(onClick) ? onClick(i, DropdownItem) : null;
-            this._drop("up", DropdownMenu, animationEnterCls, animationLeaveCls);
-        };
-
-        for (let i = 0; i < itemLens; i++) {
-            const DropdownItem = document.createElement("li");
-            DropdownItem.className = `${prefixCls}-menu-item`;
-
-            isDisabled = dropdownItem[i].getAttribute("disabled");
-            isSelected = dropdownItem[i].getAttribute("selected");
-
-            if (!isDisabled)
-                DropdownItem.onclick = () => itemClickEvent(i, DropdownItem);
-            if (isDisabled === "true")
-                DropdownItem.classList.add(`${prefixCls}-menu-item-disabled`);
-            if (isSelected === "true")
-                DropdownItem.classList.add(`${prefixCls}-menu-item-selected`);
-
-            addElemetsOfSlots(dropdownItem[i], DropdownItem);
-            isSlotsUserd(true, dropdownItem[i]);
-
-            DropdownMenu.appendChild(DropdownItem);
+            itemList.push(DropDownItem);
         }
 
-        Dropdown.append(DropdownRel, DropdownMenu);
+        this._setDisabled(disabled, DropDownRef);
+        this._setItemDisabled(itemDisabled, itemList);
+        this._setSelected(selected, itemList);
+        this._setDivided(divided, itemList, DrpDownDivided);
+        this._setPlacement(placement, DropDownMenu, DropDown);
 
-        isSlotsUserd(true, ref);
+        this._hoverHandle(
+            trigger,
+            disabled,
+            placement,
+            DropDown,
+            DropDownMenu,
+            onUnfold
+        );
 
-        return Dropdown;
+        this._clickHandle(
+            trigger,
+            disabled,
+            placement,
+            DropDown,
+            DropDownRef,
+            DropDownMenu,
+            onUnfold
+        );
+
+        addElemetsOfSlots(ref, DropDownRef);
+
+        DropDown.append(DropDownRef, DropDownMenu);
+
+        this._documentClickHandle(DropDown, DropDownMenu, trigger, placement);
+
+        return DropDown;
     },
 
-    _setDropWidth(el, dropdownMenu) {
-        setTimeout(() => {
-            let elWidth = Math.floor(el.offsetWidth);
-            elWidth <= 100 ? null : (dropdownMenu.style.minWidth = `${elWidth}px`);
-        }, 0);
-    },
-
-    _setPlacement(el, dropdown) {
-        $DropDown.setDirection(el, dropdown, 5);
-    },
-
-    _dropdownEvent() {
+    _addClassName(
+        className,
+        dropDown,
+        dropDownRef,
+        dropDownMenu,
+        drpDownDivided
+    ) {
         const prefixCls = "rbt-dropdown";
-        const animationEnterCls = `${prefixCls}-drop-in`;
-        const animationLeaveCls = `${prefixCls}-drop-out`;
-        const dropdowns = document.querySelectorAll(`.${prefixCls}`);
-        const dropdownRels = document.querySelectorAll(`.${prefixCls}-rel`);
-        const dropdownMenus = document.querySelectorAll(`.${prefixCls}-menu`);
 
-        const clickOutside = (con) => {
-            document.onclick = (e) => {
-                con.forEach((item) => {
-                    if (e.target.contains(item)) {
-                        dropDownState = false;
-                        this.drop("up", item, animationEnterCls, animationLeaveCls);
+        dropDown.className = `${prefixCls}`;
+        dropDownRef.className = `${prefixCls}-rel`;
+        dropDownMenu.className = `${prefixCls}-menu ${className}`;
+        drpDownDivided.className = `${prefixCls}-item-divider`;
+    },
+
+    _commonSet({ api, isDivided, dropDownItem, cls, drpDownDivided }) {
+        if (isArr(api) && api.length > 0) {
+            api.map((item, i) => {
+                if (item === true) {
+                    if (isDivided) {
+                        const prev = i - 1;
+                        dropDownItem[prev].after(drpDownDivided);
+                    } else {
+                        dropDownItem[i].classList.add(cls);
                     }
-                });
-            };
-        };
+                }
+            });
+        }
+    },
 
-        const dropState = (currentIndex) => {
-            let state = "up";
+    _setDisabled(disabled, dropdownRef) {
+        if (disabled) dropdownRef.classList.add("rbt-dropdown-disabled");
+    },
 
-            if (dropDownState) {
-                dropDownState = false;
-                state = "up";
-            } else {
-                dropDownState = true;
-                state = "down";
-                this._setDropWidth(
-                    dropdownRels[currentIndex],
-                    dropdownMenus[currentIndex]
-                );
-            }
-
-            this.drop(
-                state,
-                dropdownMenus[currentIndex],
-                animationEnterCls,
-                animationLeaveCls
-            );
-
-            this._setPlacement(
-                dropdownRels[currentIndex],
-                dropdownMenus[currentIndex]
-            );
-        };
-
-        dropdowns.forEach((dropdown, dropdownIndex) => {
-            const { trigger } = dropdown.dataset;
-            if (trigger === "hover") {
-                dropdown.onmouseenter = () => {
-                    this._drop(
-                        "down",
-                        dropdownMenus[dropdownIndex],
-                        animationEnterCls,
-                        animationLeaveCls
-                    );
-                    this._setDropWidth(
-                        dropdownRels[dropdownIndex],
-                        dropdownMenus[dropdownIndex]
-                    );
-                    this._setPlacement(
-                        dropdownRels[dropdownIndex],
-                        dropdownMenus[dropdownIndex]
-                    );
-                };
-
-                dropdown.onmouseleave = () =>
-                    this._drop(
-                        "up",
-                        dropdownMenus[dropdownIndex],
-                        animationEnterCls,
-                        animationLeaveCls
-                    );
-            }
-
-            if (trigger === "click" || trigger === "contextMenu") {
-                //点击空白处关闭菜单
-                const con = document.querySelectorAll(".rbt-dropdown-menu");
-                clickOutside(con);
-            }
-
-            if (trigger === "click") {
-                dropdownRels[dropdownIndex].onclick = () => {
-                    dropState(dropdownIndex);
-                };
-            }
-
-            if (trigger === "contextMenu") {
-                dropdownRels[dropdownIndex].oncontextmenu = (e) => {
-                    e.preventDefault();
-                    dropState(dropdownIndex);
-                };
-            }
+    _setItemDisabled(disabled, dropDownItem) {
+        const cls = "rbt-dropdown-item-disabled";
+        this._commonSet({
+            api: disabled,
+            dropDownItem,
+            cls,
         });
     },
 
-    _drop(mode, dropdownMenu, animationEnterCls, animationLeaveCls) {
-        if (mode === "down") {
-            CSSTransition(
-                dropdownMenu,
-                "in",
-                animationEnterCls,
-                animationLeaveCls,
-                250
-            );
-        } else if (mode === "up") {
-            CSSTransition(
-                dropdownMenu,
-                "out",
-                animationEnterCls,
-                animationLeaveCls,
-                250
-            );
-            setTimeout(() => (dropdownMenu.style.display = ""), 240);
+    _setSelected(selected, dropDownItem) {
+        const cls = "rbt-dropdown-item-selected";
+        this._commonSet({
+            api: selected,
+            dropDownItem,
+            cls,
+        });
+    },
+
+    _setDivided(divider, dropDownItem, drpDownDivided) {
+        this._commonSet({
+            api: divider,
+            isDivided: true,
+            dropDownItem,
+            drpDownDivided,
+        });
+    },
+
+    _setPlacement(placement, dropdownMenu, dropdownRoot) {
+        dropdownMenu.dataset.placement = placement;
+        SET.setDirection(dropdownRoot, dropdownMenu, -10);
+    },
+
+    _autoWidth(dropdown, dropdownMenu) {
+        const dropdownWidth = dropdown.offsetWidth;
+        if (dropdownWidth < 70 || dropdownWidth > 100) {
+            dropdownMenu.style.minWidth = `${dropdownWidth}px`;
         }
+    },
+
+    _slider(dropdown, dropdownMenu, mode, placement, callback) {
+        const slideUp = () => {
+            dropdownMenu.classList.replace(
+                "rbt-dropdown-drop-in",
+                "rbt-dropdown-drop-out"
+            );
+
+            setTimeout(() => (dropdownMenu.style.display = "none"), 240);
+        };
+
+        const slideDown = () => {
+            CSSTransition2(
+                dropdownMenu,
+                "rbt-dropdown-drop-in",
+                "rbt-dropdown-drop-out",
+                235
+            );
+
+            isFunc(callback) ? callback() : null;
+
+            this._autoWidth(dropdown, dropdownMenu);
+        };
+
+        if (mode === "down") {
+            slideDown();
+            this._setPlacement(placement, dropdownMenu, dropdown);
+        } else slideUp();
+    },
+
+    _hoverHandle(trigger, disabled, placement, dropdown, dropdownMenu, cb) {
+        let timer = null;
+
+        if (trigger === "hover" && !disabled) {
+            dropdown.addEventListener("mouseenter", () => {
+                timer = setTimeout(
+                    () => this._slider(dropdown, dropdownMenu, "down", placement, cb),
+                    350
+                );
+            });
+
+            dropdown.addEventListener("mouseleave", () => {
+                clearTimeout(timer);
+                this._slider(dropdown, dropdownMenu, "", placement, cb);
+            });
+        }
+    },
+
+    _clickHandle(
+        trigger,
+        disabled,
+        placement,
+        dropdown,
+        dropdownRef,
+        dropdownMenu,
+        cb
+    ) {
+        if (disabled) return;
+
+        if (trigger === "click") {
+            dropdownRef.addEventListener("click", () => {
+                this._slider(dropdown, dropdownMenu, "down", placement, cb);
+                return false;
+            });
+        }
+
+        if (trigger === "contextMenu") {
+            dropdownRef.addEventListener("contextmenu", (e) => {
+                e.preventDefault();
+                this._slider(dropdown, dropdownMenu, "down", placement, cb);
+            });
+        }
+    },
+
+    _itemClickHandle(dropdown, dropdownMenu, dropdownItem, placement, cb, index) {
+        const item = dropdownItem;
+
+        item.addEventListener("click", (e) => {
+            if (item.classList.contains("rbt-dropdown-item-disabled")) {
+                return false;
+            } else {
+                isFunc(cb) ? cb(index, item) : null;
+                this._slider(dropdown, dropdownMenu, "", placement, cb);
+            }
+            return false;
+        });
+    },
+
+    _documentClickHandle(dropdown, dropdownMenu, trigger, placement) {
+        if (trigger !== "click" && trigger !== "contextMenu") return;
+
+        const _con = Array.from(document.querySelectorAll(".rbt-dropdown-menu"));
+
+        document.addEventListener("click", (e) => {
+            e.stopPropagation;
+
+            _con.map((item) => {
+                if (e.target.contains(item))
+                    this._slider(dropdown, dropdownMenu, "", placement, null);
+            });
+        });
     },
 };
