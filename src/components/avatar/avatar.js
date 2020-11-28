@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Avatar = {
-    _createInstance(config) {
+    _createInstance(_config) {
         const prefixCls = "rbt-avatar";
         const prefixIconCls = "rbt-icon";
 
@@ -17,7 +17,7 @@ Rabbit.prototype.Avatar = {
                 styles = {},
                 className = "",
                 customIcon,
-        } = config;
+        } = _config;
 
         const _styles = objToString(styles);
 

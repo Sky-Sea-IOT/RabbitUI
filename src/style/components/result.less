@@ -10,42 +10,29 @@
 .@{prefix}result {
   padding: 48px 32px;
 
-  &-info {
+  &-info &-icon > .rbt-icon {
     color: @primary-color;
-    .@{prefix}result-icon {
-      color: @primary-color;
-    }
   }
 
-  &-success {
+  &-success &-icon > .rbt-icon {
     color: @success-color;
-    .@{prefix}result-icon {
-      color: @success-color;
-    }
   }
 
-  &-warning {
+  &-warning &-icon > .rbt-icon {
     color: @warning-color;
-    .@{prefix}result-icon {
-      color: @warning-color;
-    }
   }
 
-  &-error {
+  &-error &-icon > .rbt-icon {
     color: @error-color;
-    .@{prefix}result-icon {
-      color: @error-color;
-    }
   }
 
   &-icon {
-    margin-bottom: @margin-xs;
     text-align: center;
     font-size: 92px;
   }
 
   &-img {
-    .size(250px,295px);
+    .size(350px,280px);
     margin: @auto;
     margin-bottom: @margin-lg;
   }
@@ -60,11 +47,11 @@
   &-subtitle {
     color: @sub-color;
     font-size: @font-size-sm;
-    line-height: 1.6;
+    padding-top: @padding-xs;
     text-align: center;
   }
 
-  &-content {
+  &-extra {
     margin-top: @margin-lg;
     padding: @padding-lg 40px;
     background-color: #fafafa;

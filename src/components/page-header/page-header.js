@@ -1,10 +1,10 @@
 Rabbit.prototype.PageHeader = {
-    _createInstance: (config, slot) => {
+    _createInstance: (_config, _slot) => {
         const prefixCls = "rbt-page-header";
         const prefixIconCls = "rbt-icon";
 
-        const { onBack } = config;
-        const { header, content } = slot;
+        const { onBack } = _config;
+        const { HEADER, CONTENT } = _slot;
 
         const PageHeader = document.createElement("div");
         const PageHeaderLeft = document.createElement("div");
@@ -23,11 +23,11 @@ Rabbit.prototype.PageHeader = {
         PageHeader.append(PageHeaderLeft, PageHeaderContent);
         PageHeaderLeft.append(PageHeaderIcon, PageHeaderTitle);
 
-        addElemetsOfSlots(header, PageHeaderTitle);
-        addElemetsOfSlots(content, PageHeaderContent);
+        addElemetsOfSlots(HEADER, PageHeaderTitle);
+        addElemetsOfSlots(CONTENT, PageHeaderContent);
 
-        isSlotsUserd(true, header);
-        isSlotsUserd(true, content);
+        isSlotsUserd(true, HEADER);
+        isSlotsUserd(true, CONTENT);
 
         return PageHeader;
     },

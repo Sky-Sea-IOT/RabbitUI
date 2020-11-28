@@ -3,7 +3,7 @@
  * 静态地呈现一些警告信息。
  */
 Rabbit.prototype.Alert = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const prefixCls = "rbt-alert";
 
         const {
@@ -13,9 +13,9 @@ Rabbit.prototype.Alert = {
                 banner = false,
                 closeText,
                 onClose,
-        } = config;
+        } = _config;
 
-        const { message, desc, icon } = slot;
+        const { MESSAGE, DESC, ICON } = _slot;
 
         let _types = "",
             Icons = "";
@@ -29,7 +29,7 @@ Rabbit.prototype.Alert = {
         const AlertCloseIcon = document.createElement("i");
 
         // 根据 type 属性自动添加不同图标，如果有描述内容则添加outline类型的图标
-        if (showIcon && desc && desc.innerHTML) {
+        if (showIcon && DESC && DESC.innerHTML) {
             _types = type + "-outline";
             Icons = getIconTypes(_types);
         } else {
@@ -51,8 +51,8 @@ Rabbit.prototype.Alert = {
         this.setBanner(banner, Alert);
 
         // 警告提示内容
-        if (message && message.innerHTML) {
-            addElemetsOfSlots(message, AlertMessage);
+        if (MESSAGE && MESSAGE.innerHTML) {
+            addElemetsOfSlots(MESSAGE, AlertMessage);
         } else {
             throw new Error(
                 "creating an alert component requires at least a basic prompt"
@@ -60,20 +60,20 @@ Rabbit.prototype.Alert = {
         }
 
         // 警告提示辅助性文字介绍
-        if (desc && desc.innerHTML) {
+        if (DESC && DESC.innerHTML) {
             Alert.classList.add(`${prefixCls}-with-desc`);
-            addElemetsOfSlots(desc, AlertDesc);
+            addElemetsOfSlots(DESC, AlertDesc);
         }
 
-        this.showIcon(showIcon, Alert, AlertIconBox, AlertIcon, icon);
+        this.showIcon(showIcon, Alert, AlertIconBox, AlertIcon, ICON);
         this.closable(closable, closeText, Alert, AlertCloseBox, AlertCloseIcon);
 
         AlertCloseBox.addEventListener("click", () =>
             this.clickHandle(Alert, onClose)
         );
 
-        isSlotsUserd(true, desc);
-        isSlotsUserd(showIcon, icon);
+        isSlotsUserd(true, DESC);
+        isSlotsUserd(showIcon, ICON);
 
         Alert.append(AlertMessage, AlertDesc);
 

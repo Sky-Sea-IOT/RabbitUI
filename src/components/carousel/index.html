@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/carousel.css" />
+</head>
+<style>
+    .demo {
+        width: 800px;
+        margin: 20px auto;
+    }
+    
+    .demo-carousel {
+        height: 280px;
+        line-height: 250px;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        background: #506b9e;
+    }
+</style>
+
+<body>
+    <!-- <div class="demo">
+        <div class="rbt-carousel">
+            <button class="rbt-carousel-arrow left rbt-carousel-arrow-hover">
+          <i class="rbt-icon rbt-icon-ios-arrow-back"></i>
+        </button>
+            <div class="rbt-carousel-list">
+                <div class="rbt-carousel-item rbt-carousel-item-active" id="a">
+                    <div class="demo-carousel">1</div>
+                </div>
+                <div class="rbt-carousel-item" id="b">
+                    <div class="demo-carousel">2</div>
+                </div>
+                <div class="rbt-carousel-item" id="c">
+                    <div class="demo-carousel">3</div>
+                </div>
+                <div class="rbt-carousel-item" id="d">
+                    <div class="demo-carousel">4</div>
+                </div>
+            </div>
+            <button type="button " class="rbt-carousel-arrow right rbt-carousel-arrow-hover">
+          <i class="rbt-icon rbt-icon-ios-arrow-forward"></i>
+        </button>
+            <ol class="rbt-carousel-dots rbt-carousel-dots-inside">
+                <li class="rbt-carousel-active">
+                    <button type="button"></button>
+                </li>
+                <li><button type="button"></button></li>
+                <li><button type="button"></button></li>
+                <li><button type="button"></button></li>
+            </ol>
+        </div>
+    </div> -->
+
+    <div class="demo">
+        <rab-carousel id="car1">
+            <div class="demo-carousel" slot="carouselItem">1</div>
+            <div class="demo-carousel" slot="carouselItem">2</div>
+            <div class="demo-carousel" slot="carouselItem">3</div>
+            <div class="demo-carousel" slot="carouselItem">4</div>
+        </rab-carousel>
+    </div>
+</body>
+<script src="../../utils/typeof.js"></script>
+<script src="../../utils/addDom.js"></script>
+<script src="../../common/getComps.js"></script>
+<script src="../../common/getCompsSlot.js"></script>
+<script src="../../common/main.js"></script>
+<script src="./carousel.js"></script>
+<script>
+    RabbitUI.create("#car1");
+</script>
+
+</html>

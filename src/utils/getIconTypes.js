@@ -1,5 +1,6 @@
 /**
  * @param {string} type
+ * @return {string}
  */
 function getIconTypes(type) {
     const iconTypes = {

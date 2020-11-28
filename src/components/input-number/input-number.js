@@ -3,7 +3,7 @@
  * 通过鼠标或键盘，输入范围内的数值
  */
 Rabbit.prototype.InputNumber = {
-    _createInstance(config) {
+    _createInstance(_config) {
         const {
             max = Infinity,
                 min = -Infinity,
@@ -18,7 +18,7 @@ Rabbit.prototype.InputNumber = {
                 editable = true,
                 precision = 1,
                 placeholder = "",
-        } = config;
+        } = _config;
 
         const InputNumber = document.createElement("div");
         const InputNumberHandlerWrap = document.createElement("div");
@@ -151,7 +151,7 @@ Rabbit.prototype.InputNumber = {
             return false;
         }
 
-        // !如果 step 是小数，且点击箭头控制每次改变的精度会出现与键盘上下方向键控制的数值不一致
+        // 如果 step 是小数，且点击箭头控制每次改变的精度会出现与键盘上下方向键控制的数值不一致
 
         if (type === "up") {
             // 当step 为 1 或 0 时并无意义

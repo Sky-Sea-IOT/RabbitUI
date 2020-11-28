@@ -4,18 +4,17 @@
  */
 
 Rabbit.prototype.Timeline = {
-    _createInstance: (config, slot) => {
+    _createInstance: (_config, _slot) => {
         const prefixCls = "rbt-timeline";
-        const { color = [], pending = false } = config;
-        const { dot, timelineItem } = slot;
+
+        const { color = [], pending = false } = _config;
+        const { DOT, TIMELINEITEM } = _slot;
 
         const Timeline = document.createElement("ul");
 
         Timeline.className = `${prefixCls}`;
 
-        if (pending) {
-            Timeline.classList.add(`${prefixCls}-pending`);
-        }
+        if (pending) Timeline.classList.add(`${prefixCls}-pending`);
 
         const createItems = (i) => {
             const TimelineItem = document.createElement("li");
@@ -28,8 +27,8 @@ Rabbit.prototype.Timeline = {
             TimelineItemHead.className = `${prefixCls}-item-head`;
             TimelineItemContent.className = `${prefixCls}-item-content`;
 
-            if (dot[i]) {
-                addElemetsOfSlots(dot[i], TimelineItemHead);
+            if (DOT[i]) {
+                addElemetsOfSlots(DOT[i], TimelineItemHead);
                 TimelineItemHead.classList.add(`${prefixCls}-item-head-custom`);
             }
 
@@ -48,14 +47,14 @@ Rabbit.prototype.Timeline = {
                     TimelineItemHead.style.borderColor = `${color[i]}`;
                 }
             } else {
-                const err = `[Rabbit] The property color is an array of types instead of ${_typeof(
+                const err = `The property color is an array of types instead of ${_typeof(
           color
         )}`;
-                throw TypeError(err);
+                throw new TypeError(err);
             }
 
-            isSlotsUserd(true, timelineItem[i]);
-            addElemetsOfSlots(timelineItem[i], TimelineItemContent);
+            isSlotsUserd(true, TIMELINEITEM[i]);
+            addElemetsOfSlots(TIMELINEITEM[i], TimelineItemContent);
 
             TimelineItem.append(
                 TimelineItemTail,
@@ -65,7 +64,7 @@ Rabbit.prototype.Timeline = {
             Timeline.appendChild(TimelineItem);
         };
 
-        for (let i = 0; i < timelineItem.length; i++) createItems(i);
+        for (let i = 0; i < TIMELINEITEM.length; i++) createItems(i);
 
         return Timeline;
     },

@@ -10,7 +10,7 @@
 </head>
 <style>
     .demo {
-        width: 63%;
+        width: 65%;
         padding: 42px 24px 50px;
         color: rgba(0, 0, 0, 0.85);
         border: 1px solid #f0f0f0;
@@ -20,87 +20,77 @@
 
 <body>
     <section class="demo">
+        <!-- <div class="rbt-result rbt-result-info">
+        <div class="rbt-result-icon">
+            <i class="rbt-icon rbt-icon-ios-alert"></i>
+        </div>
+        <div class="rbt-result-title">
+            Successfully Purchased Cloud Server ECS!
+        </div>
+        <div class="rbt-result-subtitle">
+            Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.
+        </div>
+        <div class="rbt-result-footer">
+            <button class="rbt-btn rbt-btn-primary">Go Console</button>
+            <button class="rbt-btn">Buy Again</button>
+        </div>
+    </div> -->
+
         <rab-result id="result1">
-            <div slot="footer">
-                <button class="rbt-btn">确定</button>
-                <button class="rbt-btn">取消</button>
-            </div>
+            <button class="rbt-btn rbt-btn-primary" slot="footer">查看日志</button>
         </rab-result>
     </section>
     <section class="demo">
         <rab-result id="result2">
             <div slot="footer">
-                <button class="rbt-btn">确定</button>
+                <button class="rbt-btn rbt-btn-success">打印账单</button>
+                <button class="rbt-btn">再次购买</button>
             </div>
         </rab-result>
     </section>
     <section class="demo">
         <rab-result id="result3">
-            <div slot="footer">
-                <button class="rbt-btn">确定</button>
-            </div>
+            <button class="rbt-btn rbt-btn-warning" slot="footer">查看日志</button>
         </rab-result>
     </section>
     <section class="demo">
         <rab-result id="result4">
-            <div slot="content">
-                <div class="desc">
-                    <h3 style="font-size: 16px">
-                        The content you submitted has the following error:
-                    </h3>
-                    <ul>
-                        <li style="margin: 1em 0">
-                            Your account has been frozen.
-                            <a href="#">. Thaw immediately ></a>
-                        </li>
-                        <li style="margin-bottom: 1em">
-                            Your account is not yet eligible to apply.
-                            <a href="#"> Apply Unlock ></a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="desc" slot="content">
+                <h3 style="font-size: 16px">
+                    The content you submitted has the following error:
+                </h3>
+                <ul>
+                    <li style="margin: 1em 0">
+                        Your account has been frozen.
+                        <a href="#">. Thaw immediately ></a>
+                    </li>
+                    <li style="margin-bottom: 1em">
+                        Your account is not yet eligible to apply.
+                        <a href="#"> Apply Unlock ></a>
+                    </li>
+                </ul>
             </div>
             <div slot="footer">
-                <button class="rbt-btn">确定</button>
+                <button class="rbt-btn rbt-btn-primary">查看日志</button>
+                <button class="rbt-btn">联系客服</button>
             </div>
         </rab-result>
     </section>
     <section class="demo">
         <rab-result id="result5">
-            <div slot="footer">
-                <button class="rbt-btn">确定</button>
-            </div>
+            <button class="rbt-btn rbt-btn-primary" slot="footer">返回首页</button>
         </rab-result>
     </section>
     <section class="demo">
         <rab-result id="result6">
-            <div slot="footer">
-                <button class="rbt-btn">确定</button>
-            </div>
+            <button class="rbt-btn rbt-btn-primary" slot="footer">返回首页</button>
         </rab-result>
     </section>
     <section class="demo">
         <rab-result id="result7">
-            <div slot="footer">
-                <button class="rbt-btn">确定</button>
-            </div>
+            <button class="rbt-btn rbt-btn-primary" slot="footer">返回首页</button>
         </rab-result>
     </section>
-    <!-- <div class="rbt-result rbt-result-info">
-            <div class="rbt-result-icon">
-                <i class="rbt-icon rbt-icon-ios-alert rbt-result-icon"></i>
-            </div>
-            <div class="rbt-result-title">
-                Successfully Purchased Cloud Server ECS!
-            </div>
-            <div class="rbt-result-subtitle">
-                Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.
-            </div>
-            <div class="rbt-result-footer">
-                <button class="rbt-btn">Go Console</button>
-                <button class="rbt-btn">Buy Again</button>
-            </div>
-        </div> -->
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
@@ -109,41 +99,39 @@
 <script src="../../common/getCompsSlot.js"></script>
 <script src="../../common/main.js"></script>
 <script src="../../utils/isSlotUserd.js"></script>
-<script src="./svg.js"></script>
 <script src="./result.js"></script>
 <script>
     RabbitUI.create("#result1", {
-        title: "您已经执行过该操作了",
+        title: "您已经执行过该操作",
     });
     RabbitUI.create("#result2", {
         status: "success",
-        title: "支付成功!",
-        subTitle: "订单号: 2017182818828182881 感谢您的购买，物流将在下午5点后发货。",
+        title: "成功购买云服务器!",
+        subtitle: "订单号: 2020362851226364808云服务器配置1-5分钟，请等待。",
     });
     RabbitUI.create("#result3", {
         status: "warning",
-        title: "您的操作环境出现异常，请稍后再试",
-        icon: "ios-warning ",
+        title: "您的操作环境出了异常",
     });
     RabbitUI.create("#result4", {
         status: "error",
         title: "无法访问此网站!",
-        subTitle: "xxxwtf.com 的响应时间过长，请检查网络连接",
+        subtitle: "xxxwtf.com 的响应时间过长，请检查网络连接",
     });
     RabbitUI.create("#result5", {
-        status: 403,
+        status: "403",
         title: "403",
-        subTitle: "抱歉，您没有权限访问此页。",
+        subtitle: "抱歉，您没有权限访问此页。",
     });
     RabbitUI.create("#result6", {
-        status: 404,
+        status: "404",
         title: "404",
-        subTitle: "抱歉，您访问的页面不存在。",
+        subtitle: "抱歉，您访问的页面不存在。",
     });
     RabbitUI.create("#result7", {
-        status: 500,
+        status: "500",
         title: "500",
-        subTitle: "抱歉，该页面出现了些问题",
+        subtitle: " 服务器错误，无法完成请求。",
     });
 </script>
 

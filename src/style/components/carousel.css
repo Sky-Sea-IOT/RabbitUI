@@ -1,0 +1,137 @@
+@import "../common/index.css";
+@import "../common/iconfont/icons.css";
+.rbt-carousel {
+  position: relative;
+  display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.rbt-carousel-arrow {
+  border: none;
+  outline: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  transition: 0.2s;
+  background-color: rgba(31, 45, 61, 0.11);
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  font-family: inherit;
+  line-height: inherit;
+}
+.rbt-carousel-arrow:hover {
+  background-color: rgba(31, 45, 61, 0.5);
+}
+.rbt-carousel-arrow-hover {
+  display: inherit;
+  opacity: 0;
+}
+.rbt-carousel-arrow-always {
+  display: inherit;
+}
+.rbt-carousel-arrow.left {
+  left: 16px;
+}
+.rbt-carousel-arrow.right {
+  right: 16px;
+}
+.rbt-carousel:hover .rbt-carousel-arrow-hover {
+  opacity: 1;
+}
+.rbt-carousel-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.rbt-carousel-item {
+  position: relative;
+  pointer-events: none;
+  transform: translateX(100%);
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform ease 0.5s;
+}
+.rbt-carousel-item-active {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+.rbt-carousel-item-left {
+  transform: translateX(-100%);
+}
+.rbt-carousel-item-right {
+  transform: translateX(100%);
+}
+.rbt-carousel-dots {
+  z-index: 10;
+  display: none;
+  position: relative;
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  width: 100%;
+  height: 17px;
+}
+.rbt-carousel-dots li {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  margin: 0 2px;
+  padding: 7px 0;
+  cursor: pointer;
+}
+.rbt-carousel-dots li button {
+  border: 0;
+  cursor: pointer;
+  background: #8391a5;
+  opacity: 0.3;
+  display: block;
+  width: 25px;
+  height: 3px;
+  border-radius: 1px;
+  outline: 0;
+  font-size: 0;
+  color: transparent;
+  transition: all 0.5s;
+}
+.rbt-carousel-dots li button.radius {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.rbt-carousel-dots li:hover button {
+  opacity: 1;
+}
+.rbt-carousel-dots li.rbt-carousel-active button {
+  opacity: 1;
+  width: 30px;
+}
+.rbt-carousel-dots li.rbt-carousel-active button.radius {
+  width: 6px;
+}
+.rbt-carousel-dots-inside {
+  display: block;
+  position: absolute;
+  bottom: 5px;
+}
+.rbt-carousel-dots-inside .rbt-carousel-active button {
+  background-color: #fff;
+}
+.rbt-carousel-dots-outside {
+  display: block;
+  margin-top: 2px;
+}

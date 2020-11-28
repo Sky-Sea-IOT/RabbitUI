@@ -3,7 +3,7 @@
  * 展示一组折叠的下拉菜单。
  */
 Rabbit.prototype.Dropdown = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const {
             onClick,
             onUnfold,
@@ -14,9 +14,9 @@ Rabbit.prototype.Dropdown = {
             className = "",
             placement = "bottom",
             itemDisabled = [],
-        } = config;
+        } = _config;
 
-        const { ref, dropdownItem } = slot;
+        const { REF, DROPDOWNITEM } = _slot;
 
         const DropDown = document.createElement("div");
         const DropDownRef = document.createElement("div");
@@ -33,13 +33,13 @@ Rabbit.prototype.Dropdown = {
 
         let itemList = [];
 
-        for (let i = 0; i < dropdownItem.length; i++) {
+        for (let i = 0; i < DROPDOWNITEM.length; i++) {
             const DropDownItem = document.createElement("li");
 
             DropDownItem.className = "rbt-dropdown-item";
             DropDownMenu.appendChild(DropDownItem);
 
-            addElemetsOfSlots(dropdownItem[i], DropDownItem);
+            addElemetsOfSlots(DROPDOWNITEM[i], DropDownItem);
 
             this._itemClickHandle(
                 DropDown,
@@ -78,7 +78,7 @@ Rabbit.prototype.Dropdown = {
             onUnfold
         );
 
-        addElemetsOfSlots(ref, DropDownRef);
+        addElemetsOfSlots(REF, DropDownRef);
 
         DropDown.append(DropDownRef, DropDownMenu);
 

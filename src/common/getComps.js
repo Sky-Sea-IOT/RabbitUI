@@ -1,9 +1,13 @@
+/**
+ * @constant COMPONENTS 组件名
+ */
 const COMPONENTS = {
     Alert: "alert",
     Avatar: "avatar",
     BackTop: "backtop",
     Breadcrumb: "breadcrumb",
     Card: "card",
+    Carousel: "carousel",
     Collapse: "collapse",
     Drawer: "drawer",
     Dropdown: "dropdown",
@@ -21,12 +25,13 @@ const COMPONENTS = {
     Timeline: "timeline",
     Tooltip: "tooltip",
 };
+
 /**
- *
- * @param {String} el
- * @param {String} compsName
+ * 生成对应的组件实例
+ * @param {string} el
+ * @param {string} compsName
  * @param {{}} config
- * @param {HTMLSlotElement} slot
+ * @param {HTMLElement} slot
  * @returns {HTMLElement}
  */
 function _getComps(el, compsName, config, slot) {
@@ -51,6 +56,9 @@ function _getComps(el, compsName, config, slot) {
 
         case COMPONENTS.Card:
             return Rabbit.prototype.Card._createInstance(config, slot);
+
+        case COMPONENTS.Carousel:
+            return Rabbit.prototype.Carousel._createInstance(config, slot);
 
         case COMPONENTS.Collapse:
             return Rabbit.prototype.Collapse._createInstance(config, slot);

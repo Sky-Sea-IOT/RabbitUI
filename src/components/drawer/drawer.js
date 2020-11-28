@@ -5,7 +5,7 @@ let drawerZIndex = 1000;
  * 屏幕边缘滑出的浮层面板
  */
 Rabbit.prototype.Drawer = {
-    _createInstance(el, config, slot) {
+    _createInstance(_el, _config, _slot) {
         const prefixCls = "rbt-drawer";
         const {
             mask = true,
@@ -21,8 +21,8 @@ Rabbit.prototype.Drawer = {
                 className = "",
                 scrollable = false,
                 maskClosable = true,
-        } = config;
-        const { header, content, footer } = slot;
+        } = _config;
+        const { HEADER, CONTENT, FOOTER } = _slot;
 
         drawerZIndex = zIndex;
 
@@ -50,7 +50,7 @@ Rabbit.prototype.Drawer = {
         DrawerBody.className = `${prefixCls}-body`;
         DrawerFooter.className = `${prefixCls}-footer`;
 
-        bindClickEv(el, null, onClose);
+        bindClickEv(_el, null, onClose);
 
         this._initDirection(DrawerWrap, placement);
         this._showMask(mask, Drawer, DrawerMask);
@@ -77,20 +77,20 @@ Rabbit.prototype.Drawer = {
         DrawerClose.appendChild(DrawerCloseIco);
         DrawerHeader.appendChild(DrawerTitle);
 
-        if (header && header.innerHTML) {
-            addElemetsOfSlots(header, DrawerTitle);
+        if (HEADER && HEADER.innerHTML) {
+            addElemetsOfSlots(HEADER, DrawerTitle);
         } else {
             DrawerTitle.innerHTML = title;
         }
 
-        if (content && content.innerHTML) {
-            addElemetsOfSlots(content, DrawerBody);
+        if (CONTENT && CONTENT.innerHTML) {
+            addElemetsOfSlots(CONTENT, DrawerBody);
         }
 
         DrawerContentWrap.append(DrawerHeader, DrawerBody);
 
-        if (footer && footer.innerHTML) {
-            addElemetsOfSlots(footer, DrawerFooter);
+        if (FOOTER && FOOTER.innerHTML) {
+            addElemetsOfSlots(FOOTER, DrawerFooter);
             DrawerContentWrap.appendChild(DrawerFooter);
         }
 

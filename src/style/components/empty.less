@@ -12,10 +12,13 @@
   font-size: @font-size-sm;
   line-height: @base-line-height;
   text-align: center;
-  margin: 32px 0;
-  color: rgba(0, 0, 0, 0.25);
 
-  &-img {
+  &-normal {
+    margin: 32px 0;
+    color: rgba(0, 0, 0, 0.25);
+  }
+
+  &-image {
     height: 100px;
     margin-bottom: @margin-xs;
 
@@ -24,6 +27,10 @@
       height: 100%;
       margin: @auto;
     }
+  }
+
+  &-normal &-image {
+    height: 74px;
   }
 
   &-desc {

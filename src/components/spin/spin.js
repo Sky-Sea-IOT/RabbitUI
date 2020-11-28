@@ -5,7 +5,7 @@
 let spinZIndex = 2010;
 
 Rabbit.prototype.Spin = {
-    _createInstance(size, text, color) {
+    _createInstance(_size, _text, _color) {
         const prefixCls = "rbt-spin";
         const enterAniCls = `${prefixCls}-fade-enter`;
         const leaveAniCls = `${prefixCls}-fade-leave`;
@@ -25,13 +25,13 @@ Rabbit.prototype.Spin = {
         SpinFixBox.className = `${prefixCls}-fix ${prefixCls}-fullscreen`;
         SpinMainBox.className = `${prefixCls}-main`;
 
-        SpinDot.className = `${prefixCls}-dot bg-${color} ${size}`;
+        SpinDot.className = `${prefixCls}-dot bg-${_color} ${_size}`;
 
         SpinShowTextBox.className = `${prefixCls} ${prefixCls}-fix ${prefixCls}-show-text`;
         SpinTextBox.className = `${prefixCls}-text`;
-        SpinBorder.className = `rbt-icon rbt-icon-loading-solid rbt-spin-loading ${size}`;
+        SpinBorder.className = `rbt-icon rbt-icon-loading-solid rbt-spin-loading ${_size}`;
 
-        SpinText.innerHTML = text;
+        SpinText.innerHTML = _text;
 
         SpinFullscreen.style.zIndex = spinZIndex++;
 
@@ -40,7 +40,7 @@ Rabbit.prototype.Spin = {
         SpinShowTextBox.append(SpinTextBox);
         SpinTextBox.append(SpinBorder, SpinText);
 
-        text
+        _text
             ?
             SpinMainBox.appendChild(SpinShowTextBox) :
             SpinMainBox.appendChild(SpinDot);

@@ -3,43 +3,30 @@
 .rbt-result {
   padding: 48px 32px;
 }
-.rbt-result-info {
+.rbt-result-info .rbt-result-icon > .rbt-icon {
   color: #1890ff;
 }
-.rbt-result-info .rbt-result-icon {
-  color: #1890ff;
+.rbt-result-success .rbt-result-icon > .rbt-icon {
+  color: #05cc72;
 }
-.rbt-result-success {
-  color: #52c41a;
-}
-.rbt-result-success .rbt-result-icon {
-  color: #52c41a;
-}
-.rbt-result-warning {
+.rbt-result-warning .rbt-result-icon > .rbt-icon {
   color: #faad14;
 }
-.rbt-result-warning .rbt-result-icon {
-  color: #faad14;
-}
-.rbt-result-error {
-  color: #ff4d4f;
-}
-.rbt-result-error .rbt-result-icon {
+.rbt-result-error .rbt-result-icon > .rbt-icon {
   color: #ff4d4f;
 }
 .rbt-result-icon {
-  margin-bottom: 8px;
   text-align: center;
   font-size: 92px;
 }
 .rbt-result-img {
-  width: 250px;
-  height: 295px;
+  width: 350px;
+  height: 280px;
   margin: auto;
   margin-bottom: 24px;
 }
 .rbt-result-title {
-  color: #17233d;
+  color: #2c3e50;
   font-size: 24px;
   line-height: 1.8;
   text-align: center;
@@ -47,10 +34,10 @@
 .rbt-result-subtitle {
   color: #808695;
   font-size: 14px;
-  line-height: 1.6;
+  padding-top: 8px;
   text-align: center;
 }
-.rbt-result-content {
+.rbt-result-extra {
   margin-top: 24px;
   padding: 24px 40px;
   background-color: #fafafa;

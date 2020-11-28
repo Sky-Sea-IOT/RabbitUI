@@ -3,7 +3,7 @@
  * 在两种状态间切换时用到的开关选择器。
  */
 Rabbit.prototype.Switch = {
-    _createInstance: (config, slot) => {
+    _createInstance: (_config, _slot) => {
         const prefixCls = "rbt-switch";
 
         let {
@@ -14,9 +14,9 @@ Rabbit.prototype.Switch = {
             disabled,
             openColor,
             className,
-        } = config;
+        } = _config;
 
-        const { open, close } = slot;
+        const { OPEN, CLOSE } = _slot;
 
         // 记录 switch 状态，并作为 onChange 回调的参数返回出去
         let status = false;
@@ -54,7 +54,7 @@ Rabbit.prototype.Switch = {
                 openColor ? (Switch.style.background = openColor) : "";
 
                 // 自定义显示打开时的内容
-                open && open.innerHTML ? addElemetsOfSlots(open, SwitchInner) : "";
+                OPEN && OPEN.innerHTML ? addElemetsOfSlots(OPEN, SwitchInner) : "";
             } else {
                 Switch.style.background = "";
 
@@ -62,7 +62,7 @@ Rabbit.prototype.Switch = {
                 offColor ? (Switch.style.background = offColor) : "";
 
                 // 自定义显示关闭时的内容
-                close && close.innerHTML ? addElemetsOfSlots(close, SwitchInner) : "";
+                CLOSE && CLOSE.innerHTML ? addElemetsOfSlots(CLOSE, SwitchInner) : "";
             }
 
             Switch.setAttribute("aria-checked", status);
@@ -92,8 +92,8 @@ Rabbit.prototype.Switch = {
 
         switchColorChange(status);
 
-        isSlotsUserd(true, open);
-        isSlotsUserd(true, close);
+        isSlotsUserd(true, OPEN);
+        isSlotsUserd(true, CLOSE);
 
         Switch.append(SwitchHandle, SwitchInner);
 

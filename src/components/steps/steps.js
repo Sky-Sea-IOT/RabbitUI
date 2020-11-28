@@ -3,21 +3,21 @@
  * 引导用户按照流程完成任务的导航条。
  */
 Rabbit.prototype.Steps = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const {
             size = "default",
                 status = "process",
                 current = 0,
                 direction = "horizontal",
-        } = config;
+        } = _config;
 
-        const { step } = slot;
+        const { STEP } = _slot;
 
         const Steps = document.createElement("div");
         Steps.className = `rbt-steps rbt-steps-${direction} rbt-steps-${size}`;
 
         let stepsItemList = [];
-        for (let i = 0; i < step.length; i++) {
+        for (let i = 0; i < STEP.length; i++) {
             const StepsItem = document.createElement("div");
             const StepsTail = document.createElement("div");
             const StepsTailI = document.createElement("i");
@@ -31,7 +31,7 @@ Rabbit.prototype.Steps = {
             stepsItemList.push(StepsItem);
 
             this._addClassName(
-                step[i].querySelector('[slot="icon"]'),
+                STEP[i].querySelector('[slot="icon"]'),
                 status,
                 StepsItem,
                 StepsTail,
@@ -44,7 +44,7 @@ Rabbit.prototype.Steps = {
             );
             this._setCurrentContent(StepsHeadIcon, i, status);
             this._addIcon(
-                step[i].querySelector('[slot="icon"]'),
+                STEP[i].querySelector('[slot="icon"]'),
                 StepsItem,
                 StepsHeadIcon
             );
@@ -55,13 +55,13 @@ Rabbit.prototype.Steps = {
             StepsHead.append(StepsHeadInner, StepsHeadIcon);
             StepsHeadInner.appendChild(StepsHeadIcon);
             StepsMain.append(StepsTitle, StepsContent);
-            addElemetsOfSlots(step[i].querySelector('[slot="title"]'), StepsTitle);
+            addElemetsOfSlots(STEP[i].querySelector('[slot="title"]'), StepsTitle);
             addElemetsOfSlots(
-                step[i].querySelector('[slot="content"]'),
+                STEP[i].querySelector('[slot="content"]'),
                 StepsContent
             );
         }
-        this._setStatus(stepsItemList.length, current, stepsItemList, status, step);
+        this._setStatus(stepsItemList.length, current, stepsItemList, status, STEP);
         return Steps;
     },
 

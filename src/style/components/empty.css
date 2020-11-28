@@ -5,17 +5,22 @@
   font-size: 14px;
   line-height: 1.5715;
   text-align: center;
+}
+.rbt-empty-normal {
   margin: 32px 0;
   color: rgba(0, 0, 0, 0.25);
 }
-.rbt-empty-img {
+.rbt-empty-image {
   height: 100px;
   margin-bottom: 8px;
 }
-.rbt-empty-img img,
-.rbt-empty-img svg {
+.rbt-empty-image img,
+.rbt-empty-image svg {
   height: 100%;
   margin: auto;
+}
+.rbt-empty-normal .rbt-empty-image {
+  height: 74px;
 }
 .rbt-empty-desc {
   margin: 0;

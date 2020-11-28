@@ -3,7 +3,7 @@
  * 可以折叠/展开的内容区域。
  */
 Rabbit.prototype.Collapse = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const prefixCls = "rbt-collapse";
         const prefixIconCls = "rbt-icon";
 
@@ -15,9 +15,9 @@ Rabbit.prototype.Collapse = {
                 accordion = false,
                 showArrow = true,
                 defaultActiveKey = [],
-        } = config;
+        } = _config;
 
-        const { panel } = slot;
+        const { PANEL } = _slot;
 
         let expandedKeys = [];
 
@@ -100,7 +100,7 @@ Rabbit.prototype.Collapse = {
                 );
         };
 
-        panel.forEach((item, index) => createCollapseItem(item, index));
+        PANEL.forEach((item, index) => createCollapseItem(item, index));
 
         return Collapse;
     },

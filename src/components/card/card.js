@@ -3,7 +3,7 @@
  * 基础容器，用来显示文字、列表、图文等内容
  */
 Rabbit.prototype.Card = {
-    _createInstance: (config, slot) => {
+    _createInstance: (_config, _slot) => {
         const prefixCls = "rbt-card";
         const {
             width = 320,
@@ -13,8 +13,8 @@ Rabbit.prototype.Card = {
                 bodyStyle = {},
                 className = "",
                 hoverable = false,
-        } = config;
-        const { extra, title, content } = slot;
+        } = _config;
+        const { EXTRA, TITLE, CONTENT } = _slot;
 
         const Card = document.createElement("div");
         const CardHeader = document.createElement("div");
@@ -40,22 +40,22 @@ Rabbit.prototype.Card = {
 
         if (isNum(padding)) CardBody.style.padding = `${padding}px`;
 
-        if (title && title.innerHTML) {
-            addElemetsOfSlots(title, CardHeader);
+        if (TITLE && TITLE.innerHTML) {
+            addElemetsOfSlots(TITLE, CardHeader);
             Card.appendChild(CardHeader);
         }
-        if (extra && extra.innerHTML) {
-            addElemetsOfSlots(extra, CardExtra);
+        if (EXTRA && EXTRA.innerHTML) {
+            addElemetsOfSlots(EXTRA, CardExtra);
             Card.appendChild(CardExtra);
         }
-        if (content && content.innerHTML) {
-            addElemetsOfSlots(content, CardBody);
+        if (CONTENT && CONTENT.innerHTML) {
+            addElemetsOfSlots(CONTENT, CardBody);
             Card.appendChild(CardBody);
         }
 
-        isSlotsUserd(true, title);
-        isSlotsUserd(true, extra);
-        isSlotsUserd(true, content);
+        isSlotsUserd(true, TITLE);
+        isSlotsUserd(true, EXTRA);
+        isSlotsUserd(true, CONTENT);
 
         return Card;
     },

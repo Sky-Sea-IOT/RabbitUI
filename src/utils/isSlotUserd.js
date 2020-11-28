@@ -1,7 +1,6 @@
 /**
- *
- * @param { Boolean } condition
- * @param {DOMObject} slot
+ * @param {boolean} condition
+ * @param {HTMLElement} slot
  */
 function isSlotsUserd(condition, slot) {
     // 指定的slot的标签存在但是相关的条件没设置为true

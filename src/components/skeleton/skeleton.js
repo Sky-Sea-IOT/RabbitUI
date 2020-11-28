@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Skeleton = {
-    _createInstance: (config) => {
+    _createInstance: (_config) => {
         const prefixCls = "rbt-skeleton";
 
         const {
@@ -17,7 +17,7 @@ Rabbit.prototype.Skeleton = {
                 rowsWidth = 60,
                 avatarSize = "large",
                 avatarShape = "circle",
-        } = config;
+        } = _config;
 
         const Skeleton = document.createElement("div");
         const SkeletonHeader = document.createElement("div");

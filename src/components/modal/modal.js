@@ -5,8 +5,7 @@ let modalZIndex = 1000;
  * 模态对话框，在浮层中显示，引导用户进行相关操作。
  */
 Rabbit.prototype.Modal = {
-    _createInstance(el, config, slot) {
-        const prefixCls = "rbt-modal";
+    _createInstance(_el, _config, _slot) {
         const {
             mask = true,
                 onOk,
@@ -26,8 +25,8 @@ Rabbit.prototype.Modal = {
                 scrollable = false,
                 fullscreen = false,
                 maskClosable = true,
-        } = config;
-        const { header, content, footer } = slot;
+        } = _config;
+        const { HEADER, CONTENT, FOOTER } = _slot;
 
         modalZIndex = zIndex;
 
@@ -69,7 +68,7 @@ Rabbit.prototype.Modal = {
         this._buttonText(ModalOkButton, ModalCancelButton, okText, cancelText);
         this._setFullscreen(fullscreen, ModalBox);
 
-        bindClickEv(el, onOk, onCancel);
+        bindClickEv(_el, onOk, onCancel);
 
         this._onOKHandle(
             ModalOkButton,
@@ -102,23 +101,23 @@ Rabbit.prototype.Modal = {
         );
         this._modalHideByMask(maskClosable, ModalMask, ModalWrap, ModalOkButton);
 
-        addElemetsOfSlots(content, ModalBody);
+        addElemetsOfSlots(CONTENT, ModalBody);
 
-        if (header && header.innerHTML) {
-            addElemetsOfSlots(header, ModalTitle);
+        if (HEADER && HEADER.innerHTML) {
+            addElemetsOfSlots(HEADER, ModalTitle);
         } else {
             ModalTitle.innerHTML = title;
         }
 
-        if (footer && footer.innerHTML) {
-            addElemetsOfSlots(footer, ModalFooter);
+        if (FOOTER && FOOTER.innerHTML) {
+            addElemetsOfSlots(FOOTER, ModalFooter);
         } else {
             ModalFooter.append(ModalCancelButton, ModalOkButton);
         }
 
-        isSlotsUserd(true, header);
-        isSlotsUserd(true, content);
-        isSlotsUserd(true, footer);
+        isSlotsUserd(true, HEADER);
+        isSlotsUserd(true, CONTENT);
+        isSlotsUserd(true, FOOTER);
 
         Modal.append(ModalMask, ModalWrap);
         ModalWrap.appendChild(ModalBox);
@@ -300,7 +299,20 @@ Rabbit.prototype.Modal = {
         }
     },
 
-    // 外部元素调用，用于显示隐藏modal
+    _getModalElement(el) {
+        const elem = document.querySelector(el);
+        const mask = elem.querySelector(".rbt-modal-mask");
+        const wrap = elem.querySelector(".rbt-modal-wrap");
+        const okBtn = elem.querySelector(".rbt-btn-primary");
+        return {
+            elem,
+            mask,
+            wrap,
+            okBtn,
+        };
+    },
+
+    // 外部调用，用于显示隐藏modal
 
     show(el) {
         const mask = this._getModalElement(el).mask;
@@ -319,18 +331,5 @@ Rabbit.prototype.Modal = {
             this._getModalElement(el).wrap,
             this._getModalElement(el).okBtn
         );
-    },
-
-    _getModalElement(el) {
-        const elem = document.querySelector(el);
-        const mask = elem.querySelector(".rbt-modal-mask");
-        const wrap = elem.querySelector(".rbt-modal-wrap");
-        const okBtn = elem.querySelector(".rbt-btn-primary");
-        return {
-            elem,
-            mask,
-            wrap,
-            okBtn,
-        };
     },
 };

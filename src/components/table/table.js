@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Table = {
-    _createInstance(config) {
+    _createInstance(_config) {
         const prefixCls = "rbt-table";
         const {
             size = "default",
@@ -19,7 +19,7 @@ Rabbit.prototype.Table = {
                 noDataText = "暂无数据",
                 _highlightRow = false,
                 _disabledHover = false,
-        } = config;
+        } = _config;
 
         const Table = document.createElement("div");
         const TableContainer = document.createElement("div");

@@ -3,7 +3,7 @@
  * 点击/鼠标移入元素，弹出气泡式的卡片浮层。
  */
 Rabbit.prototype.Popover = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const {
             width,
             title = "",
@@ -19,11 +19,9 @@ Rabbit.prototype.Popover = {
             defaultShow = false,
             onPopoverShow,
             onPopoverHide,
-        } = config;
+        } = _config;
 
-        const { ref } = slot;
-        const Slot_Title = slot.title;
-        const Slot_Content = slot.content;
+        const { REF, TITLE, CONTENT } = _slot;
 
         const Popover = document.createElement("div");
         const PopoverRef = document.createElement("div");
@@ -35,8 +33,8 @@ Rabbit.prototype.Popover = {
         const PopoverTitle = document.createElement("div");
         const PopoverContent = document.createElement("div");
 
-        this._addTitle(title, Slot_Title, PopoverTitle);
-        this._addContent(content, Slot_Content, PopoverContent);
+        this._addTitle(title, TITLE, PopoverTitle);
+        this._addContent(content, CONTENT, PopoverContent);
         this._setSize(width, padding, PopoverBox, PopoverTitle, PopoverContent);
         this._setPlacement(placement, Popover, PopoverRef, PopoverBox, trigger);
         this._addClassName(
@@ -73,7 +71,7 @@ Rabbit.prototype.Popover = {
         );
         this._externalElemsTriggerHide(triggerHide, PopoverBox, onPopoverHide);
 
-        addElemetsOfSlots(ref, PopoverRef);
+        addElemetsOfSlots(REF, PopoverRef);
 
         Popover.append(PopoverRef, PopoverBox);
         PopoverBox.appendChild(PopoverMain);

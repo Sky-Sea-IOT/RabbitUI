@@ -3,7 +3,7 @@
  * 返回页面顶部的操作按钮。
  */
 Rabbit.prototype.BackTop = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const prefixCls = "rbt-back-top";
         const prefixIconCls = "rbt-icon";
 
@@ -13,9 +13,9 @@ Rabbit.prototype.BackTop = {
                 bottom = 50,
                 duration = 450,
                 onClick,
-        } = config;
+        } = _config;
 
-        const { content } = slot;
+        const { CONTENT } = _slot;
 
         const BackTop = document.createElement("div");
         const BackTopInner = document.createElement("div");
@@ -34,9 +34,9 @@ Rabbit.prototype.BackTop = {
         BackTop.style.bottom = `${bottom}px`;
         BackTop.style.right = `${right}px`;
 
-        // 如果用 slot content 自定义内容则替换掉默认的图标
-        if (content && content.innerHTML) {
-            addElemetsOfSlots(content, BackTop);
+        // 如果用 slot CONTENT 自定义内容则替换掉默认的图标
+        if (CONTENT && CONTENT.innerHTML) {
+            addElemetsOfSlots(CONTENT, BackTop);
         } else {
             BackTop.appendChild(BackTopInner);
         }
@@ -54,7 +54,7 @@ Rabbit.prototype.BackTop = {
         // 滚动到指定距离显示 backtop
         window.onscroll = () => this._backTopShow(`.${prefixCls}`, window.scrollY);
 
-        isSlotsUserd(true, content);
+        isSlotsUserd(true, CONTENT);
 
         return BackTop;
     },

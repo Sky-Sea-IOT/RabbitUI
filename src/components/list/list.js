@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.List = {
-    _createInstance(config, slot) {
+    _createInstance(_config, _slot) {
         const prefixCls = "rbt-list";
 
         const {
@@ -14,11 +14,9 @@ Rabbit.prototype.List = {
                 header = "",
                 footer = "",
                 renderItem = [],
-        } = config;
+        } = _config;
 
-        const SLOT_HEADER = slot.header;
-        const SLOT_FOOTER = slot.footer;
-        const SLOT_LISTITEM = slot.listItem;
+        const { HEADER, FOOTER, LISTITEM } = _slot;
 
         const List = document.createElement("div");
         const ListHeader = document.createElement("div");
@@ -38,34 +36,34 @@ Rabbit.prototype.List = {
             List.classList.remove(`${prefixCls}-bordered`);
         }
 
-        if (header || SLOT_HEADER) {
+        if (header || HEADER) {
             List.appendChild(ListHeader);
         }
         if (header) {
             ListHeader.innerHTML = header;
-        } else if (SLOT_HEADER && SLOT_HEADER.innerHTML) {
-            addElemetsOfSlots(SLOT_HEADER, ListHeader);
+        } else if (HEADER && HEADER.innerHTML) {
+            addElemetsOfSlots(HEADER, ListHeader);
         }
 
         if (renderItem.length > 0) {
             this._renderItem(renderItem, ListContainer);
         } else {
-            this._createItems(SLOT_LISTITEM, ListContainer);
+            this._createItems(LISTITEM, ListContainer);
         }
 
         List.appendChild(ListContainer);
 
-        if (footer || SLOT_FOOTER) {
+        if (footer || FOOTER) {
             List.appendChild(ListFooter);
         }
         if (footer) {
             ListFooter.innerHTML = footer;
-        } else if (SLOT_HEADER && SLOT_HEADER.innerHTML) {
-            addElemetsOfSlots(SLOT_FOOTER, ListFooter);
+        } else if (HEADER && HEADER.innerHTML) {
+            addElemetsOfSlots(FOOTER, ListFooter);
         }
 
-        isSlotsUserd(true, SLOT_HEADER);
-        isSlotsUserd(true, SLOT_FOOTER);
+        isSlotsUserd(true, HEADER);
+        isSlotsUserd(true, FOOTER);
         return List;
     },
 

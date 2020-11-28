@@ -1,0 +1,168 @@
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/close.less";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}carousel {
+  position: @rel;
+  display: @bl;
+  -webkit-user-select: @none;
+  -moz-user-select: @none;
+  -ms-user-select: @none;
+  user-select: @none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+
+  &-arrow {
+    border: @none;
+    outline: 0;
+    .size(36px,36px);
+    border-radius: 50%;
+    cursor: @pointer;
+    display: @none;
+    position: @abs;
+    top: 50%;
+    z-index: 10;
+    transform: @translatey-center;
+    transition: @transition-time;
+    background-color: rgba(31, 45, 61, 0.11);
+    color: @white;
+    text-align: center;
+    font-size: 1em;
+    font-family: inherit;
+    line-height: inherit;
+
+    &:hover {
+      background-color: rgba(31, 45, 61, 0.5);
+    }
+
+    &-hover {
+      display: inherit;
+      opacity: 0;
+    }
+
+    &-always {
+      display: inherit;
+    }
+
+    &.left {
+      left: 16px;
+    }
+
+    &.right {
+      right: 16px;
+    }
+  }
+
+  &:hover &-arrow-hover {
+    opacity: 1;
+  }
+
+  &-list {
+    position: @rel;
+    display: @bl;
+    overflow: @hid;
+  }
+
+  &-item {
+    position: @rel;
+    pointer-events: @none;
+    transform: translateX(100%);
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+    -webkit-backface-visibility: @hid;
+    backface-visibility: @hid;
+    transition: @crousel-transition-property @crousel-transition-function
+      @crousel-transition-time;
+
+    &-active {
+      transform: translateX(0);
+      pointer-events: @auto;
+    }
+
+    &-left {
+      transform: translateX(-100%);
+    }
+
+    &-right {
+      transform: translateX(100%);
+    }
+  }
+
+  &-dots {
+    z-index: 10;
+    display: @none;
+    position: @rel;
+    list-style: @none;
+    text-align: center;
+    padding: 0;
+    .size(100%,17px);
+
+    li {
+      position: @rel;
+      display: @inlb;
+      vertical-align: top;
+      text-align: center;
+      margin: 0 2px;
+      padding: 7px 0;
+      cursor: @pointer;
+
+      button {
+        border: 0;
+        cursor: @pointer;
+        background: #8391a5;
+        opacity: 0.3;
+        display: @bl;
+        .size(25px,3px);
+        border-radius: 1px;
+        outline: 0;
+        font-size: 0;
+        color: transparent;
+        transition: all 0.5s;
+
+        &.radius {
+          .size(6px,6px);
+          border-radius: 50%;
+        }
+      }
+
+      &:hover {
+        button {
+          opacity: 1;
+        }
+      }
+
+      &.rbt-carousel-active {
+        button {
+          opacity: 1;
+          width: 30px;
+
+          &.radius {
+            width: 6px;
+          }
+        }
+      }
+    }
+
+    &-inside {
+      display: @bl;
+      position: @abs;
+      bottom: 5px;
+      .rbt-carousel-active {
+        button {
+          background-color: @white;
+        }
+      }
+    }
+
+    &-outside {
+      display: @bl;
+      margin-top: 2px;
+    }
+  }
+}
