@@ -3,7 +3,7 @@
  * @param {string} el
  * @returns {HTMLElement | NodeList}
  */
-function _getCompsSlot(el) {
+function getCompsSlot(el) {
     const REF = el.querySelector('[slot="ref"]'), // Dropdown、Tooltip、Popover slot
         DOT = el.querySelectorAll('[slot="dot"]'), // timeline slot
         DESC = el.querySelector('[slot="desc"]'), // Alert slot

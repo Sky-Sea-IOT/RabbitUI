@@ -1,20 +1,19 @@
 /**
  * 添加确定和取消事件，关联到modal，drawer组件选项的属性 onOk 或者 onCancel
- * @param { String | HTMLElement } el
- * @param { Function } okCb
- * @param { Function } cancelCb
+ * @param { string | HTMLElement } el
+ * @param { function } okCb
+ * @param { function } cancelCb
  */
-
 function bindClickEv(el, okCb, cancelCb) {
     const elem = document.querySelector(el);
-    // 获取组件名
+    // 获取组件名，截取rbt-xxx
     const components = elem.tagName.toLowerCase().substring(4);
     // 只支持 modal 和 drawer 组件
     if (components !== "modal" && components !== "drawer") {
         console.error(
             `[Rabbit warn] ${components} does not support binding component associated events`
         );
-        return false;
+        return;
     }
 
     // 获取该组件下所有的子节点

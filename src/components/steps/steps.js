@@ -11,7 +11,9 @@ Rabbit.prototype.Steps = {
                 direction = "horizontal",
         } = _config;
 
-        const { STEP } = _slot;
+        const {
+            STEP
+        } = _slot;
 
         const Steps = document.createElement("div");
         Steps.className = `rbt-steps rbt-steps-${direction} rbt-steps-${size}`;

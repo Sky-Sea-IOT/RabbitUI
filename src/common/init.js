@@ -3,7 +3,7 @@
  * @param {string} c
  * @returns {HTMLElement}
  */
-function _initComps(c) {
+function initComps(c) {
     switch (c) {
         case "Message":
             Rabbit.prototype.Message.container();

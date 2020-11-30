@@ -70,9 +70,8 @@
 
   &-item {
     position: @rel;
-    pointer-events: @none;
-    transform: translateX(100%);
     float: left;
+    display: @none;
     width: 100%;
     margin-right: -100%;
     -webkit-backface-visibility: @hid;
@@ -80,18 +79,34 @@
     transition: @crousel-transition-property @crousel-transition-function
       @crousel-transition-time;
 
-    &-active {
-      transform: translateX(0);
-      pointer-events: @auto;
+    &.active,
+    &-next,
+    &-prev {
+      display: @bl;
     }
 
-    &-left {
+    &-next:not(&-left),
+    .active&-right {
+      transform: translateX(100%);
+    }
+
+    &-prev:not(&-right),
+    .active&-left {
       transform: translateX(-100%);
     }
 
-    &-right {
-      transform: translateX(100%);
-    }
+    // &-active {
+    //   transform: translateX(0);
+    //   pointer-events: @auto;
+    // }
+
+    // &-left {
+    //   transform: translateX(-100%);
+    // }
+
+    // &-right {
+    //   transform: translateX(100%);
+    // }
   }
 
   &-dots {
@@ -115,10 +130,10 @@
       button {
         border: 0;
         cursor: @pointer;
-        background: #8391a5;
+        background: @white;
         opacity: 0.3;
         display: @bl;
-        .size(25px,3px);
+        .size(16px,3px);
         border-radius: 1px;
         outline: 0;
         font-size: 0;
@@ -126,7 +141,7 @@
         transition: all 0.5s;
 
         &.radius {
-          .size(6px,6px);
+          .size(8px,8px);
           border-radius: 50%;
         }
       }
@@ -140,29 +155,29 @@
       &.rbt-carousel-active {
         button {
           opacity: 1;
-          width: 30px;
+          width: 24px;
 
           &.radius {
-            width: 6px;
+            width: 8px;
           }
         }
       }
     }
 
     &-inside {
-      display: @bl;
-      position: @abs;
-      bottom: 5px;
-      .rbt-carousel-active {
-        button {
-          background-color: @white;
-        }
-      }
+      display: block;
+      position: absolute;
+      bottom: 3px;
     }
 
     &-outside {
-      display: @bl;
+      display: block;
       margin-top: 2px;
+      li {
+        button {
+          background: #8391a5;
+        }
+      }
     }
   }
 }

@@ -16,7 +16,10 @@ Rabbit.prototype.Switch = {
             className,
         } = _config;
 
-        const { OPEN, CLOSE } = _slot;
+        const {
+            OPEN,
+            CLOSE
+        } = _slot;
 
         // 记录 switch 状态，并作为 onChange 回调的参数返回出去
         let status = false;

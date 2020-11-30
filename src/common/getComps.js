@@ -34,7 +34,7 @@ const COMPONENTS = {
  * @param {HTMLElement} slot
  * @returns {HTMLElement}
  */
-function _getComps(el, compsName, config, slot) {
+function getComps(el, compsName, config, slot) {
     if (!compsName) {
         const error =
             "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert>...</rab-alert>, and all component tags should come with closing tags";

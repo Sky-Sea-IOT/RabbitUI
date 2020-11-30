@@ -56,24 +56,26 @@
 }
 .rbt-carousel-item {
   position: relative;
-  pointer-events: none;
-  transform: translateX(100%);
   float: left;
+  display: none;
   width: 100%;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: transform ease 0.5s;
 }
-.rbt-carousel-item-active {
-  transform: translateX(0);
-  pointer-events: auto;
+.rbt-carousel-item.active,
+.rbt-carousel-item-next,
+.rbt-carousel-item-prev {
+  display: block;
 }
-.rbt-carousel-item-left {
-  transform: translateX(-100%);
-}
-.rbt-carousel-item-right {
+.rbt-carousel-item-next:not(.rbt-carousel-item-left),
+.active.rbt-carousel-item-right {
   transform: translateX(100%);
+}
+.rbt-carousel-item-prev:not(.rbt-carousel-item-right),
+.active.rbt-carousel-item-left {
+  transform: translateX(-100%);
 }
 .rbt-carousel-dots {
   z-index: 10;
@@ -97,10 +99,10 @@
 .rbt-carousel-dots li button {
   border: 0;
   cursor: pointer;
-  background: #8391a5;
+  background: #fff;
   opacity: 0.3;
   display: block;
-  width: 25px;
+  width: 16px;
   height: 3px;
   border-radius: 1px;
   outline: 0;
@@ -109,8 +111,8 @@
   transition: all 0.5s;
 }
 .rbt-carousel-dots li button.radius {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
 }
 .rbt-carousel-dots li:hover button {
@@ -118,20 +120,20 @@
 }
 .rbt-carousel-dots li.rbt-carousel-active button {
   opacity: 1;
-  width: 30px;
+  width: 24px;
 }
 .rbt-carousel-dots li.rbt-carousel-active button.radius {
-  width: 6px;
+  width: 8px;
 }
 .rbt-carousel-dots-inside {
   display: block;
   position: absolute;
-  bottom: 5px;
-}
-.rbt-carousel-dots-inside .rbt-carousel-active button {
-  background-color: #fff;
+  bottom: 3px;
 }
 .rbt-carousel-dots-outside {
   display: block;
   margin-top: 2px;
+}
+.rbt-carousel-dots-outside li button {
+  background: #8391a5;
 }

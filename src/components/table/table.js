@@ -166,11 +166,13 @@ Rabbit.prototype.Table = {
 
                                     TableBodyTd.innerHTML = datas[key];
                                     TableBodyTd.className = `rbt-table-column-${align}`;
+
                                     TableBodyTr.appendChild(TableBodyTd);
                                 } else {
-                                    throw ReferenceError(
-                                        `${key} is not included in the [${columnsData}] or vice versa`
+                                    console.error(
+                                        `[Rabbit warn] In the rows of table data source there are data inconsistent with those in columns.  row: [{${key}}]`
                                     );
+                                    return;
                                 }
                             }
                         });
