@@ -22,6 +22,7 @@ const COMPONENTS = {
     Steps: "steps",
     Switch: "switch",
     Table: "table",
+    Time: "time",
     Timeline: "timeline",
     Tooltip: "tooltip",
 };
@@ -101,6 +102,9 @@ function getComps(el, compsName, config, slot) {
 
         case COMPONENTS.Table:
             return Rabbit.prototype.Table._createInstance(config);
+
+        case COMPONENTS.Time:
+            return Rabbit.prototype.Time._createInstance(config);
 
         case COMPONENTS.Timeline:
             return Rabbit.prototype.Timeline._createInstance(config, slot);

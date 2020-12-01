@@ -14,7 +14,7 @@ Rabbit.prototype.Carousel = {
             trigger = "click",
             onClick,
             initial = 0,
-            autoplay = true,
+            autoplay = false,
             radiusDot = false,
             hoverPause = true,
             dotPosition = "inside",
