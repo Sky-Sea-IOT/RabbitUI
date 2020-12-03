@@ -1,5 +1,5 @@
 Rabbit.prototype.PageHeader = {
-    _createInstance: (_config, _slot) => {
+    createInstance: (_config, _slot) => {
         const prefixCls = "rbt-page-header";
         const prefixIconCls = "rbt-icon";
 
@@ -25,9 +25,6 @@ Rabbit.prototype.PageHeader = {
 
         addElemetsOfSlots(HEADER, PageHeaderTitle);
         addElemetsOfSlots(CONTENT, PageHeaderContent);
-
-        isSlotsUserd(true, HEADER);
-        isSlotsUserd(true, CONTENT);
 
         return PageHeader;
     },

@@ -4,7 +4,7 @@
  */
 Rabbit.prototype.Carousel = {
     prefixCls: "rbt-carousel",
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const {
             prev,
             next,
@@ -40,10 +40,10 @@ Rabbit.prototype.Carousel = {
             CarouselItem.className = `${this.prefixCls}-item`;
             CarouselIndicatorBtn.type = "button";
 
-            this._setHeight(height, CarouselItem);
-            this._setEaseing(easing, CarouselItem);
-            this._setRadiusDot(radiusDot, CarouselIndicatorBtn);
-            this._itemClickHandle(CarouselItem, i, onClick);
+            this.setHeight(height, CarouselItem);
+            this.setEaseing(easing, CarouselItem);
+            this.setRadiusDot(radiusDot, CarouselIndicatorBtn);
+            this.itemHanleClick(CarouselItem, i, onClick);
 
             addElemetsOfSlots(CAROUSELITEM[i], CarouselItem);
 
@@ -55,18 +55,18 @@ Rabbit.prototype.Carousel = {
             indicators.push(CarouselIndicator);
         }
 
-        this._addClassName(
+        this.addClassName(
             Carousel,
             CarouselArrowL,
             CarouselArrowR,
             CarouselList,
             CarouselDots
         );
-        this._setCarouseItemActive(carouselItems, initial);
-        this._setArrow(arrow, CarouselArrowL, CarouselArrowR);
-        this._setDotPos(dotPosition, CarouselDots);
-        this._setInitPosition(initial, indicators, carouselItems);
-        this._init_({
+        this.setCarouseItemActive(carouselItems, initial);
+        this.setArrow(arrow, CarouselArrowL, CarouselArrowR);
+        this.setDotPos(dotPosition, CarouselDots);
+        this.setInitPosition(initial, indicators, carouselItems);
+        this.init({
             index: initial,
             autoplay,
             speed: autoplaySpeed,
@@ -85,7 +85,7 @@ Rabbit.prototype.Carousel = {
         return Carousel;
     },
 
-    _addClassName(
+    addClassName(
         carousel,
         carouselArrowL,
         carouselArrowR,
@@ -99,11 +99,11 @@ Rabbit.prototype.Carousel = {
         carouselDots.className = `${this.prefixCls}-dots`;
     },
 
-    _setCarouseItemActive(carouselItems, position) {
+    setCarouseItemActive(carouselItems, position) {
         carouselItems[position].classList.add("active");
     },
 
-    _setArrow(showArrow, carouselArrowL, carouselArrowR) {
+    setArrow(showArrow, carouselArrowL, carouselArrowR) {
         carouselArrowL.type = "button";
         carouselArrowR.type = "button";
 
@@ -114,26 +114,26 @@ Rabbit.prototype.Carousel = {
         carouselArrowR.innerHTML = `<i class="rbt-icon rbt-icon-ios-arrow-forward"></i>`;
     },
 
-    _setHeight(height, carouselItem) {
+    setHeight(height, carouselItem) {
         let h = isNum(height) ? `${height}px` : height;
         carouselItem.style.height = h;
     },
 
-    _setEaseing(easeing, carouselItem) {
+    setEaseing(easeing, carouselItem) {
         carouselItem.style.transition = `transform ${easeing} 0.5s`;
     },
 
-    _setDotPos(position, carouselDots) {
+    setDotPos(position, carouselDots) {
         carouselDots.classList.add(`${this.prefixCls}-dots-${position}`);
     },
 
-    _setRadiusDot(radiusDot, indicator) {
+    setRadiusDot(radiusDot, indicator) {
         if (radiusDot) {
             indicator.className = "radius";
         }
     },
 
-    _setInitPosition(position, indicators, carouselItems) {
+    setInitPosition(position, indicators, carouselItems) {
         if (position < 0 || position > carouselItems.length - 1) {
             console.error(
                 `[Rabbit warn] The initial value of ${position} set for carousel is invalid`
@@ -144,7 +144,7 @@ Rabbit.prototype.Carousel = {
     },
 
     // 点击幻灯片时触发，返回索引值
-    _itemClickHandle(carouselItem, index, cb) {
+    itemHanleClick(carouselItem, index, cb) {
         carouselItem.addEventListener("click", callback);
 
         function callback() {
@@ -152,14 +152,14 @@ Rabbit.prototype.Carousel = {
         }
     },
 
-    _setIndicatorActive(indicator) {
+    setIndicatorActive(indicator) {
         indicator.classList.add(`${this.prefixCls}-active`);
         Rbt.siblings(indicator).map((brother) => {
             brother.classList.remove(`${this.prefixCls}-active`);
         });
     },
 
-    _itemChangeEffect(d, prevItem, nextItem) {
+    itemChangeEffect(d, prevItem, nextItem) {
         if (d === "forward") {
             nextItem.classList.add(`${this.prefixCls}-item-next`);
             setTimeout(() => {
@@ -190,32 +190,32 @@ Rabbit.prototype.Carousel = {
         }
     },
 
-    _forward(index, carouselItems) {
+    forward(index, carouselItems) {
         const total = carouselItems.length - 1;
         const nextItem = carouselItems[index]; // 下一项
         let prevItem = carouselItems[index - 1]; // 相对于下一项的上一个当前项
         // 如果获取为 undefined 则说明当前要在尾项开始回滚到首项
         if (prevItem == undefined) prevItem = carouselItems[total];
-        this._itemChangeEffect("forward", prevItem, nextItem);
+        this.itemChangeEffect("forward", prevItem, nextItem);
     },
 
-    _back(index, carouselItems) {
+    back(index, carouselItems) {
         const prevItem = carouselItems[index]; // 前一项
         // 相对于前一项的下一个当前项
         let nextItem = carouselItems[index + 1];
         // 如果获取为 undefined 则说明当前要在首项开始回滚到尾项
         if (nextItem == undefined) nextItem = carouselItems[0];
-        this._itemChangeEffect("back", prevItem, nextItem);
+        this.itemChangeEffect("back", prevItem, nextItem);
     },
 
-    _sliding(direction, index, indicators, carouselItems) {
-        if (direction === "forward") this._forward(index, carouselItems);
-        if (direction === "back") this._back(index, carouselItems);
+    sliding(direction, index, indicators, carouselItems) {
+        if (direction === "forward") this.forward(index, carouselItems);
+        if (direction === "back") this.back(index, carouselItems);
 
-        this._setIndicatorActive(indicators[index]);
+        this.setIndicatorActive(indicators[index]);
     },
 
-    _init_({
+    init({
         index,
         autoplay,
         speed,
@@ -237,13 +237,13 @@ Rabbit.prototype.Carousel = {
             record >= total ? (record = 0) : record++;
             value = record;
             isFunc(nextCallback) ? nextCallback(value) : null;
-            this._sliding("forward", record, indicators, carouselItems);
+            this.sliding("forward", record, indicators, carouselItems);
         };
         const prev = () => {
             record <= 0 ? (record = total) : record--;
             value = record;
             isFunc(prevCallback) ? prevCallback(value) : null;
-            this._sliding("back", record, indicators, carouselItems);
+            this.sliding("back", record, indicators, carouselItems);
         };
         // 暂停
         const pause = () => window.clearInterval(timer);
@@ -266,7 +266,7 @@ Rabbit.prototype.Carousel = {
         const indicatorHandle = () => {
             indicators.map((indicator, index) => {
                 indicator.addEventListener("click", () => {
-                    this._setIndicatorActive(indicator);
+                    this.setIndicatorActive(indicator);
                 });
             });
         };

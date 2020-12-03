@@ -3,7 +3,7 @@
  * 在两种状态间切换时用到的开关选择器。
  */
 Rabbit.prototype.Switch = {
-    _createInstance: (_config, _slot) => {
+    createInstance: (_config, _slot) => {
         const prefixCls = "rbt-switch";
 
         let {
@@ -16,10 +16,7 @@ Rabbit.prototype.Switch = {
             className,
         } = _config;
 
-        const {
-            OPEN,
-            CLOSE
-        } = _slot;
+        const { OPEN, CLOSE } = _slot;
 
         // 记录 switch 状态，并作为 onChange 回调的参数返回出去
         let status = false;
@@ -48,22 +45,18 @@ Rabbit.prototype.Switch = {
             Switch.classList.add(`${prefixCls}-checked`);
         }
 
-        const switchColorChange = (status) => {
+        const changeColor = (status) => {
             if (status) {
                 // 初始化背景色
                 Switch.style.background = "";
-
                 // 自定义打开时的背景色
                 openColor ? (Switch.style.background = openColor) : "";
-
                 // 自定义显示打开时的内容
                 OPEN && OPEN.innerHTML ? addElemetsOfSlots(OPEN, SwitchInner) : "";
             } else {
                 Switch.style.background = "";
-
                 // 自定义关闭时的背景色
                 offColor ? (Switch.style.background = offColor) : "";
-
                 // 自定义显示关闭时的内容
                 CLOSE && CLOSE.innerHTML ? addElemetsOfSlots(CLOSE, SwitchInner) : "";
             }
@@ -81,9 +74,7 @@ Rabbit.prototype.Switch = {
                 Switch.classList.add(`${prefixCls}-checked`);
                 SwitchInner.innerHTML = "";
             }
-
-            switchColorChange(status);
-
+            changeColor(status);
             isFunc(onChange) ? onChange(status) : null;
         };
 
@@ -93,10 +84,7 @@ Rabbit.prototype.Switch = {
             Switch.classList.add(`${prefixCls}-disabled`) :
             (Switch.onclick = () => switchChange());
 
-        switchColorChange(status);
-
-        isSlotsUserd(true, OPEN);
-        isSlotsUserd(true, CLOSE);
+        changeColor(status);
 
         Switch.append(SwitchHandle, SwitchInner);
 

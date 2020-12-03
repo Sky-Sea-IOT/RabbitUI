@@ -3,7 +3,7 @@
  * 展示一组折叠的下拉菜单。
  */
 Rabbit.prototype.Dropdown = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const {
             onClick,
             onUnfold,
@@ -23,7 +23,7 @@ Rabbit.prototype.Dropdown = {
         const DropDownMenu = document.createElement("ul");
         const DrpDownDivided = document.createElement("li");
 
-        this._addClassName(
+        this.addClassName(
             className,
             DropDown,
             DropDownRef,
@@ -41,7 +41,7 @@ Rabbit.prototype.Dropdown = {
 
             addElemetsOfSlots(DROPDOWNITEM[i], DropDownItem);
 
-            this._itemClickHandle(
+            this.itemHandleClick(
                 DropDown,
                 DropDownMenu,
                 DropDownItem,
@@ -53,13 +53,13 @@ Rabbit.prototype.Dropdown = {
             itemList.push(DropDownItem);
         }
 
-        this._setDisabled(disabled, DropDownRef);
-        this._setItemDisabled(itemDisabled, itemList);
-        this._setSelected(selected, itemList);
-        this._setDivided(divided, itemList, DrpDownDivided);
-        this._setPlacement(placement, DropDownMenu, DropDown);
+        this.setDisabled(disabled, DropDownRef);
+        this.setItemDisabled(itemDisabled, itemList);
+        this.setSelected(selected, itemList);
+        this.setDivided(divided, itemList, DrpDownDivided);
+        this.setPlacement(placement, DropDownMenu, DropDown);
 
-        this._hoverHandle(
+        this.handleHover(
             trigger,
             disabled,
             placement,
@@ -68,7 +68,7 @@ Rabbit.prototype.Dropdown = {
             onUnfold
         );
 
-        this._clickHandle(
+        this.handleClick(
             trigger,
             disabled,
             placement,
@@ -82,18 +82,12 @@ Rabbit.prototype.Dropdown = {
 
         DropDown.append(DropDownRef, DropDownMenu);
 
-        this._documentClickHandle(DropDown, DropDownMenu, trigger, placement);
+        this.documentClickEv(DropDown, DropDownMenu, trigger, placement);
 
         return DropDown;
     },
 
-    _addClassName(
-        className,
-        dropDown,
-        dropDownRef,
-        dropDownMenu,
-        drpDownDivided
-    ) {
+    addClassName(className, dropDown, dropDownRef, dropDownMenu, drpDownDivided) {
         const prefixCls = "rbt-dropdown";
 
         dropDown.className = `${prefixCls}`;
@@ -117,11 +111,11 @@ Rabbit.prototype.Dropdown = {
         }
     },
 
-    _setDisabled(disabled, dropdownRef) {
+    setDisabled(disabled, dropdownRef) {
         if (disabled) dropdownRef.classList.add("rbt-dropdown-disabled");
     },
 
-    _setItemDisabled(disabled, dropDownItem) {
+    setItemDisabled(disabled, dropDownItem) {
         const cls = "rbt-dropdown-item-disabled";
         this._commonSet({
             api: disabled,
@@ -130,7 +124,7 @@ Rabbit.prototype.Dropdown = {
         });
     },
 
-    _setSelected(selected, dropDownItem) {
+    setSelected(selected, dropDownItem) {
         const cls = "rbt-dropdown-item-selected";
         this._commonSet({
             api: selected,
@@ -139,7 +133,7 @@ Rabbit.prototype.Dropdown = {
         });
     },
 
-    _setDivided(divider, dropDownItem, drpDownDivided) {
+    setDivided(divider, dropDownItem, drpDownDivided) {
         this._commonSet({
             api: divider,
             isDivided: true,
@@ -148,7 +142,7 @@ Rabbit.prototype.Dropdown = {
         });
     },
 
-    _setPlacement(placement, dropdownMenu, dropdownRoot) {
+    setPlacement(placement, dropdownMenu, dropdownRoot) {
         dropdownMenu.dataset.placement = placement;
         SET.setDirection(dropdownRoot, dropdownMenu, -10);
     },
@@ -185,11 +179,11 @@ Rabbit.prototype.Dropdown = {
 
         if (mode === "down") {
             slideDown();
-            this._setPlacement(placement, dropdownMenu, dropdown);
+            this.setPlacement(placement, dropdownMenu, dropdown);
         } else slideUp();
     },
 
-    _hoverHandle(trigger, disabled, placement, dropdown, dropdownMenu, cb) {
+    handleHover(trigger, disabled, placement, dropdown, dropdownMenu, cb) {
         let timer = null;
 
         if (trigger === "hover" && !disabled) {
@@ -207,7 +201,7 @@ Rabbit.prototype.Dropdown = {
         }
     },
 
-    _clickHandle(
+    handleClick(
         trigger,
         disabled,
         placement,
@@ -233,7 +227,7 @@ Rabbit.prototype.Dropdown = {
         }
     },
 
-    _itemClickHandle(dropdown, dropdownMenu, dropdownItem, placement, cb, index) {
+    itemHandleClick(dropdown, dropdownMenu, dropdownItem, placement, cb, index) {
         const item = dropdownItem;
 
         item.addEventListener("click", (e) => {
@@ -247,7 +241,7 @@ Rabbit.prototype.Dropdown = {
         });
     },
 
-    _documentClickHandle(dropdown, dropdownMenu, trigger, placement) {
+    documentClickEv(dropdown, dropdownMenu, trigger, placement) {
         if (trigger !== "click" && trigger !== "contextMenu") return;
 
         const _con = Array.from(document.querySelectorAll(".rbt-dropdown-menu"));

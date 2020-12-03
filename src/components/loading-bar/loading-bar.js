@@ -20,19 +20,19 @@ function clearTimer() {
  * 显示页面加载、异步请求、文件上传等的加载进度条。
  */
 Rabbit.prototype.LoadingBar = {
-    _createInstance() {
-        const prefixCls = "rbt-loading-bar";
+    prefixCls: "rbt-loading-bar",
+    createInstance() {
         const LoadingBar = document.createElement("div");
         const LoadingBarInner = document.createElement("div");
 
-        LoadingBar.className = `${prefixCls}`;
-        LoadingBarInner.className = `${prefixCls}-inner`;
+        LoadingBar.className = `${this.prefixCls}`;
+        LoadingBarInner.className = `${this.prefixCls}-inner`;
 
         // 初始化
         LoadingBarInner.style.width = "0%";
 
         setTimeout(() => {
-            this._status("primary");
+            this.status("primary");
             LoadingBar.style.height = `${loadingBarConfig.height}px`;
         }, 0);
 
@@ -40,13 +40,13 @@ Rabbit.prototype.LoadingBar = {
         document.body.appendChild(LoadingBar);
     },
 
-    _status(_status) {
-        const LoadingBarInner = document.querySelector(".rbt-loading-bar-inner");
+    status(status) {
+        const LoadingBarInner = document.querySelector(`.${this.prefixCls}-inner`);
 
-        if (_status === "primary") {
+        if (status === "primary") {
             LoadingBarInner.style.backgroundColor = loadingBarConfig.color;
         }
-        if (_status === "error") {
+        if (status === "error") {
             LoadingBarInner.style.backgroundColor = loadingBarConfig.failedColor;
             // 初始化颜色
             setTimeout(
@@ -56,13 +56,13 @@ Rabbit.prototype.LoadingBar = {
         }
     },
 
-    _visible(flag) {
-        const LoadingBar = document.querySelector(".rbt-loading-bar");
-        const LoadingBarInner = document.querySelector(".rbt-loading-bar-inner");
+    visible(flag) {
+        const LoadingBar = document.querySelector(`.${this.prefixCls}`);
+        const LoadingBarInner = document.querySelector(`.${this.prefixCls}-inner`);
 
         if (flag) {
-            LoadingBar.classList.add("rbt-loading-bar-fade-in");
-            LoadingBar.classList.remove("rbt-loading-bar-fade-out");
+            LoadingBar.classList.add(`${this.prefixCls}-fade-in`);
+            LoadingBar.classList.remove(`${this.prefixCls}-fade-out`);
             // LoadingBarInner.style.width = `${loadingBarProgress}%`;
         } else {
             loadingBarProgress = 100;
@@ -70,12 +70,12 @@ Rabbit.prototype.LoadingBar = {
 
             setTimeout(() => {
                 loadingBarProgress = 0;
-                LoadingBar.classList.add("rbt-loading-bar-fade-out");
-                LoadingBar.classList.remove("rbt-loading-bar-fade-in");
+                LoadingBar.classList.add(`${this.prefixCls}-fade-out`);
+                LoadingBar.classList.remove(`${this.prefixCls}-fade-in`);
                 LoadingBarInner.style.width = `${loadingBarProgress}%`;
 
                 setTimeout(
-                    () => LoadingBar.classList.remove("rbt-loading-bar-fade-out"),
+                    () => LoadingBar.classList.remove(`${this.prefixCls}-fade-out`),
                     200
                 );
             }, loadingBarConfig.duration);
@@ -91,23 +91,23 @@ Rabbit.prototype.LoadingBar = {
 
         if (isNum(percent)) {
             document.querySelector(
-                ".rbt-loading-bar-inner"
+                `${this.prefixCls}-inner`
             ).style.width = `${percent}%`;
         }
 
-        this._visible(true);
+        this.visible(true);
     },
 
     start() {
         if (timer) return;
 
-        this._visible(true);
+        this.visible(true);
 
         timer = setInterval(() => {
             loadingBarProgress += Math.floor(Math.random() * 3 + 1);
 
             document.querySelector(
-                ".rbt-loading-bar-inner"
+                `.${this.prefixCls}-inner`
             ).style.width = `${loadingBarProgress}%`;
 
             if (loadingBarProgress > 95) clearTimer();
@@ -116,13 +116,13 @@ Rabbit.prototype.LoadingBar = {
 
     error() {
         clearTimer();
-        this._status("error");
-        this._visible(false);
+        this.status("error");
+        this.visible(false);
     },
 
     finish() {
         clearTimer();
-        this._visible(false);
+        this.visible(false);
     },
 
     /**
@@ -154,6 +154,6 @@ Rabbit.prototype.LoadingBar = {
 
     destory() {
         clearTimer();
-        document.body.removeChild(document.querySelector(".rbt-loading-bar"));
+        document.body.removeChild(document.querySelector(`.${this.prefixCls}`));
     },
 };

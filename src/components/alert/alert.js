@@ -3,7 +3,7 @@
  * 静态地呈现一些警告信息。
  */
 Rabbit.prototype.Alert = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const prefixCls = "rbt-alert";
 
         const {

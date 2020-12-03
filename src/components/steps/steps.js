@@ -3,7 +3,8 @@
  * 引导用户按照流程完成任务的导航条。
  */
 Rabbit.prototype.Steps = {
-    _createInstance(_config, _slot) {
+    prefixCls: "rbt-steps",
+    createInstance(_config, _slot) {
         const {
             size = "default",
                 status = "process",
@@ -11,14 +12,14 @@ Rabbit.prototype.Steps = {
                 direction = "horizontal",
         } = _config;
 
-        const {
-            STEP
-        } = _slot;
+        const { STEP } = _slot;
 
         const Steps = document.createElement("div");
-        Steps.className = `rbt-steps rbt-steps-${direction} rbt-steps-${size}`;
+
+        Steps.className = `${this.prefixCls} ${this.prefixCls}-${direction} ${this.prefixCls}-${size}`;
 
         let stepsItemList = [];
+
         for (let i = 0; i < STEP.length; i++) {
             const StepsItem = document.createElement("div");
             const StepsTail = document.createElement("div");
@@ -32,7 +33,7 @@ Rabbit.prototype.Steps = {
 
             stepsItemList.push(StepsItem);
 
-            this._addClassName(
+            this.addClassName(
                 STEP[i].querySelector('[slot="icon"]'),
                 status,
                 StepsItem,
@@ -44,8 +45,8 @@ Rabbit.prototype.Steps = {
                 StepsTitle,
                 StepsContent
             );
-            this._setCurrentContent(StepsHeadIcon, i, status);
-            this._addIcon(
+            this.setContent(StepsHeadIcon, i, status);
+            this.addIcon(
                 STEP[i].querySelector('[slot="icon"]'),
                 StepsItem,
                 StepsHeadIcon
@@ -57,17 +58,20 @@ Rabbit.prototype.Steps = {
             StepsHead.append(StepsHeadInner, StepsHeadIcon);
             StepsHeadInner.appendChild(StepsHeadIcon);
             StepsMain.append(StepsTitle, StepsContent);
+
             addElemetsOfSlots(STEP[i].querySelector('[slot="title"]'), StepsTitle);
             addElemetsOfSlots(
                 STEP[i].querySelector('[slot="content"]'),
                 StepsContent
             );
         }
+
         this._setStatus(stepsItemList.length, current, stepsItemList, status, STEP);
+
         return Steps;
     },
 
-    _addClassName(
+    addClassName(
         icon,
         status,
         stepsItem,
@@ -79,42 +83,39 @@ Rabbit.prototype.Steps = {
         stepsTitle,
         stepsContent
     ) {
-        const prefixCls = "rbt-steps";
+        stepsItem.className = `${this.prefixCls}-item ${this.prefixCls}-status-wait`;
+        stepsTail.className = `${this.prefixCls}-tail`;
+        stepsHead.className = `${this.prefixCls}-head`;
+        stepsHeadInner.className = `${this.prefixCls}-head-inner`;
+        stepsMain.className = `${this.prefixCls}-main`;
+        stepsTitle.className = `${this.prefixCls}-title`;
+        stepsContent.className = `${this.prefixCls}-content`;
 
-        stepsItem.className = `${prefixCls}-item ${prefixCls}-status-wait`;
-        stepsTail.className = `${prefixCls}-tail`;
-        stepsHead.className = `${prefixCls}-head`;
-        stepsHeadInner.className = `${prefixCls}-head-inner`;
-        stepsMain.className = `${prefixCls}-main`;
-        stepsTitle.className = `${prefixCls}-title`;
-        stepsContent.className = `${prefixCls}-content`;
-
-        this._setIcon(status, icon, stepsHeadInner, stepsHeadIcon);
+        this.setIcon(status, icon, stepsHeadInner, stepsHeadIcon);
     },
 
-    _setIcon(status, icon, stepsHeadInner, stepsHeadIcon) {
+    setIcon(status, icon, stepsHeadInner, stepsHeadIcon) {
         if (!icon) {
             stepsHeadInner.dataset.customIcon = "false";
         }
         if (status === "finish" && !icon) {
-            stepsHeadIcon.className =
-                "rbt-steps-icon rbt-icon rbt-icon-ios-checkmark";
+            stepsHeadIcon.className = `${this.prefixCls}-icon rbt-icon rbt-icon-ios-checkmark`;
         }
         if (status === "error" && !icon) {
-            stepsHeadIcon.className = "rbt-steps-icon rbt-icon rbt-icon-ios-close";
+            stepsHeadIcon.className = `${this.prefixCls}-icon rbt-icon rbt-icon-ios-close`;
         }
     },
 
-    _addIcon(icon, stepsItem, stepsHeadIcon) {
+    addIcon(icon, stepsItem, stepsHeadIcon) {
         if (icon) {
-            stepsItem.classList.add("rbt-steps-custom");
-            icon.classList.add("rbt-steps-icon");
+            stepsItem.classList.add(`${this.prefixCls}-custom`);
+            icon.classList.add(`${this.prefixCls}-icon`);
             stepsHeadIcon.innerHTML = null;
             addElemetsOfSlots(icon, stepsHeadIcon);
         }
     },
 
-    _setCurrentContent(stepsHeadIcon, index, status) {
+    setContent(stepsHeadIcon, index, status) {
         if (status !== "finish" && status !== "error") {
             stepsHeadIcon.innerText = index + 1;
         }
@@ -129,23 +130,23 @@ Rabbit.prototype.Steps = {
         }
 
         stepsItem[current].classList.replace(
-            "rbt-steps-status-wait",
-            `rbt-steps-status-${status}`
+            `${this.prefixCls}-status-wait`,
+            `${this.prefixCls}-status-${status}`
         );
 
         for (let i = 0; i < current; i++) {
             stepsItem[i].classList.replace(
-                "rbt-steps-status-wait",
-                "rbt-steps-status-finish"
+                `${this.prefixCls}-status-wait`,
+                `${this.prefixCls}-status-finish`
             );
 
             const CheckIcon = document.createElement("i");
             const StepsHeadInner = stepsItem[i].querySelector(
-                ".rbt-steps-head-inner"
+                `.${this.prefixCls}-head-inner`
             );
 
             if (StepsHeadInner.dataset.customIcon === "false") {
-                CheckIcon.className = "rbt-steps-icon rbt-icon rbt-icon-ios-checkmark";
+                CheckIcon.className = `${this.prefixCls}-icon rbt-icon rbt-icon-ios-checkmark`;
                 StepsHeadInner.innerHTML = null;
                 StepsHeadInner.appendChild(CheckIcon);
             }

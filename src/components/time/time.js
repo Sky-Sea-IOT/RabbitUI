@@ -4,22 +4,22 @@
  */
 Rabbit.prototype.Time = {
     prefixCls: "rbt-time",
-    _createInstance(_config) {
+    createInstance(_config) {
         const { time, hash, link, type = "relative", interval = 1 } = _config;
         const Time = document.createElement("span");
 
         Time.className = `${this.prefixCls}`;
 
-        this._handleClick(Time, hash, link);
+        this.handleClick(Time, hash, link);
 
         setInterval(() => {
-            this._setTime(type, time, Time);
+            this.setTime(type, time, Time);
         }, 1000 * interval);
 
         return Time;
     },
 
-    _handleClick(timeElem, hash, link) {
+    handleClick(timeElem, hash, link) {
         if (isStr(hash) || isStr(link)) {
             timeElem.classList.add(`${this.prefixCls}-with-link`);
         }
@@ -31,7 +31,7 @@ Rabbit.prototype.Time = {
         }
     },
 
-    _setTime(type, time, timeElem) {
+    setTime(type, time, timeElem) {
         let result = "";
         if (type === "relative") {
             result = getRelativeTime(time);

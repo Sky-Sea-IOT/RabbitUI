@@ -19,7 +19,46 @@
  */
 class Rabbit {
     /**
-     * @private
+     * ------------------------------------------------------------------------
+     * Public
+     * ------------------------------------------------------------------------
+     */
+
+    /**
+     * @param {string} el 挂载组件的容器
+     * @param {{}} config 组件的配置选项
+     * @returns {string & object & NodeListOf<ChildNode>}
+     */
+    create(el, config) {
+        this.$el = el || "default-no-target";
+        this.$config = config || {};
+
+        this._render(this.$el, this.$config);
+
+        return { el, config, component: document.querySelector(el).childNodes };
+    }
+
+    /**
+     * 初始化组件，用于后面罗列的组件 Message Notice MessageBox LoadingBar
+     * @param {[string]} instanceName 初始化的组件的名称
+     * @returns {HTMLElement}
+     */
+    init(instanceName) {
+        if (isArr(instanceName)) {
+            instanceName.map((item) => initComps(item));
+        } else {
+            console.error("The argument type is array in RabbitUI.init()");
+            return;
+        }
+    }
+
+    /**
+     * ------------------------------------------------------------------------
+     * Private
+     * ------------------------------------------------------------------------
+     */
+
+    /**
      * @returns {HTMLElement}
      */
     _compsStore(el, compsName, config, slot) {
@@ -27,7 +66,6 @@ class Rabbit {
     }
 
     /**
-     * @private
      * @returns {HTMLElement}
      */
     _getCompsSlot(el) {
@@ -35,7 +73,6 @@ class Rabbit {
     }
 
     /**
-     * @private
      * @returns {HTMLElement}
      */
     _render(el, config) {
@@ -75,41 +112,9 @@ class Rabbit {
 
             return RABBITCOMPONENT;
         };
+
         RENDERTARGET.map((node) => renderNodeList(node));
-    }
-
-    /**
-     * @public
-     * @param {string} el 挂载组件的容器
-     * @param {{}} config 组件的配置选项
-     * @returns {string & object & NodeListOf<ChildNode>}
-     */
-    create(el, config) {
-        this.$el = el || "default-no-target";
-        this.$config = config || {};
-
-        this._render(this.$el, this.$config);
-
-        return { el, config, component: document.querySelector(el).childNodes };
-    }
-
-    /**
-     * 初始化组件，用于后面罗列的组件 Message Notice MessageBox LoadingBar
-     * @public
-     * @param {[string]} instanceName 初始化的组件的名称
-     * @returns {HTMLElement}
-     */
-    init(instanceName) {
-        if (isArr(instanceName)) {
-            instanceName.map((item) => initComps(item));
-        } else {
-            console.error("The argument type is array in RabbitUI.init()");
-            return;
-        }
     }
 }
 
-/**
- * @constant RabbitUI 初始化构造函数
- */
 const RabbitUI = new Rabbit();

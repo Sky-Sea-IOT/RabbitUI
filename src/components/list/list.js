@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.List = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const prefixCls = "rbt-list";
 
         const {
@@ -46,9 +46,9 @@ Rabbit.prototype.List = {
         }
 
         if (renderItem.length > 0) {
-            this._renderItem(renderItem, ListContainer);
+            this.renderItem(renderItem, ListContainer);
         } else {
-            this._createItems(LISTITEM, ListContainer);
+            this.createItems(LISTITEM, ListContainer);
         }
 
         List.appendChild(ListContainer);
@@ -67,7 +67,7 @@ Rabbit.prototype.List = {
         return List;
     },
 
-    _renderItem(data, el) {
+    renderItem(data, el) {
         if (isArr(data)) {
             data.map((datas) => {
                 const ListItem = document.createElement("li");
@@ -84,7 +84,7 @@ Rabbit.prototype.List = {
         }
     },
 
-    _createItems(slot_listItem, el) {
+    createItems(slot_listItem, el) {
         for (let i = 0; i < slot_listItem.length; i++) {
             const _ListItem = document.createElement("li");
 

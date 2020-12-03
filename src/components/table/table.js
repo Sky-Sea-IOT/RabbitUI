@@ -2,10 +2,9 @@
  * Table 表格
  * 主要用于展示大量结构化数据
  */
-
 Rabbit.prototype.Table = {
-    _createInstance(_config) {
-        const prefixCls = "rbt-table";
+    prefixCls: "rbt-table",
+    createInstance(_config) {
         const {
             size = "default",
                 align = "left",
@@ -17,8 +16,8 @@ Rabbit.prototype.Table = {
                 dataSource = {},
                 onRowClick,
                 noDataText = "暂无数据",
-                _highlightRow = false,
-                _disabledHover = false,
+                highlightRow = false,
+                disabledHover = false,
         } = _config;
 
         const Table = document.createElement("div");
@@ -33,11 +32,11 @@ Rabbit.prototype.Table = {
         const TableBodyTable = document.createElement("table");
         const TableBodyTableBody = document.createElement("tbody");
 
-        Table.className = `${prefixCls}-wrapper`;
-        TableContainer.className = `${prefixCls} ${prefixCls}-${size}`;
-        TableHeaderBox.className = `${prefixCls}-header`;
-        TableBodyBox.className = `${prefixCls}-body`;
-        TableBodyTableBody.className = `${prefixCls}-body`;
+        Table.className = `${this.prefixCls}-wrapper`;
+        TableContainer.className = `${this.prefixCls} ${this.prefixCls}-${size}`;
+        TableHeaderBox.className = `${this.prefixCls}-header`;
+        TableBodyBox.className = `${this.prefixCls}-body`;
+        TableBodyTableBody.className = `${this.prefixCls}-body`;
 
         if (width) {
             TableHeaderBox.style.width = width;
@@ -49,15 +48,15 @@ Rabbit.prototype.Table = {
                 let res =
                     Math.floor(Table.offsetHeight - TableHeaderBox.offsetHeight) + "px";
                 TableBodyBox.style.height = res;
-                TableBodyBox.classList.add(`${prefixCls}-overflow-y`);
+                TableBodyBox.classList.add(`${this.prefixCls}-overflow-y`);
             }, 0);
         }
         if (border) {
-            Table.classList.add(`${prefixCls}-wrapper-with-border`);
-            TableContainer.classList.add(`${prefixCls}-border`);
+            Table.classList.add(`${this.prefixCls}-wrapper-with-border`);
+            TableContainer.classList.add(`${this.prefixCls}-border`);
         }
         if (stripe) {
-            TableContainer.classList.add(`${prefixCls}-stripe`);
+            TableContainer.classList.add(`${this.prefixCls}-stripe`);
         }
 
         Table.append(TableContainer);
@@ -71,13 +70,13 @@ Rabbit.prototype.Table = {
         TableBodyBox.appendChild(TableBodyTable);
         TableBodyTable.appendChild(TableBodyTableBody);
 
-        this._render(
+        this.render(
             dataSource,
             TableHeadTableTr,
             TableBodyTableBody,
             align,
-            _highlightRow,
-            _disabledHover,
+            highlightRow,
+            disabledHover,
             noDataText,
             onRowClick
         );
@@ -85,13 +84,13 @@ Rabbit.prototype.Table = {
         return Table;
     },
 
-    _render(
+    render(
         dataSource,
         theadTr,
         tbody,
         align,
-        _highlightRow,
-        _disabledHover,
+        highlightRow,
+        disabledHover,
         noDataText,
         onRowClick
     ) {
@@ -100,26 +99,26 @@ Rabbit.prototype.Table = {
             rows: dataSource["rows"],
         };
 
-        this._renderHeader(data.columns, theadTr, align);
-        this._renderTBodyCell(
+        this.renderHeader(data.columns, theadTr, align);
+        this.renderTBodyCell(
             data.columns,
             data.rows,
             tbody,
             align,
-            _highlightRow,
-            _disabledHover,
+            highlightRow,
+            disabledHover,
             noDataText,
             onRowClick
         );
     },
 
-    _renderHeader(data, theadTr, align) {
+    renderHeader(data, theadTr, align) {
         if (isArr(data)) {
             data.map((item) => {
                 const TableHeadTh = document.createElement("th");
 
                 TableHeadTh.innerHTML = item;
-                TableHeadTh.className = `rbt-table-column-${align}`;
+                TableHeadTh.className = `${this.prefixCls}-column-${align}`;
 
                 theadTr.appendChild(TableHeadTh);
             });
@@ -128,13 +127,13 @@ Rabbit.prototype.Table = {
         }
     },
 
-    _renderTBodyCell(
+    renderTBodyCell(
         columnsData,
         data,
         tbody,
         align,
-        _highlightRow,
-        _disabledHover,
+        highlightRow,
+        disabledHover,
         noDataText,
         onRowClick
     ) {
@@ -165,7 +164,7 @@ Rabbit.prototype.Table = {
                                     const TableBodyTd = document.createElement("td");
 
                                     TableBodyTd.innerHTML = datas[key];
-                                    TableBodyTd.className = `rbt-table-column-${align}`;
+                                    TableBodyTd.className = `${this.prefixCls}-column-${align}`;
 
                                     TableBodyTr.appendChild(TableBodyTd);
                                 } else {
@@ -182,9 +181,9 @@ Rabbit.prototype.Table = {
                         );
                     }
 
-                    this._disabledHover(_disabledHover, TableBodyTr);
-                    this._highlightRow(_highlightRow, TableBodyTr);
-                    this._rowClickEv(TableBodyTr, onRowClick, datas, i);
+                    this.disabledHover(disabledHover, TableBodyTr);
+                    this.highlightRow(highlightRow, TableBodyTr);
+                    this.handleRowsClick(TableBodyTr, onRowClick, datas, i);
                 });
             }
         } else {
@@ -192,34 +191,35 @@ Rabbit.prototype.Table = {
         }
     },
 
-    _disabledHover(d, tr) {
+    disabledHover(d, tr) {
         if (!d) {
             tr.onmouseenter = () => {
-                tr.classList.add("rbt-table-row-hover");
+                tr.classList.add(`${this.prefixCls}-row-hover`);
                 Rbt.siblings(tr).forEach((item) => {
-                    if (Rbt.hasClass(item, "rbt-table-row-hover")) {
-                        item.classList.remove("rbt-table-row-hover");
+                    if (Rbt.hasClass(item, `${this.prefixCls}-row-hover`)) {
+                        item.classList.remove(`${this.prefixCls}-row-hover`);
                     }
                 });
             };
-            tr.onmouseleave = () => tr.classList.remove("rbt-table-row-hover");
+            tr.onmouseleave = () =>
+                tr.classList.remove(`${this.prefixCls}-row-hover`);
         }
     },
 
-    _highlightRow(h, tr) {
+    highlightRow(h, tr) {
         if (h) {
             tr.onclick = () => {
-                tr.classList.add("rbt-table-heightlight");
+                tr.classList.add(`${this.prefixCls}-heightlight`);
                 Rbt.siblings(tr).forEach((item) => {
-                    if (Rbt.hasClass(item, "rbt-table-heightlight")) {
-                        item.classList.remove("rbt-table-heightlight");
+                    if (Rbt.hasClass(item, `${this.prefixCls}-heightlight`)) {
+                        item.classList.remove(`${this.prefixCls}-heightlight`);
                     }
                 });
             };
         }
     },
 
-    _rowClickEv(tr, cb, row, index) {
+    handleRowsClick(tr, cb, row, index) {
         tr.onclick = () => {
             isFunc(cb) ? cb(row, index) : null;
         };

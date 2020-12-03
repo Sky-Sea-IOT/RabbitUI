@@ -9,24 +9,24 @@ let noticeTop = 24;
  * 在界面右上角显示可关闭的全局通知
  */
 Rabbit.prototype.Notice = {
+    prefixCls: "rbt-notice",
     /**
      * ------------------------------------------------------------------------
      * 初始化父容器
      * ------------------------------------------------------------------------
      */
 
-    container: () => {
-        const prefixCls = "rbt-notice";
+    container() {
         // 创建notice的各个方向父容器添加到body
         const NoticeWrapperTR = document.createElement("div"); // top-right
         const NoticeWrapperTL = document.createElement("div"); // top-left
         const NoticeWrapperBR = document.createElement("div"); // bottom-right
         const NoticeWrapperBL = document.createElement("div"); // bottom-left
 
-        NoticeWrapperTR.className = `${prefixCls} ${prefixCls}-topRight`;
-        NoticeWrapperTL.className = `${prefixCls} ${prefixCls}-topLeft`;
-        NoticeWrapperBR.className = `${prefixCls} ${prefixCls}-bottomRight`;
-        NoticeWrapperBL.className = `${prefixCls} ${prefixCls}-bottomLeft`;
+        NoticeWrapperTR.className = `${this.prefixCls} ${this.prefixCls}-topRight`;
+        NoticeWrapperTL.className = `${this.prefixCls} ${this.prefixCls}-topLeft`;
+        NoticeWrapperBR.className = `${this.prefixCls} ${this.prefixCls}-bottomRight`;
+        NoticeWrapperBL.className = `${this.prefixCls} ${this.prefixCls}-bottomLeft`;
 
         document.body.append(
             NoticeWrapperTR,
@@ -53,7 +53,7 @@ Rabbit.prototype.Notice = {
      * @returns {HTMLElement}
      */
 
-    _createInstance({
+    createInstance({
         key,
         top,
         type,
@@ -69,7 +69,7 @@ Rabbit.prototype.Notice = {
         className,
     } = {}) {
         // 是否初始化了 notice 的父容器
-        if (document.querySelectorAll(".rbt-notice").length <= 0) {
+        if (document.querySelectorAll(`.${this.prefixCls}`).length <= 0) {
             console.error("[Rabbit warn] The Notice component is not initialized");
             return;
         }
@@ -99,7 +99,7 @@ Rabbit.prototype.Notice = {
         const NoticeClose = document.createElement("a");
         const NoticeCloseIcon = document.createElement("i");
 
-        this._addClassName(
+        this.addClassName(
             type,
             closable,
             placement,
@@ -113,14 +113,14 @@ Rabbit.prototype.Notice = {
             NoticeCloseIcon
         );
 
-        this._setKey(key, Notice);
-        this._addStyles(styles, Notice);
-        this._addContent(title, desc, NoticeTitle, NoticeDesc);
-        this._customClassName(className, Notice);
-        this._putInDiffPlacement(Notice, placement, top, bottom);
-        this._clickHandle(NoticeBox, onClick);
-        this._clickCloseHandle(NoticeClose, Notice, placement, onClose);
-        this._closeInstance(Notice, placement, duration);
+        this.setKey(key, Notice);
+        this.addStyles(styles, Notice);
+        this.addContent(title, desc, NoticeTitle, NoticeDesc);
+        this.customCls(className, Notice);
+        this.putInDiffPlacement(Notice, placement, top, bottom);
+        this.handleClick(NoticeBox, onClick);
+        this.handleClose(NoticeClose, Notice, placement, onClose);
+        this.closeInstance(Notice, placement, duration);
 
         Notice.appendChild(NoticeBox);
         NoticeBox.append(NoticeContentBox);
@@ -131,7 +131,7 @@ Rabbit.prototype.Notice = {
             NoticeContentBox.removeChild(NoticeIcon);
             NoticeContentBox.className = "";
         } else {
-            NoticeContentBox.className = `rbt-notice-notice-with-icon`;
+            NoticeContentBox.className = `${this.prefixCls}-notice-with-icon`;
         }
         // 是否显示关闭图标
         if (closable) {
@@ -142,21 +142,7 @@ Rabbit.prototype.Notice = {
         return Notice;
     },
 
-    _putInDiffPlacement(notice, placement, top, bottom) {
-        const prefixCls = "rbt-notice";
-        const NoticeWrap = document.querySelector(`.${prefixCls}-${placement}`);
-
-        if (placement === "topRight" || placement === "topLeft") {
-            NoticeWrap.style.top = `${top}px`;
-        }
-        if (placement === "bottomRight" || placement === "bottomLeft") {
-            NoticeWrap.style.bottom = `${bottom}px`;
-        }
-
-        NoticeWrap.appendChild(notice);
-    },
-
-    _addClassName(
+    addClassName(
         type,
         closable,
         placement,
@@ -169,26 +155,40 @@ Rabbit.prototype.Notice = {
         NoticeClose,
         NoticeCloseIcon
     ) {
-        const prefixCls = "rbt-notice";
         const prefixIconCls = "rbt-icon";
 
-        Notice.className = `${prefixCls}-notice ${
+        Notice.className = `${this.prefixCls}-notice ${
       this.aniCls(placement).moveInCls
     }`;
 
         if (closable) {
-            Notice.classList.add(`${prefixCls}-closable`);
+            Notice.classList.add(`${this.prefixCls}-closable`);
         }
 
-        NoticeBox.className = `${prefixCls}-content`;
-        NoticeIcon.className = `${prefixIconCls} ${prefixIconCls}-${NoticeIcons} ${prefixCls}-notice-icon ${prefixCls}-notice-icon-${type}`;
-        NoticeTitle.className = `${prefixCls}-notice-title`;
-        NoticeDesc.className = `${prefixCls}-notice-desc`;
-        NoticeClose.className = `${prefixCls}-notice-close`;
+        NoticeBox.className = `${this.prefixCls}-content`;
+        NoticeIcon.className = `${prefixIconCls} ${prefixIconCls}-${NoticeIcons} ${this.prefixCls}-notice-icon ${this.prefixCls}-notice-icon-${type}`;
+        NoticeTitle.className = `${this.prefixCls}-notice-title`;
+        NoticeDesc.className = `${this.prefixCls}-notice-desc`;
+        NoticeClose.className = `${this.prefixCls}-notice-close`;
         NoticeCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
     },
 
-    _closeInstance(notice, placement, duration) {
+    putInDiffPlacement(notice, placement, top, bottom) {
+        const NoticeWrap = document.querySelector(
+            `.${this.prefixCls}-${placement}`
+        );
+
+        if (placement === "topRight" || placement === "topLeft") {
+            NoticeWrap.style.top = `${top}px`;
+        }
+        if (placement === "bottomRight" || placement === "bottomLeft") {
+            NoticeWrap.style.bottom = `${bottom}px`;
+        }
+
+        NoticeWrap.appendChild(notice);
+    },
+
+    closeInstance(notice, placement, duration) {
         // 销毁实例
         destroy({
             el: notice,
@@ -199,38 +199,44 @@ Rabbit.prototype.Notice = {
         });
     },
 
-    _setKey(key, notice) {
+    setKey(key, notice) {
         if (isNum(key) || isStr(key)) {
             notice.dataset.key = key;
         }
     },
 
-    _addStyles(styles, notice) {
+    addStyles(styles, notice) {
         notice.style.cssText = objToString(styles);
     },
 
-    _customClassName(cls, notice) {
+    customCls(cls, notice) {
         if (cls && isStr(cls)) {
             notice.classList.add(cls);
         }
     },
 
-    _addContent(title, desc, noticeTitle, noticeDes) {
+    addContent(title, desc, noticeTitle, noticeDes) {
         if (!title) {
-            throw Error("The title of the notification reminder is mandatory");
+            console.error(
+                "Rabbit [warn] The title of the notification reminder is mandatory"
+            );
+            return;
         }
         if (!desc) {
-            throw Error("The description of the notification reminder is mandatory");
+            console.error(
+                "Rabbit [warn] The description of the notification reminder is mandatory"
+            );
+            return;
         }
         noticeTitle.innerHTML = title;
         noticeDes.innerHTML = desc;
     },
 
-    _clickHandle(notice, cb) {
+    handleClick(notice, cb) {
         notice.onclick = () => (isFunc(cb) ? cb() : null);
     },
 
-    _clickCloseHandle(el, notice, placement, cb) {
+    handleClose(el, notice, placement, cb) {
         clickDestroy({
             el,
             destroyTarget: notice,
@@ -247,8 +253,8 @@ Rabbit.prototype.Notice = {
             direction = "-left";
         }
 
-        const moveInCls = `rbt-notice-move-in${direction}`;
-        const moveOutCls = `rbt-notice-move-out${direction}`;
+        const moveInCls = `${this.prefixCls}-move-in${direction}`;
+        const moveOutCls = `${this.prefixCls}-move-out${direction}`;
 
         return {
             moveInCls,
@@ -276,7 +282,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             key,
             top,
             type: "open",
@@ -308,7 +314,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             key,
             top,
             type: "info",
@@ -340,7 +346,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             key,
             top,
             type: "success",
@@ -372,7 +378,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             key,
             top,
             type: "warning",
@@ -404,7 +410,7 @@ Rabbit.prototype.Notice = {
         placement = "topRight",
         className = "",
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             key,
             top,
             type: "error",
@@ -451,11 +457,11 @@ Rabbit.prototype.Notice = {
      */
 
     destroy(key) {
-        const target = document.querySelectorAll(".rbt-notice-notice");
+        const target = document.querySelectorAll(`.${this.prefixCls}-notice`);
         // 判断出场位置
         let direction = "";
         Array.from(target).map((item) => {
-            if (item.classList.contains("rbt-notice-move-in-left")) {
+            if (item.classList.contains(`${this.prefixCls}-move-in-left`)) {
                 direction = "-left";
             }
         });
@@ -465,15 +471,15 @@ Rabbit.prototype.Notice = {
             destroyByKey({
                 key,
                 target: target,
-                moveInCls: `rbt-notice-move-in${direction}`,
-                moveOutCls: `rbt-notice-move-out${direction}`,
+                moveInCls: `${this.prefixCls}-move-in${direction}`,
+                moveOutCls: `${this.prefixCls}-move-out${direction}`,
                 whenToDestroy: 0.5,
             });
         } else {
             destoryAll({
                 el: target,
-                moveInCls: `rbt-notice-move-in${direction}`,
-                moveOutCls: `rbt-notice-move-out${direction}`,
+                moveInCls: `${this.prefixCls}-move-in${direction}`,
+                moveOutCls: `${this.prefixCls}-move-out${direction}`,
                 whenToDestroy: 0.5,
             });
         }

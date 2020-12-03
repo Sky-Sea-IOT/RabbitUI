@@ -11,7 +11,7 @@ Rabbit.prototype.MsgBox = {
      *           cancelText: string
      *           scrollable: boolean }}
      */
-    _createInstance({
+    createInstance({
         type,
         onOk,
         width,
@@ -34,19 +34,19 @@ Rabbit.prototype.MsgBox = {
 
         for (let i = 0; i < ModalNodeLens; i++) {
             const ModalNodes = document.createElement("div");
-            this._addClassName(ModalNodes, i, type);
+            this.addClassName(ModalNodes, i, type);
             ModalList.push(ModalNodes);
         }
 
-        this._setSize(ModalList[3], width);
-        this._setBtnText(ModalConfirmBtn, ModalCancelBtn, okText, cancelText);
+        this.setSize(ModalList[3], width);
+        this.setBtnText(ModalConfirmBtn, ModalCancelBtn, okText, cancelText);
 
-        this._addIcon(ModalList[8], ModalIcon);
-        this._addTitle(ModalList[9], title);
-        this._addContent(ModalList[10], content);
-        this._addButton(type, ModalList[11], ModalConfirmBtn, ModalCancelBtn);
+        this.addIcon(ModalList[8], ModalIcon);
+        this.addTitle(ModalList[9], title);
+        this.addContent(ModalList[10], content);
+        this.addButton(type, ModalList[11], ModalConfirmBtn, ModalCancelBtn);
 
-        this._onOKHandle(
+        this.handleOk(
             ModalConfirmBtn,
             ModalCancelBtn,
             onOk,
@@ -55,8 +55,8 @@ Rabbit.prototype.MsgBox = {
             ModalList[1],
             ModalList[2]
         );
-        this._onCancleHandle(ModalCancelBtn, onCancel, ModalList[1], ModalList[2]);
-        this._keyboardClose(keyboard, onCancel, ModalList[1], ModalList[2]);
+        this.handleCancel(ModalCancelBtn, onCancel, ModalList[1], ModalList[2]);
+        this.keyboardClose(keyboard, onCancel, ModalList[1], ModalList[2]);
 
         type === "confirm" ? (type = "warning") : type;
         let iconType = type + "-outline";
@@ -74,12 +74,12 @@ Rabbit.prototype.MsgBox = {
         ModalList[6].append(ModalList[7], ModalList[10], ModalList[11]);
         ModalList[7].append(ModalList[8], ModalList[9]);
 
-        this._show(ModalList[0], ModalList[1], ModalList[2], scrollable);
+        this.show(ModalList[0], ModalList[1], ModalList[2], scrollable);
 
         return ModalList[0];
     },
 
-    _addClassName(elems, index, type) {
+    addClassName(elems, index, type) {
         const prefixCls = "rbt-modal";
         const _classList = [
             `${prefixCls}-root ${prefixCls}-instance`,
@@ -98,31 +98,31 @@ Rabbit.prototype.MsgBox = {
         elems.className = _classList[index];
     },
 
-    _addIcon(modalIconBox, modalIcon) {
+    addIcon(modalIconBox, modalIcon) {
         modalIconBox.appendChild(modalIcon);
     },
 
-    _addTitle(modalHeader, title) {
+    addTitle(modalHeader, title) {
         modalHeader.innerHTML = title;
     },
 
-    _addContent(modalBody, content) {
+    addContent(modalBody, content) {
         modalBody.innerHTML = content;
     },
 
-    _addButton(type, modalFooter, okBtn, cancelBtn) {
+    addButton(type, modalFooter, okBtn, cancelBtn) {
         if (type === "confirm") {
             modalFooter.appendChild(cancelBtn);
         }
         modalFooter.appendChild(okBtn);
     },
 
-    _setSize(modal, width) {
+    setSize(modal, width) {
         if (!width) width = 416;
         modal.style.width = width + "px";
     },
 
-    _setBtnText(okBtn, cancelBtn, okText, cancelText) {
+    setBtnText(okBtn, cancelBtn, okText, cancelText) {
         if (!okText) okText = "确定";
         if (!cancelText) cancelText = "取消";
 
@@ -130,7 +130,7 @@ Rabbit.prototype.MsgBox = {
         cancelBtn.innerText = cancelText;
     },
 
-    _scrollable(flag) {
+    scrollable(flag) {
         if (!flag) {
             bodyScrollable(flag);
         } else {
@@ -138,8 +138,8 @@ Rabbit.prototype.MsgBox = {
         }
     },
 
-    _show(root, mask, modal, scrollable) {
-        this._scrollable(scrollable);
+    show(root, mask, modal, scrollable) {
+        this.scrollable(scrollable);
 
         mask.classList.add("rbt-modal-mask-enter-in");
         modal.classList.add("rbt-modal-enter-in");
@@ -147,8 +147,8 @@ Rabbit.prototype.MsgBox = {
         document.body.appendChild(root);
     },
 
-    _close(mask, modal) {
-        this._scrollable(true);
+    close(mask, modal) {
+        this.scrollable(true);
 
         mask.classList.replace(
             "rbt-modal-mask-enter-in",
@@ -159,7 +159,7 @@ Rabbit.prototype.MsgBox = {
         setTimeout(() => modal.parentElement.remove(), 300);
     },
 
-    _onOKHandle(btn, cancelBtn, cb, loading, loadingIco, mask, modal) {
+    handleOk(btn, cancelBtn, cb, loading, loadingIco, mask, modal) {
         btn.onclick = () => {
             if (loading) {
                 // 添加loading图标
@@ -169,25 +169,25 @@ Rabbit.prototype.MsgBox = {
                 cancelBtn.style.pointerEvents = "none";
                 cancelBtn.style.opacity = 0.65;
             } else {
-                this._close(mask, modal);
+                this.close(mask, modal);
             }
             isFunc(cb) ? cb() : null;
         };
     },
 
-    _onCancleHandle(btn, cb, mask, modal) {
+    handleCancel(btn, cb, mask, modal) {
         btn.onclick = () => {
-            this._close(mask, modal);
+            this.close(mask, modal);
             isFunc(cb) ? cb() : null;
         };
     },
 
-    _keyboardClose(keyboard, cb, mask, wrap) {
+    keyboardClose(keyboard, cb, mask, wrap) {
         if (keyboard) {
             window.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
                     isFunc(cb) ? cb() : null;
-                    this._close(mask, wrap);
+                    this.close(mask, wrap);
                 }
             });
         }
@@ -203,7 +203,7 @@ Rabbit.prototype.MsgBox = {
         keyboard = false,
         scrollable = false,
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             type: "info",
             onOk,
             width,
@@ -226,7 +226,7 @@ Rabbit.prototype.MsgBox = {
         keyboard = false,
         scrollable = false,
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             type: "success",
             onOk,
             width,
@@ -249,7 +249,7 @@ Rabbit.prototype.MsgBox = {
         keyboard = false,
         scrollable = false,
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             type: "warning",
             onOk,
             width,
@@ -272,7 +272,7 @@ Rabbit.prototype.MsgBox = {
         keyboard = false,
         scrollable = false,
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             type: "error",
             onOk,
             width,
@@ -297,7 +297,7 @@ Rabbit.prototype.MsgBox = {
         cancelText,
         scrollable = false,
     } = {}) {
-        this._createInstance({
+        this.createInstance({
             type: "confirm",
             onOk,
             width,
@@ -317,8 +317,8 @@ Rabbit.prototype.MsgBox = {
         const ModalMask = ModalRoots.querySelector(".rbt-modal-mask");
         const Modal = ModalRoots.querySelector(".rbt-modal-wrap");
 
-        this._close(ModalMask, Modal);
-        this._scrollable(true);
+        this.close(ModalMask, Modal);
+        this.scrollable(true);
     },
 
     destroyAll() {
@@ -327,9 +327,9 @@ Rabbit.prototype.MsgBox = {
         Array.from(ModalRoots).map((item) => {
             const ModalMask = item.querySelector(".rbt-modal-mask");
             const Modal = item.querySelector(".rbt-modal-wrap");
-            this._close(ModalMask, Modal);
+            this.close(ModalMask, Modal);
         });
 
-        this._scrollable(true);
+        this.scrollable(true);
     },
 };

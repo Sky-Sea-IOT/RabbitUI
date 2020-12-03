@@ -3,7 +3,7 @@
  * 点击/鼠标移入元素，弹出气泡式的卡片浮层。
  */
 Rabbit.prototype.Popover = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const {
             width,
             title = "",
@@ -33,11 +33,11 @@ Rabbit.prototype.Popover = {
         const PopoverTitle = document.createElement("div");
         const PopoverContent = document.createElement("div");
 
-        this._addTitle(title, TITLE, PopoverTitle);
-        this._addContent(content, CONTENT, PopoverContent);
-        this._setSize(width, padding, PopoverBox, PopoverTitle, PopoverContent);
-        this._setPlacement(placement, Popover, PopoverRef, PopoverBox, trigger);
-        this._addClassName(
+        this.addTitle(title, TITLE, PopoverTitle);
+        this.addContent(content, CONTENT, PopoverContent);
+        this.setSize(width, padding, PopoverBox, PopoverTitle, PopoverContent);
+        this.setPlacement(placement, Popover, PopoverRef, PopoverBox, trigger);
+        this.addClassName(
             className,
             Popover,
             PopoverRef,
@@ -49,7 +49,7 @@ Rabbit.prototype.Popover = {
             PopoverTitle,
             PopoverContent
         );
-        this._defaultShow(
+        this.defaultShow(
             defaultShow,
             trigger,
             placement,
@@ -57,7 +57,7 @@ Rabbit.prototype.Popover = {
             PopoverRef,
             PopoverBox
         );
-        this._popoverEventHandle(
+        this.handlePopover(
             trigger,
             placement,
             disabled,
@@ -69,7 +69,7 @@ Rabbit.prototype.Popover = {
             showDelay,
             hideDelay
         );
-        this._externalElemsTriggerHide(triggerHide, PopoverBox, onPopoverHide);
+        this.externalElemsTriggerHide(triggerHide, PopoverBox, onPopoverHide);
 
         addElemetsOfSlots(REF, PopoverRef);
 
@@ -82,7 +82,7 @@ Rabbit.prototype.Popover = {
         return Popover;
     },
 
-    _addClassName(
+    addClassName(
         className,
         popover,
         popoverRef,
@@ -107,7 +107,7 @@ Rabbit.prototype.Popover = {
         popoverContent.className = `${prefixCls}-popover-inner-content`;
     },
 
-    _setSize(width, padding, popover, popoverTitle, popoverContent) {
+    setSize(width, padding, popover, popoverTitle, popoverContent) {
         if (isNum(width)) popover.style.width = `${width}px`;
 
         if (isStr(padding)) {
@@ -116,7 +116,7 @@ Rabbit.prototype.Popover = {
         }
     },
 
-    _addTitle(title, slotTile, popoverTitle) {
+    addTitle(title, slotTile, popoverTitle) {
         if (!title && !slotTile) setTimeout(() => popoverTitle.remove(), 0);
 
         if (slotTile) {
@@ -126,7 +126,7 @@ Rabbit.prototype.Popover = {
         }
     },
 
-    _addContent(content, slotContent, popoverContent) {
+    addContent(content, slotContent, popoverContent) {
         if (!content && !slotContent) setTimeout(() => popoverContent.remove(), 0);
 
         if (slotContent) {
@@ -136,7 +136,7 @@ Rabbit.prototype.Popover = {
         }
     },
 
-    _setPlacement(placement, popoverRoot, popoverRef, popover, trigger) {
+    setPlacement(placement, popoverRoot, popoverRef, popover, trigger) {
         if (trigger === "hover") {
             Popper.createPopper(popoverRoot, popover, { placement });
         } else {
@@ -164,7 +164,7 @@ Rabbit.prototype.Popover = {
 
         isFunc(cb) ? cb() : null;
 
-        this._setPlacement(placement, popoverRoot, popoverRef, popover, trigger);
+        this.setPlacement(placement, popoverRoot, popoverRef, popover, trigger);
     },
 
     _hide(popover, cb) {
@@ -172,13 +172,13 @@ Rabbit.prototype.Popover = {
         popover.classList.replace(this._ani().fadeIn, this._ani().fadeOut);
     },
 
-    _defaultShow(show, trigger, placement, popoverRoot, popoverRef, popover) {
+    defaultShow(show, trigger, placement, popoverRoot, popoverRef, popover) {
         if (show) {
             this._show(trigger, placement, popoverRoot, popoverRef, popover, null);
         }
     },
 
-    _popoverEventHandle(
+    handlePopover(
         trigger,
         placement,
         disabled,
@@ -228,7 +228,7 @@ Rabbit.prototype.Popover = {
         }
     },
 
-    _externalElemsTriggerHide(sel, popover, cb) {
+    externalElemsTriggerHide(sel, popover, cb) {
         const hide = () => this._hide(popover, cb);
 
         if (isStr(sel) && sel) {

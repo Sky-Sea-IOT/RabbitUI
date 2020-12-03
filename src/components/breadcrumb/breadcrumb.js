@@ -3,7 +3,7 @@
  * 显示当前页面在系统层级结构中的位置，并能向上返回。
  */
 Rabbit.prototype.Breadcrumb = {
-    _createInstance: (_config, _slot) => {
+    createInstance: (_config, _slot) => {
         const prefixCls = "rbt-breadcrumb";
         const { separator = "/" } = _config;
         const { BREADCRUMBITEM } = _slot;

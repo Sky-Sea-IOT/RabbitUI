@@ -5,10 +5,10 @@
 let spinZIndex = 2010;
 
 Rabbit.prototype.Spin = {
-    _createInstance(_size, _text, _color) {
-        const prefixCls = "rbt-spin";
-        const enterAniCls = `${prefixCls}-fade-enter`;
-        const leaveAniCls = `${prefixCls}-fade-leave`;
+    prefixCls: "rbt-spin",
+    createInstance(_size, _text, _color) {
+        const enterAniCls = `${this.prefixCls}-fade-enter`;
+        const leaveAniCls = `${this.prefixCls}-fade-leave`;
 
         const SpinFullscreen = document.createElement("div");
         const SpinFixBox = document.createElement("div");
@@ -21,14 +21,14 @@ Rabbit.prototype.Spin = {
         const SpinBorder = document.createElement("i");
         const SpinText = document.createElement("span");
 
-        SpinFullscreen.className = `${prefixCls}-fullscreen ${prefixCls}-fullscreen-warpper`;
-        SpinFixBox.className = `${prefixCls}-fix ${prefixCls}-fullscreen`;
-        SpinMainBox.className = `${prefixCls}-main`;
+        SpinFullscreen.className = `${this.prefixCls}-fullscreen ${this.prefixCls}-fullscreen-warpper`;
+        SpinFixBox.className = `${this.prefixCls}-fix ${this.prefixCls}-fullscreen`;
+        SpinMainBox.className = `${this.prefixCls}-main`;
 
-        SpinDot.className = `${prefixCls}-dot bg-${_color} ${_size}`;
+        SpinDot.className = `${this.prefixCls}-dot bg-${_color} ${_size}`;
 
-        SpinShowTextBox.className = `${prefixCls} ${prefixCls}-fix ${prefixCls}-show-text`;
-        SpinTextBox.className = `${prefixCls}-text`;
+        SpinShowTextBox.className = `${this.prefixCls} ${this.prefixCls}-fix ${this.prefixCls}-show-text`;
+        SpinTextBox.className = `${this.prefixCls}-text`;
         SpinBorder.className = `rbt-icon rbt-icon-loading-solid rbt-spin-loading ${_size}`;
 
         SpinText.innerHTML = _text;
@@ -51,18 +51,18 @@ Rabbit.prototype.Spin = {
     },
 
     show({ size = "large", text = "", color = "primary" } = {}) {
-        this._createInstance(size, text, color);
+        this.createInstance(size, text, color);
     },
 
     hide() {
-        const spin = document.querySelector(".rbt-spin-fullscreen");
-        const spinFixBox = spin.querySelector(".rbt-spin-fix");
+        const spin = document.querySelector(`.${this.prefixCls}-fullscreen`);
+        const spinFixBox = spin.querySelector(`.${this.prefixCls}-fix`);
 
         CSSTransition(
             spinFixBox,
-            "out",
-            "rbt-spin-fade-enter",
-            "rbt-spin-fade-leave",
+            `out`,
+            `${this.prefixCls}-fade-enter`,
+            `${this.prefixCls}-fade-leave`,
             250
         );
 

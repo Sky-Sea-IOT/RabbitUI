@@ -3,7 +3,7 @@
  * 文字提示气泡框，在鼠标悬停时显示，代替了系统的title提示。
  */
 Rabbit.prototype.Tooltip = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const prefixCls = "rbt-tooltip";
 
         const {
@@ -55,11 +55,9 @@ Rabbit.prototype.Tooltip = {
         TooltipContent.append(TooltipArrow, TooltipInner);
         TooltipArrow.appendChild(TooltipArrowContent);
 
-        isSlotsUserd(true, REF);
-
         Popper.createPopper(Tooltip, TooltipPopper, { placement });
 
-        this._config(
+        this.setting(
             Tooltip,
             TooltipPopper,
             placement,
@@ -71,7 +69,7 @@ Rabbit.prototype.Tooltip = {
         return Tooltip;
     },
 
-    _config(
+    setting(
         popcorn,
         tooltip,
         placement,

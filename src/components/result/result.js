@@ -3,7 +3,7 @@
  * 用于反馈一系列操作任务的处理结果。
  */
 Rabbit.prototype.Result = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const { status = "info", title = "", subtitle = "" } = _config;
         const { ICON, CONTENT, FOOTER } = _slot;
 
@@ -15,7 +15,7 @@ Rabbit.prototype.Result = {
         const ResultExtra = document.createElement("div");
         const ResultFooter = document.createElement("div");
 
-        this._addClassName(
+        this.addClassName(
             Result,
             ResultIconBox,
             ResultIcon,
@@ -33,18 +33,18 @@ Rabbit.prototype.Result = {
             ResultFooter
         );
 
-        this._setStatus(status, Result);
-        this._setIcon(status, ResultIconBox, ResultIcon);
-        this._customIcon(ICON, ResultIconBox);
-        this._setTitle(title, ResultTitle);
-        this._setSubTitle(subtitle, ResultSubTitle);
-        this._setContent(CONTENT, ResultExtra);
-        this._setFooter(FOOTER, ResultFooter);
+        this.setStatus(status, Result);
+        this.setIcon(status, ResultIconBox, ResultIcon);
+        this.customIcon(ICON, ResultIconBox);
+        this.setTitle(title, ResultTitle);
+        this.setSubTitle(subtitle, ResultSubTitle);
+        this.setContent(CONTENT, ResultExtra);
+        this.setFooter(FOOTER, ResultFooter);
 
         return Result;
     },
 
-    _addClassName(
+    addClassName(
         result,
         resultIconBox,
         resultIcon,
@@ -77,13 +77,13 @@ Rabbit.prototype.Result = {
         );
     },
 
-    _setStatus(status, result) {
+    setStatus(status, result) {
         if (this._defaultStatus(status)) {
             result.classList.add(`rbt-result-${status}`);
         }
     },
 
-    _setIcon(status, resultIconBox, resultIcon) {
+    setIcon(status, resultIconBox, resultIcon) {
         const prefixIconCls = "rbt-icon";
 
         if (status !== "403" && status !== "404" && status !== "500") {
@@ -106,14 +106,14 @@ Rabbit.prototype.Result = {
         }
     },
 
-    _customIcon(_icon, resultIconBox) {
+    customIcon(_icon, resultIconBox) {
         if (_icon) {
             resultIconBox.innerHTML = null;
             addElemetsOfSlots(_icon, resultIconBox);
         }
     },
 
-    _setTitle(title, resultTitle) {
+    setTitle(title, resultTitle) {
         if (title) {
             resultTitle.innerHTML = title;
         } else {
@@ -121,7 +121,7 @@ Rabbit.prototype.Result = {
         }
     },
 
-    _setSubTitle(subtitle, resultSubTitle) {
+    setSubTitle(subtitle, resultSubTitle) {
         if (subtitle) {
             resultSubTitle.innerHTML = subtitle;
         } else {
@@ -129,7 +129,7 @@ Rabbit.prototype.Result = {
         }
     },
 
-    _setContent(content, resultExtra) {
+    setContent(content, resultExtra) {
         if (content && content.innerHTML) {
             addElemetsOfSlots(content, resultExtra);
         } else {
@@ -137,7 +137,7 @@ Rabbit.prototype.Result = {
         }
     },
 
-    _setFooter(footer, resultFooter) {
+    setFooter(footer, resultFooter) {
         if (footer && footer.innerHTML) {
             addElemetsOfSlots(footer, resultFooter);
         } else {

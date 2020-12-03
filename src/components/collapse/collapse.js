@@ -3,7 +3,7 @@
  * 可以折叠/展开的内容区域。
  */
 Rabbit.prototype.Collapse = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const prefixCls = "rbt-collapse";
         const prefixIconCls = "rbt-icon";
 
@@ -80,16 +80,16 @@ Rabbit.prototype.Collapse = {
 
             item.remove();
 
-            this._setItemsKey(i, key, CollapseItem);
+            this.setItemsKey(i, key, CollapseItem);
 
-            this._setDefaultActiveItem(
+            this.setDefaultActiveItem(
                 defaultActiveKey,
                 CollapseItem,
                 CollapseContent
             );
 
             CollapseHeader.onclick = () =>
-                this._toogleHandler(
+                this.handleToogle(
                     i,
                     CollapseItem,
                     CollapseContent,
@@ -105,7 +105,7 @@ Rabbit.prototype.Collapse = {
         return Collapse;
     },
 
-    _setItemsKey(i, key, item) {
+    setItemsKey(i, key, item) {
         if (key.length > 0) {
             item.dataset.key = key[i];
         } else {
@@ -113,7 +113,7 @@ Rabbit.prototype.Collapse = {
         }
     },
 
-    _setDefaultActiveItem(defaultActiveKey, item, itemPanel) {
+    setDefaultActiveItem(defaultActiveKey, item, itemPanel) {
         const { key } = item.dataset;
         defaultActiveKey.map((defKeys, i) => {
             if (defKeys == key) {
@@ -123,7 +123,7 @@ Rabbit.prototype.Collapse = {
         });
     },
 
-    _toogleHandler(i, el1, el2, _key, onChange, accordion, expandedKeys) {
+    handleToogle(i, el1, el2, _key, onChange, accordion, expandedKeys) {
         let key = expandedKeys;
 
         const prefixCls = "rbt-collapse";

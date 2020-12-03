@@ -1,0 +1,208 @@
+// 用于开发期间测试使用，在生产阶段去掉 @import
+@import "../common/index.css";
+@import "../custom.less";
+@import "../common/iconfont/icons.css";
+@import "../mixins/size.less";
+
+@prefix: @css-prefix;
+@icon-prefix: @css-prefix-iconfont;
+
+.@{prefix}tabs {
+  &-header {
+    position: @rel;
+    padding: 0;
+    margin: 0 0 15px;
+  }
+
+  &-nav {
+    &-wrap {
+      overflow: @hid;
+      margin-bottom: -1px;
+      position: @rel;
+
+      &::after {
+        content: "";
+        position: @abs;
+        left: 0;
+        bottom: 0;
+        .size(100%,1px);
+        background-color: @split-color;
+        z-index: 1;
+      }
+    }
+
+    &-scroll {
+      overflow: @hid;
+    }
+
+    white-space: nowrap;
+    position: @rel;
+    float: left;
+    z-index: 2;
+    transition: transform @animation-time;
+  }
+
+  &-active-bar {
+    position: @abs;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: @primary-color;
+    z-index: 1;
+    transition: transform @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  &-tab {
+    float: left;
+    position: @rel;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    cursor: @pointer;
+    font-size: @font-size-sm;
+    transition: color @transition-time @ease-in-out;
+
+    &:not(&-disabled):hover {
+      color: @primary-color;
+    }
+
+    &:nth-child(2) {
+      padding-left: @padding-sm;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &-active {
+      color: @primary-color;
+      font-weight: 500;
+    }
+
+    &-disabled {
+      color: @ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  &-content {
+    overflow: @hid;
+    position: @rel;
+  }
+
+  &-tabpane {
+    display: @none;
+
+    &-active {
+      display: @bl;
+    }
+  }
+
+  &-card,
+  &-border-card {
+    .@{prefix}tabs {
+      &-tab {
+        &:nth-child(2) {
+          padding-left: 20px;
+          border-left: @none;
+        }
+
+        &:last-child {
+          padding-right: 20px;
+        }
+      }
+
+      &-nav-wrap {
+        &::after {
+          display: @none;
+        }
+      }
+    }
+  }
+
+  &-card {
+    .@{prefix}tabs {
+      &-header {
+        border-bottom: @border-width-base @border-style-base @split-color;
+      }
+
+      &-nav {
+        border: @border-width-base @border-style-base @split-color;
+        border-bottom: @none;
+        border-radius: @sm-radius @sm-radius 0 0;
+      }
+
+      &-tab {
+        border-bottom: @border-width-base @border-style-base @split-color;
+        border-left: @border-width-base @border-style-base @split-color;
+        transition: color @animation-time cubic-bezier(0.645, 0.045, 0.355, 1),
+          padding @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
+
+        &-active {
+          background-color: @white;
+          border-bottom-color: @white;
+          .@{icon-prefix}-ios-close {
+            width: 22px;
+          }
+        }
+
+        &:hover {
+          .@{icon-prefix}-ios-close {
+            width: 22px;
+          }
+        }
+      }
+    }
+    .@{icon-prefix}-ios-close {
+      width: 0;
+      position: @rel;
+      font-size: 22px;
+      height: 14px;
+      vertical-align: middle;
+      line-height: 15px;
+      overflow: @hid;
+      top: -1px;
+      right: -2px;
+      transform-origin: 100% 50%;
+      text-align: center;
+      transition: all @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
+      margin-right: -5px;
+    }
+  }
+
+  &-border-card {
+    background: @white;
+    border: @border-width-base @border-style-base @split-color;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+
+    > .@{prefix}tabs {
+      &-header {
+        color: #909399;
+        background-color: #f5f7fa;
+        border-bottom: @border-width-base @border-style-base @split-color;
+        margin: 0;
+      }
+
+      &-tab {
+        transition: all @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
+        border: @border-width-base @border-style-base transparent;
+        margin-top: -1px;
+        color: @sub-color;
+
+        &:first-child {
+          margin-left: -1px;
+        }
+      }
+
+      &-content {
+        padding: 15px;
+      }
+    }
+
+    .@{prefix}tabs-tab-active {
+      background-color: @white;
+      border-right: @border-width-base @border-style-base @border-color;
+      border-left: @border-width-base @border-style-base @border-color;
+    }
+  }
+}

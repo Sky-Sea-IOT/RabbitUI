@@ -18,9 +18,7 @@
 </style>
 
 <body>
-    <section class="demo">
-        <rab-skeleton id="skeleton1"></rab-skeleton>
-        <!-- <div class="rbt-skeleton">
+    <!-- <div class="rbt-skeleton">
             <div class="rbt-skeleton-body">
                 <h3 class="rbt-skeleton-title"></h3>
                 <ul class="rbt-skeleton-paragraph">
@@ -30,6 +28,8 @@
                 </ul>
             </div>
         </div> -->
+    <section class="demo">
+        <rab-skeleton id="skeleton1"></rab-skeleton>
     </section>
 
     <section class="demo">
@@ -75,7 +75,9 @@
 <script src="./skeleton.js"></script>
 <script src="../switch/switch.js"></script>
 <script>
-    RabbitUI.create("#skeleton1");
+    RabbitUI.create("#skeleton1", {
+        rows: 1,
+    });
     RabbitUI.create("#skeleton2", {
         avatar: true,
         rows: 4,

@@ -3,7 +3,7 @@
  * 基础容器，用来显示文字、列表、图文等内容
  */
 Rabbit.prototype.Card = {
-    _createInstance: (_config, _slot) => {
+    createInstance: (_config, _slot) => {
         const prefixCls = "rbt-card";
         const {
             width = 320,
@@ -33,13 +33,9 @@ Rabbit.prototype.Card = {
         CardBody.style.cssText = BODYSTYLE;
 
         if (isNum(width)) Card.style.width = `${width}px`;
-
         if (bordered) Card.classList.add(`${prefixCls}-bordered`);
-
         if (hoverable) Card.classList.add(`${prefixCls}-hoverable`);
-
         if (isNum(padding)) CardBody.style.padding = `${padding}px`;
-
         if (TITLE && TITLE.innerHTML) {
             addElemetsOfSlots(TITLE, CardHeader);
             Card.appendChild(CardHeader);
@@ -52,10 +48,6 @@ Rabbit.prototype.Card = {
             addElemetsOfSlots(CONTENT, CardBody);
             Card.appendChild(CardBody);
         }
-
-        isSlotsUserd(true, TITLE);
-        isSlotsUserd(true, EXTRA);
-        isSlotsUserd(true, CONTENT);
 
         return Card;
     },

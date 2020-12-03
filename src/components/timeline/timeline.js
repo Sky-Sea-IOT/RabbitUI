@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Timeline = {
-    _createInstance: (_config, _slot) => {
+    createInstance: (_config, _slot) => {
         const prefixCls = "rbt-timeline";
 
         const { color = [], pending = false } = _config;
@@ -47,13 +47,12 @@ Rabbit.prototype.Timeline = {
                     TimelineItemHead.style.borderColor = `${color[i]}`;
                 }
             } else {
-                const err = `The property color is an array of types instead of ${_typeof(
-          color
-        )}`;
-                throw new TypeError(err);
+                const t = _typeof(color);
+                console.error(
+                    `[Rabbit warn] The property color is an array of types instead of ${t}`
+                );
             }
 
-            isSlotsUserd(true, TIMELINEITEM[i]);
             addElemetsOfSlots(TIMELINEITEM[i], TimelineItemContent);
 
             TimelineItem.append(

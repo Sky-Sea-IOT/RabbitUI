@@ -34,7 +34,7 @@ Rabbit.prototype.Message = {
      *           background: boolean }}
      * @returns {HTMLElement}
      */
-    _createInstance({
+    createInstance({
         key,
         type,
         onClose,
@@ -62,7 +62,7 @@ Rabbit.prototype.Message = {
         const MessageContentBox = document.createElement("span");
         const MessageClose = document.createElement("a");
 
-        this._addClassName(
+        this.addClassName(
             type,
             MessageIcons,
             Message,
@@ -81,16 +81,16 @@ Rabbit.prototype.Message = {
             MessageTypeBox.appendChild(MessageClose);
         }
 
-        this._setKey(key, Message);
-        this._setContent(MessageContentBox, content);
-        this._closeInstacne(Message, duration);
-        this._showBackground(background, MessageNoticeContent, type);
-        this._clickCloseHandle(MessageClose, onClose);
+        this.setKey(key, Message);
+        this.setContent(MessageContentBox, content);
+        this.closeInstacne(Message, duration);
+        this.showBackground(background, MessageNoticeContent, type);
+        this.hanleClickClose(MessageClose, onClose);
 
         return Message;
     },
 
-    _addClassName(
+    addClassName(
         type,
         MessageIcons,
         Message,
@@ -118,25 +118,25 @@ Rabbit.prototype.Message = {
         };
     },
 
-    _showBackground(background, el, type) {
+    showBackground(background, el, type) {
         if (background) {
             el.classList.add(`rbt-message-with-background-${type}`);
         }
     },
 
-    _setKey(key, el) {
+    setKey(key, el) {
         if (isNum(key) || isStr(key)) {
             el.dataset.key = key;
         }
     },
 
-    _setContent(el, content) {
+    setContent(el, content) {
         if (content) {
             el.innerHTML = content;
         }
     },
 
-    _closeInstacne(el, duration) {
+    closeInstacne(el, duration) {
         // 销毁实例
         destroy({
             el,
@@ -147,7 +147,7 @@ Rabbit.prototype.Message = {
         });
     },
 
-    _clickCloseHandle(el, cb) {
+    hanleClickClose(el, cb) {
         clickDestroy({
             el,
             moveInCls: this._aniCls().moveInCls,
@@ -166,7 +166,7 @@ Rabbit.prototype.Message = {
     info(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this._createInstance({
+        this.createInstance({
             key,
             type: "info",
             content,
@@ -181,7 +181,7 @@ Rabbit.prototype.Message = {
     success(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this._createInstance({
+        this.createInstance({
             key,
             type: "success",
             content,
@@ -196,7 +196,7 @@ Rabbit.prototype.Message = {
     warning(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this._createInstance({
+        this.createInstance({
             key,
             type: "warning",
             content,
@@ -211,7 +211,7 @@ Rabbit.prototype.Message = {
     error(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this._createInstance({
+        this.createInstance({
             key,
             type: "error",
             content,
@@ -226,7 +226,7 @@ Rabbit.prototype.Message = {
     loading(
         content, { key, onClose, duration = 2.5, closable = false, background = false } = {}
     ) {
-        this._createInstance({
+        this.createInstance({
             key,
             type: "loading",
             content,

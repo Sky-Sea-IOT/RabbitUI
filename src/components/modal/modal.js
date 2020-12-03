@@ -5,7 +5,9 @@ let modalZIndex = 1000;
  * 模态对话框，在浮层中显示，引导用户进行相关操作。
  */
 Rabbit.prototype.Modal = {
-    _createInstance(_el, _config, _slot) {
+    prefixCls: "rbt-modal",
+    prefixIconCls: "rbt-icon",
+    createInstance(_el, _config, _slot) {
         const {
             mask = true,
                 onOk,
@@ -45,7 +47,7 @@ Rabbit.prototype.Modal = {
         const ModalCancelButton = document.createElement("button");
         const ModalButtonLoading = document.createElement("i");
 
-        this._addClassName(
+        this.addClassName(
             className,
             Modal,
             ModalMask,
@@ -62,15 +64,15 @@ Rabbit.prototype.Modal = {
             ModalCancelButton
         );
         this._show(visible, ModalMask, ModalWrap);
-        this._showMask(mask, ModalMask);
-        this._setModalStyle(ModalBox, width, styles);
-        this._setModalZIndex(ModalMask, ModalWrap, modalZIndex);
-        this._buttonText(ModalOkButton, ModalCancelButton, okText, cancelText);
-        this._setFullscreen(fullscreen, ModalBox);
+        this.showMask(mask, ModalMask);
+        this.setStyle(ModalBox, width, styles);
+        this.setZIndex(ModalMask, ModalWrap, modalZIndex);
+        this.addButtonText(ModalOkButton, ModalCancelButton, okText, cancelText);
+        this.setFullscreen(fullscreen, ModalBox);
 
         bindClickEv(_el, onOk, onCancel);
 
-        this._onOKHandle(
+        this.handleOk(
             ModalOkButton,
             onOk,
             ModalMask,
@@ -78,28 +80,22 @@ Rabbit.prototype.Modal = {
             loading,
             ModalButtonLoading
         );
-        this._onCancleHandle(
+        this.handleCancel(
             ModalCancelButton,
             onCancel,
             ModalMask,
             ModalWrap,
             ModalOkButton
         );
-        this._onCancleHandle(
+        this.handleCancel(
             ModalClose,
             onCancel,
             ModalMask,
             ModalWrap,
             ModalOkButton
         );
-        this._keyboardClose(
-            keyboard,
-            onCancel,
-            ModalMask,
-            ModalWrap,
-            ModalOkButton
-        );
-        this._modalHideByMask(maskClosable, ModalMask, ModalWrap, ModalOkButton);
+        this.keyboardClose(keyboard, onCancel, ModalMask, ModalWrap, ModalOkButton);
+        this.handleMask(maskClosable, ModalMask, ModalWrap, ModalOkButton);
 
         addElemetsOfSlots(CONTENT, ModalBody);
 
@@ -115,15 +111,11 @@ Rabbit.prototype.Modal = {
             ModalFooter.append(ModalCancelButton, ModalOkButton);
         }
 
-        isSlotsUserd(true, HEADER);
-        isSlotsUserd(true, CONTENT);
-        isSlotsUserd(true, FOOTER);
-
         Modal.append(ModalMask, ModalWrap);
         ModalWrap.appendChild(ModalBox);
         ModalBox.appendChild(ModalContent);
 
-        this._showClosable(closable, ModalContent, ModalClose, ModalCloseIco);
+        this.showClosable(closable, ModalContent, ModalClose, ModalCloseIco);
 
         ModalContent.append(ModalHeader, ModalBody);
 
@@ -136,7 +128,7 @@ Rabbit.prototype.Modal = {
         return Modal;
     },
 
-    _addClassName(
+    addClassName(
         className,
         modal,
         modalMask,
@@ -152,26 +144,25 @@ Rabbit.prototype.Modal = {
         modalOkButton,
         modalCancelButton
     ) {
-        const prefixCls = "rbt-modal";
-        modal.className = `${prefixCls}-root`;
-        modalMask.className = `${prefixCls}-mask`;
-        modalWrap.className = `${prefixCls}-wrap ${className}`;
-        modalBox.className = `${prefixCls}`;
-        modalContent.className = `${prefixCls}-content`;
-        modalClose.className = `${prefixCls}-close`;
-        modalCloseIco.className = `rbt-icon rbt-icon-ios-close`;
-        modalHeader.className = `${prefixCls}-header`;
-        modalTitle.className = `${prefixCls}-title`;
-        modalBody.className = `${prefixCls}-body`;
-        modalFooter.className = `${prefixCls}-footer`;
+        modal.className = `${this.prefixCls}-root`;
+        modalMask.className = `${this.prefixCls}-mask`;
+        modalWrap.className = `${this.prefixCls}-wrap ${className}`;
+        modalBox.className = `${this.prefixCls}`;
+        modalContent.className = `${this.prefixCls}-content`;
+        modalClose.className = `${this.prefixCls}-close`;
+        modalCloseIco.className = `${this.prefixIconCls} ${this.prefixIconCls}-ios-close`;
+        modalHeader.className = `${this.prefixCls}-header`;
+        modalTitle.className = `${this.prefixCls}-title`;
+        modalBody.className = `${this.prefixCls}-body`;
+        modalFooter.className = `${this.prefixCls}-footer`;
         modalOkButton.className = "rbt-btn rbt-btn-primary";
         modalCancelButton.className = "rbt-btn";
     },
 
     // 展示遮盖层
-    _showMask(mask, el) {
+    showMask(mask, el) {
         if (!mask) {
-            el.classList.add("rbt-modal-no-mask");
+            el.classList.add(`${this.prefixCls}-no-mask`);
         }
     },
 
@@ -180,8 +171,8 @@ Rabbit.prototype.Modal = {
             bodyScrollable(false);
             mask.style.display = null;
             wrap.style.display = null;
-            mask.classList.add("rbt-modal-mask-enter-in");
-            wrap.classList.add("rbt-modal-enter-in");
+            mask.classList.add(`${this.prefixCls}-mask-enter-in`);
+            wrap.classList.add(`${this.prefixCls}-enter-in`);
         }
     },
 
@@ -189,8 +180,8 @@ Rabbit.prototype.Modal = {
         this._initScrollable();
 
         mask.classList.replace(
-            "rbt-modal-mask-enter-in",
-            "rbt-modal-mask-leave-out"
+            `${this.prefixCls}-mask-enter-in`,
+            `${this.prefixCls}-mask-leave-out`
         );
 
         if (loadingBtn) {
@@ -206,15 +197,18 @@ Rabbit.prototype.Modal = {
         setTimeout(() => {
             mask.style.display = "none";
             wrap.style.display = "none";
-            mask.classList.remove("rbt-modal-mask-leave-out");
-            wrap.classList.remove("rbt-modal-leave-out");
+            mask.classList.remove(`${this.prefixCls}-mask-leave-out`);
+            wrap.classList.remove(`${this.prefixCls}-leave-out`);
         }, 500);
 
-        wrap.classList.replace("rbt-modal-enter-in", "rbt-modal-leave-out");
+        wrap.classList.replace(
+            `${this.prefixCls}-enter-in`,
+            `${this.prefixCls}-leave-out`
+        );
     },
 
     // 遮盖层关闭modal
-    _modalHideByMask(m, el, wrap, loadingBtn) {
+    handleMask(m, el, wrap, loadingBtn) {
         if (m) {
             el.onclick = () => {
                 this._close(el, wrap, loadingBtn);
@@ -224,7 +218,7 @@ Rabbit.prototype.Modal = {
     },
 
     // 显示关闭按钮
-    _showClosable(closable, el, closeBox, closeIcon) {
+    showClosable(closable, el, closeBox, closeIcon) {
         if (closable) {
             el.appendChild(closeBox);
             closeBox.appendChild(closeIcon);
@@ -237,7 +231,7 @@ Rabbit.prototype.Modal = {
     },
 
     // 设置自定义style内联样式
-    _setModalStyle(el, width, styles) {
+    setStyle(el, width, styles) {
         el.style.width = width;
         if (typeof styles === "object") {
             el.style.cssText = objToString(styles);
@@ -245,32 +239,32 @@ Rabbit.prototype.Modal = {
     },
 
     // 设置层级
-    _setModalZIndex(mask, wrap, modalZIndex) {
+    setZIndex(mask, wrap, modalZIndex) {
         mask.style.zIndex = modalZIndex;
         wrap.style.zIndex = modalZIndex;
     },
 
     // 设置全屏
-    _setFullscreen(fullscreen, el) {
+    setFullscreen(fullscreen, el) {
         if (fullscreen) {
-            el.classList.add("rbt-modal-fullscreen");
+            el.classList.add(`${this.prefixCls}-fullscreen`);
         }
     },
 
     // 自定义按钮文字
-    _buttonText(okBtn, cancelBtn, okText, cancelText) {
+    addButtonText(okBtn, cancelBtn, okText, cancelText) {
         okBtn.textContent = okText;
         cancelBtn.textContent = cancelText;
     },
 
     // 确定按钮的回调事件
-    _onOKHandle(okBtn, cb, mask, wrap, loading, loadingIco) {
+    handleOk(okBtn, cb, mask, wrap, loading, loadingIco) {
         okBtn.onclick = () => {
             // 点击按钮是否显示加载中状态
             if (loading) {
                 okBtn.prepend(loadingIco);
                 okBtn.classList.add("rbt-btn-loading");
-                loadingIco.className = "rbt-icon rbt-icon-loading-solid";
+                loadingIco.className = `${this.prefixIconCls} ${this.prefixIconCls}-loading-solid`;
             } else {
                 this._close(mask, wrap);
             }
@@ -280,7 +274,7 @@ Rabbit.prototype.Modal = {
     },
 
     // 取消按钮的回调事件
-    _onCancleHandle(el, cb, mask, wrap, loadingBtn) {
+    handleCancel(el, cb, mask, wrap, loadingBtn) {
         el.onclick = () => {
             isFunc(cb) ? cb() : null;
             this._close(mask, wrap, loadingBtn);
@@ -288,7 +282,7 @@ Rabbit.prototype.Modal = {
     },
 
     // 键盘esc键关闭
-    _keyboardClose(keyboard, cb, mask, wrap, loadingBtn) {
+    keyboardClose(keyboard, cb, mask, wrap, loadingBtn) {
         if (keyboard) {
             window.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
@@ -299,11 +293,11 @@ Rabbit.prototype.Modal = {
         }
     },
 
-    _getModalElement(el) {
+    getRealElem(el) {
         const elem = document.querySelector(el);
-        const mask = elem.querySelector(".rbt-modal-mask");
-        const wrap = elem.querySelector(".rbt-modal-wrap");
-        const okBtn = elem.querySelector(".rbt-btn-primary");
+        const mask = elem.querySelector(`.${this.prefixCls}-mask`);
+        const wrap = elem.querySelector(`.${this.prefixCls}-wrap`);
+        const okBtn = elem.querySelector(`.rbt-btn-primary`);
         return {
             elem,
             mask,
@@ -315,8 +309,8 @@ Rabbit.prototype.Modal = {
     // 外部调用，用于显示隐藏modal
 
     show(el) {
-        const mask = this._getModalElement(el).mask;
-        const wrap = this._getModalElement(el).wrap;
+        const mask = this.getRealElem(el).mask;
+        const wrap = this.getRealElem(el).wrap;
 
         modalZIndex++;
         mask.style.zIndex = modalZIndex;
@@ -327,9 +321,9 @@ Rabbit.prototype.Modal = {
 
     hide(el) {
         this._close(
-            this._getModalElement(el).mask,
-            this._getModalElement(el).wrap,
-            this._getModalElement(el).okBtn
+            this.getRealElem(el).mask,
+            this.getRealElem(el).wrap,
+            this.getRealElem(el).okBtn
         );
     },
 };

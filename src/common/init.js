@@ -3,7 +3,7 @@
  * @param {string} c
  * @returns {HTMLElement}
  */
-function initComps(c) {
+const initComps = (c) => {
     switch (c) {
         case "Message":
             Rabbit.prototype.Message.container();
@@ -14,10 +14,10 @@ function initComps(c) {
             break;
 
         case "LoadingBar":
-            Rabbit.prototype.LoadingBar._createInstance();
+            Rabbit.prototype.LoadingBar.createInstance();
             break;
 
         default:
             console.error(`[Rabbit warn] "${c}", unable to initialize component`);
     }
-}
+};

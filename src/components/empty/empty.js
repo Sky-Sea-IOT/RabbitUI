@@ -4,7 +4,7 @@
  */
 
 Rabbit.prototype.Empty = {
-    _createInstance(_config, _slot) {
+    createInstance(_config, _slot) {
         const { desc, image = "IMAGE_DEFAULT", footer, imageStyle = {} } = _config;
         const { DESC, FOOTER } = _slot;
 
@@ -19,15 +19,15 @@ Rabbit.prototype.Empty = {
         Empty.append(EmptyImageBox, EmptyDesc, EmptyFooter);
         EmptyImageBox.appendChild(EmptyImage);
 
-        this._addClassName(Empty, EmptyImageBox, EmptyDesc, EmptyFooter);
-        this._setImage(image, imageStyle, EmptyImage, EmptyImageBox, Empty);
-        this._setDesc(desc, DESC, EmptyDesc);
-        this._setFooter(footer, FOOTER, EmptyFooter);
+        this.addClassName(Empty, EmptyImageBox, EmptyDesc, EmptyFooter);
+        this.setImage(image, imageStyle, EmptyImage, EmptyImageBox, Empty);
+        this.setDesc(desc, DESC, EmptyDesc);
+        this.setFooter(footer, FOOTER, EmptyFooter);
 
         return Empty;
     },
 
-    _addClassName(empty, emptyImageBox, emptyDesc, emptyFooter) {
+    addClassName(empty, emptyImageBox, emptyDesc, emptyFooter) {
         const prefixCls = "rbt-empty";
         empty.className = `${prefixCls}`;
         emptyImageBox.className = `${prefixCls}-image`;
@@ -35,7 +35,7 @@ Rabbit.prototype.Empty = {
         emptyFooter.className = `${prefixCls}-footer`;
     },
 
-    _setImage(image, styles, emptyImage, emptyImageBox, empty) {
+    setImage(image, styles, emptyImage, emptyImageBox, empty) {
         // !这里在打包的时候图片地址需要替换成 import 进来的变量名
         if (image === "IMAGE_DEFAULT") {
             emptyImage.src = "../../assets/empty.svg";
@@ -62,11 +62,11 @@ Rabbit.prototype.Empty = {
         }
     },
 
-    _setDesc(desc, slotDesc, emptyDesc) {
+    setDesc(desc, slotDesc, emptyDesc) {
         this._addContent(desc, slotDesc, emptyDesc);
     },
 
-    _setFooter(footer, slotFooter, emptyFooter) {
+    setFooter(footer, slotFooter, emptyFooter) {
         this._addContent(footer, slotFooter, emptyFooter);
     },
 };
