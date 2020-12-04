@@ -122,6 +122,54 @@
             </div>
         </div>
     </div>
+    <!-- 溢出滚动 -->
+    <div class="demo">
+        <div class="rbt-tabs">
+            <div class="rbt-tabs-header">
+                <div class="rbt-tabs-nav-wrap rbt-tabs-nav-scroll-able">
+                    <span class="rbt-tabs-nav-prev">
+              <i class="rbt-icon rbt-icon-ios-arrow-back"></i>
+            </span>
+                    <span class="rbt-tabs-nav-next">
+              <i class="rbt-icon rbt-icon-ios-arrow-forward"></i>
+            </span>
+                    <div class="rbt-tabs-nav-scroll">
+                        <ul class="rbt-tabs-nav">
+                            <div class="rbt-tabs-active-bar" style="width: 74px; transform: translateX(0)"></div>
+                            <li class="rbt-tabs-tab rbt-tabs-tab-active">标签一</li>
+                            <li class="rbt-tabs-tab">标签二</li>
+                            <li class="rbt-tabs-tab">标签三</li>
+                            <li class="rbt-tabs-tab">标签四</li>
+                            <li class="rbt-tabs-tab">标签五</li>
+                            <li class="rbt-tabs-tab">标签六</li>
+                            <li class="rbt-tabs-tab">标签七</li>
+                            <li class="rbt-tabs-tab">标签八</li>
+                            <li class="rbt-tabs-tab">标签九</li>
+                            <li class="rbt-tabs-tab">标签十</li>
+                            <li class="rbt-tabs-tab">标签十一</li>
+                            <li class="rbt-tabs-tab">标签十二</li>
+                            <li class="rbt-tabs-tab">标签十三</li>
+                            <li class="rbt-tabs-tab">标签十四</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="rbt-tabs-content">
+                <div class="rbt-tabs-tabpane rbt-tabs-tabpane-active">
+                    标签一的内容
+                </div>
+                <div class="rbt-tabs-tabpane">标签二的内容</div>
+                <div class="rbt-tabs-tabpane">标签三的内容</div>
+                <div class="rbt-tabs-tabpane">标签四的内容</div>
+            </div>
+        </div>
+    </div>
+    <!-- <rab-tabs>
+        <div slot="tabPane">标签二的内容</div>
+        <div slot="tabPane">标签二的内容</div>
+        <div slot="tabPane">标签二的内容</div>
+        <div slot="tabPane">标签二的内容</div>
+    </rab-tabs> -->
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../common/getComps.js"></script>
@@ -129,6 +177,12 @@
 <script src="../../utils/addDom.js"></script>
 <script src="../../common/main.js"></script>
 <script src="./tabs.js"></script>
-<script></script>
+<script>
+    // RabbitUI.create('',{
+    //     label: ['标签一','标签二','标签三','标签四'],
+    //     key: [1,2,3,4],
+    //     defaultActiveKey: 2
+    // });
+</script>
 
 </html>

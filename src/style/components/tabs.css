@@ -6,11 +6,12 @@
   margin: 0 0 15px;
 }
 .rbt-tabs-nav {
+  display: table;
   white-space: nowrap;
   position: relative;
   float: left;
   z-index: 2;
-  transition: transform 0.3s;
+  transition: transform 0.5s ease-in-out;
 }
 .rbt-tabs-nav-wrap {
   overflow: hidden;
@@ -30,6 +31,23 @@
 .rbt-tabs-nav-scroll {
   overflow: hidden;
 }
+.rbt-tabs-nav-scroll-able {
+  padding: 0 20px;
+}
+.rbt-tabs-nav-prev,
+.rbt-tabs-nav-next {
+  position: absolute;
+  cursor: pointer;
+  line-height: 42px;
+  font-size: 14px;
+  color: #808695;
+}
+.rbt-tabs-nav-prev {
+  left: 0;
+}
+.rbt-tabs-nav-next {
+  right: 0;
+}
 .rbt-tabs-active-bar {
   position: absolute;
   bottom: 0;
@@ -40,7 +58,7 @@
   transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .rbt-tabs-tab {
-  float: left;
+  display: inline-block;
   position: relative;
   padding: 0 20px;
   height: 40px;

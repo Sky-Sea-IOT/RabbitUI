@@ -15,6 +15,13 @@
   }
 
   &-nav {
+    display: @tb;
+    white-space: nowrap;
+    position: @rel;
+    float: left;
+    z-index: 2;
+    transition: transform 0.5s @ease-in-out;
+
     &-wrap {
       overflow: @hid;
       margin-bottom: -1px;
@@ -35,11 +42,26 @@
       overflow: @hid;
     }
 
-    white-space: nowrap;
-    position: @rel;
-    float: left;
-    z-index: 2;
-    transition: transform @animation-time;
+    &-scroll-able {
+      padding: 0 20px;
+    }
+
+    &-prev,
+    &-next {
+      position: @abs;
+      cursor: @pointer;
+      line-height: 42px;
+      font-size: @font-size-sm;
+      color: @sub-color;
+    }
+
+    &-prev {
+      left: 0;
+    }
+
+    &-next {
+      right: 0;
+    }
   }
 
   &-active-bar {
@@ -53,7 +75,7 @@
   }
 
   &-tab {
-    float: left;
+    display: @inlb;
     position: @rel;
     padding: 0 20px;
     height: 40px;

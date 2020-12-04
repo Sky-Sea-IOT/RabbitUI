@@ -114,5 +114,4 @@ class Rabbit {
         RENDERTARGET.map((node) => renderNodeList(node));
     }
 }
-
 const RabbitUI = new Rabbit();
