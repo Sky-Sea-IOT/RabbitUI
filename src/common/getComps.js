@@ -1,6 +1,3 @@
-/**
- * @constant COMPONENTS 组件名
- */
 const COMPONENTS = {
     Alert: "alert",
     Avatar: "avatar",
@@ -22,25 +19,28 @@ const COMPONENTS = {
     Steps: "steps",
     Switch: "switch",
     Table: "table",
+    Tabs: "tabs",
     Time: "time",
     Timeline: "timeline",
     Tooltip: "tooltip",
+};
+
+const errInfo = () => {
+    const err =
+        "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert>...</rab-alert>, and all component tags should come with closing tags";
+    return err;
 };
 
 /**
  * 生成对应的组件实例
  * @param {string} el
  * @param {string} compsName
- * @param {{}} config
+ * @param {object} config
  * @param {HTMLElement} slot
  * @returns {HTMLElement}
  */
-function getComps(el, compsName, config, slot) {
-    if (!compsName) {
-        const error =
-            "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert>...</rab-alert>, and all component tags should come with closing tags";
-        throw new Error(`${error}`);
-    }
+const getComps = (el, compsName, config, slot) => {
+    if (!compsName) throw new Error(`${errInfo()}`);
 
     switch (compsName) {
         case COMPONENTS.Alert:
@@ -103,6 +103,9 @@ function getComps(el, compsName, config, slot) {
         case COMPONENTS.Table:
             return Rabbit.prototype.Table.createInstance(config);
 
+        case COMPONENTS.Tabs:
+            return Rabbit.prototype.Tabs.createInstance(config);
+
         case COMPONENTS.Time:
             return Rabbit.prototype.Time.createInstance(config);
 
@@ -117,6 +120,5 @@ function getComps(el, compsName, config, slot) {
                 `[Rabbit warn] You are trying to create a invalid component "${compsName}" and that does not exist in Rabbit`
             );
     }
-}
-
+};
 // export default _getComps;

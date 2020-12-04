@@ -1,5 +1,5 @@
 /**
- * 在页面创建组件的依赖容器
+ * 在页面初始化创建组件的依赖容器
  * @param {string} c
  * @returns {HTMLElement}
  */

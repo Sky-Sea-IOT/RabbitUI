@@ -32,7 +32,6 @@ class Rabbit {
     create(el, config) {
         this.$el = el || "default-no-target";
         this.$config = config || {};
-
         this._render(this.$el, this.$config);
 
         return { el, config, component: document.querySelector(el).childNodes };
@@ -40,7 +39,7 @@ class Rabbit {
 
     /**
      * 初始化组件，用于后面罗列的组件 Message Notice MessageBox LoadingBar
-     * @param {[string]} instanceName 初始化的组件的名称
+     * @param {Array<string>} instanceName 初始化的组件的名称
      * @returns {HTMLElement}
      */
     init(instanceName) {
@@ -107,7 +106,6 @@ class Rabbit {
 
             // 清空挂载的容器下的所有内容
             nodes.innerHTML = null;
-
             nodes.appendChild(RABBITCOMPONENT);
 
             return RABBITCOMPONENT;
