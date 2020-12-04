@@ -42,19 +42,17 @@ Rabbit.prototype.BackTop = {
         }
 
         // 点击 backtop 返回顶部和回调
-        BackTop.onclick = () => {
+        const handleClick = () => {
             const sTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
-
             this.scrollTop(window, sTop, 0, duration);
-
             isFunc(onClick) ? onClick() : null;
         };
 
+        BackTop.addEventListener("click", handleClick);
+
         // 滚动到指定距离显示 backtop
         window.onscroll = () => this.backTopShow(`.${prefixCls}`, window.scrollY);
-
-        isSlotsUserd(true, CONTENT);
 
         return BackTop;
     },
@@ -113,3 +111,6 @@ Rabbit.prototype.BackTop = {
         scroll(from, to, step);
     },
 };
+
+const { BackTop } = Rabbit.prototype;
+export default BackTop;

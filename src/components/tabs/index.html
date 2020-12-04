@@ -178,11 +178,21 @@
 <script src="../../common/main.js"></script>
 <script src="./tabs.js"></script>
 <script>
-    // RabbitUI.create('',{
-    //     label: ['标签一','标签二','标签三','标签四'],
-    //     key: [1,2,3,4],
-    //     defaultActiveKey: 2
-    // });
+    RabbitUI.create("", {
+        label: [{
+            text: "标签一",
+            active: true,
+            disabled: true,
+            closable: true,
+        }, {
+            text: "标签二",
+        }, {
+            text: "标签三",
+        }, {
+            text: "标签四",
+        }, ],
+        onClick(index, tabpane) {},
+    });
 </script>
 
 </html>

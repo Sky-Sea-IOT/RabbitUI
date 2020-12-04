@@ -2,7 +2,6 @@
  * Avatar 头像
  * 用来代表用户或事物，支持图片、图标或字符展示。
  */
-
 Rabbit.prototype.Avatar = {
     createInstance(_config) {
         const prefixCls = "rbt-avatar";
@@ -34,9 +33,7 @@ Rabbit.prototype.Avatar = {
         Avatar.style.cssText = _styles;
 
         // 在不自定义的条件下添加头像
-        if (!src && !text && !customIcon) {
-            Avatar.appendChild(AvatarIcon);
-        }
+        if (!src && !text && !customIcon) Avatar.appendChild(AvatarIcon);
 
         // 使用字符头像
         if (text) {
@@ -72,3 +69,6 @@ Rabbit.prototype.Avatar = {
         }, 0);
     },
 };
+
+const { Avatar } = Rabbit.prototype;
+export default Avatar;

@@ -3,9 +3,8 @@
  * 静态地呈现一些警告信息。
  */
 Rabbit.prototype.Alert = {
+    prefixCls: "rbt-alert",
     createInstance(_config, _slot) {
-        const prefixCls = "rbt-alert";
-
         const {
             type = "info",
                 closable = false,
@@ -17,8 +16,8 @@ Rabbit.prototype.Alert = {
 
         const { MESSAGE, DESC, ICON } = _slot;
 
-        let _types = "",
-            Icons = "";
+        let _types = "";
+        let Icons = "";
 
         const Alert = document.createElement("div");
         const AlertIconBox = document.createElement("span");
@@ -54,14 +53,15 @@ Rabbit.prototype.Alert = {
         if (MESSAGE && MESSAGE.innerHTML) {
             addElemetsOfSlots(MESSAGE, AlertMessage);
         } else {
-            throw new Error(
-                "creating an alert component requires at least a basic prompt"
+            console.error(
+                `[Rabbit warn] You need to add content to the alert component`
             );
+            return;
         }
 
         // 警告提示辅助性文字介绍
         if (DESC && DESC.innerHTML) {
-            Alert.classList.add(`${prefixCls}-with-desc`);
+            Alert.classList.add(`${this.prefixCls}-with-desc`);
             addElemetsOfSlots(DESC, AlertDesc);
         }
 
@@ -69,11 +69,8 @@ Rabbit.prototype.Alert = {
         this.closable(closable, closeText, Alert, AlertCloseBox, AlertCloseIcon);
 
         AlertCloseBox.addEventListener("click", () =>
-            this.clickHandle(Alert, onClose)
+            this.handleClick(Alert, onClose)
         );
-
-        isSlotsUserd(true, DESC);
-        isSlotsUserd(showIcon, ICON);
 
         Alert.append(AlertMessage, AlertDesc);
 
@@ -91,22 +88,21 @@ Rabbit.prototype.Alert = {
         alertCloseBox,
         alertCloseIcon
     ) {
-        const prefixCls = "rbt-alert";
         const prefixIconCls = "rbt-icon";
 
-        alert.className = `${prefixCls} ${prefixCls}-${type} ${prefixCls}-no-icon`;
-        alertIconBox.className = `${prefixCls}-icon`;
+        alert.className = `${this.prefixCls} ${this.prefixCls}-${type} ${this.prefixCls}-no-icon`;
+        alertIconBox.className = `${this.prefixCls}-icon`;
         alertIcon.className = `${prefixIconCls} ${prefixIconCls}-${Icons}`;
-        alertMessage.className = `${prefixCls}-message`;
-        alertDesc.className = `${prefixCls}-desc`;
-        alertCloseBox.className = `${prefixCls}-close`;
+        alertMessage.className = `${this.prefixCls}-message`;
+        alertDesc.className = `${this.prefixCls}-desc`;
+        alertCloseBox.className = `${this.prefixCls}-close`;
         alertCloseIcon.className = `${prefixIconCls} ${prefixIconCls}-ios-close`;
     },
 
     // 是否用作顶部公告
     setBanner(banner, alert) {
         if (banner) {
-            alert.classList.add("rbt-alert-banner");
+            alert.classList.add(`${this.prefixCls}-banner`);
         }
     },
 
@@ -114,7 +110,7 @@ Rabbit.prototype.Alert = {
     showIcon(show, alert, alertIconBox, alertIcon, iconSlot) {
         if (show) {
             alert.appendChild(alertIconBox);
-            alert.classList.remove("rbt-alert-no-icon");
+            alert.classList.remove(`${this.prefixCls}-no-icon`);
             alertIconBox.appendChild(alertIcon);
             // 自定义图标，showIcon 为 true 时有效
             if (iconSlot && iconSlot.innerHTML) {
@@ -137,15 +133,18 @@ Rabbit.prototype.Alert = {
         }
     },
 
-    clickHandle(alert, cb) {
+    handleClick(alert, cb) {
         destroy({
             el: alert,
             destroyParent: true,
             duration: 0.1,
             moveInCls: "",
-            moveOutCls: "rbt-alert-slide-up",
+            moveOutCls: `${this.prefixCls}-slide-up`,
             whenToDestroy: 0.3,
         });
         isFunc(cb) ? cb() : null;
     },
 };
+
+// const { Alert } = Rabbit.prototype;
+// export default Alert;
