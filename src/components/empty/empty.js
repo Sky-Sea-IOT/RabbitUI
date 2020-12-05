@@ -5,16 +5,16 @@
 
 Rabbit.prototype.Empty = {
     createInstance(_config, _slot) {
-        const { desc, image = "IMAGE_DEFAULT", footer, imageStyle = {} } = _config;
+        const { desc, image = 'IMAGE_DEFAULT', footer, imageStyle = {} } = _config;
         const { DESC, FOOTER } = _slot;
 
-        const Empty = document.createElement("div");
-        const EmptyImageBox = document.createElement("div");
-        const EmptyImage = document.createElement("img");
-        const EmptyDesc = document.createElement("div");
-        const EmptyFooter = document.createElement("div");
+        const Empty = document.createElement('div');
+        const EmptyImageBox = document.createElement('div');
+        const EmptyImage = document.createElement('img');
+        const EmptyDesc = document.createElement('div');
+        const EmptyFooter = document.createElement('div');
 
-        EmptyImage.alt = "empty";
+        EmptyImage.alt = 'empty';
 
         Empty.append(EmptyImageBox, EmptyDesc, EmptyFooter);
         EmptyImageBox.appendChild(EmptyImage);
@@ -28,7 +28,7 @@ Rabbit.prototype.Empty = {
     },
 
     addClassName(empty, emptyImageBox, emptyDesc, emptyFooter) {
-        const prefixCls = "rbt-empty";
+        const prefixCls = 'rbt-empty';
         empty.className = `${prefixCls}`;
         emptyImageBox.className = `${prefixCls}-image`;
         emptyDesc.className = `${prefixCls}-desc`;
@@ -37,11 +37,11 @@ Rabbit.prototype.Empty = {
 
     setImage(image, styles, emptyImage, emptyImageBox, empty) {
         // !这里在打包的时候图片地址需要替换成 import 进来的变量名
-        if (image === "IMAGE_DEFAULT") {
-            emptyImage.src = "../../assets/empty.svg";
-        } else if (image === "IMAGE_SIMPLE") {
-            empty.classList.add("rbt-empty-normal");
-            emptyImage.src = "../../assets/empty-simple.svg";
+        if (image === 'IMAGE_DEFAULT') {
+            emptyImage.src = '../../assets/empty.svg';
+        } else if (image === 'IMAGE_SIMPLE') {
+            empty.classList.add('rbt-empty-normal');
+            emptyImage.src = '../../assets/empty-simple.svg';
         } else {
             emptyImage.src = image;
         }

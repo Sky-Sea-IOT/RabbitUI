@@ -5,25 +5,25 @@ let modalZIndex = 1000;
  * 模态对话框，在浮层中显示，引导用户进行相关操作。
  */
 Rabbit.prototype.Modal = {
-    prefixCls: "rbt-modal",
-    prefixIconCls: "rbt-icon",
+    prefixCls: 'rbt-modal',
+    prefixIconCls: 'rbt-icon',
     createInstance(_el, _config, _slot) {
         const {
             mask = true,
                 onOk,
-                width = "520px",
-                title = "默认标题",
+                width = '520px',
+                title = '默认标题',
                 styles,
                 zIndex = 1000,
-                okText = "确定",
+                okText = '确定',
                 visible = false,
                 loading = false,
                 closable = true,
                 onCancel,
                 keyboard = true,
-                className = "",
+                className = '',
                 footerHide = false,
-                cancelText = "取消",
+                cancelText = '取消',
                 scrollable = false,
                 fullscreen = false,
                 maskClosable = true,
@@ -32,20 +32,20 @@ Rabbit.prototype.Modal = {
 
         modalZIndex = zIndex;
 
-        const Modal = document.createElement("div");
-        const ModalMask = document.createElement("div");
-        const ModalWrap = document.createElement("div");
-        const ModalBox = document.createElement("div");
-        const ModalContent = document.createElement("div");
-        const ModalClose = document.createElement("a");
-        const ModalCloseIco = document.createElement("i");
-        const ModalHeader = document.createElement("div");
-        const ModalTitle = document.createElement("div");
-        const ModalBody = document.createElement("div");
-        const ModalFooter = document.createElement("div");
-        const ModalOkButton = document.createElement("button");
-        const ModalCancelButton = document.createElement("button");
-        const ModalButtonLoading = document.createElement("i");
+        const Modal = document.createElement('div');
+        const ModalMask = document.createElement('div');
+        const ModalWrap = document.createElement('div');
+        const ModalBox = document.createElement('div');
+        const ModalContent = document.createElement('div');
+        const ModalClose = document.createElement('a');
+        const ModalCloseIco = document.createElement('i');
+        const ModalHeader = document.createElement('div');
+        const ModalTitle = document.createElement('div');
+        const ModalBody = document.createElement('div');
+        const ModalFooter = document.createElement('div');
+        const ModalOkButton = document.createElement('button');
+        const ModalCancelButton = document.createElement('button');
+        const ModalButtonLoading = document.createElement('i');
 
         this.addClassName(
             className,
@@ -155,8 +155,8 @@ Rabbit.prototype.Modal = {
         modalTitle.className = `${this.prefixCls}-title`;
         modalBody.className = `${this.prefixCls}-body`;
         modalFooter.className = `${this.prefixCls}-footer`;
-        modalOkButton.className = "rbt-btn rbt-btn-primary";
-        modalCancelButton.className = "rbt-btn";
+        modalOkButton.className = 'rbt-btn rbt-btn-primary';
+        modalCancelButton.className = 'rbt-btn';
     },
 
     // 展示遮盖层
@@ -186,17 +186,17 @@ Rabbit.prototype.Modal = {
 
         if (loadingBtn) {
             // modal隐藏时将加载中状态的按钮初始化
-            loadingBtn.classList.remove("rbt-btn-loading");
+            loadingBtn.classList.remove('rbt-btn-loading');
 
             // 如果按钮中有加载中图标则清空类名
-            if (loadingBtn.querySelector("i")) {
-                loadingBtn.querySelector("i").className = "";
+            if (loadingBtn.querySelector('i')) {
+                loadingBtn.querySelector('i').className = '';
             }
         }
 
         setTimeout(() => {
-            mask.style.display = "none";
-            wrap.style.display = "none";
+            mask.style.display = 'none';
+            wrap.style.display = 'none';
             mask.classList.remove(`${this.prefixCls}-mask-leave-out`);
             wrap.classList.remove(`${this.prefixCls}-leave-out`);
         }, 500);
@@ -233,7 +233,7 @@ Rabbit.prototype.Modal = {
     // 设置自定义style内联样式
     setStyle(el, width, styles) {
         el.style.width = width;
-        if (typeof styles === "object") {
+        if (typeof styles === 'object') {
             el.style.cssText = objToString(styles);
         }
     },
@@ -263,7 +263,7 @@ Rabbit.prototype.Modal = {
             // 点击按钮是否显示加载中状态
             if (loading) {
                 okBtn.prepend(loadingIco);
-                okBtn.classList.add("rbt-btn-loading");
+                okBtn.classList.add('rbt-btn-loading');
                 loadingIco.className = `${this.prefixIconCls} ${this.prefixIconCls}-loading-solid`;
             } else {
                 this._close(mask, wrap);
@@ -284,8 +284,8 @@ Rabbit.prototype.Modal = {
     // 键盘esc键关闭
     keyboardClose(keyboard, cb, mask, wrap, loadingBtn) {
         if (keyboard) {
-            window.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
+            window.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
                     isFunc(cb) ? cb() : null;
                     this._close(mask, wrap, loadingBtn);
                 }

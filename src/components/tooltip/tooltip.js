@@ -4,38 +4,38 @@
  */
 Rabbit.prototype.Tooltip = {
     createInstance(_config, _slot) {
-        const prefixCls = "rbt-tooltip";
+        const prefixCls = 'rbt-tooltip';
 
         const {
-            title = "",
-                color = "",
-                theme = "dark",
+            title = '',
+                color = '',
+                theme = 'dark',
                 always = false,
                 disabled = false,
                 maxWidth = 250,
-                placement = "top",
+                placement = 'top',
                 mouseEnterDelay = 0.1,
                 mouseLeaveDelay = 0.1,
         } = _config;
 
         const { REF } = _slot;
 
-        let isAlwaysShow = always ? `${prefixCls}-always` : "";
+        let isAlwaysShow = always ? `${prefixCls}-always` : '';
 
-        const Tooltip = document.createElement("div");
-        const TooltipRel = document.createElement("div");
-        const TooltipPopper = document.createElement("div");
-        const TooltipContent = document.createElement("div");
-        const TooltipArrow = document.createElement("div");
-        const TooltipArrowContent = document.createElement("span");
-        const TooltipInner = document.createElement("div");
+        const Tooltip = document.createElement('div');
+        const TooltipRel = document.createElement('div');
+        const TooltipPopper = document.createElement('div');
+        const TooltipContent = document.createElement('div');
+        const TooltipArrow = document.createElement('div');
+        const TooltipArrowContent = document.createElement('span');
+        const TooltipInner = document.createElement('div');
 
         Tooltip.className = `${prefixCls}`;
         TooltipRel.className = `${prefixCls}-rel`;
 
         TooltipPopper.className = `${prefixCls}-popper ${prefixCls}-${theme} ${isAlwaysShow}`;
         TooltipPopper.style.maxWidth = `${maxWidth}px`;
-        TooltipPopper.setAttribute("x-placement", placement);
+        TooltipPopper.setAttribute('x-placement', placement);
 
         TooltipContent.className = `${prefixCls}-content`;
 
@@ -78,19 +78,19 @@ Rabbit.prototype.Tooltip = {
         mouseEnterDelay,
         mouseLeaveDelay
     ) {
-        const prefixCls = "rbt-tooltip";
+        const prefixCls = 'rbt-tooltip';
 
         let timer = null;
 
         setInterval(() => detectTooltipDirection(tooltip), 500);
 
-        const showHidden = (flag) => {
+        const showHidden = flag => {
             if (!disabled && !always) {
                 Popper.createPopper(popcorn, tooltip, { placement });
-                if (flag === "in") {
+                if (flag === 'in') {
                     tooltip.classList.add(`${prefixCls}-fade-enter`);
                     tooltip.classList.remove(`${prefixCls}-fade-leave`);
-                } else if (flag === "out") {
+                } else if (flag === 'out') {
                     tooltip.classList.replace(
                         `${prefixCls}-fade-enter`,
                         `${prefixCls}-fade-leave`
@@ -99,13 +99,13 @@ Rabbit.prototype.Tooltip = {
             }
         };
 
-        popcorn.addEventListener("mouseenter", () => {
-            timer = setTimeout(() => showHidden("in"), mouseEnterDelay * 1000);
+        popcorn.addEventListener('mouseenter', () => {
+            timer = setTimeout(() => showHidden('in'), mouseEnterDelay * 1000);
         });
 
-        popcorn.addEventListener("mouseleave", () => {
+        popcorn.addEventListener('mouseleave', () => {
             clearTimeout(timer);
-            setTimeout(() => showHidden("out"), mouseLeaveDelay * 1000);
+            setTimeout(() => showHidden('out'), mouseLeaveDelay * 1000);
         });
     },
 };

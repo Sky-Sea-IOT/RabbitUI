@@ -1,6 +1,6 @@
-const btns = document.querySelectorAll("button");
+const btns = document.querySelectorAll('button');
 
-btns.forEach((btn) => {
+btns.forEach(btn => {
     if (btn.disabled) {
         btn.onclick = () => false;
     }

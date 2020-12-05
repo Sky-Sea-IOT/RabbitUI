@@ -15,16 +15,16 @@ const SET = {
             bottom: /^bottom/,
         };
         const origin = {
-            top: "center bottom",
-            bottom: "center top",
+            top: 'center bottom',
+            bottom: 'center top',
         };
 
         // 获取下拉菜单设置的位置
         const { placement } = dropdown.dataset;
 
         // 获取attachedElement的宽高
-        const getWidth = (el) => Math.floor(el.offsetWidth);
-        const getHeight = (el) => Math.floor(el.offsetHeight);
+        const getWidth = el => Math.floor(el.offsetWidth);
+        const getHeight = el => Math.floor(el.offsetHeight);
 
         const offsetLeft = getWidth(attachedElement) + attachedMargin;
         const offsetTop = getHeight(attachedElement) + attachedMargin;
@@ -33,8 +33,8 @@ const SET = {
         const init = () => {
             dropdown.style.top = 0;
             dropdown.style.left = 0;
-            dropdown.style.position = "absolute";
-            dropdown.style.willChange = "top, left";
+            dropdown.style.position = 'absolute';
+            dropdown.style.willChange = 'top, left';
 
             if (reg.top.test(placement)) {
                 dropdown.style.top = `-${getHeight(dropdown)}px`;
@@ -62,13 +62,13 @@ const SET = {
             const offsetRight = getWidth(dropdown) - offsetLeft;
             const offsetCenter = Math.floor((offsetLeft - getWidth(dropdown)) / 4);
 
-            if (placement === "top" || placement === "bottom")
+            if (placement === 'top' || placement === 'bottom')
                 dropdown.style.left = `${offsetCenter}px`;
 
-            if (placement === "top-start" || placement === "bottom-start")
-                dropdown.style.left = "5px";
+            if (placement === 'top-start' || placement === 'bottom-start')
+                dropdown.style.left = '5px';
 
-            if (placement === "top-end" || placement === "bottom-end")
+            if (placement === 'top-end' || placement === 'bottom-end')
                 dropdown.style.left = `-${offsetRight}px`;
         };
 
@@ -79,13 +79,13 @@ const SET = {
             const offsetCenter = Math.floor(dropdownHeight - offsetHeight) / 2;
             const offsetEnd = dropdownHeight - offsetHeight;
 
-            if (placement === "right-start" || placement === "left-start") {
+            if (placement === 'right-start' || placement === 'left-start') {
                 dropdown.style.transformOrigin = origin.bottom;
             }
-            if (placement === "right" || placement === "left")
+            if (placement === 'right' || placement === 'left')
                 dropdown.style.top = `-${offsetCenter}px`;
 
-            if (placement === "right-end" || placement === "left-end") {
+            if (placement === 'right-end' || placement === 'left-end') {
                 dropdown.style.top = `-${offsetEnd}px`;
                 dropdown.style.transformOrigin = origin.top;
             }

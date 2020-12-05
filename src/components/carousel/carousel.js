@@ -3,42 +3,42 @@
  * 常用于一组图片或卡片轮播，当内容空间不足时，可以用走马灯的形式进行收纳，进行轮播展现。
  */
 Rabbit.prototype.Carousel = {
-    prefixCls: "rbt-carousel",
+    prefixCls: 'rbt-carousel',
     createInstance(_config, _slot) {
         const {
             prev,
             next,
-            arrow = "hover",
-            height = "auto",
-            easing = "ease",
-            trigger = "click",
+            arrow = 'hover',
+            height = 'auto',
+            easing = 'ease',
+            trigger = 'click',
             onClick,
             initial = 0,
             autoplay = false,
             radiusDot = false,
             hoverPause = true,
-            dotPosition = "inside",
+            dotPosition = 'inside',
             autoplaySpeed = 3000,
         } = _config;
 
         const { CAROUSELITEM } = _slot;
 
-        const Carousel = document.createElement("div");
-        const CarouselArrowL = document.createElement("button");
-        const CarouselArrowR = document.createElement("button");
-        const CarouselList = document.createElement("div");
-        const CarouselDots = document.createElement("ol");
+        const Carousel = document.createElement('div');
+        const CarouselArrowL = document.createElement('button');
+        const CarouselArrowR = document.createElement('button');
+        const CarouselList = document.createElement('div');
+        const CarouselDots = document.createElement('ol');
 
         let carouselItems = [];
         let indicators = [];
 
         for (let i = 0; i < CAROUSELITEM.length; i++) {
-            const CarouselItem = document.createElement("div");
-            const CarouselIndicator = document.createElement("li");
-            const CarouselIndicatorBtn = document.createElement("button");
+            const CarouselItem = document.createElement('div');
+            const CarouselIndicator = document.createElement('li');
+            const CarouselIndicatorBtn = document.createElement('button');
 
             CarouselItem.className = `${this.prefixCls}-item`;
-            CarouselIndicatorBtn.type = "button";
+            CarouselIndicatorBtn.type = 'button';
 
             this.setHeight(height, CarouselItem);
             this.setEaseing(easing, CarouselItem);
@@ -100,12 +100,12 @@ Rabbit.prototype.Carousel = {
     },
 
     setCarouseItemActive(carouselItems, position) {
-        carouselItems[position].classList.add("active");
+        carouselItems[position].classList.add('active');
     },
 
     setArrow(showArrow, carouselArrowL, carouselArrowR) {
-        carouselArrowL.type = "button";
-        carouselArrowR.type = "button";
+        carouselArrowL.type = 'button';
+        carouselArrowR.type = 'button';
 
         carouselArrowL.classList.add(`${this.prefixCls}-arrow-${showArrow}`);
         carouselArrowR.classList.add(`${this.prefixCls}-arrow-${showArrow}`);
@@ -129,7 +129,7 @@ Rabbit.prototype.Carousel = {
 
     setRadiusDot(radiusDot, indicator) {
         if (radiusDot) {
-            indicator.className = "radius";
+            indicator.className = 'radius';
         }
     },
 
@@ -145,7 +145,7 @@ Rabbit.prototype.Carousel = {
 
     // 点击幻灯片时触发，返回索引值
     itemHanleClick(carouselItem, index, cb) {
-        carouselItem.addEventListener("click", callback);
+        carouselItem.addEventListener('click', callback);
 
         function callback() {
             isFunc(cb) ? cb(index) : null;
@@ -154,13 +154,13 @@ Rabbit.prototype.Carousel = {
 
     setIndicatorActive(indicator) {
         indicator.classList.add(`${this.prefixCls}-active`);
-        Rbt.siblings(indicator).map((brother) => {
+        Rbt.siblings(indicator).map(brother => {
             brother.classList.remove(`${this.prefixCls}-active`);
         });
     },
 
     itemChangeEffect(d, prevItem, nextItem) {
-        if (d === "forward") {
+        if (d === 'forward') {
             nextItem.classList.add(`${this.prefixCls}-item-next`);
             setTimeout(() => {
                 nextItem.classList.add(`${this.prefixCls}-item-left`);
@@ -168,24 +168,24 @@ Rabbit.prototype.Carousel = {
             }, 20);
             setTimeout(() => {
                 prevItem.classList.remove(`${this.prefixCls}-item-left`);
-                prevItem.classList.remove("active");
+                prevItem.classList.remove('active');
                 nextItem.classList.remove(`${this.prefixCls}-item-next`);
                 nextItem.classList.remove(`${this.prefixCls}-item-left`);
-                nextItem.classList.add("active");
+                nextItem.classList.add('active');
             }, 500);
         }
-        if (d === "back") {
+        if (d === 'back') {
             prevItem.classList.add(`${this.prefixCls}-item-prev`);
             setTimeout(() => {
                 prevItem.classList.add(`${this.prefixCls}-item-right`);
                 nextItem.classList.add(`${this.prefixCls}-item-right`);
             }, 20);
             setTimeout(() => {
-                prevItem.classList.add("active");
+                prevItem.classList.add('active');
                 prevItem.classList.remove(`${this.prefixCls}-item-prev`);
                 prevItem.classList.remove(`${this.prefixCls}-item-right`);
                 nextItem.classList.remove(`${this.prefixCls}-item-right`);
-                nextItem.classList.remove("active");
+                nextItem.classList.remove('active');
             }, 500);
         }
     },
@@ -196,7 +196,7 @@ Rabbit.prototype.Carousel = {
         let prevItem = carouselItems[index - 1]; // 相对于下一项的上一个当前项
         // 如果获取为 undefined 则说明当前要在尾项开始回滚到首项
         if (prevItem == undefined) prevItem = carouselItems[total];
-        this.itemChangeEffect("forward", prevItem, nextItem);
+        this.itemChangeEffect('forward', prevItem, nextItem);
     },
 
     back(index, carouselItems) {
@@ -205,12 +205,12 @@ Rabbit.prototype.Carousel = {
         let nextItem = carouselItems[index + 1];
         // 如果获取为 undefined 则说明当前要在首项开始回滚到尾项
         if (nextItem == undefined) nextItem = carouselItems[0];
-        this.itemChangeEffect("back", prevItem, nextItem);
+        this.itemChangeEffect('back', prevItem, nextItem);
     },
 
     sliding(direction, index, indicators, carouselItems) {
-        if (direction === "forward") this.forward(index, carouselItems);
-        if (direction === "back") this.back(index, carouselItems);
+        if (direction === 'forward') this.forward(index, carouselItems);
+        if (direction === 'back') this.back(index, carouselItems);
 
         this.setIndicatorActive(indicators[index]);
     },
@@ -237,13 +237,13 @@ Rabbit.prototype.Carousel = {
             record >= total ? (record = 0) : record++;
             value = record;
             isFunc(nextCallback) ? nextCallback(value) : null;
-            this.sliding("forward", record, indicators, carouselItems);
+            this.sliding('forward', record, indicators, carouselItems);
         };
         const prev = () => {
             record <= 0 ? (record = total) : record--;
             value = record;
             isFunc(prevCallback) ? prevCallback(value) : null;
-            this.sliding("back", record, indicators, carouselItems);
+            this.sliding('back', record, indicators, carouselItems);
         };
         // 暂停
         const pause = () => window.clearInterval(timer);
@@ -252,8 +252,8 @@ Rabbit.prototype.Carousel = {
         // 鼠标悬停在轮播图是否暂停轮播
         const _hoverPause = () => {
             if (hoverPause) {
-                carousel.addEventListener("mouseenter", pause);
-                carousel.addEventListener("mouseleave", start);
+                carousel.addEventListener('mouseenter', pause);
+                carousel.addEventListener('mouseleave', start);
             }
         };
         // 是否自动播放
@@ -265,14 +265,14 @@ Rabbit.prototype.Carousel = {
         };
         const indicatorHandle = () => {
             indicators.map((indicator, index) => {
-                indicator.addEventListener("click", () => {
+                indicator.addEventListener('click', () => {
                     this.setIndicatorActive(indicator);
                 });
             });
         };
 
-        leftArrow.addEventListener("click", prev);
-        rightArrow.addEventListener("click", next);
+        leftArrow.addEventListener('click', prev);
+        rightArrow.addEventListener('click', next);
 
         isAutoPlay();
         indicatorHandle();

@@ -4,26 +4,26 @@
  */
 Rabbit.prototype.Avatar = {
     createInstance(_config) {
-        const prefixCls = "rbt-avatar";
-        const prefixIconCls = "rbt-icon";
+        const prefixCls = 'rbt-avatar';
+        const prefixIconCls = 'rbt-icon';
 
         const {
-            src = "",
-                icon = "md-person",
-                size = "default",
-                text = "",
-                shape = "circle",
+            src = '',
+                icon = 'md-person',
+                size = 'default',
+                text = '',
+                shape = 'circle',
                 styles = {},
-                className = "",
+                className = '',
                 customIcon,
         } = _config;
 
         const _styles = objToString(styles);
 
-        const Avatar = document.createElement("span");
-        const AvatarIcon = document.createElement("i");
-        const AvatarImage = document.createElement("img");
-        const AvatarString = document.createElement("span");
+        const Avatar = document.createElement('span');
+        const AvatarIcon = document.createElement('i');
+        const AvatarImage = document.createElement('img');
+        const AvatarString = document.createElement('span');
 
         Avatar.className = `${prefixCls} ${prefixCls}-${shape} ${prefixCls}-${size} ${prefixCls}-icon ${className}`;
         AvatarIcon.className = `${prefixIconCls} ${prefixIconCls}-${icon}`;

@@ -4,21 +4,21 @@
  */
 Rabbit.prototype.Breadcrumb = {
     createInstance: (_config, _slot) => {
-        const prefixCls = "rbt-breadcrumb";
-        const { separator = "/" } = _config;
+        const prefixCls = 'rbt-breadcrumb';
+        const { separator = '/' } = _config;
         const { BREADCRUMBITEM } = _slot;
-        const Breadcrumb = document.createElement("ol");
+        const Breadcrumb = document.createElement('ol');
 
         Breadcrumb.className = `${prefixCls}`;
 
         for (let i = 0; i < BREADCRUMBITEM.length; i++) {
-            const BreadcrumbItem = document.createElement("li");
-            const BreadcrumbSeparator = document.createElement("span");
+            const BreadcrumbItem = document.createElement('li');
+            const BreadcrumbSeparator = document.createElement('span');
 
             BREADCRUMBITEM[i].classList.add(`${prefixCls}-link`);
 
             BreadcrumbSeparator.innerHTML = separator;
-            BreadcrumbSeparator.setAttribute("role", "separator");
+            BreadcrumbSeparator.setAttribute('role', 'separator');
             BreadcrumbSeparator.className = `${prefixCls}-separator`;
 
             addElemetsOfSlots(BREADCRUMBITEM[i], BreadcrumbItem);

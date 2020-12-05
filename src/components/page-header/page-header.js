@@ -1,16 +1,16 @@
 Rabbit.prototype.PageHeader = {
     createInstance: (_config, _slot) => {
-        const prefixCls = "rbt-page-header";
-        const prefixIconCls = "rbt-icon";
+        const prefixCls = 'rbt-page-header';
+        const prefixIconCls = 'rbt-icon';
 
         const { onBack } = _config;
         const { HEADER, CONTENT } = _slot;
 
-        const PageHeader = document.createElement("div");
-        const PageHeaderLeft = document.createElement("div");
-        const PageHeaderIcon = document.createElement("i");
-        const PageHeaderTitle = document.createElement("div");
-        const PageHeaderContent = document.createElement("div");
+        const PageHeader = document.createElement('div');
+        const PageHeaderLeft = document.createElement('div');
+        const PageHeaderIcon = document.createElement('i');
+        const PageHeaderTitle = document.createElement('div');
+        const PageHeaderContent = document.createElement('div');
 
         PageHeader.className = `${prefixCls}`;
         PageHeaderLeft.className = `${prefixCls}-back`;

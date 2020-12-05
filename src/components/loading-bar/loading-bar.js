@@ -1,10 +1,10 @@
 // LoadingBar 全局配置项
 let loadingBarProgress = 0;
 let loadingBarConfig = {
-    color: "#1890ff",
+    color: '#1890ff',
     height: 2,
     duration: 800,
-    failedColor: "#ff4d4f",
+    failedColor: '#ff4d4f',
 };
 let timer;
 
@@ -20,19 +20,19 @@ function clearTimer() {
  * 显示页面加载、异步请求、文件上传等的加载进度条。
  */
 Rabbit.prototype.LoadingBar = {
-    prefixCls: "rbt-loading-bar",
+    prefixCls: 'rbt-loading-bar',
     createInstance() {
-        const LoadingBar = document.createElement("div");
-        const LoadingBarInner = document.createElement("div");
+        const LoadingBar = document.createElement('div');
+        const LoadingBarInner = document.createElement('div');
 
         LoadingBar.className = `${this.prefixCls}`;
         LoadingBarInner.className = `${this.prefixCls}-inner`;
 
         // 初始化
-        LoadingBarInner.style.width = "0%";
+        LoadingBarInner.style.width = '0%';
 
         setTimeout(() => {
-            this.status("primary");
+            this.status('primary');
             LoadingBar.style.height = `${loadingBarConfig.height}px`;
         }, 0);
 
@@ -43,10 +43,10 @@ Rabbit.prototype.LoadingBar = {
     status(status) {
         const LoadingBarInner = document.querySelector(`.${this.prefixCls}-inner`);
 
-        if (status === "primary") {
+        if (status === 'primary') {
             LoadingBarInner.style.backgroundColor = loadingBarConfig.color;
         }
-        if (status === "error") {
+        if (status === 'error') {
             LoadingBarInner.style.backgroundColor = loadingBarConfig.failedColor;
             // 初始化颜色
             setTimeout(
@@ -116,7 +116,7 @@ Rabbit.prototype.LoadingBar = {
 
     error() {
         clearTimer();
-        this.status("error");
+        this.status('error');
         this.visible(false);
     },
 

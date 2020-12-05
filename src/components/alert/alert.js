@@ -3,10 +3,10 @@
  * 静态地呈现一些警告信息。
  */
 Rabbit.prototype.Alert = {
-    prefixCls: "rbt-alert",
+    prefixCls: 'rbt-alert',
     createInstance(_config, _slot) {
         const {
-            type = "info",
+            type = 'info',
                 closable = false,
                 showIcon = false,
                 banner = false,
@@ -16,20 +16,20 @@ Rabbit.prototype.Alert = {
 
         const { MESSAGE, DESC, ICON } = _slot;
 
-        let _types = "";
-        let Icons = "";
+        let _types = '';
+        let Icons = '';
 
-        const Alert = document.createElement("div");
-        const AlertIconBox = document.createElement("span");
-        const AlertIcon = document.createElement("i");
-        const AlertMessage = document.createElement("span");
-        const AlertDesc = document.createElement("span");
-        const AlertCloseBox = document.createElement("span");
-        const AlertCloseIcon = document.createElement("i");
+        const Alert = document.createElement('div');
+        const AlertIconBox = document.createElement('span');
+        const AlertIcon = document.createElement('i');
+        const AlertMessage = document.createElement('span');
+        const AlertDesc = document.createElement('span');
+        const AlertCloseBox = document.createElement('span');
+        const AlertCloseIcon = document.createElement('i');
 
         // 根据 type 属性自动添加不同图标，如果有描述内容则添加outline类型的图标
         if (showIcon && DESC && DESC.innerHTML) {
-            _types = type + "-outline";
+            _types = type + '-outline';
             Icons = getIconTypes(_types);
         } else {
             Icons = getIconTypes(type);
@@ -68,7 +68,7 @@ Rabbit.prototype.Alert = {
         this.showIcon(showIcon, Alert, AlertIconBox, AlertIcon, ICON);
         this.closable(closable, closeText, Alert, AlertCloseBox, AlertCloseIcon);
 
-        AlertCloseBox.addEventListener("click", () =>
+        AlertCloseBox.addEventListener('click', () =>
             this.handleClick(Alert, onClose)
         );
 
@@ -88,7 +88,7 @@ Rabbit.prototype.Alert = {
         alertCloseBox,
         alertCloseIcon
     ) {
-        const prefixIconCls = "rbt-icon";
+        const prefixIconCls = 'rbt-icon';
 
         alert.className = `${this.prefixCls} ${this.prefixCls}-${type} ${this.prefixCls}-no-icon`;
         alertIconBox.className = `${this.prefixCls}-icon`;
@@ -138,7 +138,7 @@ Rabbit.prototype.Alert = {
             el: alert,
             destroyParent: true,
             duration: 0.1,
-            moveInCls: "",
+            moveInCls: '',
             moveOutCls: `${this.prefixCls}-slide-up`,
             whenToDestroy: 0.3,
         });

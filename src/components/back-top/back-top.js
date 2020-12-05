@@ -4,8 +4,8 @@
  */
 Rabbit.prototype.BackTop = {
     createInstance(_config, _slot) {
-        const prefixCls = "rbt-back-top";
-        const prefixIconCls = "rbt-icon";
+        const prefixCls = 'rbt-back-top';
+        const prefixIconCls = 'rbt-icon';
 
         const {
             height = 400,
@@ -17,9 +17,9 @@ Rabbit.prototype.BackTop = {
 
         const { CONTENT } = _slot;
 
-        const BackTop = document.createElement("div");
-        const BackTopInner = document.createElement("div");
-        const BackTopIcon = document.createElement("i");
+        const BackTop = document.createElement('div');
+        const BackTopInner = document.createElement('div');
+        const BackTopIcon = document.createElement('i');
 
         BackTop.className = `${prefixCls}`;
         BackTopInner.className = `${prefixCls}-inner`;
@@ -49,7 +49,7 @@ Rabbit.prototype.BackTop = {
             isFunc(onClick) ? onClick() : null;
         };
 
-        BackTop.addEventListener("click", handleClick);
+        BackTop.addEventListener('click', handleClick);
 
         // 滚动到指定距离显示 backtop
         window.onscroll = () => this.backTopShow(`.${prefixCls}`, window.scrollY);
@@ -61,17 +61,17 @@ Rabbit.prototype.BackTop = {
         const scrollY = Math.floor(top);
         const backTops = document.querySelectorAll(el);
 
-        backTops.forEach((item) => {
+        backTops.forEach(item => {
             // 获取属于该组件的显示height
             const visibilityHeight = Math.floor(item.dataset.visibilityHeight);
 
             // 判断是否滚动到指定的显示height
             if (scrollY >= visibilityHeight) {
-                item.style.display = "block";
+                item.style.display = 'block';
 
                 setTimeout(() => (item.style.opacity = 1), 0);
             } else {
-                item.style.display = "none";
+                item.style.display = 'none';
                 item.style.opacity = 0;
             }
         });

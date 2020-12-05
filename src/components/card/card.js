@@ -4,22 +4,22 @@
  */
 Rabbit.prototype.Card = {
     createInstance: (_config, _slot) => {
-        const prefixCls = "rbt-card";
+        const prefixCls = 'rbt-card';
         const {
             width = 320,
                 bordered = true,
                 padding = 24,
                 headStyle = {},
                 bodyStyle = {},
-                className = "",
+                className = '',
                 hoverable = false,
         } = _config;
         const { EXTRA, TITLE, CONTENT } = _slot;
 
-        const Card = document.createElement("div");
-        const CardHeader = document.createElement("div");
-        const CardExtra = document.createElement("div");
-        const CardBody = document.createElement("div");
+        const Card = document.createElement('div');
+        const CardHeader = document.createElement('div');
+        const CardExtra = document.createElement('div');
+        const CardBody = document.createElement('div');
 
         Card.className = `${prefixCls} ${className}`;
         CardHeader.className = `${prefixCls}-head`;

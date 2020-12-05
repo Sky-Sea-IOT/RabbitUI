@@ -3,33 +3,33 @@
  * 引导用户按照流程完成任务的导航条。
  */
 Rabbit.prototype.Steps = {
-    prefixCls: "rbt-steps",
+    prefixCls: 'rbt-steps',
     createInstance(_config, _slot) {
         const {
-            size = "default",
-                status = "process",
+            size = 'default',
+                status = 'process',
                 current = 0,
-                direction = "horizontal",
+                direction = 'horizontal',
         } = _config;
 
         const { STEP } = _slot;
 
-        const Steps = document.createElement("div");
+        const Steps = document.createElement('div');
 
         Steps.className = `${this.prefixCls} ${this.prefixCls}-${direction} ${this.prefixCls}-${size}`;
 
         let stepsItemList = [];
 
         for (let i = 0; i < STEP.length; i++) {
-            const StepsItem = document.createElement("div");
-            const StepsTail = document.createElement("div");
-            const StepsTailI = document.createElement("i");
-            const StepsHead = document.createElement("div");
-            const StepsHeadInner = document.createElement("div");
-            const StepsHeadIcon = document.createElement("span");
-            const StepsMain = document.createElement("div");
-            const StepsTitle = document.createElement("div");
-            const StepsContent = document.createElement("div");
+            const StepsItem = document.createElement('div');
+            const StepsTail = document.createElement('div');
+            const StepsTailI = document.createElement('i');
+            const StepsHead = document.createElement('div');
+            const StepsHeadInner = document.createElement('div');
+            const StepsHeadIcon = document.createElement('span');
+            const StepsMain = document.createElement('div');
+            const StepsTitle = document.createElement('div');
+            const StepsContent = document.createElement('div');
 
             stepsItemList.push(StepsItem);
 
@@ -96,12 +96,12 @@ Rabbit.prototype.Steps = {
 
     setIcon(status, icon, stepsHeadInner, stepsHeadIcon) {
         if (!icon) {
-            stepsHeadInner.dataset.customIcon = "false";
+            stepsHeadInner.dataset.customIcon = 'false';
         }
-        if (status === "finish" && !icon) {
+        if (status === 'finish' && !icon) {
             stepsHeadIcon.className = `${this.prefixCls}-icon rbt-icon rbt-icon-ios-checkmark`;
         }
-        if (status === "error" && !icon) {
+        if (status === 'error' && !icon) {
             stepsHeadIcon.className = `${this.prefixCls}-icon rbt-icon rbt-icon-ios-close`;
         }
     },
@@ -116,7 +116,7 @@ Rabbit.prototype.Steps = {
     },
 
     setContent(stepsHeadIcon, index, status) {
-        if (status !== "finish" && status !== "error") {
+        if (status !== 'finish' && status !== 'error') {
             stepsHeadIcon.innerText = index + 1;
         }
     },
@@ -124,7 +124,7 @@ Rabbit.prototype.Steps = {
     _setStatus(total, current, stepsItem, status, step) {
         if (current > total || current < 0 || !stepsItem[current]) {
             console.error(
-                "[Rabbit warn] The number of steps currently set is not within the scope of the total steps"
+                '[Rabbit warn] The number of steps currently set is not within the scope of the total steps'
             );
             return;
         }
@@ -140,12 +140,12 @@ Rabbit.prototype.Steps = {
                 `${this.prefixCls}-status-finish`
             );
 
-            const CheckIcon = document.createElement("i");
+            const CheckIcon = document.createElement('i');
             const StepsHeadInner = stepsItem[i].querySelector(
                 `.${this.prefixCls}-head-inner`
             );
 
-            if (StepsHeadInner.dataset.customIcon === "false") {
+            if (StepsHeadInner.dataset.customIcon === 'false') {
                 CheckIcon.className = `${this.prefixCls}-icon rbt-icon rbt-icon-ios-checkmark`;
                 StepsHeadInner.innerHTML = null;
                 StepsHeadInner.appendChild(CheckIcon);

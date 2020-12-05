@@ -6,13 +6,13 @@ Rabbit.prototype.Popover = {
     createInstance(_config, _slot) {
         const {
             width,
-            title = "",
-            content = "",
-            padding = "",
-            trigger = "click",
+            title = '',
+            content = '',
+            padding = '',
+            trigger = 'click',
             disabled = false,
-            placement = "top",
-            className = "",
+            placement = 'top',
+            className = '',
             showDelay = 0.1,
             hideDelay = 0.1,
             triggerHide,
@@ -23,15 +23,15 @@ Rabbit.prototype.Popover = {
 
         const { REF, TITLE, CONTENT } = _slot;
 
-        const Popover = document.createElement("div");
-        const PopoverRef = document.createElement("div");
-        const PopoverBox = document.createElement("div");
-        const PopoverMain = document.createElement("div");
-        const PopoverArrow = document.createElement("div");
-        const PopoverArrowInner = document.createElement("div");
-        const PopoverInner = document.createElement("div");
-        const PopoverTitle = document.createElement("div");
-        const PopoverContent = document.createElement("div");
+        const Popover = document.createElement('div');
+        const PopoverRef = document.createElement('div');
+        const PopoverBox = document.createElement('div');
+        const PopoverMain = document.createElement('div');
+        const PopoverArrow = document.createElement('div');
+        const PopoverArrowInner = document.createElement('div');
+        const PopoverInner = document.createElement('div');
+        const PopoverTitle = document.createElement('div');
+        const PopoverContent = document.createElement('div');
 
         this.addTitle(title, TITLE, PopoverTitle);
         this.addContent(content, CONTENT, PopoverContent);
@@ -94,7 +94,7 @@ Rabbit.prototype.Popover = {
         popoverTitle,
         popoverContent
     ) {
-        const prefixCls = "rbt-popover";
+        const prefixCls = 'rbt-popover';
 
         popover.className = `${prefixCls}`;
         popoverRef.className = `${prefixCls}-rel`;
@@ -137,20 +137,20 @@ Rabbit.prototype.Popover = {
     },
 
     setPlacement(placement, popoverRoot, popoverRef, popover, trigger) {
-        if (trigger === "hover") {
+        if (trigger === 'hover') {
             Popper.createPopper(popoverRoot, popover, { placement });
         } else {
             Popper.createPopper(popoverRef, popover, { placement });
         }
 
-        popover.setAttribute("x-placement", placement);
+        popover.setAttribute('x-placement', placement);
 
         setInterval(() => detectTooltipDirection(popover), 1000);
     },
 
     _ani() {
-        const fadeIn = "rbt-popover-fade-enter";
-        const fadeOut = "rbt-popover-fade-leave";
+        const fadeIn = 'rbt-popover-fade-enter';
+        const fadeOut = 'rbt-popover-fade-leave';
         return { fadeIn, fadeOut };
     },
 
@@ -208,23 +208,23 @@ Rabbit.prototype.Popover = {
         };
 
         const hide = () => {
-            status = "hide";
+            status = 'hide';
             setTimeout(() => this._hide(popover, hideCb), hideTimeout * 1000);
         };
 
-        if (trigger === "click") {
+        if (trigger === 'click') {
             clickOutSide(popoverRoot, hide);
-            popoverRef.addEventListener("click", show);
+            popoverRef.addEventListener('click', show);
         }
 
-        if (trigger === "hover") {
-            popoverRoot.addEventListener("mouseenter", show);
-            popoverRoot.addEventListener("mouseleave", hide);
+        if (trigger === 'hover') {
+            popoverRoot.addEventListener('mouseenter', show);
+            popoverRoot.addEventListener('mouseleave', hide);
         }
 
-        if (trigger === "focus") {
-            popoverRef.addEventListener("mousedown", show);
-            popoverRef.addEventListener("mouseup", hide);
+        if (trigger === 'focus') {
+            popoverRef.addEventListener('mousedown', show);
+            popoverRef.addEventListener('mouseup', hide);
         }
     },
 
@@ -234,7 +234,7 @@ Rabbit.prototype.Popover = {
         if (isStr(sel) && sel) {
             setTimeout(() => {
                 const el = document.querySelector(sel);
-                el.addEventListener("click", hide);
+                el.addEventListener('click', hide);
             }, 0);
         }
     },

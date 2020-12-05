@@ -5,7 +5,7 @@ function _typeof(data) {
 }
 
 function isStr(s) {
-    return typeof s === "string";
+    return typeof s === 'string';
 }
 
 function isUndef(u) {
@@ -13,7 +13,7 @@ function isUndef(u) {
 }
 
 function isNum(n) {
-    return typeof n === "number";
+    return typeof n === 'number';
 }
 
 function isObj(o) {
@@ -25,7 +25,7 @@ function isArr(a) {
 }
 
 function isFunc(f) {
-    return typeof f === "function";
+    return typeof f === 'function';
 }
 
 // export { _typeof, isStr, isUndef, isNum, isObj, isArr, isFunc };

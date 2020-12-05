@@ -7,21 +7,21 @@ Rabbit.prototype.Dropdown = {
         const {
             onClick,
             onUnfold,
-            trigger = "hover",
+            trigger = 'hover',
             divided = [],
             selected = [],
             disabled = false,
-            className = "",
-            placement = "bottom",
+            className = '',
+            placement = 'bottom',
             itemDisabled = [],
         } = _config;
 
         const { REF, DROPDOWNITEM } = _slot;
 
-        const DropDown = document.createElement("div");
-        const DropDownRef = document.createElement("div");
-        const DropDownMenu = document.createElement("ul");
-        const DrpDownDivided = document.createElement("li");
+        const DropDown = document.createElement('div');
+        const DropDownRef = document.createElement('div');
+        const DropDownMenu = document.createElement('ul');
+        const DrpDownDivided = document.createElement('li');
 
         this.addClassName(
             className,
@@ -34,9 +34,9 @@ Rabbit.prototype.Dropdown = {
         let itemList = [];
 
         for (let i = 0; i < DROPDOWNITEM.length; i++) {
-            const DropDownItem = document.createElement("li");
+            const DropDownItem = document.createElement('li');
 
-            DropDownItem.className = "rbt-dropdown-item";
+            DropDownItem.className = 'rbt-dropdown-item';
             DropDownMenu.appendChild(DropDownItem);
 
             addElemetsOfSlots(DROPDOWNITEM[i], DropDownItem);
@@ -88,7 +88,7 @@ Rabbit.prototype.Dropdown = {
     },
 
     addClassName(className, dropDown, dropDownRef, dropDownMenu, drpDownDivided) {
-        const prefixCls = "rbt-dropdown";
+        const prefixCls = 'rbt-dropdown';
 
         dropDown.className = `${prefixCls}`;
         dropDownRef.className = `${prefixCls}-rel`;
@@ -112,11 +112,11 @@ Rabbit.prototype.Dropdown = {
     },
 
     setDisabled(disabled, dropdownRef) {
-        if (disabled) dropdownRef.classList.add("rbt-dropdown-disabled");
+        if (disabled) dropdownRef.classList.add('rbt-dropdown-disabled');
     },
 
     setItemDisabled(disabled, dropDownItem) {
-        const cls = "rbt-dropdown-item-disabled";
+        const cls = 'rbt-dropdown-item-disabled';
         this._commonSet({
             api: disabled,
             dropDownItem,
@@ -125,7 +125,7 @@ Rabbit.prototype.Dropdown = {
     },
 
     setSelected(selected, dropDownItem) {
-        const cls = "rbt-dropdown-item-selected";
+        const cls = 'rbt-dropdown-item-selected';
         this._commonSet({
             api: selected,
             dropDownItem,
@@ -157,18 +157,18 @@ Rabbit.prototype.Dropdown = {
     _slider(dropdown, dropdownMenu, mode, placement, callback) {
         const slideUp = () => {
             dropdownMenu.classList.replace(
-                "rbt-dropdown-drop-in",
-                "rbt-dropdown-drop-out"
+                'rbt-dropdown-drop-in',
+                'rbt-dropdown-drop-out'
             );
 
-            setTimeout(() => (dropdownMenu.style.display = "none"), 240);
+            setTimeout(() => (dropdownMenu.style.display = 'none'), 240);
         };
 
         const slideDown = () => {
             CSSTransition2(
                 dropdownMenu,
-                "rbt-dropdown-drop-in",
-                "rbt-dropdown-drop-out",
+                'rbt-dropdown-drop-in',
+                'rbt-dropdown-drop-out',
                 235
             );
 
@@ -177,7 +177,7 @@ Rabbit.prototype.Dropdown = {
             this._autoWidth(dropdown, dropdownMenu);
         };
 
-        if (mode === "down") {
+        if (mode === 'down') {
             slideDown();
             this.setPlacement(placement, dropdownMenu, dropdown);
         } else slideUp();
@@ -186,17 +186,17 @@ Rabbit.prototype.Dropdown = {
     handleHover(trigger, disabled, placement, dropdown, dropdownMenu, cb) {
         let timer = null;
 
-        if (trigger === "hover" && !disabled) {
-            dropdown.addEventListener("mouseenter", () => {
+        if (trigger === 'hover' && !disabled) {
+            dropdown.addEventListener('mouseenter', () => {
                 timer = setTimeout(
-                    () => this._slider(dropdown, dropdownMenu, "down", placement, cb),
+                    () => this._slider(dropdown, dropdownMenu, 'down', placement, cb),
                     350
                 );
             });
 
-            dropdown.addEventListener("mouseleave", () => {
+            dropdown.addEventListener('mouseleave', () => {
                 clearTimeout(timer);
-                this._slider(dropdown, dropdownMenu, "", placement, cb);
+                this._slider(dropdown, dropdownMenu, '', placement, cb);
             });
         }
     },
@@ -212,17 +212,17 @@ Rabbit.prototype.Dropdown = {
     ) {
         if (disabled) return;
 
-        if (trigger === "click") {
-            dropdownRef.addEventListener("click", () => {
-                this._slider(dropdown, dropdownMenu, "down", placement, cb);
+        if (trigger === 'click') {
+            dropdownRef.addEventListener('click', () => {
+                this._slider(dropdown, dropdownMenu, 'down', placement, cb);
                 return false;
             });
         }
 
-        if (trigger === "contextMenu") {
-            dropdownRef.addEventListener("contextmenu", (e) => {
+        if (trigger === 'contextMenu') {
+            dropdownRef.addEventListener('contextmenu', e => {
                 e.preventDefault();
-                this._slider(dropdown, dropdownMenu, "down", placement, cb);
+                this._slider(dropdown, dropdownMenu, 'down', placement, cb);
             });
         }
     },
@@ -230,28 +230,28 @@ Rabbit.prototype.Dropdown = {
     itemHandleClick(dropdown, dropdownMenu, dropdownItem, placement, cb, index) {
         const item = dropdownItem;
 
-        item.addEventListener("click", (e) => {
-            if (item.classList.contains("rbt-dropdown-item-disabled")) {
+        item.addEventListener('click', e => {
+            if (item.classList.contains('rbt-dropdown-item-disabled')) {
                 return false;
             } else {
                 isFunc(cb) ? cb(index, item) : null;
-                this._slider(dropdown, dropdownMenu, "", placement, cb);
+                this._slider(dropdown, dropdownMenu, '', placement, cb);
             }
             return false;
         });
     },
 
     documentClickEv(dropdown, dropdownMenu, trigger, placement) {
-        if (trigger !== "click" && trigger !== "contextMenu") return;
+        if (trigger !== 'click' && trigger !== 'contextMenu') return;
 
-        const _con = Array.from(document.querySelectorAll(".rbt-dropdown-menu"));
+        const _con = Array.from(document.querySelectorAll('.rbt-dropdown-menu'));
 
-        document.addEventListener("click", (e) => {
+        document.addEventListener('click', e => {
             e.stopPropagation;
 
-            _con.map((item) => {
+            _con.map(item => {
                 if (e.target.contains(item))
-                    this._slider(dropdown, dropdownMenu, "", placement, null);
+                    this._slider(dropdown, dropdownMenu, '', placement, null);
             });
         });
     },

@@ -9,9 +9,9 @@
 // 偏移矢量：scrollWidth * 初始步数++
 
 Rabbit.prototype.Tabs = {
-    prefixCls: "rbt-tabs",
+    prefixCls: 'rbt-tabs',
     createInstance(_config, _slot) {
-        const { type = "line", lable, onClick, onTabRemove } = _config;
+        const { type = 'line', lable, onClick, onTabRemove } = _config;
         const { TABSPANE } = _slot;
     },
     addClassName() {},

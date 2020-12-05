@@ -6,19 +6,19 @@ let drawerZIndex = 1000;
  */
 Rabbit.prototype.Drawer = {
     createInstance(_el, _config, _slot) {
-        const prefixCls = "rbt-drawer";
+        const prefixCls = 'rbt-drawer';
         const {
             mask = true,
-                title = "默认标题",
-                width = "256px",
+                title = '默认标题',
+                width = '256px',
                 styles,
                 zIndex = 1000,
                 onClose,
                 visible = false,
                 closable = true,
                 keyboard = true,
-                placement = "right",
-                className = "",
+                placement = 'right',
+                className = '',
                 scrollable = false,
                 maskClosable = true,
         } = _config;
@@ -26,17 +26,17 @@ Rabbit.prototype.Drawer = {
 
         drawerZIndex = zIndex;
 
-        const Drawer = document.createElement("div");
-        const DrawerMask = document.createElement("div");
-        const DrawerWrap = document.createElement("div");
-        const DrawerContentBox = document.createElement("div");
-        const DrawerContentWrap = document.createElement("div");
-        const DrawerClose = document.createElement("a");
-        const DrawerCloseIco = document.createElement("i");
-        const DrawerHeader = document.createElement("div");
-        const DrawerTitle = document.createElement("div");
-        const DrawerBody = document.createElement("div");
-        const DrawerFooter = document.createElement("div");
+        const Drawer = document.createElement('div');
+        const DrawerMask = document.createElement('div');
+        const DrawerWrap = document.createElement('div');
+        const DrawerContentBox = document.createElement('div');
+        const DrawerContentWrap = document.createElement('div');
+        const DrawerClose = document.createElement('a');
+        const DrawerCloseIco = document.createElement('i');
+        const DrawerHeader = document.createElement('div');
+        const DrawerTitle = document.createElement('div');
+        const DrawerBody = document.createElement('div');
+        const DrawerFooter = document.createElement('div');
 
         Drawer.className = `${prefixCls} ${prefixCls}-${placement}`;
         DrawerMask.className = `${prefixCls}-mask`;
@@ -69,7 +69,7 @@ Rabbit.prototype.Drawer = {
         this.keyboardClose(keyboard, Drawer, DrawerWrap, onClose, placement);
         this.showClose(closable, DrawerContentWrap, DrawerClose);
 
-        visible ? this.showDrawer(Drawer, DrawerWrap, placement) : "";
+        visible ? this.showDrawer(Drawer, DrawerWrap, placement) : '';
 
         Drawer.appendChild(DrawerWrap);
         DrawerWrap.appendChild(DrawerContentBox);
@@ -101,16 +101,16 @@ Rabbit.prototype.Drawer = {
     initDirection(drawer, placement) {
         const T = 100;
         switch (placement) {
-            case "top":
+            case 'top':
                 drawer.style.transform = `translateY(-${T}%)`;
                 break;
-            case "right":
+            case 'right':
                 drawer.style.transform = `translateX(${T}%)`;
                 break;
-            case "bottom":
+            case 'bottom':
                 drawer.style.transform = `translateY(${T}%)`;
                 break;
-            case "left":
+            case 'left':
                 drawer.style.transform = `translateX(-${T}%)`;
                 break;
         }
@@ -121,13 +121,13 @@ Rabbit.prototype.Drawer = {
         bodyScrollable(false);
         drawer.style.transform = null;
         root.style.zIndex = drawerZIndex;
-        root.classList.add("rbt-drawer-open");
+        root.classList.add('rbt-drawer-open');
     },
 
     hideDrawer(root, drawer, placement) {
         bodyScrollable(true);
         this.initDirection(drawer, placement);
-        root.classList.remove("rbt-drawer-open");
+        root.classList.remove('rbt-drawer-open');
     },
 
     showMask(mask, drawer, drawerMask) {
@@ -143,7 +143,7 @@ Rabbit.prototype.Drawer = {
     },
 
     setSize(el, width, placement) {
-        if (placement === "top" || placement === "bottom") {
+        if (placement === 'top' || placement === 'bottom') {
             el.style.height = width;
         } else {
             el.style.width = width;
@@ -182,8 +182,8 @@ Rabbit.prototype.Drawer = {
     // 是否支持键盘 esc 关闭
     keyboardClose(keyboard, root, drawer, cb, placement) {
         if (keyboard) {
-            window.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
+            window.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
                     isFunc(cb) ? cb() : null;
                     this.hideDrawer(root, drawer, placement);
                 }
@@ -193,8 +193,8 @@ Rabbit.prototype.Drawer = {
 
     getDrawerElement(el) {
         const elem = document.querySelector(el);
-        const root = elem.querySelector(".rbt-drawer");
-        const drawer = root.querySelector(".rbt-drawer-wrap");
+        const root = elem.querySelector('.rbt-drawer');
+        const drawer = root.querySelector('.rbt-drawer-wrap');
 
         return {
             elem,
@@ -204,17 +204,17 @@ Rabbit.prototype.Drawer = {
     },
 
     getDrawerPlacement(el) {
-        if (el.classList.contains("rbt-drawer-top")) {
-            return "top";
+        if (el.classList.contains('rbt-drawer-top')) {
+            return 'top';
         }
-        if (el.classList.contains("rbt-drawer-right")) {
-            return "right";
+        if (el.classList.contains('rbt-drawer-right')) {
+            return 'right';
         }
-        if (el.classList.contains("rbt-drawer-bottom")) {
-            return "bottom";
+        if (el.classList.contains('rbt-drawer-bottom')) {
+            return 'bottom';
         }
-        if (el.classList.contains("rbt-drawer-left")) {
-            return "left";
+        if (el.classList.contains('rbt-drawer-left')) {
+            return 'left';
         }
     },
 

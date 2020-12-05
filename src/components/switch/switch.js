@@ -4,7 +4,7 @@
  */
 Rabbit.prototype.Switch = {
     createInstance: (_config, _slot) => {
-        const prefixCls = "rbt-switch";
+        const prefixCls = 'rbt-switch';
 
         let {
             size,
@@ -21,21 +21,21 @@ Rabbit.prototype.Switch = {
         // 记录 switch 状态，并作为 onChange 回调的参数返回出去
         let status = false;
 
-        if (isUndef(size)) size = "";
-        else size = "-" + size;
+        if (isUndef(size)) size = '';
+        else size = '-' + size;
 
         isUndef(checked) ? (checked = false) : checked;
         isUndef(disabled) ? (disabled = false) : disabled;
-        isUndef(offColor) ? (offColor = "") : offColor;
-        isUndef(openColor) ? (openColor = "") : openColor;
-        isUndef(className) ? (className = "") : className;
+        isUndef(offColor) ? (offColor = '') : offColor;
+        isUndef(openColor) ? (openColor = '') : openColor;
+        isUndef(className) ? (className = '') : className;
 
-        const Switch = document.createElement("button");
-        const SwitchHandle = document.createElement("div");
-        const SwitchInner = document.createElement("span");
+        const Switch = document.createElement('button');
+        const SwitchHandle = document.createElement('div');
+        const SwitchInner = document.createElement('span');
 
         Switch.className = `${prefixCls} ${prefixCls}${size} ${className}`;
-        Switch.setAttribute("role", "switch");
+        Switch.setAttribute('role', 'switch');
         SwitchHandle.className = `${prefixCls}-handle`;
         SwitchInner.className = `${prefixCls}-inner`;
 
@@ -45,34 +45,34 @@ Rabbit.prototype.Switch = {
             Switch.classList.add(`${prefixCls}-checked`);
         }
 
-        const changeColor = (status) => {
+        const changeColor = status => {
             if (status) {
                 // 初始化背景色
-                Switch.style.background = "";
+                Switch.style.background = '';
                 // 自定义打开时的背景色
-                openColor ? (Switch.style.background = openColor) : "";
+                openColor ? (Switch.style.background = openColor) : '';
                 // 自定义显示打开时的内容
-                OPEN && OPEN.innerHTML ? addElemetsOfSlots(OPEN, SwitchInner) : "";
+                OPEN && OPEN.innerHTML ? addElemetsOfSlots(OPEN, SwitchInner) : '';
             } else {
-                Switch.style.background = "";
+                Switch.style.background = '';
                 // 自定义关闭时的背景色
-                offColor ? (Switch.style.background = offColor) : "";
+                offColor ? (Switch.style.background = offColor) : '';
                 // 自定义显示关闭时的内容
-                CLOSE && CLOSE.innerHTML ? addElemetsOfSlots(CLOSE, SwitchInner) : "";
+                CLOSE && CLOSE.innerHTML ? addElemetsOfSlots(CLOSE, SwitchInner) : '';
             }
 
-            Switch.setAttribute("aria-checked", status);
+            Switch.setAttribute('aria-checked', status);
         };
 
         const switchChange = () => {
             if (status) {
                 status = false;
                 Switch.classList.remove(`${prefixCls}-checked`);
-                SwitchInner.innerHTML = "";
+                SwitchInner.innerHTML = '';
             } else {
                 status = true;
                 Switch.classList.add(`${prefixCls}-checked`);
-                SwitchInner.innerHTML = "";
+                SwitchInner.innerHTML = '';
             }
             changeColor(status);
             isFunc(onChange) ? onChange(status) : null;

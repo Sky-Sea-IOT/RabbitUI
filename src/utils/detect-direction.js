@@ -2,10 +2,10 @@
 function detectTooltipDirection(tooltip) {
     setTimeout(() => {
         let a = tooltip.dataset.popperPlacement,
-            b = tooltip.getAttribute("x-placement");
+            b = tooltip.getAttribute('x-placement');
         if (b !== a) {
             b = a;
-            tooltip.setAttribute("x-placement", b);
+            tooltip.setAttribute('x-placement', b);
         }
     }, 0);
 }

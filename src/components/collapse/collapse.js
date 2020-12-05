@@ -4,8 +4,8 @@
  */
 Rabbit.prototype.Collapse = {
     createInstance(_config, _slot) {
-        const prefixCls = "rbt-collapse";
-        const prefixIconCls = "rbt-icon";
+        const prefixCls = 'rbt-collapse';
+        const prefixIconCls = 'rbt-icon';
 
         const {
             key = [],
@@ -22,41 +22,41 @@ Rabbit.prototype.Collapse = {
         let expandedKeys = [];
 
         const error =
-            "[Rabbit] You did not use the correct slot in the collapse component, like the one above";
+            '[Rabbit] You did not use the correct slot in the collapse component, like the one above';
 
-        const Collapse = document.createElement("div");
+        const Collapse = document.createElement('div');
 
         Collapse.className = `${prefixCls}`;
 
         // 折叠面板透明且无边框
-        ghost ? Collapse.classList.add(`${prefixCls}-ghost`) : "";
+        ghost ? Collapse.classList.add(`${prefixCls}-ghost`) : '';
 
         // 是否带边框的折叠面板
-        !bordered ? Collapse.classList.add(`${prefixCls}-borderless`) : "";
+        !bordered ? Collapse.classList.add(`${prefixCls}-borderless`) : '';
 
         // 创建折叠面板项
         const createCollapseItem = (item, i) => {
             const header = item.children[0];
             const content = item.children[1];
-            const CollapseItem = document.createElement("div");
-            const CollapseHeader = document.createElement("div");
-            const CollapseArrow = document.createElement("i");
-            const CollapseContent = document.createElement("div");
-            const CollapseContentBox = document.createElement("div");
+            const CollapseItem = document.createElement('div');
+            const CollapseHeader = document.createElement('div');
+            const CollapseArrow = document.createElement('i');
+            const CollapseContent = document.createElement('div');
+            const CollapseContentBox = document.createElement('div');
 
-            CollapseContent.style.display = "none";
+            CollapseContent.style.display = 'none';
 
             if (
-                header.getAttribute("slot") === "header" &&
-                content.getAttribute("slot") === "content"
+                header.getAttribute('slot') === 'header' &&
+                content.getAttribute('slot') === 'content'
             ) {
                 addElemetsOfSlots(item, CollapseItem);
                 addElemetsOfSlots(header, CollapseHeader);
                 addElemetsOfSlots(content, CollapseContentBox);
-            } else if (header.getAttribute("slot") !== "header") {
+            } else if (header.getAttribute('slot') !== 'header') {
                 console.error(header);
                 console.error(error);
-            } else if (content.getAttribute("slot") !== "content") {
+            } else if (content.getAttribute('slot') !== 'content') {
                 console.error(content);
                 console.error(error);
             }
@@ -117,8 +117,8 @@ Rabbit.prototype.Collapse = {
         const { key } = item.dataset;
         defaultActiveKey.map((defKeys, i) => {
             if (defKeys == key) {
-                itemPanel.style.display = "block";
-                item.classList.add("rbt-collapse-item-active");
+                itemPanel.style.display = 'block';
+                item.classList.add('rbt-collapse-item-active');
             }
         });
     },
@@ -126,7 +126,7 @@ Rabbit.prototype.Collapse = {
     handleToogle(i, el1, el2, _key, onChange, accordion, expandedKeys) {
         let key = expandedKeys;
 
-        const prefixCls = "rbt-collapse";
+        const prefixCls = 'rbt-collapse';
         const slideSpeed = 140;
         const CollapseItem = el1;
         const CollapseContent = el2;
@@ -152,7 +152,7 @@ Rabbit.prototype.Collapse = {
         // TODO: 手风琴模式下，折叠其他展开的面板并删除数组中对应key
         const accordionToggle = () => {
             if (accordion) {
-                Rbt.siblings(CollapseItem).forEach((item) => {
+                Rbt.siblings(CollapseItem).forEach(item => {
                     const collapsePanel = item.children[1];
                     Rbt.slider().up(collapsePanel, slideSpeed);
                     item.classList.remove(`${prefixCls}-item-active`);

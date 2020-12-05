@@ -16,15 +16,15 @@ function CSSTransition(
 ) {
     timeout = timeout * 1000;
 
-    if (mode === "in") {
-        elem.style.display = "block";
+    if (mode === 'in') {
+        elem.style.display = 'block';
         elem.classList.add(animationEnterCls);
         setTimeout(() => elem.classList.remove(animationEnterCls), timeout);
-    } else if (mode === "out") {
+    } else if (mode === 'out') {
         elem.classList.add(animationLeaveCls);
 
         setTimeout(() => {
-            elem.style.display = "none";
+            elem.style.display = 'none';
             elem.classList.remove(animationLeaveCls);
         }, timeout);
     }
@@ -34,9 +34,9 @@ function CSSTransition(
 function CSSTransition2(elem, animationEnterCls, animationLeaveCls, timeout) {
     if (elem.classList.contains(animationEnterCls)) {
         elem.classList.replace(animationEnterCls, animationLeaveCls);
-        setTimeout(() => (elem.style.display = "none"), timeout);
+        setTimeout(() => (elem.style.display = 'none'), timeout);
     } else {
-        elem.style.display = "block";
+        elem.style.display = 'block';
         elem.classList.add(animationEnterCls);
         elem.classList.remove(animationLeaveCls);
     }

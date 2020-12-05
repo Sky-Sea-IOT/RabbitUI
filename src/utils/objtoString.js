@@ -12,10 +12,10 @@ function objToString(obj) {
     let errorType;
 
     if (isObj(obj)) {
-        (str = JSON.stringify(obj).replace(/"([^"]*)"/g, "$1")),
-        (b = str.replace(/,/g, "; ")),
-        (c = b.replace(/{/, "")),
-        (result = c.replace(/}/, ""));
+        (str = JSON.stringify(obj).replace(/"([^"]*)"/g, '$1')),
+        (b = str.replace(/,/g, '; ')),
+        (c = b.replace(/{/, '')),
+        (result = c.replace(/}/, ''));
     } else {
         errorType = _typeof(obj);
         console.error(

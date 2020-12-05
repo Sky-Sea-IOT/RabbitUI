@@ -8,7 +8,7 @@ Rabbit.prototype.InputNumber = {
             max = Infinity,
                 min = -Infinity,
                 step = 1,
-                size = "default",
+                size = 'default',
                 value = 1,
                 onBlur,
                 onFocus,
@@ -17,17 +17,17 @@ Rabbit.prototype.InputNumber = {
                 readOnly = false,
                 editable = true,
                 precision = 1,
-                placeholder = "",
+                placeholder = '',
         } = _config;
 
-        const InputNumber = document.createElement("div");
-        const InputNumberHandlerWrap = document.createElement("div");
-        const InputNumberHandlerUp = document.createElement("a");
-        const InputNumberHandlerDown = document.createElement("a");
-        const InputNumberHandlerUpIco = document.createElement("span");
-        const InputNumberHandlerDownIco = document.createElement("span");
-        const InputNumberInputWrap = document.createElement("div");
-        const InputNumberInput = document.createElement("input");
+        const InputNumber = document.createElement('div');
+        const InputNumberHandlerWrap = document.createElement('div');
+        const InputNumberHandlerUp = document.createElement('a');
+        const InputNumberHandlerDown = document.createElement('a');
+        const InputNumberHandlerUpIco = document.createElement('span');
+        const InputNumberHandlerDownIco = document.createElement('span');
+        const InputNumberInputWrap = document.createElement('div');
+        const InputNumberInput = document.createElement('input');
 
         this.addClassName(
             InputNumber,
@@ -94,8 +94,8 @@ Rabbit.prototype.InputNumber = {
         InputNumberInput,
         size
     ) {
-        const prefixCls = "rbt-input-number";
-        const prefixIconCls = "rbt-icon";
+        const prefixCls = 'rbt-input-number';
+        const prefixIconCls = 'rbt-icon';
 
         InputNumber.className = `${prefixCls} ${prefixCls}-${size}`;
         InputNumberHandlerWrap.className = `${prefixCls}-handler-wrap`;
@@ -111,11 +111,11 @@ Rabbit.prototype.InputNumber = {
     setInputAttr(
         input, { value, step, max, min, disabled, readOnly, placeholder } = {}
     ) {
-        input.type = "number";
+        input.type = 'number';
 
         if (value) {
             input.value = value;
-            input.setAttribute("value", value);
+            input.setAttribute('value', value);
         }
 
         input.step = step;
@@ -128,14 +128,14 @@ Rabbit.prototype.InputNumber = {
 
     addNum(input, val, step, cb, readOnly, max, precision) {
         val++;
-        this.setValue("up", input, val, step, cb, readOnly, precision, {
+        this.setValue('up', input, val, step, cb, readOnly, precision, {
             max,
         });
     },
 
     reduceNum(input, val, step, cb, readOnly, min, precision) {
         val--;
-        this.setValue("down", input, val, step, cb, readOnly, precision, {
+        this.setValue('down', input, val, step, cb, readOnly, precision, {
             min,
         });
     },
@@ -143,7 +143,7 @@ Rabbit.prototype.InputNumber = {
     inputValChange(input, val, cb) {
         input.value = val;
         isFunc(cb) ? cb(val) : null;
-        input.setAttribute("value", val);
+        input.setAttribute('value', val);
     },
 
     setValue(type, input, val, step, cb, readOnly, precision, { max, min } = {}) {
@@ -153,7 +153,7 @@ Rabbit.prototype.InputNumber = {
 
         // 如果 step 是小数，且点击箭头控制每次改变的精度会出现与键盘上下方向键控制的数值不一致
 
-        if (type === "up") {
+        if (type === 'up') {
             // 当step 为 1 或 0 时并无意义
             if (step != 1 || step != 0) {
                 val = Number((val * step).toFixed(precision));
@@ -163,7 +163,7 @@ Rabbit.prototype.InputNumber = {
                 this.inputValChange(input, val, cb);
             }
         }
-        if (type === "down") {
+        if (type === 'down') {
             if (step != 0) {
                 val = Number((val / step).toFixed(precision));
                 if (val <= min) {
@@ -175,16 +175,16 @@ Rabbit.prototype.InputNumber = {
     },
 
     handleFocus(el, input, cb) {
-        input.onfocus = (e) => {
+        input.onfocus = e => {
             isFunc(cb) ? cb(e) : null;
-            el.classList.add("rbt-input-number-focused");
+            el.classList.add('rbt-input-number-focused');
         };
     },
 
     handleBlur(el, input, cb) {
         input.onblur = () => {
             isFunc(cb) ? cb() : null;
-            el.classList.remove("rbt-input-number-focused");
+            el.classList.remove('rbt-input-number-focused');
         };
     },
 
@@ -205,7 +205,7 @@ Rabbit.prototype.InputNumber = {
     },
 
     keyboardChangeVal(input, min, max) {
-        input.oninput = (e) => {
+        input.oninput = e => {
             // 记录当前输入框值
             let currentVal = Number(e.target.value);
             // 如果输入的值小于 min 则当前值变为 min
@@ -230,7 +230,7 @@ Rabbit.prototype.InputNumber = {
 
     setDisabled(el, disabled) {
         if (disabled) {
-            el.classList.add("rbt-input-number-disabled");
+            el.classList.add('rbt-input-number-disabled');
         }
     },
 };

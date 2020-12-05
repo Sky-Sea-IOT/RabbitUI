@@ -5,23 +5,23 @@
 
 Rabbit.prototype.List = {
     createInstance(_config, _slot) {
-        const prefixCls = "rbt-list";
+        const prefixCls = 'rbt-list';
 
         const {
-            size = "defalut",
+            size = 'defalut',
                 split = true,
                 border = true,
-                header = "",
-                footer = "",
+                header = '',
+                footer = '',
                 renderItem = [],
         } = _config;
 
         const { HEADER, FOOTER, LISTITEM } = _slot;
 
-        const List = document.createElement("div");
-        const ListHeader = document.createElement("div");
-        const ListContainer = document.createElement("ul");
-        const ListFooter = document.createElement("div");
+        const List = document.createElement('div');
+        const ListHeader = document.createElement('div');
+        const ListContainer = document.createElement('ul');
+        const ListFooter = document.createElement('div');
 
         List.className = `${prefixCls} ${prefixCls}-${size} ${prefixCls}-bordered ${prefixCls}-split`;
         ListHeader.className = `${prefixCls}-header`;
@@ -69,11 +69,11 @@ Rabbit.prototype.List = {
 
     renderItem(data, el) {
         if (isArr(data)) {
-            data.map((datas) => {
-                const ListItem = document.createElement("li");
-                ListItem.className = "rbt-list-item";
+            data.map(datas => {
+                const ListItem = document.createElement('li');
+                ListItem.className = 'rbt-list-item';
                 if (isObj(datas)) {
-                    Object.keys(datas).forEach((key) => {
+                    Object.keys(datas).forEach(key => {
                         ListItem.innerHTML = datas[key];
                     });
                 } else {
@@ -86,12 +86,12 @@ Rabbit.prototype.List = {
 
     createItems(slot_listItem, el) {
         for (let i = 0; i < slot_listItem.length; i++) {
-            const _ListItem = document.createElement("li");
+            const _ListItem = document.createElement('li');
 
             addElemetsOfSlots(slot_listItem[i], _ListItem);
             el.appendChild(_ListItem);
 
-            _ListItem.className = "rbt-list-item";
+            _ListItem.className = 'rbt-list-item';
         }
     },
 };

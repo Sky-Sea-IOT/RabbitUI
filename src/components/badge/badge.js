@@ -5,18 +5,18 @@
 Rabbit.prototype.Badge = {
     listenCount: ({ el, showZero = false, overflowCount = 99 } = {}) => {
         if (isArr(el)) {
-            el.map((item) => setInterval(() => change(item), 100));
+            el.map(item => setInterval(() => change(item), 100));
         } else {
             setInterval(() => change(el), 100);
         }
 
         function change(_el) {
             const badges = document.querySelector(_el);
-            const badgesCountEl = badges.querySelector(".rbt-badge-count");
+            const badgesCountEl = badges.querySelector('.rbt-badge-count');
             const badgesCount = Number(badgesCountEl.innerHTML);
 
             if (!showZero && badgesCount <= 0 && badgesCount !== NaN) {
-                badgesCountEl.style.display = "none";
+                badgesCountEl.style.display = 'none';
             } else {
                 badgesCountEl.style.display = null;
             }
@@ -32,8 +32,8 @@ Rabbit.prototype.Badge = {
         setInterval(a, 100);
 
         function a() {
-            const badgesDot = document.querySelectorAll(".rbt-badge-dot");
-            badgesDot.forEach((item) => (item.innerHTML = null));
+            const badgesDot = document.querySelectorAll('.rbt-badge-dot');
+            badgesDot.forEach(item => (item.innerHTML = null));
         }
     },
 };

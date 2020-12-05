@@ -15,9 +15,9 @@ Rabbit.prototype.Message = {
      */
 
     container: () => {
-        const MessageContainer = document.createElement("div");
+        const MessageContainer = document.createElement('div');
 
-        MessageContainer.className = "rbt-message";
+        MessageContainer.className = 'rbt-message';
         setTimeout(() => (MessageContainer.style.top = `${messageTop}px`), 0);
 
         document.body.appendChild(MessageContainer);
@@ -44,8 +44,8 @@ Rabbit.prototype.Message = {
         background,
     } = {}) {
         // 是否初始化了 message 的父容器
-        if (!document.querySelector(".rbt-message")) {
-            console.error("[Rabbit warn] The Message component is not initialized");
+        if (!document.querySelector('.rbt-message')) {
+            console.error('[Rabbit warn] The Message component is not initialized');
             return;
         }
         // 全局的自动关闭的延时如果不是 2.5 则说明被更改了，所以实例的 duration 同步为全局的 duration
@@ -55,12 +55,12 @@ Rabbit.prototype.Message = {
         // 获取图标
         const MessageIcons = getIconTypes(type);
 
-        const Message = document.createElement("div");
-        const MessageNoticeContent = document.createElement("div");
-        const MessageTypeBox = document.createElement("div");
-        const MessageIconBox = document.createElement("i");
-        const MessageContentBox = document.createElement("span");
-        const MessageClose = document.createElement("a");
+        const Message = document.createElement('div');
+        const MessageNoticeContent = document.createElement('div');
+        const MessageTypeBox = document.createElement('div');
+        const MessageIconBox = document.createElement('i');
+        const MessageContentBox = document.createElement('span');
+        const MessageClose = document.createElement('a');
 
         this.addClassName(
             type,
@@ -72,7 +72,7 @@ Rabbit.prototype.Message = {
             MessageClose
         );
 
-        document.querySelector(".rbt-message").appendChild(Message);
+        document.querySelector('.rbt-message').appendChild(Message);
         Message.appendChild(MessageNoticeContent);
         MessageNoticeContent.appendChild(MessageTypeBox);
         MessageTypeBox.append(MessageIconBox, MessageContentBox);
@@ -99,8 +99,8 @@ Rabbit.prototype.Message = {
         MessageIconBox,
         MessageClose
     ) {
-        const prefixCls = "rbt-message";
-        const prefixIcon = "rbt-icon";
+        const prefixCls = 'rbt-message';
+        const prefixIcon = 'rbt-icon';
 
         Message.className = `${prefixCls}-notice ${this._aniCls().moveInCls}`;
         MessageNoticeContent.className = `${prefixCls}-notice-content`;
@@ -110,8 +110,8 @@ Rabbit.prototype.Message = {
     },
 
     _aniCls() {
-        const moveInCls = "rbt-message-notice-fade-enter";
-        const moveOutCls = "rbt-message-notice-fade-leave";
+        const moveInCls = 'rbt-message-notice-fade-enter';
+        const moveOutCls = 'rbt-message-notice-fade-leave';
         return {
             moveInCls,
             moveOutCls,
@@ -152,7 +152,7 @@ Rabbit.prototype.Message = {
             el,
             moveInCls: this._aniCls().moveInCls,
             moveOutCls: this._aniCls().moveOutCls,
-            destroyTarget: document.querySelector(".rbt-message-notice"),
+            destroyTarget: document.querySelector('.rbt-message-notice'),
             onClose: cb,
         });
     },
@@ -168,7 +168,7 @@ Rabbit.prototype.Message = {
     ) {
         this.createInstance({
             key,
-            type: "info",
+            type: 'info',
             content,
             onClose,
             duration,
@@ -183,7 +183,7 @@ Rabbit.prototype.Message = {
     ) {
         this.createInstance({
             key,
-            type: "success",
+            type: 'success',
             content,
             onClose,
             duration,
@@ -198,7 +198,7 @@ Rabbit.prototype.Message = {
     ) {
         this.createInstance({
             key,
-            type: "warning",
+            type: 'warning',
             content,
             onClose,
             duration,
@@ -213,7 +213,7 @@ Rabbit.prototype.Message = {
     ) {
         this.createInstance({
             key,
-            type: "error",
+            type: 'error',
             content,
             onClose,
             duration,
@@ -228,7 +228,7 @@ Rabbit.prototype.Message = {
     ) {
         this.createInstance({
             key,
-            type: "loading",
+            type: 'loading',
             content,
             onClose,
             duration,
@@ -265,14 +265,14 @@ Rabbit.prototype.Message = {
         if (key) {
             destroyByKey({
                 key,
-                target: document.querySelectorAll(".rbt-message-notice"),
+                target: document.querySelectorAll('.rbt-message-notice'),
                 moveInCls: this._aniCls().moveInCls,
                 moveOutCls: this._aniCls().moveOutCls,
                 whenToDestroy: 0.25,
             });
         } else {
             destoryAll({
-                el: document.querySelectorAll(".rbt-message-notice"),
+                el: document.querySelectorAll('.rbt-message-notice'),
                 moveInCls: this._aniCls().moveInCls,
                 moveOutCls: this._aniCls().moveOutCls,
                 whenToDestroy: 0.25,

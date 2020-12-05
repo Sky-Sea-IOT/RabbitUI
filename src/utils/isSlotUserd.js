@@ -7,7 +7,7 @@ function isSlotsUserd(condition, slot) {
     if (!condition && slot && slot.innerHTML) {
         console.warn(slot);
         console.warn(
-            "You used the component slot above, but the corresponding condition is false, set it to true"
+            'You used the component slot above, but the corresponding condition is false, set it to true'
         );
     }
     // 指定的slot使用了但是没有添加任何节点内容

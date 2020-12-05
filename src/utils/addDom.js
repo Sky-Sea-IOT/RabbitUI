@@ -7,7 +7,7 @@
 function addElemetsOfSlots(slot, targetEle) {
     if (slot) {
         slot.nodeType === 1 ? targetEle.appendChild(slot) : null;
-        setTimeout(() => slot.removeAttribute("slot"), 200);
+        setTimeout(() => slot.removeAttribute('slot'), 200);
     }
 }
 

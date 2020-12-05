@@ -1,5 +1,5 @@
 // 全局配置项
-let noticePlacement = "topRight";
+let noticePlacement = 'topRight';
 let noticeDuration = 4.5;
 let noticeBottom = 24;
 let noticeTop = 24;
@@ -9,7 +9,7 @@ let noticeTop = 24;
  * 在界面右上角显示可关闭的全局通知
  */
 Rabbit.prototype.Notice = {
-    prefixCls: "rbt-notice",
+    prefixCls: 'rbt-notice',
     /**
      * ------------------------------------------------------------------------
      * 初始化父容器
@@ -18,10 +18,10 @@ Rabbit.prototype.Notice = {
 
     container() {
         // 创建notice的各个方向父容器添加到body
-        const NoticeWrapperTR = document.createElement("div"); // top-right
-        const NoticeWrapperTL = document.createElement("div"); // top-left
-        const NoticeWrapperBR = document.createElement("div"); // bottom-right
-        const NoticeWrapperBL = document.createElement("div"); // bottom-left
+        const NoticeWrapperTR = document.createElement('div'); // top-right
+        const NoticeWrapperTL = document.createElement('div'); // top-left
+        const NoticeWrapperBR = document.createElement('div'); // bottom-right
+        const NoticeWrapperBL = document.createElement('div'); // bottom-left
 
         NoticeWrapperTR.className = `${this.prefixCls} ${this.prefixCls}-topRight`;
         NoticeWrapperTL.className = `${this.prefixCls} ${this.prefixCls}-topLeft`;
@@ -70,14 +70,14 @@ Rabbit.prototype.Notice = {
     } = {}) {
         // 是否初始化了 notice 的父容器
         if (document.querySelectorAll(`.${this.prefixCls}`).length <= 0) {
-            console.error("[Rabbit warn] The Notice component is not initialized");
+            console.error('[Rabbit warn] The Notice component is not initialized');
             return;
         }
         // 同步为全局设置
         if (noticeDuration != 4.5) {
             duration = noticeDuration;
         }
-        if (noticePlacement != "topRight") {
+        if (noticePlacement != 'topRight') {
             placement = noticePlacement;
         }
         if (noticeBottom != 24) {
@@ -87,17 +87,17 @@ Rabbit.prototype.Notice = {
             top = noticeTop;
         }
 
-        const cas = type + "-outline";
-        const NoticeIcons = type !== "open" ? getIconTypes(cas) : "";
+        const cas = type + '-outline';
+        const NoticeIcons = type !== 'open' ? getIconTypes(cas) : '';
 
-        const Notice = document.createElement("div");
-        const NoticeBox = document.createElement("div");
-        const NoticeContentBox = document.createElement("div");
-        const NoticeIcon = document.createElement("i");
-        const NoticeTitle = document.createElement("div");
-        const NoticeDesc = document.createElement("div");
-        const NoticeClose = document.createElement("a");
-        const NoticeCloseIcon = document.createElement("i");
+        const Notice = document.createElement('div');
+        const NoticeBox = document.createElement('div');
+        const NoticeContentBox = document.createElement('div');
+        const NoticeIcon = document.createElement('i');
+        const NoticeTitle = document.createElement('div');
+        const NoticeDesc = document.createElement('div');
+        const NoticeClose = document.createElement('a');
+        const NoticeCloseIcon = document.createElement('i');
 
         this.addClassName(
             type,
@@ -127,9 +127,9 @@ Rabbit.prototype.Notice = {
         NoticeContentBox.append(NoticeIcon, NoticeTitle, NoticeDesc);
 
         // 调用的方法为 open 则不添加图标
-        if (type === "open") {
+        if (type === 'open') {
             NoticeContentBox.removeChild(NoticeIcon);
-            NoticeContentBox.className = "";
+            NoticeContentBox.className = '';
         } else {
             NoticeContentBox.className = `${this.prefixCls}-notice-with-icon`;
         }
@@ -155,7 +155,7 @@ Rabbit.prototype.Notice = {
         NoticeClose,
         NoticeCloseIcon
     ) {
-        const prefixIconCls = "rbt-icon";
+        const prefixIconCls = 'rbt-icon';
 
         Notice.className = `${this.prefixCls}-notice ${
       this.aniCls(placement).moveInCls
@@ -178,10 +178,10 @@ Rabbit.prototype.Notice = {
             `.${this.prefixCls}-${placement}`
         );
 
-        if (placement === "topRight" || placement === "topLeft") {
+        if (placement === 'topRight' || placement === 'topLeft') {
             NoticeWrap.style.top = `${top}px`;
         }
-        if (placement === "bottomRight" || placement === "bottomLeft") {
+        if (placement === 'bottomRight' || placement === 'bottomLeft') {
             NoticeWrap.style.bottom = `${bottom}px`;
         }
 
@@ -218,13 +218,13 @@ Rabbit.prototype.Notice = {
     addContent(title, desc, noticeTitle, noticeDes) {
         if (!title) {
             console.error(
-                "Rabbit [warn] The title of the notification reminder is mandatory"
+                'Rabbit [warn] The title of the notification reminder is mandatory'
             );
             return;
         }
         if (!desc) {
             console.error(
-                "Rabbit [warn] The description of the notification reminder is mandatory"
+                'Rabbit [warn] The description of the notification reminder is mandatory'
             );
             return;
         }
@@ -248,9 +248,9 @@ Rabbit.prototype.Notice = {
 
     aniCls(placement) {
         // 是否为左边入场
-        let direction = "";
-        if (placement === "topLeft" || placement === "bottomLeft") {
-            direction = "-left";
+        let direction = '';
+        if (placement === 'topLeft' || placement === 'bottomLeft') {
+            direction = '-left';
         }
 
         const moveInCls = `${this.prefixCls}-move-in${direction}`;
@@ -271,21 +271,21 @@ Rabbit.prototype.Notice = {
     open({
         key,
         top = 24,
-        desc = "",
-        title = "",
+        desc = '',
+        title = '',
         bottom = 24,
         styles = {},
         onClick,
         onClose,
         closable = true,
         duration = 4.5,
-        placement = "topRight",
-        className = "",
+        placement = 'topRight',
+        className = '',
     } = {}) {
         this.createInstance({
             key,
             top,
-            type: "open",
+            type: 'open',
             desc,
             title,
             bottom,
@@ -303,21 +303,21 @@ Rabbit.prototype.Notice = {
     info({
         key,
         top = 24,
-        desc = "",
-        title = "",
+        desc = '',
+        title = '',
         bottom = 24,
         styles = {},
         onClick,
         onClose,
         closable = true,
         duration = 4.5,
-        placement = "topRight",
-        className = "",
+        placement = 'topRight',
+        className = '',
     } = {}) {
         this.createInstance({
             key,
             top,
-            type: "info",
+            type: 'info',
             desc,
             title,
             bottom,
@@ -335,21 +335,21 @@ Rabbit.prototype.Notice = {
     success({
         key,
         top = 24,
-        desc = "",
-        title = "",
+        desc = '',
+        title = '',
         bottom = 24,
         styles = {},
         onClick,
         onClose,
         closable = true,
         duration = 4.5,
-        placement = "topRight",
-        className = "",
+        placement = 'topRight',
+        className = '',
     } = {}) {
         this.createInstance({
             key,
             top,
-            type: "success",
+            type: 'success',
             desc,
             title,
             bottom,
@@ -367,21 +367,21 @@ Rabbit.prototype.Notice = {
     warning({
         key,
         top = 24,
-        desc = "",
-        title = "",
+        desc = '',
+        title = '',
         bottom = 24,
         styles = {},
         onClick,
         onClose,
         closable = true,
         duration = 4.5,
-        placement = "topRight",
-        className = "",
+        placement = 'topRight',
+        className = '',
     } = {}) {
         this.createInstance({
             key,
             top,
-            type: "warning",
+            type: 'warning',
             desc,
             title,
             bottom,
@@ -399,21 +399,21 @@ Rabbit.prototype.Notice = {
     error({
         key,
         top = 24,
-        desc = "",
-        title = "",
+        desc = '',
+        title = '',
         bottom = 24,
         styles = {},
         onClick,
         onClose,
         closable = true,
         duration = 4.5,
-        placement = "topRight",
-        className = "",
+        placement = 'topRight',
+        className = '',
     } = {}) {
         this.createInstance({
             key,
             top,
-            type: "error",
+            type: 'error',
             desc,
             title,
             bottom,
@@ -459,10 +459,10 @@ Rabbit.prototype.Notice = {
     destroy(key) {
         const target = document.querySelectorAll(`.${this.prefixCls}-notice`);
         // 判断出场位置
-        let direction = "";
-        Array.from(target).map((item) => {
+        let direction = '';
+        Array.from(target).map(item => {
             if (item.classList.contains(`${this.prefixCls}-move-in-left`)) {
-                direction = "-left";
+                direction = '-left';
             }
         });
 

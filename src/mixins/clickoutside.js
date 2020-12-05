@@ -3,7 +3,7 @@
  * @param {Function} callback 点击的目标区域不包含目标元素的回调事件
  */
 function clickOutSide(elem, callback) {
-    document.addEventListener("click", (e) => {
+    document.addEventListener('click', e => {
         e.stopPropagation();
         const target = elem;
         if (target) {

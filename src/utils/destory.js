@@ -2,7 +2,7 @@
  * @param {{ el: string, moveInCls: string, moveOutCls: string, whenToDestroy: number}}
  */
 function destoryAll({ el, moveInCls, moveOutCls, whenToDestroy = 0.4 } = {}) {
-    Array.from(el).map((item) => {
+    Array.from(el).map(item => {
         item.style.opacity = 0;
         item.classList.replace(moveInCls, moveOutCls);
         setTimeout(() => item.remove(), whenToDestroy * 1000);
@@ -34,7 +34,7 @@ function destroy({
 
             // 是否连同实例的父元素容器一起销毁
             if (destroyParent) {
-                setTimeout(() => (parentNode.style.display = "none"), 150);
+                setTimeout(() => (parentNode.style.display = 'none'), 150);
             }
 
             currentEle.style.opacity = 0;
@@ -66,7 +66,7 @@ function destroyByKey({
     moveOutCls,
     whenToDestroy = 0.4,
 } = {}) {
-    Array.from(target).map((item) => {
+    Array.from(target).map(item => {
         const targetKey = item.dataset.key;
         // 如果目标元素设置的key与传入的key相符合则销毁对应的元素
         if (key === targetKey) {

@@ -5,7 +5,7 @@
  * @returns {promise}
  */
 function PromiseAfterClose(duration) {
-    const callback = new Promise((reslove) =>
+    const callback = new Promise(reslove =>
         setTimeout(() => reslove(), duration * 1000)
     );
     return callback;

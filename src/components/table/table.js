@@ -3,34 +3,34 @@
  * 主要用于展示大量结构化数据
  */
 Rabbit.prototype.Table = {
-    prefixCls: "rbt-table",
+    prefixCls: 'rbt-table',
     createInstance(_config) {
         const {
-            size = "default",
-                align = "left",
-                width = "",
-                height = "",
+            size = 'default',
+                align = 'left',
+                width = '',
+                height = '',
                 border = false,
                 stripe = false,
                 showHeader = true,
                 dataSource = {},
                 onRowClick,
-                noDataText = "暂无数据",
+                noDataText = '暂无数据',
                 highlightRow = false,
                 disabledHover = false,
         } = _config;
 
-        const Table = document.createElement("div");
-        const TableContainer = document.createElement("div");
+        const Table = document.createElement('div');
+        const TableContainer = document.createElement('div');
         // header
-        const TableHeaderBox = document.createElement("div");
-        const TableHeaderTable = document.createElement("table");
-        const TableHeaderTableHead = document.createElement("thead");
-        const TableHeadTableTr = document.createElement("tr");
+        const TableHeaderBox = document.createElement('div');
+        const TableHeaderTable = document.createElement('table');
+        const TableHeaderTableHead = document.createElement('thead');
+        const TableHeadTableTr = document.createElement('tr');
         // body
-        const TableBodyBox = document.createElement("div");
-        const TableBodyTable = document.createElement("table");
-        const TableBodyTableBody = document.createElement("tbody");
+        const TableBodyBox = document.createElement('div');
+        const TableBodyTable = document.createElement('table');
+        const TableBodyTableBody = document.createElement('tbody');
 
         Table.className = `${this.prefixCls}-wrapper`;
         TableContainer.className = `${this.prefixCls} ${this.prefixCls}-${size}`;
@@ -46,7 +46,7 @@ Rabbit.prototype.Table = {
             Table.style.height = height;
             setTimeout(() => {
                 let res =
-                    Math.floor(Table.offsetHeight - TableHeaderBox.offsetHeight) + "px";
+                    Math.floor(Table.offsetHeight - TableHeaderBox.offsetHeight) + 'px';
                 TableBodyBox.style.height = res;
                 TableBodyBox.classList.add(`${this.prefixCls}-overflow-y`);
             }, 0);
@@ -95,8 +95,8 @@ Rabbit.prototype.Table = {
         onRowClick
     ) {
         const data = {
-            columns: dataSource["columns"],
-            rows: dataSource["rows"],
+            columns: dataSource['columns'],
+            rows: dataSource['rows'],
         };
 
         this.renderHeader(data.columns, theadTr, align);
@@ -114,8 +114,8 @@ Rabbit.prototype.Table = {
 
     renderHeader(data, theadTr, align) {
         if (isArr(data)) {
-            data.map((item) => {
-                const TableHeadTh = document.createElement("th");
+            data.map(item => {
+                const TableHeadTh = document.createElement('th');
 
                 TableHeadTh.innerHTML = item;
                 TableHeadTh.className = `${this.prefixCls}-column-${align}`;
@@ -123,7 +123,7 @@ Rabbit.prototype.Table = {
                 theadTr.appendChild(TableHeadTh);
             });
         } else {
-            throw TypeError("The type of property columns must be an array");
+            throw TypeError('The type of property columns must be an array');
         }
     },
 
@@ -139,29 +139,29 @@ Rabbit.prototype.Table = {
     ) {
         if (isArr(data)) {
             if (data.length <= 0) {
-                const TableBodyTr = document.createElement("tr");
-                const TableBodyTd = document.createElement("td");
+                const TableBodyTr = document.createElement('tr');
+                const TableBodyTd = document.createElement('td');
 
                 TableBodyTd.innerHTML = noDataText;
-                TableBodyTd.style.textAlign = "center";
+                TableBodyTd.style.textAlign = 'center';
 
                 TableBodyTr.appendChild(TableBodyTd);
                 tbody.appendChild(TableBodyTr);
             } else {
                 data.map((datas, i) => {
-                    const TableBodyTr = document.createElement("tr");
+                    const TableBodyTr = document.createElement('tr');
                     tbody.appendChild(TableBodyTr);
                     if (isObj(datas)) {
-                        Object.keys(datas).forEach((key) => {
-                            if (key === "rowClassName") {
+                        Object.keys(datas).forEach(key => {
+                            if (key === 'rowClassName') {
                                 const rowClassName = datas[key];
                                 TableBodyTr.className = rowClassName;
                             }
                             // 排除 rowClassName
-                            if (key !== "rowClassName") {
+                            if (key !== 'rowClassName') {
                                 // columns 的值和 rows 对象的键要相等
                                 if (columnsData.includes(key)) {
-                                    const TableBodyTd = document.createElement("td");
+                                    const TableBodyTd = document.createElement('td');
 
                                     TableBodyTd.innerHTML = datas[key];
                                     TableBodyTd.className = `${this.prefixCls}-column-${align}`;
@@ -177,7 +177,7 @@ Rabbit.prototype.Table = {
                         });
                     } else {
                         throw TypeError(
-                            "The data type that holds the content of the table must be an object"
+                            'The data type that holds the content of the table must be an object'
                         );
                     }
 
@@ -187,7 +187,7 @@ Rabbit.prototype.Table = {
                 });
             }
         } else {
-            throw TypeError("The type of property data must be an array");
+            throw TypeError('The type of property data must be an array');
         }
     },
 
@@ -195,7 +195,7 @@ Rabbit.prototype.Table = {
         if (!d) {
             tr.onmouseenter = () => {
                 tr.classList.add(`${this.prefixCls}-row-hover`);
-                Rbt.siblings(tr).forEach((item) => {
+                Rbt.siblings(tr).forEach(item => {
                     if (Rbt.hasClass(item, `${this.prefixCls}-row-hover`)) {
                         item.classList.remove(`${this.prefixCls}-row-hover`);
                     }
@@ -210,7 +210,7 @@ Rabbit.prototype.Table = {
         if (h) {
             tr.onclick = () => {
                 tr.classList.add(`${this.prefixCls}-heightlight`);
-                Rbt.siblings(tr).forEach((item) => {
+                Rbt.siblings(tr).forEach(item => {
                     if (Rbt.hasClass(item, `${this.prefixCls}-heightlight`)) {
                         item.classList.remove(`${this.prefixCls}-heightlight`);
                     }

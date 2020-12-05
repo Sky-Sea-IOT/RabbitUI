@@ -3,18 +3,18 @@
  * @param {number} _time
  * @returns {string}
  */
-const formatDate = (_time) => {
+const formatDate = _time => {
     const time = new Date(_time);
-    const format = "yyyy-mm-dd";
-    const transformFormat = (t) => (t < 10 ? "0" : "") + t;
+    const format = 'yyyy-mm-dd';
+    const transformFormat = t => (t < 10 ? '0' : '') + t;
 
-    return format.replace(/yyyy|mm|dd/g, (str) => {
+    return format.replace(/yyyy|mm|dd/g, str => {
         switch (str) {
-            case "yyyy":
+            case 'yyyy':
                 return transformFormat(time.getFullYear());
-            case "mm":
+            case 'mm':
                 return transformFormat(time.getMonth() + 1);
-            case "dd":
+            case 'dd':
                 return transformFormat(time.getDate());
         }
     });
@@ -25,24 +25,24 @@ const formatDate = (_time) => {
  * @param {number} _time
  * @returns {string}
  */
-const formatDateTime = (_time) => {
+const formatDateTime = _time => {
     const time = new Date(_time);
-    const format = "yyyy-MM-dd HH:mm:ss";
-    const transformFormat = (t) => (t < 10 ? "0" : "") + t;
+    const format = 'yyyy-MM-dd HH:mm:ss';
+    const transformFormat = t => (t < 10 ? '0' : '') + t;
 
-    return format.replace(/yyyy|MM|dd|HH|mm|ss/g, (str) => {
+    return format.replace(/yyyy|MM|dd|HH|mm|ss/g, str => {
         switch (str) {
-            case "yyyy":
+            case 'yyyy':
                 return transformFormat(time.getFullYear());
-            case "MM":
+            case 'MM':
                 return transformFormat(time.getMonth() + 1);
-            case "mm":
+            case 'mm':
                 return transformFormat(time.getMinutes());
-            case "dd":
+            case 'dd':
                 return transformFormat(time.getDate());
-            case "HH":
+            case 'HH':
                 return transformFormat(time.getHours());
-            case "ss":
+            case 'ss':
                 return transformFormat(time.getSeconds());
         }
     });
