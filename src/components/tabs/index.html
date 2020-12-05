@@ -19,7 +19,7 @@
 </style>
 
 <body>
-    <div class="demo">
+    <!-- <div class="demo">
         <div class="rbt-tabs">
             <div class="rbt-tabs-header">
                 <div class="rbt-tabs-nav-wrap">
@@ -43,9 +43,9 @@
                 <div class="rbt-tabs-tabpane">标签四的内容</div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 选项卡样式 -->
-    <div class="demo">
+    <!-- <div class="demo">
         <div class="rbt-tabs rbt-tabs-card">
             <div class="rbt-tabs-header">
                 <div class="rbt-tabs-nav-wrap">
@@ -67,9 +67,9 @@
                 <div class="rbt-tabs-tabpane">订单管理</div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 卡片化 -->
-    <div class="demo">
+    <!-- <div class="demo">
         <div class="rbt-tabs rbt-tabs-border-card">
             <div class="rbt-tabs-header">
                 <div class="rbt-tabs-nav-wrap">
@@ -91,22 +91,22 @@
                 <div class="rbt-tabs-tabpane">订单管理</div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 可关闭 -->
-    <div class="demo">
+    <!-- <div class="demo">
         <div class="rbt-tabs rbt-tabs-card">
             <div class="rbt-tabs-header">
                 <div class="rbt-tabs-nav-wrap">
                     <div class="rbt-tabs-nav-scroll">
                         <ul class="rbt-tabs-nav">
                             <div class="rbt-tabs-active-bar"></div>
-                            <li class="rbt-tabs-tab rbt-tabs-closable rbt-tabs-tab-active">
+                            <li class="rbt-tabs-tab rbt-tabs-tab-active">
                                 Tab 1 <i class="rbt-icon rbt-icon-ios-close"></i>
                             </li>
-                            <li class="rbt-tabs-tab rbt-tabs-closable">
+                            <li class="rbt-tabs-tab">
                                 Tab 2 <i class="rbt-icon rbt-icon-ios-close"></i>
                             </li>
-                            <li class="rbt-tabs-tab rbt-tabs-closable">
+                            <li class="rbt-tabs-tab">
                                 Tab 3 <i class="rbt-icon rbt-icon-ios-close"></i>
                             </li>
                         </ul>
@@ -121,9 +121,9 @@
                 <div class="rbt-tabs-tabpane">Tab 3 content</div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 溢出滚动 -->
-    <div class="demo">
+    <!-- <div class="demo">
         <div class="rbt-tabs">
             <div class="rbt-tabs-header">
                 <div class="rbt-tabs-nav-wrap rbt-tabs-nav-scroll-able">
@@ -163,13 +163,15 @@
                 <div class="rbt-tabs-tabpane">标签四的内容</div>
             </div>
         </div>
+    </div> -->
+    <div class="demo">
+        <rab-tabs id="tabs1">
+            <div slot="tabPane">标签一的内容</div>
+            <div slot="tabPane">标签二的内容</div>
+            <div slot="tabPane">标签三的内容</div>
+            <div slot="tabPane">标签四的内容</div>
+        </rab-tabs>
     </div>
-    <!-- <rab-tabs>
-        <div slot="tabPane">标签二的内容</div>
-        <div slot="tabPane">标签二的内容</div>
-        <div slot="tabPane">标签二的内容</div>
-        <div slot="tabPane">标签二的内容</div>
-    </rab-tabs> -->
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../common/getComps.js"></script>
@@ -178,12 +180,10 @@
 <script src="../../common/main.js"></script>
 <script src="./tabs.js"></script>
 <script>
-    RabbitUI.create('', {
+    RabbitUI.create('#tabs1', {
         label: [{
             text: '标签一',
             active: true,
-            disabled: true,
-            closable: true,
         }, {
             text: '标签二',
         }, {
@@ -191,7 +191,9 @@
         }, {
             text: '标签四',
         }, ],
-        onClick(index, tabpane) {},
+        onClick(index, tabPane) {
+            console.log(`当前点击项：`, index, tabPane);
+        },
     });
 </script>
 

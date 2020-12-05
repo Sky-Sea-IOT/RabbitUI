@@ -1,33 +1,33 @@
 const COMPONENTS = {
-    Alert: "alert",
-    Avatar: "avatar",
-    BackTop: "backtop",
-    Breadcrumb: "breadcrumb",
-    Card: "card",
-    Carousel: "carousel",
-    Collapse: "collapse",
-    Drawer: "drawer",
-    Dropdown: "dropdown",
-    Empty: "empty",
-    InputNumber: "input-number",
-    List: "list",
-    Modal: "modal",
-    PageHeader: "pageheader",
-    Popover: "popover",
-    Result: "result",
-    Skeleton: "skeleton",
-    Steps: "steps",
-    Switch: "switch",
-    Table: "table",
-    Tabs: "tabs",
-    Time: "time",
-    Timeline: "timeline",
-    Tooltip: "tooltip",
+    Alert: 'alert',
+    Avatar: 'avatar',
+    BackTop: 'backtop',
+    Breadcrumb: 'breadcrumb',
+    Card: 'card',
+    Carousel: 'carousel',
+    Collapse: 'collapse',
+    Drawer: 'drawer',
+    Dropdown: 'dropdown',
+    Empty: 'empty',
+    InputNumber: 'input-number',
+    List: 'list',
+    Modal: 'modal',
+    PageHeader: 'pageheader',
+    Popover: 'popover',
+    Result: 'result',
+    Skeleton: 'skeleton',
+    Steps: 'steps',
+    Switch: 'switch',
+    Table: 'table',
+    Tabs: 'tabs',
+    Time: 'time',
+    Timeline: 'timeline',
+    Tooltip: 'tooltip',
 };
 
 const errInfo = () => {
     const err =
-        "UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert>...</rab-alert>, and all component tags should come with closing tags";
+        'UI components that use Rabbit need to follow our agreed component tags, as shown in the example <rab-alert>...</rab-alert>, and all component tags should come with closing tags';
     return err;
 };
 
@@ -104,7 +104,7 @@ const getComps = (el, compsName, config, slot) => {
             return Rabbit.prototype.Table.createInstance(config);
 
         case COMPONENTS.Tabs:
-            return Rabbit.prototype.Tabs.createInstance(config);
+            return Rabbit.prototype.Tabs.createInstance(config, slot);
 
         case COMPONENTS.Time:
             return Rabbit.prototype.Time.createInstance(config);

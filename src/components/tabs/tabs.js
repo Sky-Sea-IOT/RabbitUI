@@ -11,8 +11,133 @@
 Rabbit.prototype.Tabs = {
     prefixCls: 'rbt-tabs',
     createInstance(_config, _slot) {
-        const { type = 'line', lable, onClick, onTabRemove } = _config;
-        const { TABSPANE } = _slot;
+        const {
+            label,
+            type = 'line',
+            onClick,
+            closable = false,
+            onTabRemove,
+        } = _config;
+        const { TABPANE } = _slot;
+
+        const Tabs = document.createElement('div');
+        const TabsHeader = document.createElement('div');
+        const TabsNavWrap = document.createElement('div');
+        const TabsNavScroll = document.createElement('div');
+        const TabsNav = document.createElement('ul');
+        const TabsNavActBar = document.createElement('div');
+        const TabsContentBox = document.createElement('div');
+
+        this.addClassName(
+            Tabs,
+            TabsHeader,
+            TabsNavWrap,
+            TabsNavScroll,
+            TabsNav,
+            TabsNavActBar,
+            TabsContentBox
+        );
+        this.setAppearance(type, Tabs);
+
+        Tabs.append(TabsHeader, TabsContentBox);
+        TabsHeader.appendChild(TabsNavWrap);
+        TabsNavWrap.appendChild(TabsNavScroll);
+        TabsNavScroll.appendChild(TabsNav);
+        TabsNav.appendChild(TabsNavActBar);
+        this.addTabsTab(
+            TABPANE,
+            TabsNav,
+            TabsNavActBar,
+            type,
+            label,
+            closable,
+            onClick
+        );
+        this.addTabPane(TABPANE, TabsContentBox, label);
+
+        return Tabs;
     },
-    addClassName() {},
+    addClassName(
+        tabs,
+        tabsHeader,
+        tabsNavWrap,
+        tabsNavScroll,
+        tabsNav,
+        tabsNavActBar,
+        tabsContentBox
+    ) {
+        tabs.className = `${this.prefixCls}`;
+        tabsHeader.className = `${this.prefixCls}-header`;
+        tabsNavWrap.className = `${this.prefixCls}-nav-wrap`;
+        tabsNavScroll.className = `${this.prefixCls}-nav-scroll`;
+        tabsNav.className = `${this.prefixCls}-nav`;
+        tabsNavActBar.className = `${this.prefixCls}-active-bar`;
+        tabsContentBox.className = `${this.prefixCls}-content`;
+    },
+    addTabsTab(itemSlot, tabsNav, tabsActiveBar, type, config, closable, cb) {
+        for (let i = 0; i < itemSlot.length; i++) {
+            const TabsTab = document.createElement('li');
+
+            TabsTab.className = `${this.prefixCls}-tab`;
+            TabsTab.innerHTML = config[i].text;
+            tabsNav.appendChild(TabsTab);
+
+            if (config[i].active)
+                TabsTab.classList.add(`${this.prefixCls}-tab-active`);
+
+            this.setClosable(type, closable, TabsTab);
+            this.setDisabled(config[i].disabled, TabsTab);
+            setTimeout(() => {
+                this.setActiveBar(config[i].active, tabsActiveBar, TabsTab);
+                this.handleClick(config[i].disabled, TabsTab, i, cb);
+            }, 0);
+        }
+    },
+    addTabPane(itemSlot, tabsContentBox, config) {
+        for (let i = 0; i < itemSlot.length; i++) {
+            const TabsPane = document.createElement('div');
+            TabsPane.className = `${this.prefixCls}-tabpane`;
+
+            if (config[i].active)
+                TabsPane.classList.add(`${this.prefixCls}-tabpane-active`);
+
+            addElemetsOfSlots(itemSlot[i], TabsPane);
+            tabsContentBox.appendChild(TabsPane);
+        }
+    },
+    setDisabled(disabled, tabsTab) {
+        if (!disabled) return;
+        tabsTab.onclick = () => false;
+        tabsTab.classList.add(`${this.prefixCls}-tab-disabled`);
+    },
+    setClosable(type, closable, tabsTab) {
+        if (type === 'card' && closable) {
+            const closeBtn = document.createElement('i');
+            closeBtn.className = 'rbt-icon rbt-icon-ios-close';
+            tabsTab.appendChild(closeBtn);
+        }
+    },
+    setAppearance(type, tabs) {
+        tabs.classList.add(`${this.prefixCls}-${type}`);
+    },
+    // TODO:设置跟随条位置
+    setActiveBar(active, bar, tabsTab) {
+        const offsetX = 0;
+        if (active) {
+            bar.style.width = `${tabsTab.offsetWidth}px`;
+        }
+        bar.style.transform = `translateX(${offsetX}px)`;
+    },
+    // TODO:切换面板 、跟随条切换
+    handleChange() {},
+    // TODO: 溢出滚动
+
+    handleClick(disabled, tabsTab, index, cb) {
+        if (disabled) return;
+        const tabPanes = document.querySelectorAll(`.${this.prefixCls}-tabpane`);
+        tabsTab.onclick = () => {
+            const tabPane = tabPanes[index].firstChild;
+            isFunc(cb) ? cb(index, tabPane) : null;
+        };
+    },
 };
