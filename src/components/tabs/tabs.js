@@ -88,7 +88,7 @@ Rabbit.prototype.Tabs = {
             this.setClosable(type, closable, TabsTab);
             this.setDisabled(config[i].disabled, TabsTab);
             setTimeout(() => {
-                this.setActiveBar(config[i].active, tabsActiveBar, TabsTab);
+                this.setActiveBar(config[i].active, tabsActiveBar, TabsTab, i);
                 this.handleClick(config[i].disabled, TabsTab, i, cb);
             }, 0);
         }
@@ -120,24 +120,41 @@ Rabbit.prototype.Tabs = {
     setAppearance(type, tabs) {
         tabs.classList.add(`${this.prefixCls}-${type}`);
     },
+    handleClick(disabled, tabsTab, index, cb) {
+        if (!disabled) {
+            const tabPanes = document.querySelectorAll(`.${this.prefixCls}-tabpane`);
+            const paneChange = () => {
+                tabsTab.classList.add(`${this.prefixCls}-tab-active`);
+                Rbt.siblings(tabsTab).map(item =>
+                    item.classList.remove(`${this.prefixCls}-tab-active`)
+                );
+                tabPanes[index].classList.add(`${this.prefixCls}-tabpane-active`);
+                Rbt.siblings(tabPanes[index]).map(item =>
+                    item.classList.remove(`${this.prefixCls}-tabpane-active`)
+                );
+            };
+            const callback = () => {
+                const tabPane = tabPanes[index].firstChild;
+                isFunc(cb) ? cb(index, tabPane) : null;
+            };
+            tabsTab.addEventListener('click', () => {
+                paneChange();
+                callback();
+            });
+        }
+    },
+    handleRemove() {},
     // TODO:设置跟随条位置
-    setActiveBar(active, bar, tabsTab) {
-        const offsetX = 0;
+    setActiveBar(active, bar, tabsTab, index) {
+        let offsetX = 0;
         if (active) {
             bar.style.width = `${tabsTab.offsetWidth}px`;
+            bar.style.transform = `translateX(${offsetX}px)`;
         }
-        bar.style.transform = `translateX(${offsetX}px)`;
+        tabsTab.addEventListener('click', () => {
+            bar.style.width = `${tabsTab.offsetWidth}px`;
+            if (index === 1) {}
+        });
     },
-    // TODO:切换面板 、跟随条切换
-    handleChange() {},
     // TODO: 溢出滚动
-
-    handleClick(disabled, tabsTab, index, cb) {
-        if (disabled) return;
-        const tabPanes = document.querySelectorAll(`.${this.prefixCls}-tabpane`);
-        tabsTab.onclick = () => {
-            const tabPane = tabPanes[index].firstChild;
-            isFunc(cb) ? cb(index, tabPane) : null;
-        };
-    },
 };
