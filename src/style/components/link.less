@@ -1,0 +1,135 @@
+@import '../common/index.css';
+@import '../custom.less';
+
+@prefix: @css-prefix;
+
+.@{prefix}link {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  position: @rel;
+  color: @text-color;
+  padding: 0;
+  font-size: @font-size-sm;
+  font-weight: 500;
+
+  &::after {
+    content: '';
+    position: @abs;
+    left: 0;
+    right: 0;
+    height: 0;
+    bottom: 0;
+    border-bottom: @border-width-base @border-style-base transparent;
+  }
+
+  &.underline {
+    &:hover {
+      &::after {
+        border-bottom-color: @light-primary-color;
+      }
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+
+  &:not([disabled]) {
+    &.primary {
+      &:hover {
+        color: @light-primary-color;
+      }
+    }
+
+    &.success {
+      &:hover {
+        color: @green;
+      }
+    }
+
+    &.warning {
+      &:hover {
+        color: @orange;
+      }
+    }
+
+    &.error {
+      &:hover {
+        color: @red;
+      }
+    }
+
+    &.info {
+      &:hover {
+        color: @light-primary-color;
+      }
+    }
+  }
+
+  &.primary {
+    color: @primary-color;
+  }
+
+  &.success {
+    color: @success-color;
+  }
+
+  &.warning {
+    color: @warning-color;
+  }
+
+  &.error {
+    color: @error-color;
+  }
+
+  &.info {
+    color: @info-color;
+  }
+}
+
+.underline.primary {
+  &:hover {
+    &::after {
+      border-bottom-color: @light-primary-color;
+    }
+  }
+}
+
+.underline.success {
+  &:hover {
+    &::after {
+      border-bottom-color: @green;
+    }
+  }
+}
+
+.underline.warning {
+  &:hover {
+    &::after {
+      border-bottom-color: @orange;
+    }
+  }
+}
+
+.underline.error {
+  &:hover {
+    &::after {
+      border-bottom-color: @red;
+    }
+  }
+}
+
+.underline.info {
+  &:hover {
+    &::after {
+      border-bottom-color: @light-primary-color;
+    }
+  }
+}

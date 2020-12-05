@@ -403,14 +403,14 @@ template {
 [hidden] {
   display: none;
 }
-[class*="rbt-"],
-[class*="rbt-"] *,
-[class*="rbt-"] :after,
-[class*="rbt-"] :before,
-[class^="rbt-"],
-[class^="rbt-"] *,
-[class^="rbt-"] :after,
-[class^="rbt-"] :before {
+[class*='rbt-'],
+[class*='rbt-'] *,
+[class*='rbt-'] :after,
+[class*='rbt-'] :before,
+[class^='rbt-'],
+[class^='rbt-'] *,
+[class^='rbt-'] :after,
+[class^='rbt-'] :before {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -497,7 +497,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -521,7 +521,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 a {
@@ -531,9 +531,9 @@ a {
   text-decoration: none;
   outline: none;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.1s ease-in-out;
 }
-a:hover {
+a:not([disabled]):hover {
   color: #5cadff;
 }
 a:active {
@@ -544,14 +544,4 @@ a:hover {
   outline: 0;
   -webkit-text-decoration: none;
   text-decoration: none;
-}
-a[disabled] {
-  color: #ccc;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-[data-component="dropdown"],
-[data-component="tooltip"],
-[data-component="popover"] {
-  display: inline-block;
 }
