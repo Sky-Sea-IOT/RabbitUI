@@ -1,24 +1,19 @@
-@import "../common/index.css";
+@import '../common/index.css';
 .rbt-divider {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   color: #55585e;
   font-size: 14px;
-  font-variant: tabular-nums;
-  font-feature-settings: "tnum";
   line-height: 1.5715;
   list-style: none;
   border-top: 1px solid #e8eaec;
 }
-.rbt-divider-horizontal {
+.rbt-divider.horizontal {
   display: flex;
   clear: both;
   width: 100%;
   min-width: 100%;
   margin: 24px 0;
 }
-.rbt-divider-vertical {
+.rbt-divider.vertical {
   position: relative;
   top: -0.06em;
   display: inline-block;
@@ -35,7 +30,7 @@
 .rbt-divider-with-text {
   display: flex;
   margin: 16px 0;
-  color: #17233d;
+  color: #2c3e50;
   font-weight: 500;
   font-size: 16px;
   white-space: nowrap;
@@ -43,27 +38,27 @@
   border-top: 0;
   border-top-color: #e8eaec;
 }
-.rbt-divider-horizontal.rbt-divider-with-text:after,
-.rbt-divider-horizontal.rbt-divider-with-text:before {
+.rbt-divider.horizontal.rbt-divider-with-text:after,
+.rbt-divider.horizontal.rbt-divider-with-text:before {
   position: relative;
   top: 50%;
   width: 50%;
   border-top: 1px solid transparent;
   border-top-color: inherit;
   border-bottom: 0;
-  transform: translateY(50%);
-  content: "";
+  transform: translateY(-50%);
+  content: '';
 }
-.rbt-divider-horizontal.rbt-divider-with-text-left:after,
-.rbt-divider-horizontal.rbt-divider-with-text-right:before {
+.rbt-divider.horizontal.rbt-divider-with-text-left:after,
+.rbt-divider.horizontal.rbt-divider-with-text-right:before {
   top: 50%;
   width: 95%;
 }
-.rbt-divider-horizontal.rbt-divider-with-text-left:before {
+.rbt-divider.horizontal.rbt-divider-with-text-left:before {
   top: 50%;
   width: 5%;
 }
-.rbt-divider-horizontal.rbt-divider-with-text-right:after {
+.rbt-divider.horizontal.rbt-divider-with-text-right:after {
   top: 50%;
   width: 5%;
 }
