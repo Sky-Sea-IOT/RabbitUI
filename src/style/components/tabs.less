@@ -8,10 +8,11 @@
 @icon-prefix: @css-prefix-iconfont;
 
 .@{prefix}tabs {
+  overflow: @hid;
   &-header {
     position: @rel;
     padding: 0;
-    margin: 0 0 15px;
+    margin-bottom: 15px;
   }
 
   &-nav {
@@ -115,15 +116,26 @@
   }
 
   &-content {
-    overflow: @hid;
     position: @rel;
+
+    &-animated {
+      display: @flex;
+      flex-direction: row;
+      will-change: transform;
+      transition: transform @animation-time @ease-in-out;
+    }
   }
 
   &-tabpane {
-    display: @none;
+    visibility: @hid;
+    flex-shrink: 0;
+    width: 100%;
+    transition: opacity @animation-time;
+    opacity: 1;
+    outline: 0;
 
     &-active {
-      display: @bl;
+      visibility: visible;
     }
   }
 
@@ -236,6 +248,12 @@
       background-color: @white;
       border-right: @border-width-base @border-style-base @border-color;
       border-left: @border-width-base @border-style-base @border-color;
+    }
+  }
+
+  &-no-animation {
+    > .@{prefix}tabs-content {
+      transform: @none !important;
     }
   }
 }

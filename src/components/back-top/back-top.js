@@ -35,7 +35,7 @@ Rabbit.prototype.BackTop = {
         BackTop.style.right = `${right}px`;
 
         // 如果用 slot CONTENT 自定义内容则替换掉默认的图标
-        if (CONTENT && CONTENT.innerHTML) {
+        if (CONTENT) {
             addElemetsOfSlots(CONTENT, BackTop);
         } else {
             BackTop.appendChild(BackTopInner);
@@ -112,5 +112,5 @@ Rabbit.prototype.BackTop = {
     },
 };
 
-const { BackTop } = Rabbit.prototype;
-export default BackTop;
+// const { BackTop } = Rabbit.prototype;
+// export default BackTop;

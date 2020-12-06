@@ -1,9 +1,12 @@
 @import '../common/index.css';
 @import '../common/iconfont/icons.css';
+.rbt-tabs {
+  overflow: hidden;
+}
 .rbt-tabs-header {
   position: relative;
   padding: 0;
-  margin: 0 0 15px;
+  margin-bottom: 15px;
 }
 .rbt-tabs-nav {
   display: table;
@@ -94,14 +97,24 @@
   cursor: not-allowed;
 }
 .rbt-tabs-content {
-  overflow: hidden;
   position: relative;
 }
+.rbt-tabs-content-animated {
+  display: flex;
+  flex-direction: row;
+  will-change: transform;
+  transition: transform 0.3s ease-in-out;
+}
 .rbt-tabs-tabpane {
-  display: none;
+  visibility: hidden;
+  flex-shrink: 0;
+  width: 100%;
+  transition: opacity 0.3s;
+  opacity: 1;
+  outline: 0;
 }
 .rbt-tabs-tabpane-active {
-  display: block;
+  visibility: visible;
 }
 .rbt-tabs-card .rbt-tabs-tab:nth-child(1),
 .rbt-tabs-border-card .rbt-tabs-tab:nth-child(1) {
@@ -186,4 +199,7 @@
   background-color: #fff;
   border-right: 1px solid #dcdee2;
   border-left: 1px solid #dcdee2;
+}
+.rbt-tabs-no-animation > .rbt-tabs-content {
+  transform: none !important;
 }

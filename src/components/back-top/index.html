@@ -12,7 +12,7 @@
         height: 1500px;
     }
     
-    .top i {
+    .top {
         color: rgba(0, 153, 229, 0.7);
         font-size: 52px;
         transform: rotate(-44deg);
@@ -28,9 +28,7 @@
     </div> -->
     <rab-backTop id="bt1"></rab-backTop>
     <rab-backTop id="bt2">
-        <div slot="content" class="top">
-            <i class="rbt-icon rbt-icon-ios-rocket"></i>
-        </div>
+        <i class="rbt-icon rbt-icon-ios-rocket top" slot="content"></i>
     </rab-backTop>
 </body>
 <script src="../../utils/typeof.js"></script>
@@ -41,9 +39,9 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./back-top.js"></script>
 <script>
-    RabbitUI.create("#bt1");
+    RabbitUI.create('#bt1');
 
-    RabbitUI.create("#bt2", {
+    RabbitUI.create('#bt2', {
         height: 100,
         // right,
         bottom: 200,
