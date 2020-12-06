@@ -51,7 +51,8 @@ Rabbit.prototype.Tabs = {
             type,
             label,
             closable,
-            onClick
+            onClick,
+            onTabRemove
         );
         this.addTabPane(TABPANE, TabsContentBox, label);
 
@@ -74,7 +75,16 @@ Rabbit.prototype.Tabs = {
         tabsNavActBar.className = `${this.prefixCls}-active-bar`;
         tabsContentBox.className = `${this.prefixCls}-content`;
     },
-    addTabsTab(itemSlot, tabsNav, tabsActiveBar, type, config, closable, cb) {
+    addTabsTab(
+        itemSlot,
+        tabsNav,
+        tabsActiveBar,
+        type,
+        config,
+        closable,
+        cb,
+        removeCb
+    ) {
         for (let i = 0; i < itemSlot.length; i++) {
             const TabsTab = document.createElement('li');
 
@@ -85,11 +95,11 @@ Rabbit.prototype.Tabs = {
             if (config[i].active)
                 TabsTab.classList.add(`${this.prefixCls}-tab-active`);
 
-            this.setClosable(type, closable, TabsTab);
             this.setDisabled(config[i].disabled, TabsTab);
             setTimeout(() => {
-                this.setActiveBar(config[i].active, tabsActiveBar, TabsTab, i);
+                this.setActiveBar(type, config[i].active, tabsActiveBar, TabsTab, i);
                 this.handleClick(config[i].disabled, TabsTab, i, cb);
+                this.setClosable(type, closable, TabsTab, i, removeCb);
             }, 0);
         }
     },
@@ -110,11 +120,12 @@ Rabbit.prototype.Tabs = {
         tabsTab.onclick = () => false;
         tabsTab.classList.add(`${this.prefixCls}-tab-disabled`);
     },
-    setClosable(type, closable, tabsTab) {
+    setClosable(type, closable, tabsTab, index, cb) {
         if (type === 'card' && closable) {
             const closeBtn = document.createElement('i');
             closeBtn.className = 'rbt-icon rbt-icon-ios-close';
             tabsTab.appendChild(closeBtn);
+            this.handleRemove(closeBtn, tabsTab, index, cb);
         }
     },
     setAppearance(type, tabs) {
@@ -122,7 +133,10 @@ Rabbit.prototype.Tabs = {
     },
     handleClick(disabled, tabsTab, index, cb) {
         if (!disabled) {
-            const tabPanes = document.querySelectorAll(`.${this.prefixCls}-tabpane`);
+            // 。。。我也很无奈，获取当前tab的最外层父元素
+            const tabPanes = tabsTab.parentElement.parentElement.parentElement.parentElement.parentElement.querySelectorAll(
+                `.${this.prefixCls}-tabpane`
+            );
             const paneChange = () => {
                 tabsTab.classList.add(`${this.prefixCls}-tab-active`);
                 Rbt.siblings(tabsTab).map(item =>
@@ -143,9 +157,21 @@ Rabbit.prototype.Tabs = {
             });
         }
     },
-    handleRemove() {},
+    handleRemove(closeEl, tabsTab, index, cb) {
+        // 。。。我也很无奈
+        const tabsPane = tabsTab.parentElement.parentElement.parentElement.parentElement.parentElement.querySelectorAll(
+            `.${this.prefixCls}-tabpane`
+        );
+        const _remove = () => {
+            tabsTab.remove();
+            tabsPane[index].remove();
+            isFunc(cb) ? cb(index) : null;
+        };
+        closeEl.onclick = () => _remove();
+    },
     // TODO:设置跟随条位置
-    setActiveBar(active, bar, tabsTab, index) {
+    setActiveBar(type, active, bar, tabsTab, index) {
+        if (type !== 'line') return;
         let offsetX = 0;
         if (active) {
             bar.style.width = `${tabsTab.offsetWidth}px`;
@@ -157,4 +183,5 @@ Rabbit.prototype.Tabs = {
         });
     },
     // TODO: 溢出滚动
+    handleOverflow() {},
 };

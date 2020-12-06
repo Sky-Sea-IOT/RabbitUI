@@ -172,6 +172,29 @@
             <div slot="tabPane">标签四的内容</div>
         </rab-tabs>
     </div>
+    <div class="demo">
+        <rab-tabs id="tabs2">
+            <div slot="tabPane">网站设置</div>
+            <div slot="tabPane">用户管理</div>
+            <div slot="tabPane">权限分配</div>
+            <div slot="tabPane">订单管理</div>
+        </rab-tabs>
+    </div>
+    <div class="demo">
+        <rab-tabs id="tabs3">
+            <div slot="tabPane">用户管理</div>
+            <div slot="tabPane">配置管理</div>
+            <div slot="tabPane">角色管理</div>
+            <div slot="tabPane">定时任务补偿</div>
+        </rab-tabs>
+    </div>
+    <div class="demo">
+        <rab-tabs id="tabs4">
+            <div slot="tabPane">标签一的内容</div>
+            <div slot="tabPane">标签二的内容</div>
+            <div slot="tabPane">标签三的内容</div>
+        </rab-tabs>
+    </div>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../common/getComps.js"></script>
@@ -193,7 +216,48 @@
             text: '标签四',
         }, ],
         onClick(index, tabPane) {
-            // console.log(`当前点击项：`, index, tabPane);
+            console.log(`当前点击项：`, index, tabPane);
+        },
+    });
+    RabbitUI.create('#tabs2', {
+        label: [{
+            text: '网站设置',
+            active: true,
+        }, {
+            text: '用户管理',
+        }, {
+            text: '权限分配',
+        }, {
+            text: '订单管理',
+        }, ],
+        type: 'card',
+    });
+    RabbitUI.create('#tabs3', {
+        label: [{
+            text: '用户管理',
+            active: true,
+        }, {
+            text: '配置管理',
+        }, {
+            text: '角色管理',
+        }, {
+            text: '定时任务补偿',
+        }, ],
+        type: 'border-card',
+    });
+    RabbitUI.create('#tabs4', {
+        label: [{
+            text: 'Tab 1',
+            active: true,
+        }, {
+            text: 'Tab 2',
+        }, {
+            text: 'Tab 3',
+        }, ],
+        type: 'card',
+        closable: true,
+        onTabRemove(index) {
+            console.log(`当前删除的索引：${index}`);
         },
     });
 </script>

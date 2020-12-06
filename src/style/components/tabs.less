@@ -1,8 +1,8 @@
 // 用于开发期间测试使用，在生产阶段去掉 @import
-@import "../common/index.css";
-@import "../custom.less";
-@import "../common/iconfont/icons.css";
-@import "../mixins/size.less";
+@import '../common/index.css';
+@import '../custom.less';
+@import '../common/iconfont/icons.css';
+@import '../mixins/size.less';
 
 @prefix: @css-prefix;
 @icon-prefix: @css-prefix-iconfont;
@@ -28,7 +28,7 @@
       position: @rel;
 
       &::after {
-        content: "";
+        content: '';
         position: @abs;
         left: 0;
         bottom: 0;
@@ -145,18 +145,18 @@
   &-card {
     .@{prefix}tabs {
       &-header {
-        border-bottom: @border-width-base @border-style-base @split-color;
+        border-bottom: @border-width-base @border-style-base @border-color;
       }
 
       &-nav {
-        border: @border-width-base @border-style-base @split-color;
+        border: @border-width-base @border-style-base @border-color;
         border-bottom: @none;
         border-radius: @sm-radius @sm-radius 0 0;
       }
 
       &-tab {
-        border-bottom: @border-width-base @border-style-base @split-color;
-        border-left: @border-width-base @border-style-base @split-color;
+        border-bottom: @border-width-base @border-style-base @border-color;
+        border-left: @border-width-base @border-style-base @border-color;
         transition: color @animation-time cubic-bezier(0.645, 0.045, 0.355, 1),
           padding @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
 
@@ -164,13 +164,13 @@
           background-color: @white;
           border-bottom-color: @white;
           .@{icon-prefix}-ios-close {
-            width: 22px;
+            width: 20px;
           }
         }
 
         &:hover {
           .@{icon-prefix}-ios-close {
-            width: 22px;
+            width: 20px;
           }
         }
       }
@@ -178,7 +178,7 @@
     .@{icon-prefix}-ios-close {
       width: 0;
       position: @rel;
-      font-size: 22px;
+      font-size: 20px;
       height: 14px;
       vertical-align: middle;
       line-height: 15px;
@@ -188,6 +188,7 @@
       transform-origin: 100% 50%;
       text-align: center;
       transition: all @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
+      margin-left: 5px;
       margin-right: -5px;
     }
   }
