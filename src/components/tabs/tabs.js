@@ -25,7 +25,6 @@ Rabbit.prototype.Tabs = {
         const TabsNavWrap = document.createElement('div');
         const TabsNavScroll = document.createElement('div');
         const TabsNav = document.createElement('ul');
-        const TabsNavActBar = document.createElement('div');
         const TabsContentBox = document.createElement('div');
 
         this.addClassName(
@@ -34,7 +33,6 @@ Rabbit.prototype.Tabs = {
             TabsNavWrap,
             TabsNavScroll,
             TabsNav,
-            TabsNavActBar,
             TabsContentBox
         );
         this.setAppearance(type, Tabs);
@@ -43,11 +41,9 @@ Rabbit.prototype.Tabs = {
         TabsHeader.appendChild(TabsNavWrap);
         TabsNavWrap.appendChild(TabsNavScroll);
         TabsNavScroll.appendChild(TabsNav);
-        TabsNav.appendChild(TabsNavActBar);
         this.addTabsTab(
             TABPANE,
             TabsNav,
-            TabsNavActBar,
             type,
             label,
             closable,
@@ -64,7 +60,6 @@ Rabbit.prototype.Tabs = {
         tabsNavWrap,
         tabsNavScroll,
         tabsNav,
-        tabsNavActBar,
         tabsContentBox
     ) {
         tabs.className = `${this.prefixCls}`;
@@ -72,19 +67,9 @@ Rabbit.prototype.Tabs = {
         tabsNavWrap.className = `${this.prefixCls}-nav-wrap`;
         tabsNavScroll.className = `${this.prefixCls}-nav-scroll`;
         tabsNav.className = `${this.prefixCls}-nav`;
-        tabsNavActBar.className = `${this.prefixCls}-active-bar`;
         tabsContentBox.className = `${this.prefixCls}-content`;
     },
-    addTabsTab(
-        itemSlot,
-        tabsNav,
-        tabsActiveBar,
-        type,
-        config,
-        closable,
-        cb,
-        removeCb
-    ) {
+    addTabsTab(itemSlot, tabsNav, type, config, closable, cb, removeCb) {
         for (let i = 0; i < itemSlot.length; i++) {
             const TabsTab = document.createElement('li');
 
@@ -97,7 +82,6 @@ Rabbit.prototype.Tabs = {
 
             this.setDisabled(config[i].disabled, TabsTab);
             setTimeout(() => {
-                this.setActiveBar(type, config[i].active, tabsActiveBar, TabsTab, i);
                 this.handleClick(config[i].disabled, TabsTab, i, cb);
                 this.setClosable(type, closable, TabsTab, i, removeCb);
             }, 0);
@@ -168,19 +152,6 @@ Rabbit.prototype.Tabs = {
             isFunc(cb) ? cb(index) : null;
         };
         closeEl.onclick = () => _remove();
-    },
-    // TODO:设置跟随条位置
-    setActiveBar(type, active, bar, tabsTab, index) {
-        if (type !== 'line') return;
-        let offsetX = 0;
-        if (active) {
-            bar.style.width = `${tabsTab.offsetWidth}px`;
-            bar.style.transform = `translateX(${offsetX}px)`;
-        }
-        tabsTab.addEventListener('click', () => {
-            bar.style.width = `${tabsTab.offsetWidth}px`;
-            if (index === 1) {}
-        });
     },
     // TODO: 溢出滚动
     handleOverflow() {},

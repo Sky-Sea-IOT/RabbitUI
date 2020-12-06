@@ -88,17 +88,24 @@
       color: @primary-color;
     }
 
-    &:nth-child(2) {
+    &:nth-child(1) {
       padding-left: @padding-sm;
-    }
-
-    &:last-child {
-      padding-right: 0;
     }
 
     &-active {
       color: @primary-color;
       font-weight: 500;
+      &::after {
+        position: @abs;
+        left: 0;
+        top: 0;
+        content: '';
+        .size(100%,41px);
+        border-bottom: 3px @border-style-base @primary-color;
+        border-radius: @xm-radius @xm-radius 0 0;
+        box-sizing: border-box;
+        pointer-events: @none;
+      }
     }
 
     &-disabled {
@@ -124,13 +131,16 @@
   &-border-card {
     .@{prefix}tabs {
       &-tab {
-        &:nth-child(2) {
+        &:nth-child(1) {
           padding-left: 20px;
           border-left: @none;
         }
 
         &:last-child {
           padding-right: 20px;
+        }
+        &::after {
+          display: @none;
         }
       }
 
