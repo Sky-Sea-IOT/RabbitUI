@@ -2,12 +2,6 @@
  * Tabs 标签页
  * 选项卡切换组件
  */
-
-// 溢出滚动：1.先算出可分段移动的总次数 2.每移动一次移动次数+1直到等于总次数再停止
-// 初始步数：1
-// 移动总数（取整）：navWidth / scrollWidth
-// 偏移矢量：scrollWidth * 初始步数++
-
 Rabbit.prototype.Tabs = {
     prefixCls: 'rbt-tabs',
     createInstance(_config, _slot) {
@@ -43,6 +37,7 @@ Rabbit.prototype.Tabs = {
         TabsHeader.appendChild(TabsNavWrap);
         TabsNavWrap.appendChild(TabsNavScroll);
         TabsNavScroll.appendChild(TabsNav);
+
         this.addTabsTab(
             TABPANE,
             TabsNav,
@@ -53,6 +48,11 @@ Rabbit.prototype.Tabs = {
             onTabRemove
         );
         this.addTabPane(TABPANE, TabsContentBox, label);
+
+        setTimeout(() => {
+            this.setNavScrollArrow(TabsNavScroll, TabsNav);
+            this.handleScroll(Tabs, TabsNavScroll, TabsNav);
+        }, 0);
 
         return Tabs;
     },
@@ -144,6 +144,35 @@ Rabbit.prototype.Tabs = {
             this.handleRemove(closeBtn, tabsTab, index, cb);
         }
     },
+    setNavScrollArrow(container, nav) {
+        nav.style.transform = `translateX(0)`;
+
+        const { getNW, getNCW } = this;
+
+        const prevArrow = document.createElement('span');
+        const nextArrow = document.createElement('span');
+
+        prevArrow.className = `${this.prefixCls}-nav-prev`;
+        nextArrow.className = `${this.prefixCls}-nav-next`;
+        prevArrow.innerHTML = `<i class="rbt-icon rbt-icon-ios-arrow-back"></i>`;
+        nextArrow.innerHTML = `<i class="rbt-icon rbt-icon-ios-arrow-forward"></i>`;
+
+        if (getNW(nav) > getNCW(container)) {
+            container.before(prevArrow);
+            container.before(nextArrow);
+            prevArrow.parentElement.classList.add(
+                `${this.prefixCls}-nav-scroll-able`
+            );
+        }
+    },
+    getNCW(container) {
+        const containerWidth = container.offsetWidth;
+        return containerWidth;
+    },
+    getNW(nav) {
+        const navWidth = nav.offsetWidth;
+        return navWidth;
+    },
     handleChange(tabsTab, tabPanes, index) {
         this.handleSetActive(tabPanes.parentElement, index);
         const activeCls1 = `${this.prefixCls}-tab-active`;
@@ -195,7 +224,36 @@ Rabbit.prototype.Tabs = {
         tabContentBox.style.transform = `translateX(${offsetX}%) translateZ(0px)`;
     },
     // TODO: 溢出滚动
-    handleOverflow() {},
+    handleScroll(tabs, tabsNavScroll, tabsNav) {
+        // 溢出滚动：1.先算出可分段移动的总次数 2.每移动一次移动次数+1直到等于总次数再停止
+        // 初始步数：1
+        // 移动总数（取整）：navWidth / scrollWidth
+        // 偏移矢量：scrollWidth * 初始步数++
+        const containerWidth = this.getNW(tabsNavScroll);
+        const navWidth = this.getNW(tabsNav);
+        let step = 0;
+        const totalStep = Math.floor(navWidth / containerWidth);
+        let offsetX = 0;
+
+        if (totalStep > 0) {
+            const p_Arrow = tabs.querySelector(`.${this.prefixCls}-nav-prev`);
+            const n_Arrow = tabs.querySelector(`.${this.prefixCls}-nav-next`);
+            const forwad = () => {
+                step >= totalStep ? (step = totalStep) : step++;
+                offsetX = containerWidth * step - 10;
+                tabsNav.style.transform = `translateX(-${offsetX}px)`;
+            };
+            const back = () => {
+                step <= 0 ? (step = 0) : step--;
+                offsetX =
+                    containerWidth / step === Infinity ? 0 : containerWidth / step;
+
+                tabsNav.style.transform = `translateX(-${offsetX}px)`;
+            };
+            p_Arrow.addEventListener('click', back);
+            n_Arrow.addEventListener('click', forwad);
+        }
+    },
     // TODO 删除会报错且倒序或不按顺序删除，面板不会自动设置active到下一个面板，但不影响删除节点
     removeSetNewActive(elem, cls) {
         // 如果要删除的元素是active状态则把这个状态移给它上一个或下一个节点

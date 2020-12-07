@@ -52,8 +52,10 @@
       position: @abs;
       cursor: @pointer;
       line-height: 42px;
-      font-size: @font-size-sm;
       color: @sub-color;
+      i {
+        font-size: 16px;
+      }
     }
 
     &-prev {
@@ -101,7 +103,7 @@
         left: 0;
         top: 0;
         content: '';
-        .size(100%,41px);
+        .size(100%,40px);
         border-bottom: 3px @border-style-base @primary-color;
         border-radius: @xm-radius @xm-radius 0 0;
         box-sizing: border-box;

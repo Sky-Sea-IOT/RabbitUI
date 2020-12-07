@@ -204,6 +204,25 @@
             <div slot="tabPane">标签三的内容</div>
         </rab-tabs>
     </div>
+    <div class="demo">
+        <rab-tabs id="tabs7">
+            <div slot="tabPane">Google</div>
+            <div slot="tabPane">Python</div>
+            <div slot="tabPane">Angular</div>
+        </rab-tabs>
+    </div>
+    <div class="demo" style="width: 400px">
+        <rab-tabs id="tabs8">
+            <div slot="tabPane">标签1的内容</div>
+            <div slot="tabPane">标签2的内容</div>
+            <div slot="tabPane">标签3的内容</div>
+            <div slot="tabPane">标签4的内容</div>
+            <div slot="tabPane">标签5的内容</div>
+            <div slot="tabPane">标签6的内容</div>
+            <div slot="tabPane">标签7的内容</div>
+            <div slot="tabPane">标签8的内容</div>
+        </rab-tabs>
+    </div>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../common/getComps.js"></script>
@@ -288,6 +307,37 @@
             text: '标签3',
         }, ],
         animated: false,
+    });
+    RabbitUI.create('#tabs7', {
+        label: [{
+            text: '<i class="rbt-icon rbt-icon-logo-google"> Google',
+            active: true,
+        }, {
+            text: '<i class="rbt-icon rbt-icon-logo-python"> Python',
+        }, {
+            text: '<i class="rbt-icon rbt-icon-logo-angular"> Angular',
+        }, ],
+    });
+    RabbitUI.create('#tabs8', {
+        label: [{
+            text: '标签1',
+            active: true,
+        }, {
+            text: '标签2',
+        }, {
+            text: '标签3',
+        }, {
+            text: '标签4',
+        }, {
+            text: '标签5',
+        }, {
+            text: '标签6',
+        }, {
+            text: '标签7',
+        }, {
+            text: '标签8',
+        }, ],
+        type: 'card',
     });
 </script>
 
