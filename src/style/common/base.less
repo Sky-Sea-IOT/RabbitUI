@@ -25,11 +25,10 @@ body {
   font-family: @base-font-family;
   background: @white;
   color: @text-color;
-  line-height: 1.5;
-  @font-variant-with-font-feature-settings-num();
-  -webkit-font-smoothing: antialiased;
+  line-height: @base-line-height;
   transition: background @transtion-time-fast
     cubic-bezier(0.075, 0.82, 0.165, 1);
+  @font-variant-with-font-feature-settings-num();
 }
 
 article,

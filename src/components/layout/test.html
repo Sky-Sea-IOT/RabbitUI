@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" main="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/components/layout.css" />
+</head>
+<style>
+    .demo {
+        width: 1010px;
+        text-align: center;
+        margin: 20px auto;
+        padding: 42px 24px 50px;
+        color: rgba(0, 0, 0, 0.85);
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .demo rab-header,
+    .demo rab-footer {
+        color: #fff;
+        background: #7dbcea;
+    }
+    
+    .demo rab-content {
+        min-height: 120px;
+        color: #fff;
+        line-height: 120px;
+        background: rgba(16, 142, 233, 1);
+    }
+    
+    .demo rab-sider {
+        color: #fff;
+        line-height: 120px;
+        background: #3ba0e9;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <rab-layout>
+            <rab-header>Header</rab-header>
+            <rab-content>Content</rab-content>
+            <rab-footer>Footer</rab-footer>
+        </rab-layout>
+    </div>
+
+    <div class="demo">
+        <rab-layout>
+            <rab-header>Header</rab-header>
+            <rab-layout has-sider>
+                <rab-sider>Sider</rab-sider>
+                <rab-content>Content</rab-content>
+            </rab-layout>
+            <rab-footer>Footer</rab-footer>
+        </rab-layout>
+    </div>
+
+    <div class="demo">
+        <rab-layout>
+            <rab-header>Header</rab-header>
+            <rab-layout has-sider>
+                <rab-content>Content</rab-content>
+                <rab-sider>Sider</rab-sider>
+            </rab-layout>
+            <rab-footer>Footer</rab-footer>
+        </rab-layout>
+    </div>
+
+    <div class="demo">
+        <rab-layout has-sider>
+            <rab-sider style="line-height: 250px">Sider</rab-sider>
+            <rab-layout>
+                <rab-header>Header</rab-header>
+                <rab-content>Content</rab-content>
+                <rab-footer>Footer</rab-footer>
+            </rab-layout>
+        </rab-layout>
+    </div>
+</body>
+<script></script>
+
+</html>
