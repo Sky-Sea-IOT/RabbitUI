@@ -12,9 +12,7 @@ Rabbit.prototype.Time = {
 
         this.handleClick(Time, hash, link);
 
-        setInterval(() => {
-            this.setTime(type, time, Time);
-        }, 1000 * interval);
+        this.setTime(type, time, Time, interval);
 
         return Time;
     },
@@ -31,17 +29,21 @@ Rabbit.prototype.Time = {
         }
     },
 
-    setTime(type, time, timeElem) {
-        let result = '';
-        if (type === 'relative') {
-            result = getRelativeTime(time);
-        }
-        if (type === 'date') {
-            result = formatDate(time);
-        }
-        if (type === 'datetime') {
-            result = formatDateTime(time);
-        }
-        timeElem.textContent = result;
+    setTime(type, time, timeElem, interval) {
+        const timer = () => {
+            let result = '';
+            if (type === 'relative') {
+                result = getRelativeTime(time);
+            }
+            if (type === 'date') {
+                result = formatDate(time);
+            }
+            if (type === 'datetime') {
+                result = formatDateTime(time);
+            }
+            timeElem.textContent = result;
+            return timer;
+        };
+        setInterval(timer(), interval * 60000);
     },
 };
