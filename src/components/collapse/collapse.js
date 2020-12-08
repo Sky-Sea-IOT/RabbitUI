@@ -3,8 +3,8 @@
  * 可以折叠/展开的内容区域。
  */
 Rabbit.prototype.Collapse = {
+    prefixCls: 'rbt-collapse',
     createInstance(_config, _slot) {
-        const prefixCls = 'rbt-collapse';
         const prefixIconCls = 'rbt-icon';
 
         const {
@@ -17,7 +17,7 @@ Rabbit.prototype.Collapse = {
                 defaultActiveKey = [],
         } = _config;
 
-        const { PANEL } = _slot;
+        const { COLLAPSEPANEL } = _slot;
 
         let expandedKeys = [];
 
@@ -26,17 +26,17 @@ Rabbit.prototype.Collapse = {
 
         const Collapse = document.createElement('div');
 
-        Collapse.className = `${prefixCls}`;
+        Collapse.className = `${this.prefixCls}`;
 
         // 折叠面板透明且无边框
-        ghost ? Collapse.classList.add(`${prefixCls}-ghost`) : '';
+        ghost ? Collapse.classList.add(`${this.prefixCls}-ghost`) : '';
 
         // 是否带边框的折叠面板
-        !bordered ? Collapse.classList.add(`${prefixCls}-borderless`) : '';
+        !bordered ? Collapse.classList.add(`${this.prefixCls}-borderless`) : '';
 
         // 创建折叠面板项
         const createCollapseItem = (item, i) => {
-            const header = item.children[0];
+            const title = item.children[0];
             const content = item.children[1];
             const CollapseItem = document.createElement('div');
             const CollapseHeader = document.createElement('div');
@@ -47,25 +47,25 @@ Rabbit.prototype.Collapse = {
             CollapseContent.style.display = 'none';
 
             if (
-                header.getAttribute('slot') === 'header' &&
+                title.getAttribute('slot') === 'title' &&
                 content.getAttribute('slot') === 'content'
             ) {
                 addElemetsOfSlots(item, CollapseItem);
-                addElemetsOfSlots(header, CollapseHeader);
+                addElemetsOfSlots(title, CollapseHeader);
                 addElemetsOfSlots(content, CollapseContentBox);
-            } else if (header.getAttribute('slot') !== 'header') {
-                console.error(header);
+            } else if (title.getAttribute('slot') !== 'title') {
+                console.error(title);
                 console.error(error);
             } else if (content.getAttribute('slot') !== 'content') {
                 console.error(content);
                 console.error(error);
             }
 
-            CollapseItem.className = `${prefixCls}-item`;
-            CollapseHeader.className = `${prefixCls}-header`;
+            CollapseItem.className = `${this.prefixCls}-item`;
+            CollapseHeader.className = `${this.prefixCls}-header`;
             CollapseArrow.className = `${prefixIconCls} ${prefixIconCls}-ios-arrow-forward`;
-            CollapseContent.className = `${prefixCls}-content`;
-            CollapseContentBox.className = `${prefixCls}-content-box`;
+            CollapseContent.className = `${this.prefixCls}-content`;
+            CollapseContentBox.className = `${this.prefixCls}-content-box`;
 
             Collapse.appendChild(CollapseItem);
             CollapseItem.append(CollapseHeader, CollapseContent);
@@ -74,19 +74,15 @@ Rabbit.prototype.Collapse = {
             showArrow
                 ?
                 CollapseHeader.prepend(CollapseArrow) :
-                CollapseItem.classList.add(`${prefixCls}-no-arrow`);
+                CollapseItem.classList.add(`${this.prefixCls}-no-arrow`);
 
             CollapseContent.appendChild(CollapseContentBox);
 
             item.remove();
 
-            this.setItemsKey(i, key, CollapseItem);
+            this.steKey(i, key, CollapseItem);
 
-            this.setDefaultActiveItem(
-                defaultActiveKey,
-                CollapseItem,
-                CollapseContent
-            );
+            this.setActive(defaultActiveKey, CollapseItem, CollapseContent);
 
             CollapseHeader.onclick = () =>
                 this.handleToogle(
@@ -100,12 +96,12 @@ Rabbit.prototype.Collapse = {
                 );
         };
 
-        PANEL.forEach((item, index) => createCollapseItem(item, index));
+        COLLAPSEPANEL.forEach((item, index) => createCollapseItem(item, index));
 
         return Collapse;
     },
 
-    setItemsKey(i, key, item) {
+    steKey(i, key, item) {
         if (key.length > 0) {
             item.dataset.key = key[i];
         } else {
@@ -113,38 +109,36 @@ Rabbit.prototype.Collapse = {
         }
     },
 
-    setDefaultActiveItem(defaultActiveKey, item, itemPanel) {
+    setActive(defaultActiveKey, item, itemPanel) {
         const { key } = item.dataset;
-        defaultActiveKey.map((defKeys, i) => {
+        defaultActiveKey.map(defKeys => {
             if (defKeys == key) {
                 itemPanel.style.display = 'block';
-                item.classList.add('rbt-collapse-item-active');
+                item.classList.add(`${this.prefixCls}-item-active`);
             }
         });
     },
 
     handleToogle(i, el1, el2, _key, onChange, accordion, expandedKeys) {
         let key = expandedKeys;
-
-        const prefixCls = 'rbt-collapse';
         const slideSpeed = 140;
         const CollapseItem = el1;
         const CollapseContent = el2;
 
         // 面板切换
         const toogle = () => {
-            if (Rbt.hasClass(CollapseItem, `${prefixCls}-item-active`)) {
+            if (Rbt.hasClass(CollapseItem, `${this.prefixCls}-item-active`)) {
                 // 收起面板时删除该面板的 key 并返回当前数组
                 key.some((keys, j) => {
                     keys == _key[i] ? key.splice(j, 1) : null;
                 });
                 Rbt.slider().up(CollapseContent, slideSpeed);
-                CollapseItem.classList.remove(`${prefixCls}-item-active`);
+                CollapseItem.classList.remove(`${this.prefixCls}-item-active`);
             } else {
                 // 切换面板时返回当前已展开的面板的 key，格式为数组
                 key.push(_key[i]);
                 Rbt.slider().down(CollapseContent, slideSpeed);
-                CollapseItem.classList.add(`${prefixCls}-item-active`);
+                CollapseItem.classList.add(`${this.prefixCls}-item-active`);
             }
             isFunc(onChange) ? onChange(key) : null;
         };
@@ -155,7 +149,7 @@ Rabbit.prototype.Collapse = {
                 Rbt.siblings(CollapseItem).forEach(item => {
                     const collapsePanel = item.children[1];
                     Rbt.slider().up(collapsePanel, slideSpeed);
-                    item.classList.remove(`${prefixCls}-item-active`);
+                    item.classList.remove(`${this.prefixCls}-item-active`);
                 });
             }
         };

@@ -18,7 +18,7 @@
     <div class="demo">
         <!-- <div class="rbt-collapse rbt-collapse-active">
             <div class="rbt-collapse-item">
-                <div class="rbt-collapse-header">
+                <div class="rbt-collapse-title">
                     <i class="rbt-icon rbt-icon-ios-arrow-forward"></i> 折叠面板标题 1
                 </div>
                 <div class="rbt-collapse-content">
@@ -30,49 +30,49 @@
         </div> -->
 
         <rab-collapse id="c1">
-            <div slot="panel">
-                <div slot="header">Steve Jobs</div>
-                <div slot="content">
+            <div slot="collapsePanel">
+                <span slot="title">Steve Jobs</span>
+                <p slot="content">
                     Steve Jobs (Born 24 February 1955 in San Francisco, California) is an American inventor, entrepreneur and co-founder of Apple inc
-                </div>
+                </p>
             </div>
-            <div slot="panel">
-                <div slot="header">Steve Gary Wozniak</div>
-                <div slot="content">
+            <div slot="collapsePanel">
+                <span slot="title">Steve Gary Wozniak</span>
+                <p slot="content">
                     Stephen Gary Wozniak was an American computer engineer who co-founded Apple Computer with Steve Jobs. Steve Gary Wozniak attended the University of Colorado and later transferred to UC Berkeley, where he received his undergraduate degree in electrical
                     Engineering and Computing (EECS) in 1987.
-                </div>
+                </p>
             </div>
-            <div slot="panel">
-                <div slot="header">Jonathan Ive</div>
-                <div slot="content">
+            <div slot="collapsePanel">
+                <span slot="title">Jonathan Ive</span>
+                <p slot="content">
                     Sir Jonathan Ive is an industrial designer and senior vice President of Design at Apple. He has been involved in the design of the iPod, iMac, iPhone, iPad and many other Apple products. Aside from Steve Jobs, he was the most influential person on Apple's
                     famous products.
-                </div>
+                </p>
             </div>
         </rab-collapse>
     </div>
     <div class="demo">
         <rab-collapse id="c2">
-            <div slot="panel">
-                <div slot="header">Steve Jobs</div>
-                <div slot="content">
+            <div slot="collapsePanel">
+                <span slot="title">Steve Jobs</span>
+                <p slot="content">
                     Steve Jobs (Born 24 February 1955 in San Francisco, California) is an American inventor, entrepreneur and co-founder of Apple inc
-                </div>
+                </p>
             </div>
-            <div slot="panel">
-                <div slot="header">Steve Gary Wozniak</div>
-                <div slot="content">
+            <div slot="collapsePanel">
+                <span slot="title">Steve Gary Wozniak</span>
+                <p slot="content">
                     Stephen Gary Wozniak was an American computer engineer who co-founded Apple Computer with Steve Jobs. Steve Gary Wozniak attended the University of Colorado and later transferred to UC Berkeley, where he received his undergraduate degree in electrical
                     Engineering and Computing (EECS) in 1987.
-                </div>
+                </p>
             </div>
-            <div slot="panel">
-                <div slot="header">Jonathan Ive</div>
-                <div slot="content">
+            <div slot="collapsePanel">
+                <span slot="title">Jonathan Ive</span>
+                <p slot="content">
                     Sir Jonathan Ive is an industrial designer and senior vice President of Design at Apple. He has been involved in the design of the iPod, iMac, iPhone, iPad and many other Apple products. Aside from Steve Jobs, he was the most influential person on Apple's
                     famous products.
-                </div>
+                </p>
             </div>
         </rab-collapse>
     </div>
@@ -86,14 +86,14 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./collapse.js"></script>
 <script>
-    RabbitUI.create("#c1", {
+    RabbitUI.create('#c1', {
         defaultActiveKey: [1],
         key: [1, 2, 3],
         onChange(key) {
             console.log(key);
         },
     });
-    RabbitUI.create("#c2", {
+    RabbitUI.create('#c2', {
         accordion: true,
     });
 </script>

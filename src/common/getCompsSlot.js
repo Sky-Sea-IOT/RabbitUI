@@ -3,7 +3,7 @@
  * @param {string} el
  * @returns {HTMLElement & NodeList}
  */
-const getCompsSlot = (el) => {
+const getCompsSlot = el => {
     const REF = el.querySelector('[slot="ref"]'), // Dropdown、Tooltip、Popover slot
         DOT = el.querySelectorAll('[slot="dot"]'), // Timeline slot
         DESC = el.querySelector('[slot="desc"]'), // Alert slot
@@ -11,7 +11,7 @@ const getCompsSlot = (el) => {
         OPEN = el.querySelector('[slot="open"]'), // Switch slot
         CLOSE = el.querySelector('[slot="close"]'), // Switch slot
         EXTRA = el.querySelector('[slot="extra"]'), // Card slot
-        PANEL = el.querySelectorAll('[slot="panel"]'), // Collapse slot
+        COLLAPSEPANEL = el.querySelectorAll('[slot="collapsePanel"]'), // Collapse slot
         TITLE = el.querySelector('[slot="title"]'), // common slot
         HEADER = el.querySelector('[slot="header"]'), // common slot
         FOOTER = el.querySelector('[slot="footer"]'), // common slot
@@ -40,7 +40,6 @@ const getCompsSlot = (el) => {
         OPEN,
         CLOSE,
         EXTRA,
-        PANEL,
         TITLE,
         ACTION,
         HEADER,
@@ -51,10 +50,11 @@ const getCompsSlot = (el) => {
         LISTITEM,
         LISTITEMMETA,
         LISTITEMDESC,
-        LISTITEMTITLE,
         TIMELINEITEM,
         DROPDOWNITEM,
         CAROUSELITEM,
+        LISTITEMTITLE,
+        COLLAPSEPANEL,
         LISTITEMAVATAR,
         BREADCRUMBITEM,
     };
