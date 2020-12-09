@@ -1,9 +1,7 @@
 @import '../common/index.css';
 @import '../custom.less';
 
-@tagName-prefix: rab-;
-
-@{tagName-prefix} {
+@{tag-prefix} {
   &layout {
     display: @flex;
     flex: @auto;
@@ -17,8 +15,8 @@
 
     &[has-sider] {
       flex-direction: row;
-      & > @{tagName-prefix}layout,
-      & > @{tagName-prefix}content {
+      & > @{tag-prefix}layout,
+      & > @{tag-prefix}content {
         width: 0;
         overflow-x: @hid;
       }

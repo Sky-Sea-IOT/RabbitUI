@@ -6,100 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../../style/components/card.css" />
-    <link rel="stylesheet" href="../../style/components/button.css" />
 </head>
 <style>
-    .demo {
-        width: 500px;
-        margin: 10px auto;
+    body {
+        height: 1500px;
     }
     
-    .demo-ghost {
-        background: #ececec;
-        padding: 20px;
+    .demo {
+        width: 800px;
+        margin: 50px auto;
+    }
+    
+    .demo rab-card {
+        width: 480px;
+    }
+    
+    .text {
+        margin-bottom: 18px;
+    }
+    
+    .bottom {
+        margin: 12px 0;
+        line-height: 12px;
+        color: #999;
+    }
+    
+    .image {
+        width: 100%;
+        display: block;
     }
 </style>
 
 <body>
     <div class="demo">
-        <rab-card id="c1">
-            <p slot="title">Basic card</p>
-            <a href="#" slot="extra">更多</a>
-            <div slot="content">
-                <p>Some card content</p>
-                <p>Some card content</p>
-                <p>Some card content</p>
-            </div>
+        <rab-card>
+            <rab-card-header>
+                卡片标题<a style="float: right; padding: 3px 0">操作按钮</a>
+            </rab-card-header>
+            <rab-card-body>
+                <p class="text">卡片的内容</p>
+                <p class="text">卡片的内容</p>
+                <p class="text">卡片的内容</p>
+            </rab-card-body>
         </rab-card>
     </div>
 
     <div class="demo">
-        <rab-card id="c2">
-            <div slot="content">
-                <p>Some card content</p>
-                <p>Some card content</p>
-                <p>Some card content</p>
-            </div>
+        <rab-card>
+            <rab-card-body>
+                <p class="text">卡片的内容</p>
+                <p class="text">卡片的内容</p>
+                <p class="text">卡片的内容</p>
+            </rab-card-body>
         </rab-card>
     </div>
 
-    <div class="demo" style="width: 50%">
-        <div class="demo-ghost">
-            <div style="display: inline-block">
-                <rab-card id="c3">
-                    <p slot="title">Borderless card</p>
-                    <div slot="content">
-                        <p>Some card content</p>
-                        <p>Some card content</p>
-                        <p>Some card content</p>
+    <div class="demo">
+        <div style="float: left; margin-right: 6%">
+            <rab-card style="width: 270px">
+                <rab-card-body style="padding: 0">
+                    <img src="../../../assets/card.jpg" class="image" />
+                    <div style="padding: 14px; text-align: center">
+                        <h4>那些年那些事那些兔</h4>
+                        <div class="bottom">www.bilibili.com</div>
                     </div>
-                </rab-card>
-            </div>
-
-            <div style="display: inline-block; margin-left: 50px">
-                <rab-card id="c4">
-                    <p slot="title">Use a card and hover it with a shadow</p>
-                    <div slot="content">
-                        <p>Some card content</p>
-                        <p>Some card content</p>
-                        <p>Some card content</p>
-                    </div>
-                </rab-card>
-            </div>
+                </rab-card-body>
+            </rab-card>
         </div>
+
+        <rab-card style="width: 270px">
+            <rab-card-body style="padding: 0">
+                <img src="../../../assets/card.jpg " class="image" />
+                <div style="padding: 14px; text-align: center">
+                    <h4>那些年那些事那些兔</h4>
+                    <div class="bottom">www.bilibili.com</div>
+                </div>
+            </rab-card-body>
+        </rab-card>
     </div>
 
     <div class="demo">
-        <rab-card id="c5">
-            <div slot="content" style="text-align: center">
-                <img src="../../../assets/card.jpg" />
-                <h4 style="padding: 16px">那些年那些事那些兔</h4>
-                <button class="rbt-btn rbt-btn-primary">前往观看</button>
-            </div>
+        <rab-card style="width: 30%; margin-right: 6px; float: left">
+            <rab-card-body>总是显示</rab-card-body>
+        </rab-card>
+        <rab-card style="width: 30%; margin-left: 6px; margin-right: 6px; float: left" rab-shadow="hover">
+            <rab-card-body>鼠标悬浮时显示</rab-card-body>
+        </rab-card>
+        <rab-card style="width: 30%; margin-left: 6px; float: left" rab-shadow="nerve">
+            <rab-card-body>从不显示</rab-card-body>
         </rab-card>
     </div>
 </body>
-<script src="../../utils/typeof.js"></script>
-<script src="../../utils/addDom.js"></script>
-<script src="../../common/getComps.js"></script>
-<script src="../../common/getCompsSlot.js"></script>
-<script src="../../common/main.js"></script>
-<script src="../../utils/objtoString.js"></script>
-<script src="./card.js"></script>
-<script>
-    RabbitUI.create("#c1");
-    RabbitUI.create("#c2");
-    RabbitUI.create("#c3", {
-        bordered: false,
-    });
-    RabbitUI.create("#c4", {
-        hoverable: true,
-    });
-    RabbitUI.create("#c5", {
-        width: 240,
-        padding: 0,
-        hoverable: true,
-    });
-</script>
 
 </html>
