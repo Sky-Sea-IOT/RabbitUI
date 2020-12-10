@@ -1,15 +1,15 @@
-@import "../common/index.css";
-@import "../custom.less";
-@import "../common/iconfont/icons.css";
-@import "../mixins/size.less";
+@import '../common/index.css';
+@import '../custom.less';
+@import '../common/iconfont/icons.css';
 
-@prefix: @css-prefix;
+@prefix: @tag-prefix;
 @icon-prefix: @css-prefix-iconfont;
 
-.@{prefix}tag {
+@{prefix}tag {
   box-sizing: border-box;
   color: @text-color;
-  display: @inlb;
+  display: @inlf;
+  align-items: center;
   height: @auto;
   margin: 0 @tag-margin-left 0 0;
   padding: 0 @tag-padding-horizontal;
@@ -27,62 +27,52 @@
     opacity: 0.85;
   }
 
-  & {
-    a,
-    a:hover {
-      color: @text-color;
+  a,
+  a:hover {
+    color: @text-color !important;
+  }
+
+  .@{icon-prefix} {
+    font-size: @font-size-sm;
+
+    &-ios-close {
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 20px;
+      cursor: @pointer;
     }
   }
 
-  &-close-icon {
-    color: rgba(0, 0, 0, 0.45);
-    font-size: 20px;
-    cursor: @pointer;
-    transition: all 0.3s;
+  .@{icon-prefix} + span,
+  span + .@{icon-prefix} {
+    margin-left: 5px;
+    vertical-align: middle;
   }
 
-  &-with-color {
-    border-color: transparent;
-  }
-
-  & {
-    .@{icon-prefix} {
-      font-size: @font-size-sm;
-    }
-
-    .@{icon-prefix} + span,
-    span + .@{icon-prefix} {
-      margin-left: 5px;
-      vertical-align: middle;
-    }
-  }
-
-  &-checkable {
+  &.checkable {
     background-color: transparent;
     border-color: transparent;
     cursor: @pointer;
 
-    &:not(&-checked) {
+    &:not(.checked) {
       &:hover {
         color: @primary-color;
       }
     }
-
-    &-checked {
-      background-color: @primary-color;
-    }
-
-    &-checked,
-    &-checked:active {
-      color: @white;
-    }
   }
 
-  &-primary,
-  &-success,
-  &-info,
-  &-warning,
-  &-error {
+  &.checked {
+    color: @white;
+    &:active {
+      color: @white;
+    }
+    background-color: @primary-color;
+  }
+
+  &[rab-color='primary'],
+  &[rab-color='success'],
+  &[rab-color='info'],
+  &[rab-color='warning'],
+  &[rab-color='error'] {
     color: @white;
     border-color: transparent;
     a {
@@ -92,87 +82,87 @@
     }
   }
 
-  &-primary {
+  &[rab-color='primary'] {
     background-color: @primary-color;
   }
 
-  &-success {
+  &[rab-color='success'] {
     background-color: @success-color;
   }
 
-  &-info {
+  &[rab-color='info'] {
     background-color: @info-color;
   }
 
-  &-warning {
+  &[rab-color='warning'] {
     background-color: @warning-color;
   }
 
-  &-error {
+  &[rab-color='error'] {
     background-color: @error-color;
   }
 
-  &-magenta {
+  &[rab-color='magenta'] {
     color: @magenta;
     background: #fff0f6;
     border-color: #ffadd2;
   }
 
-  &-red {
+  &[rab-color='red'] {
     color: @red;
     background: #fff1f0;
     border-color: #ffa39e;
   }
 
-  &-volcano {
+  &[rab-color='volcano'] {
     color: @volcano;
     background: #fff2e8;
     border-color: #ffbb96;
   }
 
-  &-orange {
+  &[rab-color='orange'] {
     color: @orange;
     background: #fff7e6;
     border-color: #ffd591;
   }
 
-  &-gold {
+  &[rab-color='gold'] {
     color: @gold;
     background: #fffbe6;
     border-color: #ffe58f;
   }
 
-  &-lime {
+  &[rab-color='lime'] {
     color: @lime;
     background: #fcffe6;
     border-color: #eaff8f;
   }
 
-  &-green {
+  &[rab-color='green'] {
     color: @green;
     background: #f6ffed;
     border-color: #b7eb8f;
   }
 
-  &-cyan {
+  &[rab-color='cyan'] {
     color: @cyan;
     background: #e6fffb;
     border-color: #87e8de;
   }
 
-  &-blue {
+  &[rab-color='blue'] {
     color: @blue;
     background: #e6f7ff;
     border-color: #91d5ff;
   }
 
-  &-geekblue {
+  &[rab-color='geekblue'] {
     color: @geekblue;
     background: #f0f5ff;
     border-color: #adc6ff;
   }
 
-  &-purple {
+  &[rab-color='purple'] {
     color: @purple;
     background: #f9f0ff;
     border-color: #d3adf7;

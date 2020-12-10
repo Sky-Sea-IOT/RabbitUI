@@ -13,88 +13,82 @@
         margin: 10px auto;
     }
     
-    .demo .rbt-tag {
+    .demo rab-tag {
         margin-bottom: 8px;
     }
 </style>
 
 <body>
     <div class="demo">
-        <span class="rbt-tag">标签 1</span>
-        <div class="rbt-tag">
-            <a href="https://github.com/niu-grandpa/RabbitUI">标签 2</a>
-        </div>
-        <div class="rbt-tag">
-            标签 3<i class="rbt-icon rbt-icon-ios-close rbt-tag-close-icon"></i>
-        </div>
+        <rab-tag>标签 1</rab-tag>
+        <rab-tag><a href="https://github.com/niu-grandpa/RabbitUI">标签 2</a></rab-tag>
+        <rab-tag> 标签 3<i class="rbt-icon rbt-icon-ios-close"></i></rab-tag>
     </div>
 
     <div class="demo">
-        <span class="rbt-tag rbt-tag-primary">primary</span>
-        <span class="rbt-tag rbt-tag-success">success</span>
-        <span class="rbt-tag rbt-tag-info">info</span>
-        <span class="rbt-tag rbt-tag-warning">warning</span>
-        <span class="rbt-tag rbt-tag-error">error</span>
-        <span class="rbt-tag rbt-tag-magenta">magenta</span>
-        <span class="rbt-tag rbt-tag-red">red</span>
-        <span class="rbt-tag rbt-tag-volcano">volcano</span>
-        <span class="rbt-tag rbt-tag-orange">orange</span>
-        <span class="rbt-tag rbt-tag-gold">gold</span>
-        <span class="rbt-tag rbt-tag-lime">lime</span>
-        <span class="rbt-tag rbt-tag-green"> green</span>
-        <span class="rbt-tag rbt-tag-cyan">cyan</span>
-        <span class="rbt-tag rbt-tag-blue">blue</span>
-        <span class="rbt-tag rbt-tag-geekblue">geekblue</span>
-        <span class="rbt-tag rbt-tag-purple">purple</span>
+        <rab-tag rab-color="primary">primary</rab-tag>
+        <rab-tag rab-color="success">success</rab-tag>
+        <rab-tag rab-color="info">info</rab-tag>
+        <rab-tag rab-color="warning">warning</rab-tag>
+        <rab-tag rab-color="error">error</rab-tag>
+        <rab-tag rab-color="magenta">magenta</rab-tag>
+        <rab-tag rab-color="red">red</rab-tag>
+        <rab-tag rab-color="volcano">volcano</rab-tag>
+        <rab-tag rab-color="orange">orange</rab-tag>
+        <rab-tag rab-color="gold">gold</rab-tag>
+        <rab-tag rab-color="lime">lime</rab-tag>
+        <rab-tag rab-color="green">green</rab-tag>
+        <rab-tag rab-color="cyan">cyan</rab-tag>
+        <rab-tag rab-color="blue">blue</rab-tag>
+        <rab-tag rab-color="geekblue">geekblue</rab-tag>
+        <rab-tag rab-color="purple">purple</rab-tag>
     </div>
 
     <div class="demo">
-        <div class="rbt-tag rbt-tag-error">
+        <rab-tag rab-color="error">
             <i class="rbt-icon rbt-icon-logo-angular"></i>
             <span>Angular</span>
-        </div>
-        <div class="rbt-tag rbt-tag-primary">
+        </rab-tag>
+        <rab-tag rab-color="primary">
             <i class="rbt-icon rbt-icon-logo-facebook"></i>
             <span>Facebook</span>
-        </div>
-        <div class="rbt-tag rbt-tag-info">
+        </rab-tag>
+        <rab-tag rab-color="info">
             <i class="rbt-icon rbt-icon-logo-twitter"></i>
             <span>Twitter</span>
-        </div>
+        </rab-tag>
     </div>
 
     <div class="demo">
-        <div class="rbt-tag rbt-tag-green">
+        <rab-tag rab-color="green">
             <i class="rbt-icon rbt-icon-ios-checkmark-circle-outline"></i>
             <span>success</span>
-        </div>
-        <div class="rbt-tag rbt-tag-blue">
+        </rab-tag>
+        <rab-tag rab-color="blue">
             <i class="rbt-icon rbt-icon-loading1"></i>
             <span>processing</span>
-        </div>
-        <div class="rbt-tag rbt-tag-red">
+        </rab-tag>
+        <rab-tag rab-color="red">
             <i class="rbt-icon rbt-icon-ios-close-circle-outline"></i>
             <span>error</span>
-        </div>
-        <div class="rbt-tag rbt-tag-gold">
+        </rab-tag>
+        <rab-tag rab-color="gold">
             <i class="rbt-icon rbt-icon-md-information-circle-outline"></i>
             <span>warning</span>
-        </div>
-        <div class="rbt-tag">
+        </rab-tag>
+        <rab-tag rab-color="primary">
             <i class="rbt-icon rbt-icon-md-stopwatch"></i>
             <span>waiting</span>
-        </div>
+        </rab-tag>
     </div>
 
     <div class="demo">
-        <span class="rbt-tag rbt-tag-checkable">电影</span>
-        <span class="rbt-tag rbt-tag-checkable rbt-tag-checkable-checked">书籍</span
-      >
-      <span class="rbt-tag rbt-tag-checkable">音乐</span>
-        <span class="rbt-tag rbt-tag-checkable">运动</span>
+        <rab-tag class="checkable">电影</rab-tag>
+        <rab-tag class="checkable checked">书籍</rab-tag>
+        <rab-tag class="checkable">音乐</rab-tag>
+        <rab-tag class="checkable">运动</rab-tag>
     </div>
 </body>
-<script src="../../common/main.js"></script>
 <script src="./tag.js"></script>
 
 </html>

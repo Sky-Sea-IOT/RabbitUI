@@ -1,13 +1,13 @@
-Rabbit.prototype.Tag = {
-    toogle: () => {
-        const tags = document.querySelectorAll('.rbt-tag-checkable');
-        Array.from(tags).map(tag => {
-            tag.onclick = () => {
-                tag.classList.contains('rbt-tag-checkable-checked') ?
-                    tag.classList.remove('rbt-tag-checkable-checked') :
-                    tag.classList.add('rbt-tag-checkable-checked');
-            };
-        });
-    },
+const _TagCheckable = () => {
+    const tags = document.querySelectorAll('rab-tag');
+    tags.forEach(tag => {
+        if (tag.classList.contains('checkable')) {
+            tag.addEventListener('click', () => {
+                tag.classList.contains('checked') ?
+                    tag.classList.remove('checked') :
+                    tag.classList.add('checked');
+            });
+        }
+    });
 };
-Rabbit.prototype.Tag.toogle();
+_TagCheckable();

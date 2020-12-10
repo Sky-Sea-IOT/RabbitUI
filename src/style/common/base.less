@@ -1,4 +1,5 @@
 @import '../custom.less';
+@import '../animation/spin.less';
 
 [class*='rbt-'],
 [class*='rbt-'] *,
@@ -17,6 +18,11 @@
 :before {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+
+[class*='loading'],
+[class*='loading-solid'] {
+  .ani-spin-loading();
 }
 
 body {

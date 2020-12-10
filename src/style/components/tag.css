@@ -1,12 +1,13 @@
-@import "../common/index.css";
-@import "../common/iconfont/icons.css";
-.rbt-tag {
+@import '../common/index.css';
+@import '../common/iconfont/icons.css';
+rab-tag {
   box-sizing: border-box;
   color: #55585e;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   height: auto;
   margin: 0 8px 0 0;
-  padding: 0 7px;
+  padding: 0 8px;
   font-size: 12px;
   line-height: 20px;
   white-space: nowrap;
@@ -17,126 +18,122 @@
   opacity: 1;
   transition: all 0.3s;
 }
-.rbt-tag:hover {
+rab-tag:hover {
   opacity: 0.85;
 }
-.rbt-tag a,
-.rbt-tag a:hover {
-  color: #55585e;
+rab-tag a,
+rab-tag a:hover {
+  color: #55585e !important;
 }
-.rbt-tag-close-icon {
+rab-tag .rbt-icon {
+  font-size: 14px;
+}
+rab-tag .rbt-icon-ios-close {
   color: rgba(0, 0, 0, 0.45);
   font-size: 20px;
   cursor: pointer;
-  transition: all 0.3s;
 }
-.rbt-tag-with-color {
-  border-color: transparent;
-}
-.rbt-tag .rbt-icon {
-  font-size: 14px;
-}
-.rbt-tag .rbt-icon + span,
-.rbt-tag span + .rbt-icon {
+rab-tag .rbt-icon + span,
+rab-tag span + .rbt-icon {
   margin-left: 5px;
   vertical-align: middle;
 }
-.rbt-tag-checkable {
+rab-tag.checkable {
   background-color: transparent;
   border-color: transparent;
   cursor: pointer;
 }
-.rbt-tag-checkable:not(.rbt-tag-checkable-checked):hover {
+rab-tag.checkable:not(.checked):hover {
   color: #1890ff;
 }
-.rbt-tag-checkable-checked {
+rab-tag.checked {
+  color: #fff;
   background-color: #1890ff;
 }
-.rbt-tag-checkable-checked,
-.rbt-tag-checkable-checked:active {
+rab-tag.checked:active {
   color: #fff;
 }
-.rbt-tag-primary,
-.rbt-tag-success,
-.rbt-tag-info,
-.rbt-tag-warning,
-.rbt-tag-error {
+rab-tag[rab-color='primary'],
+rab-tag[rab-color='success'],
+rab-tag[rab-color='info'],
+rab-tag[rab-color='warning'],
+rab-tag[rab-color='error'] {
   color: #fff;
   border-color: transparent;
 }
-.rbt-tag-primary a:hover,
-.rbt-tag-success a:hover,
-.rbt-tag-info a:hover,
-.rbt-tag-warning a:hover,
-.rbt-tag-error a:hover {
+rab-tag[rab-color='primary'] a:hover,
+rab-tag[rab-color='success'] a:hover,
+rab-tag[rab-color='info'] a:hover,
+rab-tag[rab-color='warning'] a:hover,
+rab-tag[rab-color='error'] a:hover {
   color: #fff;
 }
-.rbt-tag-primary {
+rab-tag[rab-color='primary'] {
   background-color: #1890ff;
 }
-.rbt-tag-success {
+rab-tag[rab-color='success'] {
   background-color: #05cc72;
 }
-.rbt-tag-info {
+rab-tag[rab-color='info'] {
   background-color: #40c4ff;
 }
-.rbt-tag-warning {
+rab-tag[rab-color='warning'] {
   background-color: #faad14;
 }
-.rbt-tag-error {
+rab-tag[rab-color='error'] {
   background-color: #ff4d4f;
 }
-.rbt-tag-magenta {
+rab-tag[rab-color='magenta'] {
   color: #eb2f96;
   background: #fff0f6;
   border-color: #ffadd2;
 }
-.rbt-tag-red {
+rab-tag[rab-color='red'] {
   color: #f5222d;
   background: #fff1f0;
   border-color: #ffa39e;
 }
-.rbt-tag-volcano {
+rab-tag[rab-color='volcano'] {
   color: #fa541c;
   background: #fff2e8;
   border-color: #ffbb96;
 }
-.rbt-tag-orange {
+rab-tag[rab-color='orange'] {
   color: #fa8c16;
   background: #fff7e6;
   border-color: #ffd591;
 }
-.rbt-tag-gold {
+rab-tag[rab-color='gold'] {
   color: #faad14;
   background: #fffbe6;
   border-color: #ffe58f;
 }
-.rbt-tag-lime {
+rab-tag[rab-color='lime'] {
   color: #a0d911;
   background: #fcffe6;
   border-color: #eaff8f;
 }
-.rbt-tag-green {
+rab-tag[rab-color='green'] {
   color: #52c41a;
   background: #f6ffed;
   border-color: #b7eb8f;
 }
-.rbt-tag-cyan {
+rab-tag[rab-color='cyan'] {
   color: #13c2c2;
   background: #e6fffb;
   border-color: #87e8de;
 }
-.rbt-tag-blue {
+rab-tag[rab-color='blue'] {
   color: #1890ff;
   background: #e6f7ff;
   border-color: #91d5ff;
 }
-.rbt-tag-geekblue {
+rab-tag[rab-color='geekblue'] {
   color: #2f54eb;
   background: #f0f5ff;
   border-color: #adc6ff;
 }
-.rbt-tag-purple {
+rab-tag[rab-color='purple'] {
   color: #722ed1;
   background: #f9f0ff;
   border-color: #d3adf7;
