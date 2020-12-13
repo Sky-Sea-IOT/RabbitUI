@@ -1,4 +1,4 @@
-const _TagCheckable = () => {
+Rabbit.prototype.tag = () => {
     const tags = document.querySelectorAll('rab-tag');
     tags.forEach(tag => {
         if (tag.classList.contains('checkable')) {
@@ -10,4 +10,4 @@ const _TagCheckable = () => {
         }
     });
 };
-_TagCheckable();
+Rabbit.prototype.tag();
