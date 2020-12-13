@@ -2,73 +2,48 @@
  * Avatar 头像
  * 用来代表用户或事物，支持图片、图标或字符展示。
  */
-Rabbit.prototype.Avatar = {
-    createInstance(_config) {
-        const prefixCls = 'rbt-avatar';
-        const prefixIconCls = 'rbt-icon';
+// 字体适应容器：transform.scale = 头像容器 / 字体容器宽度 + 15
+Rabbit.prototype.Avatar = () => {
+    const avatars = document.querySelectorAll('rab-avatar');
 
-        const {
-            src = '',
-                icon = 'md-person',
-                size = 'default',
-                text = '',
-                shape = 'circle',
-                styles = {},
-                className = '',
-                customIcon,
-        } = _config;
+    avatars.forEach(avatar => {
+        const iconType = avatar.getAttribute('rab-icon');
+        const iconElem = document.createElement('i');
+        iconElem.className = 'rbt-icon';
 
-        const _styles = objToString(styles);
-
-        const Avatar = document.createElement('span');
-        const AvatarIcon = document.createElement('i');
-        const AvatarImage = document.createElement('img');
-        const AvatarString = document.createElement('span');
-
-        Avatar.className = `${prefixCls} ${prefixCls}-${shape} ${prefixCls}-${size} ${prefixCls}-icon ${className}`;
-        AvatarIcon.className = `${prefixIconCls} ${prefixIconCls}-${icon}`;
-        AvatarString.className = `${prefixCls}-string`;
-
-        // 自定义 style 样式
-        Avatar.style.cssText = _styles;
-
-        // 在不自定义的条件下添加头像
-        if (!src && !text && !customIcon) Avatar.appendChild(AvatarIcon);
-
-        // 使用字符头像
-        if (text) {
-            AvatarString.innerHTML = text;
-            Avatar.appendChild(AvatarString);
+        // 设置头像图标
+        if (iconType) {
+            iconElem.classList.add(`rbt-icon-${iconType}`);
+        } else {
+            // 默认的头像图标
+            iconElem.classList.add(`rbt-icon-md-person`);
         }
+        avatar.appendChild(iconElem);
 
-        // 图片类头像的资源地址
-        if (src) {
-            AvatarImage.src = src;
-            Avatar.appendChild(AvatarImage);
-        }
-
-        // 自定义图标
-        if (customIcon) Avatar.innerHTML = customIcon;
-
-        this.setSize(Avatar, AvatarString);
-
-        return Avatar;
-    },
-
-    // 头像字体自适应容器
-    setSize(avatar, avatarString) {
-        // 字体适应容器计算方法： 头像容器 / 字体容器宽度 + 15
-        setTimeout(() => {
-            let containerWidth = avatar.offsetWidth;
-            let stringWidth = avatarString.offsetWidth;
-            let newStrWidth = 0;
-            if (stringWidth >= containerWidth) {
-                newStrWidth = containerWidth / (stringWidth + 15);
-                avatarString.style.transform = `scale(${newStrWidth}) translateX(-50%)`;
+        avatar.childNodes.forEach(node => {
+            // 设置图片头像
+            if (node.nodeName === 'IMG') {
+                avatar.style.background = 'transparent';
+                avatar.appendChild(node);
+                iconElem.remove();
             }
-        }, 0);
-    },
+            // 设置字符型头像
+            if (
+                node.nodeType === 1 &&
+                node.nodeName !== 'IMG' &&
+                !node.classList.contains('rbt-icon')
+            ) {
+                node.classList.add('rbt-avatar-string');
+                avatar.appendChild(node);
+                iconElem.remove();
+                // 字体适应
+                let newScale = 0;
+                if (node.offsetWidth >= avatar.offsetWidth - 8) {
+                    newScale = avatar.offsetWidth / node.offsetWidth - 0.19;
+                    node.style.transform = `scale(${newScale}) translateX(-50%)`;
+                }
+            }
+        });
+    });
 };
-
-const { Avatar } = Rabbit.prototype;
-export default Avatar;
+Rabbit.prototype.Avatar();

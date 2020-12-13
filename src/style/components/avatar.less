@@ -1,12 +1,11 @@
-@import "../common/index.css";
-@import "../custom.less";
-@import "../common/iconfont/icons.css";
-@import "../mixins/size.less";
+@import '../common/index.css';
+@import '../custom.less';
+@import '../common/iconfont/icons.css';
+@import '../mixins/size.less';
 
-@prefix: @css-prefix;
 @icon-prefix: @css-prefix-iconfont;
 
-.@{prefix}avatar {
+@{tag-prefix}avatar {
   display: @inl-flex;
   justify-content: center;
   align-items: center;
@@ -16,38 +15,29 @@
   position: @rel;
   overflow: @hid;
   vertical-align: middle;
+  font-size: @font-size-md;
   .size(@avatar-size-base,@avatar-size-base);
   line-height: @avatar-size-base;
   border-radius: 50%;
 
-  &&-icon {
-    font-size: @font-size-md;
-  }
-
-  &-large {
+  &[rab-size='large'] {
     .size(@avatar-size-lg,@avatar-size-lg);
     line-height: @avatar-size-lg;
-  }
-
-  &-large&-icon {
     font-size: @avatar-font-size-lg;
   }
 
-  &-small {
+  &[rab-size='small'] {
     .size(@avatar-size-sm,@avatar-size-sm);
     line-height: @avatar-size-sm;
-  }
-
-  &-small&-icon {
     font-size: @avatar-font-size-sm;
   }
 
-  &-large .rbt-icon {
-    position: relative;
+  &[rab-size='large'] .@{icon-prefix} {
+    position: @rel;
     top: -2px;
   }
 
-  &-square {
+  &[rab-shape='square'] {
     border-radius: @avatar-border-radius;
   }
 
@@ -55,10 +45,10 @@
     .size(100%,100%);
   }
 
-  &-string {
+  .@{css-prefix}avatar-string {
     position: @abs;
     left: 50%;
-    transform: @translatex-center;
+    transform: scale(1) @translatex-center;
     transform-origin: 0 center;
   }
 }

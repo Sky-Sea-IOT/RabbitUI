@@ -13,12 +13,12 @@
         margin: 20px auto;
     }
     
-    .demo .rbt-avatar {
+    .demo rab-avatar {
         margin-top: 16px;
         margin-right: 16px;
     }
     
-    .avatar-custom {
+    .custom {
         width: 64px;
         height: 64px;
         line-height: 64px;
@@ -28,91 +28,34 @@
 
 <body>
     <div class="demo">
-        <rab-avatar id="avatar1"></rab-avatar>
-        <rab-avatar id="avatar2"></rab-avatar>
-        <rab-avatar id="avatar3"></rab-avatar>
-        <rab-avatar id="avatar4"></rab-avatar>
+        <rab-avatar class="custom"></rab-avatar>
+        <rab-avatar rab-size="large"></rab-avatar>
+        <rab-avatar></rab-avatar>
+        <rab-avatar rab-size="small"></rab-avatar>
     </div>
     <div class="demo">
-        <rab-avatar id="avatar5"></rab-avatar>
-        <rab-avatar id="avatar6"></rab-avatar>
-        <rab-avatar id="avatar7"></rab-avatar>
-        <rab-avatar id="avatar8"></rab-avatar>
+        <rab-avatar rab-shape="square" class="custom"></rab-avatar>
+        <rab-avatar rab-shape="square" rab-size="large"></rab-avatar>
+        <rab-avatar rab-shape="square"></rab-avatar>
+        <rab-avatar rab-shape="square" rab-size="small"></rab-avatar>
     </div>
     <div class="demo">
-        <rab-avatar id="avatar9"></rab-avatar>
-        <rab-avatar id="avatar10"></rab-avatar>
-        <rab-avatar id="avatar11"></rab-avatar>
-        <rab-avatar id="avatar12"></rab-avatar>
-        <rab-avatar id="avatar13"></rab-avatar>
-        <rab-avatar id="avatar14"></rab-avatar>
+        <rab-avatar></rab-avatar>
+        <rab-avatar><span>U</span></rab-avatar>
+        <rab-avatar><span>USER</span></rab-avatar>
+        <rab-avatar><img src="../../../assets/avatar.jpg" /></rab-avatar>
+        <rab-avatar style="background: #f56a00"><span>U</span></rab-avatar>
+        <rab-avatar style="background: #87d068"></rab-avatar>
+    </div>
+    <div class="demo">
+        <rab-avatar style="background: #f56a00"><span>U</span></rab-avatar>
+        <rab-avatar style="background: rgb(114, 101, 230)"><span>Jack</span></rab-avatar>
+        <rab-avatar style="background: rgb(255, 191, 0)"><span>Tom</span></rab-avatar>
+        <rab-avatar style="background: rgb(0, 162, 174)"><span>Edward</span></rab-avatar>
     </div>
 </body>
-<script src="../../utils/typeof.js"></script>
-<script src="../../utils/getIconTypes.js"></script>
-<script src="../../utils/objtoString.js"></script>
-<script src="../../common/getComps.js"></script>
-<script src="../../utils/addDom.js"></script>
-<script src="../../common/getCompsSlot.js"></script>
 <script src="../../common/main.js"></script>
-<script src="../../utils/isSlotUserd.js"></script>
 <script src="./avatar.js"></script>
-<script>
-    RabbitUI.create('#avatar1', {
-        className: 'avatar-custom',
-    });
-    RabbitUI.create('#avatar2', {
-        size: 'large',
-    });
-    RabbitUI.create('#avatar3');
-    RabbitUI.create('#avatar4', {
-        size: 'small',
-    });
-
-    RabbitUI.create('#avatar5', {
-        shape: 'square',
-        styles: {
-            width: '64px',
-            height: '64px',
-            'line-height': '64px',
-            'font-size': '32px',
-        },
-    });
-    RabbitUI.create('#avatar6', {
-        shape: 'square',
-        size: 'large',
-    });
-    RabbitUI.create('#avatar7', {
-        shape: 'square',
-    });
-    RabbitUI.create('#avatar8', {
-        shape: 'square',
-        size: 'small',
-    });
-
-    RabbitUI.create('#avatar9');
-    RabbitUI.create('#avatar10', {
-        text: 'U',
-    });
-    RabbitUI.create('#avatar11', {
-        text: 'USER',
-    });
-    RabbitUI.create('#avatar12', {
-        src: '../../../assets/avatar.jpg',
-    });
-    RabbitUI.create('#avatar13', {
-        text: 'U',
-        styles: {
-            color: '#f56a00',
-            background: '#fde3cf',
-        },
-    });
-    RabbitUI.create('#avatar14', {
-        icon: 'ios-notifications',
-        styles: {
-            background: '#87d068',
-        },
-    });
-</script>
+<script></script>
 
 </html>
