@@ -1,6 +1,5 @@
 const COMPONENTS = {
     Alert: 'alert',
-    Avatar: 'avatar',
     BackTop: 'backtop',
     Breadcrumb: 'breadcrumb',
     Card: 'card',
@@ -45,9 +44,6 @@ const getComps = (el, compsName, config, slot) => {
     switch (compsName) {
         case COMPONENTS.Alert:
             return Rabbit.prototype.Alert.createInstance(config, slot);
-
-        case COMPONENTS.Avatar:
-            return Rabbit.prototype.Avatar.createInstance(config);
 
         case COMPONENTS.BackTop:
             return Rabbit.prototype.BackTop.createInstance(config, slot);
