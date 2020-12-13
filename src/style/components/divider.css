@@ -1,33 +1,32 @@
 @import '../common/index.css';
-.rbt-divider {
-  color: #55585e;
-  font-size: 14px;
-  line-height: 1.5715;
-  list-style: none;
-  border-top: 1px solid #e8eaec;
-}
-.rbt-divider.horizontal {
+rab-divider {
   display: flex;
   clear: both;
   width: 100%;
   min-width: 100%;
   margin: 24px 0;
+  color: #55585e;
+  font-size: 14px;
+  line-height: 1.5715;
+  border-top: 1px solid #e8eaec;
 }
-.rbt-divider.vertical {
+rab-divider[rab-type='vertical'] {
+  width: 1px;
+  min-width: 1px;
+  height: 0.9em;
+  display: inline-flex;
   position: relative;
   top: -0.06em;
-  display: inline-block;
-  height: 0.9em;
   margin: 0 8px;
   vertical-align: middle;
   border-top: 0;
   border-left: 1px solid #e8eaec;
 }
-.rbt-divider-dashed {
+rab-divider[rab-dashed] {
   background: 0 0;
-  border-top: 1px dashed #e8eaec;
+  border-top: 1px dashed #dcdee2;
 }
-.rbt-divider-with-text {
+rab-divider.rbt-divider-with-text {
   display: flex;
   margin: 16px 0;
   color: #2c3e50;
@@ -38,36 +37,31 @@
   border-top: 0;
   border-top-color: #e8eaec;
 }
-.rbt-divider.horizontal.rbt-divider-with-text:after,
-.rbt-divider.horizontal.rbt-divider-with-text:before {
+rab-divider.rbt-divider-with-text:after,
+rab-divider.rbt-divider-with-text:before {
   position: relative;
   top: 50%;
   width: 50%;
   border-top: 1px solid transparent;
   border-top-color: inherit;
   border-bottom: 0;
-  transform: translateY(-50%);
+  transform: translateY(50%);
   content: '';
 }
-.rbt-divider.horizontal.rbt-divider-with-text-left:after,
-.rbt-divider.horizontal.rbt-divider-with-text-right:before {
+rab-divider.rbt-divider-with-text-left:after,
+rab-divider.rbt-divider-with-text-right:before {
   top: 50%;
   width: 95%;
 }
-.rbt-divider.horizontal.rbt-divider-with-text-left:before {
+rab-divider.rbt-divider-with-text-left:before {
   top: 50%;
   width: 5%;
 }
-.rbt-divider.horizontal.rbt-divider-with-text-right:after {
+rab-divider.rbt-divider-with-text-right:after {
   top: 50%;
   width: 5%;
 }
-.rbt-divider-inner-text {
+rab-divider .rbt-divider-inner-text {
   display: inline-block;
   padding: 0 16px;
-}
-.rbt-divider-plain.rbt-divider-with-text {
-  color: #55585e;
-  font-weight: 400;
-  font-size: 14px;
 }
