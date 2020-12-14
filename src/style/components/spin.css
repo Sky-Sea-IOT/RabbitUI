@@ -71,61 +71,48 @@
     opacity: 0;
   }
 }
-.rbt-spin {
+rb-spin {
   color: #1890ff;
   vertical-align: middle;
   text-align: center;
 }
-.rbt-spin-show-text .rbt-spin-text {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.rbt-spin-loading {
+rb-spin .rbt-icon {
   font-size: 24px;
 }
-.rbt-spin-loading.small {
-  font-size: 16px;
-}
-.rbt-spin-loading.large {
-  font-size: 36px;
-}
-.rbt-spin-dot {
+rb-spin[rb-type='dot'] {
   position: relative;
   display: inline-block;
-  background-color: #1890ff !important;
+  background-color: #1890ff;
   border-radius: 50%;
   width: 26px;
   height: 26px;
   -webkit-animation: ani-spin-bounce 1s 0s ease-in-out infinite;
   animation: ani-spin-bounce 1s 0s ease-in-out infinite;
 }
-.rbt-spin-dot.small {
+rb-spin[rb-type='dot'] * {
+  display: none !important;
+}
+rb-spin[rb-type='dot'][rb-size='small'] {
   width: 12px;
   height: 12px;
 }
-.rbt-spin-dot.large {
+rb-spin[rb-type='dot'][rb-size='large'] {
   width: 36px;
   height: 36px;
 }
-.rbt-spin-dot.bg-primary {
-  background-color: #1890ff !important;
+rb-spin[rb-type='dot'][rb-color='success'] {
+  background-color: #05cc72;
 }
-.rbt-spin-dot.bg-success {
-  background-color: #05cc72 !important;
+rb-spin[rb-type='dot'][rb-color='info'] {
+  background-color: #40c4ff;
 }
-.rbt-spin-dot.bg-info {
-  background-color: #40c4ff !important;
+rb-spin[rb-type='dot'][rb-color='warning'] {
+  background-color: #faad14;
 }
-.rbt-spin-dot.bg-warning {
-  background-color: #faad14 !important;
+rb-spin[rb-type='dot'][rb-color='error'] {
+  background-color: #ff4d4f;
 }
-.rbt-spin-dot.bg-error {
-  background-color: #ff4d4f !important;
-}
-.rbt-spin-fix {
+rb-spin[rb-fix='true'] {
   position: absolute;
   top: 0;
   left: 0;
@@ -134,27 +121,18 @@
   height: 100%;
   background-color: hsla(0, 0%, 100%, 0.9);
 }
-.rbt-spin-fix .rbt-spin-main {
+rb-spin[rb-fix='true'] .rbt-spin-main {
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.rbt-spin-fullscreen {
-  z-index: 2010;
-}
-.rbt-spin-fullscreen-wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.rbt-spin-fade-enter {
+.rbt-spin-fade-in {
   -webkit-animation: rbtFadeIn 0.25s ease;
   animation: rbtFadeIn 0.25s ease;
 }
-.rbt-spin-fade-leave {
+.rbt-spin-fade-out {
   -webkit-animation: rbtFadeOut 0.25s ease-in-out;
   animation: rbtFadeOut 0.25s ease-in-out;
 }

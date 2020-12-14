@@ -8,108 +8,74 @@
 @prefix: @css-prefix;
 @icon-prefix: @css-prefix-iconfont;
 
-@{tag-prefix} {
-}
-
-.@{prefix}spin {
+@{tag-prefix}spin {
   color: @primary-color;
   vertical-align: middle;
   text-align: center;
 
-  &-show-text &-text {
-    display: @bl;
-    position: @abs;
-    top: 50%;
-    left: 50%;
-    transform: @translate-center;
-  }
-
-  &-loading {
+  .@{icon-prefix} {
     font-size: @font-size-lg;
-
-    &.small {
-      font-size: @font-size-md;
-    }
-
-    &.large {
-      font-size: 36px;
-    }
   }
 
-  &-dot {
+  &[rb-type='dot'] {
     position: @rel;
     display: @inlb;
-    background-color: @primary-color !important;
+    background-color: @primary-color;
     border-radius: 50%;
     .size(26px,26px);
     .ani-spin-bounce();
 
-    &.small {
+    * {
+      display: @none !important;
+    }
+
+    &[rb-size='small'] {
       .size(12px,12px);
     }
 
-    &.large {
+    &[rb-size='large'] {
       .size(36px,36px);
     }
 
-    &.bg {
-      &-primary {
-        background-color: @primary-color !important;
-      }
+    &[rb-color='success'] {
+      background-color: @success-color;
+    }
 
-      &-success {
-        background-color: @success-color !important;
-      }
+    &[rb-color='info'] {
+      background-color: @info-color;
+    }
 
-      &-info {
-        background-color: @info-color !important;
-      }
+    &[rb-color='warning'] {
+      background-color: @warning-color;
+    }
 
-      &-warning {
-        background-color: @warning-color !important;
-      }
-
-      &-error {
-        background-color: @error-color !important;
-      }
+    &[rb-color='error'] {
+      background-color: @error-color;
     }
   }
 
-  &-fix {
+  &[rb-fix='true'] {
     position: @abs;
     top: 0;
     left: 0;
     z-index: @zindex-spin;
     .size(100%,100%);
     background-color: hsla(0, 0%, 100%, 0.9);
-  }
 
-  &-fix &-main {
-    position: @abs;
-    top: 50%;
-    left: 50%;
-    transform: @translate-center;
-  }
-
-  &-fullscreen {
-    z-index: @zindex-spin-fullscreen;
-
-    &-wrapper {
-      position: @fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+    .@{css-prefix}spin-main {
+      display: @bl;
+      position: @abs;
+      top: 50%;
+      left: 50%;
+      transform: @translate-center;
     }
   }
+}
 
-  &-fade {
-    &-enter {
-      .fadeIn(0.25s);
-    }
+.@{css-prefix}spin-fade-in {
+  .fadeIn(0.25s);
+}
 
-    &-leave {
-      .fadeOut(0.25s);
-    }
-  }
+.@{css-prefix}spin-fade-out {
+  .fadeOut(0.25s);
 }
