@@ -1,10 +1,10 @@
 /**
  *
  * @param { HTMLElement } elem 添加过渡动画的元素
- * @param { String } mode 显示模式出场或入场？
- * @param { String } animationEnterCls  入场动画类名
- * @param { String } animationLeaveCls  出场动画类名
- * @param { Number } timeout  对应css的动画过渡时间
+ * @param { string } mode 显示模式出场或入场？
+ * @param { string } animationEnterCls  入场动画类名
+ * @param { string } animationLeaveCls  出场动画类名
+ * @param { number } timeout  对应css的动画过渡时间
  */
 
 function CSSTransition(
@@ -14,8 +14,6 @@ function CSSTransition(
     animationLeaveCls,
     timeout
 ) {
-    timeout = timeout * 1000;
-
     if (mode === 'in') {
         elem.style.display = 'block';
         elem.classList.add(animationEnterCls);
@@ -26,7 +24,7 @@ function CSSTransition(
         setTimeout(() => {
             elem.style.display = 'none';
             elem.classList.remove(animationLeaveCls);
-        }, timeout);
+        }, timeout * 1000);
     }
 }
 
