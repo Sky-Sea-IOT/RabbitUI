@@ -1,6 +1,6 @@
 @import '../common/index.css';
 @import '../common/iconfont/icons.css';
-rab-avatar {
+rb-avatar {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -16,30 +16,30 @@ rab-avatar {
   line-height: 32px;
   border-radius: 50%;
 }
-rab-avatar[rab-size='large'] {
+rb-avatar[rb-size='large'] {
   width: 40px;
   height: 40px;
   line-height: 40px;
   font-size: 24px;
 }
-rab-avatar[rab-size='small'] {
+rb-avatar[rb-size='small'] {
   width: 24px;
   height: 24px;
   line-height: 24px;
   font-size: 14px;
 }
-rab-avatar[rab-size='large'] .rbt-icon {
+rb-avatar[rb-size='large'] .rbt-icon {
   position: relative;
   top: -2px;
 }
-rab-avatar[rab-shape='square'] {
+rb-avatar[rb-shape='square'] {
   border-radius: 2px;
 }
-rab-avatar img {
+rb-avatar img {
   width: 100%;
   height: 100%;
 }
-rab-avatar .rbt-avatar-string {
+rb-avatar .rbt-avatar-string {
   position: absolute;
   left: 50%;
   transform: scale(1) translateX(-50%);

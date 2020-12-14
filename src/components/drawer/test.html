@@ -55,7 +55,7 @@
     <br /><br />
     <button class="rbt-btn" onclick="f()">嵌套抽屉</button>
 
-    <rab-drawer id="mydarwer">
+    <rb-drawer id="mydarwer">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
@@ -65,46 +65,46 @@
         <!-- <button class="rbt-btn" slot="footer" data-bind="drawer-close">
         取消
       </button> -->
-    </rab-drawer>
+    </rb-drawer>
 
-    <rab-drawer id="mydarwer2">
+    <rb-drawer id="mydarwer2">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </rab-drawer>
-    <rab-drawer id="mydarwer3">
+    </rb-drawer>
+    <rb-drawer id="mydarwer3">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </rab-drawer>
-    <rab-drawer id="mydarwer4">
+    </rb-drawer>
+    <rb-drawer id="mydarwer4">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </rab-drawer>
-    <rab-drawer id="mydarwer5">
+    </rb-drawer>
+    <rb-drawer id="mydarwer5">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <p>一些内容...</p>
             <p>一些内容...</p>
             <p>一些内容...</p>
         </div>
-    </rab-drawer>
-    <rab-drawer id="mydarwer6">
+    </rb-drawer>
+    <rb-drawer id="mydarwer6">
         <div slot="header">基础抽屉</div>
         <div slot="content">
             <button class="rbt-btn" onclick="c()">嵌套抽屉</button>
         </div>
-    </rab-drawer>
+    </rb-drawer>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
@@ -118,46 +118,46 @@
 <script src="../../mixins/scrollable.js"></script>
 <script src="./drawer.js"></script>
 <script>
-    RabbitUI.create("#mydarwer", {
+    RabbitUI.create('#mydarwer', {
         onClose() {
             // RabbitUI.Drawer.hide("#mydarwer");
         },
     });
 
-    RabbitUI.create("#mydarwer2");
+    RabbitUI.create('#mydarwer2');
 
-    RabbitUI.create("#mydarwer3", {
-        placement: "left",
+    RabbitUI.create('#mydarwer3', {
+        placement: 'left',
     });
 
-    RabbitUI.create("#mydarwer4", {
-        placement: "top",
+    RabbitUI.create('#mydarwer4', {
+        placement: 'top',
     });
 
-    RabbitUI.create("#mydarwer5", {
-        placement: "bottom",
+    RabbitUI.create('#mydarwer5', {
+        placement: 'bottom',
     });
 
-    RabbitUI.create("#mydarwer6");
+    RabbitUI.create('#mydarwer6');
 
     a = () => {
-        RabbitUI.Drawer.show("#mydarwer");
+        RabbitUI.Drawer.show('#mydarwer');
     };
     b = () => {
-        RabbitUI.Drawer.show("#mydarwer2");
+        RabbitUI.Drawer.show('#mydarwer2');
     };
     c = () => {
-        RabbitUI.Drawer.show("#mydarwer3");
+        RabbitUI.Drawer.show('#mydarwer3');
     };
     d = () => {
-        RabbitUI.Drawer.show("#mydarwer4");
+        RabbitUI.Drawer.show('#mydarwer4');
     };
     e = () => {
-        RabbitUI.Drawer.show("#mydarwer5");
+        RabbitUI.Drawer.show('#mydarwer5');
     };
 
     f = () => {
-        RabbitUI.Drawer.show("#mydarwer6");
+        RabbitUI.Drawer.show('#mydarwer6');
     };
 </script>
 

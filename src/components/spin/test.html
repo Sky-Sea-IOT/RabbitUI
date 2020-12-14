@@ -12,7 +12,6 @@
     .demo {
         width: 40%;
         margin: 10px auto;
-        /* border: 1px solid #ccc; */
     }
     
     .demo-box {
@@ -27,6 +26,8 @@
 <body>
     <div class="demo">
         <span class="rbt-spin-dot"></span>
+        <rab-spin type="dot">
+            </rb-spin>
     </div>
     <div class="demo">
         <span class="rbt-spin-dot small"></span>
@@ -46,6 +47,12 @@
             <div class="rbt-spin rbt-spin-fix rbt-spin-show-text">
                 <span class="rbt-spin-text">Loading...</span>
             </div>
+
+            <rab-spin rab-fix>
+                <i class="rbt-icon rbt-icon-loading1 rbt-spin-loading"></i>
+                <p>Loading...</p>
+            </rab-spin>
+
         </div>
         <div class="demo-box">
             <div class="rbt-spin rbt-spin-fix rbt-spin-show-text">
@@ -104,7 +111,7 @@
     };
     s2 = () => {
         RabbitUI.Spin.show({
-            text: "Loading...",
+            text: 'Loading...',
         });
         setTimeout(() => RabbitUI.Spin.hide(), 3000);
     };

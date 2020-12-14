@@ -29,26 +29,26 @@
             </div>
         </div> -->
     <section class="demo">
-        <rab-skeleton id="skeleton1"></rab-skeleton>
+        <rb-skeleton id="skeleton1"></rb-skeleton>
     </section>
 
     <section class="demo">
-        <rab-skeleton id="skeleton2"></rab-skeleton>
+        <rb-skeleton id="skeleton2"></rb-skeleton>
     </section>
 
     <section class="demo">
-        <rab-skeleton id="skeleton3"></rab-skeleton>
+        <rb-skeleton id="skeleton3"></rb-skeleton>
     </section>
 
     <section class="demo">
-        <rab-switch id="switch1"></rab-switch>
+        <rb-switch id="switch1"></rb-switch>
         <br /><br />
         <div class="loading">
-            <rab-skeleton id="skeleton4"></rab-skeleton>
+            <rb-skeleton id="skeleton4"></rb-skeleton>
             <br /><br />
-            <rab-skeleton id="skeleton5"></rab-skeleton>
+            <rb-skeleton id="skeleton5"></rb-skeleton>
             <br /><br />
-            <rab-skeleton id="skeleton6"></rab-skeleton>
+            <rb-skeleton id="skeleton6"></rb-skeleton>
         </div>
         <div class="main-content" style="display: none">
             <ul>
@@ -75,39 +75,39 @@
 <script src="./skeleton.js"></script>
 <script src="../switch/switch.js"></script>
 <script>
-    RabbitUI.create("#skeleton1", {
+    RabbitUI.create('#skeleton1', {
         rows: 1,
     });
-    RabbitUI.create("#skeleton2", {
+    RabbitUI.create('#skeleton2', {
         avatar: true,
         rows: 4,
     });
-    RabbitUI.create("#skeleton3", {
+    RabbitUI.create('#skeleton3', {
         active: true,
     });
-    RabbitUI.create("#skeleton4", {
-        active: true,
-        avatar: true,
-        rows: 2,
-    });
-    RabbitUI.create("#skeleton5", {
+    RabbitUI.create('#skeleton4', {
         active: true,
         avatar: true,
         rows: 2,
     });
-    RabbitUI.create("#skeleton6", {
+    RabbitUI.create('#skeleton5', {
         active: true,
         avatar: true,
         rows: 2,
     });
-    RabbitUI.create("#switch1", {
-        onChange: (status) => {
+    RabbitUI.create('#skeleton6', {
+        active: true,
+        avatar: true,
+        rows: 2,
+    });
+    RabbitUI.create('#switch1', {
+        onChange: status => {
             if (status) {
-                document.querySelector(".loading").style.display = "none";
-                document.querySelector(".main-content").style.display = "block";
+                document.querySelector('.loading').style.display = 'none';
+                document.querySelector('.main-content').style.display = 'block';
             } else {
-                document.querySelector(".loading").style.display = "block";
-                document.querySelector(".main-content").style.display = "none";
+                document.querySelector('.loading').style.display = 'block';
+                document.querySelector('.main-content').style.display = 'none';
             }
         },
     });

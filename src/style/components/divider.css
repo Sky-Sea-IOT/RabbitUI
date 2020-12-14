@@ -1,5 +1,5 @@
 @import '../common/index.css';
-rab-divider {
+rb-divider {
   display: flex;
   clear: both;
   width: 100%;
@@ -10,7 +10,7 @@ rab-divider {
   line-height: 1.5715;
   border-top: 1px solid #e8eaec;
 }
-rab-divider[rab-type='vertical'] {
+rb-divider[rb-type='vertical'] {
   width: 1px;
   min-width: 1px;
   height: 0.9em;
@@ -22,11 +22,11 @@ rab-divider[rab-type='vertical'] {
   border-top: 0;
   border-left: 1px solid #e8eaec;
 }
-rab-divider[rab-dashed] {
+rb-divider[rb-dashed] {
   background: 0 0;
   border-top: 1px dashed #dcdee2;
 }
-rab-divider.rbt-divider-with-text {
+rb-divider.rbt-divider-with-text {
   display: flex;
   margin: 16px 0;
   color: #2c3e50;
@@ -37,8 +37,8 @@ rab-divider.rbt-divider-with-text {
   border-top: 0;
   border-top-color: #e8eaec;
 }
-rab-divider.rbt-divider-with-text:after,
-rab-divider.rbt-divider-with-text:before {
+rb-divider.rbt-divider-with-text:after,
+rb-divider.rbt-divider-with-text:before {
   position: relative;
   top: 50%;
   width: 50%;
@@ -48,20 +48,20 @@ rab-divider.rbt-divider-with-text:before {
   transform: translateY(50%);
   content: '';
 }
-rab-divider.rbt-divider-with-text-left:after,
-rab-divider.rbt-divider-with-text-right:before {
+rb-divider.rbt-divider-with-text-left:after,
+rb-divider.rbt-divider-with-text-right:before {
   top: 50%;
   width: 95%;
 }
-rab-divider.rbt-divider-with-text-left:before {
+rb-divider.rbt-divider-with-text-left:before {
   top: 50%;
   width: 5%;
 }
-rab-divider.rbt-divider-with-text-right:after {
+rb-divider.rbt-divider-with-text-right:after {
   top: 50%;
   width: 5%;
 }
-rab-divider .rbt-divider-inner-text {
+rb-divider .rbt-divider-inner-text {
   display: inline-block;
   padding: 0 16px;
 }

@@ -1,12 +1,15 @@
-@import "../common/index.css";
-@import "../custom.less";
-@import "../common/iconfont/icons.css";
-@import "../animation/fade.less";
-@import "../animation/spin.less";
-@import "../mixins/size.less";
+@import '../common/index.css';
+@import '../custom.less';
+@import '../common/iconfont/icons.css';
+@import '../animation/fade.less';
+@import '../animation/spin.less';
+@import '../mixins/size.less';
 
 @prefix: @css-prefix;
 @icon-prefix: @css-prefix-iconfont;
+
+@{tag-prefix} {
+}
 
 .@{prefix}spin {
   color: @primary-color;
@@ -23,9 +26,6 @@
 
   &-loading {
     font-size: @font-size-lg;
-    .ani-spin-loading();
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
 
     &.small {
       font-size: @font-size-md;

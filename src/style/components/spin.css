@@ -1,5 +1,5 @@
-@import "../common/index.css";
-@import "../common/iconfont/icons.css";
+@import '../common/index.css';
+@import '../common/iconfont/icons.css';
 @-webkit-keyframes rbtFadeIn {
   0% {
     opacity: 0;
@@ -31,6 +31,11 @@
   100% {
     opacity: 0;
   }
+}
+[class*='rbt-icon-loading1'] {
+  transform: rotate(45deg);
+  -webkit-animation: ani-spin 1.3s linear infinite;
+  animation: ani-spin 1.3s linear infinite;
 }
 @-webkit-keyframes ani-spin {
   0% {
@@ -80,11 +85,6 @@
 }
 .rbt-spin-loading {
   font-size: 24px;
-  transform: rotate(45deg);
-  -webkit-animation: ani-spin 1.3s linear infinite;
-  animation: ani-spin 1.3s linear infinite;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
 }
 .rbt-spin-loading.small {
   font-size: 16px;

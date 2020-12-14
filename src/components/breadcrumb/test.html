@@ -44,16 +44,16 @@
             </li>
         </ul> -->
 
-        <rab-breadcrumb id="b1">
+        <rb-breadcrumb id="b1">
             <a href="#" slot="breadcrumbItem">Home</a>
             <a href="#" slot="breadcrumbItem">Components Docs</a>
             <a href="#" slot="breadcrumbItem">Components List</a>
             <span slot="breadcrumbItem">Components</span>
-        </rab-breadcrumb>
+        </rb-breadcrumb>
     </div>
 
     <div class="demo">
-        <rab-breadcrumb id="b2">
+        <rb-breadcrumb id="b2">
             <a href="#" slot="breadcrumbItem">
                 <i class="rbt-icon rbt-icon-ios-home"></i> Home
             </a>
@@ -61,25 +61,25 @@
                 <i class="rbt-icon rbt-icon-logo-buffer"></i> Components Docs
             </a>
             <span slot="breadcrumbItem"> Components </span>
-        </rab-breadcrumb>
+        </rb-breadcrumb>
     </div>
 
     <div class="demo">
-        <rab-breadcrumb id="b3">
+        <rb-breadcrumb id="b3">
             <a href="#" slot="breadcrumbItem">Home</a>
             <a href="#" slot="breadcrumbItem">Components Docs</a>
             <a href="#" slot="breadcrumbItem">Components List</a>
             <span slot="breadcrumbItem">Components</span>
-        </rab-breadcrumb>
+        </rb-breadcrumb>
     </div>
 
     <div class="demo">
-        <rab-breadcrumb id="b4">
+        <rb-breadcrumb id="b4">
             <a href="#" slot="breadcrumbItem">Home</a>
             <a href="#" slot="breadcrumbItem">Components Docs</a>
             <a href="#" slot="breadcrumbItem">Components List</a>
             <span slot="breadcrumbItem">Components</span>
-        </rab-breadcrumb>
+        </rb-breadcrumb>
     </div>
 </body>
 <script src="../../utils/addDom.js"></script>
@@ -88,12 +88,12 @@
 <script src="../../common/main.js"></script>
 <script src="./breadcrumb.js"></script>
 <script>
-    RabbitUI.create("#b1");
-    RabbitUI.create("#b2");
-    RabbitUI.create("#b3", {
-        separator: ">",
+    RabbitUI.create('#b1');
+    RabbitUI.create('#b2');
+    RabbitUI.create('#b3', {
+        separator: '>',
     });
-    RabbitUI.create("#b4", {
+    RabbitUI.create('#b4', {
         separator: "<b class='demo-breadcrumb-separator'>-></b>",
     });
 </script>

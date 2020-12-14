@@ -67,30 +67,30 @@
     </div> -->
     <div class="demo">
         <h3>基本</h3>
-        <rab-table id="t1"></rab-table>
+        <rb-table id="t1"></rb-table>
     </div>
     <div class="demo">
         <h3>斑马纹</h3>
-        <rab-table id="t2"></rab-table>
+        <rb-table id="t2"></rb-table>
     </div>
     <div class="demo">
         <h3>带边框</h3>
-        <rab-table id="t3"></rab-table>
+        <rb-table id="t3"></rb-table>
     </div>
     <div class="demo">
         <h3>给某一行指定一个样式名称</h3>
-        <rab-table id="t4"></rab-table>
+        <rb-table id="t4"></rb-table>
     </div>
     <div class="demo">
         <h3>固定表头</h3>
-        <rab-table id="t5"></rab-table>
+        <rb-table id="t5"></rb-table>
     </div>
     <div class="demo">
         <h3>尺寸</h3>
-        <rab-table id="t6"></rab-table>
+        <rb-table id="t6"></rb-table>
     </div>
     <div class="demo">
-        <rab-table id="t7"></rab-table>
+        <rb-table id="t7"></rb-table>
     </div>
 </body>
 <script src="../../utils/typeof.js"></script>
@@ -103,108 +103,108 @@
 <script src="./table.js"></script>
 <script>
     const dataSource = {
-        columns: ["Name", "Age", "Address"],
+        columns: ['Name', 'Age', 'Address'],
         rows: [{
-            Name: "John Brown",
+            Name: 'John Brown',
             Age: 18,
-            Address: "New York No. 1 Lake Park",
+            Address: 'New York No. 1 Lake Park',
         }, {
-            Name: "Jim Green",
+            Name: 'Jim Green',
             Age: 24,
-            Address: "London No. 1 Lake Park",
+            Address: 'London No. 1 Lake Park',
         }, {
-            Name: "Joe Black",
+            Name: 'Joe Black',
             Age: 30,
-            Address: "Sydney No. 1 Lake Park",
+            Address: 'Sydney No. 1 Lake Park',
         }, {
-            Name: "Jon Snow",
+            Name: 'Jon Snow',
             Age: 26,
-            Address: "Ottawa No. 2 Lake Park",
+            Address: 'Ottawa No. 2 Lake Park',
         }, ],
     };
     const dataSource2 = {
-        columns: ["Name", "Age", "Address"],
+        columns: ['Name', 'Age', 'Address'],
         rows: [{
-            Name: "John Brown",
+            Name: 'John Brown',
             Age: 18,
-            Address: "New York No. 1 Lake Park",
+            Address: 'New York No. 1 Lake Park',
         }, {
-            Name: "Jim Green",
+            Name: 'Jim Green',
             Age: 24,
-            Address: "London No. 1 Lake Park",
-            rowClassName: "demo-table-info-row",
+            Address: 'London No. 1 Lake Park',
+            rowClassName: 'demo-table-info-row',
         }, {
-            Name: "Joe Black",
+            Name: 'Joe Black',
             Age: 30,
-            Address: "Sydney No. 1 Lake Park",
+            Address: 'Sydney No. 1 Lake Park',
         }, {
-            Name: "Jon Snow",
+            Name: 'Jon Snow',
             Age: 26,
-            Address: "Ottawa No. 2 Lake Park",
-            rowClassName: "demo-table-error-row",
+            Address: 'Ottawa No. 2 Lake Park',
+            rowClassName: 'demo-table-error-row',
         }, ],
     };
     const dataSource3 = {
-        columns: ["Name", "Age", "Address"],
+        columns: ['Name', 'Age', 'Address'],
         rows: [{
-            Name: "John Brown",
+            Name: 'John Brown',
             Age: 18,
-            Address: "New York No. 1 Lake Park",
+            Address: 'New York No. 1 Lake Park',
         }, {
-            Name: "Jim Green",
+            Name: 'Jim Green',
             Age: 24,
-            Address: "London No. 1 Lake Park",
+            Address: 'London No. 1 Lake Park',
         }, {
-            Name: "Joe Black",
+            Name: 'Joe Black',
             Age: 30,
-            Address: "Sydney No. 1 Lake Park",
+            Address: 'Sydney No. 1 Lake Park',
         }, {
-            Name: "Jon Snow",
+            Name: 'Jon Snow',
             Age: 26,
-            Address: "Ottawa No. 2 Lake Park",
+            Address: 'Ottawa No. 2 Lake Park',
         }, {
-            Name: "Jon Black",
+            Name: 'Jon Black',
             Age: 30,
-            Address: "Ottawa No. 2 Lake Park",
+            Address: 'Ottawa No. 2 Lake Park',
         }, {
-            Name: "Jon Green",
+            Name: 'Jon Green',
             Age: 24,
-            Address: "Ottawa No. 2 Lake Park",
+            Address: 'Ottawa No. 2 Lake Park',
         }, {
-            Name: "John Brown",
+            Name: 'John Brown',
             Age: 18,
-            Address: "New York No. 1 Lake Park",
+            Address: 'New York No. 1 Lake Park',
         }, ],
     };
 
-    RabbitUI.create("#t1", {
+    RabbitUI.create('#t1', {
         dataSource,
         onRowClick(row, index) {
             console.log(row);
         },
     });
-    RabbitUI.create("#t2", {
+    RabbitUI.create('#t2', {
         dataSource,
         stripe: true,
     });
-    RabbitUI.create("#t3", {
+    RabbitUI.create('#t3', {
         dataSource,
         border: true,
     });
-    RabbitUI.create("#t4", {
+    RabbitUI.create('#t4', {
         dataSource: dataSource2,
     });
-    RabbitUI.create("#t5", {
+    RabbitUI.create('#t5', {
         dataSource: dataSource3,
-        height: "200px",
+        height: '200px',
     });
-    RabbitUI.create("#t6", {
+    RabbitUI.create('#t6', {
         dataSource,
-        size: "large",
+        size: 'large',
     });
-    RabbitUI.create("#t7", {
+    RabbitUI.create('#t7', {
         dataSource,
-        size: "small",
+        size: 'small',
     });
 </script>
 

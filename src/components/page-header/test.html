@@ -16,10 +16,10 @@
 
 <body>
     <div class="demo">
-        <rab-pageheader id="p1">
+        <rb-pageheader id="p1">
             <div slot="header">返回</div>
             <div slot="content">详情页面</div>
-        </rab-pageheader>
+        </rb-pageheader>
         <!-- <div class="rbt-page-header">
             <div class="rbt-page-header-back">
                 <i class="rbt-icon rbt-icon-ios-arrow-back"></i>
@@ -36,9 +36,9 @@
 <script src="../../common/main.js"></script>
 <script src="./page-header.js"></script>
 <script>
-    RabbitUI.create("#p1", {
+    RabbitUI.create('#p1', {
         onBack: () => {
-            console.log("back");
+            console.log('back');
         },
     });
 </script>

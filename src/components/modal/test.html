@@ -41,19 +41,19 @@
     <button onclick="a()" class="rbt-btn">显示</button>
     <button onclick="b()" class="rbt-btn">异步</button>
 
-    <rab-modal id="m1">
+    <rb-modal id="m1">
         <div slot="header">基本对话框</div>
         <div slot="content">
             <p>对话框内容...</p>
             <p>对话框内容...</p>
             <p>对话框内容...</p>
         </div>
-    </rab-modal>
+    </rb-modal>
 
-    <rab-modal id="m2">
+    <rb-modal id="m2">
         <div slot="header">对话框标题</div>
         <p slot="content">点击确定后，对话框将在 2秒 后关闭。</p>
-    </rab-modal>
+    </rb-modal>
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/destory.js"></script>
@@ -67,19 +67,19 @@
 <script src="../../utils/css-transition.js"></script>
 <script src="./modal.js"></script>
 <script>
-    RabbitUI.create("#m1");
-    RabbitUI.create("#m2", {
+    RabbitUI.create('#m1');
+    RabbitUI.create('#m2', {
         loading: true,
         onOk: () => {
-            setTimeout(() => RabbitUI.Modal.hide("#m2"), 2000);
+            setTimeout(() => RabbitUI.Modal.hide('#m2'), 2000);
         },
     });
 
     a = () => {
-        RabbitUI.Modal.show("#m1");
+        RabbitUI.Modal.show('#m1');
     };
     b = () => {
-        RabbitUI.Modal.show("#m2");
+        RabbitUI.Modal.show('#m2');
     };
 </script>
 

@@ -1,5 +1,5 @@
 Rabbit.prototype.tag = () => {
-    const tags = document.querySelectorAll('rab-tag');
+    const tags = document.querySelectorAll('rb-tag');
     tags.forEach(tag => {
         if (tag.classList.contains('checkable')) {
             tag.addEventListener('click', () => {

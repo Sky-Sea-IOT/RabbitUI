@@ -43,43 +43,43 @@
         <span class="rbt-switch-inner"></span>
       </button> -->
 
-        <rab-switch id="switch1"></rab-switch>
+        <rb-switch id="switch1"></rb-switch>
         <br />
         <br />
         <div>
-            <rab-switch id="switch2"></rab-switch>
-            <rab-switch id="switch3"></rab-switch>
-            <rab-switch id="switch4"></rab-switch>
+            <rb-switch id="switch2"></rb-switch>
+            <rb-switch id="switch3"></rb-switch>
+            <rb-switch id="switch4"></rb-switch>
         </div>
         <br />
         <div>
-            <rab-switch id="switch5">
+            <rb-switch id="switch5">
                 <span slot="open">开</span>
                 <span slot="close">关</span>
-            </rab-switch>
+            </rb-switch>
 
-            <rab-switch id="switch6">
+            <rb-switch id="switch6">
                 <div slot="open">
                     <i class="rbt-icon rbt-icon-md-checkmark"></i>
                 </div>
                 <div slot="close"><i class="rbt-icon rbt-icon-md-close"></i></div>
-            </rab-switch>
+            </rb-switch>
         </div>
         <br />
-        <rab-switch id="switch7">
+        <rb-switch id="switch7">
             <span slot="open">开启</span>
             <span slot="close">关闭</span>
-        </rab-switch>
+        </rb-switch>
 
-        <rab-switch id="switch8">
+        <rb-switch id="switch8">
             <span slot="open">ON</span>
             <span slot="close">OFF</span>
-        </rab-switch>
+        </rb-switch>
         <br /><br />
-        <rab-switch id="switch9"></rab-switch>
-        <rab-switch id="switch10"></rab-switch>
+        <rb-switch id="switch9"></rb-switch>
+        <rb-switch id="switch10"></rb-switch>
         <br /><br />
-        <rab-switch id="switch11"></rab-switch>
+        <rb-switch id="switch11"></rb-switch>
     </div>
 </body>
 <script src="../../utils/typeof.js"></script>
@@ -95,39 +95,39 @@
 <script src="../../mixins/aferCloseCb.js"></script>
 <script src="../message/message.js"></script>
 <script>
-    RabbitUI.init(["Message"]);
-    RabbitUI.create("#switch1", {
+    RabbitUI.init(['Message']);
+    RabbitUI.create('#switch1', {
         onChange(status) {
-            RabbitUI.Message.info("开关状态：" + status);
+            RabbitUI.Message.info('开关状态：' + status);
         },
     });
 
-    RabbitUI.create("#switch2", {
-        size: "small",
+    RabbitUI.create('#switch2', {
+        size: 'small',
     });
-    RabbitUI.create("#switch3");
-    RabbitUI.create("#switch4", {
-        size: "large",
+    RabbitUI.create('#switch3');
+    RabbitUI.create('#switch4', {
+        size: 'large',
     });
-    RabbitUI.create("#switch5");
-    RabbitUI.create("#switch6");
-    RabbitUI.create("#switch7", {
-        size: "large",
+    RabbitUI.create('#switch5');
+    RabbitUI.create('#switch6');
+    RabbitUI.create('#switch7', {
+        size: 'large',
     });
-    RabbitUI.create("#switch8", {
-        size: "large",
+    RabbitUI.create('#switch8', {
+        size: 'large',
     });
-    RabbitUI.create("#switch9", {
+    RabbitUI.create('#switch9', {
         disabled: true,
         checked: true,
     });
-    RabbitUI.create("#switch10", {
+    RabbitUI.create('#switch10', {
         disabled: true,
-        size: "small",
+        size: 'small',
     });
-    RabbitUI.create("#switch11", {
-        openColor: "#13ce66",
-        offColor: "#ff4949",
+    RabbitUI.create('#switch11', {
+        openColor: '#13ce66',
+        offColor: '#ff4949',
     });
 </script>
 

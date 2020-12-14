@@ -4,10 +4,10 @@
  */
 // 字体适应容器：transform.scale = 头像容器 / 字体容器宽度 + 15
 Rabbit.prototype.Avatar = () => {
-    const avatars = document.querySelectorAll('rab-avatar');
+    const avatars = document.querySelectorAll('rb-avatar');
 
     avatars.forEach(avatar => {
-        const iconType = avatar.getAttribute('rab-icon');
+        const iconType = avatar.getAttribute('rb-icon');
         const iconElem = document.createElement('i');
         iconElem.className = 'rbt-icon';
 

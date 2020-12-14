@@ -85,67 +85,67 @@
         </div>
       </div> -->
 
-        <rab-popover id="popover1">
+        <rb-popover id="popover1">
             <button class="rbt-btn" slot="ref">Hover 触发</button>
-        </rab-popover>
-        <rab-popover id="popover2">
+        </rb-popover>
+        <rb-popover id="popover2">
             <button class="rbt-btn" slot="ref">Focus 触发</button>
-        </rab-popover>
-        <rab-popover id="popover3">
+        </rb-popover>
+        <rb-popover id="popover3">
             <button class="rbt-btn" slot="ref">Click 触发</button>
-        </rab-popover>
+        </rb-popover>
     </div>
     <div class="demo">
         <div class="top">
-            <rab-popover id="popover4">
+            <rb-popover id="popover4">
                 <button class="rbt-btn" slot="ref">上左</button>
-            </rab-popover>
-            <rab-popover id="popover5">
+            </rb-popover>
+            <rb-popover id="popover5">
                 <button class="rbt-btn" slot="ref">上边</button>
-            </rab-popover>
-            <rab-popover id="popover6">
+            </rb-popover>
+            <rb-popover id="popover6">
                 <button class="rbt-btn" slot="ref">上左</button>
-            </rab-popover>
+            </rb-popover>
         </div>
         <div class="left">
-            <rab-popover id="popover7">
+            <rb-popover id="popover7">
                 <button class="rbt-btn" slot="ref">左上</button>
-            </rab-popover>
-            <rab-popover id="popover8">
+            </rb-popover>
+            <rb-popover id="popover8">
                 <button class="rbt-btn" slot="ref">左边</button>
-            </rab-popover>
-            <rab-popover id="popover9">
+            </rb-popover>
+            <rb-popover id="popover9">
                 <button class="rbt-btn" slot="ref">左下</button>
-            </rab-popover>
+            </rb-popover>
         </div>
         <div class="right">
-            <rab-popover id="popover10">
+            <rb-popover id="popover10">
                 <button class="rbt-btn" slot="ref">右上</button>
-            </rab-popover>
-            <rab-popover id="popover11">
+            </rb-popover>
+            <rb-popover id="popover11">
                 <button class="rbt-btn" slot="ref">右边</button>
-            </rab-popover>
-            <rab-popover id="popover12">
+            </rb-popover>
+            <rb-popover id="popover12">
                 <button class="rbt-btn" slot="ref">右下</button>
-            </rab-popover>
+            </rb-popover>
         </div>
         <div class="bottom">
-            <rab-popover id="popover13">
+            <rb-popover id="popover13">
                 <button class="rbt-btn" slot="ref">下左</button>
-            </rab-popover>
-            <rab-popover id="popover14">
+            </rb-popover>
+            <rb-popover id="popover14">
                 <button class="rbt-btn" slot="ref">下边</button>
-            </rab-popover>
-            <rab-popover id="popover15">
+            </rb-popover>
+            <rb-popover id="popover15">
                 <button class="rbt-btn" slot="ref">下右</button>
-            </rab-popover>
+            </rb-popover>
         </div>
     </div>
     <div class="demo">
-        <rab-popover id="popover16">
+        <rb-popover id="popover16">
             <button class="rbt-btn" slot="ref">浮层内关闭</button>
-        </rab-popover>
-        <rab-popover id="popover17">
+        </rb-popover>
+        <rb-popover id="popover17">
             <button class="rbt-btn" slot="ref">嵌套复杂内容</button>
             <div class="custom-table" slot="content">
                 <table>
@@ -175,7 +175,7 @@
                     </tbody>
                 </table>
             </div>
-        </rab-popover>
+        </rb-popover>
     </div>
 </body>
 
@@ -191,88 +191,88 @@
 <script src="../../mixins/clickoutside.js"></script>
 <script src="./popover.js"></script>
 <script>
-    RabbitUI.create("#popover1", {
-        title: "标题",
+    RabbitUI.create('#popover1', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        trigger: "hover",
+        trigger: 'hover',
     });
-    RabbitUI.create("#popover2", {
-        title: "标题",
+    RabbitUI.create('#popover2', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        trigger: "focus",
+        trigger: 'focus',
     });
-    RabbitUI.create("#popover3", {
-        title: "标题",
-        content: `提示内容<br />提示内容`,
-    });
-
-    RabbitUI.create("#popover4", {
-        title: "标题",
-        content: `提示内容<br />提示内容`,
-        placement: "top-start",
-    });
-    RabbitUI.create("#popover5", {
-        title: "标题",
+    RabbitUI.create('#popover3', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
     });
 
-    RabbitUI.create("#popover6", {
-        title: "标题",
+    RabbitUI.create('#popover4', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "top-end",
+        placement: 'top-start',
     });
-    RabbitUI.create("#popover7", {
-        title: "标题",
+    RabbitUI.create('#popover5', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "left-start",
     });
-    RabbitUI.create("#popover8", {
-        title: "标题",
+
+    RabbitUI.create('#popover6', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "left",
+        placement: 'top-end',
     });
-    RabbitUI.create("#popover9", {
-        title: "标题",
+    RabbitUI.create('#popover7', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "left-end",
+        placement: 'left-start',
     });
-    RabbitUI.create("#popover10", {
-        title: "标题",
+    RabbitUI.create('#popover8', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "right-start",
+        placement: 'left',
     });
-    RabbitUI.create("#popover11", {
-        title: "标题",
+    RabbitUI.create('#popover9', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "right",
+        placement: 'left-end',
     });
-    RabbitUI.create("#popover12", {
-        title: "标题",
+    RabbitUI.create('#popover10', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "right-end",
+        placement: 'right-start',
     });
-    RabbitUI.create("#popover13", {
-        title: "标题",
+    RabbitUI.create('#popover11', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "bottom-start",
+        placement: 'right',
     });
-    RabbitUI.create("#popover14", {
-        title: "标题",
+    RabbitUI.create('#popover12', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "bottom",
+        placement: 'right-end',
     });
-    RabbitUI.create("#popover15", {
-        title: "标题",
+    RabbitUI.create('#popover13', {
+        title: '标题',
         content: `提示内容<br />提示内容`,
-        placement: "bottom-end",
+        placement: 'bottom-start',
     });
-    RabbitUI.create("#popover16", {
+    RabbitUI.create('#popover14', {
+        title: '标题',
+        content: `提示内容<br />提示内容`,
+        placement: 'bottom',
+    });
+    RabbitUI.create('#popover15', {
+        title: '标题',
+        content: `提示内容<br />提示内容`,
+        placement: 'bottom-end',
+    });
+    RabbitUI.create('#popover16', {
         title: `<em>自定义标题</em>`,
         content: `<a id="close">关闭提示框</a>`,
-        triggerHide: "#close",
+        triggerHide: '#close',
     });
-    RabbitUI.create("#popover17", {
-        placement: "right",
+    RabbitUI.create('#popover17', {
+        placement: 'right',
         width: 400,
     });
 </script>

@@ -36,25 +36,25 @@
         </div>
     </div> -->
 
-        <rab-result id="result1">
+        <rb-result id="result1">
             <button class="rbt-btn rbt-btn-primary" slot="footer">查看日志</button>
-        </rab-result>
+        </rb-result>
     </section>
     <section class="demo">
-        <rab-result id="result2">
+        <rb-result id="result2">
             <div slot="footer">
                 <button class="rbt-btn rbt-btn-success">打印账单</button>
                 <button class="rbt-btn">再次购买</button>
             </div>
-        </rab-result>
+        </rb-result>
     </section>
     <section class="demo">
-        <rab-result id="result3">
+        <rb-result id="result3">
             <button class="rbt-btn rbt-btn-warning" slot="footer">查看日志</button>
-        </rab-result>
+        </rb-result>
     </section>
     <section class="demo">
-        <rab-result id="result4">
+        <rb-result id="result4">
             <div class="desc" slot="content">
                 <h3 style="font-size: 16px">
                     The content you submitted has the following error:
@@ -74,22 +74,22 @@
                 <button class="rbt-btn rbt-btn-primary">查看日志</button>
                 <button class="rbt-btn">联系客服</button>
             </div>
-        </rab-result>
+        </rb-result>
     </section>
     <section class="demo">
-        <rab-result id="result5">
+        <rb-result id="result5">
             <button class="rbt-btn rbt-btn-primary" slot="footer">返回首页</button>
-        </rab-result>
+        </rb-result>
     </section>
     <section class="demo">
-        <rab-result id="result6">
+        <rb-result id="result6">
             <button class="rbt-btn rbt-btn-primary" slot="footer">返回首页</button>
-        </rab-result>
+        </rb-result>
     </section>
     <section class="demo">
-        <rab-result id="result7">
+        <rb-result id="result7">
             <button class="rbt-btn rbt-btn-primary" slot="footer">返回首页</button>
-        </rab-result>
+        </rb-result>
     </section>
 </body>
 <script src="../../utils/typeof.js"></script>
@@ -101,37 +101,37 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./result.js"></script>
 <script>
-    RabbitUI.create("#result1", {
-        title: "您已经执行过该操作",
+    RabbitUI.create('#result1', {
+        title: '您已经执行过该操作',
     });
-    RabbitUI.create("#result2", {
-        status: "success",
-        title: "成功购买云服务器!",
-        subtitle: "订单号: 2020362851226364808云服务器配置1-5分钟，请等待。",
+    RabbitUI.create('#result2', {
+        status: 'success',
+        title: '成功购买云服务器!',
+        subtitle: '订单号: 2020362851226364808云服务器配置1-5分钟，请等待。',
     });
-    RabbitUI.create("#result3", {
-        status: "warning",
-        title: "您的操作环境出了异常",
+    RabbitUI.create('#result3', {
+        status: 'warning',
+        title: '您的操作环境出了异常',
     });
-    RabbitUI.create("#result4", {
-        status: "error",
-        title: "无法访问此网站!",
-        subtitle: "xxxwtf.com 的响应时间过长，请检查网络连接",
+    RabbitUI.create('#result4', {
+        status: 'error',
+        title: '无法访问此网站!',
+        subtitle: 'xxxwtf.com 的响应时间过长，请检查网络连接',
     });
-    RabbitUI.create("#result5", {
-        status: "403",
-        title: "403",
-        subtitle: "抱歉，您没有权限访问此页。",
+    RabbitUI.create('#result5', {
+        status: '403',
+        title: '403',
+        subtitle: '抱歉，您没有权限访问此页。',
     });
-    RabbitUI.create("#result6", {
-        status: "404",
-        title: "404",
-        subtitle: "抱歉，您访问的页面不存在。",
+    RabbitUI.create('#result6', {
+        status: '404',
+        title: '404',
+        subtitle: '抱歉，您访问的页面不存在。',
     });
-    RabbitUI.create("#result7", {
-        status: "500",
-        title: "500",
-        subtitle: " 服务器错误，无法完成请求。",
+    RabbitUI.create('#result7', {
+        status: '500',
+        title: '500',
+        subtitle: ' 服务器错误，无法完成请求。',
     });
 </script>
 

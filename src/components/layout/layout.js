@@ -1,16 +1,16 @@
 Rabbit.prototype.layout = () => {
     const layout = {
-        header: document.querySelectorAll('rab-header'),
-        content: document.querySelectorAll('rab-content'),
-        footer: document.querySelectorAll('rab-footer'),
-        sider: document.querySelectorAll('rab-sider'),
+        header: document.querySelectorAll('rb-header'),
+        content: document.querySelectorAll('rb-content'),
+        footer: document.querySelectorAll('rb-footer'),
+        sider: document.querySelectorAll('rb-sider'),
     };
 
     const childCheck = key => {
         layout[key].forEach(node => {
-            if (node.parentElement.tagName.toLowerCase() !== 'rab-layout') {
+            if (node.parentElement.tagName.toLowerCase() !== 'rb-layout') {
                 console.error(
-                    '[Rabbit warn] 👇 This component should be used under the parent element <rab-layout>, not alone'
+                    '[Rabbit warn] 👇 This component should be used under the parent element <rb-layout>, not alone'
                 );
                 console.error(node);
                 node.remove();

@@ -48,7 +48,7 @@
         </div> -->
     </div>
     <div class="demo">
-        <rab-dropdown id="d1">
+        <rb-dropdown id="d1">
             <a href="javascript:void(0)" slot="ref">
           下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -57,9 +57,9 @@
             <span slot="dropdownItem">菜单项 3</span>
             <span slot="dropdownItem">菜单项 4</span>
             <span slot="dropdownItem">菜单项 5</span>
-        </rab-dropdown>
+        </rb-dropdown>
 
-        <rab-dropdown id="d2">
+        <rb-dropdown id="d2">
             <button class="rbt-btn rbt-btn-primary" slot="ref">
           下拉菜单 <i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </button>
@@ -68,11 +68,11 @@
             <span slot="dropdownItem">菜单项 3</span>
             <span slot="dropdownItem">菜单项 4</span>
             <span slot="dropdownItem">菜单项 5</span>
-        </rab-dropdown>
+        </rb-dropdown>
     </div>
 
     <div class="demo">
-        <rab-dropdown id="d3">
+        <rb-dropdown id="d3">
             <a href="javascript:void(0)" slot="ref">
           hover 触发<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -80,9 +80,9 @@
             <span slot="dropdownItem">菜单项 2</span>
             <span slot="dropdownItem">菜单项 3</span>
             <span slot="dropdownItem">菜单项 4</span>
-        </rab-dropdown>
+        </rb-dropdown>
 
-        <rab-dropdown id="d4">
+        <rb-dropdown id="d4">
             <a href="javascript:void(0)" slot="ref">
           click 触发<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -90,19 +90,19 @@
             <span slot="dropdownItem">菜单项 2</span>
             <span slot="dropdownItem">菜单项 3</span>
             <span slot="dropdownItem">菜单项 4</span>
-        </rab-dropdown>
+        </rb-dropdown>
 
-        <rab-dropdown id="d5">
+        <rb-dropdown id="d5">
             <a href="javascript:void(0)" slot="ref">
           右键触发<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
             <span slot="dropdownItem">取消</span>
             <span slot="dropdownItem" style="color: #ff4d4f">删除</span>
-        </rab-dropdown>
+        </rb-dropdown>
     </div>
 
     <div class="demo">
-        <rab-dropdown id="d6">
+        <rb-dropdown id="d6">
             <a href="javascript:void(0)" slot="ref">
           菜单(下左)<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -110,9 +110,9 @@
             <span slot="dropdownItem">第二个菜单项</span>
             <span slot="dropdownItem">第三个菜单项</span>
             <span slot="dropdownItem">第四个菜单项</span>
-        </rab-dropdown>
+        </rb-dropdown>
 
-        <rab-dropdown id="d7">
+        <rb-dropdown id="d7">
             <a href="javascript:void(0)" slot="ref">
           菜单(居中)<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -120,9 +120,9 @@
             <span slot="dropdownItem">第二个菜单项</span>
             <span slot="dropdownItem">第三个菜单项</span>
             <span slot="dropdownItem">第四个菜单项</span>
-        </rab-dropdown>
+        </rb-dropdown>
 
-        <rab-dropdown id="d8">
+        <rb-dropdown id="d8">
             <a href="javascript:void(0)" slot="ref">
           菜单(下右)<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -130,11 +130,11 @@
             <span slot="dropdownItem">第二个菜单项</span>
             <span slot="dropdownItem">第三个菜单项</span>
             <span slot="dropdownItem">第四个菜单项</span>
-        </rab-dropdown>
+        </rb-dropdown>
     </div>
 
     <div class="demo">
-        <rab-dropdown id="d9">
+        <rb-dropdown id="d9">
             <button class="rbt-btn rbt-btn-primary" slot="ref">
           下拉菜单 <i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </button>
@@ -143,9 +143,9 @@
             <span slot="dropdownItem">菜单项 3</span>
             <span slot="dropdownItem">菜单项 4</span>
             <span slot="dropdownItem">菜单项 5</span>
-        </rab-dropdown>
+        </rb-dropdown>
 
-        <rab-dropdown id="d10">
+        <rb-dropdown id="d10">
             <a href="javascript:void(0)" slot="ref">
           下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
         </a>
@@ -154,7 +154,7 @@
             <span slot="dropdownItem">菜单项 3</span>
             <span slot="dropdownItem">菜单项 4</span>
             <span slot="dropdownItem">菜单项 5</span>
-        </rab-dropdown>
+        </rb-dropdown>
     </div>
 </body>
 <script src="../../utils/typeof.js"></script>
@@ -168,39 +168,39 @@
 <script src="./drop-down.js"></script>
 
 <script>
-    RabbitUI.create("#d1", {
+    RabbitUI.create('#d1', {
         divided: [, , , , true],
         itemDisabled: [, , true, , ],
         onUnfold() {
-            console.log("菜单展开");
+            console.log('菜单展开');
         },
     });
 
-    RabbitUI.create("#d2", {
+    RabbitUI.create('#d2', {
         divided: [, , , , true],
         itemDisabled: [, , true, , ],
     });
-    RabbitUI.create("#d3");
-    RabbitUI.create("#d4", {
-        trigger: "click",
+    RabbitUI.create('#d3');
+    RabbitUI.create('#d4', {
+        trigger: 'click',
         onClick(index) {
             console.log(`当前点击的索引：${index}`);
         },
     });
-    RabbitUI.create("#d5", {
-        trigger: "contextMenu",
+    RabbitUI.create('#d5', {
+        trigger: 'contextMenu',
     });
-    RabbitUI.create("#d6", {
-        placement: "bottom-start",
+    RabbitUI.create('#d6', {
+        placement: 'bottom-start',
     });
-    RabbitUI.create("#d7");
-    RabbitUI.create("#d8", {
-        placement: "bottom-end",
+    RabbitUI.create('#d7');
+    RabbitUI.create('#d8', {
+        placement: 'bottom-end',
     });
-    RabbitUI.create("#d9", {
+    RabbitUI.create('#d9', {
         disabled: true,
     });
-    RabbitUI.create("#d10", {
+    RabbitUI.create('#d10', {
         disabled: true,
     });
 </script>

@@ -30,7 +30,7 @@ class Rabbit {
      * @returns {string & object & NodeListOf<ChildNode>}
      */
     create(el, config) {
-        this.$el = el || "default-no-target";
+        this.$el = el || 'default-no-target';
         this.$config = config || {};
         this._render(this.$el, this.$config);
 
@@ -44,9 +44,9 @@ class Rabbit {
      */
     init(instanceName) {
         if (isArr(instanceName)) {
-            instanceName.map((item) => initComps(item));
+            instanceName.map(item => initComps(item));
         } else {
-            console.error("The argument type is array in RabbitUI.init()");
+            console.error('The argument type is array in RabbitUI.init()');
             return;
         }
     }
@@ -89,9 +89,9 @@ class Rabbit {
          * @param {NodeList} nodes
          * @returns {RABBITCOMPONENT}
          */
-        const renderNodeList = (nodes) => {
+        const renderNodeList = nodes => {
             // 通过截取标签 rab- 后的内容获取组件名称
-            const COMPONENTNAMES = nodes.tagName.toLowerCase().substring(4);
+            const COMPONENTNAMES = nodes.tagName.toLowerCase().substring(3);
 
             // 获取挂载容器下的具名插槽项
             const SLOT = this._getCompsSlot(nodes);
@@ -111,7 +111,7 @@ class Rabbit {
             return RABBITCOMPONENT;
         };
 
-        RENDERTARGET.map((node) => renderNodeList(node));
+        RENDERTARGET.map(node => renderNodeList(node));
     }
 }
 const RabbitUI = new Rabbit();

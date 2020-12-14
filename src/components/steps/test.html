@@ -16,7 +16,7 @@
 
 <body>
     <div class="demo">
-        <rab-steps id="steps1">
+        <rb-steps id="steps1">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -33,10 +33,10 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
     </div>
     <div class="demo">
-        <rab-steps id="steps2">
+        <rb-steps id="steps2">
             <div slot="step">
                 <span slot="title">已完成</span>
             </div>
@@ -49,10 +49,10 @@
             <div slot="step">
                 <span slot="title">待进行</span>
             </div>
-        </rab-steps>
+        </rb-steps>
     </div>
     <div class="demo">
-        <rab-steps id="steps3">
+        <rb-steps id="steps3">
             <div slot="step">
                 <i class="rbt-icon rbt-icon-ios-person-add" slot="icon"></i>
                 <span slot="title">注册</span>
@@ -65,10 +65,10 @@
                 <i class="rbt-icon rbt-icon-ios-mail" slot="icon"></i>
                 <span slot="title">验证邮箱</span>
             </div>
-        </rab-steps>
+        </rb-steps>
     </div>
     <div class="demo">
-        <rab-steps id="steps4">
+        <rb-steps id="steps4">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -85,10 +85,10 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
     </div>
     <div class="demo">
-        <rab-steps id="steps5">
+        <rb-steps id="steps5">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -105,7 +105,7 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
     </div>
     <div class="demo">
         <!-- <div class="rbt-steps rbt-steps-horizontal">
@@ -168,23 +168,23 @@
 <script src="../../utils/isSlotUserd.js"></script>
 <script src="./steps.js"></script>
 <script>
-    RabbitUI.create("#steps1", {
+    RabbitUI.create('#steps1', {
         current: 1,
     });
-    RabbitUI.create("#steps2", {
+    RabbitUI.create('#steps2', {
         current: 2,
-        size: "small",
+        size: 'small',
     });
-    RabbitUI.create("#steps3", {
+    RabbitUI.create('#steps3', {
         current: 1,
     });
-    RabbitUI.create("#steps4", {
+    RabbitUI.create('#steps4', {
         current: 2,
-        direction: "vertical",
+        direction: 'vertical',
     });
-    RabbitUI.create("#steps5", {
+    RabbitUI.create('#steps5', {
         current: 1,
-        status: "error",
+        status: 'error',
     });
 </script>
 

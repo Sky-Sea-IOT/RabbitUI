@@ -1,8 +1,8 @@
 Rabbit.prototype.divider = () => {
-    const dividers = document.querySelectorAll('rab-divider');
+    const dividers = document.querySelectorAll('rb-divider');
 
     dividers.forEach(divider => {
-        const orientation = divider.getAttribute('rab-orientation');
+        const orientation = divider.getAttribute('rb-orientation');
         const textContainer = document.createElement('span');
         textContainer.className = 'rbt-divider-inner-text';
 

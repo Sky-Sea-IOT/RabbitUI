@@ -1,6 +1,6 @@
 @import '../common/index.css';
 @import '../common/iconfont/icons.css';
-rab-tag {
+rb-tag {
   box-sizing: border-box;
   color: #55585e;
   display: inline-flex;
@@ -18,122 +18,122 @@ rab-tag {
   opacity: 1;
   transition: all 0.3s;
 }
-rab-tag:hover {
+rb-tag:hover {
   opacity: 0.85;
 }
-rab-tag a,
-rab-tag a:hover {
+rb-tag a,
+rb-tag a:hover {
   color: #55585e !important;
 }
-rab-tag .rbt-icon {
+rb-tag .rbt-icon {
   font-size: 14px;
 }
-rab-tag .rbt-icon-ios-close {
+rb-tag .rbt-icon-ios-close {
   color: rgba(0, 0, 0, 0.45);
   font-size: 20px;
   cursor: pointer;
 }
-rab-tag .rbt-icon + span,
-rab-tag span + .rbt-icon {
+rb-tag .rbt-icon + span,
+rb-tag span + .rbt-icon {
   margin-left: 5px;
   vertical-align: middle;
 }
-rab-tag.checkable {
+rb-tag.checkable {
   background-color: transparent;
   border-color: transparent;
   cursor: pointer;
 }
-rab-tag.checkable:not(.checked):hover {
+rb-tag.checkable:not(.checked):hover {
   color: #1890ff;
 }
-rab-tag.checked {
+rb-tag.checked {
   color: #fff;
   background-color: #1890ff;
 }
-rab-tag.checked:active {
+rb-tag.checked:active {
   color: #fff;
 }
-rab-tag[rab-color='primary'],
-rab-tag[rab-color='success'],
-rab-tag[rab-color='info'],
-rab-tag[rab-color='warning'],
-rab-tag[rab-color='error'] {
+rb-tag[rb-color='primary'],
+rb-tag[rb-color='success'],
+rb-tag[rb-color='info'],
+rb-tag[rb-color='warning'],
+rb-tag[rb-color='error'] {
   color: #fff;
   border-color: transparent;
 }
-rab-tag[rab-color='primary'] a:hover,
-rab-tag[rab-color='success'] a:hover,
-rab-tag[rab-color='info'] a:hover,
-rab-tag[rab-color='warning'] a:hover,
-rab-tag[rab-color='error'] a:hover {
+rb-tag[rb-color='primary'] a:hover,
+rb-tag[rb-color='success'] a:hover,
+rb-tag[rb-color='info'] a:hover,
+rb-tag[rb-color='warning'] a:hover,
+rb-tag[rb-color='error'] a:hover {
   color: #fff;
 }
-rab-tag[rab-color='primary'] {
+rb-tag[rb-color='primary'] {
   background-color: #1890ff;
 }
-rab-tag[rab-color='success'] {
+rb-tag[rb-color='success'] {
   background-color: #05cc72;
 }
-rab-tag[rab-color='info'] {
+rb-tag[rb-color='info'] {
   background-color: #40c4ff;
 }
-rab-tag[rab-color='warning'] {
+rb-tag[rb-color='warning'] {
   background-color: #faad14;
 }
-rab-tag[rab-color='error'] {
+rb-tag[rb-color='error'] {
   background-color: #ff4d4f;
 }
-rab-tag[rab-color='magenta'] {
+rb-tag[rb-color='magenta'] {
   color: #eb2f96;
   background: #fff0f6;
   border-color: #ffadd2;
 }
-rab-tag[rab-color='red'] {
+rb-tag[rb-color='red'] {
   color: #f5222d;
   background: #fff1f0;
   border-color: #ffa39e;
 }
-rab-tag[rab-color='volcano'] {
+rb-tag[rb-color='volcano'] {
   color: #fa541c;
   background: #fff2e8;
   border-color: #ffbb96;
 }
-rab-tag[rab-color='orange'] {
+rb-tag[rb-color='orange'] {
   color: #fa8c16;
   background: #fff7e6;
   border-color: #ffd591;
 }
-rab-tag[rab-color='gold'] {
+rb-tag[rb-color='gold'] {
   color: #faad14;
   background: #fffbe6;
   border-color: #ffe58f;
 }
-rab-tag[rab-color='lime'] {
+rb-tag[rb-color='lime'] {
   color: #a0d911;
   background: #fcffe6;
   border-color: #eaff8f;
 }
-rab-tag[rab-color='green'] {
+rb-tag[rb-color='green'] {
   color: #52c41a;
   background: #f6ffed;
   border-color: #b7eb8f;
 }
-rab-tag[rab-color='cyan'] {
+rb-tag[rb-color='cyan'] {
   color: #13c2c2;
   background: #e6fffb;
   border-color: #87e8de;
 }
-rab-tag[rab-color='blue'] {
+rb-tag[rb-color='blue'] {
   color: #1890ff;
   background: #e6f7ff;
   border-color: #91d5ff;
 }
-rab-tag[rab-color='geekblue'] {
+rb-tag[rb-color='geekblue'] {
   color: #2f54eb;
   background: #f0f5ff;
   border-color: #adc6ff;
 }
-rab-tag[rab-color='purple'] {
+rb-tag[rb-color='purple'] {
   color: #722ed1;
   background: #f9f0ff;
   border-color: #d3adf7;
