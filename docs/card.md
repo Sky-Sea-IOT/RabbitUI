@@ -15,16 +15,16 @@
 包含标题，内容和操作。
 
 ```html
-<rab-card>
-    <rab-card-header>
+<rb-card>
+    <rb-card-header>
        卡片标题<a style="float: right; padding: 3px 0">操作按钮</a>
-    </rab-card-header>
-    <rab-card-body>
+    </rb-card-header>
+    <rb-card-body>
        <p class="text">卡片的内容</p>
        <p class="text">卡片的内容</p>
        <p class="text">卡片的内容</p>
-	</rab-card-body>
-</rab-card>
+	</rb-card-body>
+</rb-card>
 ```
 
 ##### 简单卡片
@@ -32,13 +32,13 @@
 只包含内容区域。
 
 ```html
-<rab-card>
-  <rab-card-body>
+<rb-card>
+  <rb-card-body>
      <p>卡片的内容</p>
      <p>卡片的内容</p>
      <p>卡片的内容</p>
-  </rab-card-body>
-</rab-card>
+  </rb-card-body>
+</rb-card>
 ```
 
 ##### 带图片
@@ -59,15 +59,15 @@
     }
 </style>     
 	<div style="float: left; margin-right: 6%">
-        <rab-card style="width: 270px">
-           <rab-card-body style="padding: 0">
+        <rb-card style="width: 270px">
+           <rb-card-body style="padding: 0">
                <img src="../../../assets/card.jpg" class="image" />
                   <div style="padding: 14px; text-align: center">
                       <h4>那些年那些事那些兔</h4>
                       <div class="bottom">www.bilibili.com</div>
                   </div>
-            </rab-card-body>
-          </rab-card>
+            </rb-card-body>
+          </rb-card>
       </div>
 ```
 
@@ -75,18 +75,18 @@
 
 可对阴影的显示进行配置。
 
-通过属性 `rab-shadow` 设置阴影显示时机。  `hover`  鼠标悬浮时显示，  `never` 从不显示
+通过属性 `rb-shadow` 设置阴影显示时机。  `hover`  鼠标悬浮时显示，  `never` 从不显示
 
 ```html
-<rab-card>
-   <rab-card-body>总是显示</rab-card-body>
-</rab-card>
+<rb-card>
+   <rb-card-body>总是显示</rb-card-body>
+</rb-card>
 
-<rab-card rab-shadow="hover">
-   <rab-card-body>总是显示</rab-card-body>
-</rab-card>
+<rb-card rb-shadow="hover">
+   <rb-card-body>总是显示</rb-card-body>
+</rb-card>
 
-<rab-card rab-shadow="nerve">
-   <rab-card-body>总是显示</rab-card-body>
-</rab-card>
+<rb-card rb-shadow="nerve">
+   <rb-card-body>总是显示</rb-card-body>
+</rb-card>
 ```

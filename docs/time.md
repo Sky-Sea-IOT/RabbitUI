@@ -11,8 +11,8 @@
 设置一个时间戳或 Date，可自动转为相对于当前的时间。
 
 ```html
-<rab-time id="t1"></rab-time>
-<rab-time id="t2"></rab-time>
+<rb-time id="t1"></rb-time>
+<rb-time id="t2"></rb-time>
 <script>
     RabbitUI.create("#t1", {
         time: new Date().getTime() - 60 * 3 * 1000
@@ -28,7 +28,7 @@
 设置自动更新间隔，默认为 60 秒。
 
 ```html
-<rab-time id="t3"></rab-time>
+<rb-time id="t3"></rb-time>
 <script>
     RabbitUI.create("#t3", {
         time: new Date().getTime() - 60 * 3 * 1000,
@@ -46,9 +46,9 @@
 例如：`"2020-12-01"` 、`"2020-12-01 13:04:56"`
 
 ```html
-<rab-time id="t4"></rab-time>
-<rab-time id="t5"></rab-time>
-<rab-time id="t6"></rab-time>
+<rb-time id="t4"></rb-time>
+<rb-time id="t5"></rb-time>
+<rb-time id="t6"></rb-time>
 <script>
     RabbitUI.create("#t4", {
         time: new Date().getTime() - 86400 * 3 * 1000  
@@ -69,8 +69,8 @@
 设置 `hash` 或者 `link` 属性，相对时间可以点击并定位锚点或打开链接。
 
 ```html
-<rab-time id="t7"></rab-time>
-<rab-time id="t8"></rab-time>
+<rb-time id="t7"></rb-time>
+<rb-time id="t8"></rb-time>
 <script>
     RabbitUI.create("#t7", {
         time: new Date().getTime() - 86400 * 3 * 1000,

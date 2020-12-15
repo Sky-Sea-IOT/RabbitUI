@@ -16,7 +16,7 @@
 简单的展示。
 
 ```html
-<rab-empty id="empty1"></rab-empty>
+<rb-empty id="empty1"></rb-empty>
 <script>
     RabbitUI.create("#empty1", {
         desc: "暂无数据",
@@ -29,7 +29,7 @@
 可以通过设置 `image` 为 `IMAGE_SIMPLE` 选择简约风格的图片。
 
 ```html
-<rab-empty id="empty2"></rab-empty>
+<rb-empty id="empty2"></rb-empty>
 <script>
     RabbitUI.create("#empty2", {
         image: "IMAGE_SIMPLE"
@@ -43,7 +43,7 @@
 自定义图片链接、图片大小、描述、底部附属内容。
 
 ```html
-<rab-empty id="empty3"></rab-empty>
+<rb-empty id="empty3"></rb-empty>
 <script>
     RabbitUI.create("#empty3", {
         image: "https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg",
@@ -61,7 +61,7 @@
 不添加参数 `desc` 或者插槽 `slot="desc"` 则·不展示描述内容。
 
 ```html
-<rab-empty id="empty4"></rab-empty>
+<rb-empty id="empty4"></rb-empty>
 <script>
     RabbitUI.create("#empty4");
 </script>

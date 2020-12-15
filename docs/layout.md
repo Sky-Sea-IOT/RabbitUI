@@ -22,15 +22,15 @@
 
 ### 组件概述
 
-- `<rab-layout>`：布局容器，其下可嵌套 `<rab-header>` `<rab-sider> ` `<rab-content>` `<rab-footer>`或 `<rab-layout>` 本身，可以放在任何父容器中。
-- `<rab-header>`：顶部布局，自带默认样式，其下可嵌套任何元素，只能放在 `<rab-layout>` 中。
-- `<rab-sider>`：侧边栏，自带默认样式及基本功能，其下可嵌套任何元素，只能放在 `<rab-layout>` 中。
-- `<rab-content>`：内容部分，自带默认样式，其下可嵌套任何元素，只能放在 `<rab-layout>` 中。
-- `<rab-footer>`：底部布局，自带默认样式，其下可嵌套任何元素，只能放在 `<rab-layout>` 中。
+- `<rb-layout>`：布局容器，其下可嵌套 `<rb-header>` `<rb-sider> ` `<rb-content>` `<rb-footer>`或 `<rb-layout>` 本身，可以放在任何父容器中。
+- `<rb-header>`：顶部布局，自带默认样式，其下可嵌套任何元素，只能放在 `<rb-layout>` 中。
+- `<rb-sider>`：侧边栏，自带默认样式及基本功能，其下可嵌套任何元素，只能放在 `<rb-layout>` 中。
+- `<rb-content>`：内容部分，自带默认样式，其下可嵌套任何元素，只能放在 `<rb-layout>` 中。
+- `<rb-footer>`：底部布局，自带默认样式，其下可嵌套任何元素，只能放在 `<rb-layout>` 中。
 
 > 注意：采用 flex 布局实现，请注意[浏览器兼容性](https://caniuse.com/#search=flex)。
 >
-> 此外，该组件不需要使用 `RabbitUI.create()` 方法进行创建，并且使用 `<rab-sider>` 时其父元素 `<rab-layout>` 需要添加属性 `has-sider` 
+> 此外，该组件不需要使用 `RabbitUI.create()` 方法进行创建，并且使用 `<rb-sider>` 时其父元素 `<rb-layout>` 需要添加属性 `has-sider` 
 
 ### 代码示例
 
@@ -40,44 +40,44 @@
 
 ```html
 <div class="demo">
-    <rab-layout>
-        <rab-header>Header</rab-header>
-        <rab-content>Content</rab-content>
-        <rab-footer>Footer</rab-footer>
-    </rab-layout>
+    <rb-layout>
+        <rb-header>Header</rb-header>
+        <rb-content>Content</rb-content>
+        <rb-footer>Footer</rb-footer>
+    </rb-layout>
 </div>
 
 <div class="demo">
-    <rab-layout>
-        <rab-header>Header</rab-header>
-        <rab-layout has-sider>
-            <rab-sider>Sider</rab-sider>
-            <rab-content>Content</rab-content>
-        </rab-layout>
-        <rab-footer>Footer</rab-footer>
-    </rab-layout>
+    <rb-layout>
+        <rb-header>Header</rb-header>
+        <rb-layout has-sider>
+            <rb-sider>Sider</rb-sider>
+            <rb-content>Content</rb-content>
+        </rb-layout>
+        <rb-footer>Footer</rb-footer>
+    </rb-layout>
 </div>
 
 <div class="demo">
-    <rab-layout>
-        <rab-header>Header</rab-header>
-        <rab-layout has-sider>
-            <rab-content>Content</rab-content>
-            <rab-sider>Sider</rab-sider>
-        </rab-layout>
-        <rab-footer>Footer</rab-footer>
-    </rab-layout>
+    <rb-layout>
+        <rb-header>Header</rb-header>
+        <rb-layout has-sider>
+            <rb-content>Content</rb-content>
+            <rb-sider>Sider</rb-sider>
+        </rb-layout>
+        <rb-footer>Footer</rb-footer>
+    </rb-layout>
 </div>
 
 <div class="demo">
-    <rab-layout has-sider>
-        <rab-sider style="line-height: 250px">Sider</rab-sider>
-        <rab-layout>
-            <rab-header>Header</rab-header>
-            <rab-content>Content</rab-content>
-            <rab-footer>Footer</rab-footer>
-        </rab-layout>
-    </rab-layout>
+    <rb-layout has-sider>
+        <rb-sider style="line-height: 250px">Sider</rb-sider>
+        <rb-layout>
+            <rb-header>Header</rb-header>
+            <rb-content>Content</rb-content>
+            <rb-footer>Footer</rb-footer>
+        </rb-layout>
+    </rb-layout>
 </div>
 
 <style>
@@ -90,20 +90,20 @@
         border-bottom: 1px solid #f0f0f0;
     }
     
-    .demo rab-header,
-    .demo rab-footer {
+    .demo rb-header,
+    .demo rb-footer {
         color: #fff;
         background: #7dbcea;
     }
     
-    .demo rab-content {
+    .demo rb-content {
         min-height: 120px;
         color: #fff;
         line-height: 120px;
         background: rgba(16, 142, 233, 1);
     }
     
-    .demo rab-sider {
+    .demo rb-sider {
         color: #fff;
         line-height: 120px;
         background: #3ba0e9;

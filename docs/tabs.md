@@ -20,11 +20,11 @@
 通过设置 `active` 属性为 `true` 选中某一项
 
 ```html
-<rab-tabs id="tabs1">
+<rb-tabs id="tabs1">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs1', {
         label: [{
@@ -49,11 +49,11 @@
 通过设置属性 `disabled` 属性为 `true` 禁用某一项
 
 ```html
-<rab-tabs id="tabs2">
+<rb-tabs id="tabs2">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs2', {
         label: [{
@@ -77,11 +77,11 @@
 显示一个图标。
 
 ```html
-<rab-tabs id="tabs3">
+<rb-tabs id="tabs3">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs3', {
         label: [{
@@ -106,11 +106,11 @@
 通过设置属性 `type` 为 `card`
 
 ```html
-<rab-tabs id="tabs4">
+<rb-tabs id="tabs4">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs4', {
         label: [{
@@ -133,11 +133,11 @@
 通过设置属性 `type` 为 `border-card`
 
 ```html
-<rab-tabs id="tabs5">
+<rb-tabs id="tabs5">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs5', {
         label: [{
@@ -158,11 +158,11 @@
 通过设置属性 `animated` 为 `false` 可以禁用动画。
 
 ```html
-<rab-tabs id="tabs6">
+<rb-tabs id="tabs6">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs6', {
         label: [{
@@ -183,11 +183,11 @@
 通过设置属性 `closable` 可以设置该标签所有项为可关闭，仅在 `type` 为 `card` 时有效。
 
 ```html
-<rab-tabs id="tabs7">
+<rb-tabs id="tabs7">
    <div slot="tabPane">标签1的内容</div>
    <div slot="tabPane">标签2的内容</div>
    <div slot="tabPane">标签3的内容</div>
-</rab-tabs>
+</rb-tabs>
 <script>
     RabbitUI.create('#tabs7', {
         label: [{

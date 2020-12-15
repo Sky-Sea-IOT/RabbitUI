@@ -17,15 +17,15 @@
 浮层的大小由内容区域决定。
 
 ```html
- <rab-popover id="popover1">
+ <rb-popover id="popover1">
      <button class="rbt-btn" slot="ref">Hover 触发</button>
- </rab-popover>
- <rab-popover id="popover2">
+ </rb-popover>
+ <rb-popover id="popover2">
      <button class="rbt-btn" slot="ref">Focus 触发</button>
- </rab-popover>
- <rab-popover id="popover3">
+ </rb-popover>
+ <rb-popover id="popover3">
      <button class="rbt-btn" slot="ref">Click 触发</button>
- </rab-popover>
+ </rb-popover>
 <script>
     rabbit.create("#popover1", {
         title: "标题",
@@ -51,48 +51,48 @@
 ```html
 	<div class="demo">
         <div class="top">
-            <rab-popover id="popover4">
+            <rb-popover id="popover4">
                 <button class="rbt-btn" slot="ref">上左</button>
-            </rab-popover>
-            <rab-popover id="popover5">
+            </rb-popover>
+            <rb-popover id="popover5">
                 <button class="rbt-btn" slot="ref">上边</button>
-            </rab-popover>
-            <rab-popover id="popover6">
+            </rb-popover>
+            <rb-popover id="popover6">
                 <button class="rbt-btn" slot="ref">上左</button>
-            </rab-popover>
+            </rb-popover>
         </div>
         <div class="left">
-            <rab-popover id="popover7">
+            <rb-popover id="popover7">
                 <button class="rbt-btn" slot="ref">左上</button>
-            </rab-popover>
-            <rab-popover id="popover8">
+            </rb-popover>
+            <rb-popover id="popover8">
                 <button class="rbt-btn" slot="ref">左边</button>
-            </rab-popover>
-            <rab-popover id="popover9">
+            </rb-popover>
+            <rb-popover id="popover9">
                 <button class="rbt-btn" slot="ref">左下</button>
-            </rab-popover>
+            </rb-popover>
         </div>
         <div class="right">
-            <rab-popover id="popover10">
+            <rb-popover id="popover10">
                 <button class="rbt-btn" slot="ref">右上</button>
-            </rab-popover>
-            <rab-popover id="popover11">
+            </rb-popover>
+            <rb-popover id="popover11">
                 <button class="rbt-btn" slot="ref">右边</button>
-            </rab-popover>
-            <rab-popover id="popover12">
+            </rb-popover>
+            <rb-popover id="popover12">
                 <button class="rbt-btn" slot="ref">右下</button>
-            </rab-popover>
+            </rb-popover>
         </div>
         <div class="bottom">
-            <rab-popover id="popover13">
+            <rb-popover id="popover13">
                 <button class="rbt-btn" slot="ref">下左</button>
-            </rab-popover>
-            <rab-popover id="popover14">
+            </rb-popover>
+            <rb-popover id="popover14">
                 <button class="rbt-btn" slot="ref">下边</button>
-            </rab-popover>
-            <rab-popover id="popover15">
+            </rb-popover>
+            <rb-popover id="popover15">
                 <button class="rbt-btn" slot="ref">下右</button>
-            </rab-popover>
+            </rb-popover>
         </div>
     </div>
 <script>
@@ -164,9 +164,9 @@
 通过属性 `triggerHide` 传入一个选择器名称，指定该元素用来关闭 Popover，
 
 ```html
-<rab-popover id="popover16">
+<rb-popover id="popover16">
     <button class="rbt-btn" slot="ref">click 激活</button>
-</rab-popover>
+</rb-popover>
 <script>
 	rabbit.create("#popover16", {
         title: `<em>自定义标题</em>`,
@@ -181,7 +181,7 @@
 通过自定义 slot 来实现复杂的内容。
 
 ```html
-<rab-popover id="popover17">
+<rb-popover id="popover17">
     <button class="rbt-btn" slot="ref">click 激活</button>
     <div slot="content">
   	     <div class="custom-table" slot="content">
@@ -213,7 +213,7 @@
                 </table>
             </div>
     </div>
-</rab-popover>
+</rb-popover>
 <script>
 	rabbit.create("#popover17",{ placement: 'right' });
 </script>

@@ -15,7 +15,7 @@
 基本用法，组件会根据`current`自动判断各步骤状态。
 
 ```html
-        <rab-steps id="steps1">
+        <rb-steps id="steps1">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -32,7 +32,7 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
         <script>
             rabbit.create("#steps1", {
                 current: 1,
@@ -45,7 +45,7 @@
 设置属性`size`为`small`启用迷你版。
 
 ```html
-        <rab-steps id="steps2">
+        <rb-steps id="steps2">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -62,7 +62,7 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
         <script>
             rabbit.create("#steps2", {
                 current: 2,
@@ -74,7 +74,7 @@
 ##### 带图标的步骤条
 
 ```html
-        <rab-steps id="steps3">
+        <rb-steps id="steps3">
             <div slot="step">
                 <i class="rbt-icon rbt-icon-ios-person-add" slot="icon"></i>
                 <span slot="title">注册</span>
@@ -87,7 +87,7 @@
                 <i class="rbt-icon rbt-icon-ios-mail" slot="icon"></i>
                 <span slot="title">验证邮箱</span>
             </div>
-        </rab-steps>
+        </rb-steps>
         <script>
             rabbit.create("#steps3", {
                 current: 1,
@@ -100,7 +100,7 @@
 设置属性`direction`为`vertical`在垂直方向展示。
 
 ```html
-        <rab-steps id="steps4">
+        <rb-steps id="steps4">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -117,7 +117,7 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
         <script>
             rabbit.create("#steps4", {
                 current: 2,
@@ -131,7 +131,7 @@
 设置属性`status`为`error`指定当前步骤状态。
 
 ```html
-        <rab-steps id="steps5">
+        <rb-steps id="steps5">
             <div slot="step">
                 <span slot="title">已完成</span>
                 <span slot="content">这里是该步骤的描述信息</span>
@@ -148,7 +148,7 @@
                 <span slot="title">待进行</span>
                 <span slot="content">这里是该步骤的描述信息</span>
             </div>
-        </rab-steps>
+        </rb-steps>
         <script>
             rabbit.create("#steps5", {
                current: 1,

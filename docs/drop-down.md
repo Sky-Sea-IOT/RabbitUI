@@ -22,7 +22,7 @@
 本例还展示了禁用项和分隔线，以及菜单展开时的回调事件
 
 ```html
-<rab-dropdown id="d1">
+<rb-dropdown id="d1">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -31,7 +31,7 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
+</rb-dropdown>
 <script>
     RabbitUI.create("#d1", {
         divided: [, , , , true],
@@ -48,7 +48,7 @@
 通过设置属性 `trigger` 可以更改触发方式，可选项为 click 、 hover(默认)、contextMenu
 
 ```html
-<rab-dropdown id="d2">
+<rb-dropdown id="d2">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -57,8 +57,8 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
-<rab-dropdown id="d3">
+</rb-dropdown>
+<rb-dropdown id="d3">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -67,8 +67,8 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
-<rab-dropdown id="d4">
+</rb-dropdown>
+<rb-dropdown id="d4">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -77,7 +77,7 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
+</rb-dropdown>
 <script>
     RabbitUI.create("#d2");
     RabbitUI.create("#d3", {
@@ -94,7 +94,7 @@
 通过设置属性 `placement` 可以更改下拉菜单出现的方向。支持 12 个方向，详见 API。
 
 ```html
-<rab-dropdown id="d5">
+<rb-dropdown id="d5">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -103,8 +103,8 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
-<rab-dropdown id="d6">
+</rb-dropdown>
+<rb-dropdown id="d6">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -113,8 +113,8 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
-<rab-dropdown id="d7">
+</rb-dropdown>
+<rb-dropdown id="d7">
     <a href="javascript:void(0)" slot="ref">
       下拉菜单<i class="rbt-icon rbt-icon-ios-arrow-down"></i>
     </a>
@@ -123,7 +123,7 @@
     <span slot="dropdownItem">菜单项 3</span>
     <span slot="dropdownItem">菜单项 4</span>
     <span slot="dropdownItem">菜单项 5</span>
-</rab-dropdown>
+</rb-dropdown>
 <script>
     RabbitUI.create("#d5", {
         placement: "bottom-start",

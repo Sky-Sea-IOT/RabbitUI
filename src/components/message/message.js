@@ -85,7 +85,7 @@ Rabbit.prototype.Message = {
         this.setContent(MessageContentBox, content);
         this.closeInstacne(Message, duration);
         this.showBackground(background, MessageNoticeContent, type);
-        this.hanleClickClose(MessageClose, onClose);
+        this.handleClose(MessageClose, onClose);
 
         return Message;
     },
@@ -102,14 +102,14 @@ Rabbit.prototype.Message = {
         const prefixCls = 'rbt-message';
         const prefixIcon = 'rbt-icon';
 
-        Message.className = `${prefixCls}-notice ${this._aniCls().moveInCls}`;
+        Message.className = `${prefixCls}-notice ${this.aniCls().moveInCls}`;
         MessageNoticeContent.className = `${prefixCls}-notice-content`;
         MessageTypeBox.className = `${prefixCls}-${type}`;
         MessageIconBox.className = `${prefixIcon} ${prefixIcon}-${MessageIcons}`;
         MessageClose.className = `${prefixIcon} ${prefixIcon}-ios-close`;
     },
 
-    _aniCls() {
+    aniCls() {
         const moveInCls = 'rbt-message-notice-fade-enter';
         const moveOutCls = 'rbt-message-notice-fade-leave';
         return {
@@ -141,17 +141,17 @@ Rabbit.prototype.Message = {
         destroy({
             el,
             duration,
-            moveInCls: this._aniCls().moveInCls,
-            moveOutCls: this._aniCls().moveOutCls,
+            moveInCls: this.aniCls().moveInCls,
+            moveOutCls: this.aniCls().moveOutCls,
             whenToDestroy: 0.25,
         });
     },
 
-    hanleClickClose(el, cb) {
+    handleClose(el, cb) {
         clickDestroy({
             el,
-            moveInCls: this._aniCls().moveInCls,
-            moveOutCls: this._aniCls().moveOutCls,
+            moveInCls: this.aniCls().moveInCls,
+            moveOutCls: this.aniCls().moveOutCls,
             destroyTarget: document.querySelector('.rbt-message-notice'),
             onClose: cb,
         });
@@ -266,15 +266,15 @@ Rabbit.prototype.Message = {
             destroyByKey({
                 key,
                 target: document.querySelectorAll('.rbt-message-notice'),
-                moveInCls: this._aniCls().moveInCls,
-                moveOutCls: this._aniCls().moveOutCls,
+                moveInCls: this.aniCls().moveInCls,
+                moveOutCls: this.aniCls().moveOutCls,
                 whenToDestroy: 0.25,
             });
         } else {
             destoryAll({
                 el: document.querySelectorAll('.rbt-message-notice'),
-                moveInCls: this._aniCls().moveInCls,
-                moveOutCls: this._aniCls().moveOutCls,
+                moveInCls: this.aniCls().moveInCls,
+                moveOutCls: this.aniCls().moveOutCls,
                 whenToDestroy: 0.25,
             });
         }

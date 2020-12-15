@@ -17,7 +17,7 @@
 数字输入框。
 
 ```html
-<rab-input-number id="ipn"></rab-input-number>
+<rb-input-number id="ipn"></rb-input-number>
 <script>
     rabbit.create("#ipn", {
         min: 1,
@@ -34,7 +34,7 @@
 通过设置 `step`属性控制每次改变的精度。
 
 ```html
-<rab-input-number id="ipn2"></rab-input-number>
+<rb-input-number id="ipn2"></rb-input-number>
 <script>
     rabbit.create("#ipn2", {
         min: 1,
@@ -52,9 +52,9 @@
 通过设置 `size`属性为 `large`和 `small`将输入框设置为大和小尺寸，不设置为默认（中）尺寸。
 
 ```html
-<rab-input-number id="ipn3"></rab-input-number>
-<rab-input-number id="ipn4"></rab-input-number>
-<rab-input-number id="ipn5"></rab-input-number>
+<rb-input-number id="ipn3"></rb-input-number>
+<rb-input-number id="ipn4"></rb-input-number>
+<rb-input-number id="ipn5"></rb-input-number>
 <script>
     rabbit.create("#ipn3", {
        size: 'small'
@@ -73,7 +73,7 @@
 通过设置 `disabled`属性禁用输入框
 
 ```html
-<rab-input-number id="ipn6"></rab-input-number>
+<rb-input-number id="ipn6"></rb-input-number>
 <script>
     rabbit.create("#ipn2", {
        disabled: true
@@ -88,7 +88,7 @@
 通过设置 `readOnly`属性开启只读。
 
 ```html
-<rab-input-number id="ipn7"></rab-input-number>
+<rb-input-number id="ipn7"></rb-input-number>
 <script>
     rabbit.create("#ipn7", {
        readOnly: true
@@ -103,7 +103,7 @@
 通过设置 `editable`属性控制是否能编辑。
 
 ```html
-<rab-input-number id="ipn8"></rab-input-number>
+<rb-input-number id="ipn8"></rb-input-number>
 <script>
     rabbit.create("#ipn8", {
        editable: false

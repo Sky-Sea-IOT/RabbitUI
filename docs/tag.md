@@ -15,9 +15,9 @@
 ##### 基本用法 
 
 ```html
-        <rab-tag>标签 1</rab-tag>
-        <rab-tag><a href="https://github.com/niu-grandpa/RabbitUI">标签 2</a></rab-tag>
-        <rab-tag> 标签 3<i class="rbt-icon rbt-icon-ios-close"></i></rab-tag>
+        <rb-tag>标签 1</rb-tag>
+        <rb-tag><a href="https://github.com/niu-grandpa/RabbitUI">标签 2</a></rb-tag>
+        <rb-tag> 标签 3<i class="rbt-icon rbt-icon-ios-close"></i></rb-tag>
 ```
 
 ##### 各种颜色 
@@ -25,39 +25,39 @@
 - 我们添加了多种预设色彩的标签样式，用作不同场景使用。
 
 ```html
-        <rab-tag rab-color="primary">primary</rab-tag>
-        <rab-tag rab-color="success">success</rab-tag>
-        <rab-tag rab-color="info">info</rab-tag>
-        <rab-tag rab-color="warning">warning</rab-tag>
-        <rab-tag rab-color="error">error</rab-tag>
-        <rab-tag rab-color="magenta">magenta</rab-tag>
-        <rab-tag rab-color="red">red</rab-tag>
-        <rab-tag rab-color="volcano">volcano</rab-tag>
-        <rab-tag rab-color="orange">orange</rab-tag>
-        <rab-tag rab-color="gold">gold</rab-tag>
-        <rab-tag rab-color="lime">lime</rab-tag>
-        <rab-tag rab-color="green">green</rab-tag>
-        <rab-tag rab-color="cyan">cyan</rab-tag>
-        <rab-tag rab-color="blue">blue</rab-tag>
-        <rab-tag rab-color="geekblue">geekblue</rab-tag>
-        <rab-tag rab-color="purple">purple</rab-tag>
+        <rb-tag rb-color="primary">primary</rb-tag>
+        <rb-tag rb-color="success">success</rb-tag>
+        <rb-tag rb-color="info">info</rb-tag>
+        <rb-tag rb-color="warning">warning</rb-tag>
+        <rb-tag rb-color="error">error</rb-tag>
+        <rb-tag rb-color="magenta">magenta</rb-tag>
+        <rb-tag rb-color="red">red</rb-tag>
+        <rb-tag rb-color="volcano">volcano</rb-tag>
+        <rb-tag rb-color="orange">orange</rb-tag>
+        <rb-tag rb-color="gold">gold</rb-tag>
+        <rb-tag rb-color="lime">lime</rb-tag>
+        <rb-tag rb-color="green">green</rb-tag>
+        <rb-tag rb-color="cyan">cyan</rb-tag>
+        <rb-tag rb-color="blue">blue</rb-tag>
+        <rb-tag rb-color="geekblue">geekblue</rb-tag>
+        <rb-tag rb-color="purple">purple</rb-tag>
 ```
 
 ##### 图标按钮
 
 ```html
-        <rab-tag rab-color="error">
+        <rb-tag rb-color="error">
             <i class="rbt-icon rbt-icon-logo-angular"></i>
             <span>Angular</span>
-        </rab-tag>
-        <rab-tag rab-color="primary">
+        </rb-tag>
+        <rb-tag rb-color="primary">
             <i class="rbt-icon rbt-icon-logo-facebook"></i>
             <span>Facebook</span>
-        </rab-tag>
-        <rab-tag rab-color="info">
+        </rb-tag>
+        <rb-tag rb-color="info">
             <i class="rbt-icon rbt-icon-logo-twitter"></i>
             <span>Twitter</span>
-        </rab-tag>
+        </rb-tag>
 ```
 
 ##### 可选择标签
@@ -65,15 +65,15 @@
 - 点击切换选中效果
 
 ```html
-        <rab-tag class="checkable">电影</rab-tag>
-        <rab-tag class="checkable checked">书籍</rab-tag>
-        <rab-tag class="checkable">音乐</rab-tag>
-        <rab-tag class="checkable">运动</rab-tag>
+        <rb-tag class="checkable">电影</rb-tag>
+        <rb-tag class="checkable checked">书籍</rb-tag>
+        <rb-tag class="checkable">音乐</rb-tag>
+        <rb-tag class="checkable">运动</rb-tag>
 ```
 
 ### API
 
 | 属性      | 说明                                                         | 类型   | 默认值 |
 | --------- | ------------------------------------------------------------ | ------ | ------ |
-| rab-color | 标签颜色，预设颜色值为`primary`、`success`、`warning`、`error`、`blue`、`green`、`red`、`yellow`、`pink`、`magenta`、`volcano`、`orange`、`gold`、`lime`、`cyan`、`geekblue`、`purple`，你也可以自定义颜色值。 | String | -      |
+| rb-color | 标签颜色，预设颜色值为`primary`、`success`、`warning`、`error`、`blue`、`green`、`red`、`yellow`、`pink`、`magenta`、`volcano`、`orange`、`gold`、`lime`、`cyan`、`geekblue`、`purple`，你也可以自定义颜色值。 | String | -      |
 
