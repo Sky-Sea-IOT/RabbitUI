@@ -64,60 +64,60 @@
 </body>
 <script src="../../utils/typeof.js"></script>
 <script src="../../utils/getIconTypes.js"></script>
-<script src="../../common/main.js"></script>
+<script src="../../core/main.js"></script>
 <script src="../../mixins/scrollable.js"></script>
 <script src="./message-box.js"></script>
 <script>
     a = () => {
         RabbitUI.MsgBox.info({
-            title: "对话框消息",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '对话框消息',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
         });
     };
     b = () => {
         RabbitUI.MsgBox.success({
-            title: "对话框消息",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '对话框消息',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
         });
     };
     c = () => {
         RabbitUI.MsgBox.warning({
-            title: "对话框消息",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '对话框消息',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
         });
     };
     d = () => {
         RabbitUI.MsgBox.error({
-            title: "对话框消息",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '对话框消息',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
         });
     };
     e = () => {
         RabbitUI.MsgBox.confirm({
-            title: "确认对话框标题",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '确认对话框标题',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
         });
     };
     f = () => {
         RabbitUI.MsgBox.confirm({
-            title: "This is a notification message",
+            title: 'This is a notification message',
             content: `<p>some messages...some messages...</p>
                       <p>some messages...some messages...</p>`,
-            okText: "OK",
-            cancelText: "Cancel",
+            okText: 'OK',
+            cancelText: 'Cancel',
         });
     };
     g = () => {
         RabbitUI.MsgBox.confirm({
-            title: "对话框消息",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '对话框消息',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
             width: 600,
         });
     };
     h = () => {
         RabbitUI.MsgBox.confirm({
-            title: "对话框消息",
-            content: "<p>一些对话框内容</p><p>一些对话框内容</p>",
+            title: '对话框消息',
+            content: '<p>一些对话框内容</p><p>一些对话框内容</p>',
             loading: true,
             onOk() {
                 setTimeout(() => RabbitUI.MsgBox.destroy(), 3000);

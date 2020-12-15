@@ -26,14 +26,13 @@ class Rabbit {
 
     /**
      * @param {string} el 挂载组件的容器
-     * @param {{}} config 组件的配置选项
+     * @param {object} config 组件的配置选项
      * @returns {string & object & NodeListOf<ChildNode>}
      */
     create(el, config) {
         this.$el = el || 'default-no-target';
         this.$config = config || {};
         this._render(this.$el, this.$config);
-
         return { el, config, component: document.querySelector(el).childNodes };
     }
 
@@ -46,7 +45,9 @@ class Rabbit {
         if (isArr(instanceName)) {
             instanceName.map(item => initComps(item));
         } else {
-            console.error('The argument type is array in RabbitUI.init()');
+            console.error(
+                '[Rabbit warn] The argument type is array in RabbitUI.init()'
+            );
             return;
         }
     }
@@ -58,6 +59,11 @@ class Rabbit {
      */
 
     /**
+     * 取出对应组件
+     * @param {string} el
+     * @param {string} compsName
+     * @param {object} config
+     * @param {HTMLElement} slot
      * @returns {HTMLElement}
      */
     _compsStore(el, compsName, config, slot) {
@@ -76,7 +82,6 @@ class Rabbit {
      */
     _render(el, config) {
         const RENDERTARGET = Array.from(document.querySelectorAll(el));
-
         if (RENDERTARGET.length <= 0) {
             console.error(
                 `[Rabbit warn] "${el}" this selector was not found, check if you added it to your HTML tag`
@@ -90,12 +95,10 @@ class Rabbit {
          * @returns {RABBITCOMPONENT}
          */
         const renderNodeList = nodes => {
-            // 通过截取标签 rab- 后的内容获取组件名称
+            // 通过截取自定义标签 rb- 后的组件名称
             const COMPONENTNAMES = nodes.tagName.toLowerCase().substring(3);
-
             // 获取挂载容器下的具名插槽项
             const SLOT = this._getCompsSlot(nodes);
-
             // 创建对应组件
             const RABBITCOMPONENT = this._compsStore(
                 el,
@@ -103,14 +106,11 @@ class Rabbit {
                 config,
                 SLOT
             );
-
             // 清空挂载的容器下的所有内容
             nodes.innerHTML = null;
             nodes.appendChild(RABBITCOMPONENT);
-
             return RABBITCOMPONENT;
         };
-
         RENDERTARGET.map(node => renderNodeList(node));
     }
 }
