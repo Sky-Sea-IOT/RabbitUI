@@ -1,18 +1,23 @@
-@import "../common/index.css";
-@import "../custom.less";
-@import "../mixins/size.less";
+@import '../common/index.css';
+@import '../custom.less';
+@import '../mixins/size.less';
 
-@prefix: @css-prefix;
-@icon-prefix: @css-prefix-iconfont;
-
-.@{prefix}progress {
+@{tag-prefix}progress {
   position: @rel;
   display: @flex;
-  .size(100%,14px);
+  .size(100%,12px);
   overflow: @hid;
   font-size: @font-size-xs;
-  background-color: #f5f5f5;
-  border-radius: @md-radius;
+  background-color: #f3f3f3;
+  border-radius: 20px;
+
+  &[rb-size='small'] {
+    height: 6px;
+  }
+
+  &[rb-size='large'] {
+    height: 18px;
+  }
 
   &-bar {
     display: @flex;
@@ -22,29 +27,40 @@
     position: @rel;
     height: 100%;
     color: @white;
-    border-radius: 0 @xm-radius @xm-radius 0;
+    font-size: 1em;
+    border-radius: 20px;
     text-align: center;
     white-space: nowrap;
     background-color: @primary-color;
     transition: all 0.4s @ease;
+  }
 
-    &.success {
+  &[rb-status='success'] {
+    @{tag-prefix}progress-bar {
       background-color: @success-color;
     }
+  }
 
-    &.warning {
+  &[rb-status='warning'] {
+    @{tag-prefix}progress-bar {
       background-color: @warning-color;
     }
+  }
 
-    &.error {
+  &[rb-status='wrong'] {
+    @{tag-prefix}progress-bar {
       background-color: @error-color;
     }
+  }
 
-    &.info {
+  &[rb-status='info'] {
+    @{tag-prefix}progress-bar {
       background-color: @info-color;
     }
+  }
 
-    &.active {
+  &[rb-status='active'] {
+    @{tag-prefix}progress-bar {
       &::before {
         position: @abs;
         top: 0;
@@ -57,7 +73,7 @@
           cubic-bezier(0.23, 1, 0.32, 1) infinite;
         animation: rbt-progress-active 2.4s cubic-bezier(0.23, 1, 0.32, 1)
           infinite;
-        content: "";
+        content: '';
       }
     }
   }

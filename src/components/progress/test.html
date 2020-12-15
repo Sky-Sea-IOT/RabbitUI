@@ -9,89 +9,118 @@
 </head>
 <style>
     .demo {
-        width: 50%;
+        width: 30%;
         margin: 10px auto;
+    }
+    
+    .demo rb-progress {
+        margin-bottom: 12px;
+    }
+    
+    .demo strong {
+        display: block;
+        margin-bottom: 10px;
     }
 </style>
 
 <body>
     <div class="demo">
         <strong>标准的进度条</strong>
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar" style="width: 25%"></div>
-        </div>
-    </div>
-    <div class="demo">
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar success" style="width: 45%"></div>
-        </div>
-    </div>
-    <div class="demo">
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar warning" style="width: 65%"></div>
-        </div>
-    </div>
-    <div class="demo">
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar error" style="width: 100%"></div>
-        </div>
-    </div>
-    <div class="demo">
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar info" style="width: 25%"></div>
-        </div>
+
+        <rb-progress>
+            <rb-progress-bar style="width: 25%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-status="active">
+            <rb-progress-bar style="width: 35%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-status="success">
+            <rb-progress-bar style="width: 45%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-status="warning">
+            <rb-progress-bar style="width: 65%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-status="wrong">
+            <rb-progress-bar style="width: 100%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-status="info">
+            <rb-progress-bar style="width: 40%"></rb-progress-bar>
+        </rb-progress>
     </div>
     <div class="demo">
         <strong>百分比内显</strong>
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar" style="width: 25%">25%</div>
-        </div>
+
+        <rb-progress rb-size="large">
+            <rb-progress-bar style="width: 50%">50%</rb-progress-bar>
+        </rb-progress>
+    </div>
+    <div class="demo">
+        <strong>小尺寸进度条</strong>
+
+        <rb-progress rb-size="small">
+            <rb-progress-bar style="width: 25%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-size="small" rb-status="active">
+            <rb-progress-bar style="width: 45%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-size="small" rb-status="wrong">
+            <rb-progress-bar style="width: 65%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-size="small" rb-status="success">
+            <rb-progress-bar style="width: 100%"></rb-progress-bar>
+        </rb-progress>
+    </div>
+    <div class="demo">
+        <strong>大尺寸进度条</strong>
+
+        <rb-progress rb-size="large">
+            <rb-progress-bar style="width: 25%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-size="large" rb-status="active">
+            <rb-progress-bar style="width: 45%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-size="large" rb-status="wrong">
+            <rb-progress-bar style="width: 65%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress rb-size="large" rb-status="success">
+            <rb-progress-bar style="width: 100%"></rb-progress-bar>
+        </rb-progress>
     </div>
     <div class="demo">
         <strong>自定义高度</strong>
-        <br /><br />
-        <div class="rbt-progress" style="height: 1px">
-            <div class="rbt-progress-bar" style="width: 25%"></div>
-        </div>
-        <br />
-        <div class="rbt-progress" style="height: 20px">
-            <div class="rbt-progress-bar" style="width: 25%"></div>
-        </div>
+
+        <rb-progress style="height: 2px">
+            <rb-progress-bar style="width: 25%"></rb-progress-bar>
+        </rb-progress>
+
+        <rb-progress style="height: 18px">
+            <rb-progress-bar style="width: 35%"></rb-progress-bar>
+        </rb-progress>
     </div>
     <div class="demo">
-        <strong>分段进度条</strong>
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar" style="width: 30%"></div>
-            <div class="rbt-progress-bar success" style="width: 30%"></div>
-        </div>
-    </div>
-    <div class="demo">
-        <strong>渐变色 </strong>
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar" style="
-            width: 25%;
+        <strong>渐变色</strong>
+
+        <rb-progress>
+            <rb-progress-bar style="
+            width: 90%;
             background-image: linear-gradient(
               to right,
               rgb(16, 142, 233) 0%,
               rgb(135, 208, 104) 100%
             );
-          "></div>
-        </div>
-    </div>
-    <div class="demo">
-        <strong>进度条动画</strong>
-        <div class="rbt-progress">
-            <div class="rbt-progress-bar active" style="width: 40%"></div>
-        </div>
+          ">90%</rb-progress-bar>
+        </rb-progress>
     </div>
 </body>
-<script src="../../utils/typeof.js"></script>
-<script src="../../common/getComps.js"></script>
-<script src="../../common/getCompsSlot.js"></script>
-<script src="../../utils/addDom.js"></script>
-<script src="../../utils/isSlotUserd.js"></script>
-<script src="../../common/main.js"></script>
-<script src="./progress.js"></script>
-<script></script>
 
 </html>
