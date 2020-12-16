@@ -45,7 +45,7 @@ Rabbit.prototype.Message = {
     } = {}) {
         // 是否初始化了 message 的父容器
         if (!document.querySelector('.rbt-message')) {
-            console.error('[Rabbit warn] The Message component is not initialized');
+            warn('The Message component is not initialized');
             return;
         }
         // 全局的自动关闭的延时如果不是 2.5 则说明被更改了，所以实例的 duration 同步为全局的 duration

@@ -48,11 +48,8 @@ Rabbit.prototype.Timeline = {
                 }
             } else {
                 const t = _typeof(color);
-                console.error(
-                    `[Rabbit warn] The property color is an array of types instead of ${t}`
-                );
+                warn(`The property color is an array of types instead of ${t}`);
             }
-
             addElemetsOfSlots(TIMELINEITEM[i], TimelineItemContent);
 
             TimelineItem.append(

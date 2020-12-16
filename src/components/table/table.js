@@ -168,8 +168,8 @@ Rabbit.prototype.Table = {
 
                                     TableBodyTr.appendChild(TableBodyTd);
                                 } else {
-                                    console.error(
-                                        `[Rabbit warn] In the rows of table data source there are data inconsistent with those in columns.  row: [{${key}}]`
+                                    warn(
+                                        `In the rows of table data source there are data inconsistent with those in columns.  row: [{${key}}`
                                     );
                                     return;
                                 }

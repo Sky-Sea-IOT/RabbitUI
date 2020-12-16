@@ -123,8 +123,8 @@ Rabbit.prototype.Steps = {
 
     _setStatus(total, current, stepsItem, status, step) {
         if (current > total || current < 0 || !stepsItem[current]) {
-            console.error(
-                '[Rabbit warn] The number of steps currently set is not within the scope of the total steps'
+            warn(
+                'The number of steps currently set is not within the scope of the total steps'
             );
             return;
         }

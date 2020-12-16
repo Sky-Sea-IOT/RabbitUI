@@ -30,7 +30,7 @@ class Rabbit {
      * @returns {string & object & NodeListOf<ChildNode>}
      */
     create(el, config) {
-        this.$el = el || 'default-no-target';
+        this.$el = el || null;
         this.$config = config || {};
         this._render(this.$el, this.$config);
         return { el, config, component: document.querySelector(el).childNodes };
@@ -45,9 +45,7 @@ class Rabbit {
         if (isArr(instanceName)) {
             instanceName.map(item => initComps(item));
         } else {
-            console.error(
-                '[Rabbit warn] The argument type is array in RabbitUI.init()'
-            );
+            warn('The argument type is array in RabbitUI.init()');
             return;
         }
     }
@@ -83,8 +81,8 @@ class Rabbit {
     _render(el, config) {
         const RENDERTARGET = Array.from(document.querySelectorAll(el));
         if (RENDERTARGET.length <= 0) {
-            console.error(
-                `[Rabbit warn] "${el}" this selector was not found, check if you added it to your HTML tag`
+            warn(
+                `"${el}" this selector was not found, check if you added it to your HTML tag`
             );
             return;
         }
@@ -115,3 +113,7 @@ class Rabbit {
     }
 }
 const RabbitUI = new Rabbit();
+
+function warn(msg) {
+    console.error(`[Rabbit warn] ${msg}`);
+}

@@ -135,9 +135,7 @@ Rabbit.prototype.Carousel = {
 
     setInitPosition(position, indicators, carouselItems) {
         if (position < 0 || position > carouselItems.length - 1) {
-            console.error(
-                `[Rabbit warn] The initial value of ${position} set for carousel is invalid`
-            );
+            warn(`The initial value of ${position} set for carousel is invalid`);
             return;
         }
         indicators[position].classList.add(`${this.prefixCls}-active`);

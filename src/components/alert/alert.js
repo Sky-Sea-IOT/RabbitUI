@@ -53,9 +53,7 @@ Rabbit.prototype.Alert = {
         if (MESSAGE && MESSAGE.innerHTML) {
             addElemetsOfSlots(MESSAGE, AlertMessage);
         } else {
-            console.error(
-                `[Rabbit warn] You need to add content to the alert component`
-            );
+            warn('You need to add content to the alert component');
             return;
         }
 

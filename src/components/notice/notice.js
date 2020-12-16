@@ -70,7 +70,7 @@ Rabbit.prototype.Notice = {
     } = {}) {
         // 是否初始化了 notice 的父容器
         if (document.querySelectorAll(`.${this.prefixCls}`).length <= 0) {
-            console.error('[Rabbit warn] The Notice component is not initialized');
+            warn('The Notice component is not initialized');
             return;
         }
         // 同步为全局设置
@@ -217,15 +217,11 @@ Rabbit.prototype.Notice = {
 
     addContent(title, desc, noticeTitle, noticeDes) {
         if (!title) {
-            console.error(
-                'Rabbit [warn] The title of the notification reminder is mandatory'
-            );
+            warn('The title of the notification reminder is mandatory');
             return;
         }
         if (!desc) {
-            console.error(
-                'Rabbit [warn] The description of the notification reminder is mandatory'
-            );
+            warn('The description of the notification reminder is mandatory');
             return;
         }
         noticeTitle.innerHTML = title;
