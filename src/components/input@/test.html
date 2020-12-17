@@ -6,34 +6,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../../style/components/input.css" />
+    <link rel="stylesheet" href="../../style/components/button.css" />
 </head>
 <style>
     .demo {
-        width: 430px;
-        margin: 10px auto;
+        width: 40%;
+        margin: 20px auto;
+    }
+    
+    .demo .rbt-input-group {
+        margin-bottom: 1rem;
     }
 </style>
 
 <body>
     <div class="demo">
-        <input placeholder="Basic usage" type="text" class="rbt-input" />
+        <input type="text" placeholder="请输入内容" class="rbt-input" />
     </div>
     <div class="demo">
-        <strong>尺寸</strong>
-        <br /><br />
-        <input placeholder="large size" type="text" class="rbt-input lg" />
-        <br /><br />
-        <input placeholder="default size" type="text" class="rbt-input" />
-        <br /><br />
-        <input placeholder="small size" type="text" class="rbt-input sm" />
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">@</span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+        <div class="rbt-input-group rbt-input-group-lg">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">Large</span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">Default</span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+        <div class="rbt-input-group rbt-input-group-sm">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">Small</span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">http://</span>
+            </div>
+            <input type="text" class="rbt-input" />
+            <div class="rbt-input-group-suffix">
+                <span class="rbt-input-group-text">.com</span>
+            </div>
+        </div>
+        <div class="rbt-input-group">
+            <input type="text" class="rbt-input" />
+            <div class="rbt-input-group-suffix">
+                <span class="rbt-input-group-text">.com</span>
+            </div>
+        </div>
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">http://</span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text"><input type="checkbox" /></span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text"><input type="radio" /></span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">名字和姓氏</span>
+            </div>
+            <input type="text" class="rbt-input" />
+            <input type="text" class="rbt-input" />
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">$</span>
+                <span class="rbt-input-group-text">0.00</span>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+        <div class="rbt-input-group">
+            <input type="text" class="rbt-input" />
+            <div class="rbt-input-group-suffix">
+                <span class="rbt-input-group-text">$</span>
+                <span class="rbt-input-group-text">0.00</span>
+            </div>
+        </div>
+    </div>
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <button class="rbt-btn rbt-btn-primary" type="button">Search</button>
+            </div>
+            <input type="text" class="rbt-input" />
+        </div>
+        <div class="rbt-input-group">
+            <input type="text" class="rbt-input" />
+            <div class="rbt-input-group-suffix">
+                <button class="rbt-btn" type="button">
+            <i class="rbt-icon rbt-icon-ios-search"></i>
+          </button>
+            </div>
+        </div>
+        <div class="rbt-input-group">
+            <input type="text" class="rbt-input" />
+            <div class="rbt-input-group-suffix">
+                <button class="rbt-btn rbt-btn-primary" type="button">
+            <i class="rbt-icon rbt-icon-ios-search"></i>
+          </button>
+            </div>
+        </div>
+        <div class="rbt-input-group">
+            <input type="text" class="rbt-input" />
+            <div class="rbt-input-group-suffix">
+                <button class="rbt-btn rbt-btn-primary" type="button">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">文本域</span>
+            </div>
+            <textarea class="rbt-input"></textarea>
+        </div>
+    </div>
+    <div class="demo">
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <span class="rbt-input-group-text">日期</span>
+            </div>
+            <select class="rbt-input">
+          <option selected>选择日期...</option>
+          <option value="1">星期一</option>
+          <option value="2">星期二</option>
+          <option value="3">星期三</option>
+        </select>
+        </div>
+        <div class="rbt-input-group">
+            <select class="rbt-input">
+          <option selected>选择日期...</option>
+          <option value="1">星期一</option>
+          <option value="2">星期二</option>
+          <option value="3">星期三</option>
+        </select>
+            <div class="rbt-input-group-suffix">
+                <span class="rbt-input-group-text" for="select02">日期</span>
+            </div>
+        </div>
+        <div class="rbt-input-group">
+            <div class="rbt-input-group-prefix">
+                <button class="rbt-btn" type="button">Button</button>
+            </div>
+            <select class="rbt-input">
+          <option selected>选择日期...</option>
+          <option value="1">星期一</option>
+          <option value="2">星期二</option>
+          <option value="3">星期三</option>
+        </select>
+        </div>
+        <div class="rbt-input-group">
+            <select class="rbt-input">
+          <option selected>选择日期...</option>
+          <option value="1">星期一</option>
+          <option value="2">星期二</option>
+          <option value="3">星期三</option>
+        </select>
+            <div class="rbt-input-group-suffix">
+                <button class="rbt-btn" type="button">Button</button>
+            </div>
+        </div>
     </div>
 </body>
-<script src="../../utils/typeof.js"></script>
-<script src="../../utils/getIconTypes.js"></script>
-<script src="../../utils/addDom.js"></script>
-<script src="../../core/main.js"></script>
-<script src="../../utils/isSlotUserd.js"></script>
-<script src="./input.js"></script>
-<script></script>
 
 </html>

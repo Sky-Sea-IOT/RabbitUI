@@ -1,33 +1,35 @@
-@import "../common/index.css";
-@import "../common/iconfont/icons.css";
-input,
-textarea {
-  caret-color: #808695;
-  border: 1px solid #dcdee2;
-}
-input:placeholder-shown,
-textarea:placeholder-shown {
-  text-overflow: ellipsis;
-}
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: #ccc;
-  text-shadow: none;
-  -webkit-text-fill-color: initial;
-}
+@import '../common/index.css';
+@import '../common/iconfont/icons.css';
 .rbt-input {
+  margin: 0;
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
   height: 32px;
-  padding: 4px 11px;
+  padding: 0.25rem 0.75rem;
   color: #55585e;
   font-size: 14px;
   line-height: 1.5715;
   background-color: #fff;
   background-image: none;
+  border: 1px solid #dcdee2;
   border-radius: 2px;
-  transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  transition: border 0.25s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.rbt-input:placeholder-shown {
+  text-overflow: ellipsis;
+}
+.rbt-input::-webkit-input-placeholder {
+  color: #ccc;
+}
+.rbt-input:-moz-placeholder {
+  color: #ccc;
+}
+.rbt-input::-moz-placeholder {
+  color: #ccc;
+}
+.rbt-input:-ms-input-placeholder {
+  color: #ccc;
 }
 .rbt-input:hover,
 .rbt-input:focus {
@@ -38,13 +40,129 @@ textarea::-webkit-input-placeholder {
   outline: 0;
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
-.rbt-input.lg {
-  padding: 6px 11px;
+.rbt-input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+.rbt-input-group-prefix,
+.rbt-input-group-suffix {
+  display: flex;
+}
+.rbt-input-group-prefix .rbt-btn,
+.rbt-input-group-suffix .rbt-btn {
+  position: relative;
+  z-index: 2;
+}
+.rbt-input-group-suffix {
+  margin-left: -1px;
+}
+.rbt-input-group-prefix {
+  margin-right: -1px;
+}
+.rbt-input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: #55585e;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #f5f7fa;
+  border: 1px solid #dcdee2;
+  border-radius: 2px;
+}
+.rbt-input-group > .rbt-input-group-suffix > .rbt-btn,
+.rbt-input-group > .rbt-input-group-suffix > .rbt-input-group-text,
+.rbt-input-group > .rbt-input-group-prefix:first-child > .rbt-btn:not(:first-child),
+.rbt-input-group > .rbt-input-group-prefix:first-child > .rbt-input-group-text:not(:first-child),
+.rbt-input-group > .rbt-input-group-prefix:not(:first-child) > .rbt-btn,
+.rbt-input-group > .rbt-input-group-prefix:not(:first-child) > .rbt-input-group-text {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.rbt-input-group > .rbt-input-group-suffix:last-child > .rbt-input-group-text:not(:last-child),
+.rbt-input-group > .rbt-input-group-suffix:not(:last-child) > .rbt-btn,
+.rbt-input-group > .rbt-input-group-suffix:not(:last-child) > .rbt-input-group-text,
+.rbt-input-group > .rbt-input-group-prefix > .rbt-btn,
+.rbt-input-group > .rbt-input-group-prefix > .rbt-input-group-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.rbt-input-group > select:focus,
+.rbt-input-group > .rbt-input:focus {
+  z-index: 3;
+}
+.rbt-input-group > select,
+.rbt-input-group > select,
+.rbt-input-group > .rbt-input {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.rbt-input-group > select:not(:first-child),
+.rbt-input-group > .rbt-input:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.rbt-input-group > select:not(:last-child),
+.rbt-input-group > .rbt-input:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.rbt-input-group > select + select,
+.rbt-input-group > select + .rbt-input,
+.rbt-input-group > .rbt-input + select,
+.rbt-input-group > .rbt-input + .rbt-input {
+  margin-left: -1px;
+}
+.rbt-input-group .rbt-btn + .rbt-btn,
+.rbt-input-group .rbt-btn + .rbt-input-group-text,
+.rbt-input-group .rbt-input-group-text + .rbt-btn,
+.rbt-input-group .rbt-input-group-text + .rbt-input-group-text,
+.rbt-input-group-prepend .rbt-btn + .rbt-btn,
+.rbt-input-group-prepend .rbt-btn + .rbt-input-group-text,
+.rbt-input-group-prepend .rbt-input-group-text + .rbt-btn,
+.rbt-input-group-prepend .rbt-input-group-text + .rbt-input-group-text {
+  margin-left: -1px;
+}
+.rbt-input-group-lg > select,
+.rbt-input-group-lg > .rbt-input,
+.rbt-input-group-lg > .rbt-input-group-suffix > .rbt-btn,
+.rbt-input-group-lg > .rbt-input-group-suffix > .rbt-input-group-text,
+.rbt-input-group-lg > .rbt-input-group-prefix > .rbt-btn,
+.rbt-input-group-lg > .rbt-input-group-prefix > .rbt-input-group-text {
+  padding: 0.5rem 1rem;
+  height: 40px;
   font-size: 16px;
+  line-height: 1.5715;
+}
+.rbt-input-group-lg > select,
+.rbt-input-group-lg > .rbt-input:not(textarea) {
   height: 40px;
 }
-.rbt-input.sm {
-  padding: 0 7px;
-  font-size: 12px;
+.rbt-input-group-sm > select,
+.rbt-input-group-sm > .rbt-input,
+.rbt-input-group-sm > .rbt-input-group-suffix > .rbt-btn,
+.rbt-input-group-sm > .rbt-input-group-suffix > .rbt-input-group-text,
+.rbt-input-group-sm > .rbt-input-group-prefix > .rbt-btn,
+.rbt-input-group-sm > .rbt-input-group-prefix > .rbt-input-group-text {
+  padding: 0.25rem 0.5rem;
   height: 24px;
+  font-size: 12px;
+  line-height: 1.5715;
+}
+.rbt-input-group-sm > select,
+.rbt-input-group-sm > .rbt-input:not(textarea) {
+  height: 24px;
+}
+textarea.rbt-input {
+  height: auto;
+  min-height: 31.6px;
 }

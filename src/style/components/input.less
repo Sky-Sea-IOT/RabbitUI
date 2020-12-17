@@ -1,40 +1,44 @@
-@import "../common/index.css";
-@import "../custom.less";
-@import "../common/iconfont/icons.css";
-@import "../mixins/size.less";
+@import '../common/index.css';
+@import '../custom.less';
+@import '../common/iconfont/icons.css';
+@import '../mixins/size.less';
 
 @prefix: @css-prefix;
 @icon-prefix: @css-prefix-iconfont;
 
-input,
-textarea {
-  caret-color: @sub-color;
-  border: @border-width-base @border-style-base @border-color;
-
-  &:placeholder-shown {
-    text-overflow: ellipsis;
-  }
-
-  &::-webkit-input-placeholder {
-    color: @ccc;
-    text-shadow: @none;
-    -webkit-text-fill-color: initial;
-  }
-}
-
 .@{prefix}input {
+  margin: 0;
   position: @rel;
-  display: @inlb;
-  .size(100%,32px);
-  padding: 4px 11px;
-  color: @text-color;
+  display: @bl;
+  width: 100%;
+  .size(100%,@input-height-base);
+  padding: @input-padding-vertical-base @input-padding-horizontal;
+  color: @input-color;
   font-size: @font-size-sm;
   line-height: @base-line-height;
   background-color: @white;
   background-image: @none;
+  border: @border-width-base @border-style-base @input-border-color;
   border-radius: @xm-radius;
-  transition: border-color @transtion-time @ease-in-out,
-    box-shadow @transtion-time @ease-in-out;
+  transition: border 0.25s @ease-in-out, box-shadow 0.3s @ease-in-out;
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+  &::-webkit-input-placeholder {
+    color: @ccc;
+  }
+  &:-moz-placeholder {
+    // Firefox 18-
+    color: @ccc;
+  }
+  &::-moz-placeholder {
+    // Firefox 19+
+    color: @ccc;
+  }
+  &:-ms-input-placeholder {
+    color: @ccc;
+  }
 
   &:hover,
   &:focus {
@@ -47,15 +51,147 @@ textarea {
     box-shadow: 0 0 0 2px @input-shadow-color;
   }
 
-  &.lg {
-    padding: 6px 11px;
-    font-size: @font-size-md;
-    height: 40px;
-  }
+  &-group {
+    position: @rel;
+    display: @flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
 
-  &.sm {
-    padding: 0 7px;
-    font-size: @font-size-xs;
-    height: 24px;
+    &-prefix,
+    &-suffix {
+      display: @flex;
+
+      .rbt-btn {
+        position: @rel;
+        z-index: 2;
+      }
+    }
+
+    &-suffix {
+      margin-left: -1px;
+    }
+
+    &-prefix {
+      margin-right: -1px;
+    }
+
+    &-text {
+      display: @flex;
+      align-items: center;
+      padding: @input-padding-vertical-base @input-padding-horizontal;
+      margin-bottom: 0;
+      font-size: @font-size-sm;
+      line-height: @base-line-height;
+      color: @input-color;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #f5f7fa;
+      border: @border-width-base @border-style-base @input-border-color;
+      border-radius: @xm-radius;
+    }
+
+    & > &-suffix > .rbt-btn,
+    & > &-suffix > &-text,
+    & > &-prefix:first-child > .rbt-btn:not(:first-child),
+    & > &-prefix:first-child > &-text:not(:first-child),
+    & > &-prefix:not(:first-child) > .rbt-btn,
+    & > &-prefix:not(:first-child) > &-text {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    & > &-suffix:last-child > &-text:not(:last-child),
+    & > &-suffix:not(:last-child) > .rbt-btn,
+    & > &-suffix:not(:last-child) > &-text,
+    & > &-prefix > .rbt-btn,
+    & > &-prefix > &-text {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    & > select:focus,
+    & > .@{prefix}input:focus {
+      z-index: 3;
+    }
+
+    & > select,
+    & > select,
+    & > .@{prefix}input {
+      position: @rel;
+      flex: 1 1 auto;
+      width: 1%;
+      min-width: 0;
+      margin-bottom: 0;
+    }
+
+    & > select:not(:first-child),
+    & > .@{prefix}input:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    & > select:not(:last-child),
+    & > .@{prefix}input:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    & > select + select,
+    & > select + .@{prefix}input,
+    & > .@{prefix}input + select,
+    & > .@{prefix}input + .@{prefix}input {
+      margin-left: -1px;
+    }
+
+    & .rbt-btn + .rbt-btn,
+    & .rbt-btn + &-text,
+    & &-text + .rbt-btn,
+    & &-text + &-text,
+    &-prepend .rbt-btn + .rbt-btn,
+    &-prepend .rbt-btn + &-text,
+    &-prepend &-text + .rbt-btn,
+    &-prepend &-text + &-text {
+      margin-left: -1px;
+    }
+
+    &-lg > select,
+    &-lg > .@{prefix}input,
+    &-lg > &-suffix > .rbt-btn,
+    &-lg > &-suffix > &-text,
+    &-lg > &-prefix > .rbt-btn,
+    &-lg > &-prefix > &-text {
+      padding: @input-padding-vertical-large @input-padding-horizontal-large;
+      height: @input-height-large;
+      font-size: @font-size-md;
+      line-height: @base-line-height;
+    }
+
+    &-lg > select,
+    &-lg > .@{prefix}input:not(textarea) {
+      height: @input-height-large;
+    }
+
+    &-sm > select,
+    &-sm > .@{prefix}input,
+    &-sm > &-suffix > .rbt-btn,
+    &-sm > &-suffix > &-text,
+    &-sm > &-prefix > .rbt-btn,
+    &-sm > &-prefix > &-text {
+      padding: @input-padding-vertical-small @input-padding-horizontal-small;
+      height: @input-height-small;
+      font-size: @font-size-xs;
+      line-height: @base-line-height;
+    }
+
+    &-sm > select,
+    &-sm > .@{prefix}input:not(textarea) {
+      height: @input-height-small;
+    }
   }
+}
+
+textarea.@{prefix}input {
+  height: @auto;
+  min-height: 31.6px;
 }
