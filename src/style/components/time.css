@@ -1,7 +1,0 @@
-@import "../common/index.css";
-.rbt-time-with-link {
-  cursor: pointer;
-}
-.rbt-time-with-link:hover {
-  text-decoration: underline;
-}
