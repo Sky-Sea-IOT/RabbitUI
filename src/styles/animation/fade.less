@@ -1,18 +1,3 @@
-.fade-motion(@className, @keyframeName) {
-  .make-motion(@className, @keyframeName, @animation-time-quick);
-  .@{className}-enter-active {
-    opacity: 0;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-  }
-  .@{className}-leave-active {
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-  }
-}
-
-.fade-motion(fade, rabFade);
-
 @-webkit-keyframes rabFadeIn {
   0% {
     opacity: 0;

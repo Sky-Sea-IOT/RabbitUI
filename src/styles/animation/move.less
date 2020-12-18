@@ -1,305 +1,182 @@
-.move-motion(@className, @keyframeName) {
-  .make-motion(@className, @keyframeName);
-  .@{className}-enter-active,
-  .@{className}-appear {
-    opacity: 0;
-    -webkit-animation-timing-function: @ease-in-out;
-    animation-timing-function: @ease-in-out;
-  }
-  .@{className}-leave-active {
-    -webkit-animation-timing-function: @ease-in-out;
-    animation-timing-function: @ease-in-out;
-  }
-}
+// message组件的动画
 
-.move-motion(move-up, rabMoveUp);
-.move-motion(move-down, rabMoveDown);
-.move-motion(move-left, rabMoveLeft);
-.move-motion(move-right, rabMoveRight);
-
-@-webkit-keyframes rabMoveDownIn {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
-@keyframes rabMoveDownIn {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes rabMoveDownOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes rabMoveDownOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes rabmoveleftin {
-  0% {
-    transform-origin: 0 0;
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
-    opacity: 1;
-  }
-}
-
-@keyframes rabmoveleftin {
-  0% {
-    transform-origin: 0 0;
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes rabMoveLeftOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-@keyframes rabMoveLeftOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes rabMoveRightIn {
+@-webkit-keyframes rabMessageMoveIn {
   0% {
     opacity: 0;
-    transform-origin: 0 0;
-    transform: translateX(100%);
+    padding: 8px;
+    transform: translateY(-58%);
   }
   100% {
     opacity: 1;
-    transform-origin: 0 0;
-    transform: translateX(0%);
+    padding: 8px;
+    transform: translateY(0);
   }
 }
 
-@keyframes rabMoveRightIn {
+@keyframes rabMessageMoveIn {
   0% {
     opacity: 0;
-    transform-origin: 0 0;
-    transform: translateX(100%);
+    padding: 8px;
+    transform: translateY(-58%);
   }
   100% {
     opacity: 1;
-    transform-origin: 0 0;
-    transform: translateX(0%);
+    padding: 8px;
+    transform: translateY(0);
   }
 }
 
-@-webkit-keyframes rabMoveRightOut {
+@-webkit-keyframes rabMessageMoveOut {
   0% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
+    max-height: 150px;
+    padding: 8px;
     opacity: 1;
   }
   100% {
-    transform-origin: 0 0;
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes rabMoveRightOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes rabMoveUpIn {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
-@keyframes rabMoveUpIn {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes rabMoveUpOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
-
-@keyframes rabMoveUpOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateY(0%);
-    opacity: 1;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
-
-// specific transition for Notice
-
-.move-motion(move-notice, rabMoveNotice);
-// @import '../components/notice.less';
-
-@-webkit-keyframes rabMoveNoticeIn {
-  0% {
-    opacity: 0;
-    transform-origin: 0 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform-origin: 0 0;
-    transform: translateX(0%);
-  }
-}
-
-@keyframes rabMoveNoticeIn {
-  0% {
-    opacity: 0;
-    transform-origin: 0 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform-origin: 0 0;
-    transform: translateX(0%);
-  }
-}
-
-@-webkit-keyframes rabMoveNoticeOut {
-  0% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  70% {
-    transform-origin: 0 0;
-    transform: translateX(100%);
-    height: auto;
-    padding: @notice-padding;
-    margin-bottom: @notice-margin-bottom;
-    opacity: 0;
-  }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(100%);
-    height: 0;
+    max-height: 0;
     padding: 0;
-    margin-bottom: 0;
     opacity: 0;
   }
 }
 
-@keyframes rabMoveNoticeOut {
+@keyframes rabMessageMoveOut {
   0% {
-    transform-origin: 0 0;
-    transform: translateX(0%);
+    max-height: 150px;
+    padding: 8px;
     opacity: 1;
   }
-  70% {
-    transform-origin: 0 0;
-    transform: translateX(100%);
-    height: auto;
-    padding: @notice-padding;
-    margin-bottom: @notice-margin-bottom;
+  100% {
+    max-height: 0;
+    padding: 0;
     opacity: 0;
   }
-  100% {
-    transform-origin: 0 0;
-    transform: translateX(100%);
-    height: 0;
-    padding: 0;
-    margin-bottom: 0;
+}
+
+// notice组件的动画
+
+@-webkit-keyframes rabNoticeMoveIn {
+  0% {
     opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rabNoticeMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes rabNoticeMoveOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+    margin-bottom: 0;
+  }
+}
+
+@keyframes rabNoticeMoveOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+    margin-bottom: 0;
+  }
+}
+
+// left
+@-webkit-keyframes rabNoticeMoveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rabNoticeMoveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes rabNoticeMoveOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+    margin-bottom: 0;
+  }
+}
+
+@keyframes rabNoticeMoveOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+    margin-bottom: 0;
+  }
+}
+
+// modal组件的动画
+@-webkit-keyframes rabModalMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes rabModalMoveIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

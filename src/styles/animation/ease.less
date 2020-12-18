@@ -1,22 +1,3 @@
-.ease-motion(@className, @keyframeName) {
-  .make-motion(@className, @keyframeName);
-  .@{className}-enter-active {
-    opacity: 0;
-    -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
-    -webkit-animation-duration: @transition-time;
-            animation-duration: @transition-time;
-  }
-  .@{className}-leave-active {
-    -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
-    -webkit-animation-duration: @transition-time;
-            animation-duration: @transition-time;
-  }
-}
-
-.ease-motion(ease, rabEase);
-
 @-webkit-keyframes rabEaseIn {
   0% {
     opacity: 0;

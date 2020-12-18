@@ -1,42 +1,4 @@
-.motion-common(@time) {
-  -webkit-animation-duration: @time;
-  animation-duration: @time;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.make-motion(@className, @keyframeName, @time: @animation-time) {
-  .@{className}-enter-active {
-    .motion-common(@time);
-    -webkit-animation-play-state: paused;
-    animation-play-state: paused;
-  }
-  .@{className}-leave-active {
-    .motion-common(@time);
-    -webkit-animation-play-state: paused;
-    animation-play-state: paused;
-  }
-  .@{className}-enter-active {
-    -webkit-animation-name: ~'@{keyframeName}In';
-    animation-name: ~'@{keyframeName}In';
-    -webkit-animation-play-state: running;
-    animation-play-state: running;
-  }
-  .@{className}-leave-active {
-    -webkit-animation-name: ~'@{keyframeName}Out';
-    animation-name: ~'@{keyframeName}Out';
-    -webkit-animation-play-state: running;
-    animation-play-state: running;
-  }
-}
-
 @import 'fade';
 @import 'move';
 @import 'ease';
 @import 'slide';
-
-.collapse-transition {
-  transition: @transition-time height ease-in-out,
-    @transition-time padding-top ease-in-out,
-    @transition-time padding-bottom ease-in-out;
-}
