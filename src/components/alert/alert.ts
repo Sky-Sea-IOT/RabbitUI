@@ -1,3 +1,0 @@
-class _Alert {
-  constructor() {}
-}
