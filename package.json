@@ -1,5 +1,5 @@
 {
-    "name": "rabbitui",
+    "name": "rabbit-ui",
     "version": "0.1.0",
     "title": "RabbitUI",
     "description": "A library of UI components built based on JavaScript",
@@ -23,7 +23,8 @@
         "src"
     ],
     "scripts": {
-        "build:prod": "webpack --config config/webpack.prod.config.js --progress"
+        "dev": "webpack-dev-server --open --hot --config config/webpack.dev.js",
+        "build": "webpack --config config/webpack.prod.js"
     },
     "repository": {
         "type": "git",
@@ -37,13 +38,17 @@
     "devDependencies": {
         "autoprefixer-loader": "^3.2.0",
         "babel-loader": "^8.2.2",
+        "clean-webpack-plugin": "^3.0.0",
         "compression-webpack-plugin": "^7.0.0",
         "css-loader": "^5.0.1",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "html-loader": "^1.3.2",
         "html-webpack-plugin": "^4.5.0",
         "less-loader": "^7.1.0",
+        "mini-css-extract-plugin": "^1.3.3",
         "style-loader": "^2.0.0",
+        "ts-loader": "^8.0.12",
+        "typescript": "^4.1.3",
         "uglifyjs-webpack-plugin": "^2.2.0",
         "url-loader": "^4.1.1",
         "webpack": "^5.11.0",

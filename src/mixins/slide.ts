@@ -1,13 +1,25 @@
-const slide = (): Object => {
-  const Slider = { up: null, down: null };
+function slide(): Object {
+  const Slider: { up: Function; down: Function } = {
+    up: () => {},
+    down: () => {},
+  };
   // the constructed function,timeManager,as such that's a manager about managing the setInterval
-  function TimerManager(): void {
-    this.timers = [];
-    this.args = [];
-    this.isTimerRun = false;
+  class TimerManager {
+    timers: any[];
+    args: any[];
+    isTimerRun: boolean;
+    add: any;
+    next: any;
+    timerRun: any;
+    static makeTimerManage: (element: any) => void;
+    constructor() {
+      this.timers = [];
+      this.args = [];
+      this.isTimerRun = false;
+    }
   }
   // if the element can't has the property of TimerManage what represented the constructor function,repeated creating a constructed function
-  TimerManager.makeTimerManage = function (element) {
+  TimerManager.makeTimerManage = function (element: any) {
     if (
       !element.TimerManage ||
       element.TimerManage.constructor !== TimerManager
@@ -16,7 +28,7 @@ const slide = (): Object => {
     }
   };
   // That's order to create the method what add the timer
-  TimerManager.prototype.add = function (timer, args) {
+  TimerManager.prototype.add = function (timer: any, args: any) {
     this.timers.push(timer);
     this.args.push(args);
     this.timerRun();
@@ -38,7 +50,7 @@ const slide = (): Object => {
     this.timerRun();
   };
 
-  function slideUp(element, time) {
+  function slideUp(element: any, time: any) {
     if (element.offsetHeight > 0) {
       var totalHeight = element.offsetHeight;
       var currentHeight = totalHeight;
@@ -70,7 +82,7 @@ const slide = (): Object => {
     }
   }
 
-  function slideDown(element, time) {
+  function slideDown(element: any, time: any) {
     if (element.offsetHeight <= 0) {
       element.style.display = 'block';
       element.style.transition = 'height' + time + ' ms';
@@ -103,16 +115,16 @@ const slide = (): Object => {
     }
   }
   // the interface about slideUp method
-  Slider.up = function (element) {
+  Slider.up = function (element: any) {
     TimerManager.makeTimerManage(element);
     element.TimerManage.add(slideUp, arguments);
     return this;
   };
   // the interface about slideDown method
-  Slider.down = function (element) {
+  Slider.down = function (element: any) {
     TimerManager.makeTimerManage(element);
     element.TimerManage.add(slideDown, arguments);
     return this;
   };
   return Slider;
-};
+}

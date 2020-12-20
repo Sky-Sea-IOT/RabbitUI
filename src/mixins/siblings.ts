@@ -1,4 +1,4 @@
-const siblings = (elem: HTMLElement): Array<NodeList> => {
+function siblings(elem: any): ChildNode[] {
   let r = [];
   let n = elem.parentNode.firstChild;
   for (; n; n = n.nextSibling) {
@@ -7,4 +7,4 @@ const siblings = (elem: HTMLElement): Array<NodeList> => {
     }
   }
   return r;
-};
+}
