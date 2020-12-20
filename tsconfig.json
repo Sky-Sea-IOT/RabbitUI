@@ -4,7 +4,7 @@
   ],
   "include": [
     "src" // 会编译src目录下的所有文件，包括子目录
-  ],
+, "images.d.ts"  ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
