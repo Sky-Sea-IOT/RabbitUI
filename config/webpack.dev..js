@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -6,19 +6,18 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(common, {
-    devtool: 'eval-source-map',
+    mode: 'development',
+    devtool: 'inline-source-map',
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, '../dist'),
+    },
     devServer: {
-        contentBase: '../dist',
+        contentBase: './dist',
+        hot: true,
     },
     plugins: [
-        new CleanWebpackPlugin({
-            root: path.resolve(__dirname, '../dist'),
-            verbose: true,
-            dry: false,
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development'),
-        }),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.join(__dirname, '../examples/dist/index.html'),
