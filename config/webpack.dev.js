@@ -8,7 +8,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 module.exports = merge(common, {
     devtool: 'eval-source-map',
     entry: {
-        app: path.resolve(__dirname, '../src/index.ts'),
+        app: path.resolve(__dirname, '../examples/main.ts'),
     },
     output: {
         path: path.resolve(__dirname, '../examples/dist'),
@@ -21,7 +21,7 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.resolve(__dirname, '../examples/dist/index.html'),
-            template: path.resolve(__dirname, '../examples/index.html'),
+            template: path.resolve(__dirname, '../examples/alert/index.html'),
         }),
         new FriendlyErrorsPlugin(),
     ],

@@ -1,11 +1,11 @@
 @import '../custom.less';
 @import '../mixins/content.less';
 
-@alert: rab-alert;
+@alert-tag: r-alert;
 @alert-prefix-cls: ~'@{css-prefix}alert';
 @icon-prefix-cls: ~'@{css-prefix}icon';
 
-@{alert} {
+@{alert-tag} {
   color: @text-color;
   font-size: @font-size-base;
   line-height: @line-height-base;
@@ -20,30 +20,6 @@
 
   .@{alert-prefix-cls}-icon {
     color: @primary-color;
-  }
-
-  .@{alert-prefix-cls} {
-    &-icon {
-      font-size: @font-size-large;
-      top: 6px;
-      left: 12px;
-      position: absolute;
-    }
-
-    &-message {
-      color: @title-color;
-    }
-
-    &-desc {
-      font-size: @font-size-base;
-      color: @text-color;
-      line-height: 22px;
-      display: none;
-    }
-
-    &-close {
-      .content-close();
-    }
   }
 
   &[type='success'] {
@@ -78,11 +54,44 @@
     }
   }
 
-  &[show-with-icon='true'] {
+  &[banner='true'] {
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+.@{alert-prefix-cls} {
+  &-with-icon {
     padding: 8px 48px 8px 35px;
   }
 
-  &[show-desc='true'] {
+  &-icon {
+    font-size: @font-size-large;
+    top: 6px;
+    left: 12px;
+    position: absolute;
+  }
+
+  &-message {
+    color: @title-color;
+  }
+
+  &-desc {
+    font-size: @font-size-base;
+    color: @text-color;
+    line-height: 22px;
+    display: none;
+  }
+
+  &-close {
+    .content-close();
+  }
+
+  &-with-desc&-with-icon {
+    padding: 15px 15px 15px 69px;
+  }
+
+  &-with-desc {
     padding: 16px;
     position: relative;
     border-radius: @border-radius-base;
@@ -109,14 +118,5 @@
         font-size: 30px;
       }
     }
-  }
-
-  &[show-desc='true'][show-with-icon='true'] {
-    padding: 15px 15px 15px 69px;
-  }
-
-  &[banner='true'] {
-    border: 0;
-    border-radius: 0;
   }
 }

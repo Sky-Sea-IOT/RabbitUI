@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    .example {
+        width: 520px;
+        padding: 42px 24px 50px;
+        border: 1px solid #f0f0f0;
+        margin: 20px auto;
+    }
+</style>
+
+<body>
+    <div class="example">
+        <r-alert message="Info Text"></r-alert>
+        <r-alert message="Success Text" type="success"></r-alert>
+        <r-alert message="Warning Text" type="warning"></r-alert>
+        <r-alert message="Error Text" type="error"></r-alert>
+
+        <!-- <r-alert>
+            <div class="r-alert-message">Info Text</div>
+            <a class="r-alert-close">
+                <i class="r-icon r-icon-ios-close"></i>
+            </a>
+        </r-alert> -->
+
+        <!-- <r-alert type="success">
+            <div class="r-alert-message">Success Text</div>
+        </r-alert> -->
+    </div>
+
+    <div class="example">
+        <r-alert message="Info Text" desc="Info Description Info Description Info Description Info Description"></r-alert>
+        <r-alert message="Success Text" desc="Success Description Success Description Success Description" type="success"></r-alert>
+        <r-alert message="Warning Text" desc="Warning Description Warning Description Warning Description" type="warning"></r-alert>
+        <r-alert message="Error Text" desc="Error Description Error Description Error Description" type="error"></r-alert>
+
+        <!-- <r-alert type="error" show-desc="true">
+            <div class="r-alert-message">Error Text</div>
+            <div class="r-alert-desc">
+                Error Description Error Description Error Description Error Description Error Description Error Description
+            </div>
+        </r-alert> -->
+    </div>
+
+    <div class="example">
+        <r-alert message="Info Text" show-icon="true"></r-alert>
+        <r-alert message="Success Text" show-icon="true" type="success"></r-alert>
+        <r-alert message="Warning Text" show-icon="true" type="warning"></r-alert>
+        <r-alert message="Error Text" show-icon="true" type="error"></r-alert>
+
+        <!-- <r-alert show-with-icon="true">
+            <span class="r-alert-icon">
+              <i class="r-icon r-icon-ios-information-circle"></i>
+           </span>
+            <div class="r-alert-message">Info Text</div>
+        </r-alert> -->
+    </div>
+
+    <div class="example">
+        <r-alert message="Info Notes" desc="Additional description and information about copywriting." show-icon="true"></r-alert>
+        <r-alert message="Success Tips" desc="Detailed description and advice about successful copywriting." show-icon="true" type="success"></r-alert>
+        <r-alert message="Warning" desc="This is a warning notice about copywriting." show-icon="true" type="warning"></r-alert>
+        <r-alert message="Error" desc="This is an error message about copywriting." show-icon="true" type="error"></r-alert>
+        <r-alert id="customIcon" message="Custom icon" desc="Custom icon copywriting. Custom icon copywriting. Custom icon copywriting." show-icon="true"></r-alert>
+
+        <!-- <r-alert type="error" show-desc="true" show-with-icon="true">
+            <span class="r-alert-icon">
+              <i class="r-icon r-icon-ios-information-circle-outline"></i>
+            </span>
+            <div class="r-alert-message">Error Text</div>
+            <div class="r-alert-desc">
+                Error Description Error Description Error Description Error Description Error Description Error Description
+            </div>
+        </r-alert> -->
+    </div>
+
+    <div class="example">
+        <r-alert id="close" message="Info Text" closable="true"></r-alert>
+        <r-alert message="Success Text" desc="Success Description Success Description Success Description" closable="true" type="success"></r-alert>
+        <r-alert message="Success Text" closable="true" close-text="知道了" type="warning"></r-alert>
+    </div>
+
+    <div class="example" style="padding-left: 0; padding-right: 0">
+        <r-alert message="通知：顶部公告..." banner="true" type="warning"></r-alert>
+        <r-alert message="通知：顶部公告..." banner="true" closable="true" type="warning"></r-alert>
+    </div>
+</body>
+<script></script>
+
+</html>

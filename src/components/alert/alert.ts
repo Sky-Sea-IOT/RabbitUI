@@ -1,30 +1,31 @@
-import { warn, removeAttrs } from '../../mixins';
+import { warn, removeAttrs, type, destroyElem } from '../../mixins';
 
 class Alert {
+  VERSION: string;
   prefixCls: string;
 
   constructor() {
+    this.VERSION = 'v1.0';
     this.prefixCls = 'rab-alert';
-    const elements = document.querySelectorAll('rab-alert');
+
+    const elements = document.querySelectorAll('r-alert');
     this._create(elements);
   }
 
   private _create(elem: NodeListOf<Element>) {
     elem.forEach((node, index) => {
-      // 获取所有节点内容用于设置 alert 的描述内容
-      node.childNodes.forEach(nodeChild => {
-        // 递归
-        if (nodeChild.nodeName.toLowerCase() === 'rab-alert') {
-          // @ts-ignore
-          this._create(nodeChild.childNodes);
-        } else {
-          this._setDesc(node, nodeChild);
-        }
-      });
       this._setIcon(elem[index], node);
       this._setMsg(elem[index], node);
+      this._setDesc(elem[index], node);
       this._setCloseBtn(elem[index], node);
-      removeAttrs(node, ['message', 'show-icon', 'closable', 'close-text']);
+
+      removeAttrs(node, [
+        'message',
+        'desc',
+        'show-icon',
+        'closable',
+        'close-text',
+      ]);
     });
   }
 
@@ -48,6 +49,10 @@ class Alert {
     return node.getAttribute('message') || '';
   }
 
+  private _getDesc(node: Element) {
+    return node.getAttribute('desc') || '';
+  }
+
   private _setIcon(wrapper: Element, node: Element) {
     const showIcon: boolean = this._isShowIcon(node);
     const type: string = this._getType(node);
@@ -68,7 +73,7 @@ class Alert {
       iconType = 'ios-close-circle';
     }
 
-    if (node.childElementCount > 0) {
+    if (this._getDesc(node)) {
       type === 'warning'
         ? (iconType = 'md-information-circle-outline')
         : (iconType += '-outline');
@@ -79,7 +84,7 @@ class Alert {
     AlertIcon.className = `${this.prefixCls}-icon`;
     AlertIcon.innerHTML = `<i class="rab-icon rab-icon-${iconType}"></i>`;
 
-    wrapper.setAttribute('show-with-icon', 'true');
+    wrapper.classList.add(`${this.prefixCls}-with-icon`);
     wrapper.prepend(AlertIcon);
   }
 
@@ -92,20 +97,23 @@ class Alert {
     wrapper.prepend(AlertMessage);
   }
 
-  private _setDesc(wrapper: Element, node: ChildNode) {
-    const AlertDesc = document.createElement('div');
-    AlertDesc.className = `${this.prefixCls}-desc`;
-    AlertDesc.appendChild(node);
+  private _setDesc(wrapper: Element, node: Element) {
+    if (!this._getDesc(node)) return;
 
-    wrapper.setAttribute('show-desc', 'true');
+    const AlertDesc = document.createElement('div');
+
+    AlertDesc.className = `${this.prefixCls}-desc`;
+    AlertDesc.innerHTML = this._getDesc(node);
+
+    wrapper.classList.add(`${this.prefixCls}-with-desc`);
     wrapper.appendChild(AlertDesc);
   }
 
   private _setCloseBtn(wrapper: Element, node: Element) {
     if (!this._isClosable(node)) return;
 
-    const closeText: string = this._setCloseText(node);
     const AlertCloseBtn = document.createElement('a');
+    const closeText: string = this._setCloseText(node);
 
     AlertCloseBtn.className = `${this.prefixCls}-close`;
 
@@ -113,30 +121,41 @@ class Alert {
       ? closeText
       : `<i class="rab-icon rab-icon-ios-close"></i>`;
 
+    AlertCloseBtn.addEventListener('click', () =>
+      destroyElem(wrapper, { fadeOut: true })
+    );
+
     wrapper.appendChild(AlertCloseBtn);
+  }
+
+  private handleClose(btn: Element, fn: Function) {
+    btn.addEventListener('click', () => type.isFn(fn));
   }
 
   public config(elem: string) {
     const target: any = document.querySelector(elem);
+    const alertIcon = target?.querySelector(`.${this.prefixCls}-icon`);
     const alertMsg = target?.querySelector(`.${this.prefixCls}-message`);
     const alertDesc = target?.querySelector(`.${this.prefixCls}-desc`);
-    const alertCloseBtn = target?.querySelector(`.${this.prefixCls}-close`);
 
     return {
       // 设置消息标题
       get message() {
-        return alertMsg;
+        return alertMsg.innerHTML;
       },
+
       set message(newVal) {
         if (newVal !== alertMsg.innerHTML) {
           alertMsg.innerHTML = newVal;
         }
         return;
       },
+
       // 设置描述内容
       get desc() {
-        return alertMsg;
+        return alertDesc.innerHTML;
       },
+
       set desc(newVal) {
         if (alertDesc) {
           if (newVal !== alertDesc.innerHTML) {
@@ -146,18 +165,33 @@ class Alert {
         } else {
           // 在目标alert标签需要里先有描述内容才能使用该方式动态更新内容
           warn(
-            'The alert tag requires a description in order to use this method to dynamically update content'
+            'Before setting the description of this alert tag, you need to add the attribute "desc" to the tag and add content or Spaces'
           );
-          return;
         }
       },
-      // 关闭后的回调
-      onClose(fn: Function) {
-        alertCloseBtn.addEventListener('click', () => {
-          typeof fn === 'function' ? fn() : null;
-        });
+
+      // 自定义图标
+      get icon() {
+        return alertIcon.innerHTML;
+      },
+
+      set icon(newVal) {
+        if (alertIcon) {
+          if (newVal !== alertIcon.innerHTML) {
+            alertIcon.innerHTML = newVal;
+          }
+          return;
+        } else {
+          warn('This alert tag does not set the display icon');
+        }
       },
     };
+  }
+
+  public onClose(elem: string, ev: Function) {
+    const target: any = document.querySelector(elem);
+    const alertCloseBtn = target?.querySelector(`.${this.prefixCls}-close`);
+    this.handleClose(alertCloseBtn, ev);
   }
 }
 

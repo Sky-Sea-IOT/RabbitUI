@@ -8,5 +8,5 @@ export const removeAttrs = (elem: Element, attrs: Array<string>) => {
         elem.removeAttribute(attr);
       }
     });
-  }, 350);
+  }, 300);
 };

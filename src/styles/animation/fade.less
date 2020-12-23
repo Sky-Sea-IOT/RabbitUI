@@ -1,3 +1,13 @@
+.fade(@className,@keyframes) {
+  .rab-fade-@{className} {
+    -webkit-animation: @keyframes 0.3s ease-in-out;
+            animation: @keyframes 0.3s ease-in-out;
+  }
+}
+
+.fade(in,rabFadeIn);
+.fade(out,rabFadeOut);
+
 @-webkit-keyframes rabFadeIn {
   0% {
     opacity: 0;
