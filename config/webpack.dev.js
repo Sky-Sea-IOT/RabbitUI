@@ -6,22 +6,22 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(common, {
-    mode: 'development',
-    devtool: 'inline-source-map',
-    output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, '../dist'),
+    devtool: 'eval-source-map',
+    entry: {
+        app: path.resolve(__dirname, '../src/index.ts'),
     },
-    devServer: {
-        contentBase: './dist',
-        hot: true,
+    output: {
+        path: path.resolve(__dirname, '../examples/dist'),
+        publicPath: '',
+        filename: '[name].js',
+        chunkFilename: '[name].chunk.js',
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
-            filename: path.join(__dirname, '../examples/dist/index.html'),
-            template: path.join(__dirname, '../examples/index.html'),
+            filename: path.resolve(__dirname, '../examples/dist/index.html'),
+            template: path.resolve(__dirname, '../examples/index.html'),
         }),
         new FriendlyErrorsPlugin(),
     ],

@@ -1,0 +1,122 @@
+@import '../custom.less';
+@import '../mixins/content.less';
+
+@alert: rab-alert;
+@alert-prefix-cls: ~'@{css-prefix}alert';
+@icon-prefix-cls: ~'@{css-prefix}icon';
+
+@{alert} {
+  color: @text-color;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  position: relative;
+  display: block;
+  padding: 8px 15px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  border-radius: @border-radius-base;
+  border: @border-width-base @border-style-base tint(@primary-color, 65%);
+  background-color: tint(@primary-color, 92%);
+
+  .@{alert-prefix-cls}-icon {
+    color: @primary-color;
+  }
+
+  .@{alert-prefix-cls} {
+    &-icon {
+      font-size: @font-size-large;
+      top: 6px;
+      left: 12px;
+      position: absolute;
+    }
+
+    &-message {
+      color: @title-color;
+    }
+
+    &-desc {
+      font-size: @font-size-base;
+      color: @text-color;
+      line-height: 22px;
+      display: none;
+    }
+
+    &-close {
+      .content-close();
+    }
+  }
+
+  &[type='success'] {
+    border: @border-width-base @border-style-base tint(@success-color, 65%);
+    background-color: #f6ffed;
+    .@{alert-prefix-cls}-icon {
+      color: @success-color;
+    }
+  }
+
+  &[type='info'] {
+    border: @border-width-base @border-style-base tint(@primary-color, 65%);
+    background-color: tint(@primary-color, 92%);
+    .@{alert-prefix-cls}-icon {
+      color: @primary-color;
+    }
+  }
+
+  &[type='warning'] {
+    border: @border-width-base @border-style-base tint(@warning-color, 65%);
+    background-color: #fffbe6;
+    .@{alert-prefix-cls}-icon {
+      color: @warning-color;
+    }
+  }
+
+  &[type='error'] {
+    border: @border-width-base @border-style-base tint(@error-color, 65%);
+    background-color: #fff2f0;
+    .@{alert-prefix-cls}-icon {
+      color: @error-color;
+    }
+  }
+
+  &[show-with-icon='true'] {
+    padding: 8px 48px 8px 35px;
+  }
+
+  &[show-desc='true'] {
+    padding: 16px;
+    position: relative;
+    border-radius: @border-radius-base;
+    margin-bottom: 10px;
+    color: @text-color;
+    line-height: @line-height-base;
+
+    .@{alert-prefix-cls} {
+      &-desc {
+        display: block;
+      }
+
+      &-message {
+        font-size: @font-size-large;
+        color: @title-color;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      &-icon {
+        top: 50%;
+        left: 24px;
+        transform: translateY(-50%);
+        font-size: 30px;
+      }
+    }
+  }
+
+  &[show-desc='true'][show-with-icon='true'] {
+    padding: 15px 15px 15px 69px;
+  }
+
+  &[banner='true'] {
+    border: 0;
+    border-radius: 0;
+  }
+}

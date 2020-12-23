@@ -1,10 +1,11 @@
+/**
+ * 公共配置
+ */
+
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: {
-        app: './src/index.ts',
-    },
     module: {
         rules: [{
                 test: /\.ts$/,
@@ -15,12 +16,17 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [
+                    { loader: MiniCssExtractPlugin.loader },
+                    { loader: 'css-loader' },
+                    {
+                        loader: "'autoprefixer-loader'",
+                    },
+                ],
             },
             {
                 test: /\.less$/i,
                 use: [
-                    //分离样式文件
                     { loader: MiniCssExtractPlugin.loader },
                     {
                         loader: 'css-loader',
@@ -55,8 +61,9 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 4096,
-                        name: '[name]_[hash:5].[ext]',
-                        outputPath: 'style/fonts/',
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/',
+                        // outputPath: 'styles/fonts/',  打包的时候替换为这个
                     },
                 },
             },
@@ -71,5 +78,14 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.ts'],
     },
-    plugins: [new webpack.optimize.ModuleConcatenationPlugin()],
+    plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        //分离出css文件
+        new MiniCssExtractPlugin({
+            filename: 'rabbit.css',
+            // filename: 'styles/rabbit.css',  打包的时候替换为这个
+            chunkFilename: '[id].css',
+            ignoreOrder: false,
+        }),
+    ],
 };

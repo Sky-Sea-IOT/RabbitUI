@@ -1,13 +1,21 @@
+/**
+ * 打包生产模式下的资源
+ */
+
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(common, {
     devtool: 'source-map',
+    mode: 'production',
+    entry: {
+        app: './src/index.ts',
+    },
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
@@ -28,14 +36,9 @@ module.exports = merge(common, {
             threshold: 10240,
             minRatio: 0.8,
         }),
-        //分离出css文件
-        new MiniCssExtractPlugin({
-            filename: 'styles/rabbit.css',
-            chunkFilename: '[id].css',
-            ignoreOrder: false,
-        }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
         }),
+        new OptimizeCSSAssetsPlugin({}),
     ],
 });
