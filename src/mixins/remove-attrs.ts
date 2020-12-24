@@ -1,12 +1,11 @@
 /**
- * 移除自定义的属性
+ * 移除非关联 css 的自定义属性
  */
-export const removeAttrs = (elem: Element, attrs: Array<string>) => {
+export function removeAttrs(elem: Element, attrs: Array<string>): void {
   setTimeout(() => {
-    attrs.map(attr => {
-      if (attr) {
-        elem.removeAttribute(attr);
-      }
-    });
+    for (let i = 0; i < attrs.length; i++) {
+      const attr = attrs[i];
+      elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
+    }
   }, 300);
-};
+}

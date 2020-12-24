@@ -12,12 +12,12 @@ class Alert {
     this._create(elements);
   }
 
-  private _create(elem: NodeListOf<Element>) {
-    elem.forEach((node, index) => {
-      this._setIcon(elem[index], node);
-      this._setMsg(elem[index], node);
-      this._setDesc(elem[index], node);
-      this._setCloseBtn(elem[index], node);
+  private _create(nodes: NodeListOf<Element>) {
+    nodes.forEach((node, index) => {
+      this._setIcon(nodes[index], node);
+      this._setMsg(nodes[index], node);
+      this._setDesc(nodes[index], node);
+      this._setCloseBtn(nodes[index], node);
 
       removeAttrs(node, [
         'message',

@@ -5,7 +5,7 @@
 </p>
 
 <h1>
-RabbitUI
+Rabbit UI
     <h3>A library of UI components built based on JavaScript</h3>
     <h3>一套基于JavaScript构建的UI组件库</h3>
 </h1>
