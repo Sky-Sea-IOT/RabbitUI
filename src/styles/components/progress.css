@@ -23,7 +23,6 @@ r-progress[type='vertical'] .rab-progress-outer {
 .rab-progress-inner-text {
   display: inline-block;
   vertical-align: middle;
-  color: #fff;
   font-size: 12px;
   margin: 0 6px;
 }
@@ -52,6 +51,9 @@ r-progress[type='vertical'] .rab-progress-inner:after {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+.rab-progress-bg .rab-progress-inner-text {
+  color: #fff;
 }
 .rab-progress-success-bg {
   border-radius: 100px;

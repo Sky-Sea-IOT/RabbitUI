@@ -21,6 +21,10 @@ export const isStr = (str: any) => {
   return typeof str === 'string' ? true : errMsg('string', typeOf(str));
 };
 
+export const isNum = (num: any) => {
+  return typeof num === 'number' ? true : errMsg('number', typeOf(num));
+};
+
 export const isBol = (bol: any) => {
   return typeof bol === 'boolean' ? true : errMsg('boolean', typeOf(bol));
 };

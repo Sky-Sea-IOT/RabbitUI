@@ -27,7 +27,7 @@
                 <div class="rab-progress-success-bg" style="width: 0%; height: 10px"></div>
             </div>
         </div>
-        百分比内显或 show-text 则移除下面的节点
+        百分比内显或 show-text="false" 则移除下面的节点
         <div class="rab-progress-text">
             <span class="rab-progress-text-inner">
           25%
@@ -41,14 +41,16 @@
         <r-progress percent="50" status="active"></r-progress>
         <r-progress percent="70" status="wrong"></r-progress>
         <r-progress percent="100" status="success"></r-progress>
+        <r-progress percent="50" status="warning"></r-progress>
         <r-progress percent="50" show-text="false"></r-progress>
     </div>
 
     <div class="example">
         <r-progress text-inside="true" stroke-width="20" percent="30"></r-progress>
-        <r-progress text-inside="true" stroke-width="20" percent="50" status="active"></r-progress>
-        <r-progress text-inside="true" stroke-width="20" percent="70" status="wrong"></r-progress>
-        <r-progress text-inside="true" stroke-width="20" percent="100" status="success"></r-progress>
+        <r-progress text-inside="true" stroke-width="20" percent="70" status="active"></r-progress>
+        <r-progress text-inside="true" stroke-width="20" percent="100"></r-progress>
+        <r-progress text-inside="true" stroke-width="20" percent="80" status="warning"></r-progress>
+        <r-progress text-inside="true" stroke-width="20" percent="50" status="wrong"></r-progress>
     </div>
 
     <div class="example">
@@ -60,10 +62,6 @@
         <r-progress percent="60" success-percent="30"></r-progress>
     </div>
 </body>
-<script>
-    // 字符串数组转换为真实数组
-    // let strArr = '["#aaa","#bbbb"]';
-    // JSON.parse(strArr)
-</script>
+<script></script>
 
 </html>
