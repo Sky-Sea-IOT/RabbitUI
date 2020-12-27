@@ -135,10 +135,10 @@ class Progress {
        * 转为真实数组
        * "['','']" -> ['','']
        */
-      const str: string =
+      const strArr: string =
         node.getAttribute('stroke-color')?.replace(/\'/g, '"') || '';
 
-      const colorArr: any = JSON.parse(str);
+      const colorArr = JSON.parse(strArr);
 
       return {
         from: colorArr[0],
@@ -178,6 +178,15 @@ class Progress {
         if (progressText) progressText.textContent = `${newVal}%`;
 
         progress.style.width = `${newVal}%`;
+      },
+
+      get successPercent() {
+        return progressSucs.style.width;
+      },
+      set successPercent(newVal) {
+        if (!type.isNum(newVal)) return;
+        if (newVal === progressSucs?.style.width) return;
+        progressSucs.style.width = `${newVal}%`;
       },
     };
   }
