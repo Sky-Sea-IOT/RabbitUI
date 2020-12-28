@@ -147,7 +147,7 @@ class Alert {
     return {
       // 设置消息标题
       get message() {
-        return alertMsg.innerHTML;
+        return alertMsg;
       },
 
       set message(newVal) {
@@ -159,7 +159,7 @@ class Alert {
 
       // 设置描述内容
       get desc() {
-        return alertDesc.innerHTML;
+        return alertDesc;
       },
 
       set desc(newVal) {
@@ -178,7 +178,7 @@ class Alert {
 
       // 自定义图标
       get icon() {
-        return alertIcon.innerHTML;
+        return alertIcon;
       },
 
       set icon(newVal) {

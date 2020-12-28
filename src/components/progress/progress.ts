@@ -175,7 +175,7 @@ class Progress {
 
     return {
       get percent() {
-        return progress.style.width;
+        return progress;
       },
       set percent(newVal) {
         if (!type.isNum(newVal)) return;
@@ -188,7 +188,7 @@ class Progress {
       },
 
       get successPercent() {
-        return progressSucs.style.width;
+        return progressSucs;
       },
       set successPercent(newVal) {
         if (!type.isNum(newVal)) return;
