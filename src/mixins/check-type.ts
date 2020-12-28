@@ -1,6 +1,6 @@
 import { warn } from './warn';
 
-const typeOf = (value: any) => {
+const typeOf = (value: any): string => {
   const s = Object.prototype.toString.call(value);
   // @ts-ignore
   return s.match(/\[object (.*?)\]/)[1].toLowerCase();
@@ -14,8 +14,6 @@ const errMsg = (right: string, wrong: string) => {
 };
 
 export const isUndef = (value: any) => typeof value === 'undefined';
-
-export const isDef = (value: any) => typeof value !== 'undefined';
 
 export const isStr = (str: any) => {
   return typeof str === 'string' ? true : errMsg('string', typeOf(str));
