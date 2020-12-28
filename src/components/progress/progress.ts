@@ -3,10 +3,12 @@ import { removeAttrs, type } from '../../mixins';
 class Progress {
   VERSION: string;
   prefixCls: string;
+  prefixAttr: string;
 
   constructor() {
     this.VERSION = 'v1.0';
     this.prefixCls = 'rab-progress';
+    this.prefixAttr = 'rb';
 
     const elements = document.querySelectorAll('r-progress');
 
@@ -18,12 +20,12 @@ class Progress {
       this._createChildNodes(node);
 
       removeAttrs(node, [
-        'percent',
-        'show-text',
-        'text-inside',
-        'stroke-width',
-        'stroke-color',
-        'success-percent',
+        'rb-percent',
+        'rb-show-text',
+        'rb-text-inside',
+        'rb-stroke-width',
+        'rb-stroke-color',
+        'rb-success-percent',
       ]);
     });
   }
@@ -104,19 +106,19 @@ class Progress {
   }
 
   private _getStatus(node: Element): string | null {
-    return node.getAttribute('status');
+    return node.getAttribute(`${this.prefixAttr}-status`);
   }
 
   private _getPercent(node: Element): string {
-    return node.getAttribute('percent') || '0';
+    return node.getAttribute(`${this.prefixAttr}-percent`) || '0';
   }
 
   private _getSuccessPercent(node: Element): string {
-    return node.getAttribute('success-percent') || '0';
+    return node.getAttribute(`${this.prefixAttr}-success-percent`) || '0';
   }
 
   private _getStrokeWidth(node: Element): string {
-    return node.getAttribute('stroke-width') || '10';
+    return node.getAttribute(`${this.prefixAttr}-stroke-width`) || '10';
   }
 
   private _getStrokeColor(
@@ -125,7 +127,7 @@ class Progress {
     from: Array<string>;
     to: Array<string>;
   } {
-    if (!node.getAttribute('stroke-color')) {
+    if (!node.getAttribute(`${this.prefixAttr}-stroke-color`)) {
       return {
         from: [],
         to: [],
@@ -136,7 +138,9 @@ class Progress {
        * "['','']" -> ['','']
        */
       const strArr: string =
-        node.getAttribute('stroke-color')?.replace(/\'/g, '"') || '';
+        node
+          .getAttribute(`${this.prefixAttr}-stroke-color`)
+          ?.replace(/\'/g, '"') || '';
 
       const colorArr = JSON.parse(strArr);
 
@@ -148,11 +152,14 @@ class Progress {
   }
 
   private _isTextInside(node: Element): boolean {
-    return node.getAttribute('text-inside') === 'true' || false;
+    return (
+      node.getAttribute(`${this.prefixAttr}-text-inside`) === 'true' || false
+    );
   }
 
   private _isShowText(node: Element): boolean {
-    if (node.getAttribute('show-text') === 'false') return false;
+    if (node.getAttribute(`${this.prefixAttr}-show-text`) === 'false')
+      return false;
     else return true;
   }
 

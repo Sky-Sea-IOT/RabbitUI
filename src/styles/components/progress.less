@@ -18,10 +18,6 @@
     }
   }
 
-  @{progress-tag}[type='vertical'] &-outer {
-    .size(auto,100%);
-  }
-
   &-inner {
     display: inline-block;
     width: 100%;
@@ -35,20 +31,6 @@
       vertical-align: middle;
       font-size: @font-size-small;
       margin: 0 6px;
-    }
-  }
-  @{progress-tag}[type='vertical'] &-inner {
-    .size(auto,100%);
-
-    & > *,
-    &:after {
-      display: inline-block;
-      vertical-align: bottom;
-    }
-
-    &:after {
-      content: '';
-      height: 100%;
     }
   }
 
@@ -97,7 +79,7 @@
   font-size: @font-size-small;
   position: relative;
 
-  &[status='active'] {
+  &[rb-status='active'] {
     .@{progress-prefix-cls}-bg:before {
       content: '';
       opacity: 0;
@@ -115,7 +97,7 @@
     }
   }
 
-  &[status='success'] {
+  &[rb-status='success'] {
     .@{progress-prefix-cls} {
       &-bg {
         background-color: @success-color;
@@ -127,7 +109,7 @@
     }
   }
 
-  &[status='warning'] {
+  &[rb-status='warning'] {
     .@{progress-prefix-cls} {
       &-bg {
         background-color: @warning-color;
@@ -139,7 +121,7 @@
     }
   }
 
-  &[status='wrong'] {
+  &[rb-status='wrong'] {
     .@{progress-prefix-cls} {
       &-bg {
         background-color: @error-color;

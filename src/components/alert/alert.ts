@@ -3,10 +3,12 @@ import { warn, removeAttrs, type, destroyElem } from '../../mixins';
 class Alert {
   VERSION: string;
   prefixCls: string;
+  prefixAttr: string;
 
   constructor() {
     this.VERSION = 'v1.0';
     this.prefixCls = 'rab-alert';
+    this.prefixAttr = 'rb';
 
     const elements = document.querySelectorAll('r-alert');
     this._create(elements);
@@ -20,37 +22,41 @@ class Alert {
       this._setCloseBtn(nodes[index], node);
 
       removeAttrs(node, [
-        'message',
-        'desc',
-        'show-icon',
-        'closable',
-        'close-text',
+        `${this.prefixAttr}message`,
+        `${this.prefixAttr}desc`,
+        `${this.prefixAttr}show-icon`,
+        `${this.prefixAttr}closable`,
+        `${this.prefixAttr}close-text`,
       ]);
     });
   }
 
   private _getType(node: Element): string {
-    return node.getAttribute('type') || 'info';
+    return node.getAttribute(`${this.prefixAttr}type`) || 'info';
   }
 
   private _isShowIcon(node: Element): boolean {
-    return node.getAttribute('show-icon') === 'true' ? true : false;
+    return node.getAttribute(`${this.prefixAttr}show-icon`) === 'true'
+      ? true
+      : false;
   }
 
   private _isClosable(node: Element): boolean {
-    return node.getAttribute('closable') === 'true' ? true : false;
+    return node.getAttribute(`${this.prefixAttr}closable`) === 'true'
+      ? true
+      : false;
   }
 
   private _setCloseText(node: Element): string {
-    return node.getAttribute('close-text') || '';
+    return node.getAttribute(`${this.prefixAttr}close-text`) || '';
   }
 
   private _getMsg(node: Element): string {
-    return node.getAttribute('message') || '';
+    return node.getAttribute(`${this.prefixAttr}message`) || '';
   }
 
   private _getDesc(node: Element) {
-    return node.getAttribute('desc') || '';
+    return node.getAttribute(`${this.prefixAttr}desc`) || '';
   }
 
   private _setIcon(wrapper: Element, node: Element) {
