@@ -21,7 +21,7 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.resolve(__dirname, '../examples/dist/index.html'),
-            template: path.resolve(__dirname, '../examples/progress/index.html'),
+            template: path.resolve(__dirname, '../examples/timeline/index.html'),
         }),
         new FriendlyErrorsPlugin(),
     ],
