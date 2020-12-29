@@ -71,19 +71,19 @@
     }
 
     // size
-    &-large&-circle .@{btnClassName} {
+    &-lg&-circle .@{btnClassName} {
         border-radius: @btn-circle-size-large;
     }
-    &-large {
+    &-lg {
         & > .@{btnClassName} {
             .button-size(@btn-height-large; @btn-padding-large; @btn-font-size-large; @btn-border-radius);
         }
     }
 
-    &-small&-circle .@{btnClassName} {
+    &-sm&-circle .@{btnClassName} {
         border-radius: @btn-circle-size-small;
     }
-    &-small {
+    &-sm {
         & > .@{btnClassName}{
             .button-size(@btn-height-small; @btn-padding-small; @btn-font-size; @btn-border-radius-small);
             > .@{css-prefix-iconfont} {
@@ -92,11 +92,11 @@
         }
     }
 
-    &-small .@{btnClassName}-icon-only{
+    &-sm .@{btnClassName}-icon-only{
         .square(@btn-height-small);
         padding: 0;
     }
-    &-large .@{btnClassName}-icon-only{
+    &-lg .@{btnClassName}-icon-only{
         .square(@btn-height-large);
         padding: 0;
     }
@@ -152,7 +152,7 @@
     transition: color @transition-time linear, background-color @transition-time linear, border @transition-time linear, box-shadow @transition-time linear;
 
     > .@{css-prefix-iconfont} {
-        line-height: @line-height-base;
+        line-height: 1.5;
     }
 
     &-icon-only&-circle > .@{css-prefix-iconfont}{
@@ -161,6 +161,7 @@
 
     > span, > i{
         display: inline-block;
+        vertical-align: initial;
     }
 
     &,
@@ -185,11 +186,11 @@
         }
     }
 
-    &-large {
+    &-lg {
         .button-size(@btn-height-large; @btn-padding-large; @btn-font-size-large; @btn-border-radius);
     }
 
-    &-small {
+    &-sm {
         .button-size(@btn-height-small; @btn-padding-small; @btn-font-size; @btn-border-radius-small);
     }
 

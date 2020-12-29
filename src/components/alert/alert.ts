@@ -138,8 +138,18 @@ class Alert {
     btn.addEventListener('click', () => type.isFn(fn));
   }
 
-  public config(elem: string) {
+  public config(
+    elem: string
+  ): {
+    message: any;
+    desc: any;
+    icon: any;
+  } {
     const target: any = document.querySelector(elem);
+
+    if (!target)
+      throw new Error(`The selected element "${elem}" does not exist`);
+
     const alertIcon = target?.querySelector(`.${this.prefixCls}-icon`);
     const alertMsg = target?.querySelector(`.${this.prefixCls}-message`);
     const alertDesc = target?.querySelector(`.${this.prefixCls}-desc`);

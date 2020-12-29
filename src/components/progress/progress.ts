@@ -163,7 +163,12 @@ class Progress {
     else return true;
   }
 
-  public config(elem: string) {
+  public config(
+    elem: string
+  ): {
+    percent: number;
+    successPercent: number;
+  } {
     const target: any = document.querySelector(elem);
 
     if (!target)
