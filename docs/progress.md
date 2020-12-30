@@ -9,7 +9,7 @@
 - 当一个操作会打断当前界面，或者需要在后台运行，且耗时可能超过2秒时；
 - 当需要显示一个操作完成的百分比时。
 
-> 注意！使用前需要先调用构造方法实例化组件  `new Progress()`
+> 注意！使用前需要先实例化组件  `new Progress()`
 
 ## 代码示例
 
@@ -109,13 +109,13 @@
 
 | 名称   | 参数                 | 可设置的属性                |
 | ------ | -------------------- |  --------------------------- |
-| config | `el`，配置选定的 progress 组件 | `percent`、`successPercent` |
+| config | `sel`，配置选定的 progress 组件，必须是选择器名称 | `percent`、`successPercent` |
 
 ## 使用教程
 
 ### 动态设置进度
 
-进度条的进度不可能是固定不变的，这就需要在异步场景下使用组件内置的方法 `config(el).percent`  进行设置，以  jQuery 的 ajax 为例：
+进度条的进度不可能是固定不变的，这就需要在异步场景下使用组件内置的方法 `config(sel).percent`  进行设置，以  jQuery 的 ajax 为例：
 
 ```html
 <r-progress rb-percent="0" id="upload"></r-progress>

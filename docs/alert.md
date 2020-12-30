@@ -7,7 +7,7 @@
 - 当某个页面需要向用户显示警告的信息时。
 - 非浮层的静态展现形式，始终展现，不会自动消失，用户可以点击关闭。
 
-> 注意！使用前需要先调用构造方法实例化组件  `new Alert()`
+> 注意！使用前需要先实例化组件  `new Alert()`
 
 ## 代码示例
 
@@ -157,17 +157,19 @@
 
 | 名称   | 参数                 |  可设置的属性                |
 | ------ | -------------------- | --------------------------- |
-| config | `el`，配置选定的 alert 组件  | `rb-message` 、`rb-desc`、 `icon` |
+| config | `sel`，配置选定的 alert 组件，必须是选择器名称 | `rb-message` 、`rb-desc`、 `icon` |
 
-| 名称    | 说明       |
-| ------- | ---------- |
-| onClose | 关闭时触发 |
+### 事件
+
+| 名称    | 说明       | 参数            | 返回值   |
+| ------- | ---------- | --------------- | -------- |
+| onClose | 关闭时触发 | `($this) => {}` | 当前元素 |
 
 ## 使用教程
 
 #### 如何动态地或在异步在时机下改变 alert 的提示内容？
 
-请使用 `config(el).rb-message/rb-desc` 方法，该方法只有一个参数，用于传入选择器或元素名以用于单独为该组件进行配置
+请使用 `config(sel).rb-message/rb-desc` 方法，该方法只有一个参数，用于传入选择器或元素名以用于单独为该组件进行配置
 
 ```html
 <r-alert rb-message="Info Text" id="changeMsg"></r-alert>
@@ -221,7 +223,8 @@
 
 <script>
 	const $Alert = new Alert();
-    $Alert.onClose('#closeTip', () => {
+    $Alert.onClose('#closeTip', ($this) => {
+        // 参数 $this 是当前点击的整个元素
         // 任意代码...
 	});
 </script>
