@@ -1,4 +1,4 @@
-import { removeAttrs, type, validComps } from '../../mixins';
+import { type, validComps } from '../../mixins';
 
 class Switch {
   VERSION: string;
