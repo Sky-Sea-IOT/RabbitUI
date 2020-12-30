@@ -1,18 +1,17 @@
-import { removeAttrs, type } from '../../mixins';
+import { removeAttrs, type, validComps } from '../../mixins';
 
 class Progress {
   VERSION: string;
   prefixCls: string;
   prefixAttr: string;
+  components: any;
 
   constructor() {
     this.VERSION = 'v1.0';
     this.prefixCls = 'rab-progress';
     this.prefixAttr = 'rb';
-
-    const elements = document.querySelectorAll('r-progress');
-
-    this._create(elements);
+    this.components = document.querySelectorAll('r-progress');
+    this._create(this.components);
   }
 
   private _create(nodes: NodeListOf<Element>): void {
@@ -52,20 +51,12 @@ class Progress {
     this._showText(wrapper, PgrsBar);
   }
 
-  private _setPercent(
-    wrapper: Element,
-    bar: HTMLDivElement,
-    successBar: HTMLDivElement
-  ): void {
+  private _setPercent(wrapper: Element, bar: HTMLDivElement, successBar: HTMLDivElement): void {
     bar.style.width = `${this._getPercent(wrapper)}%`;
     successBar.style.width = `${this._getSuccessPercent(wrapper)}%`;
   }
 
-  private _setStrokeWidth(
-    wrapper: Element,
-    bar: HTMLDivElement,
-    successBar: HTMLDivElement
-  ): void {
+  private _setStrokeWidth(wrapper: Element, bar: HTMLDivElement, successBar: HTMLDivElement): void {
     bar.style.height = `${this._getStrokeWidth(wrapper)}px`;
     successBar.style.height = `${this._getStrokeWidth(wrapper)}px`;
   }
@@ -138,9 +129,7 @@ class Progress {
        * "['','']" -> ['','']
        */
       const strArr: string =
-        node
-          .getAttribute(`${this.prefixAttr}-stroke-color`)
-          ?.replace(/\'/g, '"') || '';
+        node.getAttribute(`${this.prefixAttr}-stroke-color`)?.replace(/\'/g, '"') || '';
 
       const colorArr = JSON.parse(strArr);
 
@@ -152,14 +141,11 @@ class Progress {
   }
 
   private _isTextInside(node: Element): boolean {
-    return (
-      node.getAttribute(`${this.prefixAttr}-text-inside`) === 'true' || false
-    );
+    return node.getAttribute(`${this.prefixAttr}-text-inside`) === 'true' || false;
   }
 
   private _isShowText(node: Element): boolean {
-    if (node.getAttribute(`${this.prefixAttr}-show-text`) === 'false')
-      return false;
+    if (node.getAttribute(`${this.prefixAttr}-show-text`) === 'false') return false;
     else return true;
   }
 
@@ -171,22 +157,19 @@ class Progress {
   } {
     const target: any = document.querySelector(elem);
 
-    if (!target)
-      throw new Error(`The selected element "${elem}" does not exist`);
+    validComps(target, 'progress');
 
-    const progress = target?.querySelector(`.${this.prefixCls}-bg`);
-    const progressSucs = target?.querySelector(`.${this.prefixCls}-success-bg`);
-    const progressText = target?.querySelector(`.${this.prefixCls}-inner-text`);
+    const progress = target.querySelector(`.${this.prefixCls}-bg`);
+    const progressSucs = target.querySelector(`.${this.prefixCls}-success-bg`);
+    const progressText = target.querySelector(`.${this.prefixCls}-inner-text`);
 
     return {
       get percent() {
         return progress;
       },
+
       set percent(newVal) {
-        if (!type.isNum(newVal)) return;
-
-        if (newVal === progress?.style.width) return;
-
+        if (!type.isNum(newVal) || newVal == progress.style.width) return;
         if (progressText) progressText.textContent = `${newVal}%`;
 
         progress.style.width = `${newVal}%`;
@@ -195,9 +178,9 @@ class Progress {
       get successPercent() {
         return progressSucs;
       },
+
       set successPercent(newVal) {
-        if (!type.isNum(newVal)) return;
-        if (newVal === progressSucs?.style.width) return;
+        if (!type.isNum(newVal) || newVal == progressSucs.style.width) return;
         progressSucs.style.width = `${newVal}%`;
       },
     };

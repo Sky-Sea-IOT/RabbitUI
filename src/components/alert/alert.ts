@@ -1,17 +1,17 @@
-import { warn, removeAttrs, type, destroyElem } from '../../mixins';
+import { warn, removeAttrs, type, destroyElem, validComps } from '../../mixins';
 
 class Alert {
   VERSION: string;
   prefixCls: string;
   prefixAttr: string;
+  components: any;
 
   constructor() {
     this.VERSION = 'v1.0';
     this.prefixCls = 'rab-alert';
     this.prefixAttr = 'rb';
-
-    const elements = document.querySelectorAll('r-alert');
-    this._create(elements);
+    this.components = document.querySelectorAll('r-alert');
+    this._create(this.components);
   }
 
   private _create(nodes: NodeListOf<Element>) {
@@ -22,41 +22,13 @@ class Alert {
       this._setCloseBtn(nodes[index], node);
 
       removeAttrs(node, [
-        `${this.prefixAttr}message`,
-        `${this.prefixAttr}desc`,
-        `${this.prefixAttr}show-icon`,
-        `${this.prefixAttr}closable`,
-        `${this.prefixAttr}close-text`,
+        `${this.prefixAttr}-message`,
+        `${this.prefixAttr}-desc`,
+        `${this.prefixAttr}-show-icon`,
+        `${this.prefixAttr}-closable`,
+        `${this.prefixAttr}-close-text`,
       ]);
     });
-  }
-
-  private _getType(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}type`) || 'info';
-  }
-
-  private _isShowIcon(node: Element): boolean {
-    return node.getAttribute(`${this.prefixAttr}show-icon`) === 'true'
-      ? true
-      : false;
-  }
-
-  private _isClosable(node: Element): boolean {
-    return node.getAttribute(`${this.prefixAttr}closable`) === 'true'
-      ? true
-      : false;
-  }
-
-  private _setCloseText(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}close-text`) || '';
-  }
-
-  private _getMsg(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}message`) || '';
-  }
-
-  private _getDesc(node: Element) {
-    return node.getAttribute(`${this.prefixAttr}desc`) || '';
   }
 
   private _setIcon(wrapper: Element, node: Element) {
@@ -80,9 +52,7 @@ class Alert {
     }
 
     if (this._getDesc(node)) {
-      type === 'warning'
-        ? (iconType = 'md-information-circle-outline')
-        : (iconType += '-outline');
+      type === 'warning' ? (iconType = 'md-information-circle-outline') : (iconType += '-outline');
     }
 
     const AlertIcon = document.createElement('span');
@@ -94,12 +64,14 @@ class Alert {
     wrapper.prepend(AlertIcon);
   }
 
+  private _setCloseText(node: Element): string {
+    return node.getAttribute(`${this.prefixAttr}close-text`) || '';
+  }
+
   private _setMsg(wrapper: Element, node: Element) {
     const AlertMessage = document.createElement('div');
-
     AlertMessage.className = `${this.prefixCls}-message`;
     AlertMessage.innerHTML = this._getMsg(node);
-
     wrapper.prepend(AlertMessage);
   }
 
@@ -123,19 +95,31 @@ class Alert {
 
     AlertCloseBtn.className = `${this.prefixCls}-close`;
 
-    AlertCloseBtn.innerHTML = closeText
-      ? closeText
-      : `<i class="rab-icon rab-icon-ios-close"></i>`;
+    AlertCloseBtn.innerHTML = closeText ? closeText : `<i class="rab-icon rab-icon-ios-close"></i>`;
 
-    AlertCloseBtn.addEventListener('click', () =>
-      destroyElem(wrapper, { fadeOut: true })
-    );
+    AlertCloseBtn.addEventListener('click', () => destroyElem(wrapper, { fadeOut: true }));
 
     wrapper.appendChild(AlertCloseBtn);
   }
 
-  private handleClose(btn: Element, fn: Function) {
-    btn.addEventListener('click', () => type.isFn(fn));
+  private _getType(node: Element): string {
+    return node.getAttribute(`${this.prefixAttr}-type`) || 'info';
+  }
+
+  private _isClosable(node: Element): boolean {
+    return node.getAttribute(`${this.prefixAttr}-closable`) === 'true' ? true : false;
+  }
+
+  private _isShowIcon(node: Element): boolean {
+    return node.getAttribute(`${this.prefixAttr}-show-icon`) === 'true' ? true : false;
+  }
+
+  private _getMsg(node: Element): string {
+    return node.getAttribute(`${this.prefixAttr}-message`) || '';
+  }
+
+  private _getDesc(node: Element) {
+    return node.getAttribute(`${this.prefixAttr}-desc`) || '';
   }
 
   public config(
@@ -147,8 +131,7 @@ class Alert {
   } {
     const target: any = document.querySelector(elem);
 
-    if (!target)
-      throw new Error(`The selected element "${elem}" does not exist`);
+    validComps(target, 'alert');
 
     const alertIcon = target?.querySelector(`.${this.prefixCls}-icon`);
     const alertMsg = target?.querySelector(`.${this.prefixCls}-message`);
@@ -161,7 +144,7 @@ class Alert {
       },
 
       set message(newVal) {
-        if (newVal !== alertMsg.innerHTML) {
+        if (newVal != alertMsg.innerHTML) {
           alertMsg.innerHTML = newVal;
         }
         return;
@@ -174,7 +157,7 @@ class Alert {
 
       set desc(newVal) {
         if (alertDesc) {
-          if (newVal !== alertDesc.innerHTML) {
+          if (newVal != alertDesc.innerHTML) {
             alertDesc.innerHTML = newVal;
           }
           return;
@@ -193,7 +176,7 @@ class Alert {
 
       set icon(newVal) {
         if (alertIcon) {
-          if (newVal !== alertIcon.innerHTML) {
+          if (newVal != alertIcon.innerHTML) {
             alertIcon.innerHTML = newVal;
           }
           return;
@@ -204,10 +187,18 @@ class Alert {
     };
   }
 
-  public onClose(elem: string, ev: Function) {
+  public onClose(elem: string, cb: Function) {
     const target: any = document.querySelector(elem);
-    const alertCloseBtn = target?.querySelector(`.${this.prefixCls}-close`);
-    this.handleClose(alertCloseBtn, ev);
+
+    // 将当前选中的组件作为参数返回出去
+    let $this: Element;
+
+    validComps(target, 'alert');
+
+    $this = target;
+
+    const alertCloseBtn = target.querySelector(`.${this.prefixCls}-close`);
+    alertCloseBtn.addEventListener('click', () => type.isFn(cb, $this));
   }
 }
 

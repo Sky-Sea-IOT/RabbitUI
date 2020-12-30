@@ -1,4 +1,4 @@
-import { type } from '.';
+import { type, warn } from '.';
 
 interface Options {
   key?: string | number;
@@ -11,14 +11,9 @@ interface Options {
 
 export const destroyElem = (
   elem: any,
-  {
-    fadeOut = false,
-    clsLeave,
-    clsEnter,
-    cb = () => {},
-    destroy = true,
-  }: Options
+  { fadeOut = false, clsLeave, clsEnter, cb = () => {}, destroy = true }: Options
 ) => {
+  // 是否选择淡出效果
   if (fadeOut) {
     elem.classList.add('rab-fade-out');
     elem.classList.remove('rab-fade-in');
@@ -28,6 +23,7 @@ export const destroyElem = (
       elem.classList.remove(clsEnter);
     }
   }
+  // 销毁或仅隐藏元素
   setTimeout(() => {
     if (destroy) {
       elem.remove();
@@ -38,13 +34,14 @@ export const destroyElem = (
   }, 300);
 };
 
-export const destroyElemByKey = (config: Options, options: {}) => {
-  const target = document.querySelector('[data-el-key]');
-  //@ts-ignore
-  const targetKey = target.dataset.elKey;
-
-  config.key = config.key?.toString();
-  if (config.key === targetKey) {
+export const destroyElemByKey = (options: Options) => {
+  // 统一转换为字符串
+  options.key = options.key!.toString();
+  // 传入的key是否选取得到对应的元素
+  const target = document.querySelector(`[data-comp-key="${options.key}"]`);
+  if (target) {
     destroyElem(target, options);
+  } else {
+    warn(`The key value is invalid --${options.key}`);
   }
 };

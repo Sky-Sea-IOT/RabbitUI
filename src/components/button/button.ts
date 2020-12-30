@@ -4,14 +4,14 @@ class Button {
   VERSION: string;
   prefixCls: string;
   prefixAttr: string;
+  components: any;
 
   constructor() {
     this.VERSION = '1.0';
     this.prefixCls = 'rab-btn';
     this.prefixAttr = 'rb';
-
-    const btns = document.querySelectorAll(`.${this.prefixCls}`);
-    this._getAllBtns(btns);
+    this.components = document.querySelectorAll(`.${this.prefixCls}`);
+    this._getAllBtns(this.components);
   }
 
   private _getAllBtns(nodes: NodeListOf<Element>): void {

@@ -8,5 +8,5 @@ export default function alertTest() {
   $alert.config('#customIcon').icon = ICON;
 
   // 测试关闭回调
-  $alert.onClose('#close', () => console.log('这是点击关闭的回调'));
+  $alert.onClose('#close', ($this: Element) => console.log('这是点击关闭的回调'));
 }
