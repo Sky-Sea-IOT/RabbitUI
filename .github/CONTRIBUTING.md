@@ -1,4 +1,4 @@
-# Contributing to RabbitUI
+# Contributing to Rabbit UI
 
 Looking to contribute something to RabbitUI? **Here's how you can help.**
 
