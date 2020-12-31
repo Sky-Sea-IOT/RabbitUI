@@ -1,6 +1,7 @@
 import alertTest from './alert';
 import avatarTest from './avatar';
 import buttonTest from './button';
+import messageTest from './message';
 import progressTest from './progress';
 import switchTest from './switch';
 import timelineTest from './timeline';
@@ -10,4 +11,5 @@ import timelineTest from './timeline';
 // progressTest();
 // timelineTest();
 // buttonTest();
+messageTest();
 // switchTest();

@@ -8,6 +8,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     module: {
         rules: [{
+                test: /\.js$/,
+                loader: 'babel-loader',
+                options: {
+                    sourceMap: true,
+                },
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 use: {
@@ -38,6 +46,9 @@ module.exports = {
                         loader: 'less-loader',
                         options: {
                             sourceMap: true,
+                            lessOptions: {
+                                javascriptEnabled: true,
+                            },
                         },
                     },
                 ],
