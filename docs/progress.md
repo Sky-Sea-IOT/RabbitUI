@@ -91,9 +91,9 @@
 <r-progress rb-percent="60" rb-success-percent="30"></r-progress>
 ```
 
-<p style="font-size: 32px">API</p>
+<p style="font-size: 32px">Attributes</p>
 
-#### Progress Attributes
+#### Progress
 
 | 属性               | 说明                                                         | 默认值 |
 | ------------------ | ------------------------------------------------------------ | ------ |

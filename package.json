@@ -23,7 +23,7 @@
         "src"
     ],
     "scripts": {
-        "dev": "webpack-dev-server --content-base test/ --open --inline --hot --compress --history-api-fallback --port 8088 --config config/webpack.dev.js --progress",
+        "dev": "webpack-dev-server  --history-api-fallback --config config/webpack.dev.js",
         "build:dev": "webpack --config config/webpack.dist.dev.js --progress",
         "build:prod": "webpack --config config/webpack.dist.prod.js --progress",
         "build": "npm run build:dev && npm run build:prod"

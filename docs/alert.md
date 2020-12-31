@@ -139,9 +139,9 @@
 </r-alert>
 ```
 
-<p style="font-size: 32px">API</p>
+<p style="font-size: 32px">Attributes</p>
 
-#### Alert Attributes
+#### Alert
 
 | 属性       | 说明                                                        | 默认值 |
 | ---------- | ----------------------------------------------------------- | ------ |

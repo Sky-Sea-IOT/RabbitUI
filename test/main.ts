@@ -6,7 +6,7 @@ import switchTest from './switch';
 import timelineTest from './timeline';
 
 // alertTest();
-avatarTest();
+// avatarTest();
 // progressTest();
 // timelineTest();
 // buttonTest();

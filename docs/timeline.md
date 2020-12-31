@@ -84,15 +84,15 @@
 </r-timeline>
 ```
 
-<p style="font-size: 32px">API</p>
+<p style="font-size: 32px">Attributes</p>
 
-#### Timeline Attributes
+#### Timeline
 
 | 属性       | 说明                           | 默认值 |
 | ---------- | ------------------------------ | ------ |
 | rb-pending | 指定是否最后一个节点为幽灵节点 | -      |
 
-#### Timeline-item  Attributes
+#### Timeline-item 
 
 | 属性     | 说明                                                         | 默认值 |
 | -------- | ------------------------------------------------------------ | ------ |

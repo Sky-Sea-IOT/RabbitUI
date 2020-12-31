@@ -73,9 +73,9 @@
 
 设置属性 `rb-true-color` 和 `rb-false-color` 可以自定义背景色。
 
-<p style="font-size: 32px">API</p>
+<p style="font-size: 32px">Attributes</p>
 
-### Switch Attributes
+### Switch
 
 | 属性           | 说明                                                         | 默认值 |
 | -------------- | ------------------------------------------------------------ | ------ |
