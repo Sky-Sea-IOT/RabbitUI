@@ -5,12 +5,18 @@ class Progress {
   prefixCls: string;
   prefixAttr: string;
   components: any;
+  iconsHtml: object;
 
   constructor() {
     this.VERSION = 'v1.0';
     this.prefixCls = 'rab-progress';
     this.prefixAttr = 'rb';
     this.components = document.querySelectorAll('r-progress');
+    this.iconsHtml = {
+      success: `<i class="rab-icon rab-icon-ios-checkmark-circle"></i>`,
+      warning: `<i class="rab-icon rab-icon-ios-alert"></i>`,
+      wrong: `<i class="rab-icon rab-icon-ios-close-circle"></i>`,
+    };
     this._create(this.components);
   }
 
@@ -75,11 +81,14 @@ class Progress {
       wrapper.className = `${this.prefixCls}-show-info`;
 
       if (this._getStatus(wrapper) === 'success') {
-        PgresText.innerHTML = `<i class="rab-icon rab-icon-ios-checkmark-circle"></i>`;
+        // @ts-ignore
+        PgresText.innerHTML = this.iconsHtml.success;
       } else if (this._getStatus(wrapper) === 'warning') {
-        PgresText.innerHTML = `<i class="rab-icon rab-icon-ios-alert"></i>`;
+        // @ts-ignore
+        PgresText.innerHTML = this.iconsHtml.warning;
       } else if (this._getStatus(wrapper) === 'wrong') {
-        PgresText.innerHTML = `<i class="rab-icon rab-icon-ios-close-circle"></i>`;
+        // @ts-ignore
+        PgresText.innerHTML = this.iconsHtml.wrong;
       }
 
       PgrsTextWrapper.appendChild(PgresText);

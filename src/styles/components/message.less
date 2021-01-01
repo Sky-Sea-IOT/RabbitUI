@@ -73,7 +73,7 @@
     }
 
     .@{icon-prefix-cls} {
-        margin-right: 4px;
+        margin-right: 6px;
         font-size: 18px;
         position: relative;
         top: 2px;
@@ -114,34 +114,32 @@
 
 .move(@className,@keyframes) {
     .@{message-prefix-cls}-move-@{className} {
-        -webkit-animation: @keyframes @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
-        animation: @keyframes @animation-time cubic-bezier(0.645, 0.045, 0.355, 1);
+        -webkit-animation: @keyframes @animation-time cubic-bezier(0.23, 1, 0.320, 1);
+        animation: @keyframes @animation-time cubic-bezier(0.23, 1, 0.320, 1);
     }
 }
 
 @-webkit-keyframes rabMessageMoveIn {
     0% {
       opacity: 0;
-      padding: 8px;
-      transform: translateY(-100%);
+      padding: 0;
+      transform: translateY(-40%);
     }
     100% {
       opacity: 1;
       padding: 8px;
-      transform: translateY(0);
     }
   }
   
   @keyframes rabMessageMoveIn {
     0% {
       opacity: 0;
-      padding: 8px;
-      transform: translateY(-100%);
+      padding: 0;
+      transform: translateY(-40%);
     }
     100% {
       opacity: 1;
       padding: 8px;
-      transform: translateY(0);
     }
   }
   
