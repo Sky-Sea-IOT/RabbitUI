@@ -33,6 +33,7 @@ export default function messageTest() {
     message.info({
       content: '这是一条带背景色的通知',
       background: true,
+      duration: 5,
     });
   };
 
@@ -57,6 +58,13 @@ export default function messageTest() {
   window.getLoading = () => {
     message.loading('正在加载中...');
   };
+  window.getPromise = () => {
+    message.loading('正在加载中...').then(() => {
+      message.success('加载成功!').then(() => {
+        message.info('加载成功后的提示');
+      });
+    });
+  };
   window.get10s = () => {
     message.success({
       content: '这是成功的提示信息，我将在10秒内消失',
@@ -71,6 +79,6 @@ export default function messageTest() {
     });
   };
   window.useHTML = () => {
-    message.info('<strong>这是 <i>HTML</i> 片段</strong>');
+    message.info(`<strong>这是 <i>HTML</i> 片段</strong>`);
   };
 }

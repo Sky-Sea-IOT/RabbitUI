@@ -1,4 +1,6 @@
 import { CssTranstion, destroyElem, destroyElemByKey, type, warn } from '../../mixins';
+import usePromiseCallback from '../../mixins/cb-promise';
+import promiseCb from '../../mixins/cb-promise';
 
 interface MsgGlobalCfg {
   top?: number;
@@ -25,14 +27,18 @@ const defaults: {
 let zIndex: number = 1010;
 
 // 创建实例的最外层父容器，通过实例的 init方法调用
-function createInstanceWrapper(): void {
+function createInstanceWrapper(): HTMLDivElement {
   const MsgParent = document.createElement('div');
 
   MsgParent.className = 'rab-message';
   MsgParent.style.zIndex = `${zIndex}`;
+
   document.body.appendChild(MsgParent);
 
+  // 设置全局 top值
   setTimeout(() => (MsgParent.style.top = `${defaults.top}px`), 0);
+
+  return MsgParent;
 }
 
 class Message {
@@ -67,18 +73,18 @@ class Message {
     this.msgMoveLeave = `${this.prefixCls}-move-leave`;
   }
 
-  // 每次创建实例自动增加最外层父容器的层级
   private _autoSetZindex(): void {
+    // 每次创建实例自动增加最外层父容器的层级
     zIndex++;
     // @ts-ignore
     document.querySelector(`.${this.prefixCls}`).style.zIndex = zIndex;
   }
 
-  private _createInstance(_type: string, config: string | MsgInstancesCfg): void {
+  private _createInstance(_type: string, config: string | MsgInstancesCfg): false | HTMLDivElement {
     // 是否初始化组件
     if (!document.querySelector(`.${this.prefixCls}`)) {
       warn('Please initialize the Message component first');
-      return;
+      return false;
     }
 
     this._autoSetZindex();
@@ -104,8 +110,8 @@ class Message {
       let { key, closable, duration, onClose, background } = config;
 
       type.isUndef(closable) ? (closable = false) : closable;
+      type.isUndef(onClose) ? (onClose = () => {}) : closable;
       type.isUndef(background) ? (background = false) : background;
-
       // 为每个实例自己的 duration 参数设置默认值，如果有传入值则使用自定义的值
       type.isUndef(duration) ? (duration = defaults.duration) : duration;
 
@@ -122,13 +128,14 @@ class Message {
     MsgContentBox.append(MsgInfoBox);
     MsgInfoBox.append(MsgIcon, MsgText);
     Message.appendChild(MsgContentWrap);
-
     document.querySelector(`.${this.prefixCls}`)!.appendChild(Message);
 
     // 存放每次创建的实例
     this.instances.push(Message);
 
     CssTranstion(Message, this.msgMoveEnter, true);
+
+    return Message;
   }
 
   private _setCls(
@@ -147,7 +154,7 @@ class Message {
   }
 
   private _setIcon(type: string, icon: HTMLElement): void {
-    if (type === 'loading') icon.classList.add('rab-load-loop');
+    type === 'loading' ? icon.classList.add('rab-load-loop') : '';
     // @ts-ignore
     icon.classList.add(`rab-icon-${this.iconTypes[type]}`);
   }
@@ -186,17 +193,16 @@ class Message {
   }
 
   private _autoClose(node: HTMLElement, duration: any): void {
-    setTimeout(() => {
-      destroyElem(node, {
-        duration,
-        clsEnter: this.msgMoveEnter,
-        clsLeave: this.msgMoveLeave,
-      });
-    }, 0);
+    destroyElem(node, {
+      duration,
+      clsEnter: this.msgMoveEnter,
+      clsLeave: this.msgMoveLeave,
+    });
   }
 
   private _handleClose(parent: HTMLElement, closeBtn: HTMLElement, onClose: any): void {
     closeBtn.addEventListener('click', () => {
+      // 手动关闭后的回调
       type.isFn(onClose);
 
       this.instances.length -= 1;
@@ -215,24 +221,35 @@ class Message {
     children.classList.add(`${this.prefixChildCls}-content-background`);
   }
 
-  public info(config: string | MsgInstancesCfg): void {
-    return this._createInstance('info', config);
+  public info(config: string | MsgInstancesCfg): Promise<void> {
+    this._createInstance('info', config);
+    // message 结束时提供 then 接口在关闭后运行 callback
+    // @ts-ignore
+    return usePromiseCallback(defaults.duration, config.duration);
   }
 
-  public success(config: string | MsgInstancesCfg): void {
-    return this._createInstance('success', config);
+  public success(config: string | MsgInstancesCfg): Promise<void> {
+    this._createInstance('success', config);
+    // @ts-ignore
+    return usePromiseCallback(defaults.duration, config.duration);
   }
 
-  public warning(config: string | MsgInstancesCfg): void {
-    return this._createInstance('warning', config);
+  public warning(config: string | MsgInstancesCfg): Promise<void> {
+    this._createInstance('warning', config);
+    // @ts-ignore
+    return usePromiseCallback(defaults.duration, config.duration);
   }
 
-  public error(config: string | MsgInstancesCfg): void {
-    return this._createInstance('error', config);
+  public error(config: string | MsgInstancesCfg): Promise<void> {
+    this._createInstance('error', config);
+    // @ts-ignore
+    return usePromiseCallback(defaults.duration, config.duration);
   }
 
-  public loading(config: string | MsgInstancesCfg): void {
-    return this._createInstance('loading', config);
+  public loading(config: string | MsgInstancesCfg): Promise<void> {
+    this._createInstance('loading', config);
+    // @ts-ignore
+    return usePromiseCallback(defaults.duration, config.duration);
   }
 
   public config(options: MsgGlobalCfg): void {
@@ -247,6 +264,7 @@ class Message {
   public destroy(key?: string | number): void {
     // 通过设置的 key 消除
     if (key && (type.isStr(key) || type.isNum(key))) {
+      this.instances.length -= 1;
       destroyElemByKey({
         key,
         duration: 0.1,
@@ -254,10 +272,8 @@ class Message {
         clsEnter: this.msgMoveEnter,
         clsLeave: this.msgMoveLeave,
       });
-
-      this.instances.length -= 1;
-      // 销毁所有实例
     } else {
+      // 销毁所有实例
       this.instances.forEach(instance => {
         destroyElem(instance, {
           duration: 0.1,
