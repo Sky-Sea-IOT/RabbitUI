@@ -1,9 +1,12 @@
+@import '../animation/move.less';
 @import '../color/colorPalette.less';
 @import '../custom.less';
 @import '../mixins/close.less';
 
 @message-prefix-cls: ~"@{css-prefix}message";
 @icon-prefix-cls: ~"@{css-prefix}icon";
+
+@message-time-function: cubic-bezier(0.23, 1, 0.320, 1);
 
 .@{message-prefix-cls} {
     font-size: @font-size-base;
@@ -109,62 +112,5 @@
     }
 }
 
-.move(enter,rabMessageMoveIn);
-.move(leave,rabMessageMoveOut);
-
-.move(@className,@keyframes) {
-    .@{message-prefix-cls}-move-@{className} {
-        -webkit-animation: @keyframes @animation-time cubic-bezier(0.23, 1, 0.320, 1);
-        animation: @keyframes @animation-time cubic-bezier(0.23, 1, 0.320, 1);
-    }
-}
-
-@-webkit-keyframes rabMessageMoveIn {
-    0% {
-      opacity: 0;
-      padding: 0;
-      transform: translateY(-40%);
-    }
-    100% {
-      opacity: 1;
-      padding: 8px;
-    }
-  }
-  
-  @keyframes rabMessageMoveIn {
-    0% {
-      opacity: 0;
-      padding: 0;
-      transform: translateY(-40%);
-    }
-    100% {
-      opacity: 1;
-      padding: 8px;
-    }
-  }
-  
-  @-webkit-keyframes rabMessageMoveOut {
-    0% {
-      max-height: 150px;
-      padding: 8px;
-      opacity: 1;
-    }
-    100% {
-      max-height: 0;
-      padding: 0;
-      opacity: 0;
-    }
-  }
-  
-  @keyframes rabMessageMoveOut {
-    0% {
-      max-height: 150px;
-      padding: 8px;
-      opacity: 1;
-    }
-    100% {
-      max-height: 0;
-      padding: 0;
-      opacity: 0;
-    }
-  }
+.move(message,rabMessageMoveIn,enter,@animation-time,@message-time-function);
+.move(message,rabMessageMoveOut,leave,@animation-time,@message-time-function);

@@ -1,5 +1,66 @@
-// notice组件的动画
+// @className 动画类名
+// @keyframes 动画
+// @direction 动画方向
+// @duration 持续时间
+// @time-function 过渡效果函数
+.move(@className,@keyframes,@direction,@duration,@time-function) {
+  .@{css-prefix}@{className}-move-@{direction} {
+    animation: @keyframes @duration @time-function;
+  }
+}
 
+// message组件的动画
+@-webkit-keyframes rabMessageMoveIn {
+  0% {
+    opacity: 0;
+    padding: 0;
+    transform: translateY(-40%);
+  }
+  100% {
+    opacity: 1;
+    padding: 8px;
+  }
+}
+
+@keyframes rabMessageMoveIn {
+  0% {
+    opacity: 0;
+    padding: 0;
+    transform: translateY(-40%);
+  }
+  100% {
+    opacity: 1;
+    padding: 8px;
+  }
+}
+
+@-webkit-keyframes rabMessageMoveOut {
+  0% {
+    max-height: 150px;
+    padding: 8px;
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes rabMessageMoveOut {
+  0% {
+    max-height: 150px;
+    padding: 8px;
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
+
+// notice组件的动画
 @-webkit-keyframes rabNoticeMoveIn {
   0% {
     opacity: 0;
