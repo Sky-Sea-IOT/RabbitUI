@@ -94,7 +94,6 @@ class Alert {
     const closeText: string = this._setCloseText(node);
 
     AlertCloseBtn.className = `${this.prefixCls}-close`;
-
     AlertCloseBtn.innerHTML = closeText ? closeText : `<i class="rab-icon rab-icon-ios-close"></i>`;
 
     AlertCloseBtn.addEventListener('click', () => destroyElem(wrapper, { fadeOut: true }));
@@ -189,14 +188,10 @@ class Alert {
 
   public onClose(elem: string, cb: Function) {
     const target: any = document.querySelector(elem);
-
     // 将当前选中的组件作为参数返回出去
-    let $this: Element;
-
+    let $this: HTMLElement;
     validComps(target, 'alert');
-
     $this = target;
-
     const alertCloseBtn = target.querySelector(`.${this.prefixCls}-close`);
     alertCloseBtn.addEventListener('click', () => type.isFn(cb, $this));
   }

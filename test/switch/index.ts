@@ -10,8 +10,8 @@ export default function switchTest() {
   // });
 
   // 使用多个参数
-  // $switch.onChange('#a', ([status, $this]: [boolean, Element]) => {
-  //   textBox.textContent = `${status}`;
-  //   console.log($this);
-  // });
+  $switch.onChange('#a', ([status, $this]: [boolean, Element]) => {
+    textBox.textContent = `${status}`;
+    console.log($this);
+  });
 }
