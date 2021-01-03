@@ -3,7 +3,7 @@
 // @direction 动画方向
 // @duration 持续时间
 // @time-function 过渡效果函数
-.move(@className,@keyframes,@direction,@duration,@time-function) {
+.move(@className, @keyframes, @direction, @duration, @time-function) {
   .@{css-prefix}@{className}-move-@{direction} {
     animation: @keyframes @duration @time-function;
   }
@@ -16,6 +16,7 @@
     padding: 0;
     transform: translateY(-40%);
   }
+
   100% {
     opacity: 1;
     padding: 8px;
@@ -28,6 +29,7 @@
     padding: 0;
     transform: translateY(-40%);
   }
+
   100% {
     opacity: 1;
     padding: 8px;
@@ -40,6 +42,7 @@
     padding: 8px;
     opacity: 1;
   }
+
   100% {
     max-height: 0;
     padding: 0;
@@ -53,6 +56,7 @@
     padding: 8px;
     opacity: 1;
   }
+
   100% {
     max-height: 0;
     padding: 0;
@@ -66,6 +70,7 @@
     opacity: 0;
     transform: translateX(100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -77,6 +82,7 @@
     opacity: 0;
     transform: translateX(100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -88,9 +94,7 @@
     opacity: 1;
     transform: translateX(0);
   }
-  50% {
-    transform: translateX(-15%);
-  }
+
   100% {
     opacity: 0;
     transform: translateX(100%);
@@ -103,9 +107,7 @@
     opacity: 1;
     transform: translateX(0);
   }
-  50% {
-    transform: translateX(-15%);
-  }
+
   100% {
     opacity: 0;
     transform: translateX(100%);
@@ -119,6 +121,7 @@
     opacity: 0;
     transform: translateX(-100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -130,6 +133,7 @@
     opacity: 0;
     transform: translateX(-100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -141,9 +145,11 @@
     opacity: 1;
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(15%);
   }
+
   100% {
     opacity: 0;
     transform: translateX(-100%);
@@ -156,9 +162,11 @@
     opacity: 1;
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(15%);
   }
+
   100% {
     opacity: 0;
     transform: translateX(-100%);
@@ -172,16 +180,19 @@
     opacity: 0;
     transform: translateY(-20%);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 @keyframes rabModalMoveIn {
   0% {
     opacity: 0;
     transform: translateY(-20%);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);

@@ -2,17 +2,17 @@ import { CssTranstion, destroyElem, destroyElemByKey, type, warn } from '../../m
 import usePromiseCallback from '../../mixins/cb-promise';
 
 interface MsgGlobalCfg {
-  top?: number;
-  duration?: number;
+  top?: number; // 消息从顶部弹出时，距离顶部的位置，单位像素
+  duration?: number; // 默认自动关闭延时，单位秒
 }
 
 interface MsgInstancesCfg {
-  key?: string | number;
-  content?: string;
-  duration?: number;
-  onClose?: Function;
-  closable?: boolean;
-  background?: boolean;
+  key?: string | number; // 当前消息唯一标志
+  content?: string; // 提示内容
+  duration?: number; // 自动关闭的延时，单位秒，不关闭可以写 0
+  onClose?: Function; // 点击消息关闭按钮时的回调
+  closable?: boolean; // 是否显示关闭按钮
+  background?: boolean; // 是否显示背景色
 }
 
 const defaults: {
