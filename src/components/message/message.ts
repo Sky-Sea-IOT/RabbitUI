@@ -1,12 +1,12 @@
-import { CssTranstion, destroyElem, destroyElemByKey, type, warn } from '../../mixins';
+import { CssTranstion, destroyElem, destroyElemByKey, type } from '../../mixins';
 import usePromiseCallback from '../../mixins/cb-promise';
 
-interface MsgGlobalCfg {
+interface MsgGlobalAPI {
   top?: number; // 消息从顶部弹出时，距离顶部的位置，单位像素
   duration?: number; // 默认自动关闭延时，单位秒
 }
 
-interface MsgInstancesCfg {
+interface MessageAPI {
   key?: string | number; // 当前消息唯一标志
   content?: string; // 提示内容
   duration?: number; // 自动关闭的延时，单位秒，不关闭可以写 0
@@ -15,7 +15,15 @@ interface MsgInstancesCfg {
   background?: boolean; // 是否显示背景色
 }
 
-const defaults: {
+const iconTypes = {
+  info: 'ios-information-circle',
+  success: 'ios-checkmark-circle',
+  warning: 'ios-alert',
+  error: 'ios-close-circle',
+  loading: 'loading-solid',
+};
+
+const defaults_message: {
   top: number;
   duration: number;
 } = {
@@ -25,28 +33,22 @@ const defaults: {
 
 let zIndex: number = 1010;
 
-// 创建实例的最外层父容器，通过实例的 init方法调用
-function createInstanceWrapper(): HTMLDivElement {
-  const MsgParent = document.createElement('div');
-
-  MsgParent.className = 'rab-message';
-  MsgParent.style.zIndex = `${zIndex}`;
-
-  document.body.appendChild(MsgParent);
-
-  // 设置全局 top值
-  setTimeout(() => (MsgParent.style.top = `${defaults.top}px`), 0);
-
-  return MsgParent;
+// 创建实例的最外层父容器
+function messageInstanceWrapper(): HTMLDivElement {
+  const MsgWrapper = document.createElement('div');
+  MsgWrapper.className = 'rab-message';
+  MsgWrapper.style.zIndex = `${zIndex}`;
+  setTimeout(() => (MsgWrapper.style.top = `${defaults_message.top}px`), 0);
+  document.body.appendChild(MsgWrapper);
+  return MsgWrapper;
 }
 
-class Rabbit_Message {
+class Message {
   VERSION: string;
   prefixCls: string;
   prefixChildCls: string;
   prefixKey: string;
   instances: Array<HTMLElement>;
-  iconTypes: object;
   msgMoveEnter: string;
   msgMoveLeave: string;
 
@@ -60,28 +62,20 @@ class Rabbit_Message {
     // 存储已经创建的实例，在 destroy方法里需要用到
     this.instances = [];
 
-    this.iconTypes = {
-      info: 'ios-information-circle',
-      success: 'ios-checkmark-circle',
-      warning: 'ios-alert',
-      error: 'ios-close-circle',
-      loading: 'loading-solid',
-    };
-
     this.msgMoveEnter = `${this.prefixCls}-move-enter`;
     this.msgMoveLeave = `${this.prefixCls}-move-leave`;
 
-    createInstanceWrapper();
+    messageInstanceWrapper();
   }
 
   private _autoSetZindex(): void {
     // 每次创建实例自动增加最外层父容器的层级
     zIndex++;
     // @ts-ignore
-    document.querySelector(`.${this.prefixCls}`).style.zIndex = zIndex;
+    document.querySelector(`.${this.prefixCls}`).style.zIndex = `${zIndex}`;
   }
 
-  private _createInstance(_type: string, config: string | MsgInstancesCfg): HTMLDivElement {
+  private _createInstance(_type: string, config: string | MessageAPI): HTMLDivElement {
     this._autoSetZindex();
 
     const Message = document.createElement('div');
@@ -97,7 +91,7 @@ class Rabbit_Message {
 
     // 参数 config 为字符串
     if (typeof config === 'string') {
-      this._autoClose(Message, defaults.duration);
+      this._autoClose(Message, defaults_message.duration);
     }
 
     // 参数 config 为对象
@@ -107,11 +101,12 @@ class Rabbit_Message {
       type.isUndef(closable) ? (closable = false) : closable;
       type.isUndef(onClose) ? (onClose = () => {}) : closable;
       type.isUndef(background) ? (background = false) : background;
+
       // 为每个实例自己的 duration 参数设置默认值，如果有传入值则使用自定义的值
-      type.isUndef(duration) ? (duration = defaults.duration) : duration;
+      type.isUndef(duration) ? (duration = defaults_message.duration) : duration;
 
       // 当全局的 duration 不为 3 时说明进行了全局配置进行改变
-      defaults.duration !== 3 ? (duration = defaults.duration) : '';
+      defaults_message.duration !== 3 ? (duration = defaults_message.duration) : '';
 
       this._setClosable(closable, Message, MsgContentWrap, onClose);
       this._setBackground(Message, MsgContentWrap, background);
@@ -123,6 +118,7 @@ class Rabbit_Message {
     MsgContentBox.append(MsgInfoBox);
     MsgInfoBox.append(MsgIcon, MsgText);
     Message.appendChild(MsgContentWrap);
+
     document.querySelector(`.${this.prefixCls}`)!.appendChild(Message);
 
     // 存放每次创建的实例
@@ -151,10 +147,10 @@ class Rabbit_Message {
   private _setIcon(type: string, icon: HTMLElement): void {
     type === 'loading' ? icon.classList.add('rab-load-loop') : '';
     // @ts-ignore
-    icon.classList.add(`rab-icon-${this.iconTypes[type]}`);
+    icon.classList.add(`rab-icon-${iconTypes[type]}`);
   }
 
-  private _setContent(node: HTMLElement, cfg: string | MsgInstancesCfg): void {
+  private _setContent(node: HTMLElement, cfg: string | MessageAPI): void {
     if (typeof cfg === 'string') {
       node.innerHTML = cfg;
     } else if (typeof cfg === 'object') {
@@ -190,7 +186,6 @@ class Rabbit_Message {
   private _autoClose(node: HTMLElement, duration: any): void {
     destroyElem(node, {
       duration,
-      clsEnter: this.msgMoveEnter,
       clsLeave: this.msgMoveLeave,
     });
   }
@@ -216,50 +211,48 @@ class Rabbit_Message {
     children.classList.add(`${this.prefixChildCls}-content-background`);
   }
 
-  public info(config: string | MsgInstancesCfg): Promise<void> {
+  public info(config: string | MessageAPI): Promise<void> {
     this._createInstance('info', config);
     // message 结束时提供 then 接口在关闭后运行 callback
-    return usePromiseCallback(defaults.duration, config);
+    return usePromiseCallback(defaults_message.duration, config);
   }
 
-  public success(config: string | MsgInstancesCfg): Promise<void> {
+  public success(config: string | MessageAPI): Promise<void> {
     this._createInstance('success', config);
-    return usePromiseCallback(defaults.duration, config);
+    return usePromiseCallback(defaults_message.duration, config);
   }
 
-  public warning(config: string | MsgInstancesCfg): Promise<void> {
+  public warning(config: string | MessageAPI): Promise<void> {
     this._createInstance('warning', config);
-    return usePromiseCallback(defaults.duration, config);
+    return usePromiseCallback(defaults_message.duration, config);
   }
 
-  public error(config: string | MsgInstancesCfg): Promise<void> {
+  public error(config: string | MessageAPI): Promise<void> {
     this._createInstance('error', config);
-    return usePromiseCallback(defaults.duration, config);
+    return usePromiseCallback(defaults_message.duration, config);
   }
 
-  public loading(config: string | MsgInstancesCfg): Promise<void> {
+  public loading(config: string | MessageAPI): Promise<void> {
     this._createInstance('loading', config);
-    return usePromiseCallback(defaults.duration, config);
+    return usePromiseCallback(defaults_message.duration, config);
   }
 
-  public config(options: MsgGlobalCfg): void {
+  public config(options: MsgGlobalAPI): void {
     if (options.top && type.isNum(options.top)) {
-      defaults.top = options.top;
+      defaults_message.top = options.top;
     }
     if ((options.duration && type.isNum(options.duration)) || options.duration === 0) {
-      defaults.duration = options.duration;
+      defaults_message.duration = options.duration;
     }
   }
 
   public destroy(key?: string | number): void {
     // 通过设置的 key 消除
     if (key && (type.isStr(key) || type.isNum(key))) {
-      this.instances.length -= 1;
       destroyElemByKey({
         key,
         duration: 0.1,
         prefixKey: this.prefixKey,
-        clsEnter: this.msgMoveEnter,
         clsLeave: this.msgMoveLeave,
       });
     } else {
@@ -267,7 +260,6 @@ class Rabbit_Message {
       this.instances.forEach(instance => {
         destroyElem(instance, {
           duration: 0.1,
-          clsEnter: this.msgMoveEnter,
           clsLeave: this.msgMoveLeave,
         });
       });
@@ -277,5 +269,4 @@ class Rabbit_Message {
   }
 }
 
-const Message = new Rabbit_Message();
 export default Message;

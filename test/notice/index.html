@@ -6,7 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
+<style>
+    .example {
+        width: 520px;
+        padding: 42px 24px 50px;
+        border: 1px solid #f0f0f0;
+        margin: 20px auto;
+    }
+</style>
 
-<body></body>
+<body>
+    <div class="example">
+        <button class="rab-btn rab-btn-primary" onclick="normal()">打开提醒</button>
+        <button class="rab-btn" onclick="onlyTitle()">打开提醒 (仅标题)</button>
+    </div>
+    <div class="example">
+        <p>带描述信息</p>
+        <button class="rab-btn" onclick="getInfo()">消息</button>
+        <button class="rab-btn" onclick="getSuccess()">成功</button>
+        <button class="rab-btn" onclick="getWarning()">警告</button>
+        <button class="rab-btn" onclick="getError()">错误</button>
+    </div>
+    <!-- <div class="rab-notice" style="top: 24px; right: 0px; z-index: 1180;">
+        <div class="rab-notice-notice rab-notice-notice-closable">
+            <div class="rab-notice-notice-content">
+                <div class="rab-notice-custom-content rab-notice-with-icon rab-notice-with-info">
+                    <span class="rab-notice-icon rab-notice-icon-info">
+                        <i class="rab-icon rab-icon-ios-information-circle"></i>
+                    </span>
+                    <div class="rab-notice-title">通知标题</div>
+                    <div class="rab-notice-desc"></div>
+                </div>
+            </div>
+            <a class="rab-notice-notice-close">
+                <i class="rab-icon rab-icon-ios-close"></i>
+            </a>
+        </div>
+
+        <div class="rab-notice-notice rab-notice-notice-closable rab-notice-notice-with-desc">
+            <div class="rab-notice-notice-content">
+                <div class="rab-notice-custom-content rab-notice-with-icon rab-notice-with-info  rab-notice-with-desc">
+                    <span class="rab-notice-icon rab-notice-icon-info">
+                        <i class="rab-icon rab-icon-ios-information-circle-outline"></i>
+                    </span>
+                    <div class="rab-notice-title">通知标题</div>
+                    <div class="rab-notice-desc">这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述
+                    </div>
+                </div>
+            </div>
+            <a class="rab-notice-notice-close">
+                <i class="rab-icon rab-icon-ios-close"></i>
+            </a>
+        </div>
+
+        <div class="rab-notice-notice rab-notice-notice-closable">
+            <div class="rab-notice-notice-content">
+                <div class="rab-notice-custom-content rab-notice-with-desc">
+                    <div class="rab-notice-title">通知标题</div>
+                    <div class="rab-notice-desc">
+                        这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述
+                    </div>
+                </div>
+            </div>
+            <a class="rab-notice-notice-close"><i class="rab-icon rab-icon-ios-close"></i></a>
+        </div>
+    </div> -->
+</body>
 
 </html>

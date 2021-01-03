@@ -1,105 +1,79 @@
-// @className 动画类名
-// @keyframes 动画
-// @direction 动画方向
-// @duration 持续时间
-// @time-function 过渡效果函数
-.move(@className, @keyframes, @direction, @duration, @time-function) {
-  .@{css-prefix}@{className}-move-@{direction} {
-    animation: @keyframes @duration @time-function;
-  }
-}
-
-// message组件的动画
 @-webkit-keyframes rabMessageMoveIn {
   0% {
     opacity: 0;
     padding: 0;
     transform: translateY(-40%);
   }
-
   100% {
     opacity: 1;
     padding: 8px;
   }
 }
-
 @keyframes rabMessageMoveIn {
   0% {
     opacity: 0;
     padding: 0;
     transform: translateY(-40%);
   }
-
   100% {
     opacity: 1;
     padding: 8px;
   }
 }
-
 @-webkit-keyframes rabMessageMoveOut {
   0% {
     max-height: 150px;
     padding: 8px;
     opacity: 1;
   }
-
   100% {
     max-height: 0;
     padding: 0;
     opacity: 0;
   }
 }
-
 @keyframes rabMessageMoveOut {
   0% {
     max-height: 150px;
     padding: 8px;
     opacity: 1;
   }
-
   100% {
     max-height: 0;
     padding: 0;
     opacity: 0;
   }
 }
-
-// notice组件的动画
 @-webkit-keyframes rabNoticeMoveIn {
   0% {
     opacity: 0;
     transform-origin: 0 0;
     transform: translateX(100%);
   }
-
   100% {
     opacity: 1;
     transform-origin: 0 0;
     transform: translateX(0%);
   }
 }
-
 @keyframes rabNoticeMoveIn {
   0% {
     opacity: 0;
     transform-origin: 0 0;
     transform: translateX(100%);
   }
-
   100% {
     opacity: 1;
     transform-origin: 0 0;
     transform: translateX(0%);
   }
 }
-
 @-webkit-keyframes rabNoticeMoveOut {
   0% {
     opacity: 1;
     transform-origin: 0 0;
     transform: translateX(0);
   }
-
   70% {
     transform-origin: 0 0;
     transform: translateX(100%);
@@ -108,7 +82,6 @@
     margin-bottom: 10px;
     opacity: 0;
   }
-
   100% {
     transform-origin: 0 0;
     transform: translateX(100%);
@@ -118,15 +91,12 @@
     opacity: 0;
   }
 }
-
 @keyframes rabNoticeMoveOut {
   0% {
     transform-origin: 0 0;
     opacity: 1;
     transform: translateX(0);
   }
-
-
   70% {
     transform-origin: 0 0;
     transform: translateX(100%);
@@ -135,7 +105,6 @@
     margin-bottom: 10px;
     opacity: 0;
   }
-
   100% {
     transform-origin: 0 0;
     transform: translateX(100%);
@@ -145,28 +114,120 @@
     opacity: 0;
   }
 }
-
-// modal组件的动画
 @-webkit-keyframes rabModalMoveIn {
   0% {
     opacity: 0;
     transform: translateY(-20%);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 @keyframes rabModalMoveIn {
   0% {
     opacity: 0;
     transform: translateY(-20%);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
+.rab-notice {
+  width: 384px;
+  max-width: calc(100vw - 32px);
+  margin-right: 24px;
+  position: fixed;
+  z-index: 1010;
+}
+.rab-notice-content-with-icon {
+  margin-left: 51px;
+}
+.rab-notice-with-desc.rab-notice-with-icon .rab-notice-title {
+  margin-left: 51px;
+}
+.rab-notice-notice {
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  line-height: 1.5;
+  position: relative;
+  overflow: hidden;
+}
+.rab-notice-notice-close {
+  position: absolute;
+  top: 16px;
+  right: 22px;
+  color: #999;
+  outline: none;
+}
+.rab-notice-notice-close i {
+  font-size: 22px;
+  color: #999;
+  transition: color 0.2s ease;
+  position: relative;
+  top: 0;
+}
+.rab-notice-notice-close i:hover {
+  color: #666;
+}
+.rab-notice-notice-with-desc .rab-notice-notice-close {
+  top: 11px;
+}
+.rab-notice-title {
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c3e50;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rab-notice-with-desc .rab-notice-title {
+  margin-bottom: 8px;
+}
+.rab-notice-desc {
+  font-size: 14px;
+  color: #55585e;
+  text-align: justify;
+  line-height: 1.5;
+}
+.rab-notice-with-desc.rab-notice-with-icon .rab-notice-desc {
+  margin-left: 51px;
+}
+.rab-notice-with-icon .rab-notice-title {
+  margin-left: 26px;
+}
+.rab-notice-icon {
+  position: absolute;
+  top: 10px;
+  font-size: 20px;
+}
+.rab-notice-icon-success {
+  color: #52c41a;
+}
+.rab-notice-icon-info {
+  color: #1890ff;
+}
+.rab-notice-icon-warning {
+  color: #faad14;
+}
+.rab-notice-icon-error {
+  color: #ff4d4f;
+}
+.rab-notice-with-desc .rab-notice-icon {
+  font-size: 36px;
+  top: 1px;
+}
+.rab-notice-custom-content {
+  position: relative;
+}
+.rab-notice-move-enter {
+  animation: rabNoticeMoveIn 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.rab-notice-move-leave {
+  animation: rabNoticeMoveOut 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
 }

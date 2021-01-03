@@ -13,5 +13,5 @@ import timelineTest from './timeline';
 // timelineTest();
 // buttonTest();
 // messageTest();
-// noticeTest();
+noticeTest();
 // switchTest();

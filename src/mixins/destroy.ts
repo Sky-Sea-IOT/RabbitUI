@@ -52,8 +52,7 @@ export function destroyElemByKey(options: Options): void {
   let { key, prefixKey } = options;
   // 统一转换为字符串
   typeof key !== 'string' ? (key = key!.toString()) : key;
-
-  const target = document.querySelector(`[${prefixKey}-key="${key}"]`);
   // 传入的key是否选取得到对应的元素
+  const target = document.querySelector(`[${prefixKey}-key="${key}"]`);
   target ? destroyElem(target, options) : warn(`The key value is invalid --> "${key}"`);
 }
