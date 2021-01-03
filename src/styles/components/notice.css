@@ -169,7 +169,7 @@
   color: #999;
   transition: color 0.2s ease;
   position: relative;
-  top: 0;
+  top: -4px;
 }
 .rab-notice-notice-close i:hover {
   color: #666;
@@ -229,5 +229,5 @@
   animation: rabNoticeMoveIn 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-notice-move-leave {
-  animation: rabNoticeMoveOut 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabNoticeMoveOut 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
