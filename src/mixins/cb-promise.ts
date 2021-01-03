@@ -11,7 +11,7 @@ export default function usePromiseCallback(duration: number, compConfig?: any): 
 
   // 当组件参数以对象形式传递，并且设置了自己的 duration则修改 promise的触发时机
   typeof compConfig === 'object'
-    ? compConfig.duration
+    ? compConfig.duration || compConfig.duration === 0
       ? (timeout = compConfig.duration)
       : (timeout = duration)
     : '';
@@ -19,6 +19,10 @@ export default function usePromiseCallback(duration: number, compConfig?: any): 
   return promiseCb(timeout);
 }
 
-function promiseCb(duration: number): Promise<void> {
-  return new Promise(resolve => setTimeout(() => resolve(), duration * 1000));
+function promiseCb(duration: number) {
+  let timer: any = null;
+  return new Promise<void>(afterClose => {
+    timer = setTimeout(() => afterClose(), duration * 1000);
+    duration === 0 ? clearTimeout(timer) : timer;
+  });
 }

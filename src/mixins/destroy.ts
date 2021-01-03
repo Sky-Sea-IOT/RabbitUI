@@ -11,7 +11,7 @@ interface Options {
 }
 
 export const destroyElem = (
-  elem: Element,
+  elem: any,
   { fadeOut = false, clsLeave, clsEnter, duration = 3, destroy = true }: Options
 ) => {
   let timer = null;

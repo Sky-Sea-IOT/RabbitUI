@@ -1,6 +1,5 @@
 import { CssTranstion, destroyElem, destroyElemByKey, type, warn } from '../../mixins';
 import usePromiseCallback from '../../mixins/cb-promise';
-import promiseCb from '../../mixins/cb-promise';
 
 interface MsgGlobalCfg {
   top?: number;
@@ -41,7 +40,7 @@ function createInstanceWrapper(): HTMLDivElement {
   return MsgParent;
 }
 
-class Message {
+class Rabbit_Message {
   VERSION: string;
   prefixCls: string;
   prefixChildCls: string;
@@ -71,6 +70,8 @@ class Message {
 
     this.msgMoveEnter = `${this.prefixCls}-move-enter`;
     this.msgMoveLeave = `${this.prefixCls}-move-leave`;
+
+    createInstanceWrapper();
   }
 
   private _autoSetZindex(): void {
@@ -80,13 +81,7 @@ class Message {
     document.querySelector(`.${this.prefixCls}`).style.zIndex = zIndex;
   }
 
-  private _createInstance(_type: string, config: string | MsgInstancesCfg): false | HTMLDivElement {
-    // 是否初始化组件
-    if (!document.querySelector(`.${this.prefixCls}`)) {
-      warn('Please initialize the Message component first');
-      return false;
-    }
-
+  private _createInstance(_type: string, config: string | MsgInstancesCfg): HTMLDivElement {
     this._autoSetZindex();
 
     const Message = document.createElement('div');
@@ -224,32 +219,27 @@ class Message {
   public info(config: string | MsgInstancesCfg): Promise<void> {
     this._createInstance('info', config);
     // message 结束时提供 then 接口在关闭后运行 callback
-    // @ts-ignore
-    return usePromiseCallback(defaults.duration, config.duration);
+    return usePromiseCallback(defaults.duration, config);
   }
 
   public success(config: string | MsgInstancesCfg): Promise<void> {
     this._createInstance('success', config);
-    // @ts-ignore
-    return usePromiseCallback(defaults.duration, config.duration);
+    return usePromiseCallback(defaults.duration, config);
   }
 
   public warning(config: string | MsgInstancesCfg): Promise<void> {
     this._createInstance('warning', config);
-    // @ts-ignore
-    return usePromiseCallback(defaults.duration, config.duration);
+    return usePromiseCallback(defaults.duration, config);
   }
 
   public error(config: string | MsgInstancesCfg): Promise<void> {
     this._createInstance('error', config);
-    // @ts-ignore
-    return usePromiseCallback(defaults.duration, config.duration);
+    return usePromiseCallback(defaults.duration, config);
   }
 
   public loading(config: string | MsgInstancesCfg): Promise<void> {
     this._createInstance('loading', config);
-    // @ts-ignore
-    return usePromiseCallback(defaults.duration, config.duration);
+    return usePromiseCallback(defaults.duration, config);
   }
 
   public config(options: MsgGlobalCfg): void {
@@ -285,10 +275,7 @@ class Message {
       this.instances.length = 0;
     }
   }
-
-  public init(): void {
-    createInstanceWrapper();
-  }
 }
 
+const Message = new Rabbit_Message();
 export default Message;
