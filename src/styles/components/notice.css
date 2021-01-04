@@ -135,8 +135,6 @@
   }
 }
 .rab-notice {
-  width: 384px;
-  max-width: calc(100vw - 32px);
   margin-right: 24px;
   position: fixed;
   z-index: 1010;
@@ -148,7 +146,10 @@
   margin-left: 51px;
 }
 .rab-notice-notice {
+  width: 384px;
+  max-width: calc(100vw - 24px * 2);
   margin-bottom: 10px;
+  margin-left: auto;
   padding: 16px;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -229,5 +230,5 @@
   animation: rabNoticeMoveIn 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-notice-move-leave {
-  animation: rabNoticeMoveOut 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabNoticeMoveOut 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }

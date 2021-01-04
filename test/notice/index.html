@@ -26,51 +26,23 @@
         <button class="rab-btn" onclick="getSuccess()">成功</button>
         <button class="rab-btn" onclick="getWarning()">警告</button>
         <button class="rab-btn" onclick="getError()">错误</button>
+        <br><br>
+        <p>仅标题</p>
+        <button class="rab-btn" onclick="getInfoNodesc()">消息</button>
+        <button class="rab-btn" onclick="getSuccessNodesc()">成功</button>
+        <button class="rab-btn" onclick="getWarningNodesc()">警告</button>
+        <button class="rab-btn" onclick="getErrorNodesc()">错误</button>
     </div>
-    <!-- <div class="rab-notice" style="top: 24px; right: 0px; z-index: 1180;">
-        <div class="rab-notice-notice rab-notice-notice-closable">
-            <div class="rab-notice-notice-content">
-                <div class="rab-notice-custom-content rab-notice-with-icon rab-notice-with-info">
-                    <span class="rab-notice-icon rab-notice-icon-info">
-                        <i class="rab-icon rab-icon-ios-information-circle"></i>
-                    </span>
-                    <div class="rab-notice-title">通知标题</div>
-                    <div class="rab-notice-desc"></div>
-                </div>
-            </div>
-            <a class="rab-notice-notice-close">
-                <i class="rab-icon rab-icon-ios-close"></i>
-            </a>
-        </div>
-
-        <div class="rab-notice-notice rab-notice-notice-closable rab-notice-notice-with-desc">
-            <div class="rab-notice-notice-content">
-                <div class="rab-notice-custom-content rab-notice-with-icon rab-notice-with-info  rab-notice-with-desc">
-                    <span class="rab-notice-icon rab-notice-icon-info">
-                        <i class="rab-icon rab-icon-ios-information-circle-outline"></i>
-                    </span>
-                    <div class="rab-notice-title">通知标题</div>
-                    <div class="rab-notice-desc">这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述
-                    </div>
-                </div>
-            </div>
-            <a class="rab-notice-notice-close">
-                <i class="rab-icon rab-icon-ios-close"></i>
-            </a>
-        </div>
-
-        <div class="rab-notice-notice rab-notice-notice-closable">
-            <div class="rab-notice-notice-content">
-                <div class="rab-notice-custom-content rab-notice-with-desc">
-                    <div class="rab-notice-title">通知标题</div>
-                    <div class="rab-notice-desc">
-                        这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述
-                    </div>
-                </div>
-            </div>
-            <a class="rab-notice-notice-close"><i class="rab-icon rab-icon-ios-close"></i></a>
-        </div>
-    </div> -->
+    <div class="example">
+        <button class="rab-btn" onclick="multipleNotice()">显示顺序通知</button>
+    </div>
+    <div class="example">
+        <button class="rab-btn rab-btn-primary" onclick="customTime()">自定义时长</button>
+        <button class="rab-btn rab-btn-primary" onclick="customStyle()">自定义样式</button>
+    </div>
+    <div class="example">
+        <button class="rab-btn" onclick="useHTML()">使用HTML片段</button>
+    </div>
 </body>
 
 </html>

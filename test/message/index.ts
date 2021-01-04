@@ -81,6 +81,9 @@ export default function messageTest() {
     });
   };
   window.useHTML = () => {
-    message.info(`<strong>这是 <i>HTML</i> 片段</strong>`);
+    message.info({
+      content: `<strong>这是 <i>HTML</i> 片段</strong>`,
+      dangerouslyUseHTMLString: true,
+    });
   };
 }

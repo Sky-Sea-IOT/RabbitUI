@@ -11,8 +11,6 @@
 @notice-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
 .@{notice-prefix-cls} {
-    width: @notice-width;
-    max-width: calc(100vw - 32px);
     margin-right: 24px;
     position: fixed;
     z-index: @zindex-notification;
@@ -26,7 +24,10 @@
     }
 
     &-notice {
+        width: @notice-width;
+        max-width: calc(100vw - 24px * 2);
         margin-bottom: @notice-margin-bottom;
+        margin-left: auto;
         padding: @notice-padding;
         border-radius: @border-radius-base + 2;
         box-shadow: @shadow-base;
@@ -116,4 +117,4 @@
 }
 
 .move(notice, rabNoticeMoveIn, enter, .35s, @notice-timing-function);
-.move(notice, rabNoticeMoveOut, leave, .8s, @notice-timing-function);
+.move(notice, rabNoticeMoveOut, leave, .5s, @notice-timing-function);

@@ -1,4 +1,4 @@
-import { CssTranstion, destroyElem, destroyElemByKey, type } from '../../mixins';
+import { CssTranstion, destroyElem, destroyElemByKey, isUseHTMLString, type } from '../../mixins';
 import usePromiseCallback from '../../mixins/cb-promise';
 
 interface MsgGlobalAPI {
@@ -13,6 +13,7 @@ interface MessageAPI {
   onClose?: Function; // 点击消息关闭按钮时的回调
   closable?: boolean; // 是否显示关闭按钮
   background?: boolean; // 是否显示背景色
+  dangerouslyUseHTMLString?: boolean; // 是否支持传入 HTML 片段
 }
 
 const iconTypes = {
@@ -152,9 +153,9 @@ class Message {
 
   private _setContent(node: HTMLElement, cfg: string | MessageAPI): void {
     if (typeof cfg === 'string') {
-      node.innerHTML = cfg;
-    } else if (typeof cfg === 'object') {
-      node.innerHTML = `${cfg.content}`;
+      isUseHTMLString(node, cfg, false);
+    } else if (typeof cfg === 'object' && cfg.content) {
+      isUseHTMLString(node, cfg.content, cfg.dangerouslyUseHTMLString);
     }
   }
 

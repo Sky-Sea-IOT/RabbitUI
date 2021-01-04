@@ -8,11 +8,19 @@ interface Options {
   clsEnter?: string;
   destroy?: true;
   duration?: number;
+  transitionTime?: number;
 }
 
 export function destroyElem(
   elem: any,
-  { fadeOut = false, clsLeave, clsEnter, duration = 3, destroy = true }: Options
+  {
+    fadeOut = false,
+    clsLeave,
+    clsEnter,
+    duration = 3,
+    transitionTime = 0.25,
+    destroy = true,
+  }: Options
 ): void {
   let timer = null;
 
@@ -30,6 +38,7 @@ export function destroyElem(
     // 追加出场动画
     elem.classList.add(clsLeave!);
     elem.classList.contains(clsEnter!) ? elem.classList.remove(clsEnter!) : '';
+    elem.style.opacity = 0;
     ismiss();
   }, duration * 1000);
 
@@ -41,7 +50,7 @@ export function destroyElem(
         // @ts-ignore
         elem = null; // 释放内存
       }
-    }, 250);
+    }, transitionTime * 900);
   }
 
   // 自动关闭的延时为 0 则不关闭

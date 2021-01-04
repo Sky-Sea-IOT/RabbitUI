@@ -7,7 +7,9 @@
 - 可提供成功、警告和错误等反馈信息。
 - 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 
-> 注意！使用前需要先实例化组件  `new Message()`，以下所有示例都在这里提前实例化 `const message = new Message()`
+> 注意！使用前需要先实例化组件  `new Message()`，以下所有示例都在这里提前实例化，
+>
+>  `const message = new Message()`
 
 ## 代码示例
 
@@ -106,8 +108,13 @@ message.info({
 - 传入 HTML 片段
 
 ```js
-message.info(`<strong>这是 <i>HTML</i> 片段</strong>`);
+message.info({
+  content: `<strong>这是 <i>HTML</i> 片段</strong>`,
+  dangerouslyUseHTMLString: true
+});
 ```
+
+> `content` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保`content`的内容是可信的，**永远不要**将用户提交的内容赋值给 `content`  属性。
 
 <p style="font-size: 32px">API</p>
 
@@ -136,7 +143,8 @@ message.info(`<strong>这是 <i>HTML</i> 片段</strong>`);
 | onClose    | 点击消息关闭按钮时的回调                 | Function        | -      |
 | closable   | 是否显示关闭按钮                       | Boolean         | false  |
 | background | 是否显示背景色                         | Boolean         | false  |
-| key        | 当前提示的唯一标志                     | String / Number | -      |
+| key        | 当前提示的唯一标志                     | String \| Number | -      |
+| dangerouslyUseHTMLString | 是否将 content 属性作为 HTML 片段处理 | Boolean | false |
 
 #### 全局方法
 

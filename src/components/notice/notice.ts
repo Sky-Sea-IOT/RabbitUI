@@ -1,4 +1,12 @@
-import { CssTranstion, destroyElem, destroyElemByKey, type, warn } from '../../mixins';
+import {
+  CssTranstion,
+  isUseHTMLString,
+  destroyElem,
+  destroyElemByKey,
+  type,
+  warn,
+} from '../../mixins';
+import usePromiseCallback from '../../mixins/cb-promise';
 
 interface NoticeGlobalAPI {
   top?: number; // 通知组件距离顶端的距离，单位像素
@@ -10,11 +18,13 @@ interface NoticeAPI {
   icon?: string; // 自定义图标
   title?: string; // 通知提醒的标题
   desc?: string; // 通知提醒的内容，为空或不填时，自动应用仅标题模式下的样式
+  style?: string; // 自定义内联样式
   onClose?: Function; // 点击通知关闭按钮时的回调
   onClick?: Function; // 点击通知时触发的回调函数
   duration?: number; // 自动关闭的延时，单位秒，不关闭可以写 0
   closable?: boolean; // 是否显示右上角关闭按钮，默认为 true
   className?: string; // 自定义 CSS class
+  dangerouslyUseHTMLString?: boolean;
 }
 
 const iconTypes = {
@@ -30,7 +40,7 @@ const defaults_notice: {
   duration: number;
 } = {
   top: 24,
-  duration: 2.5,
+  duration: 4.5,
 };
 
 let zIndex: number = 1180;
@@ -96,10 +106,17 @@ class Notice {
       config.className
     );
     this._setKey(Notice, config.key);
-    this._setTitle(NoticeTitle, config.title);
-    this._setDesc(Notice, NoticeCustomContent, NoticeDesc, config.desc);
+    this._setTitle(NoticeTitle, config.title, config.dangerouslyUseHTMLString);
+    this._setDesc(
+      Notice,
+      NoticeCustomContent,
+      NoticeDesc,
+      config.desc,
+      config.dangerouslyUseHTMLString
+    );
     this._setIcon(type, NoticeCustomContent, NoticeDesc, config.icon);
     this._setClosable(Notice, config.closable, config.onClose);
+    this._customStyle(Notice, config.style);
 
     NoticeCustomContent.append(NoticeTitle, NoticeDesc);
     NoticeContent.appendChild(NoticeCustomContent);
@@ -137,27 +154,32 @@ class Notice {
     node.setAttribute(`${this.prefixKey}-key`, key);
   }
 
-  private _setTitle(node: HTMLElement, title?: string): void {
+  private _setTitle(node: HTMLElement, title?: string, dangerouslyUseHTMLString?: boolean): void {
     // 必须设置一个通知提醒标题
     if (!title) {
       warn('You must set a notification to remind the title');
       return;
     }
-    node.innerHTML = title;
+
+    // 是否支持传入 HTML 片段
+    isUseHTMLString(node, title, dangerouslyUseHTMLString);
   }
 
   private _setDesc(
     parent: HTMLElement,
     children_custm: HTMLElement,
     child_desc: HTMLElement,
-    desc?: string
+    desc?: string,
+    dangerouslyUseHTMLString?: boolean
   ): void {
     if (!desc) return;
 
     parent.classList.add(`${this.prefixChildCls}-with-desc`);
 
     children_custm.classList.add(`${this.prefixCls}-with-desc`);
-    child_desc.innerHTML = desc;
+
+    // 是否支持传入 HTML 片段
+    isUseHTMLString(child_desc, desc, dangerouslyUseHTMLString);
   }
 
   private _setIcon(
@@ -168,7 +190,9 @@ class Notice {
   ): void {
     // 不带状态图标的类型
     if (type === 'noraml') return;
-    if (type !== 'normal') child_custom.classList.add(`${this.prefixCls}-with-icon`);
+    if (type !== 'normal' || customIcon) {
+      child_custom.classList.add(`${this.prefixCls}-with-icon`);
+    }
 
     let isOutline = '';
 
@@ -206,6 +230,12 @@ class Notice {
     parent.appendChild(NoticeClose);
   }
 
+  // 自定义内联样式
+  private _customStyle(node: HTMLElement, style?: string): void {
+    if (!style) return;
+    node.style.cssText = style;
+  }
+
   // 点击通知时触发的回调函数
   private _handleNoticeClick(parent: HTMLElement, onClick?: Function): void {
     parent.onclick = e => {
@@ -232,31 +262,37 @@ class Notice {
     type.isUndef(duration) ? (duration = defaults_notice.duration) : duration;
 
     destroyElem(instance, {
-      clsLeave: this.ntMoveLeave,
       duration,
+      clsLeave: this.ntMoveLeave,
+      transitionTime: 0.5,
     });
   }
 
   // TODO: 设置 Promise接口
 
-  public open(config: NoticeAPI) {
+  public open(config: NoticeAPI): Promise<void> {
     this._createInstance('normal', config);
+    return usePromiseCallback(defaults_notice.duration, config.duration);
   }
 
-  public info(config: NoticeAPI) {
+  public info(config: NoticeAPI): Promise<void> {
     this._createInstance('info', config);
+    return usePromiseCallback(defaults_notice.duration, config.duration);
   }
 
-  public success(config: NoticeAPI) {
+  public success(config: NoticeAPI): Promise<void> {
     this._createInstance('success', config);
+    return usePromiseCallback(defaults_notice.duration, config.duration);
   }
 
-  public warning(config: NoticeAPI) {
+  public warning(config: NoticeAPI): Promise<void> {
     this._createInstance('warning', config);
+    return usePromiseCallback(defaults_notice.duration, config.duration);
   }
 
-  public error(config: NoticeAPI) {
+  public error(config: NoticeAPI): Promise<void> {
     this._createInstance('error', config);
+    return usePromiseCallback(defaults_notice.duration, config.duration);
   }
 
   public config(options: NoticeGlobalAPI) {
