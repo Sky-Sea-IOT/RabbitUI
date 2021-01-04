@@ -1,4 +1,5 @@
 import { warn } from '.';
+import CssTransition from './css-transition';
 
 interface Options {
   key?: string | number;
@@ -6,7 +7,7 @@ interface Options {
   fadeOut?: boolean;
   clsLeave?: string;
   clsEnter?: string;
-  destroy?: true;
+  destroy?: boolean;
   duration?: number;
   transitionTime?: number;
 }
@@ -24,28 +25,6 @@ export function destroyElem(
 ): void {
   let timer = null;
 
-  // 方式一：是否只用淡出效果
-  if (fadeOut) {
-    elem.classList.add('rab-fade-out');
-    elem.classList.remove('rab-fade-in');
-
-    setTimeout(() => {
-      elem ? (elem.style.display = 'none') : '';
-    }, 250);
-
-    dismiss();
-    return;
-  }
-
-  // 方式二：手动
-  timer = setTimeout(() => {
-    // 追加出场动画
-    elem.classList.add(clsLeave!);
-    elem.classList.contains(clsEnter!) ? elem.classList.remove(clsEnter!) : '';
-    elem.style.opacity = 0;
-    dismiss();
-  }, duration * 1000);
-
   function dismiss() {
     // 销毁或仅隐藏元素
     setTimeout(() => {
@@ -56,6 +35,31 @@ export function destroyElem(
       }
     }, transitionTime * 900);
   }
+
+  // 方式一：是否只用淡出效果
+  if (fadeOut) {
+    dismiss();
+
+    CssTransition(elem, {
+      inOrOut: 'out',
+      enterCls: 'rab-fade-in',
+      leaveCls: 'rab-fade-out',
+      timeout: 250,
+    });
+    return;
+  }
+
+  // 方式二：手动
+  timer = setTimeout(() => {
+    dismiss();
+
+    CssTransition(elem, {
+      inOrOut: 'out',
+      enterCls: clsEnter,
+      leaveCls: clsLeave,
+      timeout: 0,
+    });
+  }, duration * 1000);
 
   // 自动关闭的延时为 0 则不关闭
   duration <= 0 ? clearTimeout(timer) : timer;

@@ -2,7 +2,7 @@
 
 用来代表用户或事物，支持图片、图标或字符展示。
 
-> 实例化  `new Rabbit.Timeline()`
+> 注意！使用前需要先实例化组件  `new Rabbit.Avatar()`
 
 ## 代码示例
 

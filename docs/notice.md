@@ -10,9 +10,9 @@
 - 带有交互的通知，给出用户下一步的行动点。
 - 系统主动推送。
 
-> 注意！使用前需要先实例化组件  `new Rabbit.Notice()`，以下所有示例都在这里提前实例化，
+> 注意！使用前需要先实例化组件  `new Rabbit.Notice()`，
 >
-> `const notice = new Rabbit.Notice()`
+> 以下所有示例都在这里提前实例化：`const notice = new Rabbit.Notice()`
 
 ## 代码示例
 

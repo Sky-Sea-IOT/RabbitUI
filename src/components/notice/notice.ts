@@ -1,5 +1,5 @@
 import {
-  CssTranstion,
+  CssTransition,
   isUseHTMLString,
   destroyElem,
   destroyElemByKey,
@@ -123,7 +123,11 @@ class Notice {
     Notice.appendChild(NoticeContent);
     document.querySelector(`.${this.prefixCls}`)!.appendChild(Notice);
 
-    CssTranstion(Notice, this.ntMoveEnter, true);
+    CssTransition(Notice, {
+      inOrOut: 'in',
+      enterCls: this.ntMoveEnter,
+      rmCls: true,
+    });
 
     this.instances.push(Notice);
 

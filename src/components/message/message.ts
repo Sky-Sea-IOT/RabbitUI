@@ -1,4 +1,4 @@
-import { CssTranstion, destroyElem, destroyElemByKey, isUseHTMLString, type } from '../../mixins';
+import { CssTransition, destroyElem, destroyElemByKey, isUseHTMLString, type } from '../../mixins';
 import usePromiseCallback from '../../mixins/cb-promise';
 
 interface MsgGlobalAPI {
@@ -125,7 +125,11 @@ class Message {
     // 存放每次创建的实例
     this.instances.push(Message);
 
-    CssTranstion(Message, this.msgMoveEnter, true);
+    CssTransition(Message, {
+      inOrOut: 'in',
+      enterCls: this.msgMoveEnter,
+      rmCls: true,
+    });
 
     return Message;
   }
