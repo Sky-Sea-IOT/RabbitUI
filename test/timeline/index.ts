@@ -1,5 +1,5 @@
-import { Timeline } from '../../src';
+import Rabbit from '../../src';
 
 export default function timelineTest() {
-  new Timeline();
+  new Rabbit.Timeline();
 }

@@ -25,6 +25,7 @@
   &[rb-type='success'] {
     border: @border-width-base @border-style-base tint(@success-color, 65%);
     background-color: #f6ffed;
+
     .@{alert-prefix-cls}-icon {
       color: @success-color;
     }
@@ -33,6 +34,7 @@
   &[rb-type='info'] {
     border: @border-width-base @border-style-base tint(@primary-color, 65%);
     background-color: tint(@primary-color, 92%);
+
     .@{alert-prefix-cls}-icon {
       color: @primary-color;
     }
@@ -41,6 +43,7 @@
   &[rb-type='warning'] {
     border: @border-width-base @border-style-base tint(@warning-color, 65%);
     background-color: #fffbe6;
+
     .@{alert-prefix-cls}-icon {
       color: @warning-color;
     }
@@ -49,6 +52,7 @@
   &[rb-type='error'] {
     border: @border-width-base @border-style-base tint(@error-color, 65%);
     background-color: #fff2f0;
+
     .@{alert-prefix-cls}-icon {
       color: @error-color;
     }
@@ -85,6 +89,7 @@
 
   &-close {
     .content-close();
+    top: 5px;
   }
 
   &-with-desc&-with-icon {

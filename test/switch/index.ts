@@ -1,7 +1,6 @@
-import { Switch } from '../../src';
-
+import Rabbit from '../../src';
 export default function switchTest() {
-  const $switch = new Switch();
+  const $switch = new Rabbit.Switch();
   const textBox = document.querySelector('#status')!;
 
   // 使用单个参数

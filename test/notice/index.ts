@@ -1,8 +1,8 @@
 //@ts-nocheck
-import { Notice } from '../../src';
+import Rabbit from '../../src';
 
 export default function noticeTest() {
-  const notice = new Notice();
+  const notice = new Rabbit.Notice();
 
   // notice.config({
   //   top: 50,

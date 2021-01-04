@@ -8,9 +8,12 @@ class Timeline {
 
   constructor() {
     this.VERSION = '1.0';
+
     this.prefixCls = 'rab-timeline';
     this.prefixAttr = 'rb';
+
     this.components = document.querySelectorAll('r-timeline > r-timeline-item');
+
     this._create(this.components);
   }
 

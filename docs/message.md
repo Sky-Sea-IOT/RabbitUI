@@ -7,9 +7,9 @@
 - 可提供成功、警告和错误等反馈信息。
 - 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 
-> 注意！使用前需要先实例化组件  `new Message()`，以下所有示例都在这里提前实例化，
->
->  `const message = new Message()`
+> 注意！使用前需要先实例化组件  `new Rabbit.Message()`，以下所有示例都在这里提前实例化，
+
+> `const message = new Rabbit.Message()`
 
 ## 代码示例
 

@@ -8,9 +8,12 @@ class Avatar {
 
   constructor() {
     this.VERSION = 'v1.0';
+
     this.prefixCls = 'rab-avatar';
     this.prefixAttr = 'rb';
+
     this.components = document.querySelectorAll('r-avatar');
+
     this._create(this.components);
   }
 

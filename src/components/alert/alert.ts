@@ -8,9 +8,12 @@ class Alert {
 
   constructor() {
     this.VERSION = 'v1.0';
+
     this.prefixCls = 'rab-alert';
     this.prefixAttr = 'rb';
+
     this.components = document.querySelectorAll('r-alert');
+
     this._create(this.components);
   }
 
@@ -190,9 +193,13 @@ class Alert {
     const target: any = document.querySelector(elem);
     // 将当前选中的组件作为参数返回出去
     let $this: HTMLElement;
+
     validComps(target, 'alert');
+
     $this = target;
+
     const alertCloseBtn = target.querySelector(`.${this.prefixCls}-close`);
+
     alertCloseBtn.addEventListener('click', () => type.isFn(cb, $this));
   }
 }

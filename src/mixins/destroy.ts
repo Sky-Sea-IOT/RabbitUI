@@ -28,8 +28,12 @@ export function destroyElem(
   if (fadeOut) {
     elem.classList.add('rab-fade-out');
     elem.classList.remove('rab-fade-in');
-    setTimeout(() => (elem.style.display = 'none'), 250);
-    ismiss();
+
+    setTimeout(() => {
+      elem ? (elem.style.display = 'none') : '';
+    }, 250);
+
+    dismiss();
     return;
   }
 
@@ -39,10 +43,10 @@ export function destroyElem(
     elem.classList.add(clsLeave!);
     elem.classList.contains(clsEnter!) ? elem.classList.remove(clsEnter!) : '';
     elem.style.opacity = 0;
-    ismiss();
+    dismiss();
   }, duration * 1000);
 
-  function ismiss() {
+  function dismiss() {
     // 销毁或仅隐藏元素
     setTimeout(() => {
       if (destroy) {

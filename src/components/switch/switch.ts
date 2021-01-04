@@ -8,9 +8,12 @@ class Switch {
 
   constructor() {
     this.VERSION = '1.0';
+
     this.prefixCls = 'rab-switch';
     this.prefixAttr = 'rb';
+
     this.components = document.querySelectorAll('r-switch');
+
     this._getAllSwitch(this.components);
   }
 

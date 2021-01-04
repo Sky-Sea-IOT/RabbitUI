@@ -8,9 +8,12 @@ class Button {
 
   constructor() {
     this.VERSION = '1.0';
+
     this.prefixCls = 'rab-btn';
     this.prefixAttr = 'rb';
+
     this.components = document.querySelectorAll(`.${this.prefixCls}`);
+
     this._getAllBtns(this.components);
   }
 

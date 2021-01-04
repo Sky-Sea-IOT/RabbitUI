@@ -1,4 +1,5 @@
-import { Avatar } from '../../src';
+import Rabbit from '../../src';
+
 export default function avatarTest() {
-  const avatar = new Avatar();
+  new Rabbit.Avatar();
 }

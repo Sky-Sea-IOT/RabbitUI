@@ -9,14 +9,18 @@ class Progress {
 
   constructor() {
     this.VERSION = 'v1.0';
+
     this.prefixCls = 'rab-progress';
     this.prefixAttr = 'rb';
+
     this.components = document.querySelectorAll('r-progress');
+
     this.iconsHtml = {
       success: `<i class="rab-icon rab-icon-ios-checkmark-circle"></i>`,
       warning: `<i class="rab-icon rab-icon-ios-alert"></i>`,
       wrong: `<i class="rab-icon rab-icon-ios-close-circle"></i>`,
     };
+
     this._create(this.components);
   }
 

@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { Message } from '../../src';
+import Rabbit from '../../src';
 
 export default function messageTest() {
-  const message = new Message();
+  const message = new Rabbit.Message();
 
   // 全局配置
   // message.config({
