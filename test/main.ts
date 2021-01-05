@@ -15,7 +15,7 @@ import '../src/styles/index.less';
 // progressTest();
 // timelineTest();
 // buttonTest();
-loadingBarTest();
+// loadingBarTest();
 // messageTest();
 // noticeTest();
 // switchTest();
