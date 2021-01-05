@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .example {
+        width: 520px;
+        padding: 42px 24px 50px;
+        border: 1px solid #f0f0f0;
+        margin: 20px auto;
+    }
+    
+    .demo-badge {
+        width: 42px;
+        height: 42px;
+        background: #eee;
+        border-radius: 6px;
+        display: inline-block;
+    }
+    
+    .example r-badge {
+        margin-left: 15px;
+        vertical-align: top;
+    }
+    
+    .demo-badge-alone {
+        background: #5cb85c !important;
+    }
+</style>
+
+<body>
+    <div class="example">
+        <r-badge>
+            <a class="demo-badge"></a>
+
+        </r-badge>
+        <r-badge rb-icon="<i class='rab-icon rab-icon-md-time'></i>">
+            <a class="demo-badge"></a>
+        </r-badge>
+    </div>
+
+    <div class="example">
+        <r-badge rb-dot="true">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-dot="true">
+            <i class="rab-icon rab-icon-ios-notifications-outline" style="font-size: 26px;"></i>
+        </r-badge>
+        <r-badge rb-dot="true">
+            <a>可以是一个链接</a>
+        </r-badge>
+    </div>
+
+    <div class="example">
+        <r-badge rb-count="99">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="1000">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="99" rb-max="10">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="1000">
+            <a class="demo-badge"></a>
+        </r-badge>
+    </div>
+
+    <div class="example">
+        <r-badge rb-count="25"></r-badge>
+        <r-badge rb-count="15" class="demo-badge-alone"></r-badge>
+    </div>
+
+    <div class="example">
+        <r-badge rb-text="new"></r-badge>
+        <r-badge rb-text="hot" class="demo-badge-alone"></r-badge>
+    </div>
+
+    <div class="example">
+        <r-badge rb-status="success"></r-badge>
+        <r-badge rb-status="error"></r-badge>
+        <r-badge rb-status="default"></r-badge>
+        <r-badge rb-status="processing"></r-badge>
+        <r-badge rb-status="warning"></r-badge>
+        <r-badge rb-status="error"></r-badge>
+        <br />
+        <r-badge rb-status="success" text="Success"></r-badge>
+        <br />
+        <r-badge rb-status="error" text="Error"></r-badge>
+        <br />
+        <r-badge rb-status="default" text="Default"></r-badge>
+        <br />
+        <r-badge rb-status="processing" text="Processing"></r-badge>
+        <br />
+        <r-badge rb-status="warning" text="Warning"></r-badge>
+    </div>
+
+    <div class="example">
+        <strong>预设：</strong>
+        <br>
+        <r-badge rb-color="blue" rb-text="blue"></r-badge>
+        <r-badge rb-color="green" rb-text="green"></r-badge>
+        <r-badge rb-color="red" rb-text="red"></r-badge>
+        <r-badge rb-color="yellow" rb-text="yellow"></r-badge>
+        <r-badge rb-color="pink" rb-text="pink"></r-badge>
+        <r-badge rb-color="magenta" rb-text="magenta"></r-badge>
+        <r-badge rb-color="volcano" rb-text="volcano"></r-badge>
+        <r-badge rb-color="orange" rb-text="orange"></r-badge>
+        <r-badge rb-color="gold" rb-text="gold"></r-badge>
+        <r-badge rb-color="lime" rb-text="lime"></r-badge>
+        <r-badge rb-color="cyan" rb-text="cyan"></r-badge>
+        <r-badge rb-color="geekblue" rb-text="geekblue"></r-badge>
+        <r-badge rb-color="purple" rb-text="purple"></r-badge>
+        <br>
+        <strong>自定义：</strong>
+        <br>
+        <r-badge rb-color="#2db7f5" rb-text="#2db7f5"></r-badge>
+        <r-badge rb-color="#f50" rb-text="#f50"></r-badge>
+    </div>
+
+    <div class="example">
+        <r-badge rb-count="6" rb-type="primary">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="6" rb-type="success">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="6" rb-type="normal">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="6" rb-type="info">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="6" rb-type="error">
+            <a class="demo-badge"></a>
+        </r-badge>
+        <r-badge rb-count="6" rb-type="warning">
+            <a class="demo-badge"></a>
+        </r-badge>
+    </div>
+</body>
+
+</html>

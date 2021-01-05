@@ -1,2 +1,2 @@
 import Timeline from './timeline';
-export { Timeline };
+export default Timeline;

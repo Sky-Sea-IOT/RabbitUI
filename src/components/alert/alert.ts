@@ -1,19 +1,15 @@
 import { warn, removeAttrs, type, destroyElem, validComps } from '../../mixins';
 
+const AlertPrefixCls = 'rab-alert';
+const AlertPrefixAttr = 'rb';
+
 class Alert {
   VERSION: string;
-  prefixCls: string;
-  prefixAttr: string;
   components: any;
 
   constructor() {
     this.VERSION = 'v1.0';
-
-    this.prefixCls = 'rab-alert';
-    this.prefixAttr = 'rb';
-
     this.components = document.querySelectorAll('r-alert');
-
     this._create(this.components);
   }
 
@@ -25,11 +21,11 @@ class Alert {
       this._setCloseBtn(nodes[index], node);
 
       removeAttrs(node, [
-        `${this.prefixAttr}-message`,
-        `${this.prefixAttr}-desc`,
-        `${this.prefixAttr}-show-icon`,
-        `${this.prefixAttr}-closable`,
-        `${this.prefixAttr}-close-text`,
+        `${AlertPrefixAttr}-message`,
+        `${AlertPrefixAttr}-desc`,
+        `${AlertPrefixAttr}-show-icon`,
+        `${AlertPrefixAttr}-closable`,
+        `${AlertPrefixAttr}-close-text`,
       ]);
     });
   }
@@ -60,20 +56,20 @@ class Alert {
 
     const AlertIcon = document.createElement('span');
 
-    AlertIcon.className = `${this.prefixCls}-icon`;
+    AlertIcon.className = `${AlertPrefixCls}-icon`;
     AlertIcon.innerHTML = `<i class="rab-icon rab-icon-${iconType}"></i>`;
 
-    wrapper.classList.add(`${this.prefixCls}-with-icon`);
+    wrapper.classList.add(`${AlertPrefixCls}-with-icon`);
     wrapper.prepend(AlertIcon);
   }
 
   private _setCloseText(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}close-text`) || '';
+    return node.getAttribute(`${AlertPrefixAttr}close-text`) || '';
   }
 
   private _setMsg(wrapper: Element, node: Element) {
     const AlertMessage = document.createElement('div');
-    AlertMessage.className = `${this.prefixCls}-message`;
+    AlertMessage.className = `${AlertPrefixCls}-message`;
     AlertMessage.innerHTML = this._getMsg(node);
     wrapper.prepend(AlertMessage);
   }
@@ -83,10 +79,10 @@ class Alert {
 
     const AlertDesc = document.createElement('div');
 
-    AlertDesc.className = `${this.prefixCls}-desc`;
+    AlertDesc.className = `${AlertPrefixCls}-desc`;
     AlertDesc.innerHTML = this._getDesc(node);
 
-    wrapper.classList.add(`${this.prefixCls}-with-desc`);
+    wrapper.classList.add(`${AlertPrefixCls}-with-desc`);
     wrapper.appendChild(AlertDesc);
   }
 
@@ -96,7 +92,7 @@ class Alert {
     const AlertCloseBtn = document.createElement('a');
     const closeText: string = this._setCloseText(node);
 
-    AlertCloseBtn.className = `${this.prefixCls}-close`;
+    AlertCloseBtn.className = `${AlertPrefixCls}-close`;
     AlertCloseBtn.innerHTML = closeText ? closeText : `<i class="rab-icon rab-icon-ios-close"></i>`;
 
     AlertCloseBtn.addEventListener('click', () => destroyElem(wrapper, { fadeOut: true }));
@@ -105,23 +101,23 @@ class Alert {
   }
 
   private _getType(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}-type`) || 'info';
+    return node.getAttribute(`${AlertPrefixAttr}-type`) || 'info';
   }
 
   private _isClosable(node: Element): boolean {
-    return node.getAttribute(`${this.prefixAttr}-closable`) === 'true' ? true : false;
+    return node.getAttribute(`${AlertPrefixAttr}-closable`) === 'true' ? true : false;
   }
 
   private _isShowIcon(node: Element): boolean {
-    return node.getAttribute(`${this.prefixAttr}-show-icon`) === 'true' ? true : false;
+    return node.getAttribute(`${AlertPrefixAttr}-show-icon`) === 'true' ? true : false;
   }
 
   private _getMsg(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}-message`) || '';
+    return node.getAttribute(`${AlertPrefixAttr}-message`) || '';
   }
 
   private _getDesc(node: Element) {
-    return node.getAttribute(`${this.prefixAttr}-desc`) || '';
+    return node.getAttribute(`${AlertPrefixAttr}-desc`) || '';
   }
 
   public config(
@@ -135,9 +131,9 @@ class Alert {
 
     validComps(target, 'alert');
 
-    const alertIcon = target?.querySelector(`.${this.prefixCls}-icon`);
-    const alertMsg = target?.querySelector(`.${this.prefixCls}-message`);
-    const alertDesc = target?.querySelector(`.${this.prefixCls}-desc`);
+    const alertIcon = target?.querySelector(`.${AlertPrefixCls}-icon`);
+    const alertMsg = target?.querySelector(`.${AlertPrefixCls}-message`);
+    const alertDesc = target?.querySelector(`.${AlertPrefixCls}-desc`);
 
     return {
       // 设置消息标题
@@ -198,7 +194,7 @@ class Alert {
 
     $this = target;
 
-    const alertCloseBtn = target.querySelector(`.${this.prefixCls}-close`);
+    const alertCloseBtn = target.querySelector(`.${AlertPrefixCls}-close`);
 
     alertCloseBtn.addEventListener('click', () => type.isFn(cb, $this));
   }

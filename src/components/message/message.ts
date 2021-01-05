@@ -16,6 +16,14 @@ interface MessageAPI {
   dangerouslyUseHTMLString?: boolean; // 是否支持传入 HTML 片段
 }
 
+const MsgPrefixCls = 'rab-message';
+const MsgChildPrefixCls = 'rab-message-notice';
+
+const prefixKey = 'rb-message';
+
+const MsgMoveEnter = `${MsgPrefixCls}-move-enter`;
+const MsgMoveLeave = `${MsgPrefixCls}-move-leave`;
+
 const iconTypes = {
   info: 'ios-information-circle',
   success: 'ios-checkmark-circle',
@@ -37,34 +45,25 @@ let zIndex: number = 1010;
 // 创建实例的最外层父容器
 function messageInstanceWrapper(): HTMLDivElement {
   const MsgWrapper = document.createElement('div');
-  MsgWrapper.className = 'rab-message';
+
+  MsgWrapper.className = `${MsgPrefixCls}`;
   MsgWrapper.style.zIndex = `${zIndex}`;
+
   setTimeout(() => (MsgWrapper.style.top = `${defaults_message.top}px`), 0);
+
   document.body.appendChild(MsgWrapper);
+
   return MsgWrapper;
 }
 
 class Message {
   VERSION: string;
-  prefixCls: string;
-  prefixChildCls: string;
-  prefixKey: string;
   instances: Array<HTMLElement>;
-  msgMoveEnter: string;
-  msgMoveLeave: string;
 
   constructor() {
     this.VERSION = 'v1.0';
-
-    this.prefixCls = 'rab-message';
-    this.prefixChildCls = `${this.prefixCls}-notice`;
-    this.prefixKey = 'rb-message';
-
     // 存储已经创建的实例，在 destroy方法里需要用到
     this.instances = [];
-
-    this.msgMoveEnter = `${this.prefixCls}-move-enter`;
-    this.msgMoveLeave = `${this.prefixCls}-move-leave`;
 
     messageInstanceWrapper();
   }
@@ -73,7 +72,7 @@ class Message {
     // 每次创建实例自动增加最外层父容器的层级
     zIndex++;
     // @ts-ignore
-    document.querySelector(`.${this.prefixCls}`).style.zIndex = `${zIndex}`;
+    document.querySelector(`.${MsgPrefixCls}`).style.zIndex = `${zIndex}`;
   }
 
   private _createInstance(_type: string, config: string | MessageAPI): HTMLDivElement {
@@ -120,14 +119,14 @@ class Message {
     MsgInfoBox.append(MsgIcon, MsgText);
     Message.appendChild(MsgContentWrap);
 
-    document.querySelector(`.${this.prefixCls}`)!.appendChild(Message);
+    document.querySelector(`.${MsgPrefixCls}`)!.appendChild(Message);
 
     // 存放每次创建的实例
     this.instances.push(Message);
 
     CssTransition(Message, {
       inOrOut: 'in',
-      enterCls: this.msgMoveEnter,
+      enterCls: MsgMoveEnter,
       rmCls: true,
     });
 
@@ -142,10 +141,10 @@ class Message {
     node4: HTMLElement,
     node5: HTMLElement
   ): void {
-    node1.className = `${this.prefixChildCls}`;
-    node2.className = `${this.prefixChildCls}-content ${this.prefixChildCls}-content-${type}`;
-    node3.className = `${this.prefixChildCls}-content-text`;
-    node4.className = `${this.prefixCls}-${type}`;
+    node1.className = `${MsgChildPrefixCls}`;
+    node2.className = `${MsgChildPrefixCls}-content ${MsgChildPrefixCls}-content-${type}`;
+    node3.className = `${MsgChildPrefixCls}-content-text`;
+    node4.className = `${MsgPrefixCls}-${type}`;
     node5.className = 'rab-icon';
   }
 
@@ -171,11 +170,11 @@ class Message {
   ): void {
     if (!closable) return;
 
-    parent.classList.add(`${this.prefixChildCls}-closable`);
+    parent.classList.add(`${MsgChildPrefixCls}-closable`);
 
     const MsgCloseBtn = document.createElement('a');
 
-    MsgCloseBtn.className = `${this.prefixChildCls}-close`;
+    MsgCloseBtn.className = `${MsgChildPrefixCls}-close`;
     MsgCloseBtn.innerHTML = `<i class="rab-icon rab-icon-ios-close"></i>`;
 
     this._handleClose(parent, MsgCloseBtn, onClose);
@@ -185,13 +184,13 @@ class Message {
 
   private _setKey(node: HTMLElement, key: any): void {
     if (!key) return;
-    node.setAttribute(`${this.prefixKey}-key`, key);
+    node.setAttribute(`${prefixKey}-key`, key);
   }
 
   private _autoClose(node: HTMLElement, duration: any): void {
     destroyElem(node, {
       duration,
-      clsLeave: this.msgMoveLeave,
+      clsLeave: MsgMoveLeave,
     });
   }
 
@@ -204,16 +203,16 @@ class Message {
 
       destroyElem(parent, {
         duration: 0.1,
-        clsEnter: this.msgMoveEnter,
-        clsLeave: this.msgMoveLeave,
+        clsEnter: MsgMoveEnter,
+        clsLeave: MsgMoveLeave,
       });
     });
   }
 
   private _setBackground(node: HTMLElement, children: HTMLElement, background: any): void {
     if (!background) return;
-    node.classList.add(`${this.prefixChildCls}-with-background`);
-    children.classList.add(`${this.prefixChildCls}-content-background`);
+    node.classList.add(`${MsgChildPrefixCls}-with-background`);
+    children.classList.add(`${MsgChildPrefixCls}-content-background`);
   }
 
   public info(config: string | MessageAPI): Promise<void> {
@@ -257,15 +256,15 @@ class Message {
       destroyElemByKey({
         key,
         duration: 0.1,
-        prefixKey: this.prefixKey,
-        clsLeave: this.msgMoveLeave,
+        prefixKey: prefixKey,
+        clsLeave: MsgMoveLeave,
       });
     } else {
       // 销毁所有实例
       this.instances.forEach(instance => {
         destroyElem(instance, {
           duration: 0.1,
-          clsLeave: this.msgMoveLeave,
+          clsLeave: MsgMoveLeave,
         });
       });
       // 清空存放的所有实例

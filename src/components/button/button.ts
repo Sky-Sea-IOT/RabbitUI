@@ -1,19 +1,15 @@
 import { removeAttrs } from '../../mixins';
 
+const BtnPrefixCls = 'rab-btn';
+const BtnPrefixAttr = 'rb';
+
 class Button {
   VERSION: string;
-  prefixCls: string;
-  prefixAttr: string;
   components: any;
 
   constructor() {
     this.VERSION = '1.0';
-
-    this.prefixCls = 'rab-btn';
-    this.prefixAttr = 'rb';
-
-    this.components = document.querySelectorAll(`.${this.prefixCls}`);
-
+    this.components = document.querySelectorAll(`.${BtnPrefixCls}`);
     this._getAllBtns(this.components);
   }
 
@@ -21,15 +17,15 @@ class Button {
     nodes.forEach(node => {
       this._setLoading(node);
       this._setIcon(node);
-      removeAttrs(node, [`${this.prefixAttr}-icon`]);
+      removeAttrs(node, [`${BtnPrefixAttr}-icon`]);
     });
   }
 
   private _setLoading(node: Element): void {
     if (this._isLoading(node)) {
-      if (node.innerHTML === '') node.classList.add(`${this.prefixCls}-icon-only`);
+      if (node.innerHTML === '') node.classList.add(`${BtnPrefixCls}-icon-only`);
 
-      node.classList.add(`${this.prefixCls}-loading`);
+      node.classList.add(`${BtnPrefixCls}-loading`);
       node.prepend(this._loadIcon());
     }
   }
@@ -38,7 +34,7 @@ class Button {
     if (!this._getIcon(node)) return;
 
     if (node.innerHTML === '') {
-      node.classList.add(`${this.prefixCls}-icon-only`);
+      node.classList.add(`${BtnPrefixCls}-icon-only`);
       node.innerHTML = `<i class="rab-icon rab-icon-${this._getIcon(node)}"></i>`;
     } else {
       const Icon = document.createElement('i');
@@ -48,7 +44,7 @@ class Button {
   }
 
   private _isLoading(node: Element): boolean {
-    return node.getAttribute(`${this.prefixAttr}-loading`) === 'true' || false;
+    return node.getAttribute(`${BtnPrefixAttr}-loading`) === 'true' || false;
   }
 
   private _loadIcon(): HTMLElement {
@@ -58,7 +54,7 @@ class Button {
   }
 
   private _getIcon(node: Element): string {
-    return node.getAttribute(`${this.prefixAttr}-icon`) || '';
+    return node.getAttribute(`${BtnPrefixAttr}-icon`) || '';
   }
 
   public config(

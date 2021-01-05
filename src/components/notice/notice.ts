@@ -6,6 +6,7 @@ import {
   type,
   warn,
 } from '../../mixins';
+
 import usePromiseCallback from '../../mixins/cb-promise';
 
 interface NoticeGlobalAPI {
@@ -26,6 +27,14 @@ interface NoticeAPI {
   className?: string; // 自定义 CSS class
   dangerouslyUseHTMLString?: boolean;
 }
+
+const NotPrefixCls = 'rab-notice';
+const NotChildPrefixCls = 'rab-notice-notice';
+
+const NotPrefixKey = 'rb-notice';
+
+const NotMoveEnter = `${NotPrefixCls}-move-enter`;
+const NotMoveLeave = `${NotPrefixCls}-move-leave`;
 
 const iconTypes = {
   info: 'ios-information-circle',
@@ -48,35 +57,27 @@ let zIndex: number = 1180;
 // 创建实例的最外层父容器
 function noticeInsanceWrapper(): HTMLElement {
   const NoticeWrapper = document.createElement('div');
+
   NoticeWrapper.className = 'rab-notice';
+
   NoticeWrapper.style.zIndex = `${zIndex}`;
   NoticeWrapper.style.right = '0';
+
   setTimeout(() => (NoticeWrapper.style.top = `${defaults_notice.top}px`), 0);
+
   document.body.appendChild(NoticeWrapper);
+
   return NoticeWrapper;
 }
 
 class Notice {
   VERSION: string;
-  prefixCls: string;
-  prefixChildCls: string;
-  prefixKey: string;
   instances: Array<HTMLElement>;
-  ntMoveEnter: string;
-  ntMoveLeave: string;
 
   constructor() {
     this.VERSION = 'v1.0';
-
-    this.prefixCls = 'rab-notice';
-    this.prefixChildCls = `${this.prefixCls}-notice`;
-    this.prefixKey = 'rb-notice';
-
     // 存储已经创建的实例，在 destroy方法里需要用到
     this.instances = [];
-
-    this.ntMoveEnter = `${this.prefixCls}-move-enter`;
-    this.ntMoveLeave = `${this.prefixCls}-move-leave`;
 
     noticeInsanceWrapper();
   }
@@ -84,7 +85,7 @@ class Notice {
   private _autoSetZindex(): void {
     zIndex++;
     // @ts-ignore
-    document.querySelector(`.${this.prefixCls}`).style.zIndex = `${zIndex}`;
+    document.querySelector(`.${NotPrefixCls}`).style.zIndex = `${zIndex}`;
   }
 
   private _createInstance(type: string, config: NoticeAPI): HTMLElement {
@@ -121,11 +122,11 @@ class Notice {
     NoticeCustomContent.append(NoticeTitle, NoticeDesc);
     NoticeContent.appendChild(NoticeCustomContent);
     Notice.appendChild(NoticeContent);
-    document.querySelector(`.${this.prefixCls}`)!.appendChild(Notice);
+    document.querySelector(`.${NotPrefixCls}`)!.appendChild(Notice);
 
     CssTransition(Notice, {
       inOrOut: 'in',
-      enterCls: this.ntMoveEnter,
+      enterCls: NotMoveEnter,
       rmCls: true,
     });
 
@@ -146,16 +147,16 @@ class Notice {
     node5: HTMLElement,
     customCls?: string
   ): void {
-    node1.className = `${this.prefixChildCls} ${customCls ? customCls : ''}`;
-    node2.className = `${this.prefixChildCls}-content`;
-    node3.className = `${this.prefixChildCls}-custom-content ${this.prefixCls}-with-${type}`;
-    node4.className = `${this.prefixCls}-title`;
-    node5.className = `${this.prefixCls}-desc`;
+    node1.className = `${NotChildPrefixCls} ${customCls ? customCls : ''}`;
+    node2.className = `${NotChildPrefixCls}-content`;
+    node3.className = `${NotChildPrefixCls}-custom-content ${NotPrefixCls}-with-${type}`;
+    node4.className = `${NotPrefixCls}-title`;
+    node5.className = `${NotPrefixCls}-desc`;
   }
 
   private _setKey(node: HTMLElement, key: any): void {
     if (!key) return;
-    node.setAttribute(`${this.prefixKey}-key`, key);
+    node.setAttribute(`${NotPrefixKey}-key`, key);
   }
 
   private _setTitle(node: HTMLElement, title?: string, dangerouslyUseHTMLString?: boolean): void {
@@ -178,9 +179,9 @@ class Notice {
   ): void {
     if (!desc) return;
 
-    parent.classList.add(`${this.prefixChildCls}-with-desc`);
+    parent.classList.add(`${NotChildPrefixCls}-with-desc`);
 
-    children_custm.classList.add(`${this.prefixCls}-with-desc`);
+    children_custm.classList.add(`${NotPrefixCls}-with-desc`);
 
     // 是否支持传入 HTML 片段
     isUseHTMLString(child_desc, desc, dangerouslyUseHTMLString);
@@ -195,7 +196,7 @@ class Notice {
     // 不带状态图标的类型
     if (type === 'noraml') return;
     if (type !== 'normal' || customIcon) {
-      child_custom.classList.add(`${this.prefixCls}-with-icon`);
+      child_custom.classList.add(`${NotPrefixCls}-with-icon`);
     }
 
     let isOutline = '';
@@ -204,7 +205,7 @@ class Notice {
     if (child_desc.innerHTML) isOutline = '-outline';
 
     const NoticeIcon = document.createElement('span');
-    NoticeIcon.className = `${this.prefixCls}-icon ${this.prefixCls}-icon-${type}`;
+    NoticeIcon.className = `${NotPrefixCls}-icon ${NotPrefixCls}-icon-${type}`;
 
     // 是否自定义状态图标
     if (customIcon) {
@@ -223,10 +224,10 @@ class Notice {
 
     if (!closable) return;
 
-    parent.classList.add(`${this.prefixChildCls}-closable`);
+    parent.classList.add(`${NotChildPrefixCls}-closable`);
 
     const NoticeClose = document.createElement('a');
-    NoticeClose.className = `${this.prefixChildCls}-close`;
+    NoticeClose.className = `${NotChildPrefixCls}-close`;
     NoticeClose.innerHTML = `<i class="rab-icon rab-icon-ios-close"></i>`;
 
     this._handleClose(parent, NoticeClose, onClose);
@@ -255,7 +256,7 @@ class Notice {
       if (onClose) type.isFn(onClose);
 
       destroyElem(parent, {
-        clsLeave: this.ntMoveLeave,
+        clsLeave: NotMoveLeave,
         duration: 0.1,
       });
     };
@@ -267,7 +268,7 @@ class Notice {
 
     destroyElem(instance, {
       duration,
-      clsLeave: this.ntMoveLeave,
+      clsLeave: NotMoveLeave,
       transitionTime: 0.5,
     });
   }
@@ -312,15 +313,15 @@ class Notice {
     destroyElemByKey({
       key,
       duration: 0.1,
-      clsLeave: this.ntMoveLeave,
-      prefixKey: this.prefixKey,
+      clsLeave: NotMoveLeave,
+      prefixKey: NotPrefixKey,
     });
   }
 
   public destroy() {
     this.instances.forEach(instance => {
       destroyElem(instance, {
-        clsLeave: this.ntMoveLeave,
+        clsLeave: NotMoveLeave,
         duration: 0.1,
       });
     });

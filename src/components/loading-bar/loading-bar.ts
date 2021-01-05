@@ -13,6 +13,8 @@ interface UpdateAPI {
   show?: boolean; // 是否显示进度条
 }
 
+const LbrPrefixCls = 'rab-loading-bar';
+
 // 全局配置
 const defaults_loadingBar: {
   color: string;
@@ -28,11 +30,9 @@ const defaults_loadingBar: {
 
 let timer: any;
 
-const lb_prefixCls = 'rab-loading-bar';
-
 function r_update(options: UpdateAPI): void {
-  const LBar = document.querySelector(`.${lb_prefixCls}`)!;
-  const LBarInner = document.querySelector(`.${lb_prefixCls}-inner`)!;
+  const LBar = document.querySelector(`.${LbrPrefixCls}`)!;
+  const LBarInner = document.querySelector(`.${LbrPrefixCls}-inner`)!;
 
   // 设置进度
   // @ts-ignore
@@ -96,11 +96,11 @@ function setColor(status: string, elem: any) {
         elem.style.backgroundColor = '';
       }, defaults_loadingBar.duration);
     } else {
-      elem.classList.add(`${lb_prefixCls}-inner-failed-color-error`);
+      elem.classList.add(`${LbrPrefixCls}-inner-failed-color-error`);
 
       // 在隐藏的持续时间后设为初始颜色
       setTimeout(() => {
-        elem.classList.remove(`${lb_prefixCls}-inner-failed-color-error`);
+        elem.classList.remove(`${LbrPrefixCls}-inner-failed-color-error`);
       }, defaults_loadingBar.duration + 200);
     }
   } else if (status === 'primary') {
@@ -109,7 +109,7 @@ function setColor(status: string, elem: any) {
       // @ts-ignore
       elem.style.backgroundColor = defaults_loadingBar.color;
     } else {
-      elem.classList.add(`${lb_prefixCls}-inner-color-primary`);
+      elem.classList.add(`${LbrPrefixCls}-inner-color-primary`);
     }
   }
 }
@@ -118,8 +118,8 @@ function loadingBarInstance(): HTMLDivElement {
   const LoadingBar = document.createElement('div');
   const LoadingBarInner = document.createElement('div');
 
-  LoadingBar.className = 'rab-loading-bar';
-  LoadingBarInner.className = 'rab-loading-bar-inner';
+  LoadingBar.className = `${LbrPrefixCls}`;
+  LoadingBarInner.className = `${LbrPrefixCls}-inner`;
 
   setColor('primary', LoadingBarInner);
 
@@ -139,11 +139,9 @@ function loadingBarInstance(): HTMLDivElement {
 
 class LoadingBar {
   VERSION: string;
-  lb_prefixCls: string;
 
   constructor() {
     this.VERSION = 'v1.0';
-    this.lb_prefixCls = 'rab-loading-bar';
 
     loadingBarInstance();
   }
@@ -214,7 +212,7 @@ class LoadingBar {
 
   public destroy(): void {
     clearTimer();
-    document.body.removeChild(document.querySelector(`.${this.lb_prefixCls}`)!);
+    document.body.removeChild(document.querySelector(`.${LbrPrefixCls}`)!);
   }
 }
 

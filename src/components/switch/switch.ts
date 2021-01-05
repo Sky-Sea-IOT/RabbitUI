@@ -1,19 +1,14 @@
 import { type, validComps } from '../../mixins';
 
+const SwitchPrefixCls = 'rab-switch';
+
 class Switch {
   VERSION: string;
-  prefixCls: string;
-  prefixAttr: string;
   components: any;
 
   constructor() {
     this.VERSION = '1.0';
-
-    this.prefixCls = 'rab-switch';
-    this.prefixAttr = 'rb';
-
     this.components = document.querySelectorAll('r-switch');
-
     this._getAllSwitch(this.components);
   }
 
@@ -41,7 +36,7 @@ class Switch {
     if (!openText || !closeText) return;
     // 创建文本容器
     const TextBox = document.createElement('span');
-    TextBox.className = `${this.prefixCls}-inner`;
+    TextBox.className = `${SwitchPrefixCls}-inner`;
     node.appendChild(TextBox);
     status ? (TextBox.innerHTML = openText) : (TextBox.innerHTML = closeText);
   }
@@ -78,7 +73,7 @@ class Switch {
 
   private _changeStatusText(node: Element, status: boolean, openText: any, closeText: any): void {
     // 获取当前开关下的文本容器
-    const TextBox = node.querySelector(`.${this.prefixCls}-inner`);
+    const TextBox = node.querySelector(`.${SwitchPrefixCls}-inner`);
     if (TextBox) {
       status ? (TextBox.innerHTML = openText) : (TextBox.innerHTML = closeText);
     }

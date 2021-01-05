@@ -1,9 +1,7 @@
 import Rabbit from '../../src';
 
 export default function loadingBarTest() {
-  const loading = new Rabbit.LoadingBar();
-
-  // loading.config({
+  // Rabbit.Loading.config({
   //   height: 5,
   //   color: '#5cb85c',
   //   failedColor: '#f0ad4e',
@@ -12,14 +10,14 @@ export default function loadingBarTest() {
 
   // @ts-ignore
   window.Start = () => {
-    loading.statr();
+    Rabbit.Loading.statr();
   };
   // @ts-ignore
   window.Finish = () => {
-    loading.finish();
+    Rabbit.Loading.finish();
   };
   // @ts-ignore
   window._Error = () => {
-    loading.error();
+    Rabbit.Loading.error();
   };
 }

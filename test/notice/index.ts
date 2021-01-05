@@ -2,15 +2,13 @@
 import Rabbit from '../../src';
 
 export default function noticeTest() {
-  const notice = new Rabbit.Notice();
-
-  // notice.config({
+  // Rabbit.Message.config({
   //   top: 50,
   //   duration: 3
   // });
 
   window.normal = () => {
-    notice.open({
+    Rabbit.Message.open({
       title: '这是通知标题',
       desc:
         '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -24,14 +22,14 @@ export default function noticeTest() {
   };
 
   window.onlyTitle = () => {
-    notice.open({
+    Rabbit.Message.open({
       title: '这是通知标题',
       closable: false,
     });
   };
 
   window.getInfo = () => {
-    notice.info({
+    Rabbit.Message.info({
       title: '这是通知标题',
       desc:
         '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -39,7 +37,7 @@ export default function noticeTest() {
   };
 
   window.getSuccess = () => {
-    notice.success({
+    Rabbit.Message.success({
       title: '这是通知标题',
       desc:
         '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -47,7 +45,7 @@ export default function noticeTest() {
   };
 
   window.getWarning = () => {
-    notice.warning({
+    Rabbit.Message.warning({
       title: '这是通知标题',
       desc:
         '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -55,7 +53,7 @@ export default function noticeTest() {
   };
 
   window.getError = () => {
-    notice.error({
+    Rabbit.Message.error({
       title: '这是通知标题',
       desc:
         '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -63,52 +61,48 @@ export default function noticeTest() {
   };
 
   window.getInfoNodesc = () => {
-    notice.info({
+    Rabbit.Message.info({
       title: '这是通知标题',
     });
   };
 
   window.getSuccessNodesc = () => {
-    notice.success({
+    Rabbit.Message.success({
       title: '这是通知标题',
     });
   };
 
   window.getWarningNodesc = () => {
-    notice.warning({
+    Rabbit.Message.warning({
       title: '这是通知标题',
     });
   };
 
   window.getErrorNodesc = () => {
-    notice.error({
+    Rabbit.Message.error({
       title: '这是通知标题',
     });
   };
 
   window.multipleNotice = () => {
-    notice
-      .open({
-        title: '行程已发布',
-        desc: '您的行程订单已发布，正在等待待车主接单...',
-      })
-      .then(() => {
-        notice
-          .info({
-            title: '已有车主接单啦！',
-            desc: '你发布的行程订单已有车主接单了，请提前付款以免被取消订单！',
-          })
-          .then(() => {
-            notice.success({
-              title: '费用支付成功',
-              desc: '您的行程将在2021.9.9 12:30 开始',
-            });
-          });
+    Rabbit.Message.open({
+      title: '行程已发布',
+      desc: '您的行程订单已发布，正在等待待车主接单...',
+    }).then(() => {
+      Rabbit.Message.info({
+        title: '已有车主接单啦！',
+        desc: '你发布的行程订单已有车主接单了，请提前付款以免被取消订单！',
+      }).then(() => {
+        Rabbit.Message.success({
+          title: '费用支付成功',
+          desc: '您的行程将在2021.9.9 12:30 开始',
+        });
       });
+    });
   };
 
   window.customTime = () => {
-    notice.open({
+    Rabbit.Message.open({
       title: '这是通知标题',
       desc: '这条通知不会自动关闭，需要点击关闭按钮才可以关闭。',
       duration: 0,
@@ -116,7 +110,7 @@ export default function noticeTest() {
   };
 
   window.customStyle = () => {
-    notice.open({
+    Rabbit.Message.open({
       title: '这是通知标题',
       desc:
         '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -125,7 +119,7 @@ export default function noticeTest() {
   };
 
   window.useHTML = () => {
-    notice.open({
+    Rabbit.Message.open({
       title: 'HTML片段',
       desc: `<strong>这是 <i>HTML</i> 片段</strong>`,
       dangerouslyUseHTMLString: true,
