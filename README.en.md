@@ -11,4 +11,4 @@ Rabbit UI
 
 > The project does not rely on any third-party libraries or frameworks and is written based on native Javascript
 
-*项目正在制作中*
+*The project is under construction*

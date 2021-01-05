@@ -10,4 +10,4 @@ Rabbit UI
 
 >  项目不依赖任何第三方库或框架，一切基于原生 Javascript 编写
 
-*The project is under construction*
+*项目正在制作中*
