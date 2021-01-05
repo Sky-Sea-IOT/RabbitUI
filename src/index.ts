@@ -15,7 +15,7 @@ const components = {
   Alert,
   Avatar,
   Button,
-  Loading: LoadingBar,
+  LoadingBar,
   Message,
   Notice,
   Progress,

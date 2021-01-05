@@ -1,7 +1,7 @@
 import Rabbit from '../../src';
 
 export default function loadingBarTest() {
-  const loading = new Rabbit.Loading();
+  const loading = new Rabbit.LoadingBar();
 
   // loading.config({
   //   height: 5,
