@@ -153,19 +153,19 @@ class Progress implements PublicMethods {
     }
 
     private _getStatus(node: Element): string | null {
-        return node.getAttribute(`${PREFIX.attr}-status`);
+        return node.getAttribute('status');
     }
 
     private _getPercent(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-percent`) || '0';
+        return node.getAttribute('percent') || '0';
     }
 
     private _getSuccessPercent(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-success-percent`) || '0';
+        return node.getAttribute('success-percent') || '0';
     }
 
     private _getStrokeWidth(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-stroke-width`) || '10';
+        return node.getAttribute('stroke-width') || '10';
     }
 
     private _getStrokeColor(
@@ -174,7 +174,7 @@ class Progress implements PublicMethods {
         from: Array<string>;
         to: Array<string>;
     } {
-        if (!node.getAttribute(`${PREFIX.attr}-stroke-color`)) {
+        if (!node.getAttribute('stroke-color')) {
             return {
                 from: [],
                 to: []
@@ -184,8 +184,7 @@ class Progress implements PublicMethods {
              * 转为真实数组
              * "['','']" -> ['','']
              */
-            const strArr: string =
-                node.getAttribute(`${PREFIX.attr}-stroke-color`)?.replace(/'/g, '"') || '';
+            const strArr: string = node.getAttribute('stroke-color')?.replace(/'/g, '"') || '';
 
             const colorArr = JSON.parse(strArr);
 
@@ -197,11 +196,11 @@ class Progress implements PublicMethods {
     }
 
     private _isTextInside(node: Element): boolean {
-        return node.getAttribute(`${PREFIX.attr}-text-inside`) === 'true' || false;
+        return node.getAttribute('text-inside') === 'true' || false;
     }
 
     private _isShowText(node: Element): boolean {
-        if (node.getAttribute(`${PREFIX.attr}-show-text`) === 'false') return false;
+        if (node.getAttribute('show-text') === 'false') return false;
         else return true;
     }
 }

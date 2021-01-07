@@ -64,11 +64,11 @@ class Timeline {
     }
 
     private _getStatusColor(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-color`) || 'blue';
+        return node.getAttribute('color') || 'blue';
     }
 
     private _getDotContent(parent: Element): string {
-        return parent.getAttribute(`${PREFIX.attr}-dot`) || '';
+        return parent.getAttribute('dot') || '';
     }
 }
 

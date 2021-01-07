@@ -48,7 +48,7 @@ class Button implements PublicMethods {
         nodes.forEach((node) => {
             this._setLoading(node);
             this._setIcon(node);
-            removeAttrs(node, [`${PREFIX.attr}-icon`]);
+            removeAttrs(node, ['icon']);
         });
     }
 
@@ -75,7 +75,7 @@ class Button implements PublicMethods {
     }
 
     private _isLoading(node: Element): boolean {
-        return node.getAttribute(`${PREFIX.attr}-loading`) === 'true' || false;
+        return node.getAttribute('loading') === 'true' || false;
     }
 
     private _loadIcon(): HTMLElement {
@@ -85,7 +85,7 @@ class Button implements PublicMethods {
     }
 
     private _getIcon(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-icon`) || '';
+        return node.getAttribute('icon') || '';
     }
 }
 

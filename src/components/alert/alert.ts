@@ -107,13 +107,7 @@ class Alert implements PublicMethods {
             this._setDesc(node);
             this._setCloseBtn(node);
 
-            removeAttrs(node, [
-                `${PREFIX.attr}-message`,
-                `${PREFIX.attr}-desc`,
-                `${PREFIX.attr}-show-icon`,
-                `${PREFIX.attr}-closable`,
-                `${PREFIX.attr}-close-text`
-            ]);
+            removeAttrs(node, ['message', 'desc', 'show-icon', 'closable', 'close-text']);
         });
     }
 
@@ -192,23 +186,23 @@ class Alert implements PublicMethods {
     }
 
     private _getType(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-type`) || 'info';
+        return node.getAttribute('type') || 'info';
     }
 
     private _isClosable(node: Element): boolean {
-        return node.getAttribute(`${PREFIX.attr}-closable`) === 'true' ? true : false;
+        return node.getAttribute('closable') === 'true' ? true : false;
     }
 
     private _isShowIcon(node: Element): boolean {
-        return node.getAttribute(`${PREFIX.attr}-show-icon`) === 'true' ? true : false;
+        return node.getAttribute('show-icon') === 'true' ? true : false;
     }
 
     private _getMsg(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}-message`) || '';
+        return node.getAttribute('message') || '';
     }
 
     private _getDesc(node: Element) {
-        return node.getAttribute(`${PREFIX.attr}-desc`) || '';
+        return node.getAttribute('desc') || '';
     }
 }
 

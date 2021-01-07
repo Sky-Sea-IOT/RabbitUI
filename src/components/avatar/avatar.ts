@@ -18,11 +18,7 @@ class Avatar {
             this._setSize(node);
             this._setCustomContent(node);
 
-            removeAttrs(node, [
-                `${PREFIX.attr}-icon`,
-                `${PREFIX.attr}-src`,
-                `${PREFIX.attr}-custom-icon`
-            ]);
+            removeAttrs(node, ['icon', 'src', 'custom-icon']);
         });
     }
 
