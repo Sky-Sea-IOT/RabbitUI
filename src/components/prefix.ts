@@ -1,7 +1,6 @@
 const prefixCls = 'rab';
 
 export default {
-    attr: 'rb', // 标签属性的前缀名
     alert: `${prefixCls}-alert`,
     avatar: `${prefixCls}-avatar`,
     badge: `${prefixCls}-badge`,
