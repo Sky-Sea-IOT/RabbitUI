@@ -1,8 +1,11 @@
 import { type, validComps } from '../../mixins';
+import PREFIX from '../prefix';
 
-const SwitchPrefixCls = 'rab-switch';
+interface PublicMethods {
+    onChange(elem: string, cb: ([status, $this]: [boolean, Element]) => void): void;
+}
 
-class Switch {
+class Switch implements PublicMethods {
     readonly VERSION: string;
     readonly components: any;
 
@@ -50,7 +53,7 @@ class Switch {
         if (!openText || !closeText) return;
         // 创建文本容器
         const TextBox = document.createElement('span');
-        TextBox.className = `${SwitchPrefixCls}-inner`;
+        TextBox.className = `${PREFIX.switch}-inner`;
         node.appendChild(TextBox);
         status ? (TextBox.innerHTML = openText) : (TextBox.innerHTML = closeText);
     }
@@ -87,7 +90,7 @@ class Switch {
 
     private _changeStatusText(node: Element, status: boolean, openText: any, closeText: any): void {
         // 获取当前开关下的文本容器
-        const TextBox = node.querySelector(`.${SwitchPrefixCls}-inner`);
+        const TextBox = node.querySelector(`.${PREFIX.switch}-inner`);
         if (TextBox) {
             status ? (TextBox.innerHTML = openText) : (TextBox.innerHTML = closeText);
         }

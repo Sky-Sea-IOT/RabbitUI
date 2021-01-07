@@ -1,9 +1,18 @@
 import { warn, removeAttrs, type, destroyElem, validComps } from '../../mixins';
+import PREFIX from '../prefix';
 
-const AlertPrefixCls = 'rab-alert';
-const AlertPrefixAttr = 'rb';
+interface PublicMethods {
+    config(
+        elem: string
+    ): {
+        message: any;
+        desc: any;
+        icon: any;
+    };
+    onClose(elem: string, cb: ($this: Element) => void): void;
+}
 
-class Alert {
+class Alert implements PublicMethods {
     readonly VERSION: string;
     readonly components: any;
 
@@ -24,9 +33,9 @@ class Alert {
 
         validComps(target, 'alert');
 
-        const alertIcon = target?.querySelector(`.${AlertPrefixCls}-icon`);
-        const alertMsg = target?.querySelector(`.${AlertPrefixCls}-message`);
-        const alertDesc = target?.querySelector(`.${AlertPrefixCls}-desc`);
+        const alertIcon = target?.querySelector(`.${PREFIX.alert}-icon`);
+        const alertMsg = target?.querySelector(`.${PREFIX.alert}-message`);
+        const alertDesc = target?.querySelector(`.${PREFIX.alert}-desc`);
 
         return {
             // 设置消息标题
@@ -86,7 +95,7 @@ class Alert {
         // 将当前选中的组件作为参数返回出去
         const $this = target;
 
-        const alertCloseBtn = target.querySelector(`.${AlertPrefixCls}-close`);
+        const alertCloseBtn = target.querySelector(`.${PREFIX.alert}-close`);
 
         alertCloseBtn.addEventListener('click', () => type.isFn(cb, $this));
     }
@@ -99,11 +108,11 @@ class Alert {
             this._setCloseBtn(node);
 
             removeAttrs(node, [
-                `${AlertPrefixAttr}-message`,
-                `${AlertPrefixAttr}-desc`,
-                `${AlertPrefixAttr}-show-icon`,
-                `${AlertPrefixAttr}-closable`,
-                `${AlertPrefixAttr}-close-text`
+                `${PREFIX.attr}-message`,
+                `${PREFIX.attr}-desc`,
+                `${PREFIX.attr}-show-icon`,
+                `${PREFIX.attr}-closable`,
+                `${PREFIX.attr}-close-text`
             ]);
         });
     }
@@ -136,20 +145,20 @@ class Alert {
 
         const AlertIcon = document.createElement('span');
 
-        AlertIcon.className = `${AlertPrefixCls}-icon`;
+        AlertIcon.className = `${PREFIX.alert}-icon`;
         AlertIcon.innerHTML = `<i class="rab-icon rab-icon-${iconType}"></i>`;
 
-        node.classList.add(`${AlertPrefixCls}-with-icon`);
+        node.classList.add(`${PREFIX.alert}-with-icon`);
         node.prepend(AlertIcon);
     }
 
     private _setCloseText(node: Element): string {
-        return node.getAttribute(`${AlertPrefixAttr}close-text`) || '';
+        return node.getAttribute(`${PREFIX.attr}close-text`) || '';
     }
 
     private _setMsg(node: Element) {
         const AlertMessage = document.createElement('div');
-        AlertMessage.className = `${AlertPrefixCls}-message`;
+        AlertMessage.className = `${PREFIX.alert}-message`;
         AlertMessage.innerHTML = this._getMsg(node);
         node.prepend(AlertMessage);
     }
@@ -159,10 +168,10 @@ class Alert {
 
         const AlertDesc = document.createElement('div');
 
-        AlertDesc.className = `${AlertPrefixCls}-desc`;
+        AlertDesc.className = `${PREFIX.alert}-desc`;
         AlertDesc.innerHTML = this._getDesc(node);
 
-        node.classList.add(`${AlertPrefixCls}-with-desc`);
+        node.classList.add(`${PREFIX.alert}-with-desc`);
         node.appendChild(AlertDesc);
     }
 
@@ -172,7 +181,7 @@ class Alert {
         const AlertCloseBtn = document.createElement('a');
         const closeText: string = this._setCloseText(node);
 
-        AlertCloseBtn.className = `${AlertPrefixCls}-close`;
+        AlertCloseBtn.className = `${PREFIX.alert}-close`;
         AlertCloseBtn.innerHTML = closeText
             ? closeText
             : '<i class="rab-icon rab-icon-ios-close"></i>';
@@ -183,23 +192,23 @@ class Alert {
     }
 
     private _getType(node: Element): string {
-        return node.getAttribute(`${AlertPrefixAttr}-type`) || 'info';
+        return node.getAttribute(`${PREFIX.attr}-type`) || 'info';
     }
 
     private _isClosable(node: Element): boolean {
-        return node.getAttribute(`${AlertPrefixAttr}-closable`) === 'true' ? true : false;
+        return node.getAttribute(`${PREFIX.attr}-closable`) === 'true' ? true : false;
     }
 
     private _isShowIcon(node: Element): boolean {
-        return node.getAttribute(`${AlertPrefixAttr}-show-icon`) === 'true' ? true : false;
+        return node.getAttribute(`${PREFIX.attr}-show-icon`) === 'true' ? true : false;
     }
 
     private _getMsg(node: Element): string {
-        return node.getAttribute(`${AlertPrefixAttr}-message`) || '';
+        return node.getAttribute(`${PREFIX.attr}-message`) || '';
     }
 
     private _getDesc(node: Element) {
-        return node.getAttribute(`${AlertPrefixAttr}-desc`) || '';
+        return node.getAttribute(`${PREFIX.attr}-desc`) || '';
     }
 }
 

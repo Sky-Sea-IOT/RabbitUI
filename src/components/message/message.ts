@@ -1,5 +1,6 @@
 import { CssTransition, destroyElem, destroyElemByKey, isUseHTMLString, type } from '../../mixins';
 import usePromiseCallback from '../../mixins/cb-promise';
+import PREFIX from '../prefix';
 
 interface MsgGlobalAPI {
     top?: number; // 消息从顶部弹出时，距离顶部的位置，单位像素
@@ -16,13 +17,20 @@ interface MessageAPI {
     dangerouslyUseHTMLString?: boolean; // 是否支持传入 HTML 片段
 }
 
-const MsgPrefixCls = 'rab-message';
-const MsgChildPrefixCls = 'rab-message-notice';
+interface PublicMethods {
+    info(config: string | MessageAPI): Promise<void>;
+    success(config: string | MessageAPI): Promise<void>;
+    warning(config: string | MessageAPI): Promise<void>;
+    error(config: string | MessageAPI): Promise<void>;
+    loading(config: string | MessageAPI): Promise<void>;
+    config(options: MsgGlobalAPI): void;
+    destroy(key?: string | number): void;
+}
 
 const prefixKey = 'rb-message';
 
-const MsgMoveEnter = `${MsgPrefixCls}-move-enter`;
-const MsgMoveLeave = `${MsgPrefixCls}-move-leave`;
+const MsgMoveEnter = `${PREFIX.message}-move-enter`;
+const MsgMoveLeave = `${PREFIX.message}-move-leave`;
 
 const iconTypes = {
     info: 'ios-information-circle',
@@ -46,7 +54,7 @@ let zIndex = 1010;
 function messageInstanceWrapper(): HTMLDivElement {
     const MsgWrapper = document.createElement('div');
 
-    MsgWrapper.className = `${MsgPrefixCls}`;
+    MsgWrapper.className = `${PREFIX.message}`;
     MsgWrapper.style.zIndex = `${zIndex}`;
 
     setTimeout(() => {
@@ -58,7 +66,7 @@ function messageInstanceWrapper(): HTMLDivElement {
     return MsgWrapper;
 }
 
-class Message {
+class Message implements PublicMethods {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
 
@@ -131,7 +139,7 @@ class Message {
         // 每次创建实例自动增加最外层父容器的层级
         zIndex++;
         // @ts-ignore
-        document.querySelector(`.${MsgPrefixCls}`).style.zIndex = `${zIndex}`;
+        document.querySelector(`.${PREFIX.message}`).style.zIndex = `${zIndex}`;
     }
 
     private _createInstance(_type: string, config: string | MessageAPI): HTMLDivElement {
@@ -188,7 +196,7 @@ class Message {
         MsgInfoBox.append(MsgIcon, MsgText);
         Message.appendChild(MsgContentWrap);
 
-        document.querySelector(`.${MsgPrefixCls}`)?.appendChild(Message);
+        document.querySelector(`.${PREFIX.message}`)?.appendChild(Message);
 
         // 存放每次创建的实例
         this.instances.push(Message);
@@ -204,10 +212,10 @@ class Message {
 
     private _setCls(type: string, elems: Array<Element>): void {
         const clsList = [
-            `${MsgChildPrefixCls}`,
-            `${MsgChildPrefixCls}-content ${MsgChildPrefixCls}-content-${type}`,
-            `${MsgChildPrefixCls}-content-text`,
-            `${MsgPrefixCls}-${type}`,
+            `${PREFIX.messageChild}`,
+            `${PREFIX.messageChild}-content ${PREFIX.messageChild}-content-${type}`,
+            `${PREFIX.messageChild}-content-text`,
+            `${PREFIX.message}-${type}`,
             'rab-icon'
         ];
         elems.forEach((elem, i) => {
@@ -239,11 +247,11 @@ class Message {
     ): void {
         if (!closable) return;
 
-        parent.classList.add(`${MsgChildPrefixCls}-closable`);
+        parent.classList.add(`${PREFIX.messageChild}-closable`);
 
         const MsgCloseBtn = document.createElement('a');
 
-        MsgCloseBtn.className = `${MsgChildPrefixCls}-close`;
+        MsgCloseBtn.className = `${PREFIX.messageChild}-close`;
         MsgCloseBtn.innerHTML = '<i class="rab-icon rab-icon-ios-close"></i>';
 
         this._handleClose(parent, MsgCloseBtn, onClose);
@@ -280,8 +288,8 @@ class Message {
 
     private _setBackground(node: HTMLElement, children: HTMLElement, background: any): void {
         if (!background) return;
-        node.classList.add(`${MsgChildPrefixCls}-with-background`);
-        children.classList.add(`${MsgChildPrefixCls}-content-background`);
+        node.classList.add(`${PREFIX.messageChild}-with-background`);
+        children.classList.add(`${PREFIX.messageChild}-content-background`);
     }
 }
 

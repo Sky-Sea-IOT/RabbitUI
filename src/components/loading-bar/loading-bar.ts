@@ -1,4 +1,5 @@
 import { CssTransition } from '../../mixins';
+import PREFIX from '../prefix';
 
 interface UpdataGlobalAPI {
     color?: string; // 进度条的颜色
@@ -13,7 +14,13 @@ interface UpdateAPI {
     show?: boolean; // 是否显示进度条
 }
 
-const LbrPrefixCls = 'rab-loading-bar';
+interface PublicMethods {
+    statr(): void;
+    finish(): void;
+    error(): void;
+    update(percent: number): void;
+    destroy(): void;
+}
 
 // 全局配置
 const defaults_loadingBar: {
@@ -34,8 +41,8 @@ function loadingBarInstance(): HTMLDivElement {
     const LoadingBar = document.createElement('div');
     const LoadingBarInner = document.createElement('div');
 
-    LoadingBar.className = `${LbrPrefixCls}`;
-    LoadingBarInner.className = `${LbrPrefixCls}-inner`;
+    LoadingBar.className = `${PREFIX.loadingBar}`;
+    LoadingBarInner.className = `${PREFIX.loadingBar}-inner`;
 
     setColor('primary', LoadingBarInner);
 
@@ -55,8 +62,8 @@ function loadingBarInstance(): HTMLDivElement {
 
 // 设置进度函数
 function r_update(options: UpdateAPI): void {
-    const LBar = document.querySelector(`.${LbrPrefixCls}`)!;
-    const LBarInner = document.querySelector(`.${LbrPrefixCls}-inner`)!;
+    const LBar = document.querySelector(`.${PREFIX.loadingBar}`)!;
+    const LBarInner = document.querySelector(`.${PREFIX.loadingBar}-inner`)!;
 
     // 设置进度
     // @ts-ignore
@@ -121,11 +128,11 @@ function setColor(status: string, elem: any): void {
                 elem.style.backgroundColor = '';
             }, defaults_loadingBar.duration);
         } else {
-            elem.classList.add(`${LbrPrefixCls}-inner-failed-color-error`);
+            elem.classList.add(`${PREFIX.loadingBar}-inner-failed-color-error`);
 
             // 在隐藏的持续时间后设为初始颜色
             setTimeout(() => {
-                elem.classList.remove(`${LbrPrefixCls}-inner-failed-color-error`);
+                elem.classList.remove(`${PREFIX.loadingBar}-inner-failed-color-error`);
             }, defaults_loadingBar.duration + 200);
         }
     } else if (status === 'primary') {
@@ -134,12 +141,12 @@ function setColor(status: string, elem: any): void {
             // @ts-ignore
             elem.style.backgroundColor = defaults_loadingBar.color;
         } else {
-            elem.classList.add(`${LbrPrefixCls}-inner-color-primary`);
+            elem.classList.add(`${PREFIX.loadingBar}-inner-color-primary`);
         }
     }
 }
 
-class LoadingBar {
+class LoadingBar implements PublicMethods {
     readonly VERSION: string;
 
     constructor() {
@@ -214,7 +221,7 @@ class LoadingBar {
 
     public destroy(): void {
         clearTimer();
-        document.body.removeChild(document.querySelector(`.${LbrPrefixCls}`)!);
+        document.body.removeChild(document.querySelector(`.${PREFIX.loadingBar}`)!);
     }
 }
 

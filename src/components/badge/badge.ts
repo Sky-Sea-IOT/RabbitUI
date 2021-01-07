@@ -1,5 +1,4 @@
-const BadgePrefixCls = 'rab-badge';
-const BadgePrefixAttr = 'rb';
+import PREFIX from '../prefix';
 
 class Badge {
     readonly VERSION: string;

@@ -1,15 +1,21 @@
 import { removeAttrs } from '../../mixins';
+import PREFIX from '../prefix';
 
-const BtnPrefixCls = 'rab-btn';
-const BtnPrefixAttr = 'rb';
+interface PublicMethods {
+    config(
+        elem: string
+    ): {
+        loading: boolean;
+    };
+}
 
-class Button {
+class Button implements PublicMethods {
     readonly VERSION: string;
     readonly components: any;
 
     constructor() {
         this.VERSION = '1.0';
-        this.components = document.querySelectorAll(`.${BtnPrefixCls}`);
+        this.components = document.querySelectorAll(`.${PREFIX.button}`);
         this._getAllBtns(this.components);
     }
 
@@ -42,15 +48,15 @@ class Button {
         nodes.forEach((node) => {
             this._setLoading(node);
             this._setIcon(node);
-            removeAttrs(node, [`${BtnPrefixAttr}-icon`]);
+            removeAttrs(node, [`${PREFIX.attr}-icon`]);
         });
     }
 
     private _setLoading(node: Element): void {
         if (this._isLoading(node)) {
-            if (node.innerHTML === '') node.classList.add(`${BtnPrefixCls}-icon-only`);
+            if (node.innerHTML === '') node.classList.add(`${PREFIX.button}-icon-only`);
 
-            node.classList.add(`${BtnPrefixCls}-loading`);
+            node.classList.add(`${PREFIX.button}-loading`);
             node.prepend(this._loadIcon());
         }
     }
@@ -59,7 +65,7 @@ class Button {
         if (!this._getIcon(node)) return;
 
         if (node.innerHTML === '') {
-            node.classList.add(`${BtnPrefixCls}-icon-only`);
+            node.classList.add(`${PREFIX.button}-icon-only`);
             node.innerHTML = `<i class="rab-icon rab-icon-${this._getIcon(node)}"></i>`;
         } else {
             const Icon = document.createElement('i');
@@ -69,7 +75,7 @@ class Button {
     }
 
     private _isLoading(node: Element): boolean {
-        return node.getAttribute(`${BtnPrefixAttr}-loading`) === 'true' || false;
+        return node.getAttribute(`${PREFIX.attr}-loading`) === 'true' || false;
     }
 
     private _loadIcon(): HTMLElement {
@@ -79,7 +85,7 @@ class Button {
     }
 
     private _getIcon(node: Element): string {
-        return node.getAttribute(`${BtnPrefixAttr}-icon`) || '';
+        return node.getAttribute(`${PREFIX.attr}-icon`) || '';
     }
 }
 

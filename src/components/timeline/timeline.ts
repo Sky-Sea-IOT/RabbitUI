@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { removeAttrs } from '../../mixins';
-
-const TLPrefixCls = 'rab-badge';
-const TLPrefixAttr = 'rb';
+import PREFIX from '../prefix';
 
 class Timeline {
     readonly VERSION: string;
@@ -34,9 +31,9 @@ class Timeline {
     }
 
     private _setCls(node1: HTMLElement, node2: HTMLElement, node3: HTMLElement): void {
-        node1.className = `${TLPrefixCls}-item-tail`;
-        node2.className = `${TLPrefixCls}-item-head`;
-        node3.className = `${TLPrefixCls}-item-content`;
+        node1.className = `${PREFIX.timeline}-item-tail`;
+        node2.className = `${PREFIX.timeline}-item-head`;
+        node3.className = `${PREFIX.timeline}-item-content`;
     }
 
     private _setContent(parent: Element, node1: HTMLElement): void {
@@ -50,7 +47,7 @@ class Timeline {
 
         // 设置预设颜色或者自定义颜色
         if (colors === 'blue' || colors === 'red' || colors === 'gray' || colors === 'green') {
-            node.classList.add(`${TLPrefixCls}-item-head-${colors}`);
+            node.classList.add(`${PREFIX.timeline}-item-head-${colors}`);
         } else {
             node.style.color = colors;
             node.style.borderColor = colors;
@@ -61,17 +58,17 @@ class Timeline {
     private _setDot(parent: Element, node: HTMLElement): void {
         if (!this._getDotContent(parent)) return;
 
-        node.classList.add(`${TLPrefixCls}-item-head-custom`);
+        node.classList.add(`${PREFIX.timeline}-item-head-custom`);
 
         node.innerHTML = this._getDotContent(parent);
     }
 
     private _getStatusColor(node: Element): string {
-        return node.getAttribute(`${TLPrefixAttr}-color`) || 'blue';
+        return node.getAttribute(`${PREFIX.attr}-color`) || 'blue';
     }
 
     private _getDotContent(parent: Element): string {
-        return parent.getAttribute(`${TLPrefixAttr}-dot`) || '';
+        return parent.getAttribute(`${PREFIX.attr}-dot`) || '';
     }
 }
 

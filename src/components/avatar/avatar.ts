@@ -1,7 +1,5 @@
 import { removeAttrs, warn } from '../../mixins';
-
-const AvatarPrefixCls = 'rab-avatar';
-const AvatarPrefixAttr = 'rb';
+import PREFIX from '../prefix';
 
 class Avatar {
     readonly VERSION: string;
@@ -21,9 +19,9 @@ class Avatar {
             this._setCustomContent(node);
 
             removeAttrs(node, [
-                `${AvatarPrefixAttr}-icon`,
-                `${AvatarPrefixAttr}-src`,
-                `${AvatarPrefixAttr}-custom-icon`
+                `${PREFIX.attr}-icon`,
+                `${PREFIX.attr}-src`,
+                `${PREFIX.attr}-custom-icon`
             ]);
         });
     }
@@ -36,7 +34,7 @@ class Avatar {
 
         if (hasIcon || customIcon) {
             node.innerHTML = '';
-            node.classList.add(`${AvatarPrefixCls}-icon`);
+            node.classList.add(`${PREFIX.avatar}-icon`);
         }
 
         if (customIcon) {
@@ -59,7 +57,7 @@ class Avatar {
 
         node.innerHTML = '';
 
-        node.classList.add(`${AvatarPrefixCls}-image`);
+        node.classList.add(`${PREFIX.avatar}-image`);
 
         node.appendChild(AvatarImage);
     }
@@ -71,7 +69,7 @@ class Avatar {
         if (node.innerHTML) {
             const AvatarStrBox = document.createElement('span');
 
-            AvatarStrBox.className = `${AvatarPrefixCls}-string`;
+            AvatarStrBox.className = `${PREFIX.avatar}-string`;
             AvatarStrBox.innerHTML = node.innerHTML;
 
             node.innerHTML = '';

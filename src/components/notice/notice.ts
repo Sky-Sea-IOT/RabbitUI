@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
     CssTransition,
     isUseHTMLString,
@@ -8,7 +6,7 @@ import {
     type,
     warn
 } from '../../mixins';
-
+import PREFIX from '../prefix';
 import usePromiseCallback from '../../mixins/cb-promise';
 
 interface NoticeGlobalAPI {
@@ -30,13 +28,20 @@ interface NoticeAPI {
     dangerouslyUseHTMLString?: boolean;
 }
 
-const NotPrefixCls = 'rab-notice';
-const NotChildPrefixCls = 'rab-notice-notice';
+interface PublicMethods {
+    open(config: NoticeAPI): Promise<void>;
+    info(config: NoticeAPI): Promise<void>;
+    success(config: NoticeAPI): Promise<void>;
+    warning(config: NoticeAPI): Promise<void>;
+    error(config: NoticeAPI): Promise<void>;
+    close(key: string): void;
+    destroy(): void;
+}
 
 const NotPrefixKey = 'rb-notice';
 
-const NotMoveEnter = `${NotPrefixCls}-move-enter`;
-const NotMoveLeave = `${NotPrefixCls}-move-leave`;
+const NotMoveEnter = `${PREFIX.notice}-move-enter`;
+const NotMoveLeave = `${PREFIX.notice}-move-leave`;
 
 const iconTypes = {
     info: 'ios-information-circle',
@@ -72,7 +77,7 @@ function noticeInsanceWrapper(): HTMLElement {
     return NoticeWrapper;
 }
 
-class Notice {
+class Notice implements PublicMethods {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
 
@@ -141,7 +146,7 @@ class Notice {
     private _autoSetZindex(): void {
         zIndex++;
         // @ts-ignore
-        document.querySelector(`.${NotPrefixCls}`).style.zIndex = `${zIndex}`;
+        document.querySelector(`.${PREFIX.notice}`).style.zIndex = `${zIndex}`;
     }
 
     private _createInstance(type: string, config: NoticeAPI): HTMLElement {
@@ -178,7 +183,7 @@ class Notice {
         NoticeCustomContent.append(NoticeTitle, NoticeDesc);
         NoticeContent.appendChild(NoticeCustomContent);
         Notice.appendChild(NoticeContent);
-        document.querySelector(`.${NotPrefixCls}`)?.appendChild(Notice);
+        document.querySelector(`.${PREFIX.notice}`)?.appendChild(Notice);
 
         CssTransition(Notice, {
             inOrOut: 'in',
@@ -203,11 +208,11 @@ class Notice {
         node5: HTMLElement,
         customCls?: string
     ): void {
-        node1.className = `${NotChildPrefixCls} ${customCls ? customCls : ''}`;
-        node2.className = `${NotChildPrefixCls}-content`;
-        node3.className = `${NotChildPrefixCls}-custom-content ${NotPrefixCls}-with-${type}`;
-        node4.className = `${NotPrefixCls}-title`;
-        node5.className = `${NotPrefixCls}-desc`;
+        node1.className = `${PREFIX.noticeChild} ${customCls ? customCls : ''}`;
+        node2.className = `${PREFIX.noticeChild}-content`;
+        node3.className = `${PREFIX.noticeChild}-custom-content ${PREFIX.notice}-with-${type}`;
+        node4.className = `${PREFIX.notice}-title`;
+        node5.className = `${PREFIX.notice}-desc`;
     }
 
     private _setKey(node: HTMLElement, key: any): void {
@@ -235,9 +240,9 @@ class Notice {
     ): void {
         if (!desc) return;
 
-        parent.classList.add(`${NotChildPrefixCls}-with-desc`);
+        parent.classList.add(`${PREFIX.noticeChild}-with-desc`);
 
-        children_custm.classList.add(`${NotPrefixCls}-with-desc`);
+        children_custm.classList.add(`${PREFIX.notice}-with-desc`);
 
         // 是否支持传入 HTML 片段
         isUseHTMLString(child_desc, desc, dangerouslyUseHTMLString);
@@ -252,7 +257,7 @@ class Notice {
         // 不带状态图标的类型
         if (type === 'noraml') return;
         if (type !== 'normal' || customIcon) {
-            child_custom.classList.add(`${NotPrefixCls}-with-icon`);
+            child_custom.classList.add(`${PREFIX.notice}-with-icon`);
         }
 
         let isOutline = '';
@@ -261,7 +266,7 @@ class Notice {
         if (child_desc.innerHTML) isOutline = '-outline';
 
         const NoticeIcon = document.createElement('span');
-        NoticeIcon.className = `${NotPrefixCls}-icon ${NotPrefixCls}-icon-${type}`;
+        NoticeIcon.className = `${PREFIX.notice}-icon ${PREFIX.notice}-icon-${type}`;
 
         // 是否自定义状态图标
         if (customIcon) {
@@ -280,10 +285,10 @@ class Notice {
 
         if (!closable) return;
 
-        parent.classList.add(`${NotChildPrefixCls}-closable`);
+        parent.classList.add(`${PREFIX.noticeChild}-closable`);
 
         const NoticeClose = document.createElement('a');
-        NoticeClose.className = `${NotChildPrefixCls}-close`;
+        NoticeClose.className = `${PREFIX.noticeChild}-close`;
         NoticeClose.innerHTML = '<i class="rab-icon rab-icon-ios-close"></i>';
 
         this._handleClose(parent, NoticeClose, onClose);

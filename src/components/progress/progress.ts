@@ -1,7 +1,14 @@
 import { removeAttrs, type, validComps } from '../../mixins';
+import PREFIX from '../prefix';
 
-const PrgesPrefixCls = 'rab-progress';
-const PrgesPrefixAttr = 'rb';
+interface PublicMethods {
+    config(
+        elem: string
+    ): {
+        percent: number;
+        successPercent: number;
+    };
+}
 
 const PrgesIconType = {
     success: '<i class="rab-icon rab-icon-ios-checkmark-circle"></i>',
@@ -9,7 +16,7 @@ const PrgesIconType = {
     wrong: '<i class="rab-icon rab-icon-ios-close-circle"></i>'
 };
 
-class Progress {
+class Progress implements PublicMethods {
     readonly VERSION: string;
     readonly components: any;
 
@@ -29,9 +36,9 @@ class Progress {
 
         validComps(target, 'progress');
 
-        const progress = target.querySelector(`.${PrgesPrefixCls}-bg`);
-        const progressSucs = target.querySelector(`.${PrgesPrefixCls}-success-bg`);
-        const progressText = target.querySelector(`.${PrgesPrefixCls}-inner-text`);
+        const progress = target.querySelector(`.${PREFIX.progress}-bg`);
+        const progressSucs = target.querySelector(`.${PREFIX.progress}-success-bg`);
+        const progressText = target.querySelector(`.${PREFIX.progress}-inner-text`);
 
         return {
             get percent() {
@@ -77,10 +84,10 @@ class Progress {
         const PgrsBar = document.createElement('div');
         const PgrsBarSucess = document.createElement('div');
 
-        PgrsOuter.className = `${PrgesPrefixCls}-outer`;
-        PgrsInner.className = `${PrgesPrefixCls}-inner`;
-        PgrsBar.className = `${PrgesPrefixCls}-bg`;
-        PgrsBarSucess.className = `${PrgesPrefixCls}-success-bg`;
+        PgrsOuter.className = `${PREFIX.progress}-outer`;
+        PgrsInner.className = `${PREFIX.progress}-inner`;
+        PgrsBar.className = `${PREFIX.progress}-bg`;
+        PgrsBarSucess.className = `${PREFIX.progress}-success-bg`;
 
         this._setPercent(wrapper, PgrsBar, PgrsBarSucess);
         this._setStrokeWidth(wrapper, PgrsBar, PgrsBarSucess);
@@ -113,12 +120,12 @@ class Progress {
         const PgrsTextWrapper = document.createElement('div');
         const PgresText = document.createElement('span');
 
-        PgrsTextWrapper.className = `${PrgesPrefixCls}-text`;
-        PgresText.className = `${PrgesPrefixCls}-inner-text`;
+        PgrsTextWrapper.className = `${PREFIX.progress}-text`;
+        PgresText.className = `${PREFIX.progress}-inner-text`;
         PgresText.textContent = `${this._getPercent(wrapper)}%`;
 
         if (!this._isTextInside(wrapper)) {
-            wrapper.className = `${PrgesPrefixCls}-show-info`;
+            wrapper.className = `${PREFIX.progress}-show-info`;
 
             if (this._getStatus(wrapper) === 'success') {
                 // @ts-ignore
@@ -146,19 +153,19 @@ class Progress {
     }
 
     private _getStatus(node: Element): string | null {
-        return node.getAttribute(`${PrgesPrefixAttr}-status`);
+        return node.getAttribute(`${PREFIX.attr}-status`);
     }
 
     private _getPercent(node: Element): string {
-        return node.getAttribute(`${PrgesPrefixAttr}-percent`) || '0';
+        return node.getAttribute(`${PREFIX.attr}-percent`) || '0';
     }
 
     private _getSuccessPercent(node: Element): string {
-        return node.getAttribute(`${PrgesPrefixAttr}-success-percent`) || '0';
+        return node.getAttribute(`${PREFIX.attr}-success-percent`) || '0';
     }
 
     private _getStrokeWidth(node: Element): string {
-        return node.getAttribute(`${PrgesPrefixAttr}-stroke-width`) || '10';
+        return node.getAttribute(`${PREFIX.attr}-stroke-width`) || '10';
     }
 
     private _getStrokeColor(
@@ -167,7 +174,7 @@ class Progress {
         from: Array<string>;
         to: Array<string>;
     } {
-        if (!node.getAttribute(`${PrgesPrefixAttr}-stroke-color`)) {
+        if (!node.getAttribute(`${PREFIX.attr}-stroke-color`)) {
             return {
                 from: [],
                 to: []
@@ -178,7 +185,7 @@ class Progress {
              * "['','']" -> ['','']
              */
             const strArr: string =
-                node.getAttribute(`${PrgesPrefixAttr}-stroke-color`)?.replace(/'/g, '"') || '';
+                node.getAttribute(`${PREFIX.attr}-stroke-color`)?.replace(/'/g, '"') || '';
 
             const colorArr = JSON.parse(strArr);
 
@@ -190,11 +197,11 @@ class Progress {
     }
 
     private _isTextInside(node: Element): boolean {
-        return node.getAttribute(`${PrgesPrefixAttr}-text-inside`) === 'true' || false;
+        return node.getAttribute(`${PREFIX.attr}-text-inside`) === 'true' || false;
     }
 
     private _isShowText(node: Element): boolean {
-        if (node.getAttribute(`${PrgesPrefixAttr}-show-text`) === 'false') return false;
+        if (node.getAttribute(`${PREFIX.attr}-show-text`) === 'false') return false;
         else return true;
     }
 }
