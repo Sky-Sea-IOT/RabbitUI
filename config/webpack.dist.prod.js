@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /**
  * 打包生产模式下的资源
  */
@@ -13,7 +15,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = merge(common, {
     devtool: 'source-map',
     entry: {
-        app: './src/index.ts',
+        main: './src/index.ts'
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -21,24 +23,23 @@ module.exports = merge(common, {
         filename: 'rabbit.min.js',
         library: 'rabbit',
         libraryTarget: 'umd',
-        umdNamedDefine: true,
+        umdNamedDefine: true
     },
     plugins: [
         new UglifyJSPlugin({
             sourceMap: true,
-            parallel: true,
+            parallel: true
         }),
-        // TODO
-        // new CompressionPlugin({
-        //     filename: 'rabbit.min.js.gz[query]',
-        //     algorithm: 'gzip',
-        //     test: /\.(js|css)$/,
-        //     threshold: 10240,
-        //     minRatio: 0.8,
-        // }),
+        new CompressionPlugin({
+            filename: 'rabbit.min.js.gz[query]',
+            algorithm: 'gzip',
+            test: /\.(js|css)$/,
+            threshold: 10240,
+            minRatio: 0.8
+        }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
-        new OptimizeCSSAssetsPlugin({}),
-    ],
+        new OptimizeCSSAssetsPlugin({})
+    ]
 });

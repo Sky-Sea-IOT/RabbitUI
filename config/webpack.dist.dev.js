@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /**
  * 打包开发模式下的资源
  */
@@ -11,14 +12,15 @@ module.exports = merge(common, {
     devtool: 'source-map',
 
     entry: {
-        app: './src/index.ts',
+        main: './src/index.ts'
     },
     output: {
+        // eslint-disable-next-line no-undef
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
         filename: 'rabbit.js',
         library: 'rabbit',
         libraryTarget: 'umd',
-        umdNamedDefine: true,
-    },
+        umdNamedDefine: true
+    }
 });

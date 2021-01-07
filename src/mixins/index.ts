@@ -7,12 +7,12 @@ import isUseHTMLString from './use-html-string';
 import validComps from './validComps';
 
 export {
-  warn,
-  type,
-  CssTransition,
-  destroyElem,
-  destroyElemByKey,
-  removeAttrs,
-  isUseHTMLString,
-  validComps,
+    warn,
+    type,
+    CssTransition,
+    destroyElem,
+    destroyElemByKey,
+    removeAttrs,
+    isUseHTMLString,
+    validComps
 };

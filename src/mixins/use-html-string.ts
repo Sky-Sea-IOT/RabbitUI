@@ -6,9 +6,9 @@ import { type } from '.';
  * @param content
  * @param use
  */
-export default function isUseHTMLString(elem: HTMLElement, content: string, use?: boolean) {
-  type.isUndef(use) ? (use = false) : use;
+export default function isUseHTMLString(elem: HTMLElement, content: string, use?: boolean): void {
+    type.isUndef(use) ? (use = false) : use;
 
-  if (use) elem.innerHTML = content;
-  else elem.innerText = content;
+    if (use) elem.innerHTML = content;
+    else elem.innerText = content;
 }

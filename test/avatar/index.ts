@@ -1,5 +1,5 @@
 import Rabbit from '../../src';
 
-export default function avatarTest() {
-  new Rabbit.Avatar();
+export default function avatarTest(): void {
+    new Rabbit.Avatar();
 }

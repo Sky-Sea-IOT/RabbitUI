@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -8,13 +10,13 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 module.exports = merge(common, {
     devtool: 'eval-source-map',
     entry: {
-        app: './test/main.ts',
+        main: './test/main.ts'
     },
     output: {
         path: path.join(__dirname, '../test/dist'),
         publicPath: '',
         filename: '[name].js',
-        chunkFilename: '[name].chunk.js',
+        chunkFilename: '[name].chunk.js'
     },
     devServer: {
         port: 8085,
@@ -22,7 +24,7 @@ module.exports = merge(common, {
         hot: true,
         inline: true,
         progress: true,
-        compress: true,
+        compress: true
     },
 
     plugins: [
@@ -30,8 +32,8 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.join(__dirname, '../test/dist/index.html'),
-            template: path.join(__dirname, '../test/badge/index.html'),
+            template: path.join(__dirname, '../test/alert/index.html')
         }),
-        new FriendlyErrorsPlugin(),
-    ],
+        new FriendlyErrorsPlugin()
+    ]
 });

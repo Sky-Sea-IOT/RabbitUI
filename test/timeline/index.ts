@@ -1,5 +1,5 @@
 import Rabbit from '../../src';
 
-export default function timelineTest() {
-  new Rabbit.Timeline();
+export default function timelineTest(): void {
+    new Rabbit.Timeline();
 }
