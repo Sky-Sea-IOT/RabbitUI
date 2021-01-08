@@ -2,7 +2,7 @@ import Alert from './components/alert';
 import Avatar from './components/avatar';
 import Badge from './components/badge';
 import Button from './components/button';
-import LoadingBar from './components/loading-bar';
+import Loading from './components/loading-bar';
 import Message from './components/message';
 import Notice from './components/notice';
 import Progress from './components/progress';
@@ -12,21 +12,18 @@ import Timeline from './components/timeline';
 //! 打包的时候这里要解除封印
 // import './styles/index.less';
 
-const Instances = {
-    Loading: new LoadingBar(),
-    Message: new Message(),
-    Noitce: new Notice()
-};
-
-const Components = {
+//! 打包完成后以下代码都要注释
+const components = {
     Alert,
     Avatar,
     Badge,
     Button,
+    Loading,
     Progress,
     Switch,
     Timeline,
-    ...Instances
+    Message,
+    Notice
 };
 
-export default Components;
+export default components;

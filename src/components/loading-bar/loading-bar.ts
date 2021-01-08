@@ -146,7 +146,7 @@ function setColor(status: string, elem: any): void {
     }
 }
 
-class LoadingBar implements PublicMethods {
+class $LoadingBar implements PublicMethods {
     readonly VERSION: string;
 
     constructor() {
@@ -225,4 +225,4 @@ class LoadingBar implements PublicMethods {
     }
 }
 
-export default LoadingBar;
+export default $LoadingBar;

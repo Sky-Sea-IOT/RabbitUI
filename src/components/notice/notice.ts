@@ -77,7 +77,7 @@ function noticeInsanceWrapper(): HTMLElement {
     return NoticeWrapper;
 }
 
-class Notice implements PublicMethods {
+class $Notice implements PublicMethods {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
 
@@ -335,4 +335,4 @@ class Notice implements PublicMethods {
     }
 }
 
-export default Notice;
+export default $Notice;

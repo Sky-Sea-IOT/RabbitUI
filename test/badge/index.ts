@@ -1,5 +1,5 @@
 import Rabbit from '../../src';
 
-export default function badgeTest() {
-  const badge = new Rabbit.Badge();
+export default function badgeTest(): void {
+    const badge = new Rabbit.Badge();
 }

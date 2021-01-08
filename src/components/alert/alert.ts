@@ -147,7 +147,7 @@ class Alert implements PublicMethods {
     }
 
     private _setCloseText(node: Element): string {
-        return node.getAttribute(`${PREFIX.attr}close-text`) || '';
+        return node.getAttribute('close-text') || '';
     }
 
     private _setMsg(node: Element) {

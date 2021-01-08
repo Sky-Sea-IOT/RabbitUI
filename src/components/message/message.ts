@@ -66,7 +66,7 @@ function messageInstanceWrapper(): HTMLDivElement {
     return MsgWrapper;
 }
 
-class Message implements PublicMethods {
+class $Message implements PublicMethods {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
 
@@ -293,4 +293,4 @@ class Message implements PublicMethods {
     }
 }
 
-export default Message;
+export default $Message;

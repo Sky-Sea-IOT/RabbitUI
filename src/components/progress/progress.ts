@@ -3,7 +3,7 @@ import PREFIX from '../prefix';
 
 interface PublicMethods {
     config(
-        elem: string
+        el: string
     ): {
         percent: number;
         successPercent: number;
@@ -27,12 +27,12 @@ class Progress implements PublicMethods {
     }
 
     public config(
-        elem: string
+        el: string
     ): {
         percent: number;
         successPercent: number;
     } {
-        const target: any = document.querySelector(elem);
+        const target: any = document.querySelector(el);
 
         validComps(target, 'progress');
 
@@ -45,7 +45,7 @@ class Progress implements PublicMethods {
                 return progress;
             },
 
-            set percent(newVal) {
+            set percent(newVal: number) {
                 if (!type.isNum(newVal) || newVal == progress.style.width) return;
                 if (progressText) progressText.textContent = `${newVal}%`;
 
@@ -185,7 +185,6 @@ class Progress implements PublicMethods {
              * "['','']" -> ['','']
              */
             const strArr: string = node.getAttribute('stroke-color')?.replace(/'/g, '"') || '';
-
             const colorArr = JSON.parse(strArr);
 
             return {

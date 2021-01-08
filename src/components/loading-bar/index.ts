@@ -1,2 +1,4 @@
-import LoadingBar from './loading-bar';
-export default LoadingBar;
+import $LoadingBar from './loading-bar';
+
+const Loading = new $LoadingBar();
+export default Loading;

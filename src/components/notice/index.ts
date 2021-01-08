@@ -1,2 +1,4 @@
-import Notice from './notice';
+import $Notice from './notice';
+
+const Notice = new $Notice();
 export default Notice;
