@@ -1,4 +1,5 @@
-import { CssTransition } from '../../mixins';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { CssTransition, type } from '../../mixins';
 import PREFIX from '../prefix';
 
 interface UpdataGlobalAPI {
@@ -205,16 +206,16 @@ class $LoadingBar implements PublicMethods {
     }
 
     public config(options: UpdataGlobalAPI): void {
-        if (options.color) {
+        if (options.color && type.isStr(options.color)) {
             defaults_loadingBar.color = options.color;
         }
-        if (options.height) {
+        if (options.height && type.isNum(options.height)) {
             defaults_loadingBar.height = options.height;
         }
-        if (options.duration) {
+        if (options.duration && type.isNum(options.duration)) {
             defaults_loadingBar.duration = options.duration;
         }
-        if (options.failedColor) {
+        if (options.failedColor && type.isStr(options.failedColor)) {
             defaults_loadingBar.failedColor = options.failedColor;
         }
     }

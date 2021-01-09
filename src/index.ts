@@ -6,6 +6,7 @@ import Loading from './components/loading-bar';
 import Message from './components/message';
 import Notice from './components/notice';
 import Progress from './components/progress';
+import Steps from './components/steps';
 import Switch from './components/switch';
 import Timeline from './components/timeline';
 
@@ -20,6 +21,7 @@ const components = {
     Button,
     Loading,
     Progress,
+    Steps,
     Switch,
     Timeline,
     Message,
