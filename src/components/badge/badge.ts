@@ -1,4 +1,4 @@
-import { type, validComps, warn } from '../../mixins';
+import { removeAttrs, type, validComps, warn } from '../../mixins';
 import PREFIX from '../prefix';
 
 interface PublicMethods {
@@ -90,6 +90,16 @@ class Badge implements PublicMethods {
         nodes.forEach((node) => {
             this._setCount(node);
             this._setStatusWithColor(node);
+
+            removeAttrs(node, [
+                'count',
+                'text',
+                'status',
+                'color',
+                'show-zero',
+                'max-count',
+                'dot'
+            ]);
         });
     }
 
