@@ -1,7 +1,17 @@
 import { type, validComps, warn } from '../../mixins';
 import PREFIX from '../prefix';
 
-class Badge {
+interface PublicMethods {
+    config(
+        el: string
+    ): {
+        count: number;
+        text: string;
+        dot: boolean;
+    };
+}
+
+class Badge implements PublicMethods {
     readonly VERSION: string;
     readonly components: any;
 
@@ -15,12 +25,15 @@ class Badge {
         el: string
     ): {
         count: number;
+        text: string;
+        dot: boolean;
     } {
         const target: any = document.querySelector(el);
 
         validComps(target, 'badge');
 
         const countContainer = target.querySelector(`.${PREFIX.badge}-count`);
+        const dotContainer = target.querySelector(`.${PREFIX.badge}-dot`);
 
         const maxCount = Badge.prototype._getMaxCount(target);
         const showZero = Badge.prototype._showZero(target);
@@ -29,8 +42,8 @@ class Badge {
             get count() {
                 return countContainer?.textContent;
             },
-            set count(newVal) {
-                if (countContainer) {
+            set count(newVal: number) {
+                if (countContainer && type.isNum(newVal)) {
                     if (newVal > maxCount) {
                         Badge.prototype._setMaxCount(countContainer, maxCount);
                     } else {
@@ -42,6 +55,32 @@ class Badge {
                     }
                 } else {
                     warn(`The count value of this badge cannot be set --> "${el}"`);
+                }
+            },
+            get text() {
+                return countContainer?.textContent;
+            },
+            set text(newVal: string) {
+                if (!type.isStr(newVal)) {
+                    warn(`The text value of this badge cannot be set --> "${el}"`);
+                    return;
+                }
+
+                countContainer.textContent = newVal;
+            },
+            get dot() {
+                return dotContainer;
+            },
+            set dot(newVal: boolean) {
+                if (!dotContainer) {
+                    warn(`Unable to set this badge to dot --> "${el}"`);
+                    return;
+                }
+
+                if (type.isBol(newVal) && newVal) {
+                    dotContainer.style.display = '';
+                } else {
+                    dotContainer.style.display = 'none';
                 }
             }
         };

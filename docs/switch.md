@@ -29,26 +29,26 @@
 
 - 尺寸
 
-设置`rb-size`为 `large` 或 `small` 使用大号和小号的开关。
+设置`size`为 `large` 或 `small` 使用大号和小号的开关。
 
 ```html
-<r-switch rb-size="large"></r-switch>
+<r-switch size="large"></r-switch>
 <r-switch></r-switch>
-<r-switch rb-size="small"></r-switch>
+<r-switch size="small"></r-switch>
 ```
 
 - 文字和图标
 
-设置属性  `rb-open`  和 `rb-close` 自定义切换状态后显示的内容，建议如果使用2个汉字，将开关尺寸设置为 large。
+设置属性  `open`  和 `close` 自定义切换状态后显示的内容，建议如果使用2个汉字，将开关尺寸设置为 large。
 
 ```html
-<r-switch rb-open="开" rb-close="关"></r-switch>
+<r-switch open="开" close="关"></r-switch>
 <r-switch
-  rb-open="<i class='rab-icon rab-icon-md-checkmark'></i>"
-  rb-close="<i class='rab-icon rab-icon-md-close'></i>"
+  open="<i class='rab-icon rab-icon-md-checkmark'></i>"
+  close="<i class='rab-icon rab-icon-md-close'></i>"
 ></r-switch>
-<r-switch rb-size="large" rb-open="开启" rb-close="关闭"></r-switch>
-<r-switch rb-size="large" rb-open="ON" rb-close="OFF"></r-switch>
+<r-switch size="large" open="开启" close="关闭"></r-switch>
+<r-switch size="large" open="ON" close="OFF"></r-switch>
 
 ```
 
@@ -62,16 +62,16 @@
 
 - 加载中
 
-设置属性  `rb-loading="true"` 标识开关操作仍在执行中。
+设置属性  `loading="true"` 标识开关操作仍在执行中。
 
 ```html
-<r-switch rb-loading="true" rb-checked="true"></r-switch>
-<r-switch rb-loading="true" rb-size="small"></r-switch>
+<r-switch loading="true" checked="true"></r-switch>
+<r-switch loading="true" size="small"></r-switch>
 ```
 
 - 自定义颜色
 
-设置属性 `rb-true-color` 和 `rb-false-color` 可以自定义背景色。
+设置属性 `true-color` 和 `false-color` 可以自定义背景色。
 
 <p style="font-size: 32px">Attributes</p>
 
@@ -79,18 +79,18 @@
 
 | 属性           | 说明                                                         | 默认值 |
 | -------------- | ------------------------------------------------------------ | ------ |
-| rb-checked     | 指定当前是否选中                                             | false  |
-| rb-size        | 开关的尺寸，可选值为`large`、`small`或者不写。建议开关如果使用了2个汉字的文字，使用 large。 | -      |
+| checked     | 指定当前是否选中                                             | false  |
+| size        | 开关的尺寸，可选值为`large`、`small`或者不写。建议开关如果使用了2个汉字的文字，使用 large。 | -      |
 | disabled       | 禁用开关                                                     | false  |
-| rb-true-color  | 自定义打开时的背景色                                         | -      |
-| rb-false-color | 自定义关闭时的背景色                                         | -      |
-| rb-loading     | 加载中的开关                                                 | false  |
-| rb-open        | 开关打开时的内容                                             | -      |
-| rb-close       | 开关关闭时的内容                                             | -      |
+| true-color  | 自定义打开时的背景色                                         | -      |
+| false-color | 自定义关闭时的背景色                                         | -      |
+| loading     | 加载中的开关                                                 | false  |
+| open        | 开关打开时的内容                                             | -      |
+| close       | 开关关闭时的内容                                             | -      |
 
 ### 事件
 
 | 名称     | 说明                           | 参数                          | 返回值                       |
 | -------- | ------------------------------ | ----------------------------- | ---------------------------------- |
-| onChange | 开关变化时触发，返回当前的状态。该事件的参数是一个数组 | `(sel, [status, $this]) => {}` | 第一个参数必须是选择器名称，第二个参数是一个数组，其第一个元素为当前状态，返回 `true` / `false` ，第二个返回当前switch |
+| onChange | 开关变化时触发，返回当前的状态。该事件的参数是一个数组 | `(el, [status, $this]) => {}` | 第一个参数必须是选择器名称，第二个参数是一个数组，其第一个元素为当前状态，返回 `true` / `false` ，第二个返回当前switch |
 

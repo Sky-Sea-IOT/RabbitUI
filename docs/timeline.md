@@ -33,7 +33,7 @@
       <p class="time">2010s</p>
       <p class="content">发布 iPad</p>
   </r-timeline-item>
-  <r-timeline-item rb-color="gray">
+  <r-timeline-item color="gray">
       <p class="time">2011.10.05</p>
       <p class="content">史蒂夫·乔布斯去世</p>
   </r-timeline-item>
@@ -46,20 +46,20 @@
 
 ```html
 <r-timeline>
-  <r-timeline-item rb-color="green">发布1.0版本</r-timeline-item>
-  <r-timeline-item rb-color="green">发布2.0版本</r-timeline-item>
-  <r-timeline-item rb-color="red">重大Bug</r-timeline-item>
-  <r-timeline-item rb-color="gray">推迟发布</r-timeline-item>
+  <r-timeline-item color="green">发布1.0版本</r-timeline-item>
+  <r-timeline-item color="green">发布2.0版本</r-timeline-item>
+  <r-timeline-item color="red">重大Bug</r-timeline-item>
+  <r-timeline-item color="gray">推迟发布</r-timeline-item>
   <r-timeline-item>发布3.0版本</r-timeline-item>
 </r-timeline>
 ```
 
 - 最后一个 
 
-通过添加属性`rb-pending="true"`来标记最后一个为幽灵节点，标识还未完成。
+通过添加属性`pending="true"`来标记最后一个为幽灵节点，标识还未完成。
 
 ```html
-<r-timeline rb-pending="true">
+<r-timeline pending="true">
   <r-timeline-item>2021-04-01 创建服务器网站</r-timeline-item>
   <r-timeline-item>2021-04-01 解决了初始化网络问题</r-timeline-item>
   <r-timeline-item>2021-04-01 技术人员进行测试</r-timeline-item>
@@ -74,8 +74,8 @@
 ```html
 <r-timeline>
   <r-timeline-item
-    rb-dot="<i class='rab-icon rab-icon-ios-trophy'></i>" 
-    rb-color="green">
+    dot="<i class='rab-icon rab-icon-ios-trophy'></i>" 
+    color="green">
    发布里程碑版本
   </r-timeline-item>
   <r-timeline-item>发布1.0版本</r-timeline-item>
@@ -90,12 +90,12 @@
 
 | 属性       | 说明                           | 默认值 |
 | ---------- | ------------------------------ | ------ |
-| rb-pending | 指定是否最后一个节点为幽灵节点 | -      |
+| pending | 指定是否最后一个节点为幽灵节点 | -      |
 
 #### Timeline-item 
 
 | 属性     | 说明                                                         | 默认值 |
 | -------- | ------------------------------------------------------------ | ------ |
-| rb-color | 圆圈颜色，可选值为`blue`、`red`、`green`、`gray`，或自定义色值 | blue   |
-| rb-dot   | 自定义时间轴点                                               | -      |
+| color | 圆圈颜色，可选值为`blue`、`red`、`green`、`gray`，或自定义色值 | blue   |
+| dot   | 自定义时间轴点                                               | -      |
 

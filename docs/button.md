@@ -44,22 +44,22 @@
 
 - 图标按钮及按钮形状
 
-通过设置`rb-icon`属性在`button`内嵌入一个`icon`，或者直接在`button`内添加 `icon` 标签。
+通过设置`icon`属性在`button`内嵌入一个`icon`，或者直接在`button`内添加 `icon` 标签。
 
-使用`button`的`rb-icon`属性，图标位置将添加在最左边，如果需要自定义位置，则直接在`Button`内添加 `icon` 标签。
+使用`button`的`icon`属性，图标位置将添加在最左边，如果需要自定义位置，则直接在`Button`内添加 `icon` 标签。
 
 通过添加类名 `rab-btn-circle`，可将按钮置为圆的形状。
 
 ```html
-<button type="button" rb-icon="ios-search" class="rab-btn rab-btn-primary rab-btn-circle"></button>
-<button type="button" rb-icon="ios-search" class="rab-btn rab-btn-primary">搜索</button>
-<button type="button" rb-icon="ios-search" class="rab-btn rab-btn-primary rab-btn-circle">
+<button type="button" icon="ios-search" class="rab-btn rab-btn-primary rab-btn-circle"></button>
+<button type="button" icon="ios-search" class="rab-btn rab-btn-primary">搜索</button>
+<button type="button" icon="ios-search" class="rab-btn rab-btn-primary rab-btn-circle">
   搜索
 </button>
 <button type="button" class="rab-btn rab-btn-primary rab-btn-circle">圆角按钮</button>
-<button type="button" rb-icon="ios-search" class="rab-btn rab-btn-circle"></button>
-<button type="button" rb-icon="ios-search" class="rab-btn">搜索</button>
-<button type="button" rb-icon="ios-search" class="rab-btn rab-btn-circle">搜索</button>
+<button type="button" icon="ios-search" class="rab-btn rab-btn-circle"></button>
+<button type="button" icon="ios-search" class="rab-btn">搜索</button>
+<button type="button" icon="ios-search" class="rab-btn rab-btn-circle">搜索</button>
 <button type="button" class="rab-btn rab-btn-circle">圆角按钮</button>
 
 ```
@@ -98,12 +98,12 @@
 
 - 加载中状态	
 
-通过添加`rb-loading="true"`属性可以让按钮处于加载中状态
+通过添加`loading="true"`属性可以让按钮处于加载中状态
 
 ```html
-<button type="button" rb-loading="true" class="rab-btn rab-btn-primary">Loading...</button>
-<button type="button" rb-loading="true" class="rab-btn rab-btn-circle"></button>
-<button type="button" rb-loading="true" class="rab-btn rab-btn-primary rab-btn-circle"></button>
+<button type="button" loading="true" class="rab-btn rab-btn-primary">Loading...</button>
+<button type="button" loading="true" class="rab-btn rab-btn-circle"></button>
+<button type="button" loading="true" class="rab-btn rab-btn-primary rab-btn-circle"></button>
 
 ```
 
@@ -146,15 +146,15 @@
 </div>
 
 <div class="rab-btn-group">
-  <button type="button" rb-icon="ios-skip-backward" class="rab-btn rab-btn-primary"></button>
-  <button type="button" rb-icon="ios-skip-forward" class="rab-btn rab-btn-primary"></button>
+  <button type="button" icon="ios-skip-backward" class="rab-btn rab-btn-primary"></button>
+  <button type="button" icon="ios-skip-forward" class="rab-btn rab-btn-primary"></button>
 </div>
 
 <div class="rab-btn-group">
-  <button type="button" rb-icon="ios-color-wand" class="rab-btn"></button>
-  <button type="button" rb-icon="ios-sunny" class="rab-btn"></button>
-  <button type="button" rb-icon="ios-crop" class="rab-btn"></button>
-  <button type="button" rb-icon="ios-color-filter" class="rab-btn"></button>
+  <button type="button" icon="ios-color-wand" class="rab-btn"></button>
+  <button type="button" icon="ios-sunny" class="rab-btn"></button>
+  <button type="button" icon="ios-crop" class="rab-btn"></button>
+  <button type="button" icon="ios-color-filter" class="rab-btn"></button>
 </div>
 
 <h4>圆角</h4>
@@ -171,15 +171,15 @@
 </div>
 
 <div class="rab-btn-group rab-btn-group-circle">
-  <button type="button" rb-icon="ios-skip-backward" class="rab-btn rab-btn-primary"></button>
-  <button type="button" rb-icon="ios-skip-forward" class="rab-btn rab-btn-primary"></button>
+  <button type="button" icon="ios-skip-backward" class="rab-btn rab-btn-primary"></button>
+  <button type="button" icon="ios-skip-forward" class="rab-btn rab-btn-primary"></button>
 </div>
 
 <div class="rab-btn-group rab-btn-group-circle">
-  <button type="button" rb-icon="ios-color-wand" class="rab-btn"></button>
-  <button type="button" rb-icon="ios-sunny" class="rab-btn"></button>
-  <button type="button" rb-icon="ios-crop" class="rab-btn"></button>
-  <button type="button" rb-icon="ios-color-filter" class="rab-btn"></button>
+  <button type="button" icon="ios-color-wand" class="rab-btn"></button>
+  <button type="button" icon="ios-sunny" class="rab-btn"></button>
+  <button type="button" icon="ios-crop" class="rab-btn"></button>
+  <button type="button" icon="ios-color-filter" class="rab-btn"></button>
 </div>
 
 <h4>尺寸</h4>
@@ -222,10 +222,10 @@
 
 ```html
 <div class="rab-btn-group rab-btn-group-vertical">
-  <button type="button" rb-icon="logo-facebook" class="rab-btn"></button>
-  <button type="button" rb-icon="logo-twitter" class="rab-btn"></button>
-  <button type="button" rb-icon="logo-googleplus" class="rab-btn"></button>
-  <button type="button" rb-icon="logo-tumblr" class="rab-btn"></button>
+  <button type="button" icon="logo-facebook" class="rab-btn"></button>
+  <button type="button" icon="logo-twitter" class="rab-btn"></button>
+  <button type="button" icon="logo-googleplus" class="rab-btn"></button>
+  <button type="button" icon="logo-tumblr" class="rab-btn"></button>
 </div>
 ```
 
@@ -235,21 +235,21 @@
 
 | 属性       | 说明                                                 | 默认值 |
 | ---------- | ---------------------------------------------------- | ------ |
-| rb-loading | 设置按钮为加载中状态，如果为动态设置请看下面方法介绍 | false  |
+| loading | 设置按钮为加载中状态，如果为动态设置请看下面方法介绍 | false  |
 | disabled   | 设置按钮为禁用状态                                   | false  |
-| rb-icon    | 设置按钮的图标类型                                   | -      |
+| icon    | 设置按钮的图标类型                                   | -      |
 
 ### 方法
 
 | 名称   | 参数                                            | 可设置的属性 |
 | ------ | ----------------------------------------------- | ------------ |
-| config | `sel`，配置选定的 button 组件，必须是选择器名称 | `loading`    |
+| config | `el`，配置选定的 button 组件 | `loading`    |
 
-## 使用教程
+## config 使用
 
 ### 动态设置按钮是否加载状态
 
-常用于点击按钮后等待验证或其他异步操作，在这段时间按钮是被设为加载中的状态，并且在等待响应完成后按钮需切换为原始状态，所以这就需要用到 方法 `config(sel).loading`。
+常用于点击按钮后等待验证或其他异步操作，在这段时间按钮是被设为加载中的状态，并且在等待响应完成后按钮需切换为原始状态，所以这就需要用到 方法 `config(el).loading`。
 
 示例：
 

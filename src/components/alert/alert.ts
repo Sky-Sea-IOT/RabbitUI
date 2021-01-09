@@ -3,13 +3,13 @@ import PREFIX from '../prefix';
 
 interface PublicMethods {
     config(
-        elem: string
+        el: string
     ): {
         message: any;
         desc: any;
         icon: any;
     };
-    onClose(elem: string, cb: ($this: Element) => void): void;
+    onClose(el: string, cb: ($this: Element) => void): void;
 }
 
 class Alert implements PublicMethods {
@@ -23,13 +23,13 @@ class Alert implements PublicMethods {
     }
 
     public config(
-        elem: string
+        el: string
     ): {
         message: any;
         desc: any;
         icon: any;
     } {
-        const target: any = document.querySelector(elem);
+        const target: any = document.querySelector(el);
 
         validComps(target, 'alert');
 
@@ -87,8 +87,8 @@ class Alert implements PublicMethods {
         };
     }
 
-    public onClose(elem: string, cb: ($this: Element) => void): void {
-        const target: any = document.querySelector(elem);
+    public onClose(el: string, cb: ($this: Element) => void): void {
+        const target: any = document.querySelector(el);
 
         validComps(target, 'alert');
 
