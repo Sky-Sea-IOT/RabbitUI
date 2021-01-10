@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    .example {
+        display: block;
+        width: 60%;
+        padding: 0 20px;
+        margin: 20px auto;
+    }
+</style>
+
+<body>
+    <!-- <r-steps current="1" id="a">
+        <r-step title="已完成" content="这里是该步骤的描述信息"></r-step>
+        <r-step title="进行中" content="这里是该步骤的描述信息"></r-step>
+        <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
+        <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
+    </r-steps> -->
+    <div class="example">
+        <r-steps direction="horizontal">
+            <r-step status="finish">
+                <div class="rab-steps-tail"><i></i></div>
+                <div class="rab-steps-head">
+                    <div class="rab-steps-head-inner">
+                        <span class="rab-steps-icon rab-icon rab-icon-ios-checkmark"></span>
+                    </div>
+                </div>
+                <div class="rab-steps-main">
+                    <div class="rab-steps-title">已完成</div>
+                    <div class="rab-steps-content">这里是该步骤的描述信息</div>
+                </div>
+            </r-step>
+            <r-step status="finish">
+                <div class="rab-steps-tail"><i></i></div>
+                <div class="rab-steps-head">
+                    <div class="rab-steps-head-inner"><span>2</span></div>
+                </div>
+                <div class="rab-steps-main">
+                    <div class="rab-steps-title">进行中</div>
+                    <div class="rab-steps-content">这里是该步骤的描述信息</div>
+                </div>
+            </r-step>
+            <r-step status="wait">
+                <div class="rab-steps-tail"><i></i></div>
+                <div class="rab-steps-head">
+                    <div class="rab-steps-head-inner"><span>3</span></div>
+                </div>
+                <div class="rab-steps-main">
+                    <div class="rab-steps-title">待进行</div>
+                    <div class="rab-steps-content">这里是该步骤的描述信息</div>
+                </div>
+            </r-step>
+            <r-step status="wait">
+                <div class="rab-steps-tail"><i></i></div>
+                <div class="rab-steps-head">
+                    <div class="rab-steps-head-inner"><span>4</span></div>
+                </div>
+                <div class="rab-steps-main">
+                    <div class="rab-steps-title">待进行</div>
+                    <div class="rab-steps-content">这里是该步骤的描述信息</div>
+                </div>
+            </r-step>
+        </r-steps>
+    </div>
+</body>
+
+</html>

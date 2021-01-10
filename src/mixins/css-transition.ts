@@ -11,9 +11,13 @@ interface Config {
 export default function CssTransition(elem: any, options: Config): void {
     if (options.inOrOut === 'in') {
         // 显示元素
-        if (options.hiddenParent) options.hiddenParent.style.display = '';
+        if (options.hiddenParent) {
+            options.hiddenParent.style.display = '';
+            options.hiddenParent.style.opacity = '1';
+        }
 
         if (elem.style.display === 'none') elem.style.display = '';
+        if (elem.style.opacity === '0') elem.style.opacity = '1';
 
         setTimeout(() => {
             elem.classList.add(options.enterCls);
@@ -32,7 +36,7 @@ export default function CssTransition(elem: any, options: Config): void {
         // 过渡效果持续时间后隐藏元素
         setTimeout(() => {
             if (options.hiddenParent) options.hiddenParent.style.display = 'none';
-            elem.style.display = 'none';
+            elem.style.opacity = '0';
         }, options.timeout);
     }
 }
