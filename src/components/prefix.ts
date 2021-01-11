@@ -5,6 +5,7 @@ export default {
     avatar: `${prefixCls}-avatar`,
     badge: `${prefixCls}-badge`,
     button: `${prefixCls}-button`,
+    icon: `${prefixCls}-icon`,
     loadingBar: `${prefixCls}-loading-bar`,
     message: `${prefixCls}-message`,
     messageChild: `${prefixCls}-message-notice`,
@@ -12,5 +13,6 @@ export default {
     noticeChild: `${prefixCls}-notice-notice`,
     progress: `${prefixCls}-progress`,
     switch: `${prefixCls}-switch`,
+    steps: `${prefixCls}-steps`,
     timeline: `${prefixCls}-timeline`
 };

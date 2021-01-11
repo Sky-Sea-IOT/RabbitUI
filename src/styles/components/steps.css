@@ -101,7 +101,7 @@ r-steps[size="small"] .rab-steps-head-inner {
 }
 r-steps[size="small"] .rab-steps-head-inner > .rab-steps-icon.rab-icon {
   font-size: 16px;
-  top: 0;
+  top: -3px;
 }
 r-steps[size="small"] .rab-steps-main {
   margin-top: 0;
@@ -219,10 +219,6 @@ r-step[status="error"] .rab-steps-content {
 }
 r-step[status="error"] .rab-steps-tail > i {
   background-color: #e8eaec;
-}
-r-step.rab-steps-next-error .rab-steps-tail > i,
-r-step.rab-steps-next-error .rab-steps-tail > i:after {
-  background-color: #ff4d4f;
 }
 r-step.rab-steps-custom .rab-steps-head-inner {
   background: none;
