@@ -279,8 +279,8 @@
     }
 
     .@{steps-prefix-cls}-tail>i {
-     background-color: @border-color-split;
-   }
+      background-color: @border-color-split;
+    }
   }
 
   &.@{steps-prefix-cls}-custom {
@@ -290,16 +290,16 @@
       .square(auto);
 
       >.@{steps-prefix-cls}-icon {
-        font-size: 20px;
-        top: 2px;
-        .square(20px);
+        font-size: 22px;
+        top: 0;
+        .square(22px);
       }
     }
+  }
 
-    @{steps-tag}[status="process"] {
-      .@{steps-prefix-cls}-head-inner>.@{steps-prefix-cls}-icon {
-        color: @primary-color;
-      }
+  &[status="process"].@{steps-prefix-cls}-custom {
+    .@{steps-prefix-cls}-head-inner>.@{steps-prefix-cls}-icon {
+      color: @primary-color;
     }
   }
 

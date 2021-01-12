@@ -17,13 +17,45 @@
 
 <body>
     <div class="example">
-        <r-steps current="1" id="a">
+        <r-steps current="1">
             <r-step title="已完成" content="这里是该步骤的描述信息"></r-step>
             <r-step title="进行中" content="这里是该步骤的描述信息"></r-step>
             <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
             <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
         </r-steps>
     </div>
+    <div class="example">
+        <r-steps current="2" size="small">
+            <r-step title="已完成"></r-step>
+            <r-step title="已完成"></r-step>
+            <r-step title="进行中"></r-step>
+            <r-step title="待进行"></r-step>
+        </r-steps>
+    </div>
+    <div class="example">
+        <r-steps current="1">
+            <r-step title="注册" icon="ios-person"></r-step>
+            <r-step title="上传头像" icon="ios-camera"></r-step>
+            <r-step title="验证邮箱" icon="ios-mail"></r-step>
+        </r-steps>
+    </div>
+    <div class="example">
+        <r-steps current="2" direction="vertical">
+            <r-step title="已完成" content="这里是该步骤的描述信息"></r-step>
+            <r-step title="已完成" content="这里是该步骤的描述信息"></r-step>
+            <r-step title="进行中" content="这里是该步骤的描述信息"></r-step>
+            <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
+        </r-steps>
+    </div>
+    <div class="example">
+        <r-steps current="1" status="error">
+            <r-step title="已完成" content="这里是该步骤的描述信息"></r-step>
+            <r-step title="进行中" content="这里是该步骤的描述信息"></r-step>
+            <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
+            <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
+        </r-steps>
+    </div>
+
     <!-- <div class="example">
         <r-steps direction="horizontal">
             <r-step status="finish">

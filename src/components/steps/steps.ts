@@ -1,23 +1,8 @@
-import { removeAttrs, type, validComps, warn } from '../../mixins';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { removeAttrs, validComps, warn } from '../../mixins';
 import PREFIX from '../prefix';
 
-interface StepConfig {
-    index?: number;
-    status?: string;
-    title?: string;
-    content?: string;
-}
-
-interface PublicMethods {
-    config(
-        el: string
-    ): {
-        current: number;
-        setStep: ({ index, title, content }: StepConfig) => void;
-    };
-}
-
-class Steps implements PublicMethods {
+class Steps {
     readonly VERSION: string;
     readonly components: any;
 
@@ -27,59 +12,12 @@ class Steps implements PublicMethods {
         this._create(this.components);
     }
 
-    public config(
-        el: string
-    ): { current: number; setStep: ({ index, title, content }: StepConfig) => void } {
-        const target: any = document.querySelector(el);
-
-        validComps(target, 'steps');
-
-        const {
-            _getCurrent,
-            _updateStatus,
-            _setFinishOrErrorStatusIcon,
-            _validIndexCheck
-        } = Steps.prototype;
-
-        return {
-            get current() {
-                return _getCurrent(target);
-            },
-            set current(newVal: number) {
-                _updateStatus(target, newVal);
-            },
-            setStep({ index, status, title, content }): void {
-                // 如果没传索引值则默认是第一个节点
-                if (!index) index = 0;
-
-                const children = target.children[index];
-
-                _validIndexCheck(target.children.length - 1, index, children);
-
-                // set status
-                if (status && type.isStr(status)) {
-                    children.setAttribute('status', status);
-                }
-                // set title
-                if (title && type.isStr(title)) {
-                    const titleContainer = children.querySelector(`.${PREFIX.steps}-title`);
-                    titleContainer.innerHTML = title;
-                }
-                // set content
-                if (content && type.isStr(content)) {
-                    const contentContainer = children.querySelector(`.${PREFIX.steps}-content`);
-                    contentContainer.innerHTML = content;
-                }
-            }
-        };
-    }
-
     private _create(nodes: NodeListOf<Element>): void {
         nodes.forEach((node) => {
             this._setDirection(node);
             this._updateStatus(node, this._getCurrent(node));
             this._createStepItem(node);
-            removeAttrs(node, ['current', 'status']);
+            removeAttrs(node, ['status']);
         });
     }
 
@@ -105,74 +43,42 @@ class Steps implements PublicMethods {
 
             this._setFinishOrErrorStatusIcon(
                 child,
-                document.querySelector(`#step-${i}`)!,
+                child.querySelector(`#step-${i}`)!,
                 defaultsText
             );
             removeAttrs(child, ['title', 'content', 'icon']);
         }
     }
 
-    // 设置成功或失败状态的图标
-    private _setFinishOrErrorStatusIcon(
-        parent: Element,
-        children: Element,
-        defaultText: string
-    ): void {
-        const Span = document.createElement('span');
-        const status = Steps.prototype._geStatus(parent);
-        const customIcon = Steps.prototype._getIcon(parent);
-
-        // 是否通过标签属性 icon 自定义图标
-        if (customIcon) {
-            parent.classList.add(`${PREFIX.steps}-custom`);
-            Span.className = `${PREFIX.steps}-icon ${PREFIX.icon} ${PREFIX.icon}-${customIcon}`;
-        } // 只在状态是 finis 或 error 才添加状态图标
-        else if (status === 'finish' || status === 'error') {
-            Span.className = `${PREFIX.steps}-icon ${PREFIX.icon}`;
-            if (status === 'finish') {
-                Span.classList.add(`${PREFIX.icon}-ios-checkmark`);
-            }
-            if (status === 'error') {
-                Span.classList.add(`${PREFIX.icon}-ios-close`);
-            }
-            // 如果以上条件都没有则为默认标记文本
-        } else {
-            Span.innerHTML = defaultText;
-        }
-
-        children.appendChild(Span);
-    }
-
-    // _updateStatus 方法里面使用的是 Steps.prototype
-    // 而不用 this 来调用方法，是因为在对外方法 config 里返回了一个 children 方法，形成了闭包,
-    // 由于它需要使用到 _updateStatus 方法, 所以在 children 方法内部通过 this 调用会报错
-
-    private _updateStatus(node: Element, current: number): void {
-        const total = node.children.length - 1;
-        const currentStep = node.children[current];
-
-        Steps.prototype._validIndexCheck(total, current, currentStep);
+    private _updateStatus(parent: Element, current: number): void {
+        const total = parent.children.length - 1;
+        const currentStep = parent.children[current];
 
         validComps(currentStep, 'step');
+        this._validIndexCheck(total, current, currentStep);
 
-        const isParentStatus = node.getAttribute('status');
+        const isParentStatus = parent.getAttribute('status');
         const isChildStatus = currentStep.getAttribute('status');
 
         let status: string;
+
         // 如果当前步骤没有状态则默认设为 process 状态
         if (!isParentStatus && !isChildStatus) {
             status = 'process';
             // 父节点有设置状态并且当前选中的子节点没有设置，则采用父节点的状态，否则反之
         } else if (isParentStatus && !isChildStatus) {
             status = isParentStatus;
-        } else if (isChildStatus) {
+        } else if (isChildStatus && isChildStatus !== 'wait') {
             status = isChildStatus;
+        } else {
+            status = 'process';
         }
-        // @ts-ignore
-        Steps.prototype._setCurrentStatus(currentStep, status);
 
-        Steps.prototype._setPrevStatus(node.children, current);
-        Steps.prototype._setNextStatus(node.children, total, current);
+        // @ts-ignore
+        this._setCurrentStatus(currentStep, status);
+
+        this._setPrevStatus(parent.children, current);
+        this._setNextStatus(parent.children, total, current);
     }
 
     private _setCurrentStatus(node: Element, status?: string): void {
@@ -203,6 +109,37 @@ class Steps implements PublicMethods {
                 node[next].setAttribute('status', 'wait');
             }
         }
+    }
+
+    // 设置已被标记状态为成功或失败的图标
+    private _setFinishOrErrorStatusIcon(
+        parent: Element,
+        children: Element,
+        defaultText?: string
+    ): void {
+        const Span = document.createElement('span');
+        const status = this._geStatus(parent);
+        const customIcon = this._getIcon(parent);
+
+        // 是否通过标签属性 icon 自定义图标
+        if (customIcon) {
+            parent.classList.add(`${PREFIX.steps}-custom`);
+            Span.className = `${PREFIX.steps}-icon ${PREFIX.icon} ${PREFIX.icon}-${customIcon}`;
+        } // 只在状态是 finis 或 error 才添加状态图标
+        else if (status === 'finish' || status === 'error') {
+            Span.className = `${PREFIX.steps}-icon ${PREFIX.icon}`;
+            if (status === 'finish') {
+                Span.classList.add(`${PREFIX.icon}-ios-checkmark`);
+            }
+            if (status === 'error') {
+                Span.classList.add(`${PREFIX.icon}-ios-close`);
+            }
+            // 如果以上条件都没有则为默认标记文本
+        } else {
+            defaultText ? (Span.innerHTML = defaultText) : '';
+        }
+
+        children.appendChild(Span);
     }
 
     private _setDirection(node: Element): void {
