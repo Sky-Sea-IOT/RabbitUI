@@ -1,5 +1,4 @@
-import { warn } from '.';
-import CssTransition from './css-transition';
+import { warn, CssTransition } from '../mixins';
 
 interface Options {
     key?: string | number;

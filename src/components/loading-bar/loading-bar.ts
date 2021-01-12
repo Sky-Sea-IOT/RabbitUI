@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { CssTransition, type } from '../../mixins';
+import { CssTransition } from '../../mixins';
+import { type } from '../../utils';
 import PREFIX from '../prefix';
 
 interface UpdataGlobalAPI {

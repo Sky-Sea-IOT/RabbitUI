@@ -1,4 +1,4 @@
-import { removeAttrs } from '../../mixins';
+import { removeAttrs } from '../../dom-utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {

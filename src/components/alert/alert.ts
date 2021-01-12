@@ -1,4 +1,6 @@
-import { warn, removeAttrs, type, destroyElem, validComps } from '../../mixins';
+import { warn } from '../../mixins';
+import { removeAttrs } from '../../dom-utils';
+import { type, destroyElem, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {

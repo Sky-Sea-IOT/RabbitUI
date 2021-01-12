@@ -1,13 +1,7 @@
-import {
-    CssTransition,
-    isUseHTMLString,
-    destroyElem,
-    destroyElemByKey,
-    type,
-    warn
-} from '../../mixins';
+import { CssTransition, warn } from '../../mixins';
+import { type, destroyElem, destroyElemByKey, useHTMLString } from '../../utils';
+import { usePromiseCallback } from '../../mixins';
 import PREFIX from '../prefix';
-import usePromiseCallback from '../../mixins/cb-promise';
 
 interface NoticeGlobalAPI {
     top?: number; // 通知组件距离顶端的距离，单位像素
@@ -228,7 +222,7 @@ class $Notice implements PublicMethods {
         }
 
         // 是否支持传入 HTML 片段
-        isUseHTMLString(node, title, dangerouslyUseHTMLString);
+        useHTMLString(node, title, dangerouslyUseHTMLString);
     }
 
     private _setDesc(
@@ -245,7 +239,7 @@ class $Notice implements PublicMethods {
         children_custm.classList.add(`${PREFIX.notice}-with-desc`);
 
         // 是否支持传入 HTML 片段
-        isUseHTMLString(child_desc, desc, dangerouslyUseHTMLString);
+        useHTMLString(child_desc, desc, dangerouslyUseHTMLString);
     }
 
     private _setIcon(

@@ -1,8 +1,30 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { removeAttrs, validComps, warn } from '../../mixins';
+import { warn } from '../../mixins';
+import { prevAll, nextAll, removeAttrs } from '../../dom-utils';
+import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
-class Steps {
+interface StepsConfig {
+    current: number;
+    status?: string;
+}
+
+interface StepConfig {
+    idx?: number;
+    title?: string;
+    content?: string;
+}
+
+interface PublicMethods {
+    config(
+        el: string
+    ): {
+        setSteps: ({ current, status }: StepsConfig) => void;
+        setStep: ({ idx, title, content }: StepConfig) => void;
+    };
+}
+
+class Steps implements PublicMethods {
     readonly VERSION: string;
     readonly components: any;
 
@@ -10,6 +32,45 @@ class Steps {
         this.VERSION = '1.0';
         this.components = document.querySelectorAll('r-steps');
         this._create(this.components);
+    }
+
+    public config(
+        el: string
+    ): {
+        setSteps({ current, status }: StepsConfig): void;
+        setStep({ idx, title, content }: StepConfig): void;
+    } {
+        const target: any = document.querySelector(el);
+
+        validComps(target, 'steps');
+
+        const { _updateStatus } = Steps.prototype;
+
+        const oldCurrent = Steps.prototype._getCurrent(target);
+
+        return {
+            setSteps({ current, status }: StepsConfig) {
+                if (current !== oldCurrent) {
+                    if (!current && current !== 0) {
+                        warn('The current property is missing in the Steps configuration');
+                        return;
+                    } else if (type.isNum(current) && type.isStr(status)) {
+                        _updateStatus(target, current, status);
+                    }
+                }
+            },
+            setStep({ idx, title, content }: StepConfig) {
+                // 如果没有传入索引值则默认为第一个
+                if (!idx) idx = 0;
+
+                const CurrentChild = target.children[idx];
+                const ChildTitle = CurrentChild.querySelector(`.${PREFIX.steps}-title`);
+                const ChildContent = CurrentChild.querySelector(`.${PREFIX.steps}-content`);
+
+                if (title && type.isStr(title)) ChildTitle.textContent = title;
+                if (content && type.isStr(content)) ChildContent.textContent = content;
+            }
+        };
     }
 
     private _create(nodes: NodeListOf<Element>): void {
@@ -27,58 +88,64 @@ class Steps {
 
         for (let i = 0; i < children.length; i++) {
             const child = children[i];
-
-            const defaultsText = `${i + 1}`;
+            const idxText = `${i + 1}`;
 
             child.innerHTML = `
              <div class="${PREFIX.steps}-tail"><i></i></div>
              <div class="${PREFIX.steps}-head">
-                 <div class="${PREFIX.steps}-head-inner" id="step-${i}"></div>
+                 <div class="${PREFIX.steps}-head-inner">
+                    <span data-step-flag="${i}" data-step="current">${idxText}</span>
+                 </div>
              </div>
              <div class="${PREFIX.steps}-main">
                  <div class="${PREFIX.steps}-title">${this._getTitle(child)}</div>
                  <div class="${PREFIX.steps}-content">${this._getContent(child)}</div>
              </div>
             `;
+            this._setCustomIcon(child);
+            this._setNextErrorStatus(child);
+            this._autoSetFinishOrErrorIcon(child, i);
 
-            this._setFinishOrErrorStatusIcon(
-                child,
-                child.querySelector(`#step-${i}`)!,
-                defaultsText
-            );
             removeAttrs(child, ['title', 'content', 'icon']);
         }
     }
 
-    private _updateStatus(parent: Element, current: number): void {
+    private _setDirection(node: Element): void {
+        if (!node.getAttribute('direction')) node.setAttribute('direction', 'horizontal');
+    }
+
+    private _updateStatus(parent: Element, current: number, status?: string): void {
+        const _this = Steps.prototype;
+
         const total = parent.children.length - 1;
         const currentStep = parent.children[current];
 
         validComps(currentStep, 'step');
-        this._validIndexCheck(total, current, currentStep);
+        _this._validIndexCheck(total, current, currentStep);
 
         const isParentStatus = parent.getAttribute('status');
         const isChildStatus = currentStep.getAttribute('status');
 
-        let status: string;
+        let currentStatus: string;
 
         // 如果当前步骤没有状态则默认设为 process 状态
         if (!isParentStatus && !isChildStatus) {
-            status = 'process';
+            currentStatus = 'process';
             // 父节点有设置状态并且当前选中的子节点没有设置，则采用父节点的状态，否则反之
         } else if (isParentStatus && !isChildStatus) {
-            status = isParentStatus;
+            currentStatus = isParentStatus;
         } else if (isChildStatus && isChildStatus !== 'wait') {
-            status = isChildStatus;
+            currentStatus = isChildStatus;
         } else {
-            status = 'process';
+            currentStatus = 'process';
         }
 
-        // @ts-ignore
-        this._setCurrentStatus(currentStep, status);
+        _this._setCurrentStatus(currentStep, !status ? currentStatus : status);
+        _this._setPrevStatus(currentStep);
+        _this._setNextStatus(currentStep);
+        _this._setNextErrorStatus(currentStep);
 
-        this._setPrevStatus(parent.children, current);
-        this._setNextStatus(parent.children, total, current);
+        setTimeout(() => _this._autoSetFinishOrErrorIcon(currentStep, current), 0);
     }
 
     private _setCurrentStatus(node: Element, status?: string): void {
@@ -90,62 +157,75 @@ class Steps {
         }
     }
 
-    // 从当前节点位置开始，设置其前面的所有节点状态为 finish
-    private _setPrevStatus(node: HTMLCollection, current: number): void {
-        for (let prev = 0; prev < current; prev++) {
+    private _setPrevStatus(node: Element): void {
+        prevAll(node).forEach((prevNode) => {
             // 除去最开始的步骤，当前步骤是正在进行中的，那么它前面的状态一定是完成或者错误
             // 因此，前面的步骤不能随便的设为等待或进行中状态
             // 除了 error 状态其余前面的节点都覆盖为 finish 状态
-            if (this._geStatus(node[prev]) !== 'error') {
-                node[prev].setAttribute('status', 'finish');
+            if (this._geStatus(prevNode) !== 'error') {
+                this._setCurrentStatus(prevNode, 'finish');
             }
-        }
+        });
     }
 
-    // 从当前节点位置开始，设置其后面的所有节点状态为 wait
-    private _setNextStatus(node: HTMLCollection, total: number, current: number): void {
-        for (let next = total; next > current; next--) {
-            if (!this._geStatus(node[next])) {
-                node[next].setAttribute('status', 'wait');
-            }
+    private _setNextStatus(node: Element): void {
+        // 从当前节点位置开始，设置其后面的所有节点状态为 wait
+        nextAll(node).forEach((nextNode) => this._setCurrentStatus(nextNode));
+    }
+
+    private _setNextErrorStatus(node: Element): void {
+        if (
+            this._geStatus(node) === 'error' &&
+            node.previousElementSibling &&
+            this._geStatus(node.previousElementSibling) === 'error'
+        ) {
+            node.previousElementSibling.classList.add(`${PREFIX.steps}-next-error`);
         }
     }
 
     // 设置已被标记状态为成功或失败的图标
-    private _setFinishOrErrorStatusIcon(
-        parent: Element,
-        children: Element,
-        defaultText?: string
-    ): void {
-        const Span = document.createElement('span');
-        const status = this._geStatus(parent);
-        const customIcon = this._getIcon(parent);
+    private _autoSetFinishOrErrorIcon(node: Element, current: number): void {
+        if (this._getIcon(node)) return;
 
-        // 是否通过标签属性 icon 自定义图标
-        if (customIcon) {
-            parent.classList.add(`${PREFIX.steps}-custom`);
-            Span.className = `${PREFIX.steps}-icon ${PREFIX.icon} ${PREFIX.icon}-${customIcon}`;
-        } // 只在状态是 finis 或 error 才添加状态图标
-        else if (status === 'finish' || status === 'error') {
-            Span.className = `${PREFIX.steps}-icon ${PREFIX.icon}`;
-            if (status === 'finish') {
-                Span.classList.add(`${PREFIX.icon}-ios-checkmark`);
+        const prefixIconCls = `${PREFIX.steps}-icon ${PREFIX.icon} ${PREFIX.icon}-`;
+        const currentStatus = this._geStatus(node);
+
+        const setFinishOrErrorIcon = (status: string, children: Element): void => {
+            if (status === 'finish' || status === 'error') {
+                children.innerHTML = '';
+                if (status === 'finish') children.className = `${prefixIconCls}ios-checkmark`;
+                if (status === 'error') children.className = `${prefixIconCls}ios-close`;
             }
-            if (status === 'error') {
-                Span.classList.add(`${PREFIX.icon}-ios-close`);
-            }
-            // 如果以上条件都没有则为默认标记文本
-        } else {
-            defaultText ? (Span.innerHTML = defaultText) : '';
+        };
+
+        // 判断当前选中的步骤的状态是完成还是错误
+        if (currentStatus === 'finish' || currentStatus === 'error') {
+            const HeadInner = node.querySelector(`[data-step-flag="${current}"]`)!;
+            setFinishOrErrorIcon(currentStatus, HeadInner);
         }
 
-        children.appendChild(Span);
+        // 判断之前的所有步骤的状态
+        prevAll(node).forEach((prevNode) => {
+            const prevStatus = this._geStatus(prevNode);
+            // 如果之前的步骤的状态存在有完成或者是错误的则添加对应图标
+            if (prevStatus === 'finish' || prevStatus === 'error') {
+                const HeadInner = prevNode.querySelector('[data-step="current"]')!;
+                setFinishOrErrorIcon(prevStatus, HeadInner);
+            }
+        });
     }
 
-    private _setDirection(node: Element): void {
-        if (!node.getAttribute('direction')) {
-            node.setAttribute('direction', 'horizontal');
-        }
+    private _setCustomIcon(node: Element): void {
+        const iconType = this._getIcon(node);
+
+        if (!iconType) return;
+
+        node.classList.add(`${PREFIX.steps}-custom`);
+
+        const child = node.querySelector(`.${PREFIX.steps}-head-inner`)!.children[0];
+
+        child.innerHTML = '';
+        child.className = `${PREFIX.steps}-icon ${PREFIX.icon} ${PREFIX.icon}-${iconType}`;
     }
 
     private _getCurrent(node: Element): number {

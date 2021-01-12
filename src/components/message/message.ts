@@ -1,5 +1,6 @@
-import { CssTransition, destroyElem, destroyElemByKey, isUseHTMLString, type } from '../../mixins';
-import usePromiseCallback from '../../mixins/cb-promise';
+import { CssTransition } from '../../mixins';
+import { type, destroyElem, destroyElemByKey, useHTMLString } from '../../utils';
+import { usePromiseCallback } from '../../mixins';
 import PREFIX from '../prefix';
 
 interface MsgGlobalAPI {
@@ -233,9 +234,9 @@ class $Message implements PublicMethods {
 
     private _setContent(node: HTMLElement, cfg: string | MessageAPI): void {
         if (typeof cfg === 'string') {
-            isUseHTMLString(node, cfg, false);
+            useHTMLString(node, cfg, false);
         } else if (typeof cfg === 'object' && cfg.content) {
-            isUseHTMLString(node, cfg.content, cfg.dangerouslyUseHTMLString);
+            useHTMLString(node, cfg.content, cfg.dangerouslyUseHTMLString);
         }
     }
 

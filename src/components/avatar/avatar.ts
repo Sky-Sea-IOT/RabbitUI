@@ -1,4 +1,5 @@
-import { removeAttrs, warn } from '../../mixins';
+import { warn } from '../../mixins';
+import { removeAttrs } from '../../dom-utils';
 import PREFIX from '../prefix';
 
 class Avatar {

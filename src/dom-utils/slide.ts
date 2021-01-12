@@ -1,5 +1,10 @@
 /* eslint-disable prefer-rest-params */
-function slide() {
+interface Slide {
+    up: any;
+    down: any;
+}
+
+export default function slide(): Slide {
     const Slider: { up: any; down: any } = {
         up: null,
         down: null

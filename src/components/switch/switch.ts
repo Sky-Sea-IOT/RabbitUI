@@ -1,4 +1,4 @@
-import { type, validComps } from '../../mixins';
+import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {
