@@ -10,14 +10,15 @@
     .example {
         display: block;
         width: 60%;
-        padding: 0 20px;
-        margin: 20px auto;
+        border-bottom: 1px solid #ebedf0;
+        padding: 42px 24px 50px;
+        margin: 0 auto;
     }
 </style>
 
 <body>
     <div class="example">
-        <r-steps current="1" id="a">
+        <r-steps current="1">
             <r-step title="已完成" content="这里是该步骤的描述信息"></r-step>
             <r-step title="进行中" content="这里是该步骤的描述信息"></r-step>
             <r-step title="待进行" content="这里是该步骤的描述信息"></r-step>
@@ -38,6 +39,16 @@
             <r-step title="上传头像" icon="ios-camera"></r-step>
             <r-step title="验证邮箱" icon="ios-mail"></r-step>
         </r-steps>
+    </div>
+    <div class="example">
+        <r-steps current="0" id="a">
+            <r-step title="步骤1"></r-step>
+            <r-step title="步骤2"></r-step>
+            <r-step title="步骤3"></r-step>
+            <r-step title="步骤4"></r-step>
+        </r-steps>
+        <br />
+        <button class="rab-btn rab-btn-primary" onclick="next()">下一步</button>
     </div>
     <div class="example">
         <r-steps current="2" direction="vertical">

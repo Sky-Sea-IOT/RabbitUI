@@ -10,9 +10,9 @@ interface StepsConfig {
 }
 
 interface StepConfig {
-    idx?: number;
-    title?: string;
-    content?: string;
+    idx?: number; // 要设置的第几个步骤，默认为0
+    title?: string; // 设置标题
+    content?: string; // 设置步骤的详细描述
 }
 
 interface PublicMethods {
@@ -20,7 +20,7 @@ interface PublicMethods {
         el: string
     ): {
         setSteps: ({ current, status }: StepsConfig) => void;
-        setStep: ({ idx, title, content }: StepConfig) => void;
+        setChildren: ({ idx, title, content }: StepConfig) => void;
     };
 }
 
@@ -38,7 +38,7 @@ class Steps implements PublicMethods {
         el: string
     ): {
         setSteps({ current, status }: StepsConfig): void;
-        setStep({ idx, title, content }: StepConfig): void;
+        setChildren({ idx, title, content }: StepConfig): void;
     } {
         const target: any = document.querySelector(el);
 
@@ -54,12 +54,12 @@ class Steps implements PublicMethods {
                     if (!current && current !== 0) {
                         warn('The current property is missing in the Steps configuration');
                         return;
-                    } else if (type.isNum(current) && type.isStr(status)) {
+                    } else if ((current && type.isNum(current)) || (status && type.isStr(status))) {
                         _updateStatus(target, current, status);
                     }
                 }
             },
-            setStep({ idx, title, content }: StepConfig) {
+            setChildren({ idx, title, content }: StepConfig) {
                 // 如果没有传入索引值则默认为第一个
                 if (!idx) idx = 0;
 

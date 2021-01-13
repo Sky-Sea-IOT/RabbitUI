@@ -12,7 +12,7 @@
 
 基础用法 
 
-- 基本用法，组件会根据`current`自动判断各步骤状态。( 设置后需要浏览器刷新才生效 )
+- 基本用法，组件会根据`current`自动判断各步骤状态。
 
 ```html
 <r-steps current="1">
@@ -48,6 +48,35 @@
 </r-steps>
 ```
 
+切换步骤
+
+- 通常配合内容及按钮使用，表示一个流程的处理进度。
+
+```html
+<r-steps current="0" id="a">
+  <r-step title="步骤1"></r-step>
+  <r-step title="步骤2"></r-step>
+  <r-step title="步骤3"></r-step>
+  <r-step title="步骤4"></r-step>
+</r-steps>
+<br />
+<button class="rab-btn rab-btn-primary" onclick="next()">下一步</button>
+
+<script>
+	const Steps = new Rabbit.Steps();
+    let n = 0;
+    next = () => {
+        n++;
+        if (n > 3) {
+            n = 3;
+            Steps.config('#a').setSteps({ current: n, status: 'finish' });
+            return;
+        }
+        Steps.config('#a').setSteps({ current: n });
+    };
+</script>
+```
+
 垂直方向
 
 - 设置属性`direction`为`vertical`在垂直方向展示。
@@ -78,6 +107,8 @@
 
 ### Steps
 
+整体步骤条
+
 | 属性      | 说明                                                         | 默认值     |
 | :-------- | :----------------------------------------------------------- | :--------- |
 | current   | 当前步骤，从 0 开始计数                                      | 0          |
@@ -87,6 +118,8 @@
 
 ### Step
 
+步骤条内的每一个步骤
+
 | 属性    | 说明                                                         | 默认值  |
 | :------ | :----------------------------------------------------------- | :------ |
 | status  | 步骤的状态，可选值为`wait`、`process`、`finish`、`error`，不设置时自动判断 | process |
@@ -94,6 +127,31 @@
 | content | 步骤的详细描述，可选                                         | -       |
 | icon    | 步骤的图标，可选                                             | -       |
 
-#### 该组件没有提供 `Config` 方法，即通过 JS 动态设置的标签属性与内容需要页面刷新后才会生效。
+### Config  方法
 
-组件提供的所有属性都可以通过 js 的原生API `setAttribute` 设置
+配置组件的一些必要的响应式更新操作
+
+| 参数 | 说明                                             | 类型   |
+| ---- | ------------------------------------------------ | ------ |
+| el   | 配置当前选定的 steps，必须是选择器名称或者元素名 | String |
+
+该方法返回以下两个函数类型的值：
+
+- `setSteps(options)`
+
+- `setChildren(options)`
+
+`setSteps` 的参数 options 为对象，用于设置整体步骤条，具体说明如下：
+
+| 属性    | 说明                                                         | 类型   | 默认值  |
+| ------- | ------------------------------------------------------------ | ------ | ------- |
+| current | 当前步骤                                                     | Number | 0       |
+| status  | 当前步骤的状态，可选值为`wait`、`process`、`finish`、`error` | String | process |
+
+`setChildren` 的参数 options 为对象，用于设置步骤条内的每一个步骤，具体说明如下：
+
+| 属性    | 说明                     | 类型   | 默认值 |
+| ------- | ------------------------ | ------ | ------ |
+| idx     | 选定步骤条内的某一个步骤 | Number | 0      |
+| title   | 标题                     | String | -      |
+| content | 步骤的详细描述           | String | -      |

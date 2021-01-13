@@ -159,17 +159,33 @@
 | ------ | -------------------- | --------------------------- |
 | config | `el`，配置选定的 alert 组件 | `message` 、`desc`、 `icon` |
 
-### 事件
+### Config  方法
 
-| 名称    | 说明       | 参数            | 返回值   |
-| ------- | ---------- | --------------- | -------- |
-| onClose | 关闭时触发 | `($this) => {}` | 当前元素 |
+配置组件的一些必要的响应式更新操作
 
-## config 使用
+| 参数 | 说明                                             | 类型   |
+| ---- | ------------------------------------------------ | ------ |
+| el   | 配置当前选定的 steps，必须是选择器名称或者元素名 | String |
+
+该方法返回以下的4个属性，其中一个为函数类型：
+
+- `message`
+- `desc`
+- `icon`
+- `onClose(el,cb)`
+
+`onClose` 的参数 ，具体说明如下：
+
+| 名称 | 说明                                             | 类型     | 默认值 |
+| ---- | ------------------------------------------------ | -------- | ------ |
+| el   | Alert 的选择器名称或者元素名                     | String   | -      |
+| cb   | 点击关闭的回调事件，回调参数为 `($this) => void` | Function | -      |
+
+### 使用示例
 
 #### 如何动态地或在异步在时机下改变 alert 的提示内容？
 
-请使用 `config(el).message/desc` 方法，该方法只有一个参数，用于传入选择器或元素名以用于单独为该组件进行配置
+请使用 config 方法提供的属性 `message`或者`desc` 
 
 ```html
 <r-alert message="Info Text" id="changeMsg"></r-alert>
@@ -203,7 +219,9 @@
 
 ####  如何自定义图标？
 
-请使用 `config(el).icon` 方法设置图标，请注意设置属性 `show-icon="true"`
+请使用 config 方法提供的属性 `icon` 设置图标，
+
+请注意设置属性 `show-icon="true"`
 
 ```html
 <r-alert id="customIcon" message="Info Text" show-icon="true"></r-alert>
@@ -216,7 +234,7 @@
 
 ### 如何在关闭提示的同时添加事件？
 
-请使用 `onClose` 方法添加关闭时触发的回调事件
+请使用 config 方法提供的属性 `onClose` 方法添加关闭时触发的回调事件
 
 ```html
 <r-alert id="closeTip" message="Info Text" closable="true"></r-alert>
