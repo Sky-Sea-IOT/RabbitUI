@@ -9,6 +9,7 @@ import progressTest from './progress';
 import stepsTest from './steps';
 import switchTest from './switch';
 import timelineTest from './timeline';
+import tooltipTest from './tooltip';
 
 import '../src/styles/index.less';
 
@@ -21,5 +22,6 @@ import '../src/styles/index.less';
 // loadingBarTest();
 // messageTest();
 // noticeTest();
-stepsTest();
+// stepsTest();
 // switchTest();
+tooltipTest();

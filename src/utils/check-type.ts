@@ -9,7 +9,7 @@ const typeOf = (r: any): string => {
 
 const errMsg = (right: string, wrong: string): boolean => {
     warn(
-        `The expected type accepted is a ${right}, and the error type currently in use is --> ${wrong}`
+        `The expected type accepted is ${right}, but the error type currently in use is --> ${wrong}`
     );
     return false;
 };
@@ -34,7 +34,7 @@ export const isFn = (r: any, param?: [...any] | any): any =>
     typeof r === 'function' ? r(param) : errMsg('function', typeOf(r));
 
 export const isObj = (r: any): boolean =>
-    typeof r === 'object' ? true : errMsg('object', typeOf(r));
+    r.constructor === Object ? true : errMsg('object', typeOf(r));
 
 export const isArr = (r: any): boolean =>
     r.constructor === Array ? true : errMsg('array', typeOf(r));

@@ -9,23 +9,23 @@ import Progress from './components/progress';
 import Steps from './components/steps';
 import Switch from './components/switch';
 import Timeline from './components/timeline';
+import Tooltip from './components/tooltip';
 
 //! 打包的时候这里要解除封印
 // import './styles/index.less';
 
 //! 打包完成后以下代码都要注释
-const components = {
+export default {
     Alert,
     Avatar,
     Badge,
     Button,
     Loading,
+    Message,
+    Notice,
     Progress,
     Steps,
     Switch,
     Timeline,
-    Message,
-    Notice
+    Tooltip
 };
-
-export default components;

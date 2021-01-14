@@ -14,5 +14,6 @@ export default {
     progress: `${prefixCls}-progress`,
     switch: `${prefixCls}-switch`,
     steps: `${prefixCls}-steps`,
-    timeline: `${prefixCls}-timeline`
+    timeline: `${prefixCls}-timeline`,
+    tooltip: `${prefixCls}-tooltip`
 };
