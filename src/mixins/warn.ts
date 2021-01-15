@@ -1,3 +1,4 @@
 export default function warn(msg: unknown): void {
-    console.error(`[Rabbit warn] ${msg}`);
+    console.error(`[RabbitUI] Error: ${msg}`);
+    return;
 }

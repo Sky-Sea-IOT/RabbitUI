@@ -6,7 +6,11 @@
  */
 export default function removeAttrs(elem: Element, attrs: Array<string>): void {
     setTimeout(() => {
-        for (let i = 0; i < attrs.length; i++) {
+        let i = 0;
+
+        const { length } = attrs;
+
+        for (; i < length; i++) {
             const attr = attrs[i];
             elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
         }
