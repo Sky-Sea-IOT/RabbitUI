@@ -1,5 +1,5 @@
 import { warn } from '../../mixins';
-import { removeAttrs } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
 import PREFIX from '../prefix';
 
 class Avatar {
@@ -8,7 +8,7 @@ class Avatar {
 
     constructor() {
         this.VERSION = 'v1.0';
-        this.components = document.querySelectorAll('r-avatar');
+        this.components = $el('r-avatar', { all: true });
         this._create(this.components);
     }
 
@@ -30,14 +30,14 @@ class Avatar {
         if (!hasIcon) return;
 
         if (hasIcon || customIcon) {
-            node.innerHTML = '';
+            setHtml(node, '');
             node.classList.add(`${PREFIX.avatar}-icon`);
         }
 
         if (customIcon) {
-            node.innerHTML = customIcon;
+            setHtml(node, customIcon);
         } else {
-            const AvatarIcon = document.createElement('i');
+            const AvatarIcon = createElem('i');
             AvatarIcon.className = `rab-icon rab-icon-${hasIcon}`;
             node.appendChild(AvatarIcon);
         }
@@ -48,11 +48,12 @@ class Avatar {
 
         if (!hasSrc) return;
 
-        const AvatarImage = document.createElement('img');
+        const AvatarImage = createElem('img');
 
+        // @ts-ignore
         AvatarImage.src = hasSrc;
 
-        node.innerHTML = '';
+        setHtml(node, '');
 
         node.classList.add(`${PREFIX.avatar}-image`);
 
@@ -63,13 +64,13 @@ class Avatar {
     private _setCustomContent(node: Element): void {
         if (node.getAttribute('rb-icon') || node.getAttribute('rb-src')) return;
 
-        if (node.innerHTML) {
-            const AvatarStrBox = document.createElement('span');
+        if (setHtml(node)) {
+            const AvatarStrBox = createElem('span');
 
             AvatarStrBox.className = `${PREFIX.avatar}-string`;
-            AvatarStrBox.innerHTML = node.innerHTML;
 
-            node.innerHTML = '';
+            setHtml(AvatarStrBox, node.innerHTML);
+            setHtml(node, '');
 
             node.appendChild(AvatarStrBox);
 
@@ -83,11 +84,10 @@ class Avatar {
         const childrenWidth: number = children.offsetWidth;
 
         if (avatarWidth - 8 < childrenWidth) {
-            children.style.transform = `scale(${
-                (avatarWidth - 8) / childrenWidth
-            }) translateX(-50%)`;
+            const newScale = `scale(${(avatarWidth - 8) / childrenWidth}) translateX(-50%)`;
+            setCss(children, 'transform', `scale(${newScale}) translateX(-50%)`);
         } else {
-            children.style.transform = 'scale(1) translateX(-50%)';
+            setCss(children, 'transform', 'scale(1) translateX(-50%)');
         }
     }
 
@@ -97,14 +97,15 @@ class Avatar {
 
         if (!size) return;
 
-        node.style.width = `${size}px`;
-        node.style.height = `${size}px`;
-        node.style.lineHeight = `${size}px`;
+        setCss(node, 'width', `${size}px`);
+        setCss(node, 'height', `${size}px`);
+        setCss(node, 'lineHeight', `${size}px`);
 
         // 如果设置的尺寸超过40，且在有图标的情况下将其字体大写设为头像尺寸的一半
         if (size >= 40) {
             if (node.querySelector('.rab-icon')) {
-                node.style.fontSize = `${Math.floor(size / 2)}px`;
+                const newFontSize = `${Math.floor(size / 2)}px`;
+                setCss(node, 'fontSize', newFontSize);
             }
         }
     }

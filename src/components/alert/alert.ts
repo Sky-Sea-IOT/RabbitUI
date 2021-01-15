@@ -1,5 +1,5 @@
 import { warn } from '../../mixins';
-import { removeAttrs } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
 import { type, destroyElem, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -20,7 +20,7 @@ class Alert implements PublicMethods {
 
     constructor() {
         this.VERSION = 'v1.0';
-        this.components = document.querySelectorAll('r-alert');
+        this.components = $el('r-alert', { all: true });
         this._create(this.components);
     }
 
@@ -31,7 +31,7 @@ class Alert implements PublicMethods {
         desc: any;
         icon: any;
     } {
-        const target: any = document.querySelector(el);
+        const target: any = $el(el);
 
         validComps(target, 'alert');
 
@@ -47,7 +47,7 @@ class Alert implements PublicMethods {
 
             set message(newVal) {
                 if (newVal != alertMsg.innerHTML) {
-                    alertMsg.innerHTML = newVal;
+                    setHtml(alertMsg, newVal);
                 }
                 return;
             },
@@ -60,7 +60,7 @@ class Alert implements PublicMethods {
             set desc(newVal) {
                 if (alertDesc) {
                     if (newVal != alertDesc.innerHTML) {
-                        alertDesc.innerHTML = newVal;
+                        setHtml(alertDesc, newVal);
                     }
                     return;
                 } else {
@@ -116,6 +116,7 @@ class Alert implements PublicMethods {
     private _setIcon(node: Element) {
         const showIcon: boolean = this._isShowIcon(node);
         const type: string = this._getType(node);
+
         let iconType = '';
 
         if (!showIcon) return;
@@ -139,7 +140,7 @@ class Alert implements PublicMethods {
                 : (iconType += '-outline');
         }
 
-        const AlertIcon = document.createElement('span');
+        const AlertIcon = createElem('span');
 
         AlertIcon.className = `${PREFIX.alert}-icon`;
         AlertIcon.innerHTML = `<i class="rab-icon rab-icon-${iconType}"></i>`;
@@ -153,19 +154,25 @@ class Alert implements PublicMethods {
     }
 
     private _setMsg(node: Element) {
-        const AlertMessage = document.createElement('div');
+        const AlertMessage = createElem('div');
+        const content = this._getMsg(node);
+
         AlertMessage.className = `${PREFIX.alert}-message`;
-        AlertMessage.innerHTML = this._getMsg(node);
+
+        setHtml(AlertMessage, content);
+
         node.prepend(AlertMessage);
     }
 
     private _setDesc(node: Element) {
         if (!this._getDesc(node)) return;
 
-        const AlertDesc = document.createElement('div');
+        const AlertDesc = createElem('div');
+        const content = this._getDesc(node);
 
         AlertDesc.className = `${PREFIX.alert}-desc`;
-        AlertDesc.innerHTML = this._getDesc(node);
+
+        setHtml(AlertDesc, content);
 
         node.classList.add(`${PREFIX.alert}-with-desc`);
         node.appendChild(AlertDesc);
@@ -174,13 +181,13 @@ class Alert implements PublicMethods {
     private _setCloseBtn(node: Element) {
         if (!this._isClosable(node)) return;
 
-        const AlertCloseBtn = document.createElement('a');
+        const AlertCloseBtn = createElem('a');
         const closeText: string = this._setCloseText(node);
 
         AlertCloseBtn.className = `${PREFIX.alert}-close`;
-        AlertCloseBtn.innerHTML = closeText
-            ? closeText
-            : '<i class="rab-icon rab-icon-ios-close"></i>';
+
+        let text = closeText ? closeText : '<i class="rab-icon rab-icon-ios-close"></i>';
+        setHtml(AlertCloseBtn, text);
 
         AlertCloseBtn.addEventListener('click', () => destroyElem(node, { fadeOut: true }));
 
@@ -192,11 +199,11 @@ class Alert implements PublicMethods {
     }
 
     private _isClosable(node: Element): boolean {
-        return node.getAttribute('closable') === 'true' ? true : false;
+        return node.getAttribute('closable') === 'true';
     }
 
     private _isShowIcon(node: Element): boolean {
-        return node.getAttribute('show-icon') === 'true' ? true : false;
+        return node.getAttribute('show-icon') === 'true';
     }
 
     private _getMsg(node: Element): string {

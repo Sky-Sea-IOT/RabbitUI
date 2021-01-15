@@ -1,5 +1,5 @@
 import { warn } from '../../mixins';
-import { removeAttrs } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setCss, setHtml, setText } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -19,7 +19,7 @@ class Badge implements PublicMethods {
 
     constructor() {
         this.VERSION = 'v1.0';
-        this.components = document.querySelectorAll('r-badge');
+        this.components = $el('r-badge', { all: true });
         this._create(this.components);
     }
 
@@ -30,15 +30,17 @@ class Badge implements PublicMethods {
         text: string;
         dot: boolean;
     } {
-        const target: any = document.querySelector(el);
+        const target: any = $el(el);
 
         validComps(target, 'badge');
 
         const countContainer = target.querySelector(`.${PREFIX.badge}-count`);
         const dotContainer = target.querySelector(`.${PREFIX.badge}-dot`);
 
-        const maxCount = Badge.prototype._getMaxCount(target);
-        const showZero = Badge.prototype._showZero(target);
+        const { _getMaxCount, _showZero, _setMaxCount } = Badge.prototype;
+
+        const maxCount = _getMaxCount(target);
+        const showZero = _showZero(target);
 
         return {
             get count() {
@@ -47,13 +49,15 @@ class Badge implements PublicMethods {
             set count(newVal: number) {
                 if (countContainer && type.isNum(newVal)) {
                     if (newVal > maxCount) {
-                        Badge.prototype._setMaxCount(countContainer, maxCount);
+                        _setMaxCount(countContainer, maxCount);
                     } else {
-                        countContainer.textContent = newVal;
+                        setText(countContainer, `${newVal}`);
 
-                        newVal <= 0 && !showZero
-                            ? (countContainer.style.display = 'none')
-                            : (countContainer.style.display = '');
+                        if (newVal <= 0 && !showZero) {
+                            setCss(countContainer, 'display', 'none');
+                        } else {
+                            setCss(countContainer, 'display', '');
+                        }
                     }
                 } else {
                     warn(`The count value of this badge cannot be set --> "${el}"`);
@@ -68,7 +72,7 @@ class Badge implements PublicMethods {
                     return;
                 }
 
-                countContainer.textContent = newVal;
+                setText(countContainer, newVal);
             },
             get dot() {
                 return dotContainer;
@@ -80,9 +84,9 @@ class Badge implements PublicMethods {
                 }
 
                 if (type.isBol(newVal) && newVal) {
-                    dotContainer.style.display = '';
+                    setCss(dotContainer, 'display', '');
                 } else {
-                    dotContainer.style.display = 'none';
+                    setCss(dotContainer, 'display', 'none');
                 }
             }
         };
@@ -109,7 +113,7 @@ class Badge implements PublicMethods {
         const count = this._getCount(node);
         const maxCount = this._getMaxCount(node);
 
-        const BadgeCount = document.createElement('sup');
+        const BadgeCount = createElem('sup');
         BadgeCount.className = `${PREFIX.badge}-count`;
 
         if (count || count === 0) {
@@ -119,9 +123,9 @@ class Badge implements PublicMethods {
             } else {
                 // 数字为 0 时隐藏或者展示 Badge
                 if (count <= 0 && !this._showZero(node)) {
-                    BadgeCount.style.display = 'none';
+                    setCss(BadgeCount, 'display', 'none');
                 } else {
-                    BadgeCount.textContent = `${count}`;
+                    setText(BadgeCount, `${count}`);
                 }
             }
             this._setDot(node, BadgeCount);
@@ -138,14 +142,16 @@ class Badge implements PublicMethods {
     }
 
     private _setMaxCount(node: Element, maxCount: number): void {
-        node.textContent = `${maxCount}+`;
+        setText(node, `${maxCount}+`);
     }
 
     private _setDot(node: Element, children: HTMLElement): void {
         if (!this._showDot(node)) return;
+
         // 设置为小红点则不显示任何计数内容
-        children.innerHTML = '';
-        children.style.display = '';
+        setHtml(children, '');
+        setCss(children, 'display', '');
+
         children.className = `${PREFIX.badge}-dot`;
     }
 
@@ -154,8 +160,8 @@ class Badge implements PublicMethods {
         if (!this._getStatus(parent) && !this._getColor(parent)) {
             const text = this._getText(parent);
             if (text) {
-                children.style.display = '';
-                children.textContent = text;
+                setCss(children, 'display', '');
+                setText(children, text);
             }
         }
     }
@@ -169,8 +175,8 @@ class Badge implements PublicMethods {
     private _setOffset(parent: Element, children: HTMLElement) {
         const offset = this._getOffset(parent);
 
-        children.style.marginTop = `${offset?.x}px`;
-        children.style.marginRight = `${offset?.y}px`;
+        setCss(children, 'marginTop', `${offset?.x}px`);
+        setCss(children, 'marginRight', `${offset?.y}px`);
     }
 
     private _setStatusWithColor(node: Element): void {
@@ -180,10 +186,10 @@ class Badge implements PublicMethods {
 
         if (!status && !color) return;
 
-        const BadgeStatusDot = document.createElement('span');
-        const BadgeStatusText = document.createElement('span');
+        const BadgeStatusDot = createElem('span');
+        const BadgeStatusText = createElem('span');
 
-        if ((text && status) || (text && color)) BadgeStatusText.textContent = text;
+        if ((text && status) || (text && color)) setText(BadgeStatusText, text);
 
         let statusCls: string;
         let colorCls = '';
@@ -207,7 +213,7 @@ class Badge implements PublicMethods {
         ) {
             colorCls = `${PREFIX.badge}-status-${color}`;
         } else {
-            BadgeStatusDot.style.backgroundColor = color;
+            setCss(BadgeStatusDot, 'backgroundColor', color);
         }
 
         BadgeStatusDot.className = `${PREFIX.badge}-status-dot ${statusCls} ${colorCls}`;
@@ -234,6 +240,7 @@ class Badge implements PublicMethods {
         | undefined {
         // 转为真实数组，如果赋值是 offset = ['0','1'] 这样的则会报错
         const offset = JSON.parse(node.getAttribute('offset') || '[]');
+
         // 如果是数组，那么不论写了多少个值都只返回前两个
         if (type.isArr(offset) && offset.length > 0) {
             return {
