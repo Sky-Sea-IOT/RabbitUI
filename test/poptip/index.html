@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    body {
+        height: 1300px;
+    }
+    
+    .example {
+        width: 550px;
+        padding: 42px 24px 50px;
+        border: 1px solid #f0f0f0;
+        margin: 20px auto;
+    }
+    
+    .top,
+    .bottom {
+        text-align: center;
+    }
+    
+    .center {
+        width: 300px;
+        margin: 10px auto;
+        overflow: hidden;
+    }
+    
+    .center-left {
+        float: left;
+    }
+    
+    .center-right {
+        float: right;
+    }
+</style>
+
+<body>
+    <div class="example">
+        <div class="rab-poptip">
+            <div class="rab-poptip-rel">
+                <button type="button" class="rab-btn">click 激活</button>
+            </div>
+            <div class="rab-poptip-popper" x-placement="top">
+                <div class="rab-poptip-content">
+                    <div class="rab-poptip-arrow"></div>
+                    <div class="rab-poptip-inner">
+                        <div class="rab-poptip-title">
+                            <div class="rab-poptip-title-inner">提示标题</div>
+                        </div>
+                        <div class="rab-poptip-body">
+                            <div class="rab-poptip-body-content">
+                                <div class="rab-poptip-body-content-inner">提示内容</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

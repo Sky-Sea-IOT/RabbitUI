@@ -5,6 +5,7 @@ import Button from './components/button';
 import Loading from './components/loading-bar';
 import Message from './components/message';
 import Notice from './components/notice';
+import Poptip from './components/poptip';
 import Progress from './components/progress';
 import Steps from './components/steps';
 import Switch from './components/switch';
@@ -23,6 +24,7 @@ export default {
     Loading,
     Message,
     Notice,
+    Poptip,
     Progress,
     Steps,
     Switch,

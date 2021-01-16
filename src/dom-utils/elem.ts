@@ -37,3 +37,28 @@ export function setText(node: Element, value?: string): string {
         return node.textContent || '';
     }
 }
+
+// 通用的标签属性获取方法
+// 获取后的值由原先的字符串类型转换成对应类型
+
+// Return String type
+export function getStrTypeAttr(node: Element, attrName: string, defaultVal: string): string {
+    return node.getAttribute(attrName) || defaultVal;
+}
+
+// Return Boolean type
+export function getBooleanTypeAttr(node: Element): boolean {
+    return node.getAttribute('disabled') === 'true';
+}
+
+// Return Number type
+export function getNumTypeAttr(node: Element, attrName: string, defaultVal: number): number {
+    return Number(node.getAttribute(attrName)) || defaultVal;
+}
+
+// Return Array type
+export function getArrTypeAttr(node: Element, attrName: string): Array<string | number> {
+    const attr = node.getAttribute(attrName)?.replace(/'/g, '"') || '[]';
+    const array: [string | number] = JSON.parse(attr);
+    return array;
+}

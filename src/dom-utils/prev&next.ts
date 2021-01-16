@@ -3,12 +3,16 @@ export function prevAll(el: Element): Element[] {
     const Parent = el.parentElement;
     const Child = Parent!.children;
     const prevChildren = [];
-    for (let i = 0; i < Child.length; i++) {
-        const _childI = Child[i];
-        if (_childI == el) {
+
+    let i = 0;
+    const { length } = Child;
+
+    for (; i < length; i++) {
+        const _child = Child[i];
+        if (_child == el) {
             break;
         }
-        prevChildren.push(_childI);
+        prevChildren.push(_child);
     }
     return prevChildren;
 }
@@ -17,12 +21,17 @@ export function nextAll(el: Element): Element[] {
     const Parent = el.parentElement;
     const Child = Parent!.children;
     const nextChildren = [];
-    for (let i = Child.length - 1; i >= 0; i--) {
-        const _childI = Child[i];
-        if (_childI == el) {
+
+    const { length } = Child;
+    const start = 0;
+    let i = length - 1;
+
+    for (; i >= start; i--) {
+        const _child = Child[i];
+        if (_child == el) {
             break;
         }
-        nextChildren.unshift(_childI);
+        nextChildren.unshift(_child);
     }
     return nextChildren;
 }

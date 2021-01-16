@@ -1,4 +1,13 @@
-import { $el, createElem, setCss, setHtml, setText } from './elem-api';
+import {
+    $el,
+    createElem,
+    setCss,
+    setHtml,
+    setText,
+    getStrTypeAttr,
+    getNumTypeAttr,
+    getBooleanTypeAttr
+} from './elem';
 import { prevAll, nextAll } from './prev&next';
 import removeAttrs from './remove-attrs';
 import siblings from './siblings';
@@ -14,5 +23,8 @@ export {
     nextAll,
     removeAttrs,
     siblings,
-    slide
+    slide,
+    getStrTypeAttr,
+    getNumTypeAttr,
+    getBooleanTypeAttr
 };

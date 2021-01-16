@@ -31,7 +31,7 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.join(__dirname, '../test/dist/index.html'),
-            template: path.join(__dirname, '../test/tooltip/index.html')
+            template: path.join(__dirname, '../test/poptip/index.html')
         }),
         new FriendlyErrorsPlugin()
     ]
