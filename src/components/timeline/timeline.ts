@@ -1,4 +1,4 @@
-import { removeAttrs } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
 import PREFIX from '../prefix';
 
 class Timeline {
@@ -7,7 +7,7 @@ class Timeline {
 
     constructor() {
         this.VERSION = '1.0';
-        this.components = document.querySelectorAll('r-timeline > r-timeline-item');
+        this.components = $el('r-timeline > r-timeline-item', { all: true });
         this._create(this.components);
     }
 
@@ -15,9 +15,9 @@ class Timeline {
         nodes.forEach((node) => {
             const TimelineItem = node;
 
-            const TimelineTail = document.createElement('div');
-            const TimelineHead = document.createElement('div');
-            const TimelineContent = document.createElement('div');
+            const TimelineTail = createElem('div');
+            const TimelineHead = createElem('div');
+            const TimelineContent = createElem('div');
 
             this._setCls(TimelineTail, TimelineHead, TimelineContent);
             this._setColor(TimelineItem, TimelineHead);
@@ -26,7 +26,7 @@ class Timeline {
 
             TimelineItem.append(TimelineTail, TimelineHead, TimelineContent);
 
-            removeAttrs(TimelineItem, ['rb-dot']);
+            removeAttrs(TimelineItem, ['dot']);
         });
     }
 
@@ -37,9 +37,9 @@ class Timeline {
     }
 
     private _setContent(parent: Element, node1: HTMLElement): void {
-        node1.innerHTML = parent.innerHTML;
+        setHtml(node1, parent.innerHTML);
         // 清空原先的内容
-        parent.innerHTML = '';
+        setHtml(parent, '');
     }
 
     private _setColor(parent: Element, node: HTMLElement): void {
@@ -49,8 +49,8 @@ class Timeline {
         if (colors === 'blue' || colors === 'red' || colors === 'gray' || colors === 'green') {
             node.classList.add(`${PREFIX.timeline}-item-head-${colors}`);
         } else {
-            node.style.color = colors;
-            node.style.borderColor = colors;
+            setCss(node, 'color', colors);
+            setCss(node, 'borderColor', colors);
         }
     }
 
@@ -60,7 +60,8 @@ class Timeline {
 
         node.classList.add(`${PREFIX.timeline}-item-head-custom`);
 
-        node.innerHTML = this._getDotContent(parent);
+        const content = this._getDotContent(parent);
+        setHtml(node, content);
     }
 
     private _getStatusColor(node: Element): string {

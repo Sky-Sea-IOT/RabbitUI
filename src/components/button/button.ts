@@ -1,4 +1,5 @@
-import { removeAttrs } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
+import { validComps } from '../../utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {
@@ -15,7 +16,7 @@ class Button implements PublicMethods {
 
     constructor() {
         this.VERSION = '1.0';
-        this.components = document.querySelectorAll(`.${PREFIX.button}`);
+        this.components = $el(`.${PREFIX.button}`, { all: true });
         this._getAllBtns(this.components);
     }
 
@@ -24,9 +25,9 @@ class Button implements PublicMethods {
     ): {
         loading: boolean;
     } {
-        const target: any = document.querySelector(elem);
+        const target: any = $el(elem);
 
-        if (!target) throw new Error(`The selected element "${elem}" does not exist`);
+        validComps(target, 'button');
 
         return {
             get loading() {
@@ -65,21 +66,24 @@ class Button implements PublicMethods {
         if (!this._getIcon(node)) return;
 
         if (node.innerHTML === '') {
+            const btnIcon = `<i class="rab-icon rab-icon-${this._getIcon(node)}"></i>`;
+
             node.classList.add(`${PREFIX.button}-icon-only`);
-            node.innerHTML = `<i class="rab-icon rab-icon-${this._getIcon(node)}"></i>`;
+
+            setHtml(node, btnIcon);
         } else {
-            const Icon = document.createElement('i');
+            const Icon = createElem('i');
             Icon.className = `rab-icon rab-icon-${this._getIcon(node)}`;
             node.prepend(Icon);
         }
     }
 
     private _isLoading(node: Element): boolean {
-        return node.getAttribute('loading') === 'true' || false;
+        return node.getAttribute('loading') === 'true';
     }
 
     private _loadIcon(): HTMLElement {
-        const LoadIcon = document.createElement('i');
+        const LoadIcon = createElem('i');
         LoadIcon.className = 'rab-load-loop rab-icon rab-icon-loading-solid';
         return LoadIcon;
     }

@@ -2,13 +2,14 @@ import { CssTransition, warn } from '../../mixins';
 import { type, destroyElem, destroyElemByKey, useHTMLString } from '../../utils';
 import { usePromiseCallback } from '../../mixins';
 import PREFIX from '../prefix';
+import { $el, createElem, setCss, setHtml } from '../../dom-utils';
 
 interface NoticeGlobalAPI {
     top?: number; // 通知组件距离顶端的距离，单位像素
     duration?: number; // 默认自动关闭的延时，单位秒
 }
 
-interface NoticeAPI {
+interface NoticeOptions {
     key?: string | number; // 当前通知的唯一标识
     icon?: string; // 自定义图标
     title?: string; // 通知提醒的标题
@@ -23,11 +24,11 @@ interface NoticeAPI {
 }
 
 interface PublicMethods {
-    open(config: NoticeAPI): Promise<void>;
-    info(config: NoticeAPI): Promise<void>;
-    success(config: NoticeAPI): Promise<void>;
-    warning(config: NoticeAPI): Promise<void>;
-    error(config: NoticeAPI): Promise<void>;
+    open(config: NoticeOptions): Promise<void>;
+    info(config: NoticeOptions): Promise<void>;
+    success(config: NoticeOptions): Promise<void>;
+    warning(config: NoticeOptions): Promise<void>;
+    error(config: NoticeOptions): Promise<void>;
     close(key: string): void;
     destroy(): void;
 }
@@ -45,7 +46,7 @@ const iconTypes = {
     loading: 'loading-solid'
 };
 
-const defaults_notice: {
+const DEFAULT_NOTICE: {
     top: number;
     duration: number;
 } = {
@@ -56,15 +57,15 @@ const defaults_notice: {
 let zIndex = 1180;
 
 // 创建实例的最外层父容器
-function noticeInsanceWrapper(): HTMLElement {
-    const NoticeWrapper = document.createElement('div');
+function createNoticeInsanceWrapper(): HTMLElement {
+    const NoticeWrapper = createElem('div');
 
-    NoticeWrapper.className = 'rab-notice';
+    NoticeWrapper.className = `${PREFIX.notice}`;
 
-    NoticeWrapper.style.zIndex = `${zIndex}`;
-    NoticeWrapper.style.right = '0';
+    setCss(NoticeWrapper, 'zIndex', `${zIndex}`);
+    setCss(NoticeWrapper, 'right', '0');
 
-    setTimeout(() => (NoticeWrapper.style.top = `${defaults_notice.top}px`), 0);
+    setTimeout(() => setCss(NoticeWrapper, 'top', `${DEFAULT_NOTICE.top}px`), 0);
 
     document.body.appendChild(NoticeWrapper);
 
@@ -79,41 +80,40 @@ class $Notice implements PublicMethods {
         this.VERSION = 'v1.0';
         // 存储已经创建的实例，在 destroy方法里需要用到
         this.instances = [];
-
-        noticeInsanceWrapper();
+        createNoticeInsanceWrapper();
     }
 
-    public open(config: NoticeAPI): Promise<void> {
+    public open(config: NoticeOptions): Promise<void> {
         this._createInstance('normal', config);
-        return usePromiseCallback(defaults_notice.duration, config.duration);
+        return usePromiseCallback(DEFAULT_NOTICE.duration, config.duration);
     }
 
-    public info(config: NoticeAPI): Promise<void> {
+    public info(config: NoticeOptions): Promise<void> {
         this._createInstance('info', config);
-        return usePromiseCallback(defaults_notice.duration, config.duration);
+        return usePromiseCallback(DEFAULT_NOTICE.duration, config.duration);
     }
 
-    public success(config: NoticeAPI): Promise<void> {
+    public success(config: NoticeOptions): Promise<void> {
         this._createInstance('success', config);
-        return usePromiseCallback(defaults_notice.duration, config.duration);
+        return usePromiseCallback(DEFAULT_NOTICE.duration, config.duration);
     }
 
-    public warning(config: NoticeAPI): Promise<void> {
+    public warning(config: NoticeOptions): Promise<void> {
         this._createInstance('warning', config);
-        return usePromiseCallback(defaults_notice.duration, config.duration);
+        return usePromiseCallback(DEFAULT_NOTICE.duration, config.duration);
     }
 
-    public error(config: NoticeAPI): Promise<void> {
+    public error(config: NoticeOptions): Promise<void> {
         this._createInstance('error', config);
-        return usePromiseCallback(defaults_notice.duration, config.duration);
+        return usePromiseCallback(DEFAULT_NOTICE.duration, config.duration);
     }
 
     public config(options: NoticeGlobalAPI): void {
         if (options.top) {
-            defaults_notice.top = options.top;
+            DEFAULT_NOTICE.top = options.top;
         }
         if (options.duration || options.duration === 0) {
-            defaults_notice.duration = options.duration;
+            DEFAULT_NOTICE.duration = options.duration;
         }
     }
 
@@ -139,26 +139,21 @@ class $Notice implements PublicMethods {
 
     private _autoSetZindex(): void {
         zIndex++;
-        // @ts-ignore
-        document.querySelector(`.${PREFIX.notice}`).style.zIndex = `${zIndex}`;
+        setCss($el(`.${PREFIX.notice}`), 'zIndex', `${zIndex}`);
     }
 
-    private _createInstance(type: string, config: NoticeAPI): HTMLElement {
+    private _createInstance(type: string, config: NoticeOptions): HTMLElement {
         this._autoSetZindex();
 
-        const Notice = document.createElement('div');
-        const NoticeContent = document.createElement('div');
-        const NoticeCustomContent = document.createElement('div');
-        const NoticeTitle = document.createElement('div');
-        const NoticeDesc = document.createElement('div');
+        const Notice = createElem('div');
+        const NoticeContent = createElem('div');
+        const NoticeCustomContent = createElem('div');
+        const NoticeTitle = createElem('div');
+        const NoticeDesc = createElem('div');
 
         this._setCls(
             type,
-            Notice,
-            NoticeContent,
-            NoticeCustomContent,
-            NoticeTitle,
-            NoticeDesc,
+            [Notice, NoticeContent, NoticeCustomContent, NoticeTitle, NoticeDesc],
             config.className
         );
         this._setKey(Notice, config.key);
@@ -193,20 +188,23 @@ class $Notice implements PublicMethods {
         return Notice;
     }
 
-    private _setCls(
-        type: string,
-        node1: HTMLElement,
-        node2: HTMLElement,
-        node3: HTMLElement,
-        node4: HTMLElement,
-        node5: HTMLElement,
-        customCls?: string
-    ): void {
-        node1.className = `${PREFIX.noticeChild} ${customCls ? customCls : ''}`;
-        node2.className = `${PREFIX.noticeChild}-content`;
-        node3.className = `${PREFIX.noticeChild}-custom-content ${PREFIX.notice}-with-${type}`;
-        node4.className = `${PREFIX.notice}-title`;
-        node5.className = `${PREFIX.notice}-desc`;
+    private _setCls(type: string, nodes: Array<HTMLElement>, customCls?: string): void {
+        const nodesCls = [
+            `${PREFIX.noticeChild} ${customCls ? customCls : ''}`,
+            `${PREFIX.noticeChild}-content`,
+            `${PREFIX.noticeChild}-custom-content ${PREFIX.notice}-with-${type}`,
+            `${PREFIX.notice}-title`,
+            `${PREFIX.notice}-desc`
+        ];
+
+        let i = 0;
+
+        const { length } = nodes;
+
+        for (; i < length; i++) {
+            const node = nodes[i];
+            node.className = nodesCls[i];
+        }
     }
 
     private _setKey(node: HTMLElement, key: any): void {
@@ -259,15 +257,16 @@ class $Notice implements PublicMethods {
         // 带有状态图标并且是否带有提示内容，如果有则将图标设为 outline 外观
         if (child_desc.innerHTML) isOutline = '-outline';
 
-        const NoticeIcon = document.createElement('span');
+        const NoticeIcon = createElem('span');
         NoticeIcon.className = `${PREFIX.notice}-icon ${PREFIX.notice}-icon-${type}`;
 
         // 是否自定义状态图标
         if (customIcon) {
-            NoticeIcon.innerHTML = customIcon;
+            setHtml(NoticeIcon, customIcon);
         } else {
             // @ts-ignore
-            NoticeIcon.innerHTML = `<i class="rab-icon rab-icon-${iconTypes[type]}${isOutline}"></i>`;
+            const defaultIcon = `<i class="${PREFIX.icon} ${PREFIX.icon}-${iconTypes[type]}${isOutline}"></i>`;
+            setHtml(NoticeIcon, defaultIcon);
         }
 
         child_custom.prepend(NoticeIcon);
@@ -281,9 +280,12 @@ class $Notice implements PublicMethods {
 
         parent.classList.add(`${PREFIX.noticeChild}-closable`);
 
-        const NoticeClose = document.createElement('a');
+        const NoticeClose = createElem('a');
+        const closeIcon = `<i class="${PREFIX.icon} ${PREFIX.icon}-ios-close"></i>`;
+
         NoticeClose.className = `${PREFIX.noticeChild}-close`;
-        NoticeClose.innerHTML = '<i class="rab-icon rab-icon-ios-close"></i>';
+
+        setHtml(NoticeClose, closeIcon);
 
         this._handleClose(parent, NoticeClose, onClose);
 
@@ -293,13 +295,15 @@ class $Notice implements PublicMethods {
     // 自定义内联样式
     private _customStyle(node: HTMLElement, style?: string): void {
         if (!style) return;
-        node.style.cssText = style;
+
+        setCss(node, 'cssText', style);
     }
 
     // 点击通知时触发的回调函数
     private _handleNoticeClick(parent: HTMLElement, onClick?: () => void): void {
         parent.onclick = (e) => {
             e.stopPropagation();
+
             if (onClick) type.isFn(onClick);
         };
     }
@@ -319,7 +323,7 @@ class $Notice implements PublicMethods {
 
     private _autoClose(instance: HTMLElement, duration?: number): void {
         // 为每个实例自己的 duration参数设置默认值，如果有传入值则使用自定义的值
-        type.isUndef(duration) ? (duration = defaults_notice.duration) : duration;
+        type.isUndef(duration) ? (duration = DEFAULT_NOTICE.duration) : duration;
 
         destroyElem(instance, {
             duration,

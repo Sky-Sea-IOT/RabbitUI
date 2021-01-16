@@ -1,3 +1,4 @@
+import { $el, setCss, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -11,12 +12,12 @@ class Switch implements PublicMethods {
 
     constructor() {
         this.VERSION = '1.0';
-        this.components = document.querySelectorAll('r-switch');
+        this.components = $el('r-switch', { all: true });
         this._getAllSwitch(this.components);
     }
 
     public onChange(elem: string, cb: ([status, $this]: [boolean, Element]) => void): void {
-        const target: any = document.querySelector(elem);
+        const target: any = $el(elem);
 
         validComps(target, 'switch');
 
@@ -50,24 +51,31 @@ class Switch implements PublicMethods {
     // 设置自定义的状态文本
     private _setStatusText(node: Element, status: boolean): void {
         const { openText, closeText } = this._getStatusText(node);
+
         if (!openText || !closeText) return;
+
         // 创建文本容器
         const TextBox = document.createElement('span');
+
         TextBox.className = `${PREFIX.switch}-inner`;
+
         node.appendChild(TextBox);
-        status ? (TextBox.innerHTML = openText) : (TextBox.innerHTML = closeText);
+
+        status ? setHtml(TextBox, openText) : setHtml(TextBox, closeText);
     }
 
     // 设置自定义的状态颜色
     private _setStatusColor(node: any, status: boolean): void {
         const { trueColor, falseColor } = this._getColor(node);
+
         if (!trueColor || !falseColor) return;
+
         if (status) {
-            node.style.borderColor = trueColor;
-            node.style.backgroundColor = trueColor;
+            setCss(node, 'borderColor', trueColor);
+            setCss(node, 'backgroundColor', trueColor);
         } else {
-            node.style.borderColor = falseColor;
-            node.style.backgroundColor = falseColor;
+            setCss(node, 'borderColor', falseColor);
+            setCss(node, 'backgroundColor', falseColor);
         }
     }
 
@@ -77,9 +85,11 @@ class Switch implements PublicMethods {
             if (this._isLoading(node)) return false;
 
             status ? (status = false) : (status = true);
+
             node.setAttribute('rb-checked', `${status}`);
 
             const { openText, closeText } = this._getStatusText(node);
+
             this._changeStatusText(node, status, openText, closeText);
 
             this._setStatusColor(node, status);
@@ -91,8 +101,9 @@ class Switch implements PublicMethods {
     private _changeStatusText(node: Element, status: boolean, openText: any, closeText: any): void {
         // 获取当前开关下的文本容器
         const TextBox = node.querySelector(`.${PREFIX.switch}-inner`);
+
         if (TextBox) {
-            status ? (TextBox.innerHTML = openText) : (TextBox.innerHTML = closeText);
+            status ? setHtml(TextBox, openText) : setHtml(TextBox, closeText);
         }
     }
 

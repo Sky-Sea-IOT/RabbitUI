@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { warn } from '../../mixins';
-import { prevAll, nextAll, removeAttrs } from '../../dom-utils';
+import { prevAll, nextAll, removeAttrs, $el, setText, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -30,7 +30,7 @@ class Steps implements PublicMethods {
 
     constructor() {
         this.VERSION = '1.0';
-        this.components = document.querySelectorAll('r-steps');
+        this.components = $el('r-steps', { all: true });
         this._create(this.components);
     }
 
@@ -44,9 +44,9 @@ class Steps implements PublicMethods {
 
         validComps(target, 'steps');
 
-        const { _updateStatus } = Steps.prototype;
+        const { _updateStatus, _getCurrent } = Steps.prototype;
 
-        const oldCurrent = Steps.prototype._getCurrent(target);
+        const oldCurrent = _getCurrent(target);
 
         return {
             setSteps({ current, status }: StepsConfig) {
@@ -63,12 +63,13 @@ class Steps implements PublicMethods {
                 // 如果没有传入索引值则默认为第一个
                 if (!idx) idx = 0;
 
-                const CurrentChild = target.children[idx];
-                const ChildTitle = CurrentChild.querySelector(`.${PREFIX.steps}-title`);
-                const ChildContent = CurrentChild.querySelector(`.${PREFIX.steps}-content`);
+                const ChildCurrent = target.children[idx];
+                const ChildTitle = ChildCurrent.querySelector(`.${PREFIX.steps}-title`);
+                const ChildContent = ChildCurrent.querySelector(`.${PREFIX.steps}-content`);
 
-                if (title && type.isStr(title)) ChildTitle.textContent = title;
-                if (content && type.isStr(content)) ChildContent.textContent = content;
+                if (title && type.isStr(title)) setText(ChildTitle, title);
+
+                if (content && type.isStr(content)) setText(ChildContent, content);
             }
         };
     }
@@ -86,8 +87,15 @@ class Steps implements PublicMethods {
         // 该父节点下的所有 r-step 标签
         const { children } = node;
 
-        for (let i = 0; i < children.length; i++) {
+        let i = 0;
+
+        const { length } = children;
+
+        for (; i < length; i++) {
             const child = children[i];
+
+            const title = this._getTitle(child);
+            const content = this._getContent(child);
             const idxText = `${i + 1}`;
 
             child.innerHTML = `
@@ -98,10 +106,11 @@ class Steps implements PublicMethods {
                  </div>
              </div>
              <div class="${PREFIX.steps}-main">
-                 <div class="${PREFIX.steps}-title">${this._getTitle(child)}</div>
-                 <div class="${PREFIX.steps}-content">${this._getContent(child)}</div>
+                 <div class="${PREFIX.steps}-title">${title}</div>
+                 <div class="${PREFIX.steps}-content">${content}</div>
              </div>
             `;
+
             this._setCustomIcon(child);
             this._setNextErrorStatus(child);
             this._autoSetFinishOrErrorIcon(child, i);
@@ -192,8 +201,10 @@ class Steps implements PublicMethods {
 
         const setFinishOrErrorIcon = (status: string, children: Element): void => {
             if (status === 'finish' || status === 'error') {
-                children.innerHTML = '';
+                setHtml(children, '');
+
                 if (status === 'finish') children.className = `${prefixIconCls}ios-checkmark`;
+
                 if (status === 'error') children.className = `${prefixIconCls}ios-close`;
             }
         };
@@ -207,6 +218,7 @@ class Steps implements PublicMethods {
         // 判断之前的所有步骤的状态
         prevAll(node).forEach((prevNode) => {
             const prevStatus = this._geStatus(prevNode);
+
             // 如果之前的步骤的状态存在有完成或者是错误的则添加对应图标
             if (prevStatus === 'finish' || prevStatus === 'error') {
                 const HeadInner = prevNode.querySelector('[data-step="current"]')!;
@@ -224,7 +236,8 @@ class Steps implements PublicMethods {
 
         const child = node.querySelector(`.${PREFIX.steps}-head-inner`)!.children[0];
 
-        child.innerHTML = '';
+        setHtml(child, '');
+
         child.className = `${PREFIX.steps}-icon ${PREFIX.icon} ${PREFIX.icon}-${iconType}`;
     }
 

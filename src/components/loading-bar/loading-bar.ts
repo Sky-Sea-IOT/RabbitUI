@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { $el, createElem, setCss } from '../../dom-utils';
 import { CssTransition } from '../../mixins';
 import { type } from '../../utils';
 import PREFIX from '../prefix';
 
-interface UpdataGlobalAPI {
+interface UpdatelobalAPI {
     color?: string; // 进度条的颜色
     height?: number; // 进度条高度，单位 px
     duration?: number; // 隐藏时的持续时间，单位 ms
@@ -25,7 +26,7 @@ interface PublicMethods {
 }
 
 // 全局配置
-const defaults_loadingBar: {
+const DEFAULT_LOADINGBAR: {
     color: string;
     height: number;
     duration: number;
@@ -39,9 +40,9 @@ const defaults_loadingBar: {
 
 let timer: any;
 
-function loadingBarInstance(): HTMLDivElement {
-    const LoadingBar = document.createElement('div');
-    const LoadingBarInner = document.createElement('div');
+function createLoadingBarInstance(): HTMLElement {
+    const LoadingBar = createElem('div');
+    const LoadingBarInner = createElem('div');
 
     LoadingBar.className = `${PREFIX.loadingBar}`;
     LoadingBarInner.className = `${PREFIX.loadingBar}-inner`;
@@ -49,11 +50,12 @@ function loadingBarInstance(): HTMLDivElement {
     setColor('primary', LoadingBarInner);
 
     // 初始进度
-    LoadingBarInner.style.width = '0%';
+    setCss(LoadingBarInner, 'width', '0%');
 
     // 设置进度条高度为全局配置的高度
     setTimeout(() => {
-        LoadingBar.style.height = `${defaults_loadingBar.height}px`;
+        const height = `${DEFAULT_LOADINGBAR.height}px`;
+        setCss(LoadingBar, 'height', height);
     }, 0);
 
     LoadingBar.appendChild(LoadingBarInner);
@@ -64,12 +66,11 @@ function loadingBarInstance(): HTMLDivElement {
 
 // 设置进度函数
 function r_update(options: UpdateAPI): void {
-    const LBar = document.querySelector(`.${PREFIX.loadingBar}`)!;
-    const LBarInner = document.querySelector(`.${PREFIX.loadingBar}-inner`)!;
+    const LBar = $el(`.${PREFIX.loadingBar}`)!;
+    const LBarInner = $el(`.${PREFIX.loadingBar}-inner`)!;
 
     // 设置进度
-    // @ts-ignore
-    LBarInner.style.width = `${options.percent}%`;
+    setCss(LBarInner, 'width', `${options.percent}%`);
 
     const transitionConfig = {
         rmCls: true,
@@ -106,7 +107,7 @@ function hide() {
                 percent: 0
             });
         }, 200);
-    }, defaults_loadingBar.duration);
+    }, DEFAULT_LOADINGBAR.duration);
 }
 
 function clearTimer() {
@@ -120,28 +121,25 @@ function clearTimer() {
 function setColor(status: string, elem: any): void {
     if (status === 'error') {
         // 是否使用全局配置的 failedColor
-        if (defaults_loadingBar.failedColor && defaults_loadingBar.failedColor !== 'error') {
-            // @ts-ignore
-            elem.style.backgroundColor = defaults_loadingBar.failedColor;
+        if (DEFAULT_LOADINGBAR.failedColor && DEFAULT_LOADINGBAR.failedColor !== 'error') {
+            setCss(elem, 'backgroundColor', DEFAULT_LOADINGBAR.failedColor);
 
             // 在隐藏的持续时间后初始化背景色
             setTimeout(() => {
-                // @ts-ignore
-                elem.style.backgroundColor = '';
-            }, defaults_loadingBar.duration);
+                setCss(elem, 'backgroundColor', '');
+            }, DEFAULT_LOADINGBAR.duration);
         } else {
             elem.classList.add(`${PREFIX.loadingBar}-inner-failed-color-error`);
 
             // 在隐藏的持续时间后设为初始颜色
             setTimeout(() => {
                 elem.classList.remove(`${PREFIX.loadingBar}-inner-failed-color-error`);
-            }, defaults_loadingBar.duration + 200);
+            }, DEFAULT_LOADINGBAR.duration + 200);
         }
     } else if (status === 'primary') {
         // 是否使用全局配置的 color
-        if (defaults_loadingBar.color && defaults_loadingBar.color !== 'primary') {
-            // @ts-ignore
-            elem.style.backgroundColor = defaults_loadingBar.color;
+        if (DEFAULT_LOADINGBAR.color && DEFAULT_LOADINGBAR.color !== 'primary') {
+            setCss(elem, 'backgroundColor', DEFAULT_LOADINGBAR.color);
         } else {
             elem.classList.add(`${PREFIX.loadingBar}-inner-color-primary`);
         }
@@ -150,11 +148,12 @@ function setColor(status: string, elem: any): void {
 
 class $LoadingBar implements PublicMethods {
     readonly VERSION: string;
+    readonly component: any;
 
     constructor() {
         this.VERSION = 'v1.0';
-
-        loadingBarInstance();
+        this.component = $el(`.${PREFIX.loadingBar}`);
+        createLoadingBarInstance();
     }
 
     public statr(): void {
@@ -206,24 +205,25 @@ class $LoadingBar implements PublicMethods {
         hide();
     }
 
-    public config(options: UpdataGlobalAPI): void {
+    public config(options: UpdatelobalAPI): void {
         if (options.color && type.isStr(options.color)) {
-            defaults_loadingBar.color = options.color;
+            DEFAULT_LOADINGBAR.color = options.color;
         }
         if (options.height && type.isNum(options.height)) {
-            defaults_loadingBar.height = options.height;
+            DEFAULT_LOADINGBAR.height = options.height;
         }
         if (options.duration && type.isNum(options.duration)) {
-            defaults_loadingBar.duration = options.duration;
+            DEFAULT_LOADINGBAR.duration = options.duration;
         }
         if (options.failedColor && type.isStr(options.failedColor)) {
-            defaults_loadingBar.failedColor = options.failedColor;
+            DEFAULT_LOADINGBAR.failedColor = options.failedColor;
         }
     }
 
     public destroy(): void {
         clearTimer();
-        document.body.removeChild(document.querySelector(`.${PREFIX.loadingBar}`)!);
+        // @ts-ignore
+        document.body.removeChild($el(`.${PREFIX.loadingBar}`));
     }
 }
 

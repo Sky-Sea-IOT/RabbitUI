@@ -2,13 +2,14 @@ import { CssTransition } from '../../mixins';
 import { type, destroyElem, destroyElemByKey, useHTMLString } from '../../utils';
 import { usePromiseCallback } from '../../mixins';
 import PREFIX from '../prefix';
+import { $el, createElem, setCss, setHtml } from '../../dom-utils';
 
 interface MsgGlobalAPI {
     top?: number; // 消息从顶部弹出时，距离顶部的位置，单位像素
     duration?: number; // 默认自动关闭延时，单位秒
 }
 
-interface MessageAPI {
+interface MessageOptions {
     key?: string | number; // 当前消息唯一标志
     content?: string; // 提示内容
     duration?: number; // 自动关闭的延时，单位秒，不关闭可以写 0
@@ -19,11 +20,11 @@ interface MessageAPI {
 }
 
 interface PublicMethods {
-    info(config: string | MessageAPI): Promise<void>;
-    success(config: string | MessageAPI): Promise<void>;
-    warning(config: string | MessageAPI): Promise<void>;
-    error(config: string | MessageAPI): Promise<void>;
-    loading(config: string | MessageAPI): Promise<void>;
+    info(config: string | MessageOptions): Promise<void>;
+    success(config: string | MessageOptions): Promise<void>;
+    warning(config: string | MessageOptions): Promise<void>;
+    error(config: string | MessageOptions): Promise<void>;
+    loading(config: string | MessageOptions): Promise<void>;
     config(options: MsgGlobalAPI): void;
     destroy(key?: string | number): void;
 }
@@ -41,7 +42,7 @@ const iconTypes = {
     loading: 'loading-solid'
 };
 
-const defaults_message: {
+const DEFAULT_MESSAGE: {
     top: number;
     duration: number;
 } = {
@@ -52,14 +53,14 @@ const defaults_message: {
 let zIndex = 1010;
 
 // 创建实例的最外层父容器
-function messageInstanceWrapper(): HTMLDivElement {
-    const MsgWrapper = document.createElement('div');
+function createMessageInstanceWrapper(): HTMLElement {
+    const MsgWrapper = createElem('div');
 
     MsgWrapper.className = `${PREFIX.message}`;
-    MsgWrapper.style.zIndex = `${zIndex}`;
+    setCss(MsgWrapper, 'zIndex', `${zIndex}`);
 
     setTimeout(() => {
-        MsgWrapper.style.top = `${defaults_message.top}px`;
+        setCss(MsgWrapper, 'top', `${DEFAULT_MESSAGE.top}px`);
     }, 0);
 
     document.body.appendChild(MsgWrapper);
@@ -75,42 +76,41 @@ class $Message implements PublicMethods {
         this.VERSION = 'v1.0';
         // 存储已经创建的实例，在 destroy方法里需要用到
         this.instances = [];
-
-        messageInstanceWrapper();
+        createMessageInstanceWrapper();
     }
 
-    public info(config: string | MessageAPI): Promise<void> {
+    public info(config: string | MessageOptions): Promise<void> {
         this._createInstance('info', config);
         // message 结束时提供 then 接口在关闭后运行 callback
-        return usePromiseCallback(defaults_message.duration, config);
+        return usePromiseCallback(DEFAULT_MESSAGE.duration, config);
     }
 
-    public success(config: string | MessageAPI): Promise<void> {
+    public success(config: string | MessageOptions): Promise<void> {
         this._createInstance('success', config);
-        return usePromiseCallback(defaults_message.duration, config);
+        return usePromiseCallback(DEFAULT_MESSAGE.duration, config);
     }
 
-    public warning(config: string | MessageAPI): Promise<void> {
+    public warning(config: string | MessageOptions): Promise<void> {
         this._createInstance('warning', config);
-        return usePromiseCallback(defaults_message.duration, config);
+        return usePromiseCallback(DEFAULT_MESSAGE.duration, config);
     }
 
-    public error(config: string | MessageAPI): Promise<void> {
+    public error(config: string | MessageOptions): Promise<void> {
         this._createInstance('error', config);
-        return usePromiseCallback(defaults_message.duration, config);
+        return usePromiseCallback(DEFAULT_MESSAGE.duration, config);
     }
 
-    public loading(config: string | MessageAPI): Promise<void> {
+    public loading(config: string | MessageOptions): Promise<void> {
         this._createInstance('loading', config);
-        return usePromiseCallback(defaults_message.duration, config);
+        return usePromiseCallback(DEFAULT_MESSAGE.duration, config);
     }
 
     public config(options: MsgGlobalAPI): void {
         if (options.top && type.isNum(options.top)) {
-            defaults_message.top = options.top;
+            DEFAULT_MESSAGE.top = options.top;
         }
         if ((options.duration && type.isNum(options.duration)) || options.duration === 0) {
-            defaults_message.duration = options.duration;
+            DEFAULT_MESSAGE.duration = options.duration;
         }
     }
 
@@ -139,19 +139,18 @@ class $Message implements PublicMethods {
     private _autoSetZindex(): void {
         // 每次创建实例自动增加最外层父容器的层级
         zIndex++;
-        // @ts-ignore
-        document.querySelector(`.${PREFIX.message}`).style.zIndex = `${zIndex}`;
+        setCss($el(`.${PREFIX.message}`), 'zIndex', `${zIndex}`);
     }
 
-    private _createInstance(_type: string, config: string | MessageAPI): HTMLDivElement {
+    private _createInstance(_type: string, config: string | MessageOptions): HTMLElement {
         this._autoSetZindex();
 
-        const Message = document.createElement('div');
-        const MsgContentWrap = document.createElement('div');
-        const MsgContentBox = document.createElement('div');
-        const MsgInfoBox = document.createElement('div');
-        const MsgIcon = document.createElement('i');
-        const MsgText = document.createElement('span');
+        const Message = createElem('div');
+        const MsgContentWrap = createElem('div');
+        const MsgContentBox = createElem('div');
+        const MsgInfoBox = createElem('div');
+        const MsgIcon = createElem('i');
+        const MsgText = createElem('span');
 
         this._setCls(_type, [Message, MsgContentWrap, MsgContentBox, MsgInfoBox, MsgIcon]);
         this._setContent(MsgText, config);
@@ -159,7 +158,7 @@ class $Message implements PublicMethods {
 
         // 参数 config 为字符串
         if (typeof config === 'string') {
-            this._autoClose(Message, defaults_message.duration);
+            this._autoClose(Message, DEFAULT_MESSAGE.duration);
         }
 
         // 参数 config 为对象
@@ -179,11 +178,11 @@ class $Message implements PublicMethods {
             }
             // 为每个实例自己的 duration 参数设置默认值，如果有传入值则使用自定义的值
             if (type.isUndef(duration)) {
-                duration = defaults_message.duration;
+                duration = DEFAULT_MESSAGE.duration;
             }
             // 当全局的 duration 不为 3 时说明进行了全局配置进行改变
-            if (defaults_message.duration !== 3) {
-                duration = defaults_message.duration;
+            if (DEFAULT_MESSAGE.duration !== 3) {
+                duration = DEFAULT_MESSAGE.duration;
             }
 
             this._setClosable(closable, Message, MsgContentWrap, onClose);
@@ -197,7 +196,8 @@ class $Message implements PublicMethods {
         MsgInfoBox.append(MsgIcon, MsgText);
         Message.appendChild(MsgContentWrap);
 
-        document.querySelector(`.${PREFIX.message}`)?.appendChild(Message);
+        // @ts-ignore
+        $el(`.${PREFIX.message}`)?.appendChild(Message);
 
         // 存放每次创建的实例
         this.instances.push(Message);
@@ -212,15 +212,15 @@ class $Message implements PublicMethods {
     }
 
     private _setCls(type: string, elems: Array<Element>): void {
-        const clsList = [
+        const nodesCls = [
             `${PREFIX.messageChild}`,
             `${PREFIX.messageChild}-content ${PREFIX.messageChild}-content-${type}`,
             `${PREFIX.messageChild}-content-text`,
             `${PREFIX.message}-${type}`,
-            'rab-icon'
+            `${PREFIX.icon}`
         ];
         elems.forEach((elem, i) => {
-            elem.className = clsList[i];
+            elem.className = nodesCls[i];
         });
     }
 
@@ -229,14 +229,14 @@ class $Message implements PublicMethods {
             icon.classList.add('rab-load-loop');
         }
         // @ts-ignore
-        icon.classList.add(`rab-icon-${iconTypes[type]}`);
+        icon.classList.add(`${PREFIX.icon}-${iconTypes[type]}`);
     }
 
-    private _setContent(node: HTMLElement, cfg: string | MessageAPI): void {
-        if (typeof cfg === 'string') {
-            useHTMLString(node, cfg, false);
-        } else if (typeof cfg === 'object' && cfg.content) {
-            useHTMLString(node, cfg.content, cfg.dangerouslyUseHTMLString);
+    private _setContent(node: HTMLElement, config: string | MessageOptions): void {
+        if (typeof config === 'string') {
+            useHTMLString(node, config, false);
+        } else if (typeof config === 'object' && config.content) {
+            useHTMLString(node, config.content, config.dangerouslyUseHTMLString);
         }
     }
 
@@ -250,10 +250,10 @@ class $Message implements PublicMethods {
 
         parent.classList.add(`${PREFIX.messageChild}-closable`);
 
-        const MsgCloseBtn = document.createElement('a');
+        const MsgCloseBtn = createElem('a');
 
         MsgCloseBtn.className = `${PREFIX.messageChild}-close`;
-        MsgCloseBtn.innerHTML = '<i class="rab-icon rab-icon-ios-close"></i>';
+        setHtml(MsgCloseBtn, `<i class="${PREFIX.icon} ${PREFIX.icon}-ios-close"></i>`);
 
         this._handleClose(parent, MsgCloseBtn, onClose);
 
@@ -274,10 +274,10 @@ class $Message implements PublicMethods {
 
     private _handleClose(parent: HTMLElement, closeBtn: HTMLElement, onClose: any): void {
         closeBtn.addEventListener('click', () => {
+            this.instances.length -= 1;
+
             // 手动关闭后的回调
             type.isFn(onClose);
-
-            this.instances.length -= 1;
 
             destroyElem(parent, {
                 duration: 0.1,
@@ -289,6 +289,7 @@ class $Message implements PublicMethods {
 
     private _setBackground(node: HTMLElement, children: HTMLElement, background: any): void {
         if (!background) return;
+
         node.classList.add(`${PREFIX.messageChild}-with-background`);
         children.classList.add(`${PREFIX.messageChild}-content-background`);
     }

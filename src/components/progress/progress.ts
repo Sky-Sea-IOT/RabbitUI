@@ -1,5 +1,5 @@
 import { type, validComps } from '../../utils';
-import { removeAttrs } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setCss, setHtml, setText } from '../../dom-utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {
@@ -23,7 +23,7 @@ class Progress implements PublicMethods {
 
     constructor() {
         this.VERSION = 'v1.0';
-        this.components = document.querySelectorAll('r-progress');
+        this.components = $el('r-progress', { all: true });
         this._create(this.components);
     }
 
@@ -33,7 +33,7 @@ class Progress implements PublicMethods {
         percent: number;
         successPercent: number;
     } {
-        const target: any = document.querySelector(el);
+        const target: any = $el(el);
 
         validComps(target, 'progress');
 
@@ -48,9 +48,10 @@ class Progress implements PublicMethods {
 
             set percent(newVal: number) {
                 if (!type.isNum(newVal) || newVal == progress.style.width) return;
-                if (progressText) progressText.textContent = `${newVal}%`;
 
-                progress.style.width = `${newVal}%`;
+                if (progressText) setHtml(progressText, `${newVal}%`);
+
+                setCss(progress, 'width', `${newVal}%`);
             },
 
             get successPercent() {
@@ -59,7 +60,8 @@ class Progress implements PublicMethods {
 
             set successPercent(newVal) {
                 if (!type.isNum(newVal) || newVal == progressSucs.style.width) return;
-                progressSucs.style.width = `${newVal}%`;
+
+                setCss(progressSucs, 'width', `${newVal}%`);
             }
         };
     }
@@ -80,10 +82,10 @@ class Progress implements PublicMethods {
     }
 
     private _createChildNodes(wrapper: Element): void {
-        const PgrsOuter = document.createElement('div');
-        const PgrsInner = document.createElement('div');
-        const PgrsBar = document.createElement('div');
-        const PgrsBarSucess = document.createElement('div');
+        const PgrsOuter = createElem('div');
+        const PgrsInner = createElem('div');
+        const PgrsBar = createElem('div');
+        const PgrsBarSucess = createElem('div');
 
         PgrsOuter.className = `${PREFIX.progress}-outer`;
         PgrsInner.className = `${PREFIX.progress}-inner`;
@@ -101,55 +103,60 @@ class Progress implements PublicMethods {
         this._showText(wrapper, PgrsBar);
     }
 
-    private _setPercent(wrapper: Element, bar: HTMLDivElement, successBar: HTMLDivElement): void {
-        bar.style.width = `${this._getPercent(wrapper)}%`;
-        successBar.style.width = `${this._getSuccessPercent(wrapper)}%`;
+    private _setPercent(wrapper: Element, bar: HTMLElement, successBar: HTMLElement): void {
+        const percent = `${this._getPercent(wrapper)}%`;
+        const successPercent = `${this._getSuccessPercent(wrapper)}%`;
+
+        setCss(bar, 'width', percent);
+        setCss(successBar, 'width', successPercent);
     }
 
-    private _setStrokeWidth(
-        wrapper: Element,
-        bar: HTMLDivElement,
-        successBar: HTMLDivElement
-    ): void {
-        bar.style.height = `${this._getStrokeWidth(wrapper)}px`;
-        successBar.style.height = `${this._getStrokeWidth(wrapper)}px`;
+    private _setStrokeWidth(wrapper: Element, bar: HTMLElement, successBar: HTMLElement): void {
+        const strokeWidth = `${this._getStrokeWidth(wrapper)}px`;
+
+        setCss(bar, 'height', strokeWidth);
+        setCss(successBar, 'height', strokeWidth);
     }
 
-    private _showText(wrapper: Element, PgrsBar: HTMLDivElement): void {
+    private _showText(wrapper: Element, PgrsBar: HTMLElement): void {
         if (!this._isShowText(wrapper)) return;
 
-        const PgrsTextWrapper = document.createElement('div');
-        const PgresText = document.createElement('span');
+        const PgrsTextWrapper = createElem('div');
+        const PgresText = createElem('span');
 
         PgrsTextWrapper.className = `${PREFIX.progress}-text`;
         PgresText.className = `${PREFIX.progress}-inner-text`;
-        PgresText.textContent = `${this._getPercent(wrapper)}%`;
+
+        const percentText = `${this._getPercent(wrapper)}%`;
+
+        setText(PgresText, percentText);
 
         if (!this._isTextInside(wrapper)) {
             wrapper.className = `${PREFIX.progress}-show-info`;
 
             if (this._getStatus(wrapper) === 'success') {
-                // @ts-ignore
-                PgresText.innerHTML = PrgesIconType.success;
+                setHtml(PgresText, PrgesIconType.success);
             } else if (this._getStatus(wrapper) === 'warning') {
-                // @ts-ignore
-                PgresText.innerHTML = PrgesIconType.warning;
+                setHtml(PgresText, PrgesIconType.warning);
             } else if (this._getStatus(wrapper) === 'wrong') {
-                // @ts-ignore
-                PgresText.innerHTML = PrgesIconType.wrong;
+                setHtml(PgresText, PrgesIconType.wrong);
             }
 
             PgrsTextWrapper.appendChild(PgresText);
+
             wrapper.appendChild(PgrsTextWrapper);
         } else {
             PgrsBar.appendChild(PgresText);
         }
     }
 
-    private _setStrokeColor(wrapper: Element, PgrsBar: HTMLDivElement): void {
+    private _setStrokeColor(wrapper: Element, PgrsBar: HTMLElement): void {
         const { from, to } = this._getStrokeColor(wrapper);
+
         if (from.length || to.length) {
-            PgrsBar.style.backgroundImage = `linear-gradient(to right, ${from} 0%, ${to} 100%)`;
+            const strokeColor = `linear-gradient(to right, ${from} 0%, ${to} 100%)`;
+
+            setCss(PgrsBar, 'backgroundImage', strokeColor);
         }
     }
 
@@ -196,7 +203,7 @@ class Progress implements PublicMethods {
     }
 
     private _isTextInside(node: Element): boolean {
-        return node.getAttribute('text-inside') === 'true' || false;
+        return node.getAttribute('text-inside') === 'true';
     }
 
     private _isShowText(node: Element): boolean {
