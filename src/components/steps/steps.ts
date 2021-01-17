@@ -93,16 +93,16 @@ class Steps implements PublicMethods {
 
         for (; i < length; i++) {
             const child = children[i];
-
+            const uid = `steps${i}`;
+            const idxText = `${i + 1}`;
             const title = this._getTitle(child);
             const content = this._getContent(child);
-            const idxText = `${i + 1}`;
 
             child.innerHTML = `
              <div class="${PREFIX.steps}-tail"><i></i></div>
              <div class="${PREFIX.steps}-head">
                  <div class="${PREFIX.steps}-head-inner">
-                    <span data-step-flag="${i}" data-step="current">${idxText}</span>
+                    <span data-steps-uid=${uid} data-step="current">${idxText}</span>
                  </div>
              </div>
              <div class="${PREFIX.steps}-main">
@@ -211,7 +211,8 @@ class Steps implements PublicMethods {
 
         // 判断当前选中的步骤的状态是完成还是错误
         if (currentStatus === 'finish' || currentStatus === 'error') {
-            const HeadInner = node.querySelector(`[data-step-flag="${current}"]`)!;
+            const uid = `[data-steps-uid=${current}]`;
+            const HeadInner = node.querySelector(uid)!;
             setFinishOrErrorIcon(currentStatus, HeadInner);
         }
 

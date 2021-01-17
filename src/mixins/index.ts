@@ -1,6 +1,6 @@
 import warn from './warn';
 import CssTransition from './css-transition';
 import usePromiseCallback from './cb-promise';
-import * as tooltip from './tooltip';
+import * as Popper from './tooltip';
 
-export { warn, CssTransition, usePromiseCallback, tooltip };
+export { warn, CssTransition, usePromiseCallback, Popper };

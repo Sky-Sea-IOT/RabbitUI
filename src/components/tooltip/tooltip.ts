@@ -1,7 +1,7 @@
 import PREFIX from '../prefix';
 import { type, validComps } from '../../utils';
 import { $el, createElem, setCss, setHtml, setText, removeAttrs } from '../../dom-utils';
-import { tooltip, CssTransition } from '../../mixins';
+import { Popper, CssTransition } from '../../mixins';
 
 interface TooltipEvents {
     onShow?: () => void;
@@ -12,7 +12,7 @@ interface PublicMethods {
     config(
         el: string
     ): {
-        content: string; // 显示的内容
+        content: string | number; // 显示的内容
         events: (options: TooltipEvents) => void; // Tooltip 事件
     };
 }
@@ -33,7 +33,7 @@ class Tooltip implements PublicMethods {
     public config(
         el: string
     ): {
-        content: string;
+        content: string | number;
         events: (options: TooltipEvents) => void;
     } {
         const target: any = $el(el);
@@ -49,37 +49,23 @@ class Tooltip implements PublicMethods {
             get content() {
                 return setText(popperText);
             },
-            set content(newVal: string) {
-                if (!type.isStr(newVal)) return;
-
-                setHtml(popperText, newVal);
+            set content(newVal: string | number) {
+                if (type.isStr(newVal) || type.isNum(newVal)) setHtml(popperText, `${newVal}`);
             },
             events(options): void {
                 if (_getIsAlways(target) || _getIsDisabled(target)) return;
 
                 const delay = _getDelay(target);
 
-                // 通过设置 popper.dataset.tooltipShow 的方式可以判断提示框是否显示，
-                // 并根据设置的值 "true" 和 "false" 来判断是否执行对应回调事件，
-                // 避免出现鼠标快速经过但没有显示提示框，却依然执行了提示框消失时触发的回调
-                const showEvent = () => {
-                    tooltipEvTimer = setTimeout(() => {
-                        popper.dataset.tooltipShow = 'true';
-                        options.onShow && type.isFn(options.onShow);
-                    }, delay);
-                };
-
-                const hideEvent = () => {
-                    clearTimeout(tooltipEvTimer);
-
-                    if (popper.dataset.tooltipShow === 'true') {
-                        popper.dataset.tooltipShow = 'false';
-                        options.onHide && type.isFn(options.onHide);
-                    }
-                };
-
-                target.addEventListener('mouseenter', showEvent);
-                target.addEventListener('mouseleave', hideEvent);
+                Popper.handleShowAndHideEvents({
+                    reference: target,
+                    popper: popper,
+                    datasetVal: 'tooltipShow',
+                    showCb: options.onShow,
+                    hideCb: options.onHide,
+                    delay: delay,
+                    timer: tooltipEvTimer
+                });
             }
         };
     }
@@ -168,9 +154,9 @@ class Tooltip implements PublicMethods {
 
         popper.setAttribute('x-placement', placement);
 
-        tooltip.updateArrow(popper, 'scroll');
+        Popper.updateArrow(popper, 'scroll');
 
-        return tooltip._newCreatePopper(reference, popper, placement, offset);
+        return Popper._newCreatePopper(reference, popper, placement, offset);
     }
 
     private _setIsAlwaysShow(reference: Element, popper: HTMLElement): boolean | void {
@@ -209,7 +195,7 @@ class Tooltip implements PublicMethods {
                 }, delay);
             });
 
-            tooltip.updateArrow(popper, 'mouseenter', reference, delay);
+            Popper.updateArrow(popper, 'mouseenter', reference, delay);
         } else {
             reference.addEventListener('mouseleave', () => {
                 clearTimeout(tooltipShowTimer);

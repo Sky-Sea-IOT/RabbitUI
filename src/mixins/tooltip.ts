@@ -1,4 +1,5 @@
 import { createPopper } from '@popperjs/core';
+import { type } from '../utils';
 
 export function _newCreatePopper(
     reference: Element,
@@ -63,4 +64,50 @@ export function updateArrow(
 
     setArrow();
     eventUpdates();
+}
+
+export function handleShowAndHideEvents({
+    reference,
+    popper,
+    datasetVal,
+    showCb,
+    hideCb,
+    delay,
+    timer
+}: {
+    reference: Element;
+    popper: Element | any;
+    datasetVal: string;
+    showCb: any;
+    hideCb: any;
+    delay: number;
+    timer: any;
+}): void {
+    reference.addEventListener('mouseenter', () => {
+        timer = setTimeout(() => {
+            listener1();
+        }, delay);
+    });
+
+    reference.addEventListener('mouseleave', listener2);
+
+    // 通过设置 popper.dataset.tooltipShow 的方式可以判断提示框是否显示，
+    // 并根据设置的值 "true" 和 "false" 来判断是否执行对应回调事件，
+    // 避免出现鼠标快速经过但没有显示提示框，却依然执行了提示框消失时触发的回调
+
+    function listener1(): void {
+        popper.dataset[datasetVal] = 'true';
+        showCb && type.isFn(showCb);
+    }
+
+    function listener2(): void {
+        clearTimeout(timer);
+
+        if (popper.dataset[datasetVal] === 'true') {
+            popper.dataset[datasetVal] = 'false';
+            hideCb && type.isFn(hideCb);
+        }
+
+        reference.removeEventListener('mouseenter', listener1);
+    }
 }

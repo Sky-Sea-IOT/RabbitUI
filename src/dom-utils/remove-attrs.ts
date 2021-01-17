@@ -14,5 +14,5 @@ export default function removeAttrs(elem: Element, attrs: Array<string>): void {
             const attr = attrs[i];
             elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
         }
-    }, 500);
+    }, 200);
 }

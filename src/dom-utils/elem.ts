@@ -47,8 +47,8 @@ export function getStrTypeAttr(node: Element, attrName: string, defaultVal: stri
 }
 
 // Return Boolean type
-export function getBooleanTypeAttr(node: Element): boolean {
-    return node.getAttribute('disabled') === 'true';
+export function getBooleanTypeAttr(node: Element, attrName: string): boolean {
+    return node.getAttribute(attrName) === 'true';
 }
 
 // Return Number type
