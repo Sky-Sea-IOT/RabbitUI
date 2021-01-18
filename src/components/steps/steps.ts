@@ -6,7 +6,7 @@ import PREFIX from '../prefix';
 
 interface StepsConfig {
     current: number;
-    status?: string;
+    status?: 'wait' | 'process' | 'finish' | 'error';
 }
 
 interface StepConfig {
@@ -40,7 +40,7 @@ class Steps implements PublicMethods {
         setSteps({ current, status }: StepsConfig): void;
         setChildren({ idx, title, content }: StepConfig): void;
     } {
-        const target: any = document.querySelector(el);
+        const target = $el(el);
 
         validComps(target, 'steps');
 

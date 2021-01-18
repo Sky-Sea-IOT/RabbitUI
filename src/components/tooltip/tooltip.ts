@@ -36,7 +36,7 @@ class Tooltip implements PublicMethods {
         content: string | number;
         events: (options: TooltipEvents) => void;
     } {
-        const target: any = $el(el);
+        const target = $el(el);
 
         validComps(target, 'tooltip');
 
@@ -100,8 +100,8 @@ class Tooltip implements PublicMethods {
 
         // 如果 tooltip 没有设置为总是可见或者禁用显示，则正常鼠标移入移出事件
         if (!alwaysShow && !disabledShow) {
-            this._handleMouse('enter', reference, TooltipPopper);
-            this._handleMouse('leave', reference, TooltipPopper);
+            this._triggerDisplay('enter', reference, TooltipPopper);
+            this._triggerDisplay('leave', reference, TooltipPopper);
         }
 
         const { firstElementChild } = reference;
@@ -131,6 +131,40 @@ class Tooltip implements PublicMethods {
         for (; i < length; i++) {
             const node = nodes[i];
             node.className = `${nodesCls[i]}`;
+        }
+    }
+
+    private _triggerDisplay(
+        trigger: 'enter' | 'leave',
+        reference: Element,
+        popper: HTMLElement
+    ): void {
+        const ev = () => {
+            if (trigger === 'enter') this._initSetPopper(reference, popper);
+
+            CssTransition(popper, {
+                inOrOut: trigger === 'enter' ? 'in' : 'out',
+                rmCls: true,
+                enterCls: 'zoom-big-fast-enter',
+                leaveCls: 'zoom-big-fast-leave',
+                timeout: 85
+            });
+        };
+
+        const delay = this._getDelay(reference);
+
+        if (trigger === 'enter') {
+            reference.addEventListener('mouseenter', () => {
+                tooltipShowTimer = setTimeout(() => {
+                    ev();
+                }, delay);
+            });
+            Popper.updateArrow(popper, 'mouseenter', reference, delay);
+        } else {
+            reference.addEventListener('mouseleave', () => {
+                clearTimeout(tooltipShowTimer);
+                ev();
+            });
         }
     }
 
@@ -171,37 +205,6 @@ class Tooltip implements PublicMethods {
         }
 
         setCss(popper, 'display', 'none');
-    }
-
-    private _handleMouse(event: string, reference: Element, popper: HTMLElement): void {
-        const eventListener = () => {
-            if (event === 'enter') this._initSetPopper(reference, popper);
-
-            CssTransition(popper, {
-                inOrOut: event === 'enter' ? 'in' : 'out',
-                rmCls: true,
-                enterCls: 'zoom-big-fast-enter',
-                leaveCls: 'zoom-big-fast-leave',
-                timeout: 85
-            });
-        };
-
-        const delay = this._getDelay(reference);
-
-        if (event === 'enter') {
-            reference.addEventListener('mouseenter', () => {
-                tooltipShowTimer = setTimeout(() => {
-                    eventListener();
-                }, delay);
-            });
-
-            Popper.updateArrow(popper, 'mouseenter', reference, delay);
-        } else {
-            reference.addEventListener('mouseleave', () => {
-                clearTimeout(tooltipShowTimer);
-                eventListener();
-            });
-        }
     }
 
     private _getTip(node: Element): string {

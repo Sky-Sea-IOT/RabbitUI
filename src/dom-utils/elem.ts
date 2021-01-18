@@ -6,7 +6,7 @@
 export function $el(
     node: string | Element | any,
     options?: { all: boolean }
-): Element | HTMLElement | null | NodeListOf<any> | NodeListOf<Element> {
+): Element | HTMLElement | null | NodeListOf<any> | NodeListOf<Element> | any{
     if (options?.all) {
         return document.querySelectorAll(node);
     } else {

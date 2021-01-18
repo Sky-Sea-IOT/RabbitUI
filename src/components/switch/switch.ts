@@ -17,7 +17,7 @@ class Switch implements PublicMethods {
     }
 
     public onChange(elem: string, cb: ([status, $this]: [boolean, Element]) => void): void {
-        const target: any = $el(elem);
+        const target = $el(elem);
 
         validComps(target, 'switch');
 

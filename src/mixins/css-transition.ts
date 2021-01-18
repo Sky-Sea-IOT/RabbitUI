@@ -1,50 +1,53 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 interface Config {
+    inOrOut?: 'in' | 'out'; // 进场或者出场
     enterCls?: string; // 进场动画
     leaveCls?: string; // 出场动画
-    inOrOut?: string; // 进场或者出场
     rmCls?: boolean; // 动画结束后是否移除动画类名
     timeout?: number; // 过渡效果的持续时间
-    hiddenParent?: any; // 是否将父元素一起隐藏
+    hiddenParent?: Element | HTMLElement | any; // 是否将父元素一起隐藏
 }
 
-export default function CssTransition(elem: any, options: Config): void {
+export default function CssTransition(
+    elem: any,
+    { enterCls, leaveCls, inOrOut, rmCls, timeout, hiddenParent }: Config
+): void {
     const removeClassAfterTransition = (aniClassName: string): void => {
-        if (options.rmCls) {
+        if (rmCls) {
             setTimeout(() => {
                 aniClassName ? elem.classList.remove(aniClassName) : '';
-            }, options.timeout);
+            }, timeout);
         }
     };
 
-    if (options.inOrOut === 'in') {
+    if (inOrOut === 'in') {
         // 如果父元素被隐藏则变为显示
-        if (options.hiddenParent) {
-            options.hiddenParent.style.display = '';
-            options.hiddenParent.style.opacity = '1';
+        if (hiddenParent) {
+            hiddenParent.style.display = '';
+            hiddenParent.style.opacity = '1';
         }
 
         if (elem.style.display === 'none') elem.style.display = '';
         if (elem.style.opacity === '0') elem.style.opacity = '1';
 
-        elem.classList.add(options.enterCls);
+        elem.classList.add(enterCls);
 
-        removeClassAfterTransition(options.enterCls!);
-    } else if (options.inOrOut === 'out') {
-        if (elem.classList.contains(options.enterCls)) {
-            elem.classList.replace(options.enterCls, options.leaveCls);
+        removeClassAfterTransition(enterCls!);
+    } else if (inOrOut === 'out') {
+        if (elem.classList.contains(enterCls)) {
+            elem.classList.replace(enterCls, leaveCls);
         } else {
-            elem.classList.add(options.leaveCls);
+            elem.classList.add(leaveCls);
         }
 
-        removeClassAfterTransition(options.leaveCls!);
+        removeClassAfterTransition(leaveCls!);
 
         // 过渡效果持续时间后隐藏元素
         setTimeout(() => {
-            if (options.hiddenParent) options.hiddenParent.style.display = 'none';
+            if (hiddenParent) hiddenParent.style.display = 'none';
             elem.style.display = 'none';
             elem.style.opacity = '0';
-        }, options.timeout);
+        }, timeout);
     }
 }

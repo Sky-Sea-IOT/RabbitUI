@@ -30,7 +30,7 @@ class Badge implements PublicMethods {
         text: string;
         dot: boolean;
     } {
-        const target: any = $el(el);
+        const target = $el(el);
 
         validComps(target, 'badge');
 

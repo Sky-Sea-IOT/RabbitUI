@@ -33,7 +33,7 @@ class Progress implements PublicMethods {
         percent: number;
         successPercent: number;
     } {
-        const target: any = $el(el);
+        const target = $el(el);
 
         validComps(target, 'progress');
 

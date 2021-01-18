@@ -11,9 +11,10 @@ interface UpdatelobalAPI {
     failedColor?: string; // 失败时的进度条颜色
 }
 
+// 私有方法的接口
 interface UpdateAPI {
     percent?: number; // 进度条进度
-    status?: string; // 进度状态颜色
+    status?: 'primary' | 'success' | 'error'; // 进度状态颜色
     show?: boolean; // 是否显示进度条
 }
 

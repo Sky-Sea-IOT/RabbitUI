@@ -25,7 +25,7 @@ class Button implements PublicMethods {
     ): {
         loading: boolean;
     } {
-        const target: any = $el(elem);
+        const target = $el(elem);
 
         validComps(target, 'button');
 

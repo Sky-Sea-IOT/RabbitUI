@@ -34,7 +34,7 @@ export function _newCreatePopper(
 
 export function updateArrow(
     popper: HTMLElement,
-    event: string,
+    updateWay?: string,
     reference?: Element,
     delay?: number
 ): void {
@@ -48,22 +48,39 @@ export function updateArrow(
         }
     };
 
-    const eventUpdates = () => {
-        if (event === 'scroll') {
-            window.addEventListener(event, setArrow);
-        } else if (event === 'mouseenter') {
+    const eventUpdate = () => {
+        if (updateWay === 'scroll') {
+            window.addEventListener(updateWay, setArrow);
+        } else {
             if (reference) {
-                reference.addEventListener(event, () => {
-                    setTimeout(() => {
+                if (updateWay === 'mouseenter') {
+                    reference.addEventListener(updateWay, (e) => {
+                        e.stopPropagation();
+                        if (delay) {
+                            setTimeout(() => {
+                                setArrow();
+                            }, delay);
+                        } else {
+                            setArrow();
+                        }
+                    });
+                } else if (updateWay === 'click') {
+                    reference.addEventListener(updateWay, (e) => {
+                        e.stopPropagation();
                         setArrow();
-                    }, delay);
-                });
+                    });
+                } else if (updateWay === 'focus') {
+                    reference.addEventListener('mousedown', (e) => {
+                        e.stopPropagation();
+                        setArrow();
+                    });
+                }
             }
         }
     };
 
     setArrow();
-    eventUpdates();
+    eventUpdate();
 }
 
 export function handleShowAndHideEvents({

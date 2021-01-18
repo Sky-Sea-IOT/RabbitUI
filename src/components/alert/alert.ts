@@ -7,9 +7,9 @@ interface PublicMethods {
     config(
         el: string
     ): {
-        message: any;
-        desc: any;
-        icon: any;
+        message: string | number;
+        desc: string | number;
+        icon: string;
     };
     onClose(el: string, cb: ($this: Element) => void): void;
 }
@@ -27,11 +27,11 @@ class Alert implements PublicMethods {
     public config(
         el: string
     ): {
-        message: any;
-        desc: any;
-        icon: any;
+        message: string | number;
+        desc: string | number;
+        icon: string;
     } {
-        const target: any = $el(el);
+        const target = $el(el);
 
         validComps(target, 'alert');
 
@@ -59,7 +59,7 @@ class Alert implements PublicMethods {
 
             set desc(newVal) {
                 if (alertDesc) {
-                    if (newVal != alertDesc.innerHTML) {
+                    if (newVal != setHtml(alertDesc)) {
                         setHtml(alertDesc, newVal);
                     }
                     return;
@@ -78,8 +78,8 @@ class Alert implements PublicMethods {
 
             set icon(newVal) {
                 if (alertIcon) {
-                    if (newVal != alertIcon.innerHTML) {
-                        alertIcon.innerHTML = newVal;
+                    if (newVal != setHtml(alertIcon)) {
+                        setHtml(alertIcon, newVal);
                     }
                     return;
                 } else {
@@ -186,7 +186,7 @@ class Alert implements PublicMethods {
 
         AlertCloseBtn.className = `${PREFIX.alert}-close`;
 
-        let text = closeText ? closeText : '<i class="rab-icon rab-icon-ios-close"></i>';
+        const text = closeText ? closeText : '<i class="rab-icon rab-icon-ios-close"></i>';
         setHtml(AlertCloseBtn, text);
 
         AlertCloseBtn.addEventListener('click', () => destroyElem(node, { fadeOut: true }));

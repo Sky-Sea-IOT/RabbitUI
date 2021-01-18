@@ -1,14 +1,19 @@
 import PREFIX from '../prefix';
 import {
     $el,
+    createElem,
     getBooleanTypeAttr,
     getNumTypeAttr,
     getStrTypeAttr,
     removeAttrs,
-    setCss
+    setCss,
+    setHtml
 } from '../../dom-utils';
+import { updateArrow, _newCreatePopper } from '../../mixins/tooltip';
+import { CssTransition, Popper, warn } from '../../mixins';
+import { type, validComps } from '../../utils';
 
-interface PoptipAPI {
+interface PoptipAttrs {
     width: number;
     offset: number;
     title: string;
@@ -40,7 +45,10 @@ interface PublicMethods {
     };
 }
 
-class Poptip implements PublicMethods {
+let poptipShowTimer: any;
+let poptipEvTimer: any;
+
+class Poptip {
     readonly VERSION: string;
     readonly components: any;
 
@@ -50,64 +58,86 @@ class Poptip implements PublicMethods {
         this._create(this.components);
     }
 
-    public config(el: string) {}
+    public config(
+        el: string
+    ): {
+        title: string | number;
+        content: string | number;
+        events: (options: PoptipEvents) => void;
+    } {
+        const target = $el(el);
 
-    private _api(node: Element): PoptipAPI {
+        validComps(target, 'poptip');
+
+        let PoptipTitle: any;
+
+        const PoptipNMTitle = target.querySelector(`.${PREFIX.poptip}-title-inner`);
+        const PoptipConfirmTitle = target.querySelector(`.${PREFIX.poptip}-body-message`);
+
+        if (PoptipNMTitle) {
+            PoptipTitle = PoptipNMTitle;
+        } else {
+            PoptipTitle = PoptipConfirmTitle;
+        }
+
+        const PoptipContent = target.querySelector(`.${PREFIX.poptip}-body-content-inner`);
+
         return {
-            // number type
-            width: getNumTypeAttr(node, 'width', 0),
-            offset: getNumTypeAttr(node, 'offset', 0),
-            // string type
-            title: getStrTypeAttr(node, 'title', 'click'),
-            okText: getStrTypeAttr(node, 'ok-text', '确定'),
-            content: getStrTypeAttr(node, 'content', ''),
-            trigger: getStrTypeAttr(node, 'trigger', ''),
-            padding: getStrTypeAttr(node, 'padding', '8px 16px'),
-            placement: getStrTypeAttr(node, 'placement', 'top'),
-            cancelText: getStrTypeAttr(node, 'cancel-text', '取消'),
-            // boolean type
-            isDisabled: getBooleanTypeAttr(node, 'disabled'),
-            isWordWrap: getBooleanTypeAttr(node, 'word-wrap'),
-            isConfirm: getBooleanTypeAttr(node, 'confirm')
+            get title() {
+                return setHtml(PoptipTitle);
+            },
+            set title(newVal) {
+                if (type.isStr(newVal) || type.isNum(newVal)) setHtml(PoptipTitle, newVal);
+            },
+            get content() {
+                return setHtml(PoptipContent);
+            },
+            set content(newVal) {
+                if (type.isStr(newVal) || type.isNum(newVal)) setHtml(PoptipContent, newVal);
+            },
+            events({ onShow, onHide, onOk, onCancel }) {
+                //
+            }
         };
     }
 
     private _create(nodes: NodeListOf<Element>): void {
         nodes.forEach((node, i) => {
-            this._createChildren(node, i);
+            this._createPoptipNodes(node, i);
             removeAttrs(node, [
+                'width',
                 'title',
                 'content',
-                'trigger',
                 'ok-text',
-                'cancel-text',
+                'trigger',
+                'confirm',
                 'padding',
-                'placement',
                 'disabled',
+                'placement',
                 'word-wrap',
-                'confirm'
+                'cancel-text'
             ]);
         });
     }
 
-    private _createChildren(node: Element, i: number): void {
+    private _createPoptipNodes(node: Element, i: number): void {
         const uid = `poptip${i}`;
 
         const referenceElem = node.firstElementChild!;
-        const PoptipRel = document.createElement('div');
+        const PoptipRel = createElem('div');
 
         PoptipRel.className = `${PREFIX.poptip}-rel`;
         PoptipRel.appendChild(referenceElem);
 
-        const api = this._api(node);
+        const attrs = this.attrs(node);
 
-        const confirmType = api.isConfirm ? `${PREFIX.poptip}-confirm` : '';
+        const confirmType = attrs.isConfirm ? `${PREFIX.poptip}-confirm` : '';
         node.className = confirmType;
 
-        const whatAppearance = api.isConfirm ? this.confirmType(api) : this.normalType(api);
+        const whatAppearance = attrs.isConfirm ? this._confirmTpl(attrs) : this._normalTpl(attrs);
 
         const template = `
-            <div class="${PREFIX.poptip}-popper" data-poptip-uid=${uid}>
+            <div class="${PREFIX.poptip}-popper" x-placement=${attrs.placement} data-poptip-uid=${uid}>
                 <div class="${PREFIX.poptip}-content">
                     <div class="${PREFIX.poptip}-arrow"></div>
                     <div class="${PREFIX.poptip}-inner">${whatAppearance}</div>
@@ -115,59 +145,167 @@ class Poptip implements PublicMethods {
             </div>
         `;
 
-        node.innerHTML = template;
+        setHtml(node, template);
 
-        const popper = document.querySelector(`[data-poptip-uid=${uid}]`);
+        this._setWidth(attrs, uid);
 
-        popper?.before(PoptipRel);
+        const Popper = document.querySelector(`[data-poptip-uid=${uid}]`)!;
 
-        this._setWidth(api, uid);
+        Popper?.before(PoptipRel);
+
+        // 初始化 display
+        setCss(Popper, 'display', 'none');
+
+        // @ts-ignore
+        updateArrow(Popper, 'scroll');
+
+        if (!attrs.isDisabled) {
+            // @ts-ignore
+            this._triggerDisplay(attrs.trigger, node, PoptipRel, Popper, attrs);
+        }
     }
 
-    private normalType(api: PoptipAPI): string {
+    private _normalTpl(attrs: PoptipAttrs): string {
+        const isShowTitle =
+            !attrs.isWordWrap && attrs.title
+                ? `<div class="${PREFIX.poptip}-title">
+                      <div class="${PREFIX.poptip}-title-inner">${attrs.title}</div>
+                   </div>`
+                : '';
+
         const template = `
-         <div class="${PREFIX.poptip}-title">
-             <div class="${PREFIX.poptip}-title-inner">${api.title}</div>
-         </div>
-         <div class="${PREFIX.poptip}-body">
-             <div class="${PREFIX.poptip}-body-content">
-               <div class="${PREFIX.poptip}-body-content-inner">${api.content}</div>
-             </div>
-         </div>
-         `;
+            ${isShowTitle}
+            <div class="${PREFIX.poptip}-body">
+                <div class="${PREFIX.poptip}-body-content">
+                <div class="${PREFIX.poptip}-body-content-inner">${attrs.content}</div>
+                </div>
+            </div>
+            `;
 
         return template;
     }
 
-    private confirmType(api: PoptipAPI): string {
+    private _confirmTpl(attrs: PoptipAttrs): string {
         const template = `
-        <div class="${PREFIX.poptip}-body">
-            <i class="${PREFIX.icon} ${PREFIX.icon}-ios-help-circle"></i>
-                <div class="${PREFIX.poptip}-body-message">${api.title}</div>
-            </div>
-            <div class="${PREFIX.poptip}-footer">
-                <button class="${PREFIX.button} ${PREFIX.button}-text ${PREFIX.button}-sm">${api.okText}</button>
-                <button class="${PREFIX.button} ${PREFIX.button}-primary ${PREFIX.button}-sm">${api.cancelText}</button>
-            </div>
-         </div>
+          <div class="${PREFIX.poptip}-body">
+              <i class="${PREFIX.icon} ${PREFIX.icon}-ios-help-circle"></i>
+              <div class="${PREFIX.poptip}-body-message">${attrs.title}</div>
+          </div>
+          <div class="${PREFIX.poptip}-footer">
+              <button class="${PREFIX.button} ${PREFIX.button}-text ${PREFIX.button}-sm">${attrs.cancelText}</button>
+              <button class="${PREFIX.button} ${PREFIX.button}-primary ${PREFIX.button}-sm">${attrs.okText}</button>
+          </div>
       `;
 
         return template;
     }
 
-    private _setWidth(api: PoptipAPI, uid: string): void {
+    private _setWidth(attrs: PoptipAttrs, uid: string): void {
         const popper = document.querySelector(`[data-poptip-uid=${uid}]`);
-        if (api.width) {
-            setCss(popper, 'width', `${api.width}px`);
+        if (attrs.width) {
+            setCss(popper, 'width', `${attrs.width}px`);
         }
 
-        if (api.isWordWrap) {
-            const popperTitle = popper?.querySelector(`.${PREFIX.poptip}-title`);
+        if (attrs.isWordWrap) {
             const popperContent = popper?.querySelector(`.${PREFIX.poptip}-body-content`);
-
-            popperTitle?.remove();
             popperContent?.classList.add(`${PREFIX.poptip}-body-content-word-wrap`);
         }
+    }
+
+    private _triggerDisplay(
+        trigger: string,
+        parent: HTMLElement,
+        referenceChild: HTMLElement,
+        popper: Element | any,
+        poptipAttrs: PoptipAttrs
+    ): void {
+        if (trigger !== 'click' && trigger !== 'hover' && trigger !== 'focus') {
+            warn(`The Poptip attribute trigger got an invalid trigger mode --> '${trigger}'`);
+            return;
+        }
+
+        const { _initPoptip } = this;
+
+        const common = {
+            rmCls: true,
+            enterCls: 'zoom-big-fast-enter',
+            leaveCls: 'zoom-big-fast-leave',
+            timeout: 200
+        };
+
+        const showEv = () => {
+            popper.dataset.poptipShow = 'true';
+
+            CssTransition(popper, {
+                inOrOut: 'in',
+                ...common
+            });
+
+            _initPoptip(parent, popper, poptipAttrs);
+        };
+
+        const hideEv = () => {
+            popper.dataset.poptipShow = 'false';
+
+            CssTransition(popper, {
+                inOrOut: 'out',
+                ...common
+            });
+        };
+
+        const judgmentIsVisible = () =>
+            popper.dataset.poptipShow === 'true' ? hideEv() : showEv();
+
+        if (trigger === 'click' || trigger === 'focus') {
+            Popper.updateArrow(popper, trigger, parent);
+        }
+
+        if (trigger === 'click') {
+            referenceChild.addEventListener('click', judgmentIsVisible);
+        } else if (trigger === 'hover') {
+            const defalutDelay = 100;
+
+            parent.addEventListener('mouseenter', () => {
+                poptipShowTimer = setTimeout(() => {
+                    showEv();
+                }, defalutDelay);
+            });
+
+            Popper.updateArrow(popper, 'mouseenter', parent, defalutDelay);
+
+            parent.addEventListener('mouseleave', () => {
+                clearTimeout(poptipShowTimer);
+                hideEv();
+            });
+        } else if (trigger === 'focus') {
+            referenceChild.addEventListener('mousedown', judgmentIsVisible);
+            referenceChild.addEventListener('mouseup', hideEv);
+        }
+    }
+
+    private _initPoptip(reference: Element, popper: Element | any, poptipAttrs: PoptipAttrs): any {
+        const NCP = _newCreatePopper(reference, popper, poptipAttrs.placement, poptipAttrs.offset);
+        return NCP;
+    }
+
+    private attrs(node: Element): PoptipAttrs {
+        return {
+            // number type
+            width: getNumTypeAttr(node, 'width', 0),
+            offset: getNumTypeAttr(node, 'offset', 0),
+            // string type
+            title: getStrTypeAttr(node, 'title', ''),
+            okText: getStrTypeAttr(node, 'ok-text', '确定'),
+            content: getStrTypeAttr(node, 'content', ''),
+            trigger: getStrTypeAttr(node, 'trigger', 'click'),
+            padding: getStrTypeAttr(node, 'padding', '8px 16px'),
+            placement: getStrTypeAttr(node, 'placement', 'top'),
+            cancelText: getStrTypeAttr(node, 'cancel-text', '取消'),
+            // boolean type
+            isConfirm: getBooleanTypeAttr(node, 'confirm'),
+            isDisabled: getBooleanTypeAttr(node, 'disabled'),
+            isWordWrap: getBooleanTypeAttr(node, 'word-wrap')
+        };
     }
 }
 
