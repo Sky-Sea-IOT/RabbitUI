@@ -80,7 +80,7 @@ export default function messageTest(): void {
     };
     window.useHTML = () => {
         Rabbit.Message.info({
-            content: `<strong>这是 <i>HTML</i> 片段</strong>`,
+            content: '<strong>这是 <i>HTML</i> 片段</strong>',
             dangerouslyUseHTMLString: true
         });
     };

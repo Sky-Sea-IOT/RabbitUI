@@ -3,6 +3,11 @@ import Rabbit from '../../src';
 export default function poptipTest(): void {
     const poptip = new Rabbit.Poptip();
 
+    // @ts-ignore
+    window.handleChange = (val: string) => {
+        poptip.config('#test-input').content = val;
+    };
+
     const complexContent = `
         <div class="api">
             <table>
@@ -34,5 +39,14 @@ export default function poptipTest(): void {
     </div>
     `;
 
-    poptip.config('#test2').content = complexContent;
+    poptip.config('#test1').content = complexContent;
+
+    poptip.config('#test2').events({
+        onOk: () => {
+            Rabbit.Message.info('点击了确定');
+        },
+        onCancel: () => {
+            Rabbit.Message.info('点击了取消');
+        }
+    });
 }

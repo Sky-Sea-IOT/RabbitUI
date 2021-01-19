@@ -1,7 +1,7 @@
 import PREFIX from '../prefix';
 import { type, validComps } from '../../utils';
 import { $el, createElem, setCss, setHtml, setText, removeAttrs } from '../../dom-utils';
-import { Popper, CssTransition } from '../../mixins';
+import { _Popper, CssTransition, _arrow } from '../../mixins';
 
 interface TooltipEvents {
     onShow?: () => void;
@@ -22,12 +22,13 @@ let tooltipEvTimer: any;
 
 class Tooltip implements PublicMethods {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = 'v1.0';
         this.components = $el('r-tooltip', { all: true });
         this._create(this.components);
+        _arrow.scrollUpdate();
     }
 
     public config(
@@ -52,17 +53,17 @@ class Tooltip implements PublicMethods {
             set content(newVal: string | number) {
                 if (type.isStr(newVal) || type.isNum(newVal)) setHtml(popperText, `${newVal}`);
             },
-            events(options): void {
+            events({ onShow, onHide }): void {
                 if (_getIsAlways(target) || _getIsDisabled(target)) return;
 
                 const delay = _getDelay(target);
 
-                Popper.handleShowAndHideEvents({
+                _Popper.handleHoverShowAndHideEvents({
                     reference: target,
                     popper: popper,
                     datasetVal: 'tooltipShow',
-                    showCb: options.onShow,
-                    hideCb: options.onHide,
+                    showCb: onShow,
+                    hideCb: onHide,
                     delay: delay,
                     timer: tooltipEvTimer
                 });
@@ -159,7 +160,7 @@ class Tooltip implements PublicMethods {
                     ev();
                 }, delay);
             });
-            Popper.updateArrow(popper, 'mouseenter', reference, delay);
+            _arrow.toggleUpdate(popper, 'hover', reference, delay);
         } else {
             reference.addEventListener('mouseleave', () => {
                 clearTimeout(tooltipShowTimer);
@@ -188,9 +189,7 @@ class Tooltip implements PublicMethods {
 
         popper.setAttribute('x-placement', placement);
 
-        Popper.updateArrow(popper, 'scroll');
-
-        return Popper._newCreatePopper(reference, popper, placement, offset);
+        return _Popper._newCreatePopper(reference, popper, placement, offset);
     }
 
     private _setIsAlwaysShow(reference: Element, popper: HTMLElement): boolean | void {

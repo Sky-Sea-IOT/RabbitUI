@@ -32,66 +32,7 @@ export function _newCreatePopper(
     });
 }
 
-export function updateArrow(
-    popper: HTMLElement,
-    updateWay?: string,
-    reference?: Element,
-    delay?: number
-): void {
-    const setArrow = () => {
-        const xPlacement = popper.getAttribute('x-placement');
-        const { popperPlacement } = popper.dataset;
-
-        if (popperPlacement) {
-            if (xPlacement === popperPlacement) return;
-            popper.setAttribute('x-placement', popperPlacement);
-        }
-    };
-
-    const eventUpdate = () => {
-        if (updateWay === 'scroll') {
-            window.addEventListener(updateWay, setArrow);
-        } else {
-            if (reference) {
-                if (updateWay === 'mouseenter') {
-                    reference.addEventListener(updateWay, (e) => {
-                        e.stopPropagation();
-                        if (delay) {
-                            setTimeout(() => {
-                                setArrow();
-                            }, delay);
-                        } else {
-                            setArrow();
-                        }
-                    });
-                } else if (updateWay === 'click') {
-                    reference.addEventListener(updateWay, (e) => {
-                        e.stopPropagation();
-                        setArrow();
-                    });
-                } else if (updateWay === 'focus') {
-                    reference.addEventListener('mousedown', (e) => {
-                        e.stopPropagation();
-                        setArrow();
-                    });
-                }
-            }
-        }
-    };
-
-    setArrow();
-    eventUpdate();
-}
-
-export function handleShowAndHideEvents({
-    reference,
-    popper,
-    datasetVal,
-    showCb,
-    hideCb,
-    delay,
-    timer
-}: {
+interface handleOptions {
     reference: Element;
     popper: Element | any;
     datasetVal: string;
@@ -99,32 +40,42 @@ export function handleShowAndHideEvents({
     hideCb: any;
     delay: number;
     timer: any;
-}): void {
+}
+
+export function handleHoverShowAndHideEvents({
+    reference,
+    popper,
+    datasetVal,
+    showCb,
+    hideCb,
+    delay,
+    timer
+}: handleOptions): void {
     reference.addEventListener('mouseenter', () => {
         timer = setTimeout(() => {
-            listener1();
+            showEv();
         }, delay);
     });
 
-    reference.addEventListener('mouseleave', listener2);
+    reference.addEventListener('mouseleave', hideEv);
 
     // 通过设置 popper.dataset.tooltipShow 的方式可以判断提示框是否显示，
     // 并根据设置的值 "true" 和 "false" 来判断是否执行对应回调事件，
     // 避免出现鼠标快速经过但没有显示提示框，却依然执行了提示框消失时触发的回调
 
-    function listener1(): void {
-        popper.dataset[datasetVal] = 'true';
+    function showEv(): void {
+        popper.dataset[datasetVal] = 'show';
         showCb && type.isFn(showCb);
     }
 
-    function listener2(): void {
+    function hideEv(): void {
         clearTimeout(timer);
 
-        if (popper.dataset[datasetVal] === 'true') {
-            popper.dataset[datasetVal] = 'false';
+        if (popper.dataset[datasetVal] === 'show') {
+            popper.dataset[datasetVal] = 'hide';
             hideCb && type.isFn(hideCb);
         }
 
-        reference.removeEventListener('mouseenter', listener1);
+        reference.removeEventListener('mouseenter', showEv);
     }
 }

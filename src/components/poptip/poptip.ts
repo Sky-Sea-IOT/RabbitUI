@@ -9,8 +9,8 @@ import {
     setCss,
     setHtml
 } from '../../dom-utils';
-import { updateArrow, _newCreatePopper } from '../../mixins/tooltip';
-import { CssTransition, Popper, warn } from '../../mixins';
+import { _newCreatePopper } from '../../mixins/tooltip';
+import { CssTransition, listenClickOutside, _arrow, warn, _Popper } from '../../mixins';
 import { type, validComps } from '../../utils';
 
 interface PoptipAttrs {
@@ -29,10 +29,10 @@ interface PoptipAttrs {
 }
 
 interface PoptipEvents {
-    onShow: () => void; // 提示框显示时触发
-    onHide: () => void; // 提示框消失时触发
-    onOk: () => void; // 点击确定的回调
-    onCancel: () => void; // 点击取消的回调
+    onShow?: () => void; // 提示框显示时触发
+    onHide?: () => void; // 提示框消失时触发
+    onOk?: () => void; // 点击确定的回调
+    onCancel?: () => void; // 点击取消的回调
 }
 
 interface PublicMethods {
@@ -45,17 +45,22 @@ interface PublicMethods {
     };
 }
 
+const defalutPoptipDelay = 100;
 let poptipShowTimer: any;
 let poptipEvTimer: any;
 
-class Poptip {
+class Poptip implements PublicMethods {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
+    private children: any;
 
     constructor() {
         this.VERSION = 'v1.0';
         this.components = $el('r-poptip', { all: true });
         this._create(this.components);
+        this.children = $el('.rab-poptip-popper', { all: true });
+        listenClickOutside(this.children);
+        _arrow.scrollUpdate();
     }
 
     public config(
@@ -63,24 +68,31 @@ class Poptip {
     ): {
         title: string | number;
         content: string | number;
-        events: (options: PoptipEvents) => void;
+        events: ({ onShow, onHide, onOk, onCancel }: PoptipEvents) => void;
     } {
         const target = $el(el);
 
         validComps(target, 'poptip');
 
-        let PoptipTitle: any;
+        const { attrs } = Poptip.prototype;
 
-        const PoptipNMTitle = target.querySelector(`.${PREFIX.poptip}-title-inner`);
-        const PoptipConfirmTitle = target.querySelector(`.${PREFIX.poptip}-body-message`);
-
-        if (PoptipNMTitle) {
-            PoptipTitle = PoptipNMTitle;
-        } else {
-            PoptipTitle = PoptipConfirmTitle;
-        }
-
+        const PoptipRef = target.querySelector(`.${PREFIX.poptip}-rel`);
+        const PoptipPopper = target.querySelector(`.${PREFIX.poptip}-popper`);
         const PoptipContent = target.querySelector(`.${PREFIX.poptip}-body-content-inner`);
+
+        let PoptipTitle: any;
+        let OkBtn: any;
+        let CancelBtn: any;
+
+        // 判断要设置的提示框标题是否是确认对话框的标题
+        // 判断是否要获取确认对话框的确定和取消按钮
+        if (attrs(target).isConfirm) {
+            PoptipTitle = target.querySelector(`.${PREFIX.poptip}-body-message`);
+            OkBtn = target.querySelector(`.${PREFIX.button}-primary.${PREFIX.button}-sm`);
+            CancelBtn = target.querySelector(`.${PREFIX.button}-text.${PREFIX.button}-sm`);
+        } else {
+            PoptipTitle = target.querySelector(`.${PREFIX.poptip}-title-inner`);
+        }
 
         return {
             get title() {
@@ -96,7 +108,49 @@ class Poptip {
                 if (type.isStr(newVal) || type.isNum(newVal)) setHtml(PoptipContent, newVal);
             },
             events({ onShow, onHide, onOk, onCancel }) {
-                //
+                const triggerMode = attrs(target).trigger;
+
+                const showEv = () => {
+                    if (PoptipPopper.dataset.poptipShow === 'true') onShow && type.isFn(onShow);
+                };
+                const hideEv = () => {
+                    if (PoptipPopper.dataset.poptipShow === 'false') onHide && type.isFn(onHide);
+                };
+                const clickEv = () => {
+                    showEv();
+                    hideEv();
+                };
+
+                if (triggerMode === 'click') {
+                    PoptipRef.addEventListener('click', clickEv);
+                } else if (triggerMode === 'focus') {
+                    target.addEventListener('mousedown', showEv);
+                    target.addEventListener('mouseup', hideEv);
+                } else if (triggerMode === 'hover') {
+                    _Popper.handleHoverShowAndHideEvents({
+                        reference: target,
+                        popper: PoptipPopper,
+                        datasetVal: 'poptipStatus',
+                        showCb: onShow,
+                        hideCb: onHide,
+                        delay: defalutPoptipDelay,
+                        timer: poptipEvTimer
+                    });
+                }
+
+                // 确认对话框的确定和取消按钮都要触发提示框隐藏
+                if (OkBtn) {
+                    OkBtn.addEventListener('click', () => {
+                        hideEv();
+                        onOk && type.isFn(onOk);
+                    });
+                }
+                if (CancelBtn) {
+                    CancelBtn.addEventListener('click', () => {
+                        hideEv();
+                        onCancel && type.isFn(onCancel);
+                    });
+                }
             }
         };
     }
@@ -109,8 +163,6 @@ class Poptip {
                 'title',
                 'content',
                 'ok-text',
-                'trigger',
-                'confirm',
                 'padding',
                 'disabled',
                 'placement',
@@ -121,6 +173,10 @@ class Poptip {
     }
 
     private _createPoptipNodes(node: Element, i: number): void {
+        const attrs = this.attrs(node);
+
+        if (attrs.isConfirm) node.className = `${PREFIX.poptip}-confirm`;
+
         const uid = `poptip${i}`;
 
         const referenceElem = node.firstElementChild!;
@@ -129,18 +185,13 @@ class Poptip {
         PoptipRel.className = `${PREFIX.poptip}-rel`;
         PoptipRel.appendChild(referenceElem);
 
-        const attrs = this.attrs(node);
-
-        const confirmType = attrs.isConfirm ? `${PREFIX.poptip}-confirm` : '';
-        node.className = confirmType;
-
-        const whatAppearance = attrs.isConfirm ? this._confirmTpl(attrs) : this._normalTpl(attrs);
+        const whatModel = attrs.isConfirm ? this._confirmTpl(attrs) : this._normalTpl(attrs);
 
         const template = `
             <div class="${PREFIX.poptip}-popper" x-placement=${attrs.placement} data-poptip-uid=${uid}>
                 <div class="${PREFIX.poptip}-content">
-                    <div class="${PREFIX.poptip}-arrow"></div>
-                    <div class="${PREFIX.poptip}-inner">${whatAppearance}</div>
+                    <div class="${PREFIX.poptip}-arrow" data-popper-arrow></div>
+                    <div class="${PREFIX.poptip}-inner">${whatModel}</div>
                 </div>
             </div>
         `;
@@ -149,7 +200,7 @@ class Poptip {
 
         this._setWidth(attrs, uid);
 
-        const Popper = document.querySelector(`[data-poptip-uid=${uid}]`)!;
+        const Popper = $el(`[data-poptip-uid=${uid}]`)!;
 
         Popper?.before(PoptipRel);
 
@@ -157,7 +208,7 @@ class Poptip {
         setCss(Popper, 'display', 'none');
 
         // @ts-ignore
-        updateArrow(Popper, 'scroll');
+        // toggleUpdate(Popper, 'scroll');
 
         if (!attrs.isDisabled) {
             // @ts-ignore
@@ -166,16 +217,17 @@ class Poptip {
     }
 
     private _normalTpl(attrs: PoptipAttrs): string {
+        const setPadding = attrs.padding ? `padding:${attrs.padding}` : '';
         const isShowTitle =
             !attrs.isWordWrap && attrs.title
-                ? `<div class="${PREFIX.poptip}-title">
+                ? `<div class="${PREFIX.poptip}-title" style="${setPadding}">
                       <div class="${PREFIX.poptip}-title-inner">${attrs.title}</div>
                    </div>`
                 : '';
 
         const template = `
             ${isShowTitle}
-            <div class="${PREFIX.poptip}-body">
+            <div class="${PREFIX.poptip}-body" style="${setPadding}">
                 <div class="${PREFIX.poptip}-body-content">
                 <div class="${PREFIX.poptip}-body-content-inner">${attrs.content}</div>
                 </div>
@@ -233,53 +285,59 @@ class Poptip {
             timeout: 200
         };
 
-        const showEv = () => {
+        // 通过设置 popper.dataset.poptipShow 来判断是否隐藏或显示
+        const show = () => {
             popper.dataset.poptipShow = 'true';
-
             CssTransition(popper, {
                 inOrOut: 'in',
                 ...common
             });
-
             _initPoptip(parent, popper, poptipAttrs);
         };
-
-        const hideEv = () => {
+        const hide = () => {
             popper.dataset.poptipShow = 'false';
-
             CssTransition(popper, {
                 inOrOut: 'out',
                 ...common
             });
         };
 
-        const judgmentIsVisible = () =>
-            popper.dataset.poptipShow === 'true' ? hideEv() : showEv();
+        const judgmentIsVisible = () => (popper.dataset.poptipShow === 'true' ? hide() : show());
 
         if (trigger === 'click' || trigger === 'focus') {
-            Popper.updateArrow(popper, trigger, parent);
+            _initPoptip(parent, popper, poptipAttrs);
+            _arrow.toggleUpdate(popper, trigger, parent);
         }
-
         if (trigger === 'click') {
             referenceChild.addEventListener('click', judgmentIsVisible);
+        } else if (trigger === 'focus') {
+            referenceChild.addEventListener('mousedown', judgmentIsVisible);
+            referenceChild.addEventListener('mouseup', hide);
         } else if (trigger === 'hover') {
-            const defalutDelay = 100;
-
             parent.addEventListener('mouseenter', () => {
                 poptipShowTimer = setTimeout(() => {
-                    showEv();
-                }, defalutDelay);
+                    show();
+                }, defalutPoptipDelay);
             });
-
-            Popper.updateArrow(popper, 'mouseenter', parent, defalutDelay);
 
             parent.addEventListener('mouseleave', () => {
                 clearTimeout(poptipShowTimer);
-                hideEv();
+                hide();
             });
-        } else if (trigger === 'focus') {
-            referenceChild.addEventListener('mousedown', judgmentIsVisible);
-            referenceChild.addEventListener('mouseup', hideEv);
+
+            _arrow.toggleUpdate(popper, 'hover', parent, defalutPoptipDelay);
+        }
+
+        // 确认对话框的确定和取消按钮触发隐藏
+        if (poptipAttrs.isConfirm) {
+            const confirmOkBtn = popper.querySelector(
+                `.${PREFIX.button}-primary.${PREFIX.button}-sm`
+            );
+            const confirmCancelBtn = popper.querySelector(
+                `.${PREFIX.button}-text.${PREFIX.button}-sm`
+            );
+            confirmOkBtn.addEventListener('click', judgmentIsVisible);
+            confirmCancelBtn.addEventListener('click', judgmentIsVisible);
         }
     }
 
@@ -298,7 +356,7 @@ class Poptip {
             okText: getStrTypeAttr(node, 'ok-text', '确定'),
             content: getStrTypeAttr(node, 'content', ''),
             trigger: getStrTypeAttr(node, 'trigger', 'click'),
-            padding: getStrTypeAttr(node, 'padding', '8px 16px'),
+            padding: getStrTypeAttr(node, 'padding', ''),
             placement: getStrTypeAttr(node, 'placement', 'top'),
             cancelText: getStrTypeAttr(node, 'cancel-text', '取消'),
             // boolean type

@@ -6,7 +6,7 @@
 export function $el(
     node: string | Element | any,
     options?: { all: boolean }
-): Element | HTMLElement | null | NodeListOf<any> | NodeListOf<Element> | any{
+): Element | HTMLElement | null | NodeListOf<any> | NodeListOf<Element> | any {
     if (options?.all) {
         return document.querySelectorAll(node);
     } else {
@@ -23,7 +23,7 @@ export function setCss(node: Element | HTMLElement | any, styeName: string, valu
 }
 
 export function setHtml(node: Element, value?: string): string {
-    if (value) {
+    if (value || value === '') {
         return (node.innerHTML = value);
     } else {
         return node.innerHTML;
@@ -31,13 +31,14 @@ export function setHtml(node: Element, value?: string): string {
 }
 
 export function setText(node: Element, value?: string): string {
-    if (value) {
+    if (value || value === '') {
         return (node.textContent = value);
     } else {
         return node.textContent || '';
     }
 }
 
+// 2021-01-17 新增，在此后的开发才使用，此前的暂不修改
 // 通用的标签属性获取方法
 // 获取后的值由原先的字符串类型转换成对应类型
 

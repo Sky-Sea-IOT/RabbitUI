@@ -74,6 +74,9 @@
         <r-poptip trigger="focus" title="提示标题" content="提示内容">
             <button type="button" class="rab-btn">focus 激活</button>
         </r-poptip>
+        <r-poptip title="提示标题" content="<span style='color:#ccc'>请输入内容...</span>" id="test-input">
+            <input type="text" placeholder="配合输入框" oninput="handleChange(this.value)" />
+        </r-poptip>
     </div>
 
     <div class="example">
@@ -122,19 +125,13 @@
     </div>
 
     <div class="example">
-        <r-poptip title="提示标题" content="提示内容" id="test1">
-            <button class="rab-btn">click 激活</button>
-        </r-poptip>
-    </div>
-
-    <div class="example">
         <r-poptip disabled="true">
             <button class="rab-btn">禁用提示</button>
         </r-poptip>
     </div>
 
     <div class="example">
-        <r-poptip id="test2" width="400" placement="right">
+        <r-poptip width="400" placement="right" id="test1">
             <button class="rab-btn">复杂内容</button>
         </r-poptip>
     </div>
@@ -146,7 +143,7 @@
     </div>
 
     <div class="example">
-        <r-poptip confirm="true" title="您确认删除这条内容吗？">
+        <r-poptip confirm="true" title="您确认删除这条内容吗？" id="test2">
             <button class="rab-btn">删除</button>
         </r-poptip>
         <r-poptip confirm="true" title="Are you sure delete this task?" ok-text="yes" cancel-text="no">

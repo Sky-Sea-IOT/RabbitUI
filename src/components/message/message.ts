@@ -167,23 +167,13 @@ class $Message implements PublicMethods {
 
             let { closable, duration, onClose, background } = config;
 
-            if (type.isUndef(closable)) {
-                closable = false;
-            }
-            if (type.isUndef(onClose)) {
-                onClose = () => void 0;
-            }
-            if (type.isUndef(background)) {
-                background = false;
-            }
+            if (type.isUndef(closable)) closable = false;
+            if (type.isUndef(onClose)) onClose = () => void 0;
+            if (type.isUndef(background)) background = false;
             // 为每个实例自己的 duration 参数设置默认值，如果有传入值则使用自定义的值
-            if (type.isUndef(duration)) {
-                duration = DEFAULT_MESSAGE.duration;
-            }
+            if (type.isUndef(duration)) duration = DEFAULT_MESSAGE.duration;
             // 当全局的 duration 不为 3 时说明进行了全局配置进行改变
-            if (DEFAULT_MESSAGE.duration !== 3) {
-                duration = DEFAULT_MESSAGE.duration;
-            }
+            if (DEFAULT_MESSAGE.duration !== 3) duration = DEFAULT_MESSAGE.duration;
 
             this._setClosable(closable, Message, MsgContentWrap, onClose);
             this._setBackground(Message, MsgContentWrap, background);
@@ -195,8 +185,6 @@ class $Message implements PublicMethods {
         MsgContentBox.append(MsgInfoBox);
         MsgInfoBox.append(MsgIcon, MsgText);
         Message.appendChild(MsgContentWrap);
-
-        // @ts-ignore
         $el(`.${PREFIX.message}`)?.appendChild(Message);
 
         // 存放每次创建的实例
@@ -205,7 +193,8 @@ class $Message implements PublicMethods {
         CssTransition(Message, {
             inOrOut: 'in',
             enterCls: MsgMoveEnter,
-            rmCls: true
+            rmCls: true,
+            timeout: 250
         });
 
         return Message;
@@ -274,11 +263,8 @@ class $Message implements PublicMethods {
 
     private _handleClose(parent: HTMLElement, closeBtn: HTMLElement, onClose: any): void {
         closeBtn.addEventListener('click', () => {
-            this.instances.length -= 1;
-
             // 手动关闭后的回调
             type.isFn(onClose);
-
             destroyElem(parent, {
                 duration: 0.1,
                 clsEnter: MsgMoveEnter,
