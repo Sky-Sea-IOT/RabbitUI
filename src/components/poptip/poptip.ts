@@ -10,7 +10,7 @@ import {
     setHtml
 } from '../../dom-utils';
 import { _newCreatePopper } from '../../mixins/tooltip';
-import { CssTransition, listenClickOutside, _arrow, warn, _Popper } from '../../mixins';
+import { CssTransition, clickOutside, _arrow, warn, _Popper } from '../../mixins';
 import { type, validComps } from '../../utils';
 
 interface PoptipAttrs {
@@ -59,7 +59,7 @@ class Poptip implements PublicMethods {
         this.components = $el('r-poptip', { all: true });
         this._create(this.components);
         this.children = $el('.rab-poptip-popper', { all: true });
-        listenClickOutside(this.children);
+        clickOutside(this.children, 'poptipShow', 'zoom-big-fast-leave');
         _arrow.scrollUpdate();
     }
 
@@ -218,6 +218,7 @@ class Poptip implements PublicMethods {
 
     private _normalTpl(attrs: PoptipAttrs): string {
         const setPadding = attrs.padding ? `padding:${attrs.padding}` : '';
+
         const isShowTitle =
             !attrs.isWordWrap && attrs.title
                 ? `<div class="${PREFIX.poptip}-title" style="${setPadding}">
@@ -310,10 +311,10 @@ class Poptip implements PublicMethods {
         }
         if (trigger === 'click') {
             referenceChild.addEventListener('click', judgmentIsVisible);
-        } else if (trigger === 'focus') {
+        } else if (trigger === 'focus' && !poptipAttrs.isConfirm) {
             referenceChild.addEventListener('mousedown', judgmentIsVisible);
             referenceChild.addEventListener('mouseup', hide);
-        } else if (trigger === 'hover') {
+        } else if (trigger === 'hover' && !poptipAttrs.isConfirm) {
             parent.addEventListener('mouseenter', () => {
                 poptipShowTimer = setTimeout(() => {
                     show();

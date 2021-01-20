@@ -1,3 +1,5 @@
+// 更新popver弹窗或下拉菜单的箭头方向
+
 import { $el } from '../dom-utils';
 
 export function scrollUpdate(): void {

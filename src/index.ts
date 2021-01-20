@@ -2,6 +2,7 @@ import Alert from './components/alert';
 import Avatar from './components/avatar';
 import Badge from './components/badge';
 import Button from './components/button';
+import Divider from './components/divider';
 import Loading from './components/loading-bar';
 import Message from './components/message';
 import Notice from './components/notice';
@@ -21,6 +22,7 @@ export default {
     Avatar,
     Badge,
     Button,
+    Divider,
     Loading,
     Message,
     Notice,
