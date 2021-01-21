@@ -16,7 +16,7 @@ interface PublicMethods {
 
 class Alert implements PublicMethods {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = 'v1.0';

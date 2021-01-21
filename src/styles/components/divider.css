@@ -1,0 +1,110 @@
+r-divider {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: #55585e;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #e8eaec;
+}
+r-divider,
+r-divider[type="vertical"] {
+  margin: 0 8px;
+  display: inline-block;
+  height: 0.9em;
+  width: 1px;
+  vertical-align: middle;
+  position: relative;
+  top: -0.06em;
+}
+r-divider[type="horizontal"] {
+  display: block;
+  height: 1px;
+  width: 100%;
+  min-width: 100%;
+  margin: 24px 0;
+  clear: both;
+}
+r-divider[type="horizontal"].rab-divider-with-text-center,
+r-divider[type="horizontal"].rab-divider-with-text-left,
+r-divider[type="horizontal"].rab-divider-with-text-right {
+  display: table;
+  white-space: nowrap;
+  text-align: center;
+  background: transparent;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 16px;
+  margin: 16px 0;
+}
+r-divider[type="horizontal"].rab-divider-with-text-center:before,
+r-divider[type="horizontal"].rab-divider-with-text-left:before,
+r-divider[type="horizontal"].rab-divider-with-text-right:before,
+r-divider[type="horizontal"].rab-divider-with-text-center:after,
+r-divider[type="horizontal"].rab-divider-with-text-left:after,
+r-divider[type="horizontal"].rab-divider-with-text-right:after {
+  content: '';
+  display: table-cell;
+  position: relative;
+  top: 50%;
+  width: 50%;
+  border-top: 1px solid #e8eaec;
+  transform: translateY(50%);
+}
+r-divider[type="horizontal"][size="small"].rab-divider-with-text-center,
+r-divider[type="horizontal"][size="small"].rab-divider-with-text-left,
+r-divider[type="horizontal"][size="small"].rab-divider-with-text-right {
+  font-size: 14px;
+  margin: 8px 0;
+}
+r-divider[type="horizontal"].rab-divider-with-text-left .rab-divider-inner-text,
+r-divider[type="horizontal"].rab-divider-with-text-right .rab-divider-inner-text {
+  display: inline-block;
+  padding: 0 10px;
+}
+r-divider[type="horizontal"].rab-divider-with-text-left:before {
+  top: 50%;
+  width: 5%;
+}
+r-divider[type="horizontal"].rab-divider-with-text-left:after {
+  top: 50%;
+  width: 95%;
+}
+r-divider[type="horizontal"].rab-divider-with-text-right:before {
+  top: 50%;
+  width: 95%;
+}
+r-divider[type="horizontal"].rab-divider-with-text-right:after {
+  top: 50%;
+  width: 5%;
+}
+r-divider[type="horizontal"].rab-divider-with-text.rab-divider-dashed,
+r-divider[type="horizontal"].rab-divider-with-text-left.rab-divider-dashed,
+r-divider[type="horizontal"].rab-divider-with-text-right.rab-divider-dashed {
+  border-top: 0;
+}
+r-divider[type="horizontal"].rab-divider-with-text.rab-divider-dashed:before,
+r-divider[type="horizontal"].rab-divider-with-text-left.rab-divider-dashed:before,
+r-divider[type="horizontal"].rab-divider-with-text-right.rab-divider-dashed:before,
+r-divider[type="horizontal"].rab-divider-with-text.rab-divider-dashed:after,
+r-divider[type="horizontal"].rab-divider-with-text-left.rab-divider-dashed:after,
+r-divider[type="horizontal"].rab-divider-with-text-right.rab-divider-dashed:after {
+  border-style: dashed none none;
+}
+.rab-divider-inner-text {
+  display: inline-block;
+  padding: 0 24px;
+}
+.rab-divider-dashed {
+  background: none;
+  border-top: 1px dashed #e8eaec;
+}
+.rab-divider-plain.rab-divider-with-text,
+.rab-divider-plain.rab-divider-with-text-left,
+.rab-divider-plain.rab-divider-with-text-right {
+  color: #55585e !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+}

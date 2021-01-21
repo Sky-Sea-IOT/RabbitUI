@@ -43,7 +43,7 @@ export function setText(node: Element, value?: string): string {
 // 获取后的值由原先的字符串类型转换成对应类型
 
 // Return String type
-export function getStrTypeAttr(node: Element, attrName: string, defaultVal: string): string {
+export function getStrTypeAttr(node: Element, attrName: string, defaultVal: string): string | any {
     return node.getAttribute(attrName) || defaultVal;
 }
 
@@ -53,7 +53,7 @@ export function getBooleanTypeAttr(node: Element, attrName: string): boolean {
 }
 
 // Return Number type
-export function getNumTypeAttr(node: Element, attrName: string, defaultVal: number): number {
+export function getNumTypeAttr(node: Element, attrName: string, defaultVal: number): number | any {
     return Number(node.getAttribute(attrName)) || defaultVal;
 }
 
