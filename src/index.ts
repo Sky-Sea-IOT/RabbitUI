@@ -2,6 +2,7 @@ import Alert from './components/alert';
 import Avatar from './components/avatar';
 import Badge from './components/badge';
 import Button from './components/button';
+import Card from './components/card';
 import Divider from './components/divider';
 import Loading from './components/loading-bar';
 import Message from './components/message';
@@ -22,6 +23,7 @@ export default {
     Avatar,
     Badge,
     Button,
+    Card,
     Divider,
     Loading,
     Message,

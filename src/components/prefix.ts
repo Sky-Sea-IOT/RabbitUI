@@ -5,6 +5,7 @@ export default {
     avatar: `${prefixCls}-avatar`,
     badge: `${prefixCls}-badge`,
     button: `${prefixCls}-btn`,
+    card: `${prefixCls}-card`,
     divider: `${prefixCls}-divider`,
     icon: `${prefixCls}-icon`,
     loadingBar: `${prefixCls}-loading-bar`,
