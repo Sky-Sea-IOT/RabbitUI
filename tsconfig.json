@@ -1,7 +1,7 @@
 {
     "exclude": ["node_modules", "examples", "site"],
     "include": ["src"],
-    "compileOnSave": true,
+    "compileOnSave": false,
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
