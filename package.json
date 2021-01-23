@@ -19,7 +19,7 @@
         "components",
         "framework"
     ],
-    "main": "dist/rabbit.js",
+    "main": "dist/rabbit.min.js",
     "files": [
         "dist",
         "src"

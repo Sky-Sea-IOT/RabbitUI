@@ -77,8 +77,7 @@ module.exports = {
                     options: {
                         limit: 4096,
                         name: '[name].[ext]',
-                        outputPath: 'fonts/'
-                        //! outputPath: 'styles/fonts/',  打包的时候替换为这个
+                        outputPath: 'styles/fonts/'
                     }
                 }
             },
@@ -97,8 +96,7 @@ module.exports = {
         new webpack.optimize.ModuleConcatenationPlugin(),
         //分离出css文件
         new MiniCssExtractPlugin({
-            filename: 'rabbit.css',
-            //! filename: 'styles/rabbit.css',  打包的时候替换为这个
+            filename: 'styles/rabbit.css',
             chunkFilename: '[id].css',
             ignoreOrder: false
         })

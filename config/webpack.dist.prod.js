@@ -33,7 +33,7 @@ module.exports = merge(common, {
         new CompressionPlugin({
             filename: 'rabbit.min.js.gz[query]',
             algorithm: 'gzip',
-            test: /\.(js|css)$/,
+            test: /\.js$/,
             threshold: 10240,
             minRatio: 0.8
         }),

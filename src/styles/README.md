@@ -1,6 +1,3 @@
-<!-- 感谢 ViewUI 的提供 -->
-<!-- https://github.com/view-design/ViewUI -->
-
 # 样式库说明
 
 ## 目录
