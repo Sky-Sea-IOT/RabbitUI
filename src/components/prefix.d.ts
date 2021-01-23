@@ -1,0 +1,22 @@
+declare const _default: {
+    alert: string;
+    avatar: string;
+    badge: string;
+    button: string;
+    card: string;
+    divider: string;
+    icon: string;
+    loadingBar: string;
+    message: string;
+    messageChild: string;
+    notice: string;
+    poptip: string;
+    noticeChild: string;
+    progress: string;
+    switch: string;
+    steps: string;
+    time: string;
+    timeline: string;
+    tooltip: string;
+};
+export default _default;

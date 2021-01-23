@@ -1,13 +1,13 @@
 {
-    "exclude": ["node_modules", "examples"],
+    "exclude": ["node_modules", "examples", "site"],
     "include": ["src"],
-    "compileOnSave": false,
+    "compileOnSave": true,
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
         "strict": true,
         "sourceMap": true,
-        "declaration": false,
+        "declaration": true,
         //  "declarationDir": "./types",
         "removeComments": true,
         "esModuleInterop": true,

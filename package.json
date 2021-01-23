@@ -1,6 +1,6 @@
 {
     "name": "rabbitui",
-    "version": "0.1.1",
+    "version": "1.0.1",
     "title": "RabbitUI",
     "description": "A library of UI components built based on TypeScript",
     "homepage": "",
@@ -19,7 +19,7 @@
         "components",
         "framework"
     ],
-    "main": "dist/rabbit.min.js",
+    "main": "dist/rabbit.js",
     "files": [
         "dist",
         "src"

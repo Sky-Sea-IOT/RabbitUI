@@ -39,8 +39,6 @@ npm install rabbitui --save
 
 Import the file directly in the browser using the script and link tags, and use the global variable `Rabbit`.
 
-> Note: Before you can introduce rabbit.min.js, you need to introduce the dependencies [popper](https://popper.js.org/) and [moment](http://momentjs.com/) yourself
-
 ```html
 <!--import the style-->
 <link rel="stylesheet" href="dist/styles/rabbit.css">

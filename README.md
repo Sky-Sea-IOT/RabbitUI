@@ -39,8 +39,6 @@ npm install rabbitui --save
 
 在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 `Rabbit`。
 
-> 注意：引入 rabbit.min.js 前你需要自行引入 [popper](https://popper.js.org/)  和 [moment](http://momentjs.com/) 这两个依赖插件
-
 ```html
 <!--引入样式库-->
 <link rel="stylesheet" href="dist/styles/rabbit.css">
