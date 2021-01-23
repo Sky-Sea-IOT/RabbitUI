@@ -11,14 +11,15 @@ import Poptip from './components/poptip';
 import Progress from './components/progress';
 import Steps from './components/steps';
 import Switch from './components/switch';
+import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
 
 //! 打包的时候这里要解除封印
 // import './styles/index.less';
 
-//! 打包完成后以下代码都要注释
-export default {
+//! 打包完成后以下代码都要注释或删除
+const Rabbit = {
     Alert,
     Avatar,
     Badge,
@@ -32,6 +33,9 @@ export default {
     Progress,
     Steps,
     Switch,
+    Time,
     Timeline,
     Tooltip
 };
+
+export default Rabbit;

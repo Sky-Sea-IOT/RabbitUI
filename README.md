@@ -11,6 +11,6 @@ Rabbit UI
     <h3>A library of UI components built based on TypeScript</h3>
 </h1>
 
-> The project does not rely on any third-party libraries or frameworks and is written based on native Javascript
+> The project does not rely on any frameworks and is written based on native Javascript
 
 *The project is under construction*

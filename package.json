@@ -1,5 +1,5 @@
 {
-    "name": "rabbit-ui",
+    "name": "rabbitui",
     "version": "0.1.1",
     "title": "RabbitUI",
     "description": "A library of UI components built based on TypeScript",
@@ -11,6 +11,7 @@
         "jsUI组件库",
         "rabbitui",
         "rabbit-ui",
+        "rabbitui",
         "RabbitUI",
         "component",
         "javascript",
@@ -70,7 +71,8 @@
         "webpack-merge": "^5.7.2"
     },
     "dependencies": {
-        "@popperjs/core": "^2.6.0"
+        "@popperjs/core": "^2.6.0",
+        "moment": "^2.29.1"
     },
     "engines": {
         "node": ">=6.5",
