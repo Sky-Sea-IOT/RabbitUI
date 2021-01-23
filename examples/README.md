@@ -4,3 +4,5 @@
 修改其路径
 
 2. 把要测试的组件在main.ts 里将对应的 `xxxTest()` 取消注释
+
+3. 运行`npm run dev`
