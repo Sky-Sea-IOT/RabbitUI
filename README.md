@@ -39,11 +39,9 @@ npm install rabbit-design --save
 
 在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 `Rabbit`。
 
-> 注意：引入 rabbit.min.js 前你需要自行引入两个依赖插件 [popper.js](https://popper.js.org/) 和 [moment.js](http://momentjs.com/)
-
 ```html
 <!--引入样式库-->
-<link rel="stylesheet" href="dist/styles/rabbit.css">
+<link rel="stylesheet" href="dist/rabbit.css">
 <!--引入脚本-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 ```
@@ -61,18 +59,13 @@ npm install rabbit-design --save
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!--引入样式库-->
-    <link rel="stylesheet" href="dist/styles/rabbit.css">
+    <link rel="stylesheet" href="dist/rabbit.css">
 </head>
     
 <body>
     <r-alert type="success" message="Success Text"></r-alert>
     <r-tooltip content="这里是提示文字">鼠标经过这段文字时，会显示一个气泡框</r-tooltip>
 </body>
-    
-<!--引入 Popper.js-->
-<script type="text/javascript" src="https://unpkg.com/@popperjs/core@2"></script>
-<!--引入 Moment.js-->
-<script type="text/javascript" src="moment.js"></script>
 <!--引入 Rabbit.js-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 <script>
@@ -96,7 +89,7 @@ const Tooltip = new Rabbit.Tooltip();
 引入样式：
 
 ```js
-import 'rabbit-design/dist/styles/rabbit.css';
+import 'rabbit-design/dist/rabbit.css';
 ```
 
 ## 按需引用
@@ -121,9 +114,9 @@ npm install babel-plugin-import --save-dev
 import { Alert, Message } from 'rabbit-design';
 ```
 
-#### 特别提醒
+### 特别提醒
 
-- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbit-design/dist/styles/rabbit.css';`
+- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbit-design/dist/rabbit.css';`
 
 ## 浏览器支持
 

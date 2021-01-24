@@ -39,11 +39,9 @@ npm install rabbit-design --save
 
 Import the file directly in the browser using the script and link tags, and use the global variable `Rabbit`.
 
-> Note: Before you can introduce rabbit.min.js you need to introduce two dependencies yourself [popper.js](https://popper.js.org/) and [moment.js](http://momentjs.com/)
-
 ```html
 <!--import the style-->
-<link rel="stylesheet" href="dist/styles/rabbit.css">
+<link rel="stylesheet" href="dist/rabbit.css">
 <!--import RabbitUI -->
 <script type="text/javascript" src="rabbit.min.js"></script>
 ```
@@ -61,18 +59,13 @@ Browser environment example
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
      <!--import the style-->
-    <link rel="stylesheet" href="dist/styles/rabbit.css">
+    <link rel="stylesheet" href="dist/rabbit.css">
 </head>
     
 <body>
     <r-alert type="success" message="Success Text"></r-alert>
     <r-tooltip content="this is the prompt text">When you mouse over the text, a bubble box will appear</r-tooltip>
 </body>
-    
-<!--import Popper.js-->
-<script type="text/javascript" src="https://unpkg.com/@popperjs/core@2"></script>
-<!--import Moment.js-->
-<script type="text/javascript" src="moment.js"></script>
 <!--import Rabbit.js-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 <script>
@@ -96,7 +89,7 @@ const Tooltip = new Rabbit.Tooltip();
 Using css via import:
 
 ```js
-import 'rabbit-design/dist/styles/rabbit.css';
+import 'rabbit-design/dist/rabbit.css';
 ```
 
 ## Import as needed
@@ -121,7 +114,7 @@ Then import the components as needed to reduce the size:
 import { Alert, Message } from 'rabbit-design';
 ```
 
-#### Especially remind
+### Especially remind
 
 -According to the need to still need to import the reference style that the **main js** or the root component `import 'rabbit-design/dist/styles/rabbit. CSS';`
 
