@@ -31,15 +31,15 @@ Rabbit UI
 
 - 使用 npm
 
-```js
-npm install rabbitui --save
+```text
+npm install rabbit-ui --save
 ```
 
 - 浏览器引入
 
 在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 `Rabbit`。
 
-> 注意：引入 rabbit.min.js 前你需要自行引入 [moment.js](http://momentjs.com/)
+> 注意：引入 rabbit.min.js 前你需要自行引入两个依赖插件 [popper.js](https://popper.js.org/) 和 [moment.js](http://momentjs.com/)
 
 ```html
 <!--引入样式库-->
@@ -76,7 +76,7 @@ npm install rabbitui --save
 <!--引入 Rabbit.js-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 <script>
-	const Alert = new Rabbit.Alert();   
+    const Alert = new Rabbit.Alert();   
     const Tooltip = new Rabbit.Tooltip();  
 </script>
 </html>
@@ -87,7 +87,7 @@ NPM 环境
 推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用，当然，我们也推荐使用 ES2015。
 
 ```js
-import Rabbit from 'rabbitui';
+import Rabbit from 'rabbit-ui';
 
 const Alert = new Rabbit.Alert();   
 const Tooltip = new Rabbit.Tooltip();  
@@ -96,7 +96,7 @@ const Tooltip = new Rabbit.Tooltip();
 引入样式：
 
 ```js
-import 'rabbitui/dist/styles/rabbit.css';
+import 'rabbit-ui/dist/styles/rabbit.css';
 ```
 
 ## 按需引用
@@ -109,7 +109,7 @@ npm install babel-plugin-import --save-dev
 // .babelrc
 {
   "plugins": [["import", {
-    "libraryName": "rabbitui",
+    "libraryName": "rabbit-ui",
     "libraryDirectory": "src/components"
   }]]
 }
@@ -118,12 +118,12 @@ npm install babel-plugin-import --save-dev
 然后这样按需引入组件，就可以减小体积了：
 
 ```js
-import { Alert, Message } from 'rabbitui';
+import { Alert, Message } from 'rabbit-ui';
 ```
 
 #### 特别提醒
 
-- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbitui/dist/styles/rabbit.css';`
+- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbit-ui/dist/styles/rabbit.css';`
 
 ## 浏览器支持
 

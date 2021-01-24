@@ -20,7 +20,7 @@ module.exports = merge(common, {
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
-        filename: 'rabbit.min.js',
+        filename: 'rabbit.[name].min.js',
         library: 'rabbit',
         libraryTarget: 'umd',
         umdNamedDefine: true
@@ -31,7 +31,7 @@ module.exports = merge(common, {
             parallel: true
         }),
         new CompressionPlugin({
-            filename: 'rabbit.min.js.gz[query]',
+            filename: '[name].js.gz[query]',
             algorithm: 'gzip',
             test: /\.js$/,
             threshold: 10240,

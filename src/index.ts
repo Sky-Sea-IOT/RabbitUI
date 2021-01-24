@@ -15,10 +15,10 @@ import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
 
+//! 整个项目完成后以下代码都要注释或删除
 //! 打包的时候这里要解除封印
 // import './styles/index.less';
 
-//! 整个项目完成后以下代码都要注释或删除
 const Rabbit = {
     Alert,
     Avatar,
