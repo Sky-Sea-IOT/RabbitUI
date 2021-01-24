@@ -7,7 +7,7 @@
 简体中文 | [English](./README.en-US.md)
 
 <h1>
-Rabbit UI
+RabbitUI
     <h3>一个基于 TypeScript 构建的UI组件库</h3>
 </h1>
 
@@ -32,7 +32,7 @@ Rabbit UI
 - 使用 npm
 
 ```text
-npm install rabbitui --save
+npm install rabbit-design --save
 ```
 
 - 浏览器引入
@@ -87,7 +87,7 @@ NPM 环境
 推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用，当然，我们也推荐使用 ES2015。
 
 ```js
-import Rabbit from 'rabbitui';
+import Rabbit from 'rabbit-design';
 
 const Alert = new Rabbit.Alert();   
 const Tooltip = new Rabbit.Tooltip();  
@@ -96,20 +96,20 @@ const Tooltip = new Rabbit.Tooltip();
 引入样式：
 
 ```js
-import 'rabbitui/dist/styles/rabbit.css';
+import 'rabbit-design/dist/styles/rabbit.css';
 ```
 
 ## 按需引用
 
  借助插件 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import)可以实现按需加载组件，减少文件体积。首先安装，并在文件 `.babelrc` 中配置：
 
-```js
+```text
 npm install babel-plugin-import --save-dev
 
 // .babelrc
 {
   "plugins": [["import", {
-    "libraryName": "rabbitui",
+    "libraryName": "rabbit-design",
     "libraryDirectory": "src/components"
   }]]
 }
@@ -118,12 +118,12 @@ npm install babel-plugin-import --save-dev
 然后这样按需引入组件，就可以减小体积了：
 
 ```js
-import { Alert, Message } from 'rabbitui';
+import { Alert, Message } from 'rabbit-design';
 ```
 
 #### 特别提醒
 
-- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbitui/dist/styles/rabbit.css';`
+- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbit-design/dist/styles/rabbit.css';`
 
 ## 浏览器支持
 
