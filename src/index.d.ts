@@ -11,7 +11,6 @@ import Switch from './components/switch';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
-import './styles/index.less';
 declare const Rabbit: {
     Alert: typeof Alert;
     Avatar: typeof Avatar;

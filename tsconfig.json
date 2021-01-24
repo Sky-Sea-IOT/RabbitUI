@@ -1,17 +1,18 @@
 {
     "exclude": ["node_modules", "examples", "site"],
-    "include": ["src"],
-    "compileOnSave": false,
+    "include": ["src/*.ts"],
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
+        "target": "es6",
+        "module": "es6",
         "strict": true,
-        "sourceMap": true,
-        "declaration": true,
-        //  "declarationDir": "./types",
-        "removeComments": true,
-        "esModuleInterop": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
         "experimentalDecorators": true,
-        "lib": ["dom", "es2015", "ScriptHost", "ES2019.Array"]
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "lib": ["es6", "dom", "dom.iterable", "scripthost"]
     }
 }
