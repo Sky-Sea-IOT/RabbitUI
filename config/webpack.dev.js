@@ -21,6 +21,7 @@ module.exports = merge(common, {
     devServer: {
         port: 8085,
         open: true,
+        hot: true,
         inline: true,
         progress: true,
         compress: true
@@ -31,7 +32,7 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.join(__dirname, '../examples/dist/index.html'),
-            template: path.join(__dirname, '../examples/time/index.html')
+            template: path.join(__dirname, '../examples/notice/index.html')
         }),
         new FriendlyErrorsPlugin()
     ]

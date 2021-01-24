@@ -9,7 +9,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 options: {
@@ -56,16 +57,17 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|webp)$/i,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        // 文件命名
-                        name: '[name].[ext]',
-                        outputPath: 'images/',
-                        // 小于 2k 的图片转成 base64 编码
-                        limit: 2024
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/',
+                            // 小于 2k 的图片转成 base64 编码
+                            limit: 2024
+                        }
                     }
-                }]
+                ]
             },
             {
                 test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/i,
@@ -74,7 +76,7 @@ module.exports = {
                     options: {
                         limit: 4096,
                         name: '[name].[ext]',
-                        outputPath: 'styles/fonts/'
+                        outputPath: 'fonts/'
                     }
                 }
             },
@@ -93,30 +95,9 @@ module.exports = {
         new webpack.optimize.ModuleConcatenationPlugin(),
         //分离出css文件
         new MiniCssExtractPlugin({
-            filename: 'styles/rabbit.css',
+            filename: 'rabbit.css',
             chunkFilename: '[id].css',
             ignoreOrder: false
         })
-    ],
-    // 抽离出来的第三方插件库需要删掉，不发布
-    optimization: {
-        splitChunks: {
-            minSize: 30000, //提取出的chunk的最小大小
-            cacheGroups: {
-                default: {
-                    name: 'common',
-                    chunks: 'initial',
-                    minChunks: 2, //模块被引用2次以上的才抽离
-                    priority: -20
-                },
-                vendors: {
-                    //拆分第三方库（通过npm|yarn安装的库）
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor/vendor',
-                    chunks: 'initial',
-                    priority: -10
-                }
-            }
-        }
-    }
+    ]
 };

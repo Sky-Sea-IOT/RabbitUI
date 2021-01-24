@@ -18,7 +18,7 @@ module.exports = merge(common, {
         // eslint-disable-next-line no-undef
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
-        filename: 'rabbit.[name].js',
+        filename: 'rabbit.js',
         library: 'rabbit',
         libraryTarget: 'umd',
         umdNamedDefine: true

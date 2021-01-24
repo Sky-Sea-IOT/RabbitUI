@@ -20,7 +20,7 @@ module.exports = merge(common, {
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
-        filename: 'rabbit.[name].min.js',
+        filename: 'rabbit.min.js',
         library: 'rabbit',
         libraryTarget: 'umd',
         umdNamedDefine: true

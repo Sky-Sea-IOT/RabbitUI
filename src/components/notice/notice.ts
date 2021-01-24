@@ -176,8 +176,7 @@ class $Notice implements PublicMethods {
 
         CssTransition(Notice, {
             inOrOut: 'in',
-            enterCls: NotMoveEnter,
-            rmCls: true
+            enterCls: NotMoveEnter
         });
 
         this.instances.push(Notice);
@@ -327,8 +326,7 @@ class $Notice implements PublicMethods {
 
         destroyElem(instance, {
             duration,
-            clsLeave: NotMoveLeave,
-            transitionTime: 0.5
+            clsLeave: NotMoveLeave
         });
     }
 }

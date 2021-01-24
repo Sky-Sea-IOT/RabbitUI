@@ -2,8 +2,8 @@
     "exclude": ["node_modules", "examples", "site"],
     "include": ["src/*.ts"],
     "compilerOptions": {
-        "target": "es6",
-        "module": "es6",
+        "target": "es5",
+        "module": "es2015",
         "strict": true,
         "jsx": "preserve",
         "importHelpers": true,
@@ -13,6 +13,6 @@
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "lib": ["es6", "dom", "dom.iterable", "scripthost"]
+        "lib": ["es5", "dom", "dom.iterable", "scripthost"]
     }
 }
