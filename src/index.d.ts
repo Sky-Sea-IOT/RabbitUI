@@ -18,9 +18,9 @@ declare const Rabbit: {
     Button: typeof Button;
     Card: typeof Card;
     Divider: typeof Divider;
-    Loading: import("./components/loading-bar/loading-bar").default;
-    Message: import("./components/message/message").default;
-    Notice: import("./components/notice/notice").default;
+    Loading: import('./components/loading-bar/loading-bar').default;
+    Message: import('./components/message/message').default;
+    Notice: import('./components/notice/notice').default;
     Poptip: typeof Poptip;
     Progress: typeof Progress;
     Steps: typeof Steps;

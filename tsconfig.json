@@ -1,11 +1,14 @@
 {
     "exclude": ["node_modules", "examples", "site"],
     "include": ["src/*.ts"],
+    "files": ["./src/**/*"],
     "compilerOptions": {
         "target": "es5",
         "module": "es2015",
         "strict": true,
         "jsx": "preserve",
+        "declaration": true,
+        "incremental": true,
         "importHelpers": true,
         "moduleResolution": "node",
         "experimentalDecorators": true,
@@ -13,6 +16,7 @@
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "lib": ["es5", "dom", "dom.iterable", "scripthost"]
+        "outDir": "./build-js",
+        "lib": ["es5", "es2015.promise", "dom", "dom.iterable", "scripthost"]
     }
 }
