@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    .example {
+        width: 520px;
+        padding: 42px 24px 50px;
+        border: 1px solid #f0f0f0;
+        margin: 20px auto;
+    }
+</style>
+
+<body>
+    <div class="example">
+        <button class="rab-btn rab-btn-primary">Open</button>
+    </div>
+
+    <r-drawer title="Basic Drawer">
+        <slot>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+        </slot>
+    </r-drawer>
+
+    <!-- <r-drawer>
+        <div class="rab-drawer-mask"></div>
+        <div class="rab-drawer-wrap">
+            <div class="rab-drawer rab-drawer-right" style="width: 256px">
+                <div class="rab-drawer-content">
+                    <a class="rab-drawer-close"><i class="rab-icon rab-icon-ios-close"></i></a>
+                    <div class="rab-drawer-header">
+                        <div class="rab-drawer-header-inner">Basic Drawer</div>
+                    </div>
+                    <div class="rab-drawer-body">
+                        <p>Some contents...</p>
+                        <p>Some contents...</p>
+                        <p>Some contents...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </r-drawer> -->
+</body>
+
+</html>

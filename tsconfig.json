@@ -1,7 +1,7 @@
 {
     "exclude": ["node_modules", "examples", "site"],
-    "include": ["src/*.ts"],
-    "files": ["./src/**/*"],
+    "include": ["./src/*.ts"],
+    "files": ["./src/index.ts"],
     "compilerOptions": {
         "target": "es5",
         "module": "es2015",

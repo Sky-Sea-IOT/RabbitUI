@@ -4,6 +4,7 @@ import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
 import Divider from './components/divider';
+import Drawer from './components/drawer';
 import Loading from './components/loading-bar';
 import Message from './components/message';
 import Notice from './components/notice';
@@ -20,7 +21,7 @@ import Tooltip from './components/tooltip';
 // import './styles/index.less';
 
 // @ts-ignore
-// 需要将 Rabbit 导出为全局变量，解决打包后无法调用的问题
+// 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
 export default window.Rabbit = {
     Alert,
     Avatar,
@@ -28,6 +29,7 @@ export default window.Rabbit = {
     Button,
     Card,
     Divider,
+    Drawer,
     Loading,
     Message,
     Notice,

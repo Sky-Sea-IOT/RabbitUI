@@ -7,6 +7,7 @@ export default {
     button: `${prefixCls}-btn`,
     card: `${prefixCls}-card`,
     divider: `${prefixCls}-divider`,
+    drawer: `${prefixCls}-drawer`,
     icon: `${prefixCls}-icon`,
     loadingBar: `${prefixCls}-loading-bar`,
     message: `${prefixCls}-message`,
