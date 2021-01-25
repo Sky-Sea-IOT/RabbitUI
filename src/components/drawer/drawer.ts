@@ -1,10 +1,11 @@
 import PREFIX from '../prefix';
-import { $el, getBooleanTypeAttr, getStrTypeAttr, removeAttrs } from '../../dom-utils';
+import { $el, createElem, getBooleanTypeAttr, getStrTypeAttr, removeAttrs } from '../../dom-utils';
 
 interface PublicMethods {
     config(
         el: string
     ): {
+        visible: boolean;
         title: string;
         events: ({ onClose, onVisibleChange }: DrawerEvents) => void;
     };
@@ -58,7 +59,15 @@ class Drawer {
         });
     }
 
-    private _createDrawerNodes(node: Element): void {}
+    private _createDrawerNodes(node: Element): void {
+        const DrawerMask = createElem('div');
+        const DrawerWrap = createElem('div');
+        const Drawer = createElem('div');
+        const DrawerContent = createElem('div');
+        const DrawerHeader = createElem('div');
+        const DrawerHeaderInner = createElem('div');
+        const DrawerBody = createElem('div');
+    }
 
     private _attrs(node: Element): DrawerAttes {
         return {
