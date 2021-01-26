@@ -15,17 +15,17 @@
     }
 </style>
 
-<body>
+<body style="padding-right: 17px; overflow: hidden; height: 1000px">
     <div class="example">
-        <button class="rab-btn rab-btn-primary">Open</button>
+        <button class="rab-btn rab-btn-primary" onclick="Op1()">Open</button>
     </div>
 
-    <r-drawer title="Basic Drawer">
-        <div>
+    <r-drawer title="Basic Drawer" id="test1">
+        <slot>
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>
-        </div>
+        </slot>
     </r-drawer>
 
     <!-- <r-drawer>

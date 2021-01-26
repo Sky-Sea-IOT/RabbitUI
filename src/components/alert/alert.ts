@@ -1,5 +1,5 @@
 import { warn } from '../../mixins';
-import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
+import { $el, bind, createElem, removeAttrs, setHtml } from '../../dom-utils';
 import { type, destroyElem, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -96,10 +96,9 @@ class Alert implements PublicMethods {
 
         // 将当前选中的组件作为参数返回出去
         const $this = target;
-
         const alertCloseBtn = target.querySelector(`.${PREFIX.alert}-close`);
 
-        alertCloseBtn.addEventListener('click', () => type.isFn(cb, $this));
+        bind(alertCloseBtn, 'click', () => type.isFn(cb, $this));
     }
 
     private _create(nodes: NodeListOf<Element>) {

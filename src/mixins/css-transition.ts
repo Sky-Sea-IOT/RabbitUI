@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 interface Config {
     inOrOut?: 'in' | 'out'; // 进场或者出场
-    enterCls?: string; // 进场动画
-    leaveCls?: string; // 出场动画
+    enterCls?: 'rab-fade-in' | string; // 进场动画
+    leaveCls?: 'rab-fade-out' | string; // 出场动画
     rmCls?: boolean; // 动画结束后是否移除动画类名
     timeout?: number; // 过渡效果的持续时间
     hiddenParent?: Element | HTMLElement | any; // 是否将父元素一起隐藏

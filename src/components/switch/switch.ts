@@ -1,4 +1,4 @@
-import { $el, setCss, setHtml } from '../../dom-utils';
+import { $el, bind, setCss, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -24,7 +24,7 @@ class Switch implements PublicMethods {
         // 将当前选中的组件作为参数返回出去
         const $this = target;
 
-        target.addEventListener('click', () => {
+        bind(target, 'click', () => {
             const status = this._getStatus(target);
             type.isFn(cb, [status, $this]);
         });

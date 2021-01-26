@@ -3,8 +3,13 @@
 @import '../mixins/content.less';
 @import '../animation/move.less';
 
+@drawer-tag: r-drawer;
 @drawer-prefix-cls: ~"@{css-prefix}drawer";
 @drawer-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+@{drawer-tag} {
+  display: none;
+}
 
 .@{drawer-prefix-cls} {
   width: auto;
@@ -166,12 +171,12 @@
   }
 }
 
-.move(drawer-top, rabDrawerMoveTopIn, enter, .65s, @drawer-timing-function);
-.move(drawer-bottom, rabDrawerMoveBottomIn, enter, .65s, @drawer-timing-function);
-.move(drawer-left, rabDrawerMoveLeftIn, enter, .65s, @drawer-timing-function);
-.move(drawer-right, rabDrawerMoveRightIn, enter, .65s, @drawer-timing-function);
+.move(drawer-top, rabDrawerMoveTopIn, enter, .55s, @drawer-timing-function);
+.move(drawer-bottom, rabDrawerMoveBottomIn, enter, .55s, @drawer-timing-function);
+.move(drawer-left, rabDrawerMoveLeftIn, enter, .55s, @drawer-timing-function);
+.move(drawer-right, rabDrawerMoveRightIn, enter, .55s, @drawer-timing-function);
 
-.move(drawer-top, rabDrawerMoveTopOut, leave, .45s, @drawer-timing-function);
-.move(drawer-bottom, rabDrawerMoveBottomOut, leave, .45s, @drawer-timing-function);
-.move(drawer-left, rabDrawerMoveLeftOut, leave, .45s, @drawer-timing-function);
-.move(drawer-right, rabDrawerMoveRightOut, leave, .45s, @drawer-timing-function);
+.move(drawer-top, rabDrawerMoveTopOut, leave, .8s, @drawer-timing-function);
+.move(drawer-bottom, rabDrawerMoveBottomOut, leave, .8s, @drawer-timing-function);
+.move(drawer-left, rabDrawerMoveLeftOut, leave, .8s, @drawer-timing-function);
+.move(drawer-right, rabDrawerMoveRightOut, leave, .8s, @drawer-timing-function);

@@ -1,5 +1,9 @@
 import { CssTransition } from '.';
+import { bind } from '../dom-utils';
 
+/**
+ * 适应与下拉菜单、tooltip、poptip的点击空白处关闭
+ */
 export default function clickOutside(
     target: NodeListOf<HTMLElement>,
     datasetVal: string,
@@ -19,12 +23,12 @@ export default function clickOutside(
         });
     };
 
-    document.addEventListener('focusout', (e) => {
+    bind(document, 'focusout', (e: any) => {
         e.stopPropagation();
         hideJudgment();
     });
 
-    document.addEventListener('click', (e) => {
+    bind(document, 'click', (e: any) => {
         e.stopPropagation();
         hideJudgment();
     });

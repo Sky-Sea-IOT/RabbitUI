@@ -274,6 +274,9 @@
     transform: translateX(100%);
   }
 }
+r-drawer {
+  display: none;
+}
 .rab-drawer {
   width: auto;
   height: 100%;
@@ -449,26 +452,26 @@
   padding-bottom: 2px;
 }
 .rab-drawer-top-move-enter {
-  animation: rabDrawerMoveTopIn 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveTopIn 0.55s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-bottom-move-enter {
-  animation: rabDrawerMoveBottomIn 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveBottomIn 0.55s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-left-move-enter {
-  animation: rabDrawerMoveLeftIn 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveLeftIn 0.55s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-right-move-enter {
-  animation: rabDrawerMoveRightIn 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveRightIn 0.55s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-top-move-leave {
-  animation: rabDrawerMoveTopOut 0.45s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveTopOut 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-bottom-move-leave {
-  animation: rabDrawerMoveBottomOut 0.45s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveBottomOut 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-left-move-leave {
-  animation: rabDrawerMoveLeftOut 0.45s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveLeftOut 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .rab-drawer-right-move-leave {
-  animation: rabDrawerMoveRightOut 0.45s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: rabDrawerMoveRightOut 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }

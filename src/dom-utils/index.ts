@@ -1,3 +1,5 @@
+import { bind, unbind } from './bind';
+
 import {
     $el,
     createElem,
@@ -8,12 +10,15 @@ import {
     getNumTypeAttr,
     getBooleanTypeAttr
 } from './elem';
+
 import { prevAll, nextAll } from './prev&next';
 import removeAttrs from './remove-attrs';
 import siblings from './siblings';
 import slide from './slide';
 
 export {
+    bind,
+    unbind,
     $el,
     createElem,
     setCss,

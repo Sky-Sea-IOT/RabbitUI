@@ -1,4 +1,5 @@
 import { createPopper } from '@popperjs/core';
+import { bind, unbind } from '../dom-utils';
 import { type } from '../utils';
 
 export function _newCreatePopper(
@@ -51,13 +52,13 @@ export function handleHoverShowAndHideEvents({
     delay,
     timer
 }: handleOptions): void {
-    reference.addEventListener('mouseenter', () => {
+    bind(reference, 'mouseenter', () => {
         timer = setTimeout(() => {
             showEv();
         }, delay);
     });
 
-    reference.addEventListener('mouseleave', hideEv);
+    bind(reference, 'mouseleave', hideEv);
 
     // 通过设置 popper.dataset.tooltipShow 的方式可以判断提示框是否显示，
     // 并根据设置的值 "true" 和 "false" 来判断是否执行对应回调事件，
@@ -76,6 +77,6 @@ export function handleHoverShowAndHideEvents({
             hideCb && type.isFn(hideCb);
         }
 
-        reference.removeEventListener('mouseenter', showEv);
+        unbind(reference, 'mouseenter', showEv);
     }
 }

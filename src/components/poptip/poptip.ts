@@ -1,6 +1,7 @@
 import PREFIX from '../prefix';
 import {
     $el,
+    bind,
     createElem,
     getBooleanTypeAttr,
     getNumTypeAttr,
@@ -122,10 +123,10 @@ class Poptip implements PublicMethods {
                 };
 
                 if (triggerMode === 'click') {
-                    PoptipRef.addEventListener('click', clickEv);
+                    bind(PoptipRef, 'click', clickEv);
                 } else if (triggerMode === 'focus') {
-                    target.addEventListener('mousedown', showEv);
-                    target.addEventListener('mouseup', hideEv);
+                    bind(target, 'mousedown', showEv);
+                    bind(target, 'mouseup', hideEv);
                 } else if (triggerMode === 'hover') {
                     _Popper.handleHoverShowAndHideEvents({
                         reference: target,
@@ -140,13 +141,13 @@ class Poptip implements PublicMethods {
 
                 // 确认对话框的确定和取消按钮都要触发提示框隐藏
                 if (OkBtn) {
-                    OkBtn.addEventListener('click', () => {
+                    bind(OkBtn, 'click', () => {
                         hideEv();
                         onOk && type.isFn(onOk);
                     });
                 }
                 if (CancelBtn) {
-                    CancelBtn.addEventListener('click', () => {
+                    bind(OkBtn, 'click', () => {
                         hideEv();
                         onCancel && type.isFn(onCancel);
                     });
@@ -206,9 +207,6 @@ class Poptip implements PublicMethods {
 
         // 初始化 display
         setCss(Popper, 'display', 'none');
-
-        // @ts-ignore
-        // toggleUpdate(Popper, 'scroll');
 
         if (!attrs.isDisabled) {
             // @ts-ignore
@@ -310,18 +308,17 @@ class Poptip implements PublicMethods {
             _arrow.toggleUpdate(popper, trigger, parent);
         }
         if (trigger === 'click') {
-            referenceChild.addEventListener('click', judgmentIsVisible);
+            bind(referenceChild, 'click', judgmentIsVisible);
         } else if (trigger === 'focus' && !poptipAttrs.isConfirm) {
-            referenceChild.addEventListener('mousedown', judgmentIsVisible);
-            referenceChild.addEventListener('mouseup', hide);
+            bind(referenceChild, 'mousedown', judgmentIsVisible);
+            bind(referenceChild, 'mouseup', hide);
         } else if (trigger === 'hover' && !poptipAttrs.isConfirm) {
-            parent.addEventListener('mouseenter', () => {
+            bind(parent, 'mouseenter', () => {
                 poptipShowTimer = setTimeout(() => {
                     show();
                 }, defalutPoptipDelay);
             });
-
-            parent.addEventListener('mouseleave', () => {
+            bind(parent, 'mouseleave', () => {
                 clearTimeout(poptipShowTimer);
                 hide();
             });
