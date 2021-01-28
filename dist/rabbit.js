@@ -21461,6 +21461,7 @@ var prefixCls = 'rab';
     button: prefixCls + "-btn",
     card: prefixCls + "-card",
     divider: prefixCls + "-divider",
+    drawer: prefixCls + "-drawer",
     icon: prefixCls + "-icon",
     loadingBar: prefixCls + "-loading-bar",
     message: prefixCls + "-message",
@@ -21566,7 +21567,7 @@ var Time = /** @class */ (function () {
 
 /***/ "./src/dom-utils/index.ts":
 /*!********************************************!*\
-  !*** ./src/dom-utils/index.ts + 5 modules ***!
+  !*** ./src/dom-utils/index.ts + 6 modules ***!
   \********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -21577,6 +21578,7 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "$el": function() { return /* reexport */ $el; },
+  "bind": function() { return /* reexport */ bind; },
   "createElem": function() { return /* reexport */ createElem; },
   "getBooleanTypeAttr": function() { return /* reexport */ getBooleanTypeAttr; },
   "getNumTypeAttr": function() { return /* reexport */ getNumTypeAttr; },
@@ -21588,8 +21590,44 @@ __webpack_require__.d(__webpack_exports__, {
   "setHtml": function() { return /* reexport */ setHtml; },
   "setText": function() { return /* reexport */ setText; },
   "siblings": function() { return /* reexport */ siblings; },
-  "slide": function() { return /* reexport */ slide; }
+  "slide": function() { return /* reexport */ slide; },
+  "unbind": function() { return /* reexport */ unbind; }
 });
+
+;// CONCATENATED MODULE: ./src/dom-utils/bind.ts
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/**
+ * 解决事件监听兼容性问题
+ * @param {Object} obj对象
+ * @param {String} type事件类型,不带'on'前缀
+ * @param {Function} callback事件处理程序
+ */
+function bind(obj, type, callback) {
+    if (obj.addEventListener) {
+        // W3C内核
+        obj.addEventListener(type, callback);
+    }
+    else {
+        // IE内核
+        obj.attachEvent("on" + type, callback);
+    }
+}
+/**
+ * 解决移除事件监听兼容性问题
+ * @param {Object} obj对象
+ * @param {String} type事件类型,不带'on'前缀
+ * @param {Function} callback事件处理程序
+ */
+function unbind(obj, type, callback) {
+    if (obj.removeEventListener) {
+        // W3C内核
+        obj.removeEventListener(type, callback);
+    }
+    else {
+        // IE内核
+        obj.detachEvent("on" + type, callback);
+    }
+}
 
 ;// CONCATENATED MODULE: ./src/dom-utils/elem.ts
 /**
@@ -21834,11 +21872,12 @@ function slide() {
 
 
 
+
 /***/ }),
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 101 modules ***!
+  !*** ./src/index.ts + 104 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -21857,7 +21896,7 @@ function warn(msg) {
     return;
 }
 
-// EXTERNAL MODULE: ./src/dom-utils/index.ts + 5 modules
+// EXTERNAL MODULE: ./src/dom-utils/index.ts + 6 modules
 var dom_utils = __webpack_require__("./src/dom-utils/index.ts");
 ;// CONCATENATED MODULE: ./src/mixins/arrow.ts
 // 更新popver弹窗或下拉菜单的箭头方向
@@ -21963,6 +22002,37 @@ function CssTransition(elem, _a) {
     }
 }
 
+;// CONCATENATED MODULE: ./src/mixins/scrollable.ts
+
+function scrollable_scrollable(_a) {
+    var _b = _a.scroll, scroll = _b === void 0 ? false : _b, _c = _a.lock, lock = _c === void 0 ? false : _c, node = _a.node, tagName = _a.tagName;
+    // 页面是否可以滚动
+    if (!scroll) {
+        (0,dom_utils.setCss)(document.body, 'paddingRight', '17px');
+    }
+    else {
+        (0,dom_utils.setCss)(document.body, 'paddingRight', '');
+    }
+    // 是否禁止对页面滚动条的修改
+    if (!lock) {
+        (0,dom_utils.setCss)(document.body, 'overflow', 'hidden');
+    }
+    else {
+        (0,dom_utils.setCss)(document.body, 'overflow', '');
+    }
+    var prevNode = node === null || node === void 0 ? void 0 : node.previousElementSibling;
+    // 解决抽屉或对话框组件在同时打开多个的情况下，只关闭了一个窗口而页面滚动条恢复出现的bug
+    if (prevNode) {
+        var prevTagName = prevNode.tagName.toLocaleLowerCase().replace(/r-/, '');
+        if (prevTagName === tagName) {
+            // @ts-ignore
+            if (prevNode.dataset[prevTagName + "Visable"] === 'true') {
+                scrollable_scrollable({ scroll: false, lock: false });
+            }
+        }
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/mixins/cb-promise.ts
 /**
  * 用于实例组件关闭后返回 promise，提供 then 接口在关闭后运行 callback
@@ -21995,6 +22065,10 @@ function promiseCb(duration) {
 
 ;// CONCATENATED MODULE: ./src/mixins/click-outside.ts
 
+
+/**
+ * 适应与下拉菜单、tooltip、poptip的点击空白处关闭
+ */
 function clickOutside(target, datasetVal, leaveCls) {
     var hideJudgment = function () {
         target.forEach(function (node) {
@@ -22009,11 +22083,11 @@ function clickOutside(target, datasetVal, leaveCls) {
             }
         });
     };
-    document.addEventListener('focusout', function (e) {
+    (0,dom_utils.bind)(document, 'focusout', function (e) {
         e.stopPropagation();
         hideJudgment();
     });
-    document.addEventListener('click', function (e) {
+    (0,dom_utils.bind)(document, 'click', function (e) {
         e.stopPropagation();
         hideJudgment();
     });
@@ -24177,6 +24251,7 @@ function validComps(target, compName) {
 ;// CONCATENATED MODULE: ./src/mixins/tooltip.ts
 
 
+
 function _newCreatePopper(reference, popper, placement, offset) {
     return popper_createPopper(reference, popper, {
         placement: placement,
@@ -24204,12 +24279,12 @@ function _newCreatePopper(reference, popper, placement, offset) {
 }
 function handleHoverShowAndHideEvents(_a) {
     var reference = _a.reference, popper = _a.popper, datasetVal = _a.datasetVal, showCb = _a.showCb, hideCb = _a.hideCb, delay = _a.delay, timer = _a.timer;
-    reference.addEventListener('mouseenter', function () {
+    (0,dom_utils.bind)(reference, 'mouseenter', function () {
         timer = setTimeout(function () {
             showEv();
         }, delay);
     });
-    reference.addEventListener('mouseleave', hideEv);
+    (0,dom_utils.bind)(reference, 'mouseleave', hideEv);
     // 通过设置 popper.dataset.tooltipShow 的方式可以判断提示框是否显示，
     // 并根据设置的值 "true" 和 "false" 来判断是否执行对应回调事件，
     // 避免出现鼠标快速经过但没有显示提示框，却依然执行了提示框消失时触发的回调
@@ -24223,11 +24298,12 @@ function handleHoverShowAndHideEvents(_a) {
             popper.dataset[datasetVal] = 'hide';
             hideCb && isFn(hideCb);
         }
-        reference.removeEventListener('mouseenter', showEv);
+        (0,dom_utils.unbind)(reference, 'mouseenter', showEv);
     }
 }
 
 ;// CONCATENATED MODULE: ./src/mixins/index.ts
+
 
 
 
@@ -24305,7 +24381,7 @@ var Alert = /** @class */ (function () {
         // 将当前选中的组件作为参数返回出去
         var $this = target;
         var alertCloseBtn = target.querySelector("." + prefix.default.alert + "-close");
-        alertCloseBtn.addEventListener('click', function () { return isFn(cb, $this); });
+        (0,dom_utils.bind)(alertCloseBtn, 'click', function () { return isFn(cb, $this); });
     };
     Alert.prototype._create = function (nodes) {
         var _this = this;
@@ -24981,6 +25057,278 @@ var Divider = /** @class */ (function () {
 ;// CONCATENATED MODULE: ./src/components/divider/index.ts
 
 /* harmony default export */ var components_divider = (divider);
+
+;// CONCATENATED MODULE: ./src/components/drawer/drawer.ts
+
+
+
+
+var Drawer = /** @class */ (function () {
+    function Drawer() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-drawer', { all: true });
+        this._create(this.components);
+    }
+    Drawer.prototype.config = function (el) {
+        var target = (0,dom_utils.$el)(el);
+        validComps(target, 'drawer');
+        var _a = Drawer.prototype, _handleVisable = _a._handleVisable, _attrs = _a._attrs;
+        var DrawerMask = target.querySelector("." + prefix.default.drawer + "-mask");
+        var DrawerWrap = target.querySelector("." + prefix.default.drawer + "-wrap");
+        var _Drawer = target.querySelector("." + prefix.default.drawer);
+        var DrawerTitle = target.querySelector("." + prefix.default.drawer + "-header-inner");
+        var DrawerClose = target.querySelector("." + prefix.default.drawer + "-close");
+        return {
+            get title() {
+                return (0,dom_utils.setHtml)(DrawerTitle);
+            },
+            set title(newVal) {
+                if (!isStr(newVal))
+                    return;
+                (0,dom_utils.setHtml)(DrawerTitle, newVal);
+            },
+            get visable() {
+                return target.dataset['drawerVisable'];
+            },
+            set visable(newVal) {
+                if (!isBol(newVal))
+                    return;
+                _handleVisable(newVal, target, [DrawerMask, DrawerWrap, _Drawer]);
+            },
+            events: function (_a) {
+                var onClose = _a.onClose;
+                if (DrawerClose) {
+                    (0,dom_utils.bind)(DrawerClose, 'click', function () { return onClose && isFn(onClose); });
+                }
+                if (_attrs(target).maskClosable) {
+                    (0,dom_utils.bind)(DrawerWrap, 'click', function () { return onClose && isFn(onClose); });
+                }
+            }
+        };
+    };
+    Drawer.prototype._handleVisable = function (visable, parent, showElm) {
+        var _a = Drawer.prototype, _show = _a._show, _hidden = _a._hidden;
+        if (visable) {
+            _show(parent, showElm);
+        }
+        else {
+            _hidden(parent, showElm);
+        }
+    };
+    Drawer.prototype._handleClickHide = function (parent, hiddenElm, triggerElm) {
+        var _hidden = Drawer.prototype._hidden;
+        // triggerElm 表示右上角关闭按钮
+        (0,dom_utils.bind)(triggerElm, 'click', function () { return _hidden(parent, hiddenElm); });
+        (0,dom_utils.bind)(hiddenElm[1], 'click', function () { return _hidden(parent, hiddenElm); });
+        (0,dom_utils.bind)(hiddenElm[2], 'click', function (e) { return e.stopPropagation(); });
+    };
+    Drawer.prototype._create = function (nodes) {
+        var _this = this;
+        nodes.forEach(function (node) {
+            _this._createDrawerNodes(node);
+            (0,dom_utils.setCss)(node, 'display', 'block');
+            (0,dom_utils.removeAttrs)(node, [
+                'title',
+                'width',
+                'height',
+                'mask',
+                'visible',
+                'closable',
+                'scrollable',
+                'lock-scroll'
+            ]);
+        });
+    };
+    Drawer.prototype._createDrawerNodes = function (node) {
+        var DrawerMask = (0,dom_utils.createElem)('div');
+        var DrawerWrap = (0,dom_utils.createElem)('div');
+        var Drawer = (0,dom_utils.createElem)('div');
+        var DrawerContent = (0,dom_utils.createElem)('div');
+        var DrawerClose = (0,dom_utils.createElem)('a');
+        var DrawerHeader = (0,dom_utils.createElem)('div');
+        var DrawerHeaderInner = (0,dom_utils.createElem)('div');
+        var DrawerBody = (0,dom_utils.createElem)('div');
+        this._setCls([
+            DrawerMask,
+            DrawerWrap,
+            Drawer,
+            DrawerContent,
+            DrawerClose,
+            DrawerHeader,
+            DrawerHeaderInner,
+            DrawerBody
+        ]);
+        this._setSize(node, Drawer);
+        this._setPlacement(node, Drawer);
+        this._setOpenInContainer(node, DrawerMask, DrawerWrap, Drawer);
+        this._initVisible(node, DrawerMask, DrawerWrap, Drawer);
+        this._handleClickHide(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
+        DrawerWrap.appendChild(Drawer);
+        Drawer.appendChild(DrawerContent);
+        this._setClosable(node, DrawerContent, DrawerClose);
+        this._setHeader(node, DrawerContent, DrawerHeader, DrawerHeaderInner);
+        DrawerContent.appendChild(DrawerBody);
+        this._setBodyContent(node, DrawerBody);
+        this._addMask(node, DrawerMask, DrawerWrap, DrawerContent);
+        node.appendChild(DrawerWrap);
+    };
+    Drawer.prototype._show = function (parent, showElm) {
+        var _a = Drawer.prototype._attrs(parent), inner = _a.inner, placement = _a.placement, scrollable = _a.scrollable, lockScroll = _a.lockScroll;
+        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
+        if (!inner)
+            scrollable_scrollable({ scroll: scrollable, lock: lockScroll });
+        // @ts-ignore
+        // 设置当前为显示状态
+        parent.dataset['drawerVisable'] = 'true';
+        showElm[1].classList.contains(prefix.default.drawer + "-hidden") &&
+            showElm[1].classList.remove(prefix.default.drawer + "-hidden");
+        // showElm[0] 表示遮盖层
+        // showElm[1] 表示抽屉的父容器wrap
+        // showElm[2] 表示抽屉主体
+        CssTransition(showElm[0], {
+            inOrOut: 'in',
+            enterCls: 'rab-fade-in',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(showElm[2], {
+            inOrOut: 'in',
+            enterCls: prefix.default.drawer + "-" + placement + "-move-enter",
+            rmCls: true,
+            timeout: 550
+        });
+    };
+    Drawer.prototype._hidden = function (parent, hiddenElm) {
+        var placement = Drawer.prototype._attrs(parent).placement;
+        // hiddenElm[0] 表示遮盖层
+        // hiddenElm[1] 表示抽屉的父容器wrap
+        // hiddenElm[2] 表示抽屉主体
+        CssTransition(hiddenElm[0], {
+            inOrOut: 'out',
+            leaveCls: 'rab-fade-out',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(hiddenElm[2], {
+            inOrOut: 'out',
+            leaveCls: prefix.default.drawer + "-" + placement + "-move-leave",
+            rmCls: true,
+            timeout: 490
+        });
+        setTimeout(function () {
+            // @ts-ignore
+            parent.dataset['drawerVisable'] = 'false';
+            scrollable_scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
+            hiddenElm[1].classList.add(prefix.default.drawer + "-hidden");
+            (0,dom_utils.setCss)(hiddenElm[2], 'display', 'none');
+        }, 490);
+    };
+    Drawer.prototype._setCls = function (elms) {
+        var elmsCls = [
+            prefix.default.drawer + "-mask",
+            prefix.default.drawer + "-wrap",
+            "" + prefix.default.drawer,
+            prefix.default.drawer + "-content",
+            prefix.default.drawer + "-close",
+            prefix.default.drawer + "-header",
+            prefix.default.drawer + "-header-inner",
+            prefix.default.drawer + "-body"
+        ];
+        var i = 0;
+        var length = elms.length;
+        for (; i < length; i++) {
+            var elm = elms[i];
+            elm.className = elmsCls[i];
+        }
+    };
+    Drawer.prototype._setSize = function (parent, children) {
+        var _a = this._attrs(parent), width = _a.width, height = _a.height, placement = _a.placement;
+        if (placement === 'top' || placement === 'bottom') {
+            (0,dom_utils.setCss)(children, 'height', height);
+        }
+        else if (placement === 'left' || placement === 'right') {
+            children.style.width = width;
+            (0,dom_utils.setCss)(children, 'width', width);
+        }
+    };
+    Drawer.prototype._setPlacement = function (parent, children) {
+        var placement = this._attrs(parent).placement;
+        children.classList.add(prefix.default.drawer + "-" + placement);
+    };
+    Drawer.prototype._setOpenInContainer = function (parent, drawerMask, drawerWrap, drawer) {
+        var inner = this._attrs(parent).inner;
+        if (!inner)
+            return;
+        drawerMask.classList.add(prefix.default.drawer + "-mask-inner");
+        drawerWrap.classList.add(prefix.default.drawer + "-wrap-inner");
+        drawer.classList.add(prefix.default.drawer + "-inner");
+    };
+    Drawer.prototype._addMask = function (parent, drawerMask, drawerWrap, drawerContent) {
+        var mask = this._attrs(parent).mask;
+        if (parent.getAttribute('mask') == null)
+            mask = true;
+        if (!mask) {
+            drawerWrap.classList.add(prefix.default.drawer + "-no-mask");
+            drawerContent.classList.add(prefix.default.drawer + "-content-no-mask");
+            return;
+        }
+        parent.appendChild(drawerMask);
+    };
+    Drawer.prototype._setClosable = function (parent, children, drawerClose) {
+        var closable = this._attrs(parent).closable;
+        if (!closable)
+            return;
+        (0,dom_utils.setHtml)(drawerClose, "<i class=\"" + prefix.default.icon + " " + prefix.default.icon + "-ios-close\"></i>");
+        children.appendChild(drawerClose);
+    };
+    Drawer.prototype._setHeader = function (parent, drawerContent, drawerHeader, drawerTitle) {
+        var _a;
+        var title = this._attrs(parent).title;
+        if (!title) {
+            (_a = drawerContent.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add(prefix.default.drawer + "-no-header");
+            return;
+        }
+        (0,dom_utils.setHtml)(drawerTitle, title);
+        drawerHeader.appendChild(drawerTitle);
+        drawerContent.appendChild(drawerHeader);
+    };
+    Drawer.prototype._setBodyContent = function (parent, children) {
+        var drawerBodycontent = parent.firstElementChild;
+        if (drawerBodycontent)
+            children.appendChild(drawerBodycontent);
+    };
+    Drawer.prototype._initVisible = function (parent, drawerMask, drawerWrap, drawer) {
+        var visible = this._attrs(parent).visible;
+        // @ts-ignore
+        parent.dataset['drawerVisable'] = "" + visible;
+        if (visible)
+            return;
+        drawerWrap.classList.add(prefix.default.drawer + "-hidden");
+        (0,dom_utils.setCss)(drawerMask, 'display', 'none');
+        (0,dom_utils.setCss)(drawer, 'display', 'none');
+    };
+    Drawer.prototype._attrs = function (node) {
+        return {
+            title: (0,dom_utils.getStrTypeAttr)(node, 'title', ''),
+            width: (0,dom_utils.getStrTypeAttr)(node, 'width', '256px'),
+            height: (0,dom_utils.getStrTypeAttr)(node, 'height', '256px'),
+            placement: (0,dom_utils.getStrTypeAttr)(node, 'placement', 'right'),
+            mask: (0,dom_utils.getBooleanTypeAttr)(node, 'mask'),
+            inner: (0,dom_utils.getBooleanTypeAttr)(node, 'inner'),
+            visible: (0,dom_utils.getBooleanTypeAttr)(node, 'visible'),
+            closable: (0,dom_utils.getBooleanTypeAttr)(node, 'closable'),
+            scrollable: (0,dom_utils.getBooleanTypeAttr)(node, 'scrollable'),
+            lockScroll: (0,dom_utils.getBooleanTypeAttr)(node, 'lock-scroll'),
+            maskClosable: (0,dom_utils.getBooleanTypeAttr)(node, 'mask-closable')
+        };
+    };
+    return Drawer;
+}());
+/* harmony default export */ var drawer = (Drawer);
+
+;// CONCATENATED MODULE: ./src/components/drawer/index.ts
+
+/* harmony default export */ var components_drawer = (drawer);
 
 ;// CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -25905,11 +26253,11 @@ var Poptip = /** @class */ (function () {
                     hideEv();
                 };
                 if (triggerMode === 'click') {
-                    PoptipRef.addEventListener('click', clickEv);
+                    (0,dom_utils.bind)(PoptipRef, 'click', clickEv);
                 }
                 else if (triggerMode === 'focus') {
-                    target.addEventListener('mousedown', showEv);
-                    target.addEventListener('mouseup', hideEv);
+                    (0,dom_utils.bind)(target, 'mousedown', showEv);
+                    (0,dom_utils.bind)(target, 'mouseup', hideEv);
                 }
                 else if (triggerMode === 'hover') {
                     handleHoverShowAndHideEvents({
@@ -25924,13 +26272,13 @@ var Poptip = /** @class */ (function () {
                 }
                 // 确认对话框的确定和取消按钮都要触发提示框隐藏
                 if (OkBtn) {
-                    OkBtn.addEventListener('click', function () {
+                    (0,dom_utils.bind)(OkBtn, 'click', function () {
                         hideEv();
                         onOk && isFn(onOk);
                     });
                 }
                 if (CancelBtn) {
-                    CancelBtn.addEventListener('click', function () {
+                    (0,dom_utils.bind)(OkBtn, 'click', function () {
                         hideEv();
                         onCancel && isFn(onCancel);
                     });
@@ -25972,8 +26320,6 @@ var Poptip = /** @class */ (function () {
         Popper === null || Popper === void 0 ? void 0 : Popper.before(PoptipRel);
         // 初始化 display
         (0,dom_utils.setCss)(Popper, 'display', 'none');
-        // @ts-ignore
-        // toggleUpdate(Popper, 'scroll');
         if (!attrs.isDisabled) {
             // @ts-ignore
             this._triggerDisplay(attrs.trigger, node, PoptipRel, Popper, attrs);
@@ -26029,19 +26375,19 @@ var Poptip = /** @class */ (function () {
             toggleUpdate(popper, trigger, parent);
         }
         if (trigger === 'click') {
-            referenceChild.addEventListener('click', judgmentIsVisible);
+            (0,dom_utils.bind)(referenceChild, 'click', judgmentIsVisible);
         }
         else if (trigger === 'focus' && !poptipAttrs.isConfirm) {
-            referenceChild.addEventListener('mousedown', judgmentIsVisible);
-            referenceChild.addEventListener('mouseup', hide);
+            (0,dom_utils.bind)(referenceChild, 'mousedown', judgmentIsVisible);
+            (0,dom_utils.bind)(referenceChild, 'mouseup', hide);
         }
         else if (trigger === 'hover' && !poptipAttrs.isConfirm) {
-            parent.addEventListener('mouseenter', function () {
+            (0,dom_utils.bind)(parent, 'mouseenter', function () {
                 poptipShowTimer = setTimeout(function () {
                     show();
                 }, defalutPoptipDelay);
             });
-            parent.addEventListener('mouseleave', function () {
+            (0,dom_utils.bind)(parent, 'mouseleave', function () {
                 clearTimeout(poptipShowTimer);
                 hide();
             });
@@ -26479,7 +26825,7 @@ var Switch = /** @class */ (function () {
         validComps(target, 'switch');
         // 将当前选中的组件作为参数返回出去
         var $this = target;
-        target.addEventListener('click', function () {
+        (0,dom_utils.bind)(target, 'click', function () {
             var status = _this._getStatus(target);
             isFn(cb, [status, $this]);
         });
@@ -26861,11 +27207,10 @@ var Tooltip = /** @class */ (function () {
 
 
 
-//! 整个项目完成后以下代码都要注释或删除
-//! 打包的时候这里要解除封印
+
 
 // @ts-ignore
-// 需要将 Rabbit 导出为全局变量，解决打包后无法调用的问题
+// 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
 /* harmony default export */ var src = (window.Rabbit = {
     Alert: components_alert,
     Avatar: components_avatar,
@@ -26873,6 +27218,7 @@ var Tooltip = /** @class */ (function () {
     Button: components_button,
     Card: components_card,
     Divider: components_divider,
+    Drawer: components_drawer,
     Loading: components_loading_bar,
     Message: components_message,
     Notice: components_notice,

@@ -1,3 +1,8 @@
+/**
+ * 获取元素
+ * @param node
+ * @param options 选项 all 表示是否获取所有节点
+ */
 export declare function $el(node: string | Element | any, options?: {
     all: boolean;
 }): Element | HTMLElement | null | NodeListOf<any> | NodeListOf<Element> | any;

@@ -1,6 +1,6 @@
 {
     "exclude": ["node_modules", "examples", "site"],
-    "include": ["./src/*/**.ts"],
+    "include": ["./src/*.ts"],
     "files": ["./src/index.ts"],
     "compilerOptions": {
         "target": "es5",
@@ -15,7 +15,8 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
-        "outDir": "./build-js",
+        "baseUrl": ".",
+        // "outDir": "./js",
         "lib": ["es5", "es2015.promise", "dom", "dom.iterable", "scripthost"]
     }
 }

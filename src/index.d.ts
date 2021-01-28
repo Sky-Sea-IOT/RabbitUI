@@ -4,6 +4,7 @@ import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
 import Divider from './components/divider';
+import Drawer from './components/drawer';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
 import Steps from './components/steps';
@@ -11,16 +12,17 @@ import Switch from './components/switch';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
-declare const Rabbit: {
+declare const _default: {
     Alert: typeof Alert;
     Avatar: typeof Avatar;
     Badge: typeof Badge;
     Button: typeof Button;
     Card: typeof Card;
     Divider: typeof Divider;
-    Loading: import('./components/loading-bar/loading-bar').default;
-    Message: import('./components/message/message').default;
-    Notice: import('./components/notice/notice').default;
+    Drawer: typeof Drawer;
+    Loading: import("./components/loading-bar/loading-bar").default;
+    Message: import("./components/message/message").default;
+    Notice: import("./components/notice/notice").default;
     Poptip: typeof Poptip;
     Progress: typeof Progress;
     Steps: typeof Steps;
@@ -29,4 +31,4 @@ declare const Rabbit: {
     Timeline: typeof Timeline;
     Tooltip: typeof Tooltip;
 };
-export default Rabbit;
+export default _default;

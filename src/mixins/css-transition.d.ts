@@ -1,7 +1,7 @@
 interface Config {
     inOrOut?: 'in' | 'out';
-    enterCls?: string;
-    leaveCls?: string;
+    enterCls?: 'rab-fade-in' | string;
+    leaveCls?: 'rab-fade-out' | string;
     rmCls?: boolean;
     timeout?: number;
     hiddenParent?: Element | HTMLElement | any;
