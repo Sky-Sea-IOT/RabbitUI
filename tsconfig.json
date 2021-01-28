@@ -16,7 +16,7 @@
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "baseUrl": ".",
-        // "outDir": "./js",
+        "outDir": "./js",
         "lib": ["es5", "es2015.promise", "dom", "dom.iterable", "scripthost"]
     }
 }
