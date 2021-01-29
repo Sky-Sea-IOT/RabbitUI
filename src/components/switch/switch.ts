@@ -8,12 +8,12 @@ interface PublicMethods {
 
 class Switch implements PublicMethods {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = '1.0';
         this.components = $el('r-switch', { all: true });
-        this._getAllSwitch(this.components);
+        this._create(this.components);
     }
 
     public onChange(elem: string, cb: ([status, $this]: [boolean, Element]) => void): void {
@@ -30,8 +30,8 @@ class Switch implements PublicMethods {
         });
     }
 
-    private _getAllSwitch(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._init(node);
             this._handleChange(node, this._getStatus(node));
         });
@@ -41,8 +41,8 @@ class Switch implements PublicMethods {
         // 初始化按键切换索引
         node.setAttribute('tabindex', '0');
         // 初始化未选中状态的开关
-        if (node.getAttribute('rb-checked') !== 'true') {
-            node.setAttribute('rb-checked', 'false');
+        if (node.getAttribute('checked') !== 'true') {
+            node.setAttribute('checked', 'false');
         }
         this._setStatusText(node, this._getStatus(node));
         this._setStatusColor(node, this._getStatus(node));
@@ -86,7 +86,7 @@ class Switch implements PublicMethods {
 
             status ? (status = false) : (status = true);
 
-            node.setAttribute('rb-checked', `${status}`);
+            node.setAttribute('checked', `${status}`);
 
             const { openText, closeText } = this._getStatusText(node);
 
@@ -110,7 +110,7 @@ class Switch implements PublicMethods {
     private _getStatus(node: Element): boolean {
         // 转换为真实布尔类型
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return JSON.parse(node.getAttribute('rb-checked')!);
+        return JSON.parse(node.getAttribute('checked')!);
     }
 
     private _isDisabled(node: Element): boolean {
