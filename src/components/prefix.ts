@@ -17,6 +17,7 @@ export default {
     noticeChild: `${prefixCls}-notice-notice`,
     progress: `${prefixCls}-progress`,
     switch: `${prefixCls}-switch`,
+    spin: `${prefixCls}-spin`,
     steps: `${prefixCls}-steps`,
     time: `${prefixCls}-time`,
     timeline: `${prefixCls}-timeline`,

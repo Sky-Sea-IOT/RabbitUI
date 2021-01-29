@@ -10,8 +10,6 @@
     background-color: @background;
     border-color: @border;
 
-    // a inside Button which only work in Chrome
-    // http://stackoverflow.com/a/17253457
     >a:only-child {
         color: currentColor;
 
@@ -161,7 +159,7 @@
     background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
-    line-height: 1;
+    line-height: @line-height-base;
     user-select: none;
     .button-size(@btn-height-base; @btn-padding-base; @btn-font-size; @btn-border-radius);
     transition: color @transition-time linear, background-color @transition-time linear, border @transition-time linear, box-shadow @transition-time linear;

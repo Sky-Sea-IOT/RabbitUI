@@ -20,8 +20,8 @@ class Time {
         this._create(this.components);
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this.setTime(node);
             this.handleClick(node);
             removeAttrs(node, ['time', 'type', 'hash', 'locale', 'interval']);

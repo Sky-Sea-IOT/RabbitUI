@@ -3,7 +3,7 @@ import PREFIX from '../prefix';
 
 class Timeline {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = '1.0';
@@ -11,8 +11,8 @@ class Timeline {
         this._create(this.components);
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             const TimelineItem = node;
 
             const TimelineTail = createElem('div');

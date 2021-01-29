@@ -15,7 +15,7 @@ interface PublicMethods {
 
 class Badge implements PublicMethods {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = 'v1.0';
@@ -92,8 +92,8 @@ class Badge implements PublicMethods {
         };
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._setCount(node);
             this._setStatusWithColor(node);
 

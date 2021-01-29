@@ -10,6 +10,7 @@ import Message from './components/message';
 import Notice from './components/notice';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
+import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
 import Time from './components/time';
@@ -35,6 +36,7 @@ export default window.Rabbit = {
     Notice,
     Poptip,
     Progress,
+    Spin,
     Steps,
     Switch,
     Time,

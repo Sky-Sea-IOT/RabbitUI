@@ -1,6 +1,6 @@
 {
     "name": "rabbit-design",
-    "version": "1.3.3",
+    "version": "1.4.1",
     "title": "RabbitUI",
     "description": "A library of UI components built based on TypeScript",
     "homepage": "",
@@ -9,6 +9,7 @@
         "jsui",
         "jsUI库",
         "jsUI组件库",
+        "rabbit-design",
         "rabbitui",
         "rabbit-ui",
         "rabbitui",

@@ -156,8 +156,8 @@ class Poptip implements PublicMethods {
         };
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node, i) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node, i) => {
             this._createPoptipNodes(node, i);
             removeAttrs(node, [
                 'width',

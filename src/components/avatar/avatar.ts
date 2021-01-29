@@ -4,7 +4,7 @@ import PREFIX from '../prefix';
 
 class Avatar {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = 'v1.0';
@@ -12,8 +12,8 @@ class Avatar {
         this._create(this.components);
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._setIcon(node);
             this._setImage(node);
             this._setSize(node);

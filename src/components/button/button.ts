@@ -12,7 +12,7 @@ interface PublicMethods {
 
 class Button implements PublicMethods {
     readonly VERSION: string;
-    readonly components: any;
+    private components: any;
 
     constructor() {
         this.VERSION = '1.0';
@@ -45,8 +45,8 @@ class Button implements PublicMethods {
         };
     }
 
-    private _getAllBtns(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _getAllBtns(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._setLoading(node);
             this._setIcon(node);
             removeAttrs(node, ['icon']);

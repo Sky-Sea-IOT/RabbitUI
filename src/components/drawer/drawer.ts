@@ -114,8 +114,8 @@ class Drawer implements PublicMethods {
         bind(hiddenElm[2], 'click', (e: any) => e.stopPropagation());
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._createDrawerNodes(node);
 
             setCss(node, 'display', 'block');

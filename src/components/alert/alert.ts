@@ -101,8 +101,8 @@ class Alert implements PublicMethods {
         bind(alertCloseBtn, 'click', () => type.isFn(cb, $this));
     }
 
-    private _create(nodes: NodeListOf<Element>) {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>) {
+        components.forEach((node) => {
             this._setIcon(node);
             this._setMsg(node);
             this._setDesc(node);

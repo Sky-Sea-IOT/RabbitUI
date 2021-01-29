@@ -18,8 +18,8 @@ class Divider {
         this._create(this.components);
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._setType(node);
             this._setDashed(node);
             this._setPlain(node);

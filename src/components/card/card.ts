@@ -63,8 +63,8 @@ class Card implements PublicMethods {
         };
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._createCardNodes(node);
             removeAttrs(node, ['title', 'extra', 'shadow']);
         });

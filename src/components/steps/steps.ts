@@ -74,8 +74,8 @@ class Steps implements PublicMethods {
         };
     }
 
-    private _create(nodes: NodeListOf<Element>): void {
-        nodes.forEach((node) => {
+    private _create(components: NodeListOf<Element>): void {
+        components.forEach((node) => {
             this._setDirection(node);
             this._updateStatus(node, this._getCurrent(node));
             this._createStepItem(node);
