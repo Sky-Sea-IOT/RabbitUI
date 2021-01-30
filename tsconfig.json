@@ -1,6 +1,7 @@
 {
     "exclude": ["node_modules", "examples", "site"],
-    "files": ["src"],
+    "files": ["src/index.ts"],
+    "compileOnSave": true,
     "compilerOptions": {
         "target": "es5",
         "module": "es2015",
@@ -15,7 +16,6 @@
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "outDir": "js",
         "lib": ["es5", "es2015.promise", "dom", "dom.iterable", "scripthost"]
     }
 }

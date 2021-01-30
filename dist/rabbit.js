@@ -21471,6 +21471,7 @@ var prefixCls = 'rab';
     noticeChild: prefixCls + "-notice-notice",
     progress: prefixCls + "-progress",
     switch: prefixCls + "-switch",
+    spin: prefixCls + "-spin",
     steps: prefixCls + "-steps",
     time: prefixCls + "-time",
     timeline: prefixCls + "-timeline",
@@ -21501,9 +21502,9 @@ var Time = /** @class */ (function () {
         this.components = (0,_dom_utils__WEBPACK_IMPORTED_MODULE_2__.$el)('r-time', { all: true });
         this._create(this.components);
     }
-    Time.prototype._create = function (nodes) {
+    Time.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this.setTime(node);
             _this.handleClick(node);
             (0,_dom_utils__WEBPACK_IMPORTED_MODULE_2__.removeAttrs)(node, ['time', 'type', 'hash', 'locale', 'interval']);
@@ -21877,7 +21878,7 @@ function slide() {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 104 modules ***!
+  !*** ./src/index.ts + 106 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -24383,9 +24384,9 @@ var Alert = /** @class */ (function () {
         var alertCloseBtn = target.querySelector("." + prefix.default.alert + "-close");
         (0,dom_utils.bind)(alertCloseBtn, 'click', function () { return isFn(cb, $this); });
     };
-    Alert.prototype._create = function (nodes) {
+    Alert.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._setIcon(node);
             _this._setMsg(node);
             _this._setDesc(node);
@@ -24486,9 +24487,9 @@ var Avatar = /** @class */ (function () {
         this.components = (0,dom_utils.$el)('r-avatar', { all: true });
         this._create(this.components);
     }
-    Avatar.prototype._create = function (nodes) {
+    Avatar.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._setIcon(node);
             _this._setImage(node);
             _this._setSize(node);
@@ -24666,9 +24667,9 @@ var Badge = /** @class */ (function () {
             }
         };
     };
-    Badge.prototype._create = function (nodes) {
+    Badge.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._setCount(node);
             _this._setStatusWithColor(node);
             (0,dom_utils.removeAttrs)(node, [
@@ -24846,9 +24847,9 @@ var Button = /** @class */ (function () {
             }
         };
     };
-    Button.prototype._getAllBtns = function (nodes) {
+    Button.prototype._getAllBtns = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._setLoading(node);
             _this._setIcon(node);
             (0,dom_utils.removeAttrs)(node, ['icon']);
@@ -24927,9 +24928,9 @@ var Card = /** @class */ (function () {
             }
         };
     };
-    Card.prototype._create = function (nodes) {
+    Card.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._createCardNodes(node);
             (0,dom_utils.removeAttrs)(node, ['title', 'extra', 'shadow']);
         });
@@ -25001,9 +25002,9 @@ var Divider = /** @class */ (function () {
         this.components = (0,dom_utils.$el)('r-divider', { all: true });
         this._create(this.components);
     }
-    Divider.prototype._create = function (nodes) {
+    Divider.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._setType(node);
             _this._setDashed(node);
             _this._setPlain(node);
@@ -25122,9 +25123,9 @@ var Drawer = /** @class */ (function () {
         (0,dom_utils.bind)(hiddenElm[1], 'click', function () { return _hidden(parent, hiddenElm); });
         (0,dom_utils.bind)(hiddenElm[2], 'click', function (e) { return e.stopPropagation(); });
     };
-    Drawer.prototype._create = function (nodes) {
+    Drawer.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._createDrawerNodes(node);
             (0,dom_utils.setCss)(node, 'display', 'block');
             (0,dom_utils.removeAttrs)(node, [
@@ -26286,9 +26287,9 @@ var Poptip = /** @class */ (function () {
             }
         };
     };
-    Poptip.prototype._create = function (nodes) {
+    Poptip.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node, i) {
+        components.forEach(function (node, i) {
             _this._createPoptipNodes(node, i);
             (0,dom_utils.removeAttrs)(node, [
                 'width',
@@ -26474,9 +26475,9 @@ var Progress = /** @class */ (function () {
             }
         };
     };
-    Progress.prototype._create = function (nodes) {
+    Progress.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._createChildNodes(node);
             (0,dom_utils.removeAttrs)(node, [
                 'rb-percent',
@@ -26600,6 +26601,55 @@ var Progress = /** @class */ (function () {
 
 /* harmony default export */ var components_progress = (progress);
 
+;// CONCATENATED MODULE: ./src/components/spin/spin.ts
+
+
+
+
+var spinZIndex = 2010;
+var Spin = /** @class */ (function () {
+    function Spin() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-spin', { all: true });
+        this._create(this.components);
+    }
+    Spin.prototype.show = function (_a) {
+        var _b = _a === void 0 ? {} : _a, _c = _b.content, content = _c === void 0 ? '' : _c;
+        scrollable_scrollable({ scroll: false, lock: false });
+        var template = "\n        <div class=\"" + prefix.default.spin + "-fullscreen " + prefix.default.spin + "-fullscreen-wrapper\"\n         style=\"z-index: " + spinZIndex++ + "\">\n          <r-spin fix class=\"" + prefix.default.spin + "-fullscreen \n           " + (content ? prefix.default.spin + "-show-text" : '') + "\" size=\"large\">\n            " + this._createChildTemplate(content) + "\n          </r-spin>\n         </div>\n         ";
+        var fragment = document.createRange().createContextualFragment(template);
+        document.body.appendChild(fragment);
+        CssTransition((0,dom_utils.$el)("." + prefix.default.spin + "-fullscreen"), {
+            inOrOut: 'in',
+            enterCls: 'rab-fade-in'
+        });
+    };
+    Spin.prototype.hide = function () {
+        scrollable_scrollable({ scroll: true, lock: true });
+        var spinElem = (0,dom_utils.$el)("." + prefix.default.spin + "-fullscreen");
+        if (spinElem)
+            destroyElem(spinElem, { fadeOut: true });
+    };
+    Spin.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var customContent = (0,dom_utils.setHtml)(node);
+            customContent ? node.classList.add(prefix.default.spin + "-show-text") : '';
+            (0,dom_utils.setHtml)(node, _this._createChildTemplate(customContent));
+        });
+    };
+    Spin.prototype._createChildTemplate = function (content) {
+        var template = "\n          <div class=\"" + prefix.default.spin + "-main\">\n            <span class=\"" + prefix.default.spin + "-dot\"></span>\n            <div class=\"" + prefix.default.spin + "-text\">" + content + "</div>\n          </div>\n        ";
+        return template;
+    };
+    return Spin;
+}());
+/* harmony default export */ var spin = (Spin);
+
+;// CONCATENATED MODULE: ./src/components/spin/index.ts
+
+/* harmony default export */ var components_spin = (spin);
+
 ;// CONCATENATED MODULE: ./src/components/steps/steps.ts
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
@@ -26645,9 +26695,9 @@ var Steps = /** @class */ (function () {
             }
         };
     };
-    Steps.prototype._create = function (nodes) {
+    Steps.prototype._create = function (components) {
         var _this_1 = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this_1._setDirection(node);
             _this_1._updateStatus(node, _this_1._getCurrent(node));
             _this_1._createStepItem(node);
@@ -26817,7 +26867,7 @@ var Switch = /** @class */ (function () {
     function Switch() {
         this.VERSION = '1.0';
         this.components = (0,dom_utils.$el)('r-switch', { all: true });
-        this._getAllSwitch(this.components);
+        this._create(this.components);
     }
     Switch.prototype.onChange = function (elem, cb) {
         var _this = this;
@@ -26830,9 +26880,9 @@ var Switch = /** @class */ (function () {
             isFn(cb, [status, $this]);
         });
     };
-    Switch.prototype._getAllSwitch = function (nodes) {
+    Switch.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._init(node);
             _this._handleChange(node, _this._getStatus(node));
         });
@@ -26841,8 +26891,8 @@ var Switch = /** @class */ (function () {
         // 初始化按键切换索引
         node.setAttribute('tabindex', '0');
         // 初始化未选中状态的开关
-        if (node.getAttribute('rb-checked') !== 'true') {
-            node.setAttribute('rb-checked', 'false');
+        if (node.getAttribute('checked') !== 'true') {
+            node.setAttribute('checked', 'false');
         }
         this._setStatusText(node, this._getStatus(node));
         this._setStatusColor(node, this._getStatus(node));
@@ -26880,7 +26930,7 @@ var Switch = /** @class */ (function () {
             if (_this._isLoading(node))
                 return false;
             status ? (status = false) : (status = true);
-            node.setAttribute('rb-checked', "" + status);
+            node.setAttribute('checked', "" + status);
             var _a = _this._getStatusText(node), openText = _a.openText, closeText = _a.closeText;
             _this._changeStatusText(node, status, openText, closeText);
             _this._setStatusColor(node, status);
@@ -26897,7 +26947,7 @@ var Switch = /** @class */ (function () {
     Switch.prototype._getStatus = function (node) {
         // 转换为真实布尔类型
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return JSON.parse(node.getAttribute('rb-checked'));
+        return JSON.parse(node.getAttribute('checked'));
     };
     Switch.prototype._isDisabled = function (node) {
         return (node.getAttribute('disabled') === 'disabled' ||
@@ -26942,9 +26992,9 @@ var Timeline = /** @class */ (function () {
         this.components = (0,dom_utils.$el)('r-timeline > r-timeline-item', { all: true });
         this._create(this.components);
     }
-    Timeline.prototype._create = function (nodes) {
+    Timeline.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             var TimelineItem = node;
             var TimelineTail = (0,dom_utils.createElem)('div');
             var TimelineHead = (0,dom_utils.createElem)('div');
@@ -27045,9 +27095,9 @@ var Tooltip = /** @class */ (function () {
             }
         };
     };
-    Tooltip.prototype._create = function (nodes) {
+    Tooltip.prototype._create = function (components) {
         var _this = this;
-        nodes.forEach(function (node) {
+        components.forEach(function (node) {
             _this._createTooltipNodes(node);
             (0,dom_utils.removeAttrs)(node, ['content', 'theme', 'delay', 'max-width', 'disabled', 'always']);
         });
@@ -27209,6 +27259,7 @@ var Tooltip = /** @class */ (function () {
 
 
 
+
 // @ts-ignore
 // 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
 /* harmony default export */ var src = (window.Rabbit = {
@@ -27224,6 +27275,7 @@ var Tooltip = /** @class */ (function () {
     Notice: components_notice,
     Poptip: components_poptip,
     Progress: components_progress,
+    Spin: components_spin,
     Steps: components_steps,
     Switch: components_switch,
     Time: components_time,

@@ -1,6 +1,7 @@
 import PREFIX from '../prefix';
 import { $el, setHtml } from '../../dom-utils';
 import { CssTransition, Scrollable } from '../../mixins';
+import { destroyElem } from '../../utils';
 
 let spinZIndex = 2010;
 
@@ -42,7 +43,7 @@ class Spin {
 
         const spinElem = $el(`.${PREFIX.spin}-fullscreen`);
 
-        if (spinElem) document.body.removeChild(spinElem);
+        if (spinElem) destroyElem(spinElem, { fadeOut: true });
     }
 
     private _create(components: NodeListOf<Element>): void {

@@ -89,7 +89,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js', '.ts']
+        extensions: ['.ts', '.js']
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
