@@ -1,4 +1,4 @@
-import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
 import { validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -35,11 +35,11 @@ class Button implements PublicMethods {
             },
             set loading(newVal) {
                 if (newVal === true) {
-                    target.classList.add('rab-btn-loading');
+                    target.classList.add(`${PREFIX.button}-loading`);
                     target.prepend(Button.prototype._loadIcon());
                 } else {
-                    target.classList.remove('rab-btn-loading');
-                    target.querySelector('.rab-icon-loading-solid').remove();
+                    target.classList.remove(`${PREFIX.button}-loading`);
+                    target.querySelector(`.${PREFIX.icon}-loading-solid`).remove();
                 }
             }
         };
@@ -49,7 +49,7 @@ class Button implements PublicMethods {
         components.forEach((node) => {
             this._setLoading(node);
             this._setIcon(node);
-            removeAttrs(node, ['icon']);
+            removeAttrs(node, ['icon', 'loading']);
         });
     }
 
@@ -66,14 +66,14 @@ class Button implements PublicMethods {
         if (!this._getIcon(node)) return;
 
         if (node.innerHTML === '') {
-            const btnIcon = `<i class="rab-icon rab-icon-${this._getIcon(node)}"></i>`;
+            const btnIcon = `<i class="${PREFIX.icon} ${PREFIX.icon}-${this._getIcon(node)}"></i>`;
 
             node.classList.add(`${PREFIX.button}-icon-only`);
 
             setHtml(node, btnIcon);
         } else {
             const Icon = createElem('i');
-            Icon.className = `rab-icon rab-icon-${this._getIcon(node)}`;
+            Icon.className = `${PREFIX.icon} ${PREFIX.icon}-${this._getIcon(node)}`;
             node.prepend(Icon);
         }
     }
@@ -84,7 +84,8 @@ class Button implements PublicMethods {
 
     private _loadIcon(): HTMLElement {
         const LoadIcon = createElem('i');
-        LoadIcon.className = 'rab-load-loop rab-icon rab-icon-loading-solid';
+        LoadIcon.className = `rab-load-loop ${PREFIX.icon} ${PREFIX.icon}-loading-solid`;
+        setCss(LoadIcon, 'height', '25px');
         return LoadIcon;
     }
 

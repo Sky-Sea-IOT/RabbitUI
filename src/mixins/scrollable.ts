@@ -8,16 +8,13 @@ interface Options {
 }
 
 export default function scrollable({ scroll = false, lock = false, node, tagName }: Options): void {
-    // 页面是否可以滚动
-    if (!scroll) {
-        setCss(document.body, 'paddingRight', '17px');
-    } else {
-        setCss(document.body, 'paddingRight', '');
-    }
     // 是否禁止对页面滚动条的修改
-    if (!lock) {
+    // 页面是否可以滚动
+    if (lock && !scroll) {
+        setCss(document.body, 'paddingRight', '17px');
         setCss(document.body, 'overflow', 'hidden');
     } else {
+        setCss(document.body, 'paddingRight', '');
         setCss(document.body, 'overflow', '');
     }
 

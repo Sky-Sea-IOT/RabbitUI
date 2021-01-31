@@ -7,6 +7,7 @@ import Divider from './components/divider';
 import Drawer from './components/drawer';
 import Loading from './components/loading-bar';
 import Message from './components/message';
+import Modal from './components/modal';
 import Notice from './components/notice';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
@@ -33,6 +34,7 @@ export default window.Rabbit = {
     Drawer,
     Loading,
     Message,
+    Modal,
     Notice,
     Poptip,
     Progress,

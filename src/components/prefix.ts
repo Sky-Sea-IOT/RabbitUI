@@ -12,6 +12,7 @@ export default {
     loadingBar: `${prefixCls}-loading-bar`,
     message: `${prefixCls}-message`,
     messageChild: `${prefixCls}-message-notice`,
+    modal: `${prefixCls}-modal`,
     notice: `${prefixCls}-notice`,
     poptip: `${prefixCls}-poptip`,
     noticeChild: `${prefixCls}-notice-notice`,
