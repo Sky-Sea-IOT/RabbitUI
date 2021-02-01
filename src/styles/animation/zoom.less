@@ -1,19 +1,19 @@
-.zoom(@className, @keyframes, @duration) {
+.zoom(@className, @keyframes) {
   .zoom-big-@{className} {
-    -webkit-animation: @keyframes @duration cubic-bezier(0.08, 0.82, 0.17, 1);
-    animation: @keyframes @duration cubic-bezier(0.08, 0.82, 0.17, 1);
+    -webkit-animation: @keyframes .25s cubic-bezier(0.08, 0.82, 0.17, 1);
+    animation: @keyframes .25s cubic-bezier(0.08, 0.82, 0.17, 1);
   }
 }
 
-.zoom(enter, rabZoomBigIn, .3s);
-.zoom(leave, rabZoomBigOut, .3s);
-.zoom(fast-enter, rabZoomBigFastIn, .25s);
-.zoom(fast-leave, rabZoomBigFastOut, .25s);
+.zoom(enter, rabZoomBigIn);
+.zoom(leave, rabZoomBigOut);
+.zoom(fast-enter, rabZoomBigFastIn);
+.zoom(fast-leave, rabZoomBigFastOut);
 
 @-webkit-keyframes rabZoomBigIn {
   0% {
-    -webkit-transform: scale(.5);
-    transform: scale(.5);
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
     opacity: 0;
   }
 
@@ -26,8 +26,8 @@
 
 @keyframes rabZoomBigIn {
   0% {
-    -webkit-transform: scale(.5);
-    transform: scale(.5);
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
     opacity: 0;
   }
 
@@ -45,8 +45,8 @@
   }
 
   100% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
     opacity: 0;
   }
 }
@@ -58,8 +58,8 @@
   }
 
   100% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
     opacity: 0;
   }
 }
