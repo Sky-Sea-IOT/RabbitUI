@@ -45,7 +45,7 @@ class Drawer implements PublicMethods {
     private components: any;
 
     constructor() {
-        this.VERSION = 'v1.0';
+        this.VERSION = 'v1.0.1';
         this.components = $el('r-drawer', { all: true });
         this._create(this.components);
     }
@@ -78,40 +78,22 @@ class Drawer implements PublicMethods {
                 setHtml(DrawerTitle, newVal);
             },
             get visable() {
-                return target.dataset['drawerVisable'];
+                return false;
             },
             set visable(newVal: boolean) {
                 if (!type.isBol(newVal)) return;
+
                 _handleVisable(newVal, target, [DrawerMask, DrawerWrap, _Drawer]);
             },
             events({ onClose }) {
-                if (DrawerClose) {
-                    bind(DrawerClose, 'click', () => onClose && type.isFn(onClose));
-                }
-                if (_attrs(target).maskClosable) {
-                    bind(DrawerWrap, 'click', () => onClose && type.isFn(onClose));
-                }
+                // v1.0.1 改用on事件绑定，防止触发回调事件的次数随着每次点击而不断的重复叠加
+
+                if (DrawerClose) DrawerClose.onclick = () => onClose && type.isFn(onClose);
+
+                if (_attrs(target).maskClosable)
+                    DrawerWrap.onclick = () => onClose && type.isFn(onClose);
             }
         };
-    }
-
-    private _handleVisable(visable: boolean, parent: Element, showElm: Element[]): void {
-        const { _show, _hidden } = Drawer.prototype;
-
-        if (visable) {
-            _show(parent, showElm);
-        } else {
-            _hidden(parent, showElm);
-        }
-    }
-
-    private _handleClickHide(parent: Element, hiddenElm: Element[], triggerElm: HTMLElement): void {
-        const { _hidden } = Drawer.prototype;
-
-        // triggerElm 表示右上角关闭按钮
-        bind(triggerElm, 'click', () => _hidden(parent, hiddenElm));
-        bind(hiddenElm[1], 'click', () => _hidden(parent, hiddenElm));
-        bind(hiddenElm[2], 'click', (e: any) => e.stopPropagation());
     }
 
     private _create(components: NodeListOf<Element>): void {
@@ -159,7 +141,7 @@ class Drawer implements PublicMethods {
         this._setOpenInContainer(node, DrawerMask, DrawerWrap, Drawer);
 
         this._initVisible(node, DrawerMask, DrawerWrap, Drawer);
-        this._handleClickHide(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
+        this._handleClose(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
 
         DrawerWrap.appendChild(Drawer);
         Drawer.appendChild(DrawerContent);
@@ -170,69 +152,9 @@ class Drawer implements PublicMethods {
         DrawerContent.appendChild(DrawerBody);
 
         this._setBodyContent(node, DrawerBody);
-        this._addMask(node, DrawerMask, DrawerWrap, DrawerContent);
+        this._setMask(node, DrawerMask, DrawerWrap, DrawerContent);
 
         node.appendChild(DrawerWrap);
-    }
-
-    private _show(parent: Element, showElm: Element[]): void {
-        const { inner, placement, scrollable, lockScroll } = Drawer.prototype._attrs(parent);
-
-        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
-        if (!inner) Scrollable({ scroll: scrollable, lock: lockScroll });
-
-        // @ts-ignore
-        // 设置当前为显示状态
-        parent.dataset['drawerVisable'] = 'true';
-
-        showElm[1].classList.contains(`${PREFIX.drawer}-hidden`) &&
-            showElm[1].classList.remove(`${PREFIX.drawer}-hidden`);
-
-        // showElm[0] 表示遮盖层
-        // showElm[1] 表示抽屉的父容器wrap
-        // showElm[2] 表示抽屉主体
-        CssTransition(showElm[0], {
-            inOrOut: 'in',
-            enterCls: 'rab-fade-in',
-            rmCls: true,
-            timeout: 250
-        });
-
-        CssTransition(showElm[2], {
-            inOrOut: 'in',
-            enterCls: `${PREFIX.drawer}-${placement}-move-enter`,
-            rmCls: true,
-            timeout: 550
-        });
-    }
-
-    private _hidden(parent: Element, hiddenElm: Element[]): void {
-        const { placement } = Drawer.prototype._attrs(parent);
-
-        // hiddenElm[0] 表示遮盖层
-        // hiddenElm[1] 表示抽屉的父容器wrap
-        // hiddenElm[2] 表示抽屉主体
-        CssTransition(hiddenElm[0], {
-            inOrOut: 'out',
-            leaveCls: 'rab-fade-out',
-            rmCls: true,
-            timeout: 250
-        });
-
-        CssTransition(hiddenElm[2], {
-            inOrOut: 'out',
-            leaveCls: `${PREFIX.drawer}-${placement}-move-leave`,
-            rmCls: true,
-            timeout: 490
-        });
-
-        setTimeout(() => {
-            // @ts-ignore
-            parent.dataset['drawerVisable'] = 'false';
-            Scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
-            hiddenElm[1].classList.add(`${PREFIX.drawer}-hidden`);
-            setCss(hiddenElm[2], 'display', 'none');
-        }, 490);
     }
 
     private _setCls(elms: HTMLElement[]): void {
@@ -287,7 +209,7 @@ class Drawer implements PublicMethods {
         drawer.classList.add(`${PREFIX.drawer}-inner`);
     }
 
-    private _addMask(
+    private _setMask(
         parent: Element,
         drawerMask: HTMLElement,
         drawerWrap: HTMLElement,
@@ -349,7 +271,7 @@ class Drawer implements PublicMethods {
         const { visible } = this._attrs(parent);
 
         // @ts-ignore
-        parent.dataset['drawerVisable'] = `${visible}`;
+        parent.dataset.drawerVisable = `${visible}`;
 
         if (visible) return;
 
@@ -357,6 +279,81 @@ class Drawer implements PublicMethods {
 
         setCss(drawerMask, 'display', 'none');
         setCss(drawer, 'display', 'none');
+    }
+
+    private _handleVisable(visable: boolean, target: Element, children: Element[]): void {
+        const { _show, _hide } = Drawer.prototype;
+        visable ? _show(target, children) : _hide(target, children);
+    }
+
+    private _handleClose(parent: Element, hiddenElm: Element[], triggerElm: HTMLElement): void {
+        const { _hide } = Drawer.prototype;
+
+        // triggerElm 表示右上角关闭按钮
+        bind(triggerElm, 'click', () => _hide(parent, hiddenElm));
+        bind(hiddenElm[1], 'click', () => _hide(parent, hiddenElm));
+        bind(hiddenElm[2], 'click', (e: any) => e.stopPropagation());
+    }
+
+    private _show(parent: Element, showElm: Element[]): void {
+        const { inner, placement, scrollable, lockScroll } = Drawer.prototype._attrs(parent);
+
+        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
+        if (!inner) Scrollable({ scroll: scrollable, lock: lockScroll });
+
+        // @ts-ignore
+        // 设置当前为显示状态
+        parent.dataset.drawerVisable = 'true';
+
+        // showElm[0] 表示遮盖层
+        // showElm[1] 表示抽屉的父容器wrap
+        // showElm[2] 表示抽屉主体
+
+        showElm[1].classList.contains(`${PREFIX.drawer}-hidden`) &&
+            showElm[1].classList.remove(`${PREFIX.drawer}-hidden`);
+
+        CssTransition(showElm[0], {
+            inOrOut: 'in',
+            enterCls: 'rab-fade-in',
+            rmCls: true,
+            timeout: 250
+        });
+
+        CssTransition(showElm[2], {
+            inOrOut: 'in',
+            enterCls: `${PREFIX.drawer}-${placement}-move-enter`,
+            rmCls: true,
+            timeout: 550
+        });
+    }
+
+    private _hide(parent: Element, hiddenElm: Element[]): void {
+        const { placement } = Drawer.prototype._attrs(parent);
+
+        // hiddenElm[0] 表示遮盖层
+        // hiddenElm[1] 表示抽屉的父容器wrap
+        // hiddenElm[2] 表示抽屉主体
+        CssTransition(hiddenElm[0], {
+            inOrOut: 'out',
+            leaveCls: 'rab-fade-out',
+            rmCls: true,
+            timeout: 250
+        });
+
+        CssTransition(hiddenElm[2], {
+            inOrOut: 'out',
+            leaveCls: `${PREFIX.drawer}-${placement}-move-leave`,
+            rmCls: true,
+            timeout: 490
+        });
+
+        setTimeout(() => {
+            // @ts-ignore
+            parent.dataset.drawerVisable = 'false';
+            hiddenElm[1].classList.add(`${PREFIX.drawer}-hidden`);
+            setCss(hiddenElm[2], 'display', 'none');
+            Scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
+        }, 490);
     }
 
     private _attrs(node: Element): DrawerAttes {

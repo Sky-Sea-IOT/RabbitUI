@@ -10,10 +10,21 @@
     body {
         height: 1000px;
     }
+    
+    .example {
+        width: 480px;
+        padding: 42px 24px 50px;
+        border: 1px solid #f0f0f0;
+        margin: 20px auto;
+    }
 </style>
 
 <body>
-    <r-modal title="普通的Modal对话框标题" visable="true">
+    <div class="example">
+        <button class="rab-btn rab-btn-primary" onclick="handleModal1()">显示对话框</button>
+    </div>
+
+    <r-modal title="普通的Modal对话框标题" id="m1" loading="true">
         <div>
             <p>对话框内容</p>
             <p>对话框内容</p>
