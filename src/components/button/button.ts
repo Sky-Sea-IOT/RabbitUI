@@ -1,5 +1,5 @@
 import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
-import { validComps } from '../../utils';
+import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {
@@ -15,7 +15,7 @@ class Button implements PublicMethods {
     private components: any;
 
     constructor() {
-        this.VERSION = '1.0';
+        this.VERSION = '1.0.1';
         this.components = $el(`.${PREFIX.button}`, { all: true });
         this._getAllBtns(this.components);
     }
@@ -34,12 +34,19 @@ class Button implements PublicMethods {
                 return false;
             },
             set loading(newVal) {
-                if (newVal === true) {
-                    target.classList.add(`${PREFIX.button}-loading`);
-                    target.prepend(Button.prototype._loadIcon());
+                if (!type.isBol(newVal)) return;
+
+                const loadingIcon = target.querySelector(`.${PREFIX.icon}-loading-solid`);
+
+                // v1.0.1 修复加载中图标重复追加
+                if (newVal) {
+                    if (!loadingIcon) {
+                        target.classList.add(`${PREFIX.button}-loading`);
+                        target.prepend(Button.prototype._loadIcon());
+                    }
                 } else {
                     target.classList.remove(`${PREFIX.button}-loading`);
-                    target.querySelector(`.${PREFIX.icon}-loading-solid`).remove();
+                    loadingIcon ? loadingIcon.remove() : '';
                 }
             }
         };
