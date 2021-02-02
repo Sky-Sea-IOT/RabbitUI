@@ -21466,6 +21466,7 @@ var prefixCls = 'rab';
     loadingBar: prefixCls + "-loading-bar",
     message: prefixCls + "-message",
     messageChild: prefixCls + "-message-notice",
+    modal: prefixCls + "-modal",
     notice: prefixCls + "-notice",
     poptip: prefixCls + "-poptip",
     noticeChild: prefixCls + "-notice-notice",
@@ -21878,7 +21879,7 @@ function slide() {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 106 modules ***!
+  !*** ./src/index.ts + 108 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -22007,18 +22008,14 @@ function CssTransition(elem, _a) {
 
 function scrollable_scrollable(_a) {
     var _b = _a.scroll, scroll = _b === void 0 ? false : _b, _c = _a.lock, lock = _c === void 0 ? false : _c, node = _a.node, tagName = _a.tagName;
-    // 页面是否可以滚动
-    if (!scroll) {
-        (0,dom_utils.setCss)(document.body, 'paddingRight', '17px');
-    }
-    else {
-        (0,dom_utils.setCss)(document.body, 'paddingRight', '');
-    }
     // 是否禁止对页面滚动条的修改
-    if (!lock) {
+    // 页面是否可以滚动
+    if (lock && !scroll) {
+        (0,dom_utils.setCss)(document.body, 'paddingRight', '17px');
         (0,dom_utils.setCss)(document.body, 'overflow', 'hidden');
     }
     else {
+        (0,dom_utils.setCss)(document.body, 'paddingRight', '');
         (0,dom_utils.setCss)(document.body, 'overflow', '');
     }
     var prevNode = node === null || node === void 0 ? void 0 : node.previousElementSibling;
@@ -22028,7 +22025,7 @@ function scrollable_scrollable(_a) {
         if (prevTagName === tagName) {
             // @ts-ignore
             if (prevNode.dataset[prevTagName + "Visable"] === 'true') {
-                scrollable_scrollable({ scroll: false, lock: false });
+                scrollable_scrollable({ scroll: false, lock: true });
             }
         }
     }
@@ -24824,25 +24821,31 @@ var Badge = /** @class */ (function () {
 
 var Button = /** @class */ (function () {
     function Button() {
-        this.VERSION = '1.0';
+        this.VERSION = '1.0.1';
         this.components = (0,dom_utils.$el)("." + prefix.default.button, { all: true });
         this._getAllBtns(this.components);
     }
-    Button.prototype.config = function (elem) {
-        var target = (0,dom_utils.$el)(elem);
+    Button.prototype.config = function (el) {
+        var target = typeof el === 'string' ? (0,dom_utils.$el)(el) : el;
         validComps(target, 'button');
         return {
             get loading() {
                 return false;
             },
             set loading(newVal) {
-                if (newVal === true) {
-                    target.classList.add('rab-btn-loading');
-                    target.prepend(Button.prototype._loadIcon());
+                if (!isBol(newVal))
+                    return;
+                var loadingIcon = target.querySelector("." + prefix.default.icon + "-loading-solid");
+                // v1.0.1 修复加载中图标重复追加
+                if (newVal) {
+                    if (!loadingIcon) {
+                        target.classList.add(prefix.default.button + "-loading");
+                        target.prepend(Button.prototype._loadIcon());
+                    }
                 }
                 else {
-                    target.classList.remove('rab-btn-loading');
-                    target.querySelector('.rab-icon-loading-solid').remove();
+                    target.classList.remove(prefix.default.button + "-loading");
+                    loadingIcon ? loadingIcon.remove() : '';
                 }
             }
         };
@@ -24852,7 +24855,7 @@ var Button = /** @class */ (function () {
         components.forEach(function (node) {
             _this._setLoading(node);
             _this._setIcon(node);
-            (0,dom_utils.removeAttrs)(node, ['icon']);
+            (0,dom_utils.removeAttrs)(node, ['icon', 'loading']);
         });
     };
     Button.prototype._setLoading = function (node) {
@@ -24867,13 +24870,13 @@ var Button = /** @class */ (function () {
         if (!this._getIcon(node))
             return;
         if (node.innerHTML === '') {
-            var btnIcon = "<i class=\"rab-icon rab-icon-" + this._getIcon(node) + "\"></i>";
+            var btnIcon = "<i class=\"" + prefix.default.icon + " " + prefix.default.icon + "-" + this._getIcon(node) + "\"></i>";
             node.classList.add(prefix.default.button + "-icon-only");
             (0,dom_utils.setHtml)(node, btnIcon);
         }
         else {
             var Icon = (0,dom_utils.createElem)('i');
-            Icon.className = "rab-icon rab-icon-" + this._getIcon(node);
+            Icon.className = prefix.default.icon + " " + prefix.default.icon + "-" + this._getIcon(node);
             node.prepend(Icon);
         }
     };
@@ -24882,7 +24885,8 @@ var Button = /** @class */ (function () {
     };
     Button.prototype._loadIcon = function () {
         var LoadIcon = (0,dom_utils.createElem)('i');
-        LoadIcon.className = 'rab-load-loop rab-icon rab-icon-loading-solid';
+        LoadIcon.className = "rab-load-loop " + prefix.default.icon + " " + prefix.default.icon + "-loading-solid";
+        (0,dom_utils.setCss)(LoadIcon, 'height', '25px');
         return LoadIcon;
     };
     Button.prototype._getIcon = function (node) {
@@ -25066,7 +25070,7 @@ var Divider = /** @class */ (function () {
 
 var Drawer = /** @class */ (function () {
     function Drawer() {
-        this.VERSION = 'v1.0';
+        this.VERSION = 'v1.0.1';
         this.components = (0,dom_utils.$el)('r-drawer', { all: true });
         this._create(this.components);
     }
@@ -25089,7 +25093,7 @@ var Drawer = /** @class */ (function () {
                 (0,dom_utils.setHtml)(DrawerTitle, newVal);
             },
             get visable() {
-                return target.dataset['drawerVisable'];
+                return false;
             },
             set visable(newVal) {
                 if (!isBol(newVal))
@@ -25098,30 +25102,13 @@ var Drawer = /** @class */ (function () {
             },
             events: function (_a) {
                 var onClose = _a.onClose;
-                if (DrawerClose) {
-                    (0,dom_utils.bind)(DrawerClose, 'click', function () { return onClose && isFn(onClose); });
-                }
-                if (_attrs(target).maskClosable) {
-                    (0,dom_utils.bind)(DrawerWrap, 'click', function () { return onClose && isFn(onClose); });
-                }
+                // v1.0.1 改用on事件绑定，防止触发回调事件的次数随着每次点击而不断的重复叠加
+                if (DrawerClose)
+                    DrawerClose.onclick = function () { return onClose && isFn(onClose); };
+                if (_attrs(target).maskClosable === 'true')
+                    DrawerWrap.onclick = function () { return onClose && isFn(onClose); };
             }
         };
-    };
-    Drawer.prototype._handleVisable = function (visable, parent, showElm) {
-        var _a = Drawer.prototype, _show = _a._show, _hidden = _a._hidden;
-        if (visable) {
-            _show(parent, showElm);
-        }
-        else {
-            _hidden(parent, showElm);
-        }
-    };
-    Drawer.prototype._handleClickHide = function (parent, hiddenElm, triggerElm) {
-        var _hidden = Drawer.prototype._hidden;
-        // triggerElm 表示右上角关闭按钮
-        (0,dom_utils.bind)(triggerElm, 'click', function () { return _hidden(parent, hiddenElm); });
-        (0,dom_utils.bind)(hiddenElm[1], 'click', function () { return _hidden(parent, hiddenElm); });
-        (0,dom_utils.bind)(hiddenElm[2], 'click', function (e) { return e.stopPropagation(); });
     };
     Drawer.prototype._create = function (components) {
         var _this = this;
@@ -25163,66 +25150,15 @@ var Drawer = /** @class */ (function () {
         this._setPlacement(node, Drawer);
         this._setOpenInContainer(node, DrawerMask, DrawerWrap, Drawer);
         this._initVisible(node, DrawerMask, DrawerWrap, Drawer);
-        this._handleClickHide(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
+        this._handleClose(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
         DrawerWrap.appendChild(Drawer);
         Drawer.appendChild(DrawerContent);
         this._setClosable(node, DrawerContent, DrawerClose);
         this._setHeader(node, DrawerContent, DrawerHeader, DrawerHeaderInner);
         DrawerContent.appendChild(DrawerBody);
         this._setBodyContent(node, DrawerBody);
-        this._addMask(node, DrawerMask, DrawerWrap, DrawerContent);
+        this._setMask(node, DrawerMask, DrawerWrap, DrawerContent);
         node.appendChild(DrawerWrap);
-    };
-    Drawer.prototype._show = function (parent, showElm) {
-        var _a = Drawer.prototype._attrs(parent), inner = _a.inner, placement = _a.placement, scrollable = _a.scrollable, lockScroll = _a.lockScroll;
-        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
-        if (!inner)
-            scrollable_scrollable({ scroll: scrollable, lock: lockScroll });
-        // @ts-ignore
-        // 设置当前为显示状态
-        parent.dataset['drawerVisable'] = 'true';
-        showElm[1].classList.contains(prefix.default.drawer + "-hidden") &&
-            showElm[1].classList.remove(prefix.default.drawer + "-hidden");
-        // showElm[0] 表示遮盖层
-        // showElm[1] 表示抽屉的父容器wrap
-        // showElm[2] 表示抽屉主体
-        CssTransition(showElm[0], {
-            inOrOut: 'in',
-            enterCls: 'rab-fade-in',
-            rmCls: true,
-            timeout: 250
-        });
-        CssTransition(showElm[2], {
-            inOrOut: 'in',
-            enterCls: prefix.default.drawer + "-" + placement + "-move-enter",
-            rmCls: true,
-            timeout: 550
-        });
-    };
-    Drawer.prototype._hidden = function (parent, hiddenElm) {
-        var placement = Drawer.prototype._attrs(parent).placement;
-        // hiddenElm[0] 表示遮盖层
-        // hiddenElm[1] 表示抽屉的父容器wrap
-        // hiddenElm[2] 表示抽屉主体
-        CssTransition(hiddenElm[0], {
-            inOrOut: 'out',
-            leaveCls: 'rab-fade-out',
-            rmCls: true,
-            timeout: 250
-        });
-        CssTransition(hiddenElm[2], {
-            inOrOut: 'out',
-            leaveCls: prefix.default.drawer + "-" + placement + "-move-leave",
-            rmCls: true,
-            timeout: 490
-        });
-        setTimeout(function () {
-            // @ts-ignore
-            parent.dataset['drawerVisable'] = 'false';
-            scrollable_scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
-            hiddenElm[1].classList.add(prefix.default.drawer + "-hidden");
-            (0,dom_utils.setCss)(hiddenElm[2], 'display', 'none');
-        }, 490);
     };
     Drawer.prototype._setCls = function (elms) {
         var elmsCls = [
@@ -25264,7 +25200,7 @@ var Drawer = /** @class */ (function () {
         drawerWrap.classList.add(prefix.default.drawer + "-wrap-inner");
         drawer.classList.add(prefix.default.drawer + "-inner");
     };
-    Drawer.prototype._addMask = function (parent, drawerMask, drawerWrap, drawerContent) {
+    Drawer.prototype._setMask = function (parent, drawerMask, drawerWrap, drawerContent) {
         var mask = this._attrs(parent).mask;
         if (parent.getAttribute('mask') == null)
             mask = true;
@@ -25301,12 +25237,78 @@ var Drawer = /** @class */ (function () {
     Drawer.prototype._initVisible = function (parent, drawerMask, drawerWrap, drawer) {
         var visible = this._attrs(parent).visible;
         // @ts-ignore
-        parent.dataset['drawerVisable'] = "" + visible;
+        parent.dataset.drawerVisable = "" + visible;
         if (visible)
             return;
         drawerWrap.classList.add(prefix.default.drawer + "-hidden");
         (0,dom_utils.setCss)(drawerMask, 'display', 'none');
         (0,dom_utils.setCss)(drawer, 'display', 'none');
+    };
+    Drawer.prototype._handleVisable = function (visable, target, children) {
+        var _a = Drawer.prototype, _show = _a._show, _hide = _a._hide;
+        visable ? _show(target, children) : _hide(target, children);
+    };
+    Drawer.prototype._handleClose = function (parent, hiddenElm, triggerElm) {
+        var _hide = Drawer.prototype._hide;
+        // triggerElm 表示右上角关闭按钮
+        (0,dom_utils.bind)(triggerElm, 'click', function () { return _hide(parent, hiddenElm); });
+        (0,dom_utils.bind)(hiddenElm[1], 'click', function () { return _hide(parent, hiddenElm); });
+        (0,dom_utils.bind)(hiddenElm[2], 'click', function (e) { return e.stopPropagation(); });
+    };
+    Drawer.prototype._show = function (parent, showElm) {
+        var _attrs = Drawer.prototype._attrs;
+        var _a = _attrs(parent), inner = _a.inner, placement = _a.placement, scrollable = _a.scrollable;
+        var lockScroll = _attrs(parent).lockScroll;
+        !parent.getAttribute('lock-scroll') ? (lockScroll = true) : lockScroll;
+        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
+        if (!inner)
+            scrollable_scrollable({ scroll: scrollable, lock: lockScroll });
+        // @ts-ignore
+        // 设置当前为显示状态
+        parent.dataset.drawerVisable = 'true';
+        // showElm[0] 表示遮盖层
+        // showElm[1] 表示抽屉的父容器wrap
+        // showElm[2] 表示抽屉主体
+        showElm[1].classList.contains(prefix.default.drawer + "-hidden") &&
+            showElm[1].classList.remove(prefix.default.drawer + "-hidden");
+        CssTransition(showElm[0], {
+            inOrOut: 'in',
+            enterCls: 'rab-fade-in',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(showElm[2], {
+            inOrOut: 'in',
+            enterCls: prefix.default.drawer + "-" + placement + "-move-enter",
+            rmCls: true,
+            timeout: 550
+        });
+    };
+    Drawer.prototype._hide = function (parent, hiddenElm) {
+        var placement = Drawer.prototype._attrs(parent).placement;
+        // @ts-ignore
+        // 设置为隐藏状态
+        parent.dataset.drawerVisable = 'false';
+        // hiddenElm[0] 表示遮盖层
+        // hiddenElm[1] 表示抽屉的父容器wrap
+        // hiddenElm[2] 表示抽屉主体
+        CssTransition(hiddenElm[0], {
+            inOrOut: 'out',
+            leaveCls: 'rab-fade-out',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(hiddenElm[2], {
+            inOrOut: 'out',
+            leaveCls: prefix.default.drawer + "-" + placement + "-move-leave",
+            rmCls: true,
+            timeout: 490
+        });
+        setTimeout(function () {
+            hiddenElm[1].classList.add(prefix.default.drawer + "-hidden");
+            (0,dom_utils.setCss)(hiddenElm[2], 'display', 'none');
+            scrollable_scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
+        }, 490);
     };
     Drawer.prototype._attrs = function (node) {
         return {
@@ -25320,7 +25322,7 @@ var Drawer = /** @class */ (function () {
             closable: (0,dom_utils.getBooleanTypeAttr)(node, 'closable'),
             scrollable: (0,dom_utils.getBooleanTypeAttr)(node, 'scrollable'),
             lockScroll: (0,dom_utils.getBooleanTypeAttr)(node, 'lock-scroll'),
-            maskClosable: (0,dom_utils.getBooleanTypeAttr)(node, 'mask-closable')
+            maskClosable: (0,dom_utils.getStrTypeAttr)(node, 'mask-closable', 'true')
         };
     };
     return Drawer;
@@ -25951,6 +25953,311 @@ var $Message = /** @class */ (function () {
 
 var Message = new message();
 /* harmony default export */ var components_message = (Message);
+
+;// CONCATENATED MODULE: ./src/components/modal/modal.ts
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+
+
+
+
+var RABBIT_BTN = new components_button();
+var Modal = /** @class */ (function () {
+    function Modal() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-modal', { all: true });
+        this._create(this.components);
+    }
+    Modal.prototype.config = function (el) {
+        var target = (0,dom_utils.$el)(el);
+        validComps(target, 'modal');
+        var _a = Modal.prototype, _attrs = _a._attrs, _getModalNode = _a._getModalNode, _handleVisable = _a._handleVisable;
+        var loading = _attrs(target).loading;
+        var M_Child = _getModalNode(target);
+        return {
+            get title() {
+                return (0,dom_utils.setHtml)(M_Child.modalTitle);
+            },
+            set title(newVal) {
+                if (isStr(newVal))
+                    (0,dom_utils.setHtml)(M_Child.modalTitle, newVal);
+            },
+            get visable() {
+                return false;
+            },
+            set visable(newVal) {
+                if (isBol(newVal)) {
+                    // 当设置modal为隐藏状态并且确定按钮是加载中的状态则初始化它
+                    if (!newVal) {
+                        if (loading)
+                            RABBIT_BTN.config(M_Child.modalOkBtn).loading = newVal;
+                    }
+                    _handleVisable(newVal, target, [
+                        M_Child.modalMask,
+                        M_Child.modalWrap,
+                        M_Child.modal
+                    ]);
+                }
+            },
+            events: function (_a) {
+                var onOk = _a.onOk, onCancel = _a.onCancel;
+                var _b = _attrs(target), closable = _b.closable, maskClosable = _b.maskClosable;
+                var okEv = function () {
+                    // 是否设置按钮为加载中状态
+                    if (loading)
+                        RABBIT_BTN.config(M_Child.modalOkBtn).loading = loading;
+                    onOk && isFn(onOk);
+                };
+                var cancelEv = function () {
+                    // 如果按钮为加载中状态则初始化其状态
+                    if (loading)
+                        RABBIT_BTN.config(M_Child.modalOkBtn).loading = !loading;
+                    // 防止关闭modal后按键esc依然可以触发事件
+                    window.onkeydown = function (e) { return (e.key === 'Escape' ? false : ''); };
+                    onCancel && isFn(onCancel);
+                };
+                // 由于内部的_handleClose方法使用addEventListener为触发关闭模态框的元素绑定点击事件，
+                // 从而与这里绑定的事件造成冲突，一个回调事件同时多次触发的问题
+                // 因此使用on事件绑定，防止触发回调事件的次数随着每次点击而不断的重复叠加
+                if (maskClosable === 'true') {
+                    // @ts-ignore
+                    M_Child.modalWrap.onclick = function () { return cancelEv(); };
+                    // @ts-ignore
+                    M_Child.modal.onclick = function (e) { return e.stopPropagation(); };
+                }
+                if (closable === 'true') {
+                    // @ts-ignore
+                    M_Child.modalClose.onclick = function () { return cancelEv(); };
+                    window.onkeydown = function (e) { return (e.key === 'Escape' ? cancelEv() : ''); };
+                }
+                // @ts-ignore
+                M_Child.modalOkBtn.onclick = function () { return okEv(); };
+                // @ts-ignore
+                M_Child.modalCancelBtn.onclick = function () { return cancelEv(); };
+            }
+        };
+    };
+    Modal.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            _this._createTemplate(node);
+            (0,dom_utils.setCss)(node, 'display', 'block');
+            (0,dom_utils.removeAttrs)(node, [
+                'width',
+                'title',
+                'ok-text',
+                'class-name',
+                'cancel-text',
+                'mask',
+                'visable',
+                'scrollable',
+                'fullscreen',
+                'lock-scroll',
+                'footer-hide'
+            ]);
+        });
+    };
+    Modal.prototype._createTemplate = function (node) {
+        // 获取最初 modal容器下的占位内容
+        var placeholderContent = node.firstElementChild;
+        var _a = this._attrs(node), width = _a.width, title = _a.title, zIndex = _a.zIndex, okText = _a.okText, cancelText = _a.cancelText, className = _a.className;
+        var template = "\n          <div class=\"" + prefix.default.modal + "-mask\" style=\"z-index:" + zIndex + "\"></div>\n          <div class=\"" + prefix.default.modal + "-wrap " + className + "\" style=\"z-index:" + zIndex + "\">\n              <div class=\"" + prefix.default.modal + "\" style=\"width: " + width + "\">\n                  <div class=\"" + prefix.default.modal + "-content\">\n                      <a class=\"" + prefix.default.modal + "-close\">\n                        <i class=\"" + prefix.default.icon + " " + prefix.default.icon + "-ios-close\"></i>\n                      </a>\n                      <div class=\"" + prefix.default.modal + "-header\">\n                          <div class=\"" + prefix.default.modal + "-header-inner\">" + title + "</div>\n                      </div>\n                      <div class=\"" + prefix.default.modal + "-body\"></div>\n                      <div class=\"" + prefix.default.modal + "-footer\">\n                          <button type=\"button\" class=\"rab-btn rab-btn-text\" id=\"modalBtn1\">" + cancelText + "</button>\n                          <button type=\"button\" class=\"rab-btn rab-btn-primary\" id=\"modalBtn2\">" + okText + "</button>\n                      </div>\n                  </div>\n              </div>\n          </div>\n      ";
+        (0,dom_utils.setHtml)(node, template);
+        this._initVisable(node);
+        this._setHeader(node);
+        // @ts-ignore
+        this._setContent(node, placeholderContent);
+        this._setMask(node);
+        this._setFullScreen(node);
+        this._setClosable(node);
+        this._setFooterHide(node);
+        this._handleClose(node);
+    };
+    Modal.prototype._initVisable = function (node) {
+        var _a = this._attrs(node), visable = _a.visable, scrollable = _a.scrollable;
+        var _b = this._getModalNode(node), modalMask = _b.modalMask, modalWrap = _b.modalWrap, modal = _b.modal;
+        var lockScroll = this._attrs(node).lockScroll;
+        !node.getAttribute('lock-scroll') ? (lockScroll = true) : lockScroll;
+        if (visable) {
+            (0,dom_utils.setCss)(modalMask, 'display', '');
+            modalWrap.classList.remove(prefix.default.modal + "-hidden");
+            (0,dom_utils.setCss)(modal, 'display', '');
+            scrollable_scrollable({ scroll: scrollable, lock: lockScroll });
+        }
+        else {
+            (0,dom_utils.setCss)(modalMask, 'display', 'none');
+            modalWrap.classList.add(prefix.default.modal + "-hidden");
+            (0,dom_utils.setCss)(modal, 'display', 'none');
+        }
+        // @ts-ignore
+        // 设置初始显示状态
+        node.dataset.modalVisable = visable;
+    };
+    Modal.prototype._setHeader = function (node) {
+        var title = this._attrs(node).title;
+        if (!title) {
+            var modalHeader = node.querySelector("." + prefix.default.modal + "-header");
+            modalHeader === null || modalHeader === void 0 ? void 0 : modalHeader.remove();
+        }
+    };
+    Modal.prototype._setContent = function (node, content) {
+        var modalBody = node.querySelector("." + prefix.default.modal + "-body");
+        if (content)
+            modalBody === null || modalBody === void 0 ? void 0 : modalBody.appendChild(content);
+    };
+    Modal.prototype._setMask = function (node) {
+        var _a = this, _attrs = _a._attrs, _getModalNode = _a._getModalNode;
+        var mask = _attrs(node).mask;
+        if (mask === 'false') {
+            var _b = _getModalNode(node), modalMask = _b.modalMask, modalWrap = _b.modalWrap, modal = _b.modal;
+            modalMask.remove();
+            modalWrap.classList.add(prefix.default.modal + "-no-mask");
+            modal.classList.add(prefix.default.modal + "-content-no-mask");
+        }
+    };
+    Modal.prototype._setFullScreen = function (node) {
+        var fullscreen = this._attrs(node).fullscreen;
+        if (fullscreen) {
+            var modal = this._getModalNode(node).modal;
+            modal.classList.add(prefix.default.modal + "-fullscreen");
+        }
+    };
+    Modal.prototype._setClosable = function (node) {
+        var closable = this._attrs(node).closable;
+        if (closable === 'false') {
+            var modalClose = this._getModalNode(node).modalClose;
+            modalClose.remove();
+        }
+    };
+    Modal.prototype._setFooterHide = function (node) {
+        var footerHide = this._attrs(node).footerHide;
+        if (footerHide) {
+            var modalFooter = node.querySelector("." + prefix.default.modal + "-footer");
+            modalFooter === null || modalFooter === void 0 ? void 0 : modalFooter.remove();
+        }
+    };
+    Modal.prototype._handleVisable = function (visable, target, children) {
+        var _a = Modal.prototype, _show = _a._show, _hide = _a._hide;
+        visable ? _show(target, children) : _hide(target, children);
+    };
+    Modal.prototype._handleClose = function (parent) {
+        var _a = this, _attrs = _a._attrs, _hide = _a._hide, _getModalNode = _a._getModalNode;
+        var _b = _attrs(parent), closable = _b.closable, maskClosable = _b.maskClosable, loading = _b.loading;
+        var _c = _getModalNode(parent), modalMask = _c.modalMask, modalWrap = _c.modalWrap, modal = _c.modal, modalClose = _c.modalClose, modalOkBtn = _c.modalOkBtn, modalCancelBtn = _c.modalCancelBtn;
+        var hidden = function () { return _hide(parent, [modalMask, modalWrap, modal]); };
+        // 右上角关闭按钮
+        // ESC 键关闭
+        if (closable === 'true') {
+            (0,dom_utils.bind)(modalClose, 'click', function () { return hidden(); });
+            (0,dom_utils.bind)(window, 'keydown', function (e) { return (e.key === 'Escape' ? hidden() : ''); });
+        }
+        // 遮盖层关闭
+        if (maskClosable === 'true') {
+            (0,dom_utils.bind)(modalWrap, 'click', function () { return hidden(); });
+            (0,dom_utils.bind)(modal, 'click', function (e) { return e.stopPropagation(); });
+        }
+        // 确定和取消按钮关闭
+        //非加载中状态可以点击关闭模态框
+        if (!loading)
+            (0,dom_utils.bind)(modalOkBtn, 'click', function () { return hidden(); });
+        (0,dom_utils.bind)(modalCancelBtn, 'click', function () { return hidden(); });
+    };
+    Modal.prototype._show = function (parent, showElm) {
+        var _attrs = Modal.prototype._attrs;
+        var scrollable = _attrs(parent).scrollable;
+        var lockScroll = _attrs(parent).lockScroll;
+        !parent.getAttribute('lock-scroll') ? (lockScroll = true) : lockScroll;
+        // @ts-ignore
+        // 设置当前为显示状态
+        parent.dataset.modalVisable = 'true';
+        // showElm[0] 表示遮盖层
+        // showElm[1] 表示模态框的父容器wrap
+        // showElm[2] 表示模态框主体
+        showElm[1].classList.contains(prefix.default.modal + "-hidden") &&
+            showElm[1].classList.remove(prefix.default.modal + "-hidden");
+        CssTransition(showElm[0], {
+            inOrOut: 'in',
+            enterCls: 'rab-fade-in',
+            timeout: 250,
+            rmCls: true
+        });
+        CssTransition(showElm[2], {
+            inOrOut: 'in',
+            enterCls: 'zoom-big-enter',
+            timeout: 250,
+            rmCls: true
+        });
+        scrollable_scrollable({ scroll: scrollable, lock: lockScroll });
+    };
+    Modal.prototype._hide = function (parent, hiddenElm) {
+        // @ts-ignore
+        // 设置当前为隐藏状态
+        parent.dataset.modalVisable = 'false';
+        // hiddenElm[0] 表示遮盖层
+        // hiddenElm[1] 表示模态框的父容器wrap
+        // hiddenElm[2] 表示模态框主体
+        CssTransition(hiddenElm[0], {
+            inOrOut: 'out',
+            leaveCls: 'rab-fade-out',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(hiddenElm[2], {
+            inOrOut: 'out',
+            leaveCls: 'zoom-big-leave',
+            rmCls: true,
+            timeout: 250
+        });
+        setTimeout(function () {
+            hiddenElm[1].classList.add(prefix.default.modal + "-hidden");
+            (0,dom_utils.setCss)(hiddenElm[2], 'display', 'none');
+            scrollable_scrollable({ scroll: true, lock: true, node: parent, tagName: 'modal' });
+        }, 240);
+    };
+    Modal.prototype._getModalNode = function (node) {
+        var modalMask = node.querySelector("." + prefix.default.modal + "-mask");
+        var modalWrap = node.querySelector("." + prefix.default.modal + "-wrap");
+        var modal = modalWrap.querySelector("." + prefix.default.modal);
+        var modalClose = modalWrap.querySelector("." + prefix.default.modal + "-close");
+        var modalTitle = modal.querySelector("." + prefix.default.modal + "-header-inner");
+        var modalOkBtn = modal.querySelector('#modalBtn2');
+        var modalCancelBtn = modal.querySelector('#modalBtn1');
+        return {
+            modalMask: modalMask,
+            modalWrap: modalWrap,
+            modal: modal,
+            modalClose: modalClose,
+            modalTitle: modalTitle,
+            modalOkBtn: modalOkBtn,
+            modalCancelBtn: modalCancelBtn
+        };
+    };
+    Modal.prototype._attrs = function (node) {
+        return {
+            mask: (0,dom_utils.getStrTypeAttr)(node, 'mask', 'true'),
+            width: (0,dom_utils.getStrTypeAttr)(node, 'width', '520px'),
+            title: (0,dom_utils.getStrTypeAttr)(node, 'title', ''),
+            okText: (0,dom_utils.getStrTypeAttr)(node, 'ok-text', '确定'),
+            closable: (0,dom_utils.getStrTypeAttr)(node, 'closable', 'true'),
+            className: (0,dom_utils.getStrTypeAttr)(node, 'class-name', ''),
+            cancelText: (0,dom_utils.getStrTypeAttr)(node, 'cancel-text', '取消'),
+            maskClosable: (0,dom_utils.getStrTypeAttr)(node, 'mask-closable', 'true'),
+            zIndex: (0,dom_utils.getNumTypeAttr)(node, 'z-index', 1000),
+            visable: (0,dom_utils.getBooleanTypeAttr)(node, 'visable'),
+            loading: (0,dom_utils.getBooleanTypeAttr)(node, 'loading'),
+            scrollable: (0,dom_utils.getBooleanTypeAttr)(node, 'scrollable'),
+            lockScroll: (0,dom_utils.getBooleanTypeAttr)(node, 'lock-scroll'),
+            fullscreen: (0,dom_utils.getBooleanTypeAttr)(node, 'fullscreen'),
+            footerHide: (0,dom_utils.getBooleanTypeAttr)(node, 'footer-hide')
+        };
+    };
+    return Modal;
+}());
+/* harmony default export */ var modal = (Modal);
+
+;// CONCATENATED MODULE: ./src/components/modal/index.ts
+
+/* harmony default export */ var components_modal = (modal);
 
 ;// CONCATENATED MODULE: ./src/components/notice/notice.ts
 
@@ -27260,6 +27567,9 @@ var Tooltip = /** @class */ (function () {
 
 
 
+//! 整个项目完成后以下代码都要注释或删除
+//! 打包的时候这里要解除封印
+
 // @ts-ignore
 // 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
 /* harmony default export */ var src = (window.Rabbit = {
@@ -27272,6 +27582,7 @@ var Tooltip = /** @class */ (function () {
     Drawer: components_drawer,
     Loading: components_loading_bar,
     Message: components_message,
+    Modal: components_modal,
     Notice: components_notice,
     Poptip: components_poptip,
     Progress: components_progress,
