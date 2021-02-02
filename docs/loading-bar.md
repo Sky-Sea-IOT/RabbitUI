@@ -10,15 +10,13 @@
 // 部分代码省略
 import Rabbit from 'rabbit-ui';
 
-const loading = new Rabbit.LoadingBar();
-
 router.beforeEach((to, from, next) => {
-    loading.start();
+    Rabbit.Loading.start();
     next();
 });
 
 router.afterEach(route => {
-    loading.finish();
+    Rabbit.Loading.finish();
 });
  ```
 
@@ -29,27 +27,21 @@ router.afterEach(route => {
 // 以jQuery的Ajax为例，部分代码省略
 import $ from 'jquery';
 
-const loading = new Rabbit.LoadingBar();
-
 function getData () {
   loading.start();
   $.ajax({
       url: '/api/someurl',
       type: 'get',
       success: () => {
-          loading.finish();
+          Rabbit.Loading.finish();
       }
       error: () => {
-          loading.error();
+          Rabbit.Loading.error();
       }
   });
 }
 </script>
 ```
-
-> 注意！使用前需要先实例化组件 
->
-> 以下所有示例都在这里提前实例化：`const Loading = new Rabbit.LoadingBar();`
 
 ## 代码示例
 
@@ -58,9 +50,9 @@ function getData () {
 - 点击 Start 开始进度，点击 Finish 结束。在调用`start()`方法后，组件会自动模拟进度，当调用`finish()`或`error()`时，补全进度并自动消失。
 
 ```js
-Loading.statr();
-Loading.finish();
-Loading.error();
+Rabbit.Loading.statr();
+Rabbit.Loading.finish();
+Rabbit.Loading.error();
 ```
 
 <p style="font-size: 32px">API</p>
@@ -69,10 +61,10 @@ Loading.error();
 
 通过直接调用以下方法来使用组件：
 
-- `Loading.start()`
-- `Loading.finish()`
-- `Loading.error()`
-- `Loading.update(percent)`
+- `Rabbit.Loading.start()`
+- `Rabbit.Loading.finish()`
+- `Rabbit.Loading.error()`
+- `Rabbit.Loading.update(percent)`
 
 函数及参数说明如下：
 
@@ -85,11 +77,11 @@ Loading.error();
 
 另外提供了全局配置和全局销毁的方法：
 
-- `Loading.config(options)`
-- `Loading.destroy()`
+- `Rabbit.Loading.config(options)`
+- `Rabbit.Loading.destroy()`
 
 ```
-Loading.config({
+Rabbit.Loading.config({
     color: '#5cb85c',
     failedColor: '#f0ad4e',
     height: 5

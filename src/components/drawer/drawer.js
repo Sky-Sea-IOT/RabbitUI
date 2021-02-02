@@ -4,7 +4,7 @@ import { CssTransition, Scrollable } from '../../mixins';
 import { type, validComps } from '../../utils';
 var Drawer = /** @class */ (function () {
     function Drawer() {
-        this.VERSION = 'v1.0';
+        this.VERSION = 'v1.0.1';
         this.components = $el('r-drawer', { all: true });
         this._create(this.components);
     }
@@ -27,7 +27,7 @@ var Drawer = /** @class */ (function () {
                 setHtml(DrawerTitle, newVal);
             },
             get visable() {
-                return target.dataset['drawerVisable'];
+                return false;
             },
             set visable(newVal) {
                 if (!type.isBol(newVal))
@@ -36,30 +36,13 @@ var Drawer = /** @class */ (function () {
             },
             events: function (_a) {
                 var onClose = _a.onClose;
-                if (DrawerClose) {
-                    bind(DrawerClose, 'click', function () { return onClose && type.isFn(onClose); });
-                }
-                if (_attrs(target).maskClosable) {
-                    bind(DrawerWrap, 'click', function () { return onClose && type.isFn(onClose); });
-                }
+                // v1.0.1 改用on事件绑定，防止触发回调事件的次数随着每次点击而不断的重复叠加
+                if (DrawerClose)
+                    DrawerClose.onclick = function () { return onClose && type.isFn(onClose); };
+                if (_attrs(target).maskClosable === 'true')
+                    DrawerWrap.onclick = function () { return onClose && type.isFn(onClose); };
             }
         };
-    };
-    Drawer.prototype._handleVisable = function (visable, parent, showElm) {
-        var _a = Drawer.prototype, _show = _a._show, _hidden = _a._hidden;
-        if (visable) {
-            _show(parent, showElm);
-        }
-        else {
-            _hidden(parent, showElm);
-        }
-    };
-    Drawer.prototype._handleClickHide = function (parent, hiddenElm, triggerElm) {
-        var _hidden = Drawer.prototype._hidden;
-        // triggerElm 表示右上角关闭按钮
-        bind(triggerElm, 'click', function () { return _hidden(parent, hiddenElm); });
-        bind(hiddenElm[1], 'click', function () { return _hidden(parent, hiddenElm); });
-        bind(hiddenElm[2], 'click', function (e) { return e.stopPropagation(); });
     };
     Drawer.prototype._create = function (components) {
         var _this = this;
@@ -101,66 +84,15 @@ var Drawer = /** @class */ (function () {
         this._setPlacement(node, Drawer);
         this._setOpenInContainer(node, DrawerMask, DrawerWrap, Drawer);
         this._initVisible(node, DrawerMask, DrawerWrap, Drawer);
-        this._handleClickHide(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
+        this._handleClose(node, [DrawerMask, DrawerWrap, Drawer], DrawerClose);
         DrawerWrap.appendChild(Drawer);
         Drawer.appendChild(DrawerContent);
         this._setClosable(node, DrawerContent, DrawerClose);
         this._setHeader(node, DrawerContent, DrawerHeader, DrawerHeaderInner);
         DrawerContent.appendChild(DrawerBody);
         this._setBodyContent(node, DrawerBody);
-        this._addMask(node, DrawerMask, DrawerWrap, DrawerContent);
+        this._setMask(node, DrawerMask, DrawerWrap, DrawerContent);
         node.appendChild(DrawerWrap);
-    };
-    Drawer.prototype._show = function (parent, showElm) {
-        var _a = Drawer.prototype._attrs(parent), inner = _a.inner, placement = _a.placement, scrollable = _a.scrollable, lockScroll = _a.lockScroll;
-        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
-        if (!inner)
-            Scrollable({ scroll: scrollable, lock: lockScroll });
-        // @ts-ignore
-        // 设置当前为显示状态
-        parent.dataset['drawerVisable'] = 'true';
-        showElm[1].classList.contains(PREFIX.drawer + "-hidden") &&
-            showElm[1].classList.remove(PREFIX.drawer + "-hidden");
-        // showElm[0] 表示遮盖层
-        // showElm[1] 表示抽屉的父容器wrap
-        // showElm[2] 表示抽屉主体
-        CssTransition(showElm[0], {
-            inOrOut: 'in',
-            enterCls: 'rab-fade-in',
-            rmCls: true,
-            timeout: 250
-        });
-        CssTransition(showElm[2], {
-            inOrOut: 'in',
-            enterCls: PREFIX.drawer + "-" + placement + "-move-enter",
-            rmCls: true,
-            timeout: 550
-        });
-    };
-    Drawer.prototype._hidden = function (parent, hiddenElm) {
-        var placement = Drawer.prototype._attrs(parent).placement;
-        // hiddenElm[0] 表示遮盖层
-        // hiddenElm[1] 表示抽屉的父容器wrap
-        // hiddenElm[2] 表示抽屉主体
-        CssTransition(hiddenElm[0], {
-            inOrOut: 'out',
-            leaveCls: 'rab-fade-out',
-            rmCls: true,
-            timeout: 250
-        });
-        CssTransition(hiddenElm[2], {
-            inOrOut: 'out',
-            leaveCls: PREFIX.drawer + "-" + placement + "-move-leave",
-            rmCls: true,
-            timeout: 490
-        });
-        setTimeout(function () {
-            // @ts-ignore
-            parent.dataset['drawerVisable'] = 'false';
-            Scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
-            hiddenElm[1].classList.add(PREFIX.drawer + "-hidden");
-            setCss(hiddenElm[2], 'display', 'none');
-        }, 490);
     };
     Drawer.prototype._setCls = function (elms) {
         var elmsCls = [
@@ -202,7 +134,7 @@ var Drawer = /** @class */ (function () {
         drawerWrap.classList.add(PREFIX.drawer + "-wrap-inner");
         drawer.classList.add(PREFIX.drawer + "-inner");
     };
-    Drawer.prototype._addMask = function (parent, drawerMask, drawerWrap, drawerContent) {
+    Drawer.prototype._setMask = function (parent, drawerMask, drawerWrap, drawerContent) {
         var mask = this._attrs(parent).mask;
         if (parent.getAttribute('mask') == null)
             mask = true;
@@ -239,12 +171,78 @@ var Drawer = /** @class */ (function () {
     Drawer.prototype._initVisible = function (parent, drawerMask, drawerWrap, drawer) {
         var visible = this._attrs(parent).visible;
         // @ts-ignore
-        parent.dataset['drawerVisable'] = "" + visible;
+        parent.dataset.drawerVisable = "" + visible;
         if (visible)
             return;
         drawerWrap.classList.add(PREFIX.drawer + "-hidden");
         setCss(drawerMask, 'display', 'none');
         setCss(drawer, 'display', 'none');
+    };
+    Drawer.prototype._handleVisable = function (visable, target, children) {
+        var _a = Drawer.prototype, _show = _a._show, _hide = _a._hide;
+        visable ? _show(target, children) : _hide(target, children);
+    };
+    Drawer.prototype._handleClose = function (parent, hiddenElm, triggerElm) {
+        var _hide = Drawer.prototype._hide;
+        // triggerElm 表示右上角关闭按钮
+        bind(triggerElm, 'click', function () { return _hide(parent, hiddenElm); });
+        bind(hiddenElm[1], 'click', function () { return _hide(parent, hiddenElm); });
+        bind(hiddenElm[2], 'click', function (e) { return e.stopPropagation(); });
+    };
+    Drawer.prototype._show = function (parent, showElm) {
+        var _attrs = Drawer.prototype._attrs;
+        var _a = _attrs(parent), inner = _a.inner, placement = _a.placement, scrollable = _a.scrollable;
+        var lockScroll = _attrs(parent).lockScroll;
+        !parent.getAttribute('lock-scroll') ? (lockScroll = true) : lockScroll;
+        // 设置为在当前 dom 里打开则不隐藏 body 滚动条
+        if (!inner)
+            Scrollable({ scroll: scrollable, lock: lockScroll });
+        // @ts-ignore
+        // 设置当前为显示状态
+        parent.dataset.drawerVisable = 'true';
+        // showElm[0] 表示遮盖层
+        // showElm[1] 表示抽屉的父容器wrap
+        // showElm[2] 表示抽屉主体
+        showElm[1].classList.contains(PREFIX.drawer + "-hidden") &&
+            showElm[1].classList.remove(PREFIX.drawer + "-hidden");
+        CssTransition(showElm[0], {
+            inOrOut: 'in',
+            enterCls: 'rab-fade-in',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(showElm[2], {
+            inOrOut: 'in',
+            enterCls: PREFIX.drawer + "-" + placement + "-move-enter",
+            rmCls: true,
+            timeout: 550
+        });
+    };
+    Drawer.prototype._hide = function (parent, hiddenElm) {
+        var placement = Drawer.prototype._attrs(parent).placement;
+        // @ts-ignore
+        // 设置为隐藏状态
+        parent.dataset.drawerVisable = 'false';
+        // hiddenElm[0] 表示遮盖层
+        // hiddenElm[1] 表示抽屉的父容器wrap
+        // hiddenElm[2] 表示抽屉主体
+        CssTransition(hiddenElm[0], {
+            inOrOut: 'out',
+            leaveCls: 'rab-fade-out',
+            rmCls: true,
+            timeout: 250
+        });
+        CssTransition(hiddenElm[2], {
+            inOrOut: 'out',
+            leaveCls: PREFIX.drawer + "-" + placement + "-move-leave",
+            rmCls: true,
+            timeout: 490
+        });
+        setTimeout(function () {
+            hiddenElm[1].classList.add(PREFIX.drawer + "-hidden");
+            setCss(hiddenElm[2], 'display', 'none');
+            Scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
+        }, 490);
     };
     Drawer.prototype._attrs = function (node) {
         return {
@@ -258,7 +256,7 @@ var Drawer = /** @class */ (function () {
             closable: getBooleanTypeAttr(node, 'closable'),
             scrollable: getBooleanTypeAttr(node, 'scrollable'),
             lockScroll: getBooleanTypeAttr(node, 'lock-scroll'),
-            maskClosable: getBooleanTypeAttr(node, 'mask-closable')
+            maskClosable: getStrTypeAttr(node, 'mask-closable', 'true')
         };
     };
     return Drawer;

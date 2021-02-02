@@ -10,6 +10,7 @@ declare const _default: {
     loadingBar: string;
     message: string;
     messageChild: string;
+    modal: string;
     notice: string;
     poptip: string;
     noticeChild: string;

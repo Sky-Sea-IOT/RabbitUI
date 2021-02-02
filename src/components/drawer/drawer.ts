@@ -37,7 +37,7 @@ interface DrawerAttes {
     closable: boolean;
     scrollable: boolean;
     lockScroll: boolean;
-    maskClosable: boolean;
+    maskClosable: 'true' | 'false';
 }
 
 class Drawer implements PublicMethods {
@@ -87,10 +87,8 @@ class Drawer implements PublicMethods {
             },
             events({ onClose }) {
                 // v1.0.1 改用on事件绑定，防止触发回调事件的次数随着每次点击而不断的重复叠加
-
                 if (DrawerClose) DrawerClose.onclick = () => onClose && type.isFn(onClose);
-
-                if (_attrs(target).maskClosable)
+                if (_attrs(target).maskClosable === 'true')
                     DrawerWrap.onclick = () => onClose && type.isFn(onClose);
             }
         };
@@ -296,7 +294,11 @@ class Drawer implements PublicMethods {
     }
 
     private _show(parent: Element, showElm: Element[]): void {
-        const { inner, placement, scrollable, lockScroll } = Drawer.prototype._attrs(parent);
+        const { _attrs } = Drawer.prototype;
+        const { inner, placement, scrollable } = _attrs(parent);
+
+        let { lockScroll } = _attrs(parent);
+        !parent.getAttribute('lock-scroll') ? (lockScroll = true) : lockScroll;
 
         // 设置为在当前 dom 里打开则不隐藏 body 滚动条
         if (!inner) Scrollable({ scroll: scrollable, lock: lockScroll });
@@ -330,6 +332,10 @@ class Drawer implements PublicMethods {
     private _hide(parent: Element, hiddenElm: Element[]): void {
         const { placement } = Drawer.prototype._attrs(parent);
 
+        // @ts-ignore
+        // 设置为隐藏状态
+        parent.dataset.drawerVisable = 'false';
+
         // hiddenElm[0] 表示遮盖层
         // hiddenElm[1] 表示抽屉的父容器wrap
         // hiddenElm[2] 表示抽屉主体
@@ -348,8 +354,6 @@ class Drawer implements PublicMethods {
         });
 
         setTimeout(() => {
-            // @ts-ignore
-            parent.dataset.drawerVisable = 'false';
             hiddenElm[1].classList.add(`${PREFIX.drawer}-hidden`);
             setCss(hiddenElm[2], 'display', 'none');
             Scrollable({ scroll: true, lock: true, node: parent, tagName: 'drawer' });
@@ -368,7 +372,7 @@ class Drawer implements PublicMethods {
             closable: getBooleanTypeAttr(node, 'closable'),
             scrollable: getBooleanTypeAttr(node, 'scrollable'),
             lockScroll: getBooleanTypeAttr(node, 'lock-scroll'),
-            maskClosable: getBooleanTypeAttr(node, 'mask-closable')
+            maskClosable: getStrTypeAttr(node, 'mask-closable', 'true')
         };
     }
 }

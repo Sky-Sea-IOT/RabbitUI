@@ -1,27 +1,33 @@
-import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
-import { validComps } from '../../utils';
+import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
+import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 var Button = /** @class */ (function () {
     function Button() {
-        this.VERSION = '1.0';
+        this.VERSION = '1.0.1';
         this.components = $el("." + PREFIX.button, { all: true });
         this._getAllBtns(this.components);
     }
-    Button.prototype.config = function (elem) {
-        var target = $el(elem);
+    Button.prototype.config = function (el) {
+        var target = typeof el === 'string' ? $el(el) : el;
         validComps(target, 'button');
         return {
             get loading() {
                 return false;
             },
             set loading(newVal) {
-                if (newVal === true) {
-                    target.classList.add('rab-btn-loading');
-                    target.prepend(Button.prototype._loadIcon());
+                if (!type.isBol(newVal))
+                    return;
+                var loadingIcon = target.querySelector("." + PREFIX.icon + "-loading-solid");
+                // v1.0.1 修复加载中图标重复追加
+                if (newVal) {
+                    if (!loadingIcon) {
+                        target.classList.add(PREFIX.button + "-loading");
+                        target.prepend(Button.prototype._loadIcon());
+                    }
                 }
                 else {
-                    target.classList.remove('rab-btn-loading');
-                    target.querySelector('.rab-icon-loading-solid').remove();
+                    target.classList.remove(PREFIX.button + "-loading");
+                    loadingIcon ? loadingIcon.remove() : '';
                 }
             }
         };
@@ -31,7 +37,7 @@ var Button = /** @class */ (function () {
         components.forEach(function (node) {
             _this._setLoading(node);
             _this._setIcon(node);
-            removeAttrs(node, ['icon']);
+            removeAttrs(node, ['icon', 'loading']);
         });
     };
     Button.prototype._setLoading = function (node) {
@@ -46,13 +52,13 @@ var Button = /** @class */ (function () {
         if (!this._getIcon(node))
             return;
         if (node.innerHTML === '') {
-            var btnIcon = "<i class=\"rab-icon rab-icon-" + this._getIcon(node) + "\"></i>";
+            var btnIcon = "<i class=\"" + PREFIX.icon + " " + PREFIX.icon + "-" + this._getIcon(node) + "\"></i>";
             node.classList.add(PREFIX.button + "-icon-only");
             setHtml(node, btnIcon);
         }
         else {
             var Icon = createElem('i');
-            Icon.className = "rab-icon rab-icon-" + this._getIcon(node);
+            Icon.className = PREFIX.icon + " " + PREFIX.icon + "-" + this._getIcon(node);
             node.prepend(Icon);
         }
     };
@@ -61,7 +67,8 @@ var Button = /** @class */ (function () {
     };
     Button.prototype._loadIcon = function () {
         var LoadIcon = createElem('i');
-        LoadIcon.className = 'rab-load-loop rab-icon rab-icon-loading-solid';
+        LoadIcon.className = "rab-load-loop " + PREFIX.icon + " " + PREFIX.icon + "-loading-solid";
+        setCss(LoadIcon, 'height', '25px');
         return LoadIcon;
     };
     Button.prototype._getIcon = function (node) {

@@ -25,7 +25,7 @@ export default function scrollable({ scroll = false, lock = false, node, tagName
         if (prevTagName === tagName) {
             // @ts-ignore
             if (prevNode.dataset[`${prevTagName}Visable`] === 'true') {
-                scrollable({ scroll: false, lock: false });
+                scrollable({ scroll: false, lock: true });
             }
         }
     }

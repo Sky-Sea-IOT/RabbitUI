@@ -7,10 +7,6 @@
 - 可提供成功、警告和错误等反馈信息。
 - 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 
-> 注意！使用前需要先实例化组件  `new Rabbit.Message()`。
->
-> 以下所有示例都在这里提前实例化：`const message = new Rabbit.Message()`
-
 ## 代码示例
 
 普通提示
@@ -18,7 +14,7 @@
 - 最基本的提示，默认在3秒后消失。
 
 ```js
-message.info('这是一条普通的提示');
+Rabbit.Message.info('这是一条普通的提示');
 ```
 
 提示类型
@@ -26,9 +22,9 @@ message.info('这是一条普通的提示');
 - 包括成功、失败、警告。
 
 ```js
-message.success('这是一条成功的提示');
-message.warning('这是一条警告的提示');
-message.error('这是一条错误的提示');
+Rabbit.Message.success('这是一条成功的提示');
+Rabbit.Message.warning('这是一条警告的提示');
+Rabbit.Message.error('这是一条错误的提示');
 ```
 
 带背景色
@@ -36,20 +32,20 @@ message.error('这是一条错误的提示');
 设置属性 `background`  为 true 后，通知提示会显示背景色。
 
 ```js
-message.info({
+Rabbit.Message.info({
   content: '这是一条带背景色的通知',
   background: true,
   duration: 5,
 });
-message.success({
+Rabbit.Message.success({
   content: '这是一条带背景色的通知',
   background: true,
 });
-message.warning({
+Rabbit.Message.warning({
   content: '这是一条带背景色的通知',
   background: true,
 });
-message.error({
+Rabbit.Message.error({
   content: '这是一条带背景色的通知',
   background: true,
 });
@@ -60,32 +56,32 @@ message.error({
 - 进行全局 loading，异步自行移除。需要手动调用 `destroy` 方法关闭
 
 ```javascript
-message.loading({
+Rabbit.Message.loading({
   content: '正在加载中...',
   duration: 0,
 });
-setTimeout(() => message.destroy(), 3000);
+setTimeout(() => Rabbit.Message.destroy(), 3000);
 ```
 
 Promise 接口
 
-- 可以通过 then 接口在关闭后运行 callback 。以上用例将在每个 message 将要结束时通过 then 显示新的 message 。
+- 可以通过 then 接口在关闭后运行 callback 。以上用例将在每个 Rabbit.Message 将要结束时通过 then 显示新的 Rabbit.Message 。
 - 如果手动通过关闭按钮结束则无效
 
 ```js
-message.loading('正在加载中...').then(() => {
-  message.success('加载成功!').then(() => {
-    message.info('加载成功后的提示');
+Rabbit.Message.loading('正在加载中...').then(() => {
+  Rabbit.Message.success('加载成功!').then(() => {
+    Rabbit.Message.info('加载成功后的提示');
   });
 });
 ```
 
 自定义时长 
 
-- 自定义时长，也可以在`message.config()`中全局配置，详见API。
+- 自定义时长，也可以在`Rabbit.Message.config()`中全局配置，详见API。
 
 ```js
-message.success({
+Rabbit.Message.success({
   content: '这是成功的提示信息，我将在10秒内消失',
   duration: 10,
 });
@@ -96,7 +92,7 @@ message.success({
 - 设置 `closable` 为 true 后可以手动关闭提示。
 
 ```js
-message.info({
+Rabbit.Message.info({
   content: '可手动关闭的提示',
   duration: 8,
   closable: true,
@@ -108,7 +104,7 @@ message.info({
 - 传入 HTML 片段
 
 ```js
-message.info({
+Rabbit.Message.info({
   content: `<strong>这是 <i>HTML</i> 片段</strong>`,
   dangerouslyUseHTMLString: true
 });
@@ -122,17 +118,17 @@ message.info({
 
 通过直接调用以下方法来使用组件：
 
-- `message.info(config)`
-- `message.success(config)`
-- `message.warning(config)`
-- `message.error(config)`
-- `message.loading(config)`
+- `Rabbit.Message.info(config)`
+- `Rabbit.Message.success(config)`
+- `Rabbit.Message.warning(config)`
+- `Rabbit.Message.error(config)`
+- `Rabbit.Message.loading(config)`
 
 组件同时提供 promise 接口。
 
-- `message[level](config).then(afterClose)`
+- `Rabbit.Message[level](config).then(afterClose)`
 
-其中 `message[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise。
+其中 `Rabbit.Message[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise。
 
 参数 config 可以是字符串或对象，当为字符串时，直接显示内容，当为对象时，具体说明如下：
 
@@ -150,22 +146,22 @@ message.info({
 
 还提供了全局配置和全局销毁方法：
 
-- `message.config(options)`
-- `message.destroy()`
+- `Rabbit.Message.config(options)`
+- `Rabbit.Message.destroy()`
 
-> 也可通过 `message.destroy(key)` 来关闭一条消息。
+> 也可通过 `Rabbit.Message.destroy(key)` 来关闭一条消息。
 
 ```js
-message.loading({
+Rabbit.Message.loading({
   key: 'exampleKey',
   content: '正在加载中...',
   duration: 0,
 });
-setTimeout(() => message.destroy('exampleKey'), 3000);
+setTimeout(() => Rabbit.Message.destroy('exampleKey'), 3000);
 ```
 
 ```js
-message.config({
+Rabbit.Message.config({
   top: 100,
   duration: 2
 });

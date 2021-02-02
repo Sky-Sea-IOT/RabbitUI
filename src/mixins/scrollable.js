@@ -1,18 +1,14 @@
 import { setCss } from '../dom-utils';
 export default function scrollable(_a) {
     var _b = _a.scroll, scroll = _b === void 0 ? false : _b, _c = _a.lock, lock = _c === void 0 ? false : _c, node = _a.node, tagName = _a.tagName;
-    // 页面是否可以滚动
-    if (!scroll) {
-        setCss(document.body, 'paddingRight', '17px');
-    }
-    else {
-        setCss(document.body, 'paddingRight', '');
-    }
     // 是否禁止对页面滚动条的修改
-    if (!lock) {
+    // 页面是否可以滚动
+    if (lock && !scroll) {
+        setCss(document.body, 'paddingRight', '17px');
         setCss(document.body, 'overflow', 'hidden');
     }
     else {
+        setCss(document.body, 'paddingRight', '');
         setCss(document.body, 'overflow', '');
     }
     var prevNode = node === null || node === void 0 ? void 0 : node.previousElementSibling;
@@ -22,7 +18,7 @@ export default function scrollable(_a) {
         if (prevTagName === tagName) {
             // @ts-ignore
             if (prevNode.dataset[prevTagName + "Visable"] === 'true') {
-                scrollable({ scroll: false, lock: false });
+                scrollable({ scroll: false, lock: true });
             }
         }
     }

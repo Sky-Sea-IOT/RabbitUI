@@ -10,10 +10,6 @@
 - 带有交互的通知，给出用户下一步的行动点。
 - 系统主动推送。
 
-> 注意！使用前需要先实例化组件  `new Rabbit.Notice()`，
->
-> 以下所有示例都在这里提前实例化：`const notice = new Rabbit.Notice()`
-
 ## 代码示例
 
  基础用法
@@ -23,7 +19,7 @@
   建议标题言简意赅，例如"删除成功"，更详细的内容可以放在描述信息里。
 
 ```js
-notice.open({
+Rabbit.Notice.open({
   title: '这是通知标题',
   desc:
     '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -34,7 +30,7 @@ notice.open({
     console.log('Notification Close!');
   },
 });
-notice.open({
+Rabbit.Notice.open({
   title: '这是通知标题',
 });
 ```
@@ -46,25 +42,25 @@ notice.open({
 `带描述信息`
 
 ```js
-notice.info({
+Rabbit.Notice.info({
   title: '这是通知标题',
   desc:
     '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
 });
 
-notice.success({
+Rabbit.Notice.success({
   title: '这是通知标题',
   desc:
     '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
 });
 
-notice.warning({
+Rabbit.Notice.warning({
   title: '这是通知标题',
   desc:
     '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
 });
 
-notice.error({
+Rabbit.Notice.error({
   title: '这是通知标题',
   desc:
     '这里是通知的描述,这里是通知的描述这里,是通知的描述,这里是通知的描述,这里是通知的描述,这里是通知的描述',
@@ -75,19 +71,19 @@ notice.error({
 `仅标题`
 
 ```js
-notice.info({
+Rabbit.Notice.info({
   title: '这是通知标题',
 });
 
-notice.success({
+Rabbit.Notice.success({
   title: '这是通知标题',
 });
 
-notice.warning({
+Rabbit.Notice.warning({
   title: '这是通知标题',
 });
 
-notice.error({
+Rabbit.Notice.error({
   title: '这是通知标题',
 });
 
@@ -98,7 +94,7 @@ notice.error({
 自定义时长，为 0 则不自动关闭。
 
 ```js
-notice.open({
+Rabbit.Notice.open({
   title: '这是通知标题',
   desc: '这条通知不会自动关闭，需要点击关闭按钮才可以关闭。',
   duration: 0,
@@ -107,23 +103,23 @@ notice.open({
 
 Promise 接口
 
-- 可以通过 then 接口在关闭后运行 callback 。以上用例将在每个 notice 将要结束时通过 then 显示新的 notice 。
+- 可以通过 then 接口在关闭后运行 callback 。以上用例将在每个 Rabbit.Notice 将要结束时通过 then 显示新的 Rabbit.Notice 。
 - 如果手动通过关闭按钮结束则无效
 
 ```js
-notice
+Rabbit.Notice
   .open({
     title: '行程已发布',
     desc: '您的行程订单已发布，正在等待待车主接单...',
   })
   .then(() => {
-    notice
+    Rabbit.Notice
       .info({
         title: '已有车主接单啦！',
         desc: '你发布的行程订单已有车主接单了，请提前付款以免被取消订单！',
       })
       .then(() => {
-        notice.success({
+        Rabbit.Notice.success({
           title: '费用支付成功',
           desc: '您的行程将在2021.9.9 12:30 开始',
         });
@@ -139,7 +135,7 @@ notice
 - 将`dangerouslyUseHTMLString`属性设置为 true， 就会被当作 HTML 片段处理。
 
 ```js
-notice.open({
+Rabbit.Notice.open({
   title: 'HTML片段',
   desc: `<strong>这是 <i>HTML</i> 片段</strong>`,
   dangerouslyUseHTMLString: true,
@@ -154,7 +150,7 @@ notice.open({
 设置属性 `closable` 为 `false` 可以不显示关闭按钮
 
 ```js
-notice.open({
+Rabbit.Notice.open({
   title: '这是通知标题',
   closable: false
 });
@@ -166,17 +162,17 @@ notice.open({
 
 通过直接调用以下方法来使用组件：
 
-- `notice.open(config)`
-- `notice.info(config)`
-- `notice.success(config)`
-- `notice.warning(config)`
-- `notice.error(config)`
+- `Rabbit.Notice.open(config)`
+- `Rabbit.Notice.info(config)`
+- `Rabbit.Notice.success(config)`
+- `Rabbit.Notice.warning(config)`
+- `Rabbit.Notice.error(config)`
 
 组件同时提供 promise 接口。
 
-- `notice[level](config).then(afterClose)`
+- `Rabbit.Notice[level](config).then(afterClose)`
 
-其中 `notice[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise。
+其中 `Rabbit.Notice[level]` 是组件已经提供的静态方法。`then` 接口返回值是 Promise。
 
 参数 config 为对象，具体说明如下：
 
@@ -198,12 +194,12 @@ notice.open({
 
 还提供了全局配置、全局关闭某个通知和全局销毁的方法：
 
-- `notice.config(options)`
-- `notice.close(key)`
-- `notice.destroy()`
+- `Rabbit.Notice.config(options)`
+- `Rabbit.Notice.close(key)`
+- `Rabbit.Notice.destroy()`
 
 ```js
-notice.config({
+Rabbit.Notice.config({
   top: 50,
   duration: 3
 });

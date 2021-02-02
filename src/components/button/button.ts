@@ -1,10 +1,11 @@
+import { isStr } from 'src/utils/check-type';
 import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
 interface PublicMethods {
     config(
-        elem: string
+        el: string | Element
     ): {
         loading: boolean;
     };
@@ -21,11 +22,11 @@ class Button implements PublicMethods {
     }
 
     public config(
-        elem: string
+        el: string | Element
     ): {
         loading: boolean;
     } {
-        const target = $el(elem);
+        const target = typeof el === 'string' ? $el(el) : el;
 
         validComps(target, 'button');
 

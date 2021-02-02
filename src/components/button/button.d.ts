@@ -1,5 +1,5 @@
 interface PublicMethods {
-    config(elem: string): {
+    config(el: string | Element): {
         loading: boolean;
     };
 }
@@ -7,7 +7,7 @@ declare class Button implements PublicMethods {
     readonly VERSION: string;
     private components;
     constructor();
-    config(elem: string): {
+    config(el: string | Element): {
         loading: boolean;
     };
     private _getAllBtns;

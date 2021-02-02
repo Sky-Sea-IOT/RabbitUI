@@ -5,6 +5,7 @@ import Button from './components/button';
 import Card from './components/card';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
+import Modal from './components/modal';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
 import Spin from './components/spin';
@@ -24,6 +25,7 @@ declare const _default: {
     Drawer: typeof Drawer;
     Loading: import("./components/loading-bar/loading-bar").default;
     Message: import("./components/message/message").default;
+    Modal: typeof Modal;
     Notice: import("./components/notice/notice").default;
     Poptip: typeof Poptip;
     Progress: typeof Progress;

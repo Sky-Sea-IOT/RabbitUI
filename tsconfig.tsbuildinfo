@@ -207,7 +207,7 @@
         "affectsGlobalScope": false
       },
       "./src/mixins/scrollable.ts": {
-        "version": "3079aaba298555bc1658f359ba268ece741f5901c519e706c1c2f27b613ef617",
+        "version": "a453379df0d8d568e746f024ec486ea7f3b069a98facd59b083b4fccf5ed7945",
         "signature": "35ec31b35443f1d8c3a74a801fdf5bfde3d323a738790c34c10587137c88897d",
         "affectsGlobalScope": false
       },
@@ -347,8 +347,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/prefix.ts": {
-        "version": "79e02542302230079f8e217edee3f581f6d5242263a11fcd1b8d7763062176a6",
-        "signature": "38b8b916d44e672411192da5a157a5509cca3a738a2721adce530cca86e310e0",
+        "version": "d050bd66c7a929fd5815e8b8aec5448cc243f750c0d067b47ab564148b9252c6",
+        "signature": "c969da59b2c3837924a624733d092d2fa1fae19279608e3a29dcc861cd5c1a80",
         "affectsGlobalScope": false
       },
       "./src/components/alert/alert.ts": {
@@ -382,8 +382,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/button/button.ts": {
-        "version": "0326b685d82759a54f74669e058a1f1d9a2275b6257dc7b1763d20ccbd30cbf3",
-        "signature": "e1ca26f01ff7a6020c34fb34fdfdcb1caa5812aa5af7879d615513abef2b1ba4",
+        "version": "2aa85cde9a0d2b94593726efd6a3295e901580a15c5c41585b0bd03d9a0c7e9e",
+        "signature": "9745fbbe99f095f05636de53772df72d2e00ecc067a2b3a779d55f825d51c887",
         "affectsGlobalScope": false
       },
       "./src/components/button/index.ts": {
@@ -412,8 +412,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/drawer/drawer.ts": {
-        "version": "7d1238e1f95ba6b5149c12dfc7285b57ccf4a0d8be43bb7f218f2d2ecfd056d0",
-        "signature": "01ab62d9fd6e518d6fa6822e26e84a2b3a40899f946d434021b660309772d9b8",
+        "version": "80da3f450eec69d7ccc2a9cddff59d6b95f6f20fc515172a153039d923d03f3b",
+        "signature": "0161acbd1a2a7219e491735ca83ee2f952600d1e1f80a13251ac237de81a24dc",
         "affectsGlobalScope": false
       },
       "./src/components/drawer/index.ts": {
@@ -439,6 +439,16 @@
       "./src/components/message/index.ts": {
         "version": "43d9b278fa89924613fb9428e339b9ba53cd8e025ad40d3cb569d4be4611c024",
         "signature": "6cbf4d551486168c7d2f409bf4073f972a52f1e30e69804339495909bc6fd9b5",
+        "affectsGlobalScope": false
+      },
+      "./src/components/modal/modal.ts": {
+        "version": "bb042c08af96585a2b32e382c27480eeda91cd0b84c7075d66e0c9db7652607c",
+        "signature": "bc13ebc8be787dccde89a0a54dafd21ee6e9c19daee4fe8ee93a8e49b754e16d",
+        "affectsGlobalScope": false
+      },
+      "./src/components/modal/index.ts": {
+        "version": "72dd030a397769b3bfe248a1c0d69cf9526ed64fa205e6aed0f1894c9349b3e9",
+        "signature": "72dd030a397769b3bfe248a1c0d69cf9526ed64fa205e6aed0f1894c9349b3e9",
         "affectsGlobalScope": false
       },
       "./src/components/notice/notice.ts": {
@@ -537,8 +547,8 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "208ea0d698979521a543961a7907533bf68d509ee0534fcd6ddfb1e73e1dd8f4",
-        "signature": "02a59420e627962b4147faecb2a64bf6bfd129d494101db775f1cf2951e6f83c",
+        "version": "00675b69244abe2979c3062041dcf9b3f1016ba1a5bb570f386397eb84b09836",
+        "signature": "b89800f86958deb5a8636c6a2164f1c2ed446ec1f88cbf9fdd08969e997a4b5c",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/anymatch/index.d.ts": {
@@ -1337,6 +1347,7 @@
       "./src/components/button/button.ts": [
         "./src/components/prefix.ts",
         "./src/dom-utils/index.ts",
+        "./src/utils/check-type.ts",
         "./src/utils/index.ts"
       ],
       "./src/components/button/index.ts": [
@@ -1379,6 +1390,16 @@
         "./src/components/message/message.ts"
       ],
       "./src/components/message/message.ts": [
+        "./src/components/prefix.ts",
+        "./src/dom-utils/index.ts",
+        "./src/mixins/index.ts",
+        "./src/utils/index.ts"
+      ],
+      "./src/components/modal/index.ts": [
+        "./src/components/modal/modal.ts"
+      ],
+      "./src/components/modal/modal.ts": [
+        "./src/components/button/index.ts",
         "./src/components/prefix.ts",
         "./src/dom-utils/index.ts",
         "./src/mixins/index.ts",
@@ -1479,6 +1500,7 @@
         "./src/components/drawer/index.ts",
         "./src/components/loading-bar/index.ts",
         "./src/components/message/index.ts",
+        "./src/components/modal/index.ts",
         "./src/components/notice/index.ts",
         "./src/components/poptip/index.ts",
         "./src/components/progress/index.ts",
@@ -1914,6 +1936,9 @@
       "./src/components/message/index.ts": [
         "./src/components/message/message.ts"
       ],
+      "./src/components/modal/index.ts": [
+        "./src/components/modal/modal.ts"
+      ],
       "./src/components/notice/index.ts": [
         "./src/components/notice/notice.ts"
       ],
@@ -1959,6 +1984,7 @@
         "./src/components/drawer/index.ts",
         "./src/components/loading-bar/loading-bar.ts",
         "./src/components/message/message.ts",
+        "./src/components/modal/index.ts",
         "./src/components/notice/notice.ts",
         "./src/components/poptip/index.ts",
         "./src/components/progress/index.ts",
@@ -2847,6 +2873,8 @@
       "./src/components/loading-bar/loading-bar.ts",
       "./src/components/message/index.ts",
       "./src/components/message/message.ts",
+      "./src/components/modal/index.ts",
+      "./src/components/modal/modal.ts",
       "./src/components/notice/index.ts",
       "./src/components/notice/notice.ts",
       "./src/components/poptip/index.ts",
