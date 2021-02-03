@@ -1,0 +1,50 @@
+@import '../custom.less';
+@import '../mixins/select.less';
+
+@dropdown-tag: r-dropdown;
+@dropdown-menu-tag: r-dropdown-menu;
+@dropdown-item-tag: r-dropdown-item;
+@dropdown-prefix-cls: ~'@{css-prefix}dropdown';
+@select-dropdown-prefix-cls: ~'@{css-prefix}select-dropdown';
+@dropdown-item-prefix-cls: ~'@{dropdown-prefix-cls}-item';
+
+@{dropdown-tag} {
+    display: inline-block;
+
+    .@{select-dropdown-prefix-cls} {
+        overflow: visible;
+        max-height: none;
+    }
+}
+
+.@{select-dropdown-prefix-cls} {
+    width: inherit;
+    max-height: 200px;
+    overflow: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+    background-color: @white;
+    box-sizing: border-box;
+    border-radius: @border-radius-base;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    position: absolute;
+    z-index: @zindex-select;
+}
+
+@{dropdown-menu-tag} {
+    min-width: 100px;
+    display: block;
+}
+
+.@{dropdown-prefix-cls} {
+    &-rel {
+        position: relative;
+    }
+
+    &-item-selected,
+    &-item&-item-selected:hover {
+        background: ~`colorPalette('@{primary-color}', 1) `;
+    }
+}
+
+.select-item(@dropdown-prefix-cls, @dropdown-item-tag, @dropdown-item-prefix-cls);

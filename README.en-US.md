@@ -11,13 +11,15 @@ RabbitUI
     <h3>A library of UI components built on TypeScript</h3>
 </h1>
 
-> The project is still in production, with a lot of documentation, functionality, and code to work on
+> At present, the project is still in the production stage. In the future, more components will be updated and more detailed documentation and official website details page will be produced
 
 ### Features
 
-- Does not rely on any third party framework, the underlying code is based on native JavaScript code
+- It does not rely on any third party framework, and is written based on native JavaScript
 
-- It can be used directly with Vue, React or other existing projects without restriction
+- Elegant, concise, semantic, and normative modular HTML code
+
+- Can be used directly in Vue, React, or other existing projects
 
 - Rich components and features to meet most site scenarios
 

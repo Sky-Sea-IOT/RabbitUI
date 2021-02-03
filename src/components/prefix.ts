@@ -8,6 +8,7 @@ export default {
     card: `${prefixCls}-card`,
     divider: `${prefixCls}-divider`,
     drawer: `${prefixCls}-drawer`,
+    dropdown: `${prefixCls}-dropdown`,
     icon: `${prefixCls}-icon`,
     loadingBar: `${prefixCls}-loading-bar`,
     message: `${prefixCls}-message`,

@@ -5,6 +5,7 @@ import Button from './components/button';
 import Card from './components/card';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
+import Dropdown from './components/dropdown';
 import Loading from './components/loading-bar';
 import Message from './components/message';
 import Modal from './components/modal';
@@ -32,6 +33,7 @@ export default window.Rabbit = {
     Card,
     Divider,
     Drawer,
+    Dropdown,
     Loading,
     Message,
     Modal,
