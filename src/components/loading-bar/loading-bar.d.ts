@@ -4,14 +4,14 @@ interface UpdatelobalAPI {
     duration?: number;
     failedColor?: string;
 }
-interface PublicMethods {
+interface Events {
     statr(): void;
     finish(): void;
     error(): void;
     update(percent: number): void;
     destroy(): void;
 }
-declare class $LoadingBar implements PublicMethods {
+declare class $LoadingBar implements Events {
     readonly VERSION: string;
     readonly component: any;
     constructor();

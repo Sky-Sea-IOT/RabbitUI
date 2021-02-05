@@ -1,7 +1,7 @@
-interface PublicMethods {
+interface Config {
     onChange(elem: string, cb: ([status, $this]: [boolean, Element]) => void): void;
 }
-declare class Switch implements PublicMethods {
+declare class Switch implements Config {
     readonly VERSION: string;
     private components;
     constructor();

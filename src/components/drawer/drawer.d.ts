@@ -1,14 +1,14 @@
 interface DrawerEvents {
     onClose?: () => void;
 }
-interface PublicMethods {
+interface Config {
     config(el: string): {
         title: string;
         visable: boolean;
         events: ({ onClose }: DrawerEvents) => void;
     };
 }
-declare class Drawer implements PublicMethods {
+declare class Drawer implements Config {
     readonly VERSION: string;
     private components;
     constructor();

@@ -1,10 +1,10 @@
-interface PublicMethods {
+interface Config {
     config(el: string): {
         percent: number;
         successPercent: number;
     };
 }
-declare class Progress implements PublicMethods {
+declare class Progress implements Config {
     readonly VERSION: string;
     private components;
     constructor();

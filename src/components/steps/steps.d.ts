@@ -7,13 +7,13 @@ interface StepConfig {
     title?: string;
     content?: string;
 }
-interface PublicMethods {
+interface Config {
     config(el: string): {
         setSteps: ({ current, status }: StepsConfig) => void;
         setChildren: ({ idx, title, content }: StepConfig) => void;
     };
 }
-declare class Steps implements PublicMethods {
+declare class Steps implements Config {
     readonly VERSION: string;
     readonly components: any;
     constructor();

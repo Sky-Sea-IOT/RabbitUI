@@ -1,7 +1,7 @@
 import { CssTransition } from '.';
 import { bind } from '../dom-utils';
 /**
- * 适应与下拉菜单、tooltip、poptip的点击空白处关闭
+ * 适用tooltip、poptip的点击空白处关闭
  */
 export default function clickOutside(target, datasetVal, leaveCls) {
     var hideJudgment = function () {

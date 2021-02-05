@@ -1,9 +1,9 @@
-interface PublicMethods {
+interface Config {
     config(el: string | Element): {
         loading: boolean;
     };
 }
-declare class Button implements PublicMethods {
+declare class Button implements Config {
     readonly VERSION: string;
     private components;
     constructor();

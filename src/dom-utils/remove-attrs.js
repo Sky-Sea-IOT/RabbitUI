@@ -5,13 +5,11 @@
  * 3.非业务逻辑代码要用的属性
  */
 export default function removeAttrs(elem, attrs) {
-    setTimeout(function () {
-        var i = 0;
-        var length = attrs.length;
-        for (; i < length; i++) {
-            var attr = attrs[i];
-            elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
-        }
-    }, 200);
+    var i = 0;
+    var length = attrs.length;
+    for (; i < length; i++) {
+        var attr = attrs[i];
+        elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
+    }
 }
 //# sourceMappingURL=remove-attrs.js.map

@@ -1,4 +1,4 @@
-interface PublicMethods {
+interface Config {
     config(el: string): {
         message: string | number;
         desc: string | number;
@@ -6,7 +6,7 @@ interface PublicMethods {
     };
     onClose(el: string, cb: ($this: Element) => void): void;
 }
-declare class Alert implements PublicMethods {
+declare class Alert implements Config {
     readonly VERSION: string;
     private components;
     constructor();

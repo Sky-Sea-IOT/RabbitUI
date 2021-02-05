@@ -15,7 +15,7 @@ interface NoticeOptions {
     className?: string;
     dangerouslyUseHTMLString?: boolean;
 }
-interface PublicMethods {
+interface Events {
     open(config: NoticeOptions): Promise<void>;
     info(config: NoticeOptions): Promise<void>;
     success(config: NoticeOptions): Promise<void>;
@@ -24,7 +24,7 @@ interface PublicMethods {
     close(key: string): void;
     destroy(): void;
 }
-declare class $Notice implements PublicMethods {
+declare class $Notice implements Events {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
     constructor();

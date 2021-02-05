@@ -11,7 +11,7 @@ interface MessageOptions {
     background?: boolean;
     dangerouslyUseHTMLString?: boolean;
 }
-interface PublicMethods {
+interface Events {
     info(config: string | MessageOptions): Promise<void>;
     success(config: string | MessageOptions): Promise<void>;
     warning(config: string | MessageOptions): Promise<void>;
@@ -20,7 +20,7 @@ interface PublicMethods {
     config(options: MsgGlobalAPI): void;
     destroy(key?: string | number): void;
 }
-declare class $Message implements PublicMethods {
+declare class $Message implements Events {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
     constructor();

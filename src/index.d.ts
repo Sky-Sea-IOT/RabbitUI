@@ -5,6 +5,7 @@ import Button from './components/button';
 import Card from './components/card';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
+import Dropdown from './components/dropdown';
 import Modal from './components/modal';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
@@ -14,7 +15,6 @@ import Switch from './components/switch';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
-import './styles/index.less';
 declare const _default: {
     Alert: typeof Alert;
     Avatar: typeof Avatar;
@@ -23,6 +23,7 @@ declare const _default: {
     Card: typeof Card;
     Divider: typeof Divider;
     Drawer: typeof Drawer;
+    Dropdown: typeof Dropdown;
     Loading: import("./components/loading-bar/loading-bar").default;
     Message: import("./components/message/message").default;
     Modal: typeof Modal;

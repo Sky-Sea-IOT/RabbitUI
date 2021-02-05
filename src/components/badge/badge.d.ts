@@ -1,11 +1,11 @@
-interface PublicMethods {
+interface Config {
     config(el: string): {
         count: number;
         text: string;
         dot: boolean;
     };
 }
-declare class Badge implements PublicMethods {
+declare class Badge implements Config {
     readonly VERSION: string;
     private components;
     constructor();

@@ -6,6 +6,7 @@ declare const _default: {
     card: string;
     divider: string;
     drawer: string;
+    dropdown: string;
     icon: string;
     loadingBar: string;
     message: string;

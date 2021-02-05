@@ -2,13 +2,13 @@ interface TooltipEvents {
     onShow?: () => void;
     onHide?: () => void;
 }
-interface PublicMethods {
+interface Config {
     config(el: string): {
         content: string | number;
         events: (options: TooltipEvents) => void;
     };
 }
-declare class Tooltip implements PublicMethods {
+declare class Tooltip implements Config {
     readonly VERSION: string;
     private components;
     constructor();

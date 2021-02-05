@@ -4,14 +4,14 @@ interface PoptipEvents {
     onOk?: () => void;
     onCancel?: () => void;
 }
-interface PublicMethods {
+interface Config {
     config(el: string): {
         title: string | number;
         content: string | number;
         events: (options: PoptipEvents) => void;
     };
 }
-declare class Poptip implements PublicMethods {
+declare class Poptip implements Config {
     readonly VERSION: string;
     private components;
     private children;

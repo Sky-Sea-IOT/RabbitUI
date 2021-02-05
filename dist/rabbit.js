@@ -21462,6 +21462,7 @@ var prefixCls = 'rab';
     card: prefixCls + "-card",
     divider: prefixCls + "-divider",
     drawer: prefixCls + "-drawer",
+    dropdown: prefixCls + "-dropdown",
     icon: prefixCls + "-icon",
     loadingBar: prefixCls + "-loading-bar",
     message: prefixCls + "-message",
@@ -21732,14 +21733,12 @@ function nextAll(el) {
  * 3.非业务逻辑代码要用的属性
  */
 function removeAttrs(elem, attrs) {
-    setTimeout(function () {
-        var i = 0;
-        var length = attrs.length;
-        for (; i < length; i++) {
-            var attr = attrs[i];
-            elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
-        }
-    }, 200);
+    var i = 0;
+    var length = attrs.length;
+    for (; i < length; i++) {
+        var attr = attrs[i];
+        elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
+    }
 }
 
 ;// CONCATENATED MODULE: ./src/dom-utils/siblings.ts
@@ -21879,7 +21878,7 @@ function slide() {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 108 modules ***!
+  !*** ./src/index.ts + 110 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -21894,7 +21893,7 @@ __webpack_require__.d(__webpack_exports__, {
 
 ;// CONCATENATED MODULE: ./src/mixins/warn.ts
 function warn(msg) {
-    console.error("[RabbitUI] Error: " + msg);
+    console.error("[Rabbit] Error: " + msg);
     return;
 }
 
@@ -22065,7 +22064,7 @@ function promiseCb(duration) {
 
 
 /**
- * 适应与下拉菜单、tooltip、poptip的点击空白处关闭
+ * 适用tooltip、poptip的点击空白处关闭
  */
 function clickOutside(target, datasetVal, leaveCls) {
     var hideJudgment = function () {
@@ -25333,6 +25332,188 @@ var Drawer = /** @class */ (function () {
 
 /* harmony default export */ var components_drawer = (drawer);
 
+;// CONCATENATED MODULE: ./src/components/dropdown/dropdown.ts
+
+
+
+
+var defalutDpdDelay = 100;
+var dpdShowTimer;
+var Dropdown = /** @class */ (function () {
+    function Dropdown() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-dropdown', { all: true });
+        this._create(this.components);
+    }
+    Dropdown.prototype.config = function (el) {
+        var target = (0,dom_utils.$el)(el);
+        validComps(target, 'dropdown');
+        return {
+            events: function (_a) {
+                var onClick = _a.onClick;
+                var children = target.querySelectorAll('r-dropdown-item');
+                children.forEach(function (child, index) {
+                    (0,dom_utils.bind)(child, 'click', function () {
+                        child.getAttribute('disabled') !== ''
+                            ? onClick && isFn(onClick, index)
+                            : undefined;
+                    });
+                });
+            }
+        };
+    };
+    Dropdown.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            // 判断是否由两个子节点组成
+            if (node.childElementCount > 2) {
+                warn('The content of a component dropdown can only be composed of two element nodes, the first being the reference element and the second being the drop-down item');
+            }
+            // 将第一个子元素作为宿主元素
+            var refElm = node.firstElementChild;
+            // 最后一个子元素即菜单项
+            var menuItem = node.lastElementChild;
+            // 清空旧内容，防止获取的元素不正确
+            (0,dom_utils.setHtml)(node, '');
+            var DropdownRef = _this._setReferenceElm(node, refElm);
+            var DropdownMenu = _this._setMenuItem(node, menuItem);
+            _this._handleTrigger(node, DropdownRef, DropdownMenu);
+            _this._setTransformOrigin(node, DropdownMenu);
+            (0,dom_utils.removeAttrs)(node, ['trigger', 'placement']);
+        });
+    };
+    Dropdown.prototype._setReferenceElm = function (node, refElm) {
+        var DropdownRel = (0,dom_utils.createElem)('div');
+        DropdownRel.className = prefix.default.dropdown + "-rel";
+        refElm ? DropdownRel.appendChild(refElm) : '';
+        node.appendChild(DropdownRel);
+        return DropdownRel;
+    };
+    Dropdown.prototype._setMenuItem = function (node, menuItem) {
+        var DropdownMenu = (0,dom_utils.createElem)('div');
+        DropdownMenu.className = 'rab-select-dropdown';
+        this._initVisable(DropdownMenu);
+        menuItem ? DropdownMenu.appendChild(menuItem) : '';
+        node.appendChild(DropdownMenu);
+        (0,dom_utils.setCss)(menuItem, 'display', 'block');
+        return DropdownMenu;
+    };
+    Dropdown.prototype._initVisable = function (dpdMenu) {
+        (0,dom_utils.setCss)(dpdMenu, 'display', 'none');
+        dpdMenu.dataset.dropdownVisable = 'false';
+    };
+    Dropdown.prototype._setTransformOrigin = function (parent, dpdMenu) {
+        var placement = this._attrs(parent).placement;
+        // 根据 placement 设置源方向。
+        // top 开头、right-end、left-end 的位置设置源方向为 center-bottom，反之。
+        // left 和 right 开头的则无需设置。
+        if (/^top|right-end|left-end/.test(placement)) {
+            (0,dom_utils.setCss)(dpdMenu, 'transformOrigin', 'center bottom');
+        }
+        else if (/^bottom|right-start|left-start/.test(placement)) {
+            (0,dom_utils.setCss)(dpdMenu, 'transformOrigin', 'center top');
+        }
+        // TODO: 根据 popper 的方向动态改变源方向
+        // dpdMenu.dataset.popperPlacement;
+    };
+    Dropdown.prototype._handleTrigger = function (parent, dpdRef, dpdMenu) {
+        var _a = this._attrs(parent), trigger = _a.trigger, placement = _a.placement;
+        var setPopper = function () { return _newCreatePopper(dpdRef, dpdMenu, placement, 0); };
+        var show = function () {
+            setPopper();
+            dpdMenu.dataset.dropdownVisable = 'true';
+            CssTransition(dpdMenu, {
+                inOrOut: 'in',
+                enterCls: 'transition-drop-enter',
+                rmCls: true,
+                timeout: 300
+            });
+        };
+        var hidden = function () {
+            if (dpdMenu.dataset.dropdownVisable === 'true') {
+                dpdMenu.dataset.dropdownVisable = 'false';
+                CssTransition(dpdMenu, {
+                    inOrOut: 'out',
+                    leaveCls: 'transition-drop-leave',
+                    rmCls: true,
+                    timeout: 280
+                });
+            }
+        };
+        // 通过点击宿主元素的次数判断是否显示或隐藏菜单项
+        var clicksIsVisable = function (clicks) { return (clicks % 2 == 0 ? hidden() : show()); };
+        if (trigger === 'hover') {
+            (0,dom_utils.bind)(parent, 'mouseenter', function () {
+                dpdShowTimer = setTimeout(function () {
+                    show();
+                }, defalutDpdDelay);
+            });
+            (0,dom_utils.bind)(parent, 'mouseleave', function () {
+                clearTimeout(dpdShowTimer);
+                hidden();
+            });
+        }
+        else if (trigger === 'click') {
+            // 初始当前的点击次数
+            var currentClicks_1 = 1;
+            (0,dom_utils.bind)(dpdRef, 'click', function () { return clicksIsVisable(currentClicks_1++); });
+            (0,dom_utils.bind)(dpdRef, 'focusin', show);
+            (0,dom_utils.bind)(dpdRef, 'focusout', function () {
+                currentClicks_1++;
+                hidden();
+            });
+        }
+        else if (trigger === 'contextMenu') {
+            // 初始当前的右击次数
+            var currentRightClick_1 = 1;
+            (0,dom_utils.bind)(dpdRef, 'contextmenu', function (e) {
+                e.preventDefault();
+                clicksIsVisable(currentRightClick_1++);
+            });
+            (0,dom_utils.bind)(dpdRef, 'focusout', function () {
+                currentRightClick_1++;
+                hidden();
+            });
+        }
+    };
+    Dropdown.prototype._attrs = function (node) {
+        return {
+            trigger: (0,dom_utils.getStrTypeAttr)(node, 'trigger', 'hover'),
+            placement: (0,dom_utils.getStrTypeAttr)(node, 'placement', 'bottom')
+        };
+    };
+    return Dropdown;
+}());
+// 通过点击事件冒泡的方式处理单击下拉菜单项隐藏菜单
+function handleDropdownItemClickHidden() {
+    (0,dom_utils.bind)(document, 'click', function (e) {
+        var target = e.target;
+        // 获取点击的目标元素名
+        var tagName = target.tagName.toLocaleLowerCase();
+        if (tagName === 'r-dropdown-item') {
+            // 是否为禁用项
+            if (target.getAttribute('disabled') === '')
+                return;
+            // 获取菜单项的最外层容器 div.rab-select-dropdown
+            var dropdownMenu = target.parentElement.parentElement;
+            // 设置为隐藏状态
+            dropdownMenu.dataset.dropdownVisable = 'false';
+            CssTransition(dropdownMenu, {
+                inOrOut: 'out',
+                leaveCls: 'transition-drop-leave',
+                rmCls: true,
+                timeout: 280
+            });
+        }
+    });
+}
+handleDropdownItemClickHidden();
+/* harmony default export */ var dropdown = (Dropdown);
+
+;// CONCATENATED MODULE: ./src/components/dropdown/index.ts
+
+/* harmony default export */ var components_dropdown = (dropdown);
+
 ;// CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -26506,7 +26687,7 @@ var Poptip = /** @class */ (function () {
         this.VERSION = 'v1.0';
         this.components = (0,dom_utils.$el)('r-poptip', { all: true });
         this._create(this.components);
-        this.children = (0,dom_utils.$el)('.rab-poptip-popper', { all: true });
+        this.children = (0,dom_utils.$el)("." + prefix.default.poptip + "-popper", { all: true });
         clickOutside(this.children, 'poptipShow', 'zoom-big-fast-leave');
         scrollUpdate();
     }
@@ -27567,8 +27748,7 @@ var Tooltip = /** @class */ (function () {
 
 
 
-//! 整个项目完成后以下代码都要注释或删除
-//! 打包的时候这里要解除封印
+
 
 // @ts-ignore
 // 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
@@ -27580,6 +27760,7 @@ var Tooltip = /** @class */ (function () {
     Card: components_card,
     Divider: components_divider,
     Drawer: components_drawer,
+    Dropdown: components_dropdown,
     Loading: components_loading_bar,
     Message: components_message,
     Modal: components_modal,

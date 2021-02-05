@@ -12,7 +12,7 @@ var Poptip = /** @class */ (function () {
         this.VERSION = 'v1.0';
         this.components = $el('r-poptip', { all: true });
         this._create(this.components);
-        this.children = $el('.rab-poptip-popper', { all: true });
+        this.children = $el("." + PREFIX.poptip + "-popper", { all: true });
         clickOutside(this.children, 'poptipShow', 'zoom-big-fast-leave');
         _arrow.scrollUpdate();
     }

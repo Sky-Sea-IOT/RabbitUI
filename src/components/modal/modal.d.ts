@@ -2,14 +2,14 @@ interface ModalEvents {
     onOk?: () => void;
     onCancel?: () => void;
 }
-interface PublicMethods {
+interface Config {
     config(el: string): {
         title: string;
         visable: boolean;
         events({ onOk, onCancel }: ModalEvents): void;
     };
 }
-declare class Modal implements PublicMethods {
+declare class Modal implements Config {
     readonly VERSION: string;
     private components;
     constructor();
