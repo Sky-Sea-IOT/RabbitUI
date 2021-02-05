@@ -2,7 +2,7 @@ import { type, validComps } from '../../utils';
 import { $el, createElem, removeAttrs, setCss, setHtml, setText } from '../../dom-utils';
 import PREFIX from '../prefix';
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -17,7 +17,7 @@ const PrgesIconType = {
     wrong: '<i class="rab-icon rab-icon-ios-close-circle"></i>'
 };
 
-class Progress implements PublicMethods {
+class Progress implements Config {
     readonly VERSION: string;
     private components: any;
 

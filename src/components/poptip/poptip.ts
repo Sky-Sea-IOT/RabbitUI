@@ -36,7 +36,7 @@ interface PoptipEvents {
     onCancel?: () => void; // 点击取消的回调
 }
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -50,7 +50,7 @@ const defalutPoptipDelay = 100;
 let poptipShowTimer: any;
 let poptipEvTimer: any;
 
-class Poptip implements PublicMethods {
+class Poptip implements Config {
     readonly VERSION: string;
     private components: any;
     private children: any;
@@ -59,7 +59,7 @@ class Poptip implements PublicMethods {
         this.VERSION = 'v1.0';
         this.components = $el('r-poptip', { all: true });
         this._create(this.components);
-        this.children = $el('.rab-poptip-popper', { all: true });
+        this.children = $el(`.${PREFIX.poptip}-popper`, { all: true });
         clickOutside(this.children, 'poptipShow', 'zoom-big-fast-leave');
         _arrow.scrollUpdate();
     }

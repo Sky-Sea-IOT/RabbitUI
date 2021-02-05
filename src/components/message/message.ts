@@ -19,7 +19,7 @@ interface MessageOptions {
     dangerouslyUseHTMLString?: boolean; // 是否支持传入 HTML 片段
 }
 
-interface PublicMethods {
+interface Events {
     info(config: string | MessageOptions): Promise<void>;
     success(config: string | MessageOptions): Promise<void>;
     warning(config: string | MessageOptions): Promise<void>;
@@ -68,7 +68,7 @@ function createMessageInstanceWrapper(): HTMLElement {
     return MsgWrapper;
 }
 
-class $Message implements PublicMethods {
+class $Message implements Events {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
 

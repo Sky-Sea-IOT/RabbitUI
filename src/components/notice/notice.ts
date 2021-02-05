@@ -23,7 +23,7 @@ interface NoticeOptions {
     dangerouslyUseHTMLString?: boolean;
 }
 
-interface PublicMethods {
+interface Events {
     open(config: NoticeOptions): Promise<void>;
     info(config: NoticeOptions): Promise<void>;
     success(config: NoticeOptions): Promise<void>;
@@ -72,7 +72,7 @@ function createNoticeInsanceWrapper(): HTMLElement {
     return NoticeWrapper;
 }
 
-class $Notice implements PublicMethods {
+class $Notice implements Events {
     readonly VERSION: string;
     readonly instances: Array<HTMLElement>;
 

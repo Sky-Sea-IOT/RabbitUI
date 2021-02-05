@@ -16,7 +16,7 @@ interface DrawerEvents {
     onClose?: () => void;
 }
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -40,7 +40,7 @@ interface DrawerAttes {
     maskClosable: 'true' | 'false';
 }
 
-class Drawer implements PublicMethods {
+class Drawer implements Config {
     readonly VERSION: string;
     private components: any;
 

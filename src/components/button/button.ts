@@ -3,7 +3,7 @@ import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
-interface PublicMethods {
+interface Config {
     config(
         el: string | Element
     ): {
@@ -11,7 +11,7 @@ interface PublicMethods {
     };
 }
 
-class Button implements PublicMethods {
+class Button implements Config {
     readonly VERSION: string;
     private components: any;
 

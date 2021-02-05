@@ -3,7 +3,7 @@ import { $el, bind, createElem, removeAttrs, setHtml } from '../../dom-utils';
 import { type, destroyElem, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -14,7 +14,7 @@ interface PublicMethods {
     onClose(el: string, cb: ($this: Element) => void): void;
 }
 
-class Alert implements PublicMethods {
+class Alert implements Config {
     readonly VERSION: string;
     private components: any;
 

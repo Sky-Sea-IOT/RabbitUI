@@ -9,6 +9,19 @@ import {
     setHtml
 } from '../../dom-utils';
 import { CssTransition, warn, _Popper } from '../../mixins';
+import { type, validComps } from '../../utils';
+
+interface DropdownEvents {
+    onClick: (index?: number) => void; // 点击菜单项时触发，返回 r-dropdown-item 索引值
+}
+
+interface Config {
+    config(
+        el: string
+    ): {
+        events: ({ onClick }: DropdownEvents) => void;
+    };
+}
 
 interface DropdownAttrs {
     trigger: 'hover' | 'click' | 'contextMenu';
@@ -18,9 +31,8 @@ interface DropdownAttrs {
 const defalutDpdDelay = 100;
 
 let dpdShowTimer: any;
-let dpdEvTimer: any;
 
-class Dropdown {
+class Dropdown implements Config {
     readonly VERSION: string;
     private components: any;
 
@@ -28,6 +40,29 @@ class Dropdown {
         this.VERSION = 'v1.0';
         this.components = $el('r-dropdown', { all: true });
         this._create(this.components);
+    }
+
+    public config(
+        el: string
+    ): {
+        events({ onClick }: { onClick: (index?: number) => void }): void;
+    } {
+        const target = $el(el);
+
+        validComps(target, 'dropdown');
+
+        return {
+            events({ onClick }) {
+                const children = target.querySelectorAll('r-dropdown-item');
+                children.forEach((child: Element, index: number) => {
+                    bind(child, 'click', () => {
+                        child.getAttribute('disabled') !== ''
+                            ? onClick && type.isFn(onClick, index)
+                            : undefined;
+                    });
+                });
+            }
+        };
     }
 
     private _create(components: NodeListOf<Element>): void {
@@ -134,6 +169,9 @@ class Dropdown {
             }
         };
 
+        // 通过点击宿主元素的次数判断是否显示或隐藏菜单项
+        const clicksIsVisable = (clicks: number) => (clicks % 2 == 0 ? hidden() : show());
+
         if (trigger === 'hover') {
             bind(parent, 'mouseenter', () => {
                 dpdShowTimer = setTimeout(() => {
@@ -145,11 +183,24 @@ class Dropdown {
                 hidden();
             });
         } else if (trigger === 'click') {
-            bind(dpdRef, 'click', show);
+            // 初始当前的点击次数
+            let currentClicks = 1;
+            bind(dpdRef, 'click', () => clicksIsVisable(currentClicks++));
+            bind(dpdRef, 'focusin', show);
+            bind(dpdRef, 'focusout', () => {
+                currentClicks++;
+                hidden();
+            });
         } else if (trigger === 'contextMenu') {
+            // 初始当前的右击次数
+            let currentRightClick = 1;
             bind(dpdRef, 'contextmenu', (e: any) => {
                 e.preventDefault();
-                show();
+                clicksIsVisable(currentRightClick++);
+            });
+            bind(dpdRef, 'focusout', () => {
+                currentRightClick++;
+                hidden();
             });
         }
     }
@@ -162,7 +213,7 @@ class Dropdown {
     }
 }
 
-// 处理下拉项点击隐藏菜单
+// 通过点击事件冒泡的方式处理单击下拉菜单项隐藏菜单
 function handleDropdownItemClickHidden(): void {
     bind(document, 'click', (e: any) => {
         const { target } = e;

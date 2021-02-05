@@ -3,7 +3,7 @@ import { $el, createElem, removeAttrs, setCss, setHtml, setText } from '../../do
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -13,7 +13,7 @@ interface PublicMethods {
     };
 }
 
-class Badge implements PublicMethods {
+class Badge implements Config {
     readonly VERSION: string;
     private components: any;
 

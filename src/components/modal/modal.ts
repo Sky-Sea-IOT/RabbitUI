@@ -19,7 +19,7 @@ interface ModalEvents {
     onCancel?: () => void;
 }
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -49,7 +49,7 @@ interface ModalAttrs {
 
 const RABBIT_BTN = new Button();
 
-class Modal implements PublicMethods {
+class Modal implements Config {
     readonly VERSION: string;
     private components: any;
 

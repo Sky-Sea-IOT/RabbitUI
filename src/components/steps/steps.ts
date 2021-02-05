@@ -15,7 +15,7 @@ interface StepConfig {
     content?: string; // 设置步骤的详细描述
 }
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -24,7 +24,7 @@ interface PublicMethods {
     };
 }
 
-class Steps implements PublicMethods {
+class Steps implements Config {
     readonly VERSION: string;
     readonly components: any;
 

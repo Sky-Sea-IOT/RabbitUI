@@ -8,7 +8,7 @@ interface TooltipEvents {
     onHide?: () => void;
 }
 
-interface PublicMethods {
+interface Config {
     config(
         el: string
     ): {
@@ -20,7 +20,7 @@ interface PublicMethods {
 let tooltipShowTimer: any;
 let tooltipEvTimer: any;
 
-class Tooltip implements PublicMethods {
+class Tooltip implements Config {
     readonly VERSION: string;
     private components: any;
 

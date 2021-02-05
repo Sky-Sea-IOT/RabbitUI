@@ -18,7 +18,7 @@ interface UpdateAPI {
     show?: boolean; // 是否显示进度条
 }
 
-interface PublicMethods {
+interface Events {
     statr(): void;
     finish(): void;
     error(): void;
@@ -147,7 +147,7 @@ function setColor(status: string, elem: any): void {
     }
 }
 
-class $LoadingBar implements PublicMethods {
+class $LoadingBar implements Events {
     readonly VERSION: string;
     readonly component: any;
 

@@ -2,11 +2,11 @@ import { $el, bind, setCss, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
-interface PublicMethods {
+interface Config {
     onChange(elem: string, cb: ([status, $this]: [boolean, Element]) => void): void;
 }
 
-class Switch implements PublicMethods {
+class Switch implements Config {
     readonly VERSION: string;
     private components: any;
 
