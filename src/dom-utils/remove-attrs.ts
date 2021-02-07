@@ -9,6 +9,8 @@ export default function removeAttrs(elem: Element, attrs: Array<string>): void {
     const { length } = attrs;
     for (; i < length; i++) {
         const attr = attrs[i];
-        elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
+        elem.getAttribute(attr) || elem.getAttribute(attr) === ''
+            ? elem.removeAttribute(attr)
+            : null;
     }
 }

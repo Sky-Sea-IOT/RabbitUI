@@ -53,7 +53,7 @@ export function getBooleanTypeAttr(node: Element, attrName: string): boolean {
 }
 
 // Return Number type
-export function getNumTypeAttr(node: Element, attrName: string, defaultVal: number): number | any {
+export function getNumTypeAttr(node: Element, attrName: string, defaultVal?: number): number | any {
     return Number(node.getAttribute(attrName)) || defaultVal;
 }
 

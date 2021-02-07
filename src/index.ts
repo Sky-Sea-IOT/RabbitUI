@@ -3,6 +3,7 @@ import Avatar from './components/avatar';
 import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
+import Collapse from './components/collapse';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
 import Dropdown from './components/dropdown';
@@ -31,6 +32,7 @@ export default window.Rabbit = {
     Badge,
     Button,
     Card,
+    Collapse,
     Divider,
     Drawer,
     Dropdown,
