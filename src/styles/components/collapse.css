@@ -19,7 +19,6 @@ r-collapse-panel > .rab-collapse-header {
   cursor: pointer;
   position: relative;
   border-bottom: 1px solid transparent;
-  transition: all 0.2s ease-in-out;
 }
 r-collapse-panel > .rab-collapse-header > i {
   transition: transform 0.2s ease-in-out;
@@ -34,13 +33,15 @@ r-collapse-panel.rab-collapse-item-active > .rab-collapse-header > i {
 r-collapse-panel:last-child > .rab-collapse-content {
   border-radius: 0 0 2px 2px;
 }
-.rab-collapse-simple {
+.rab-collapse-simple,
+.rab-collapse-ghost {
+  border-top: none;
   border-left: none;
   border-right: none;
-  background-color: #fff;
   border-radius: 0;
 }
-.rab-collapse-simple > r-collapse-panel.rab-collapse-item-active > .rab-collapse-header {
+.rab-collapse-simple > r-collapse-panel.rab-collapse-item-active > .rab-collapse-header,
+.rab-collapse-ghost > r-collapse-panel.rab-collapse-item-active > .rab-collapse-header {
   border-bottom: 1px solid transparent;
 }
 .rab-collapse-content {
@@ -56,6 +57,23 @@ r-collapse-panel:last-child > .rab-collapse-content {
 }
 .rab-collapse-simple > r-collapse-panel > .rab-collapse-content > .rab-collapse-content-box {
   padding-top: 0;
+}
+.rab-collapse-simple .rab-collapse-content {
+  background-color: #fafafa;
+}
+.rab-collapse-ghost {
+  border-bottom: none;
+}
+.rab-collapse-ghost > r-collapse-panel {
+  border-top: none;
+}
+.rab-collapse-ghost > r-collapse-panel > .rab-collapse-content > .rab-collapse-content-box {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.rab-collapse-ghost,
+.rab-collapse-ghost .rab-collapse-content {
+  background-color: #fff;
 }
 .rab-collapse-item-active > .rab-collapse-content {
   display: block;

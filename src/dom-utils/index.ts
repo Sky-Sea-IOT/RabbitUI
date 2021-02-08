@@ -14,7 +14,7 @@ import {
 import { prevAll, nextAll } from './prev&next';
 import removeAttrs from './remove-attrs';
 import siblings from './siblings';
-import slide from './slide';
+import slider from './slide';
 
 export {
     bind,
@@ -28,7 +28,7 @@ export {
     nextAll,
     removeAttrs,
     siblings,
-    slide,
+    slider,
     getStrTypeAttr,
     getNumTypeAttr,
     getBooleanTypeAttr

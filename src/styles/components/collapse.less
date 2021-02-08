@@ -27,7 +27,6 @@
         cursor: pointer;
         position: relative;
         border-bottom: @border-width-base @border-style-base transparent;
-        transition: all @transition-time @ease-in-out;
 
         > i {
             transition: transform @transition-time @ease-in-out;
@@ -51,14 +50,16 @@
 }
 
 .@{collapse-prefix-cls} {
-    &-simple {
+    &-simple,
+    &-ghost {
+        border-top: none;
         border-left: none;
         border-right: none;
-        background-color: @white;
         border-radius: 0;
     }
 
-    &-simple > @{collapse-panel-tag}&-item-active > &-header {
+    &-simple > @{collapse-panel-tag}&-item-active > &-header,
+    &-ghost > @{collapse-panel-tag}&-item-active > &-header {
         border-bottom: @border-width-base @border-style-base transparent;
     }
 
@@ -77,6 +78,28 @@
 
     &-simple > @{collapse-panel-tag} > &-content > &-content-box {
         padding-top: 0;
+    }
+
+    &-simple &-content {
+        background-color: @background-color-base;
+    }
+
+    &-ghost {
+        border-bottom: none;
+    }
+
+    &-ghost > @{collapse-panel-tag} {
+        border-top: none;
+    }
+
+    &-ghost > @{collapse-panel-tag} > &-content > &-content-box {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    &-ghost,
+    &-ghost &-content {
+        background-color: @white;
     }
 
     &-item-active > &-content {

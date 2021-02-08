@@ -61,5 +61,6 @@ export function getNumTypeAttr(node: Element, attrName: string, defaultVal?: num
 export function getArrTypeAttr(node: Element, attrName: string): Array<string | number> {
     const attr = node.getAttribute(attrName)?.replace(/'/g, '"') || '[]';
     const array: [string | number] = JSON.parse(attr);
+
     return array;
 }
