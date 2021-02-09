@@ -7,6 +7,20 @@ import {
     setHtml
 } from '../../dom-utils/elem';
 import { $el, bind, removeAttrs, siblings, slider } from '../../dom-utils';
+import { type, validComps } from '../../utils';
+
+interface CollapseEvents {
+    onChange?: (key: []) => void;
+}
+
+interface Config {
+    config(
+        el: string
+    ): {
+        activeKey: string | number | string[] | number[];
+        events({ onChange }: CollapseEvents): void;
+    };
+}
 
 interface CollapseAttrs {
     key: string;
@@ -15,10 +29,10 @@ interface CollapseAttrs {
     simple: boolean;
     accordion: boolean;
     hideArrow: boolean;
-    defaultActiveKey: string | string[] | number[];
+    defaultactivekey: string | number | string[] | number[];
 }
 
-class Collapse {
+class Collapse implements Config {
     readonly VERSION: string;
     private components: any;
 
@@ -28,17 +42,83 @@ class Collapse {
         this._create(this.components);
     }
 
+    public config(
+        el: string
+    ): {
+        activeKey: string | number | string[] | number[];
+        events({ onChange }: { onChange: (key: []) => void }): void;
+    } {
+        const target = $el(el);
+
+        validComps(target, 'collapse');
+
+        const { _dataSetActiveKey, _openByKey } = Collapse.prototype;
+
+        const activeKey = JSON.parse(target.dataset.activeKey);
+
+        return {
+            get activeKey() {
+                return activeKey;
+            },
+            set activeKey(newVal: string | number | string[] | number[]) {
+                if (newVal == activeKey) return;
+
+                _dataSetActiveKey(target, newVal);
+                _openByKey(target, newVal, target.getAttribute('accordion'));
+            },
+            events({ onChange }) {
+                const panels = target.querySelectorAll('r-collapse-panel');
+
+                // 储存已展开面板的 key
+                const key: string[] = [];
+
+                const pushKey = (el: Element, toggle: boolean) => {
+                    if (el.classList.contains(`${PREFIX.collapse}-item-active`)) {
+                        // @ts-ignore
+                        key.push(el.dataset.panelKey);
+                    } else if (toggle) {
+                        key.splice(0, 1);
+                    }
+                };
+
+                panels.forEach((panel: Element) => {
+                    const header = panel.querySelector(`.${PREFIX.collapse}-header`);
+
+                    pushKey(panel, false);
+
+                    bind(header, 'click', () => {
+                        setTimeout(() => {
+                            pushKey(panel, true);
+                            onChange && type.isFn(onChange, key);
+                        }, 150);
+                    });
+                });
+            }
+        };
+    }
+
     private _create(components: NodeListOf<Element>): void {
         components.forEach((node) => {
-            const { simple, ghost, defaultActiveKey, accordion } = this._attrs(node);
+            const { simple, ghost, defaultactivekey, accordion } = this._attrs(node);
 
+            this._dataSetActiveKey(node, defaultactivekey);
             this._setGhost(node, ghost);
             this._setSimple(node, simple);
             this._createChildNodes(node);
-            this._openByKey(node, defaultActiveKey, accordion);
+            this._openByKey(node, defaultactivekey, accordion);
 
-            removeAttrs(node, ['simple', 'ghost', 'accordion', 'defaultActiveKey']);
+            removeAttrs(node, ['simple', 'ghost', 'defaultactivekey']);
         });
+    }
+
+    private _dataSetActiveKey(
+        node: Element,
+        activeKey: string | number | string[] | number[]
+    ): void {
+        if (activeKey) {
+            // @ts-ignore
+            node.dataset['activeKey'] = Array.isArray(activeKey) ? `[${activeKey}]` : activeKey;
+        }
     }
 
     private _setGhost(node: Element, ghost: boolean): void {
@@ -130,27 +210,44 @@ class Collapse {
         }
     }
 
-    private _openByKey(node: Element, key: string | string[] | number[], accordion: boolean): void {
+    private _openByKey(
+        node: Element,
+        key: string | number | string[] | number[],
+        accordion: boolean
+    ): void {
         // 获取选中的 key 的面板
         let selected: Element | null;
 
-        // 如果 defaultActiveKey 是数组则对其进行遍历，获取所有面板
-        // 且如果还是手风琴模式则只选取数组的第一项，只展开一个面板
+        const open = () => {
+            if (selected) {
+                selected.classList.add(`${PREFIX.collapse}-item-active`);
+
+                if (accordion) {
+                    siblings(selected).forEach((o) => {
+                        o.classList.remove(`${PREFIX.collapse}-item-active`);
+                    });
+                }
+            }
+        };
+
+        // 如果 activeKey 是数组则对其进行遍历获取所有面板
+        // 且如果是手风琴模式则只选取数组的第一项，只展开一个面板
         if (Array.isArray(key)) {
-            if (accordion) {
+            const { length } = key;
+            // length == 1 说明数组只有一项所以不必对其进行遍历
+            if (accordion || length == 1) {
                 selected = node.querySelector(`[data-panel-key="${key[0]}"]`);
-                selected?.classList.add(`${PREFIX.collapse}-item-active`);
+                open();
             } else {
-                const { length } = key;
                 let i = 0;
                 for (; i < length; i++) {
                     selected = node.querySelector(`[data-panel-key="${key[i]}"]`);
-                    selected?.classList.add(`${PREFIX.collapse}-item-active`);
+                    open();
                 }
             }
         } else {
             selected = node.querySelector(`[data-panel-key="${key}"]`);
-            selected?.classList.add(`${PREFIX.collapse}-item-active`);
+            open();
         }
     }
 
@@ -162,9 +259,9 @@ class Collapse {
             simple: getBooleanTypeAttr(node, 'simple'),
             hideArrow: getBooleanTypeAttr(node, 'hide-arrow'),
             accordion: getBooleanTypeAttr(node, 'accordion'),
-            defaultActiveKey:
-                getStrTypeAttr(node, 'defaultActiveKey', '') &&
-                getArrTypeAttr(node, 'defaultActiveKey')
+            defaultactivekey:
+                getStrTypeAttr(node, 'defaultactivekey', '') &&
+                getArrTypeAttr(node, 'defaultactivekey')
         };
     }
 }
