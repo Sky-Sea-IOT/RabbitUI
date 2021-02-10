@@ -3,6 +3,7 @@ import Avatar from './components/avatar';
 import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
+import Collapse from './components/collapse';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
 import Dropdown from './components/dropdown';
@@ -21,6 +22,7 @@ declare const _default: {
     Badge: typeof Badge;
     Button: typeof Button;
     Card: typeof Card;
+    Collapse: typeof Collapse;
     Divider: typeof Divider;
     Drawer: typeof Drawer;
     Dropdown: typeof Dropdown;

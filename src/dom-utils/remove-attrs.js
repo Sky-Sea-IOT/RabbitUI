@@ -9,7 +9,9 @@ export default function removeAttrs(elem, attrs) {
     var length = attrs.length;
     for (; i < length; i++) {
         var attr = attrs[i];
-        elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
+        elem.getAttribute(attr) || elem.getAttribute(attr) === ''
+            ? elem.removeAttribute(attr)
+            : null;
     }
 }
 //# sourceMappingURL=remove-attrs.js.map

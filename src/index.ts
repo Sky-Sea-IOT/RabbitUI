@@ -24,9 +24,9 @@ import Tooltip from './components/tooltip';
 //! 打包的时候这里要解除封印
 // import './styles/index.less';
 
-// @ts-ignore
 // 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
-export default window.Rabbit = {
+// @ts-ignore
+export default Rabbit = {
     Alert,
     Avatar,
     Badge,

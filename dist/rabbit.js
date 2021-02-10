@@ -21460,6 +21460,7 @@ var prefixCls = 'rab';
     badge: prefixCls + "-badge",
     button: prefixCls + "-btn",
     card: prefixCls + "-card",
+    collapse: prefixCls + "-collapse",
     divider: prefixCls + "-divider",
     drawer: prefixCls + "-drawer",
     dropdown: prefixCls + "-dropdown",
@@ -21568,71 +21569,25 @@ var Time = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/dom-utils/index.ts":
-/*!********************************************!*\
-  !*** ./src/dom-utils/index.ts + 6 modules ***!
-  \********************************************/
+/***/ "./src/dom-utils/elem.ts":
+/*!*******************************!*\
+  !*** ./src/dom-utils/elem.ts ***!
+  \*******************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "$el": function() { return /* reexport */ $el; },
-  "bind": function() { return /* reexport */ bind; },
-  "createElem": function() { return /* reexport */ createElem; },
-  "getBooleanTypeAttr": function() { return /* reexport */ getBooleanTypeAttr; },
-  "getNumTypeAttr": function() { return /* reexport */ getNumTypeAttr; },
-  "getStrTypeAttr": function() { return /* reexport */ getStrTypeAttr; },
-  "nextAll": function() { return /* reexport */ nextAll; },
-  "prevAll": function() { return /* reexport */ prevAll; },
-  "removeAttrs": function() { return /* reexport */ removeAttrs; },
-  "setCss": function() { return /* reexport */ setCss; },
-  "setHtml": function() { return /* reexport */ setHtml; },
-  "setText": function() { return /* reexport */ setText; },
-  "siblings": function() { return /* reexport */ siblings; },
-  "slide": function() { return /* reexport */ slide; },
-  "unbind": function() { return /* reexport */ unbind; }
-});
-
-;// CONCATENATED MODULE: ./src/dom-utils/bind.ts
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/**
- * 解决事件监听兼容性问题
- * @param {Object} obj对象
- * @param {String} type事件类型,不带'on'前缀
- * @param {Function} callback事件处理程序
- */
-function bind(obj, type, callback) {
-    if (obj.addEventListener) {
-        // W3C内核
-        obj.addEventListener(type, callback);
-    }
-    else {
-        // IE内核
-        obj.attachEvent("on" + type, callback);
-    }
-}
-/**
- * 解决移除事件监听兼容性问题
- * @param {Object} obj对象
- * @param {String} type事件类型,不带'on'前缀
- * @param {Function} callback事件处理程序
- */
-function unbind(obj, type, callback) {
-    if (obj.removeEventListener) {
-        // W3C内核
-        obj.removeEventListener(type, callback);
-    }
-    else {
-        // IE内核
-        obj.detachEvent("on" + type, callback);
-    }
-}
-
-;// CONCATENATED MODULE: ./src/dom-utils/elem.ts
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$el": function() { return /* binding */ $el; },
+/* harmony export */   "createElem": function() { return /* binding */ createElem; },
+/* harmony export */   "setCss": function() { return /* binding */ setCss; },
+/* harmony export */   "setHtml": function() { return /* binding */ setHtml; },
+/* harmony export */   "setText": function() { return /* binding */ setText; },
+/* harmony export */   "getStrTypeAttr": function() { return /* binding */ getStrTypeAttr; },
+/* harmony export */   "getBooleanTypeAttr": function() { return /* binding */ getBooleanTypeAttr; },
+/* harmony export */   "getNumTypeAttr": function() { return /* binding */ getNumTypeAttr; },
+/* harmony export */   "getArrTypeAttr": function() { return /* binding */ getArrTypeAttr; }
+/* harmony export */ });
 /**
  * 获取元素
  * @param node
@@ -21691,6 +21646,75 @@ function getArrTypeAttr(node, attrName) {
     return array;
 }
 
+
+/***/ }),
+
+/***/ "./src/dom-utils/index.ts":
+/*!********************************************!*\
+  !*** ./src/dom-utils/index.ts + 5 modules ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "$el": function() { return /* reexport */ elem.$el; },
+  "bind": function() { return /* reexport */ bind; },
+  "createElem": function() { return /* reexport */ elem.createElem; },
+  "getBooleanTypeAttr": function() { return /* reexport */ elem.getBooleanTypeAttr; },
+  "getNumTypeAttr": function() { return /* reexport */ elem.getNumTypeAttr; },
+  "getStrTypeAttr": function() { return /* reexport */ elem.getStrTypeAttr; },
+  "nextAll": function() { return /* reexport */ nextAll; },
+  "prevAll": function() { return /* reexport */ prevAll; },
+  "removeAttrs": function() { return /* reexport */ removeAttrs; },
+  "setCss": function() { return /* reexport */ elem.setCss; },
+  "setHtml": function() { return /* reexport */ elem.setHtml; },
+  "setText": function() { return /* reexport */ elem.setText; },
+  "siblings": function() { return /* reexport */ siblings; },
+  "slider": function() { return /* reexport */ slide; },
+  "unbind": function() { return /* reexport */ unbind; }
+});
+
+;// CONCATENATED MODULE: ./src/dom-utils/bind.ts
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/**
+ * 解决事件监听兼容性问题
+ * @param {Object} obj对象
+ * @param {String} type事件类型,不带'on'前缀
+ * @param {Function} callback事件处理程序
+ */
+function bind(obj, type, callback) {
+    if (obj.addEventListener) {
+        // W3C内核
+        obj.addEventListener(type, callback);
+    }
+    else {
+        // IE内核
+        obj.attachEvent("on" + type, callback);
+    }
+}
+/**
+ * 解决移除事件监听兼容性问题
+ * @param {Object} obj对象
+ * @param {String} type事件类型,不带'on'前缀
+ * @param {Function} callback事件处理程序
+ */
+function unbind(obj, type, callback) {
+    if (obj.removeEventListener) {
+        // W3C内核
+        obj.removeEventListener(type, callback);
+    }
+    else {
+        // IE内核
+        obj.detachEvent("on" + type, callback);
+    }
+}
+
+// EXTERNAL MODULE: ./src/dom-utils/elem.ts
+var elem = __webpack_require__("./src/dom-utils/elem.ts");
 ;// CONCATENATED MODULE: ./src/dom-utils/prev&next.ts
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 function prevAll(el) {
@@ -21737,15 +21761,17 @@ function removeAttrs(elem, attrs) {
     var length = attrs.length;
     for (; i < length; i++) {
         var attr = attrs[i];
-        elem.getAttribute(attr) ? elem.removeAttribute(attr) : null;
+        elem.getAttribute(attr) || elem.getAttribute(attr) === ''
+            ? elem.removeAttribute(attr)
+            : null;
     }
 }
 
 ;// CONCATENATED MODULE: ./src/dom-utils/siblings.ts
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function siblings(elem) {
+    var _a;
     var r = [];
-    var n = elem.parentNode.firstChild;
+    var n = (_a = elem.parentNode) === null || _a === void 0 ? void 0 : _a.firstChild;
     for (; n; n = n.nextSibling) {
         if (n.nodeType === 1 && n !== elem) {
             r.push(n);
@@ -21755,114 +21781,147 @@ function siblings(elem) {
 }
 
 ;// CONCATENATED MODULE: ./src/dom-utils/slide.ts
-function slide() {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-rest-params */
+// @ts-nocheck
+/* harmony default export */ var slide = (window.Slider = (function () {
+    // 定义Slider对象
     var Slider = {
-        up: null,
-        down: null
-    };
-    // the constructed function,timeManager,as such that's a manager about managing the setInterval
-    var TimerManager = /** @class */ (function () {
-        function TimerManager() {
-            this.timers = [];
-            this.args = [];
-            this.isTimerRun = false;
-        }
-        return TimerManager;
-    }());
-    // if the element can't has the property of TimerManage what represented the constructor function,repeated creating a constructed function
-    TimerManager.makeTimerManage = function (element) {
-        if (!element.TimerManage || element.TimerManage.constructor !== TimerManager) {
-            element.TimerManage = new TimerManager();
+        slideDown: function (el, time) {
+            void 0;
+        },
+        slideUp: function (el, time) {
+            void 0;
         }
     };
-    // That's order to create the method what add the timer
+    // I.定义一个TimerManager类
+    // 1）构造函数
+    function TimerManager() {
+        this.timers = []; // 保存定时器
+        this.args = []; // 保存定时器的参数
+        this.isFiring = false;
+    }
+    // 2）静态方法：为element添加一个TimerManager实例
+    TimerManager.makeInstance = function (element) {
+        // 如果element.__TimerManager__上没有TimerManager，就为其添加一个
+        if (!element.__TimerManager__ || element.__TimerManager__.constructor != TimerManager) {
+            element.__TimerManager__ = new TimerManager();
+        }
+    };
+    // 3）扩展TimerManager原型，分别实现add，fire，next方法
     TimerManager.prototype.add = function (timer, args) {
         this.timers.push(timer);
         this.args.push(args);
-        this.timerRun();
+        this.fire();
     };
-    // called the method is order to run the timer by ordering
-    TimerManager.prototype.timerRun = function () {
-        if (!this.isTimerRun) {
-            var timer = this.timers.shift(), args = this.args.shift();
+    TimerManager.prototype.fire = function () {
+        if (!this.isFiring) {
+            var timer = this.timers.shift(), // 取出定时器
+            args = this.args.shift(); // 取出定时器参数
             if (timer && args) {
-                this.isTimerRun = true;
+                this.isFiring = true;
+                // 传入参数，执行定时器函数
                 timer(args[0], args[1]);
             }
         }
     };
-    // const it run the next timer
     TimerManager.prototype.next = function () {
-        this.isTimerRun = false;
-        this.timerRun();
+        this.isFiring = false;
+        this.fire();
     };
-    function slideUp(element, time) {
-        if (element.offsetHeight > 0) {
-            var totalHeight_1 = element.offsetHeight;
-            var currentHeight_1 = totalHeight_1;
-            var reduceValue_1 = totalHeight_1 / (time / 10);
-            element.style.transition = 'height ' + time + ' ms';
-            element.style.overflow = 'hidden';
+    // II. 修改动画函数并在定时器结束后调用element.__TimerManager__.next()
+    // 1）下滑函数
+    function fnSlideDown(element, time) {
+        if (element.offsetHeight == 0) {
+            //如果当前高度为0，则执行下拉动画
+            // 获取元素总高度
+            element.style.display = 'block'; // 1.显示元素，元素变为可见
+            var totalHeight_1 = element.offsetHeight; // 2.保存总高度
+            element.style.height = '0px'; // 3.再将元素高度设置为0，元素又变为不可见
+            // 定义一个变量保存元素当前高度
+            var currentHeight_1 = 0; // 当前元素高度为0
+            // 计算每次增加的值
+            var increment_1 = totalHeight_1 / (time / 10);
+            // 开始循环定时器
             var timer_1 = setInterval(function () {
-                currentHeight_1 -= reduceValue_1;
-                element.style.height = currentHeight_1 + 'px';
-                if (currentHeight_1 <= 0) {
+                // 增加一部分高度
+                currentHeight_1 += increment_1;
+                // 把当前高度赋值给height属性
+                element.style.height = currentHeight_1 + "px";
+                // 如果当前高度大于或等于总高度则关闭定时器
+                if (currentHeight_1 >= totalHeight_1) {
+                    // 关闭定时器
                     clearInterval(timer_1);
-                    element.style.display = 'none';
-                    element.style.height = totalHeight_1 + 'px';
-                    if (element.TimerManage && element.TimerManage.constructor === TimerManager) {
-                        element.TimerManage.next();
+                    // 把高度设置为总高度
+                    element.style.height = totalHeight_1 + "px";
+                    if (element.__TimerManager__ &&
+                        element.__TimerManager__.constructor == TimerManager) {
+                        element.__TimerManager__.next();
                     }
                 }
             }, 10);
         }
         else {
-            if (element.TimerManage && element.TimerManage.constructor === TimerManager) {
-                element.TimerManage.next();
+            // 如果当前高度不为0，则直接执行队列里的下一个函数
+            if (element.__TimerManager__ && element.__TimerManager__.constructor == TimerManager) {
+                element.__TimerManager__.next();
             }
         }
     }
-    function slideDown(element, time) {
-        if (element.offsetHeight <= 0) {
-            element.style.display = 'block';
-            element.style.transition = 'height' + time + ' ms';
-            element.style.overflow = 'hidden';
+    // 2）上拉函数
+    function fnSlideUp(element, time) {
+        if (element.offsetHeight > 0) {
+            // 如果当前高度不为0，则执行上滑动画
+            // 获取元素总高度
             var totalHeight_2 = element.offsetHeight;
-            var currentHeight_2 = 0;
-            element.style.height = '0px';
-            var addValue_1 = totalHeight_2 / (time / 10);
+            // 定义一个变量保存元素当前高度
+            var currentHeight_2 = totalHeight_2;
+            // 计算每次减去的值
+            var decrement_1 = totalHeight_2 / (time / 10);
+            // 开始循环定时器
             var timer_2 = setInterval(function () {
-                currentHeight_2 += addValue_1;
-                element.style.height = currentHeight_2 + 'px';
-                if (currentHeight_2 >= totalHeight_2) {
+                // 减去当前高度的一部分
+                currentHeight_2 -= decrement_1;
+                // 把当前高度赋值给height属性
+                element.style.height = currentHeight_2 + "px";
+                // 如果当前高度小于等于0，就关闭定时器
+                if (currentHeight_2 <= 0) {
+                    // 关闭定时器
                     clearInterval(timer_2);
-                    element.style.height = totalHeight_2 + 'px';
-                    if (element.TimerManage && element.TimerManage.constructor === TimerManager) {
-                        element.TimerManage.next();
+                    // 把元素display设置为none
+                    element.style.display = 'none';
+                    // 把元素高度值还原
+                    element.style.height = totalHeight_2 + "px";
+                    if (element.__TimerManager__ &&
+                        element.__TimerManager__.constructor == TimerManager) {
+                        element.__TimerManager__.next();
                     }
                 }
             }, 10);
         }
         else {
-            if (element.TimerManage && element.TimerManage.constructor === TimerManager) {
-                element.TimerManage.next();
+            // 如果当前高度为0， 则直接执行队列里的下一个函数
+            if (element.__TimerManager__ && element.__TimerManager__.constructor == TimerManager) {
+                element.__TimerManager__.next();
             }
         }
     }
-    // the interface about slideUp method
-    Slider.up = function (element) {
-        TimerManager.makeTimerManage(element);
-        element.TimerManage.add(slideUp, arguments);
+    // III.定义外部访问接口
+    // 1）下拉接口
+    Slider.slideDown = function (element, time) {
+        TimerManager.makeInstance(element);
+        element.__TimerManager__.add(fnSlideDown, arguments);
         return this;
     };
-    // the interface about slideDown method
-    Slider.down = function (element) {
-        TimerManager.makeTimerManage(element);
-        element.TimerManage.add(slideDown, arguments);
+    // 2）上滑接口
+    Slider.slideUp = function (element, time) {
+        TimerManager.makeInstance(element);
+        element.__TimerManager__.add(fnSlideUp, arguments);
         return this;
     };
+    // 返回Slider对象
     return Slider;
-}
+})());
 
 ;// CONCATENATED MODULE: ./src/dom-utils/index.ts
 
@@ -21878,7 +21937,7 @@ function slide() {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 110 modules ***!
+  !*** ./src/index.ts + 112 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -21897,7 +21956,7 @@ function warn(msg) {
     return;
 }
 
-// EXTERNAL MODULE: ./src/dom-utils/index.ts + 6 modules
+// EXTERNAL MODULE: ./src/dom-utils/index.ts + 5 modules
 var dom_utils = __webpack_require__("./src/dom-utils/index.ts");
 ;// CONCATENATED MODULE: ./src/mixins/arrow.ts
 // 更新popver弹窗或下拉菜单的箭头方向
@@ -24996,6 +25055,211 @@ var Card = /** @class */ (function () {
 
 /* harmony default export */ var components_card = (card);
 
+// EXTERNAL MODULE: ./src/dom-utils/elem.ts
+var elem = __webpack_require__("./src/dom-utils/elem.ts");
+;// CONCATENATED MODULE: ./src/components/collapse/collapse.ts
+
+
+
+
+var Collapse = /** @class */ (function () {
+    function Collapse() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-collapse', { all: true });
+        this._create(this.components);
+    }
+    Collapse.prototype.config = function (el) {
+        var target = (0,dom_utils.$el)(el);
+        validComps(target, 'collapse');
+        var _a = Collapse.prototype, _attrs = _a._attrs, _dataSetActiveKey = _a._dataSetActiveKey, _openByKey = _a._openByKey;
+        var activeKey = JSON.parse(target.dataset.activeKey);
+        return {
+            get activeKey() {
+                return activeKey;
+            },
+            set activeKey(newVal) {
+                if (newVal == activeKey)
+                    return;
+                _dataSetActiveKey(target, newVal);
+                _openByKey(target, newVal, target.getAttribute('accordion'));
+            },
+            events: function (_a) {
+                var onChange = _a.onChange;
+                var panels = target.querySelectorAll('r-collapse-panel');
+                // 储存已展开面板的 key
+                var key = [];
+                var pushKey = function (el, toggle) {
+                    var accordion = _attrs(target).accordion;
+                    // @ts-ignore
+                    var panelKey = el.dataset.panelKey;
+                    if (el.classList.contains(prefix.default.collapse + "-item-active")) {
+                        key.push(panelKey);
+                    }
+                    else if (toggle) {
+                        var idx = key.indexOf(panelKey);
+                        idx > -1 ? key.splice(idx, 1) : '';
+                    }
+                    // 手风琴模式下每展开一个面板就删除其他的 key
+                    if (accordion) {
+                        (0,dom_utils.siblings)(el).forEach(function (o) {
+                            var otherIdx = key.indexOf(o.dataset.panelKey);
+                            otherIdx > -1 ? key.splice(otherIdx, 1) : '';
+                        });
+                    }
+                };
+                panels.forEach(function (panel) {
+                    var header = panel.querySelector("." + prefix.default.collapse + "-header");
+                    // 存放初始化面板时默认已展开的 key
+                    pushKey(panel, false);
+                    (0,dom_utils.bind)(header, 'click', function () {
+                        // 这里用定时器是为了跟移除显示面板样式类名的时机同步
+                        setTimeout(function () {
+                            pushKey(panel, true);
+                            onChange && isFn(onChange, key);
+                        }, 150);
+                    });
+                });
+            }
+        };
+    };
+    Collapse.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var _a = _this._attrs(node), simple = _a.simple, ghost = _a.ghost, defaultactivekey = _a.defaultactivekey, accordion = _a.accordion;
+            _this._dataSetActiveKey(node, defaultactivekey);
+            _this._setGhost(node, ghost);
+            _this._setSimple(node, simple);
+            _this._createChildNodes(node);
+            _this._openByKey(node, defaultactivekey, accordion);
+            (0,dom_utils.removeAttrs)(node, ['simple', 'ghost', 'defaultactivekey']);
+        });
+    };
+    Collapse.prototype._dataSetActiveKey = function (node, activeKey) {
+        if (activeKey) {
+            // @ts-ignore
+            node.dataset['activeKey'] = Array.isArray(activeKey) ? "[" + activeKey + "]" : activeKey;
+        }
+    };
+    Collapse.prototype._setGhost = function (node, ghost) {
+        ghost ? node.classList.add(prefix.default.collapse + "-ghost") : '';
+    };
+    Collapse.prototype._setSimple = function (node, simple) {
+        simple ? node.classList.add(prefix.default.collapse + "-simple") : '';
+    };
+    Collapse.prototype._createChildNodes = function (node) {
+        var collapsePanels = node.querySelectorAll('r-collapse-panel');
+        this._setPanel(node, collapsePanels);
+    };
+    Collapse.prototype._setPanel = function (parent, panels) {
+        var _this = this;
+        // 遍历所有面板节点
+        panels.forEach(function (panel, index) {
+            var _a = _this._attrs(panel), key = _a.key, title = _a.title, hideArrow = _a.hideArrow;
+            // @ts-ignore
+            // 面板的 key 如果没填则默认为索引值
+            panel.dataset.panelKey = !key ? index : key;
+            // 保存面板原先的第一个节点，也就是要填充的内容
+            var content = panel.firstElementChild;
+            var arrowIcon = "<i class=\"" + prefix.default.icon + " " + prefix.default.icon + "-ios-arrow-forward\"></i>";
+            var template = "\n                 <div class=\"" + prefix.default.collapse + "-header\">\n                    " + (!hideArrow ? arrowIcon : '') + " " + title + "\n                 </div>\n                 <div class=\"" + prefix.default.collapse + "-content\">\n                    <div class=\"" + prefix.default.collapse + "-content-box\"></div>\n                 </div>";
+            // 清空面板原先的所有内容
+            (0,elem.setHtml)(panel, '');
+            // 追加html模板
+            (0,elem.setHtml)(panel, template);
+            // 将原先的占位内容填充至面板内容盒子
+            var panelContentBox = panel.querySelector("." + prefix.default.collapse + "-content-box");
+            content ? panelContentBox === null || panelContentBox === void 0 ? void 0 : panelContentBox.appendChild(content) : null;
+            (0,elem.setCss)(panel, 'display', 'block');
+            _this._handleToggle(parent, panel);
+            (0,dom_utils.removeAttrs)(panel, ['key', 'title', 'hide-arrow']);
+        });
+    };
+    Collapse.prototype._handleToggle = function (parent, panel) {
+        var _this = this;
+        var accordion = this._attrs(parent).accordion;
+        var collapseHeader = panel.querySelector("." + prefix.default.collapse + "-header");
+        var collapseContent = panel.querySelector("." + prefix.default.collapse + "-content");
+        (0,dom_utils.bind)(collapseHeader, 'click', function () { return _this._slide(panel, collapseContent, accordion); });
+    };
+    Collapse.prototype._slide = function (p, c, accordion) {
+        var activeCls = prefix.default.collapse + "-item-active";
+        var slideUp = function (arg1, arg2) {
+            dom_utils.slider.slideUp(arg2, 150);
+            setTimeout(function () {
+                arg1.classList.remove(activeCls);
+            }, 150);
+        };
+        if (p.classList.contains(activeCls)) {
+            slideUp(p, c);
+        }
+        else {
+            dom_utils.slider.slideDown(c, 150);
+            p.classList.add(activeCls);
+        }
+        // 手风琴模式
+        if (accordion) {
+            // 获取除了已展开的面板外的所有其他面板
+            (0,dom_utils.siblings)(p).forEach(function (otherP) {
+                var otherC = otherP.querySelector("." + prefix.default.collapse + "-content");
+                slideUp(otherP, otherC);
+            });
+        }
+    };
+    Collapse.prototype._openByKey = function (node, key, accordion) {
+        // 获取选中的 key 的面板
+        var selected;
+        var open = function () {
+            if (selected) {
+                selected.classList.add(prefix.default.collapse + "-item-active");
+                if (accordion) {
+                    (0,dom_utils.siblings)(selected).forEach(function (o) {
+                        o.classList.remove(prefix.default.collapse + "-item-active");
+                    });
+                }
+            }
+        };
+        // 如果 activeKey 是数组则对其进行遍历获取所有面板
+        // 且如果是手风琴模式则只选取数组的第一项，只展开一个面板
+        if (Array.isArray(key)) {
+            var length_1 = key.length;
+            // length == 1 说明数组只有一项所以不必对其进行遍历
+            if (accordion || length_1 == 1) {
+                selected = node.querySelector("[data-panel-key=\"" + key[0] + "\"]");
+                open();
+            }
+            else {
+                var i = 0;
+                for (; i < length_1; i++) {
+                    selected = node.querySelector("[data-panel-key=\"" + key[i] + "\"]");
+                    open();
+                }
+            }
+        }
+        else {
+            selected = node.querySelector("[data-panel-key=\"" + key + "\"]");
+            open();
+        }
+    };
+    Collapse.prototype._attrs = function (node) {
+        return {
+            key: (0,elem.getStrTypeAttr)(node, 'key', ''),
+            title: (0,elem.getStrTypeAttr)(node, 'title', ''),
+            ghost: (0,elem.getBooleanTypeAttr)(node, 'ghost'),
+            simple: (0,elem.getBooleanTypeAttr)(node, 'simple'),
+            hideArrow: (0,elem.getBooleanTypeAttr)(node, 'hide-arrow'),
+            accordion: (0,elem.getBooleanTypeAttr)(node, 'accordion'),
+            defaultactivekey: (0,elem.getStrTypeAttr)(node, 'defaultactivekey', '') &&
+                (0,elem.getArrTypeAttr)(node, 'defaultactivekey')
+        };
+    };
+    return Collapse;
+}());
+/* harmony default export */ var collapse = (Collapse);
+
+;// CONCATENATED MODULE: ./src/components/collapse/index.ts
+
+/* harmony default export */ var components_collapse = (collapse);
+
 ;// CONCATENATED MODULE: ./src/components/divider/divider.ts
 
 
@@ -27750,14 +28014,16 @@ var Tooltip = /** @class */ (function () {
 
 
 
-// @ts-ignore
+
 // 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
-/* harmony default export */ var src = (window.Rabbit = {
+// @ts-ignore
+/* harmony default export */ var src = (Rabbit = {
     Alert: components_alert,
     Avatar: components_avatar,
     Badge: components_badge,
     Button: components_button,
     Card: components_card,
+    Collapse: components_collapse,
     Divider: components_divider,
     Drawer: components_drawer,
     Dropdown: components_dropdown,

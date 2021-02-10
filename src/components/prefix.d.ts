@@ -4,6 +4,7 @@ declare const _default: {
     badge: string;
     button: string;
     card: string;
+    collapse: string;
     divider: string;
     drawer: string;
     dropdown: string;

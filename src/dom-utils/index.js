@@ -3,6 +3,6 @@ import { $el, createElem, setCss, setHtml, setText, getStrTypeAttr, getNumTypeAt
 import { prevAll, nextAll } from './prev&next';
 import removeAttrs from './remove-attrs';
 import siblings from './siblings';
-import slide from './slide';
-export { bind, unbind, $el, createElem, setCss, setHtml, setText, prevAll, nextAll, removeAttrs, siblings, slide, getStrTypeAttr, getNumTypeAttr, getBooleanTypeAttr };
+import slider from './slide';
+export { bind, unbind, $el, createElem, setCss, setHtml, setText, prevAll, nextAll, removeAttrs, siblings, slider, getStrTypeAttr, getNumTypeAttr, getBooleanTypeAttr };
 //# sourceMappingURL=index.js.map

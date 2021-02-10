@@ -167,8 +167,8 @@
         "affectsGlobalScope": false
       },
       "./src/dom-utils/elem.ts": {
-        "version": "1435939302ef8c732b763ff60da100bd7dc87c52b1af475f0d09b340bd313476",
-        "signature": "f57f6ce70e67dcb7ae9337481838962b9658e6869cbd389113f431e5b9d6c5a4",
+        "version": "2a98f28fbf93373d3cbce3c6a9077cb29d6ba73dd07d652169c24fcb2f3c7a09",
+        "signature": "c4ab02ddeb42665003d4d9c3c3f8654647a0ff26541514688efc5624adbe1fba",
         "affectsGlobalScope": false
       },
       "./src/dom-utils/prev&next.ts": {
@@ -177,23 +177,23 @@
         "affectsGlobalScope": false
       },
       "./src/dom-utils/remove-attrs.ts": {
-        "version": "cd79222d4b771b456a372a5a71ff3ba88bc723cd1ce6c0b3f81282d888f4c68a",
+        "version": "9ffb7e9d19d5b7d7ba917aae7467058ecd3f89375c6b408a9a58cb564f919f54",
         "signature": "bc6a30c96179b318b0b34503ef1c1b3bd507ca2ae2836c1cdc23bc682299210b",
         "affectsGlobalScope": false
       },
       "./src/dom-utils/siblings.ts": {
-        "version": "00befc6e03987939fc0ee03e11bd478c1b141262585f997c92d5246361c48499",
-        "signature": "93aed22152965f2242ba39824f4fb99bdeb0b07da8dc05a5d36aa8024f1fde1a",
+        "version": "a10b5227c5ab33ae1c91bef596850edd8c5c467a39e629a204cc2fe565b7a256",
+        "signature": "8b2e85d48d8782a51be91d1f41dd253b10a9d782545d0c6ef8da9cb260384ace",
         "affectsGlobalScope": false
       },
       "./src/dom-utils/slide.ts": {
-        "version": "0e076ffaa0ee25ee627500cd1545bd7cd0daac96d687531006fe2c12cd71844c",
-        "signature": "5aedb68c0505ce0554b134ac037d2beb5d57e5ebd5b6138c96b3174143c70c6c",
+        "version": "ca948b52e4b22a734ac77cdc57105c65187d82529eb7324a387ada97be31470c",
+        "signature": "cc40818009baadba6b675c9108cec8f30f338077131d4fe5c02f59669cdbe446",
         "affectsGlobalScope": false
       },
       "./src/dom-utils/index.ts": {
-        "version": "17e2562873d774635f03f7959e4d94bd3547a6ed96c963dacff972078509919b",
-        "signature": "8dbe62a13370b3cd7829cdb2d622ea93578974239527b4c0bb04b39de0fe81c2",
+        "version": "3ce52236a0baaddb264f9d900a1a33c9f31aabbe8d8917b8ab5551425649f3b7",
+        "signature": "66971770c47cf6530a37f677c84c8345605289a296f1960d9ac6c148db63c2e5",
         "affectsGlobalScope": false
       },
       "./src/mixins/arrow.ts": {
@@ -347,8 +347,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/prefix.ts": {
-        "version": "e4a439cdaddca1eba5e2db282c82e6004ed02d2930b80a337b3b60731b4da933",
-        "signature": "e234142f9560efbe82d9e03fc8c89f773a0986a79767b60cbcaf01a9ad59ff38",
+        "version": "045a46d942e009154dc54c45856c74931215a8b772d599f626d73415b277bc49",
+        "signature": "d9338eefc43ab7777a0e78f546459670a788fe8a46b13a7326065ee95fede234",
         "affectsGlobalScope": false
       },
       "./src/components/alert/alert.ts": {
@@ -399,6 +399,16 @@
       "./src/components/card/index.ts": {
         "version": "e8403ddc20ffc170cd459f29eda08b7a9fb2bbe219914546bb6c3b1b57088deb",
         "signature": "e8403ddc20ffc170cd459f29eda08b7a9fb2bbe219914546bb6c3b1b57088deb",
+        "affectsGlobalScope": false
+      },
+      "./src/components/collapse/collapse.ts": {
+        "version": "8ad3ad3142a77a0daa9e6343a43f0f129746596a0bb82ba3ba8309ffddc0146b",
+        "signature": "aadf593014afdb79a5cc96124db428c7811c4520eb16f9ead577786084390465",
+        "affectsGlobalScope": false
+      },
+      "./src/components/collapse/index.ts": {
+        "version": "197ee52e84c5ef4bede9d776892c3bb95d89312f57d604d3f19b15eb56bb6896",
+        "signature": "197ee52e84c5ef4bede9d776892c3bb95d89312f57d604d3f19b15eb56bb6896",
         "affectsGlobalScope": false
       },
       "./src/components/divider/divider.ts": {
@@ -557,8 +567,8 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "d3d245129e6d5d1811016ce0646a1661f4a7ac010885858649ba95969b23da79",
-        "signature": "e10acd85d194b53c560f105561f8bb6468b641d118c98bf4d8e7cd82e99b844b",
+        "version": "939a8ba2042aa3c0b0057ded0672ad102adf620cf89c3a755b382e15faa6cf79",
+        "signature": "173f9cbdfb22212255e0827ea9f6409b8cc6bd3734f14e5cf9b0715f39a9a5a7",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/anymatch/index.d.ts": {
@@ -1371,6 +1381,15 @@
       "./src/components/card/index.ts": [
         "./src/components/card/card.ts"
       ],
+      "./src/components/collapse/collapse.ts": [
+        "./src/components/prefix.ts",
+        "./src/dom-utils/elem.ts",
+        "./src/dom-utils/index.ts",
+        "./src/utils/index.ts"
+      ],
+      "./src/components/collapse/index.ts": [
+        "./src/components/collapse/collapse.ts"
+      ],
       "./src/components/divider/divider.ts": [
         "./src/components/prefix.ts",
         "./src/dom-utils/index.ts"
@@ -1515,6 +1534,7 @@
         "./src/components/badge/index.ts",
         "./src/components/button/index.ts",
         "./src/components/card/index.ts",
+        "./src/components/collapse/index.ts",
         "./src/components/divider/index.ts",
         "./src/components/drawer/index.ts",
         "./src/components/dropdown/index.ts",
@@ -1944,6 +1964,9 @@
       "./src/components/card/index.ts": [
         "./src/components/card/card.ts"
       ],
+      "./src/components/collapse/index.ts": [
+        "./src/components/collapse/collapse.ts"
+      ],
       "./src/components/divider/index.ts": [
         "./src/components/divider/divider.ts"
       ],
@@ -2003,6 +2026,7 @@
         "./src/components/badge/index.ts",
         "./src/components/button/index.ts",
         "./src/components/card/index.ts",
+        "./src/components/collapse/index.ts",
         "./src/components/divider/index.ts",
         "./src/components/drawer/index.ts",
         "./src/components/dropdown/index.ts",
@@ -2889,6 +2913,55 @@
       "./src/components/button/index.ts",
       "./src/components/card/card.ts",
       "./src/components/card/index.ts",
+      [
+        "./src/components/collapse/collapse.ts",
+        [
+          {
+            "file": "./src/components/collapse/collapse.ts",
+            "start": 9208,
+            "length": 16,
+            "code": 2322,
+            "category": 1,
+            "messageText": {
+              "messageText": "Type '(string | number)[]' is not assignable to type 'string | number | string[] | number[]'.",
+              "category": 1,
+              "code": 2322,
+              "next": [
+                {
+                  "messageText": "Type '(string | number)[]' is not assignable to type 'string[]'.",
+                  "category": 1,
+                  "code": 2322,
+                  "next": [
+                    {
+                      "messageText": "Type 'string | number' is not assignable to type 'string'.",
+                      "category": 1,
+                      "code": 2322,
+                      "next": [
+                        {
+                          "messageText": "Type 'number' is not assignable to type 'string'.",
+                          "category": 1,
+                          "code": 2322
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "relatedInformation": [
+              {
+                "file": "./src/components/collapse/collapse.ts",
+                "start": 714,
+                "length": 16,
+                "messageText": "The expected type comes from property 'defaultactivekey' which is declared here on type 'CollapseAttrs'",
+                "category": 3,
+                "code": 6500
+              }
+            ]
+          }
+        ]
+      ],
+      "./src/components/collapse/index.ts",
       "./src/components/divider/divider.ts",
       "./src/components/divider/index.ts",
       "./src/components/drawer/drawer.ts",

@@ -52,7 +52,7 @@ class Collapse implements Config {
 
         validComps(target, 'collapse');
 
-        const { _dataSetActiveKey, _openByKey } = Collapse.prototype;
+        const { _attrs, _dataSetActiveKey, _openByKey } = Collapse.prototype;
 
         const activeKey = JSON.parse(target.dataset.activeKey);
 
@@ -73,20 +73,34 @@ class Collapse implements Config {
                 const key: string[] = [];
 
                 const pushKey = (el: Element, toggle: boolean) => {
+                    const { accordion } = _attrs(target);
+                    // @ts-ignore
+                    const panelKey = el.dataset.panelKey;
+
                     if (el.classList.contains(`${PREFIX.collapse}-item-active`)) {
-                        // @ts-ignore
-                        key.push(el.dataset.panelKey);
+                        key.push(panelKey);
                     } else if (toggle) {
-                        key.splice(0, 1);
+                        const idx = key.indexOf(panelKey);
+                        idx > -1 ? key.splice(idx, 1) : '';
+                    }
+
+                    // 手风琴模式下每展开一个面板就删除其他的 key
+                    if (accordion) {
+                        siblings(el).forEach((o) => {
+                            const otherIdx = key.indexOf(o.dataset.panelKey);
+                            otherIdx > -1 ? key.splice(otherIdx, 1) : '';
+                        });
                     }
                 };
 
                 panels.forEach((panel: Element) => {
                     const header = panel.querySelector(`.${PREFIX.collapse}-header`);
 
+                    // 存放初始化面板时默认已展开的 key
                     pushKey(panel, false);
 
                     bind(header, 'click', () => {
+                        // 这里用定时器是为了跟移除显示面板样式类名的时机同步
                         setTimeout(() => {
                             pushKey(panel, true);
                             onChange && type.isFn(onChange, key);

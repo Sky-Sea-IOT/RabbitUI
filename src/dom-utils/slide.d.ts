@@ -1,6 +1,5 @@
-interface Slide {
-    up: any;
-    down: any;
-}
-export default function slide(): Slide;
-export {};
+declare const _default: {
+    slideDown: (el: Element, time: number) => void;
+    slideUp: (el: Element, time: number) => void;
+};
+export default _default;

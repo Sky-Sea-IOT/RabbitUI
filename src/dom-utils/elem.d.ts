@@ -12,5 +12,5 @@ export declare function setHtml(node: Element, value?: string): string;
 export declare function setText(node: Element, value?: string): string;
 export declare function getStrTypeAttr(node: Element, attrName: string, defaultVal: string): string | any;
 export declare function getBooleanTypeAttr(node: Element, attrName: string): boolean;
-export declare function getNumTypeAttr(node: Element, attrName: string, defaultVal: number): number | any;
+export declare function getNumTypeAttr(node: Element, attrName: string, defaultVal?: number): number | any;
 export declare function getArrTypeAttr(node: Element, attrName: string): Array<string | number>;

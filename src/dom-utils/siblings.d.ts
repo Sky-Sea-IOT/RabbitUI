@@ -1,1 +1,1 @@
-export default function siblings(elem: any): ChildNode[];
+export default function siblings(elem: Element): any[];
