@@ -566,9 +566,14 @@
         "signature": "6875d2e37aaadd389d11e10631ba12972ff597112d7cd7b0ed57fb738a0775f5",
         "affectsGlobalScope": false
       },
+      "./src/rabbit-design.ts": {
+        "version": "d3de12b8bb59f19fcf527a6adc4adc2ce6932d5a7a26dbb87af9168719728de2",
+        "signature": "9cd2e7fac3e775bed0520b866754efd19d2b4e424976a3ed1e3b6ce5252a1477",
+        "affectsGlobalScope": false
+      },
       "./src/index.ts": {
-        "version": "939a8ba2042aa3c0b0057ded0672ad102adf620cf89c3a755b382e15faa6cf79",
-        "signature": "173f9cbdfb22212255e0827ea9f6409b8cc6bd3734f14e5cf9b0715f39a9a5a7",
+        "version": "06802fc6e1f0ce860055e6054d405d40f75e282a99ec846b6056ac6be368b3ea",
+        "signature": "2ec38789a49751baf083f48672848bf505dbc4ed8cb607e82f6e8d4b4c40fa2c",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/anymatch/index.d.ts": {
@@ -1529,27 +1534,7 @@
         "./src/dom-utils/slide.ts"
       ],
       "./src/index.ts": [
-        "./src/components/alert/index.ts",
-        "./src/components/avatar/index.ts",
-        "./src/components/badge/index.ts",
-        "./src/components/button/index.ts",
-        "./src/components/card/index.ts",
-        "./src/components/collapse/index.ts",
-        "./src/components/divider/index.ts",
-        "./src/components/drawer/index.ts",
-        "./src/components/dropdown/index.ts",
-        "./src/components/loading-bar/index.ts",
-        "./src/components/message/index.ts",
-        "./src/components/modal/index.ts",
-        "./src/components/notice/index.ts",
-        "./src/components/poptip/index.ts",
-        "./src/components/progress/index.ts",
-        "./src/components/spin/index.ts",
-        "./src/components/steps/index.ts",
-        "./src/components/switch/index.ts",
-        "./src/components/time/index.ts",
-        "./src/components/timeline/index.ts",
-        "./src/components/tooltip/index.ts"
+        "./src/rabbit-design.ts"
       ],
       "./src/mixins/arrow.ts": [
         "./src/dom-utils/index.ts"
@@ -1574,6 +1559,29 @@
         "./node_modules/@popperjs/core/index.d.ts",
         "./src/dom-utils/index.ts",
         "./src/utils/index.ts"
+      ],
+      "./src/rabbit-design.ts": [
+        "./src/components/alert/index.ts",
+        "./src/components/avatar/index.ts",
+        "./src/components/badge/index.ts",
+        "./src/components/button/index.ts",
+        "./src/components/card/index.ts",
+        "./src/components/collapse/index.ts",
+        "./src/components/divider/index.ts",
+        "./src/components/drawer/index.ts",
+        "./src/components/dropdown/index.ts",
+        "./src/components/loading-bar/index.ts",
+        "./src/components/message/index.ts",
+        "./src/components/modal/index.ts",
+        "./src/components/notice/index.ts",
+        "./src/components/poptip/index.ts",
+        "./src/components/progress/index.ts",
+        "./src/components/spin/index.ts",
+        "./src/components/steps/index.ts",
+        "./src/components/switch/index.ts",
+        "./src/components/time/index.ts",
+        "./src/components/timeline/index.ts",
+        "./src/components/tooltip/index.ts"
       ],
       "./src/utils/check-type.ts": [
         "./src/mixins/warn.ts"
@@ -2021,27 +2029,7 @@
         "./src/dom-utils/slide.ts"
       ],
       "./src/index.ts": [
-        "./src/components/alert/index.ts",
-        "./src/components/avatar/index.ts",
-        "./src/components/badge/index.ts",
-        "./src/components/button/index.ts",
-        "./src/components/card/index.ts",
-        "./src/components/collapse/index.ts",
-        "./src/components/divider/index.ts",
-        "./src/components/drawer/index.ts",
-        "./src/components/dropdown/index.ts",
-        "./src/components/loading-bar/loading-bar.ts",
-        "./src/components/message/message.ts",
-        "./src/components/modal/index.ts",
-        "./src/components/notice/notice.ts",
-        "./src/components/poptip/index.ts",
-        "./src/components/progress/index.ts",
-        "./src/components/spin/index.ts",
-        "./src/components/steps/index.ts",
-        "./src/components/switch/index.ts",
-        "./src/components/time/index.ts",
-        "./src/components/timeline/index.ts",
-        "./src/components/tooltip/index.ts"
+        "./src/rabbit-design.ts"
       ],
       "./src/mixins/index.ts": [
         "./src/mixins/arrow.ts",
@@ -2051,6 +2039,29 @@
         "./src/mixins/scrollable.ts",
         "./src/mixins/tooltip.ts",
         "./src/mixins/warn.ts"
+      ],
+      "./src/rabbit-design.ts": [
+        "./src/components/alert/index.ts",
+        "./src/components/avatar/index.ts",
+        "./src/components/badge/index.ts",
+        "./src/components/button/index.ts",
+        "./src/components/card/index.ts",
+        "./src/components/collapse/index.ts",
+        "./src/components/divider/index.ts",
+        "./src/components/drawer/index.ts",
+        "./src/components/dropdown/index.ts",
+        "./src/components/loading-bar/index.ts",
+        "./src/components/message/index.ts",
+        "./src/components/modal/index.ts",
+        "./src/components/notice/index.ts",
+        "./src/components/poptip/index.ts",
+        "./src/components/progress/index.ts",
+        "./src/components/spin/index.ts",
+        "./src/components/steps/index.ts",
+        "./src/components/switch/index.ts",
+        "./src/components/time/index.ts",
+        "./src/components/timeline/index.ts",
+        "./src/components/tooltip/index.ts"
       ],
       "./src/utils/index.ts": [
         "./src/utils/check-type.ts",
@@ -3009,6 +3020,7 @@
       "./src/mixins/scrollable.ts",
       "./src/mixins/tooltip.ts",
       "./src/mixins/warn.ts",
+      "./src/rabbit-design.ts",
       "./src/utils/check-type.ts",
       "./src/utils/destroy.ts",
       "./src/utils/index.ts",

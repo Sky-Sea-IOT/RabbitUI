@@ -20,15 +20,13 @@ import timeTest from './time';
 import timelineTest from './timeline';
 import tooltipTest from './tooltip';
 
-import '../src/styles/index.less';
-
 // alertTest();
 // avatarTest();
 // progressTest();
 // badgeTest();
 // buttonTest();
 // cardTest();
-collapseTest();
+// collapseTest();
 // dividerTest();
 // drawerTest();
 // dropdownTest();

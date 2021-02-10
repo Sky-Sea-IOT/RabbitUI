@@ -21937,7 +21937,7 @@ function siblings(elem) {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 112 modules ***!
+  !*** ./src/index.ts + 113 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -21948,6 +21948,33 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "default": function() { return /* binding */ src; }
+});
+
+// NAMESPACE OBJECT: ./src/rabbit-design.ts
+var rabbit_design_namespaceObject = {};
+__webpack_require__.r(rabbit_design_namespaceObject);
+__webpack_require__.d(rabbit_design_namespaceObject, {
+  "Alert": function() { return components_alert; },
+  "Avatar": function() { return components_avatar; },
+  "Badge": function() { return components_badge; },
+  "Button": function() { return components_button; },
+  "Card": function() { return components_card; },
+  "Collapse": function() { return components_collapse; },
+  "Divider": function() { return components_divider; },
+  "Drawer": function() { return components_drawer; },
+  "Dropdown": function() { return components_dropdown; },
+  "Loading": function() { return components_loading_bar; },
+  "Message": function() { return components_message; },
+  "Modal": function() { return components_modal; },
+  "Notice": function() { return components_notice; },
+  "Poptip": function() { return components_poptip; },
+  "Progress": function() { return components_progress; },
+  "Spin": function() { return components_spin; },
+  "Steps": function() { return components_steps; },
+  "Switch": function() { return components_switch; },
+  "Time": function() { return components_time; },
+  "Timeline": function() { return components_timeline; },
+  "Tooltip": function() { return components_tooltip; }
 });
 
 ;// CONCATENATED MODULE: ./src/mixins/warn.ts
@@ -27989,57 +28016,38 @@ var Tooltip = /** @class */ (function () {
 
 /* harmony default export */ var components_tooltip = (tooltip);
 
+;// CONCATENATED MODULE: ./src/rabbit-design.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;// CONCATENATED MODULE: ./src/styles/index.less
 // extracted by mini-css-extract-plugin
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 需要将 Rabbit 导出为全局变量 ，解决打包后无法调用的问题
 // @ts-ignore
-/* harmony default export */ var src = (Rabbit = {
-    Alert: components_alert,
-    Avatar: components_avatar,
-    Badge: components_badge,
-    Button: components_button,
-    Card: components_card,
-    Collapse: components_collapse,
-    Divider: components_divider,
-    Drawer: components_drawer,
-    Dropdown: components_dropdown,
-    Loading: components_loading_bar,
-    Message: components_message,
-    Modal: components_modal,
-    Notice: components_notice,
-    Poptip: components_poptip,
-    Progress: components_progress,
-    Spin: components_spin,
-    Steps: components_steps,
-    Switch: components_switch,
-    Time: components_time,
-    Timeline: components_timeline,
-    Tooltip: components_tooltip
-});
+/* harmony default export */ var src = (window.Rabbit = rabbit_design_namespaceObject);
 
 
 /***/ })

@@ -1,5 +1,4 @@
-import { isStr } from 'src/utils/check-type';
-import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 
@@ -16,7 +15,7 @@ class Button implements Config {
     private components: any;
 
     constructor() {
-        this.VERSION = '1.0.1';
+        this.VERSION = '1.0.2';
         this.components = $el(`.${PREFIX.button}`, { all: true });
         this._getAllBtns(this.components);
     }
@@ -93,7 +92,8 @@ class Button implements Config {
     private _loadIcon(): HTMLElement {
         const LoadIcon = createElem('i');
         LoadIcon.className = `rab-load-loop ${PREFIX.icon} ${PREFIX.icon}-loading-solid`;
-        setCss(LoadIcon, 'height', '25px');
+        // v1.0.2 取消样式高度，否则加载中图标会和文字不在同一水平线上
+        // setCss(LoadIcon, 'height', '25px');
         return LoadIcon;
     }
 
