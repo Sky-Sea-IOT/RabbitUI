@@ -13,6 +13,7 @@ import Modal from './components/modal';
 import Notice from './components/notice';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
+import Rate from './components/rate';
 import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
@@ -36,6 +37,7 @@ export {
     Notice,
     Poptip,
     Progress,
+    Rate,
     Spin,
     Steps,
     Switch,
