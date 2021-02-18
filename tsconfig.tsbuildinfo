@@ -347,8 +347,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/prefix.ts": {
-        "version": "045a46d942e009154dc54c45856c74931215a8b772d599f626d73415b277bc49",
-        "signature": "d9338eefc43ab7777a0e78f546459670a788fe8a46b13a7326065ee95fede234",
+        "version": "009ae8c8c0b2989eb6d5d0fda9cf6384d249e61bbc05bf55b1cce5e5fac4f6a5",
+        "signature": "d77a4e6a959381962d7b76cadefc65c204c8e3f37f9215c8a7547c88655498f8",
         "affectsGlobalScope": false
       },
       "./src/components/alert/alert.ts": {
@@ -371,6 +371,16 @@
         "signature": "5e781fab2f432e6dca017e71756f60733042e4deb15a0584011778362d4ee554",
         "affectsGlobalScope": false
       },
+      "./src/components/back-top/back-top.ts": {
+        "version": "d36c37fc06bf9871563dd6c0c9775ed23e62372b707e498911222a6c466ac0d0",
+        "signature": "777539f8e991422f32598f9cbddf5ce685005778fde399d05fb462eeb1408ec4",
+        "affectsGlobalScope": false
+      },
+      "./src/components/back-top/index.ts": {
+        "version": "a829cf21d958fd41bec56d56b45626bbfd687e4b6102019091b6a520be56d6da",
+        "signature": "a829cf21d958fd41bec56d56b45626bbfd687e4b6102019091b6a520be56d6da",
+        "affectsGlobalScope": false
+      },
       "./src/components/badge/badge.ts": {
         "version": "ea996258a9c225e3b2c0da03d04440b080887e4c096498b9815262eed054f63f",
         "signature": "6f929f4b243d9f728dc4cc616812301edc75bc17a86d5b3f6d1631f4a7724368",
@@ -382,7 +392,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/button/button.ts": {
-        "version": "806ccbcb485e7f0d4b26f178de2994bc80495f8b02a28341823b5660cbadbd94",
+        "version": "9b334ee7398f16642d7e05cce3f6a1bb96a175dafa9aca7ea159a68eee8e31c9",
         "signature": "89ebe21f1b6f6abcf68e4b1e06bb5574fca1a7f29c56a7756d5b4eb849f738cf",
         "affectsGlobalScope": false
       },
@@ -567,13 +577,13 @@
         "affectsGlobalScope": false
       },
       "./src/rabbit-design.ts": {
-        "version": "d3de12b8bb59f19fcf527a6adc4adc2ce6932d5a7a26dbb87af9168719728de2",
-        "signature": "9cd2e7fac3e775bed0520b866754efd19d2b4e424976a3ed1e3b6ce5252a1477",
+        "version": "fa082ec305a4226e775dfc59b5d600d7478480ad4c13284e85a09af1d3a5520a",
+        "signature": "b86e79b2e1ba4348a7969bfcaf63660f23588e814f800d1c3a4b086be6dddc09",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "06802fc6e1f0ce860055e6054d405d40f75e282a99ec846b6056ac6be368b3ea",
-        "signature": "2ec38789a49751baf083f48672848bf505dbc4ed8cb607e82f6e8d4b4c40fa2c",
+        "version": "c0655e78e50b511528eaad6c8b08d46482827e2d4e1f72ebe2beddaff1cfb619",
+        "signature": "0b38eb4d51fc75c9dcaaa383167847a1a0282a15063b3f4349628d39ad93f545",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/anymatch/index.d.ts": {
@@ -1360,6 +1370,13 @@
       "./src/components/avatar/index.ts": [
         "./src/components/avatar/avatar.ts"
       ],
+      "./src/components/back-top/back-top.ts": [
+        "./src/components/prefix.ts",
+        "./src/dom-utils/index.ts"
+      ],
+      "./src/components/back-top/index.ts": [
+        "./src/components/back-top/back-top.ts"
+      ],
       "./src/components/badge/badge.ts": [
         "./src/components/prefix.ts",
         "./src/dom-utils/index.ts",
@@ -1372,7 +1389,6 @@
       "./src/components/button/button.ts": [
         "./src/components/prefix.ts",
         "./src/dom-utils/index.ts",
-        "./src/utils/check-type.ts",
         "./src/utils/index.ts"
       ],
       "./src/components/button/index.ts": [
@@ -1563,6 +1579,7 @@
       "./src/rabbit-design.ts": [
         "./src/components/alert/index.ts",
         "./src/components/avatar/index.ts",
+        "./src/components/back-top/index.ts",
         "./src/components/badge/index.ts",
         "./src/components/button/index.ts",
         "./src/components/card/index.ts",
@@ -1963,6 +1980,9 @@
       "./src/components/avatar/index.ts": [
         "./src/components/avatar/avatar.ts"
       ],
+      "./src/components/back-top/index.ts": [
+        "./src/components/back-top/back-top.ts"
+      ],
       "./src/components/badge/index.ts": [
         "./src/components/badge/badge.ts"
       ],
@@ -2043,6 +2063,7 @@
       "./src/rabbit-design.ts": [
         "./src/components/alert/index.ts",
         "./src/components/avatar/index.ts",
+        "./src/components/back-top/index.ts",
         "./src/components/badge/index.ts",
         "./src/components/button/index.ts",
         "./src/components/card/index.ts",
@@ -2918,6 +2939,8 @@
       "./src/components/alert/index.ts",
       "./src/components/avatar/avatar.ts",
       "./src/components/avatar/index.ts",
+      "./src/components/back-top/back-top.ts",
+      "./src/components/back-top/index.ts",
       "./src/components/badge/badge.ts",
       "./src/components/badge/index.ts",
       "./src/components/button/button.ts",

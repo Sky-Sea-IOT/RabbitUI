@@ -1,5 +1,6 @@
 import Alert from './components/alert';
 import Avatar from './components/avatar';
+import BackTop from './components/back-top';
 import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
@@ -19,4 +20,4 @@ import Switch from './components/switch';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
-export { Alert, Avatar, Badge, Button, Card, Collapse, Divider, Drawer, Dropdown, Loading, Message, Modal, Notice, Poptip, Progress, Spin, Steps, Switch, Time, Timeline, Tooltip };
+export { Alert, Avatar, BackTop, Badge, Button, Card, Collapse, Divider, Drawer, Dropdown, Loading, Message, Modal, Notice, Poptip, Progress, Spin, Steps, Switch, Time, Timeline, Tooltip };

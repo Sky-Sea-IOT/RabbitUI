@@ -1,6 +1,7 @@
 declare const _default: {
     alert: string;
     avatar: string;
+    backtop: string;
     badge: string;
     button: string;
     card: string;
@@ -17,6 +18,7 @@ declare const _default: {
     poptip: string;
     noticeChild: string;
     progress: string;
+    rate: string;
     switch: string;
     spin: string;
     steps: string;

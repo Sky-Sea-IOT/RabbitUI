@@ -43,7 +43,7 @@ Import the file directly in the browser using the script and link tags, and use 
 
 ```html
 <!--import the style-->
-<link rel="stylesheet" href="dist/rabbit.css">
+<link rel="stylesheet" href="dist/styles/rabbit.css">
 <!--import RabbitUI -->
 <script type="text/javascript" src="rabbit.min.js"></script>
 ```
@@ -61,7 +61,7 @@ Browser environment example
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
      <!--import the style-->
-    <link rel="stylesheet" href="dist/rabbit.css">
+    <link rel="stylesheet" href="dist/styles/rabbit.css">
 </head>
     
 <body>
@@ -91,7 +91,7 @@ const Tooltip = new Rabbit.Tooltip();
 Using css via import:
 
 ```js
-import 'rabbit-design/dist/rabbit.css';
+import 'rabbit-design/dist/styles/rabbit.css';
 ```
 
 ## Import as needed

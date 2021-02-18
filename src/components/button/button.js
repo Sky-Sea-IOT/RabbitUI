@@ -1,9 +1,9 @@
-import { $el, createElem, removeAttrs, setCss, setHtml } from '../../dom-utils';
+import { $el, createElem, removeAttrs, setHtml } from '../../dom-utils';
 import { type, validComps } from '../../utils';
 import PREFIX from '../prefix';
 var Button = /** @class */ (function () {
     function Button() {
-        this.VERSION = '1.0.1';
+        this.VERSION = '1.0.2';
         this.components = $el("." + PREFIX.button, { all: true });
         this._getAllBtns(this.components);
     }
@@ -68,7 +68,8 @@ var Button = /** @class */ (function () {
     Button.prototype._loadIcon = function () {
         var LoadIcon = createElem('i');
         LoadIcon.className = "rab-load-loop " + PREFIX.icon + " " + PREFIX.icon + "-loading-solid";
-        setCss(LoadIcon, 'height', '25px');
+        // v1.0.2 取消样式高度，否则加载中图标会和文字不在同一水平线上
+        // setCss(LoadIcon, 'height', '25px');
         return LoadIcon;
     };
     Button.prototype._getIcon = function (node) {

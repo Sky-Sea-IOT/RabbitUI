@@ -3,6 +3,7 @@ const prefixCls = 'rab-';
 export default {
     alert: `${prefixCls}alert`,
     avatar: `${prefixCls}avatar`,
+    backtop: `${prefixCls}back-top`,
     badge: `${prefixCls}badge`,
     button: `${prefixCls}btn`,
     card: `${prefixCls}card`,

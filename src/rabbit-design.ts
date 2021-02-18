@@ -1,5 +1,6 @@
 import Alert from './components/alert';
 import Avatar from './components/avatar';
+import BackTop from './components/back-top';
 import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
@@ -13,7 +14,6 @@ import Modal from './components/modal';
 import Notice from './components/notice';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
-import Rate from './components/rate';
 import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
@@ -24,6 +24,7 @@ import Tooltip from './components/tooltip';
 export {
     Alert,
     Avatar,
+    BackTop,
     Badge,
     Button,
     Card,
@@ -37,7 +38,6 @@ export {
     Notice,
     Poptip,
     Progress,
-    Rate,
     Spin,
     Steps,
     Switch,

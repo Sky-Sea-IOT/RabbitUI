@@ -51,4 +51,4 @@
 | type     | 类型，可选值为 relative、date 或 datetime    | relative |
 | interval | 自动更新的间隔，单位：秒                     | 60       |
 | hash     | 填写该值，点击会定位锚点                     | -        |
-| local    | 国际化文案，具体配置见 https://momentjs.com/ | zh-cn    |
+| local    | 日期语言环境，可选值为 en、es-us 和 zh-cn | zh-cn  |

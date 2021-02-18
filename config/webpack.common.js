@@ -6,6 +6,7 @@
 
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
     module: {
@@ -59,12 +60,12 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|webp)$/i,
                 use: [
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
-                            name: '[name].[ext]',
-                            outputPath: 'images/',
+                            name: 'images/[name].[ext]',
                             // 小于 2k 的图片转成 base64 编码
-                            limit: 2024
+                            limit: 2024,
+                            publicPath: '../'
                         }
                     }
                 ]
@@ -72,11 +73,11 @@ module.exports = {
             {
                 test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/i,
                 use: {
-                    loader: 'url-loader',
+                    loader: 'file-loader',
                     options: {
                         limit: 4096,
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/'
+                        name: './fonts/[name].[ext]',
+                        publicPath: '../'
                     }
                 }
             },
@@ -95,9 +96,13 @@ module.exports = {
         new webpack.optimize.ModuleConcatenationPlugin(),
         //分离出css文件
         new MiniCssExtractPlugin({
-            filename: 'rabbit.css',
+            filename: 'styles/rabbit.css',
             chunkFilename: '[id].css',
             ignoreOrder: false
+        }),
+        // 剥离 Moment.js 除 "en"、"es-us" 和 "zh-cn" 以外的所有语言环境。
+        new MomentLocalesPlugin({
+            localesToKeep: ['es-us', 'zh-cn']
         })
     ]
 };

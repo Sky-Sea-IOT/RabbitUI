@@ -1,4 +1,5 @@
 import * as Rabbit from './rabbit-design';
 import './styles/index.less';
-export default Rabbit;
+// @ts-ignore
+export default window.Rabbit = Rabbit;
 //# sourceMappingURL=index.js.map

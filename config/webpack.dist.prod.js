@@ -25,15 +25,16 @@ module.exports = merge(common, {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
+
     plugins: [
         new UglifyJSPlugin({
             sourceMap: true,
             parallel: true
         }),
+
         new CompressionPlugin({
-            filename: '[name].js.gz[query]',
             algorithm: 'gzip',
-            test: /\.js$/,
+            test: /\.js$|\.css/,
             threshold: 10240,
             minRatio: 0.8
         }),

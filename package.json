@@ -1,6 +1,6 @@
 {
     "name": "rabbit-design",
-    "version": "1.7.1",
+    "version": "1.8.2",
     "title": "RabbitUI",
     "description": "A library of UI components built based on TypeScript",
     "homepage": "",
@@ -58,6 +58,7 @@
         "less": "^4.0.0",
         "less-loader": "^7.1.0",
         "mini-css-extract-plugin": "^1.3.3",
+        "moment-locales-webpack-plugin": "^1.2.0",
         "optimize-css-assets-webpack-plugin": "^5.0.4",
         "postcss-loader": "^4.1.0",
         "prettier": "^2.2.1",

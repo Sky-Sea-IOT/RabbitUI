@@ -43,7 +43,7 @@ npm install rabbit-design --save
 
 ```html
 <!--引入样式库-->
-<link rel="stylesheet" href="dist/rabbit.css">
+<link rel="stylesheet" href="dist/styles/rabbit.css">
 <!--引入脚本-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 ```
@@ -61,7 +61,7 @@ npm install rabbit-design --save
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!--引入样式库-->
-    <link rel="stylesheet" href="dist/rabbit.css">
+    <link rel="stylesheet" href="dist/styles/rabbit.css">
 </head>
     
 <body>
@@ -91,7 +91,7 @@ const Tooltip = new Rabbit.Tooltip();
 引入样式：
 
 ```js
-import 'rabbit-design/dist/rabbit.css';
+import 'rabbit-design/dist/styles/rabbit.css';
 ```
 
 ## 按需引用
@@ -118,7 +118,7 @@ import { Alert, Message } from 'rabbit-design';
 
 ### 特别提醒
 
-- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbit-design/dist/rabbit.css';`
+- 按需引用仍然需要导入样式，即在 **main.js** 或根组件执行 `import 'rabbit-design/dist/styles/rabbit.css';`
 
 ## 浏览器支持
 
