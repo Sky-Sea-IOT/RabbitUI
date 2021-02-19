@@ -17,6 +17,7 @@ import Progress from './components/progress';
 import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
+import Tabs from './components/tabs';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
@@ -41,6 +42,7 @@ export {
     Spin,
     Steps,
     Switch,
+    Tabs,
     Time,
     Timeline,
     Tooltip

@@ -1,0 +1,233 @@
+r-tabs {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  color: #55585e;
+  zoom: 1;
+}
+r-tabs:before,
+r-tabs:after {
+  content: "";
+  display: table;
+}
+r-tabs:after {
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  height: 0;
+}
+.rab-tabs-bar {
+  outline: none;
+}
+.rab-tabs-ink-bar {
+  height: 2px;
+  box-sizing: border-box;
+  background-color: #1890ff;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: 0 0;
+}
+.rab-tabs-bar {
+  border-bottom: 1px solid #dcdee2;
+  margin-bottom: 16px;
+}
+.rab-tabs-nav-container {
+  margin-bottom: -1px;
+  line-height: 1.5;
+  font-size: 14px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  zoom: 1;
+}
+.rab-tabs-nav-container:before,
+.rab-tabs-nav-container:after {
+  content: "";
+  display: table;
+}
+.rab-tabs-nav-container:after {
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  height: 0;
+}
+.rab-tabs-nav-container:focus {
+  outline: none;
+}
+.rab-tabs-nav-container:focus .rab-tabs-tab-focused {
+  border-color: #46a6ff !important;
+}
+.rab-tabs-nav-container-scrolling {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.rab-tabs-nav-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.rab-tabs-nav-scroll {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.rab-tabs-nav-right {
+  float: right;
+  margin-left: 5px;
+}
+.rab-tabs-nav-prev,
+.rab-tabs-nav-next {
+  width: 32px;
+  text-align: center;
+  position: absolute;
+  line-height: 32px;
+  cursor: pointer;
+}
+.rab-tabs-nav-prev i,
+.rab-tabs-nav-next i {
+  font-size: 16px;
+}
+.rab-tabs-nav-prev {
+  left: 0;
+}
+.rab-tabs-nav-next {
+  right: 0;
+}
+.rab-tabs-nav-scrollable {
+  padding: 0 32px;
+}
+.rab-tabs-nav-scroll-disabled {
+  display: none;
+}
+.rab-tabs-nav {
+  padding-left: 0;
+  margin: 0;
+  float: left;
+  list-style: none;
+  box-sizing: border-box;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+}
+.rab-tabs-nav:before,
+.rab-tabs-nav:after {
+  display: table;
+  content: " ";
+}
+.rab-tabs-nav:after {
+  clear: both;
+}
+.rab-tabs-nav .rab-tabs-tab-disabled {
+  pointer-events: none;
+  cursor: default;
+  color: #ccc;
+}
+.rab-tabs-nav .rab-tabs-tab {
+  display: inline-block;
+  height: 100%;
+  padding: 8px 16px;
+  margin-right: 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+.rab-tabs-nav .rab-tabs-tab:hover {
+  color: #46a6ff;
+}
+.rab-tabs-nav .rab-tabs-tab:active {
+  color: #1789f2;
+}
+.rab-tabs-nav .rab-tabs-tab .rab-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+}
+.rab-tabs-nav .rab-tabs-tab-active {
+  color: #1890ff;
+}
+.rab-tabs-mini .rab-tabs-nav-container {
+  font-size: 14px;
+}
+.rab-tabs-mini .rab-tabs-tab {
+  margin-right: 0;
+  padding: 8px 16px;
+  font-size: 12px;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-nav-container {
+  height: 32px;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-ink-bar {
+  visibility: hidden;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab {
+  margin: 0;
+  height: 31px;
+  padding: 5px 16px 4px;
+  border: 1px solid #dcdee2;
+  border-bottom: 0;
+  border-radius: 2px 2px 0 0;
+  transition: all 0.3s ease-in-out;
+  background: #f8f8f9;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab-active {
+  height: 32px;
+  padding-bottom: 5px;
+  background: #fff;
+  transform: translateZ(0);
+  border-color: #dcdee2;
+  color: #1890ff;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-nav-wrap {
+  margin-bottom: 0;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab .rab-tabs-close {
+  width: 0;
+  height: 22px;
+  font-size: 22px;
+  margin-right: 0;
+  color: #999;
+  text-align: right;
+  vertical-align: middle;
+  overflow: hidden;
+  position: relative;
+  top: -5px;
+  transform-origin: 100% 50%;
+  transition: all 0.3s ease-in-out;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab .rab-tabs-close:hover {
+  color: #ff4d4f;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab-active .rab-tabs-close,
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab:hover .rab-tabs-close {
+  width: 22px;
+  transform: translateZ(0);
+  margin-right: -6px;
+}
+.rab-tabs-no-animation > .rab-tabs-content {
+  transform: none!important;
+}
+.rab-tabs-no-animation > .rab-tabs-content > .rab-tabs-tabpane-inactive {
+  display: none;
+}
+r-tabs .rab-tabs-content-animated {
+  display: flex;
+  flex-direction: row;
+  will-change: transform;
+  transition: transform 0.3s ease-in-out;
+}
+r-tabs r-tab-pane {
+  display: none;
+  flex-shrink: 0;
+  width: 100%;
+  transition: opacity 0.3s;
+  opacity: 1;
+  outline: none;
+}
+r-tabs .rab-tabs-tabpane-inactive {
+  opacity: 0;
+  height: 0;
+}
