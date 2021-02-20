@@ -65,14 +65,29 @@ Browser environment example
 </head>
     
 <body>
+    <!--Alert component-->
     <r-alert type="success" message="Success Text"></r-alert>
-    <r-tooltip content="this is the prompt text">When you mouse over the text, a bubble box will appear</r-tooltip>
+    <!--Tooltip component-->
+    <r-tooltip content="这里是提示文字">鼠标经过这段文字时，会显示一个气泡框</r-tooltip>
+    <!--Collapse component-->
+    <r-collapse defaultActiveKey="1">
+      <r-collapse-panel key="1" title="面板标题1">
+          <p>狗是一种家养动物。它以忠诚和忠诚而闻名，在世界各地的许多家庭中，它都是受欢迎的客人。</p>
+      </r-collapse-panel>
+      <r-collapse-panel key="2" title="面板标题2">
+          <p>狗是一种家养动物。它以忠诚和忠诚而闻名，在世界各地的许多家庭中，它都是受欢迎的客人。</p>
+      </r-collapse-panel>
+      <r-collapse-panel key="3" title="面板标题3">
+          <p>狗是一种家养动物。它以忠诚和忠诚而闻名，在世界各地的许多家庭中，它都是受欢迎的客人。</p>
+      </r-collapse-panel>
+    </r-collapse>
 </body>
 <!--import Rabbit.js-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 <script>
     const Alert = new Rabbit.Alert();   
     const Tooltip = new Rabbit.Tooltip();  
+    const Collapse = new Rabbit.Collapse();  
 </script>
 </html>
 ```
@@ -86,6 +101,7 @@ import Rabbit from 'rabbit-design';
 
 const Alert = new Rabbit.Alert();   
 const Tooltip = new Rabbit.Tooltip();  
+const Collapse = new Rabbit.Collapse();  
 ```
 
 Using css via import:

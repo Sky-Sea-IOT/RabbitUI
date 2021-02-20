@@ -65,14 +65,30 @@ npm install rabbit-design --save
 </head>
     
 <body>
+    <!--警告提示组件-->
     <r-alert type="success" message="Success Text"></r-alert>
+    <!--工具提示组件-->
     <r-tooltip content="这里是提示文字">鼠标经过这段文字时，会显示一个气泡框</r-tooltip>
+    <!--折叠面板组件-->
+    <r-collapse defaultActiveKey="1">
+      <r-collapse-panel key="1" title="面板标题1">
+          <p>狗是一种家养动物。它以忠诚和忠诚而闻名，在世界各地的许多家庭中，它都是受欢迎的客人。</p>
+      </r-collapse-panel>
+      <r-collapse-panel key="2" title="面板标题2">
+          <p>狗是一种家养动物。它以忠诚和忠诚而闻名，在世界各地的许多家庭中，它都是受欢迎的客人。</p>
+      </r-collapse-panel>
+      <r-collapse-panel key="3" title="面板标题3">
+          <p>狗是一种家养动物。它以忠诚和忠诚而闻名，在世界各地的许多家庭中，它都是受欢迎的客人。</p>
+      </r-collapse-panel>
+    </r-collapse>
 </body>
 <!--引入 Rabbit.js-->
 <script type="text/javascript" src="rabbit.min.js"></script>
 <script>
+    // 需要先实例化组件的构造函数
     const Alert = new Rabbit.Alert();   
     const Tooltip = new Rabbit.Tooltip();  
+    const Collapse = new Rabbit.Collapse();  
 </script>
 </html>
 ```
@@ -85,7 +101,8 @@ NPM 环境
 import Rabbit from 'rabbit-design';
 
 const Alert = new Rabbit.Alert();   
-const Tooltip = new Rabbit.Tooltip();  
+const Tooltip = new Rabbit.Tooltip();
+const Collapse = new Rabbit.Collapse();  
 ```
 
 引入样式：
