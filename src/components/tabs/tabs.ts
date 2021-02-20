@@ -1,27 +1,30 @@
 import {
     $el,
+    bind,
     createElem,
     getBooleanTypeAttr,
     getStrTypeAttr,
     removeAttrs,
-    setHtml
+    setCss,
+    setHtml,
+    siblings
 } from '../../dom-utils';
 import PREFIX from '../prefix';
 
 interface TabsAttrs {
     defaultActivekey: string;
-    type: string;
+    type: 'line' | 'card';
     size: string;
+    animated: string;
     closable: boolean;
-    animated: boolean;
 }
 
 interface TabsPaneAttrs {
     tab: string;
     key: string;
     icon: string;
+    closable: string;
     disabled: boolean;
-    closable: boolean;
 }
 
 class Tabs {
@@ -37,13 +40,31 @@ class Tabs {
     private _create(components: NodeListOf<Element>): void {
         components.forEach((node) => {
             const tabPanes = node.querySelectorAll('r-tab-pane');
-            const { defaultActivekey } = this._attrs(node);
+            const { defaultActivekey, size, type, closable, animated } = this._attrs(node);
 
+            this._setType(node, type);
+            this._setSize(node, type, size);
+            this._setNoAnimation(node, animated);
             this._setBodyTemplate(node);
-            this._setTabPane(node, tabPanes, defaultActivekey);
+            this._setTabPane([node, tabPanes, defaultActivekey, type, animated, closable]);
 
             removeAttrs(node, ['defaultActivekey', 'type', 'size', 'closable', 'animated']);
         });
+    }
+
+    private _setType(node: Element, type: string): void {
+        if (type !== 'card') return;
+        node.classList.add(`${PREFIX.tabs}-${type}`);
+    }
+
+    private _setSize(node: Element, type: string, size: string): void {
+        if (type !== 'line') return;
+        node.classList.add(`${PREFIX.tabs}-${size}`);
+    }
+
+    private _setNoAnimation(node: Element, animated: string): void {
+        if (animated === 'true') return;
+        node.classList.add(`${PREFIX.tabs}-no-animation`);
     }
 
     private _setBodyTemplate(node: Element): void {
@@ -58,9 +79,7 @@ class Tabs {
                           <i class="${PREFIX.icon} ${PREFIX.icon}-ios-arrow-forward"></i>
                       </span>
                       <div class="${PREFIX.tabs}-nav-scroll">
-                          <div class="${PREFIX.tabs}-nav">
-                              <div class="${PREFIX.tabs}-ink-bar"></div>
-                          </div>
+                          <div class="${PREFIX.tabs}-nav"></div>
                       </div>
                   </div>
               </div>
@@ -70,22 +89,32 @@ class Tabs {
         setHtml(node, template);
     }
 
-    private _setTabPane(node: Element, panes: NodeListOf<Element>, activekey: string): void {
+    private _setTabPane(
+        args: [Element, NodeListOf<Element>, string, string, string, boolean]
+    ): void {
+        const [node, panes, activekey, type, animated, closable] = args;
+
         const TabNav = node.querySelector(`.${PREFIX.tabs}-nav`);
         const TabPaneContainer = node.querySelector(`.${PREFIX.tabs}-content`);
         const Fragment = document.createDocumentFragment();
 
         panes.forEach((pane, idx) => {
-            const { key, tab } = this._paneAttrs(pane);
+            const { key, tab, icon, closable: separateClose, disabled } = this._paneAttrs(pane);
 
-            this._setLabel(TabNav!, tab, activekey, key);
+            const TabsTab: HTMLElement = this._setTab([TabNav!, tab, activekey, key]);
+
+            this._setTabIcon(TabsTab, icon);
+            this._setTabClosable([TabsTab, type, closable, separateClose]);
+            this._setTabDisabled(TabsTab, disabled);
+
+            setCss(pane, 'display', `${animated === 'true' ? 'block' : 'none'}`);
+
             this._setPaneKey(pane, key, idx);
-            this._setActivePane(TabPaneContainer!, pane, activekey, key, idx);
+            this._setActivePane([TabPaneContainer!, pane, activekey, key, idx, animated]);
+
+            this._handleToggle([TabsTab, pane, idx, disabled, animated]);
 
             Fragment.appendChild(pane);
-
-            // @ts-ignore
-            pane.style.display = 'block';
 
             removeAttrs(pane, ['key', 'tab', 'icon', 'disabled', 'closable']);
         });
@@ -93,7 +122,9 @@ class Tabs {
         TabPaneContainer?.appendChild(Fragment);
     }
 
-    private _setLabel(tabsNav: Element, content: string, activekey: string, key: string): void {
+    private _setTab(args: [Element, string, string, string]): HTMLElement {
+        const [tabsNav, content, activekey, key] = args;
+
         const TabsTab = createElem('div');
 
         TabsTab.className = `${PREFIX.tabs}-tab ${
@@ -101,7 +132,39 @@ class Tabs {
         }`;
 
         setHtml(TabsTab, content);
+
         tabsNav.appendChild(TabsTab);
+
+        return TabsTab;
+    }
+
+    private _setTabIcon(tabElm: Element, icon: string): void {
+        if (!icon) return;
+
+        const Icon = createElem('icon');
+
+        Icon.className = `${PREFIX.icon} ${PREFIX.icon}-${icon}`;
+        tabElm.prepend(Icon);
+    }
+
+    private _setTabClosable(args: [Element, string, boolean, string]): void {
+        const [tabElm, type, closable, separateClose] = args;
+
+        if (!closable || type !== 'card') return;
+
+        const CloseIcon = createElem('icon');
+
+        CloseIcon.className = `${PREFIX.icon} ${PREFIX.icon}-ios-close ${PREFIX.tabs}-close`;
+
+        // 单独设置当前选项是否可以关闭页签
+        if (separateClose === 'false') return;
+
+        tabElm.appendChild(CloseIcon);
+    }
+
+    private _setTabDisabled(tabELm: Element, disabled: boolean): void {
+        if (!disabled) return;
+        tabELm.classList.add(`${PREFIX.tabs}-tab-disabled`);
     }
 
     private _setPaneKey(pane: Element, key: string, idx: number): void {
@@ -110,34 +173,65 @@ class Tabs {
         pane.dataset.paneKey = !key ? idx : key;
     }
 
-    private _setActivePane(
-        parent: Element,
-        pane: Element,
-        activekey: string,
-        key: string,
-        idx: number
-    ): void {
-        // @ts-ignore
-        pane.style.visibility = activekey === key ? 'visible' : 'hidden';
+    private _setActivePane(args: [Element, Element, string, string, number, string]): void {
+        const [paneContainer, pane, activekey, key, idx, animated] = args;
 
-        if (activekey !== key) return;
+        if (animated === 'false') {
+            setCss(pane, 'display', `${activekey === key ? 'block' : 'none'}`);
+        }
 
-        const x = idx * 100;
-        // @ts-ignore
-        parent.style.transform = `translateX(-${x}%)`;
+        setCss(pane, 'visibility', `${activekey === key ? 'visible' : 'hidden'}`);
+
+        if (activekey === key) this._changePane([paneContainer, idx]);
     }
 
-    private _setInkBar(tabsNav: Element, tabElm: Element): void {
-        const TabsInkBar = tabsNav.querySelector(`.${PREFIX.tabs}-ink-bar`);
+    private _handleToggle(args: [Element, Element, number, boolean, string]): void {
+        const [tabELm, pane, idx, disabled, animated] = args;
+
+        bind(tabELm, 'click', () => {
+            if (disabled) return false;
+
+            this._changeTab(tabELm);
+            this._changePane([pane.parentElement!, idx, animated, pane]);
+        });
+    }
+
+    private _changeTab(tabELm: Element): void {
+        tabELm.classList.add(`${PREFIX.tabs}-tab-active`);
+        tabELm.classList.add(`${PREFIX.tabs}-tab-focusd`);
+
+        siblings(tabELm).forEach((o) => {
+            o.classList.remove(`${PREFIX.tabs}-tab-active`);
+            o.classList.remove(`${PREFIX.tabs}-tab-focusd`);
+        });
+    }
+
+    private _changePane(args: [Element, number, string?, Element?]): void {
+        const [paneContainer, idx, animated, pane] = args;
+
+        const translateX = idx * 100;
+        setCss(paneContainer, 'transform', `translateX(-${translateX}%)`);
+
+        if (pane) {
+            if (animated === 'false') setCss(pane, 'display', 'block');
+
+            setCss(pane, 'visibility', 'visible');
+
+            siblings(pane).forEach((o) => {
+                if (animated === 'false') setCss(o, 'display', 'none');
+
+                setCss(o, 'visibility', 'hidden');
+            });
+        }
     }
 
     private _attrs(node: Element): TabsAttrs {
         return {
             defaultActivekey: getStrTypeAttr(node, 'defaultActivekey', '0'),
             type: getStrTypeAttr(node, 'type', 'line'),
-            size: getStrTypeAttr(node, 'size', ''),
-            closable: getBooleanTypeAttr(node, 'closable'),
-            animated: getBooleanTypeAttr(node, 'animated')
+            size: getStrTypeAttr(node, 'size', 'default'),
+            animated: getStrTypeAttr(node, 'animated', 'true'),
+            closable: getBooleanTypeAttr(node, 'closable')
         };
     }
 
@@ -146,22 +240,10 @@ class Tabs {
             tab: getStrTypeAttr(pane, 'tab', ''),
             key: getStrTypeAttr(pane, 'key', '0'),
             icon: getStrTypeAttr(pane, 'icon', ''),
-            disabled: getBooleanTypeAttr(pane, 'disabled'),
-            closable: getBooleanTypeAttr(pane, 'closable')
+            closable: getStrTypeAttr(pane, 'closable', 'true'),
+            disabled: getBooleanTypeAttr(pane, 'disabled')
         };
     }
 }
 
 export default Tabs;
-
-/*
- * 选项跟随条移动距离算法
- * n1 = 0
- * n2 = n1.width + ( marginRight + 4 )
- * n2+ = n2+的移动距离 + (n2+)-1.width + ( marginRight + 4 )
- */
-
-/*
- * 面板移动距离算法
- * (面板索引值 * 100%) * -1
- */

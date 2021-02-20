@@ -1,4 +1,5 @@
 @import '../custom.less';
+@import '../mixins/size.less';
 @import '../mixins/clearfix.less';
 
 @tabs-tag: r-tabs;
@@ -7,7 +8,6 @@
 
 @{tabs-tag} {
   display: block;
-  box-sizing: border-box;
   position: relative;
   overflow: hidden;
   color: @text-color;
@@ -17,22 +17,7 @@
 .@{tabs-prefix-cls} {
     &-bar {
         outline: none;
-    }
-
-    &-ink-bar {
-        height: 2px;
-        box-sizing: border-box;
-        background-color: @primary-color;
-        position: absolute;
-        left: 0;
-        bottom: 1px;
-        z-index: 1;
-        transition: transform .3s @ease-in-out;
-        transform-origin: 0 0;
-    }
-
-    &-bar {
-        border-bottom: 1px solid @border-color-base;
+        border-bottom: @border-width-base @border-style-base @border-color-base;
         margin-bottom: 16px;
     }
 
@@ -40,7 +25,6 @@
         margin-bottom: -1px;
         line-height: @line-height-base;
         font-size: @font-size-base;
-        box-sizing: border-box;
         white-space: nowrap;
         overflow: hidden;
         position: relative;
@@ -106,7 +90,6 @@
         margin: 0;
         float: left;
         list-style: none;
-        box-sizing: border-box;
         position: relative;
         transition: transform 0.5s @ease-in-out;
 
@@ -121,17 +104,16 @@
         }
 
         .@{tabs-prefix-cls}-tab-disabled {
-            pointer-events: none;
-            cursor: default;
-            color: #ccc;
+            cursor: not-allowed !important;
+            color: #ccc !important;
         }
 
         .@{tabs-prefix-cls}-tab {
             display: inline-block;
             height: 100%;
-            padding: 8px 16px;
+            padding: @padding-xs @padding-md;
             margin-right: 16px;
-            box-sizing: border-box;
+
             cursor: pointer;
             text-decoration: none;
             position: relative;
@@ -145,14 +127,23 @@
                 color: @link-active-color;
             }
             .@{css-prefix-iconfont} {
-                width: 14px;
-                height: 14px;
+                .size(14px,14px);
                 margin-right: 8px;
             }
         }
 
         .@{tabs-prefix-cls}-tab-active {
             color: @primary-color;
+
+            &::after {
+                content: '';
+                .size(100%,2px);
+                background-color: @primary-color;
+                position: absolute;
+                left: 0;
+                bottom: 1px;
+                z-index: 1;
+            }
         }
     }
     &-mini &-nav-container {
@@ -161,7 +152,7 @@
 
     &-mini &-tab {
         margin-right: 0;
-        padding: 8px 16px;
+        padding: @padding-xs @padding-md;
         font-size: @font-size-small;
     }
 
@@ -169,14 +160,13 @@
     &-card > &-bar &-nav-container {
         height: 32px;
     }
-    &-card > &-bar &-ink-bar {
-        visibility: hidden;
-    }
+
     &-card > &-bar &-tab {
         margin: 0;
+        margin-right: 4px;
         height: 31px;
-        padding: 5px 16px 4px;
-        border: 1px solid @border-color-base;
+        padding: 5px @padding-md 4px;
+        border: @border-width-base @border-style-base @border-color-base;
         border-bottom: 0;
         border-radius: @btn-border-radius @btn-border-radius 0 0;
         transition: all 0.3s @ease-in-out;
@@ -185,17 +175,20 @@
     &-card > &-bar &-tab-active {
         height: 32px;
         padding-bottom: 5px;
-        background: #fff;
+        background: @white;
         transform: translateZ(0);
         border-color: @border-color-base;
         color: @primary-color;
+
+        &::after {
+            display: none;
+        }
     }
     &-card > &-bar &-nav-wrap {
         margin-bottom: 0;
     }
     &-card > &-bar &-tab &-close {
-        width: 0;
-        height: 22px;
+        .size(0,22px);
         font-size: 22px;
         margin-right: 0;
         color: @legend-color;
@@ -207,7 +200,7 @@
         transform-origin: 100% 50%;
         transition: all 0.3s @ease-in-out;
         &:hover {
-            color: @error-color;
+            color: #444;
         }
     }
 

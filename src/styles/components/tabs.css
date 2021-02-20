@@ -1,6 +1,5 @@
 r-tabs {
   display: block;
-  box-sizing: border-box;
   position: relative;
   overflow: hidden;
   color: #55585e;
@@ -19,19 +18,6 @@ r-tabs:after {
 }
 .rab-tabs-bar {
   outline: none;
-}
-.rab-tabs-ink-bar {
-  height: 2px;
-  box-sizing: border-box;
-  background-color: #1890ff;
-  position: absolute;
-  left: 0;
-  bottom: 1px;
-  z-index: 1;
-  transition: transform 0.3s ease-in-out;
-  transform-origin: 0 0;
-}
-.rab-tabs-bar {
   border-bottom: 1px solid #dcdee2;
   margin-bottom: 16px;
 }
@@ -39,7 +25,6 @@ r-tabs:after {
   margin-bottom: -1px;
   line-height: 1.5;
   font-size: 14px;
-  box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
   position: relative;
@@ -107,7 +92,6 @@ r-tabs:after {
   margin: 0;
   float: left;
   list-style: none;
-  box-sizing: border-box;
   position: relative;
   transition: transform 0.5s ease-in-out;
 }
@@ -120,16 +104,14 @@ r-tabs:after {
   clear: both;
 }
 .rab-tabs-nav .rab-tabs-tab-disabled {
-  pointer-events: none;
-  cursor: default;
-  color: #ccc;
+  cursor: not-allowed !important;
+  color: #ccc !important;
 }
 .rab-tabs-nav .rab-tabs-tab {
   display: inline-block;
   height: 100%;
   padding: 8px 16px;
   margin-right: 16px;
-  box-sizing: border-box;
   cursor: pointer;
   text-decoration: none;
   position: relative;
@@ -149,6 +131,16 @@ r-tabs:after {
 .rab-tabs-nav .rab-tabs-tab-active {
   color: #1890ff;
 }
+.rab-tabs-nav .rab-tabs-tab-active::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #1890ff;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  z-index: 1;
+}
 .rab-tabs-mini .rab-tabs-nav-container {
   font-size: 14px;
 }
@@ -160,11 +152,9 @@ r-tabs:after {
 .rab-tabs-card > .rab-tabs-bar .rab-tabs-nav-container {
   height: 32px;
 }
-.rab-tabs-card > .rab-tabs-bar .rab-tabs-ink-bar {
-  visibility: hidden;
-}
 .rab-tabs-card > .rab-tabs-bar .rab-tabs-tab {
   margin: 0;
+  margin-right: 4px;
   height: 31px;
   padding: 5px 16px 4px;
   border: 1px solid #dcdee2;
@@ -180,6 +170,9 @@ r-tabs:after {
   transform: translateZ(0);
   border-color: #dcdee2;
   color: #1890ff;
+}
+.rab-tabs-card > .rab-tabs-bar .rab-tabs-tab-active::after {
+  display: none;
 }
 .rab-tabs-card > .rab-tabs-bar .rab-tabs-nav-wrap {
   margin-bottom: 0;
@@ -199,7 +192,7 @@ r-tabs:after {
   transition: all 0.3s ease-in-out;
 }
 .rab-tabs-card > .rab-tabs-bar .rab-tabs-tab .rab-tabs-close:hover {
-  color: #ff4d4f;
+  color: #444;
 }
 .rab-tabs-card > .rab-tabs-bar .rab-tabs-tab-active .rab-tabs-close,
 .rab-tabs-card > .rab-tabs-bar .rab-tabs-tab:hover .rab-tabs-close {
