@@ -164,7 +164,7 @@ class Tabs implements Config {
         panes.forEach((pane, idx) => {
             const { key, tab, icon, closable: separateClose, disabled } = this._paneAttrs(pane);
 
-            const TabsTab: HTMLElement = this._setTab([TabNav!, tab, activekey, key]);
+            const TabsTab: HTMLElement = this._setTab(TabNav!, tab);
 
             this._setTabIcon(TabsTab, icon);
             this._setTabClosable([TabsTab, type, closable, separateClose]);
@@ -173,10 +173,10 @@ class Tabs implements Config {
             setCss(pane, 'display', `${animated === 'true' ? 'block' : 'none'}`);
 
             this._setPaneKey(pane, key, idx);
-            this._setActive([TabPaneContainer!, TabsTab, pane, activekey, idx, animated]);
+            this._setActive([closable, TabPaneContainer!, TabsTab, pane, activekey, idx, animated]);
 
-            this._handleToggle([TabsTab, pane, idx, disabled, animated]);
-            this._handleRemove(TabsTab, pane, idx);
+            this._handleToggle([closable, TabsTab, pane, idx, disabled, animated]);
+            this._handleRemove(TabsTab, pane);
 
             Fragment.appendChild(pane);
 
@@ -186,9 +186,7 @@ class Tabs implements Config {
         TabPaneContainer?.appendChild(Fragment);
     }
 
-    private _setTab(args: [Element, string, string, string]): HTMLElement {
-        const [tabsNav, content, activekey, key] = args;
-
+    private _setTab(tabsNav: Element, content: string): HTMLElement {
         const TabsTab = createElem('div');
 
         TabsTab.className = `${PREFIX.tabs}-tab`;
@@ -235,15 +233,15 @@ class Tabs implements Config {
         pane.dataset.paneKey = !key ? idx : key;
     }
 
-    private _setActive(args: [Element, Element, Element, string, number, string]): void {
-        const [paneContainer, tabsTab, pane, activekey, idx, animated] = args;
+    private _setActive(args: [boolean, Element, Element, Element, string, number, string]): void {
+        const [closable, paneContainer, tabsTab, pane, activekey, idx, animated] = args;
 
         // @ts-ignore
         const isEqual = activekey === pane.dataset.paneKey;
 
         if (isEqual) {
             this._changeTab(tabsTab);
-            this._changePane([paneContainer, idx]);
+            this._changePane([closable, paneContainer, idx]);
         }
 
         setCss(pane, 'visibility', `${isEqual ? 'visible' : 'hidden'}`);
@@ -253,33 +251,59 @@ class Tabs implements Config {
         }
     }
 
-    private _handleToggle(args: [Element, Element, number, boolean, string]): void {
-        const [tabsTab, pane, idx, disabled, animated] = args;
+    private _handleToggle(args: [boolean, Element, Element, number, boolean, string]): void {
+        const [closable, tabsTab, pane, idx, disabled, animated] = args;
 
         bind(tabsTab, 'click', () => {
             if (disabled) return false;
 
             this._changeTab(tabsTab);
-            this._changePane([pane.parentElement!, idx, animated, pane]);
+            this._changePane([closable, pane.parentElement!, idx, animated, pane]);
         });
     }
 
-    private _handleRemove(tabsTab: Element, pane: Element, idx: number): void {
+    private _handleRemove(tabsTab: Element, pane: Element): void {
         const TabClose = tabsTab.querySelector(`.${PREFIX.tabs}-close`);
 
         if (!TabClose) return;
 
-        bind(TabClose, 'click', (e: Event) => {
-            e.stopPropagation();
-            // TODO
+        /**
+         * @param elm1 tabs的选项
+         * @param elm2 tabs的面板
+         */
+        const changeActive = (elm1: Element, elm2: Element) => {
+            this._changeTab(elm1, false);
+            setCss(elm2, 'display', 'block');
+            setCss(elm2, 'visibility', 'visible');
+        };
+
+        const removeEv = () => {
+            const prevTab = tabsTab.previousElementSibling;
+            const nextTab = tabsTab.nextElementSibling;
+            const prevPane = pane.previousElementSibling;
+            const nextPane = pane.nextElementSibling;
+
+            if (nextTab && nextPane) {
+                changeActive(nextTab, nextPane);
+            } else if (prevTab && prevPane) {
+                changeActive(prevTab, prevPane);
+            }
+
             tabsTab.remove();
             pane.remove();
+        };
+
+        bind(TabClose, 'click', (e: Event) => {
+            e.stopPropagation();
+            removeEv();
         });
     }
 
-    private _changeTab(tabsTab: Element): void {
+    private _changeTab(tabsTab: Element, siblingsChange = true): void {
         tabsTab.classList.add(`${PREFIX.tabs}-tab-active`);
         tabsTab.classList.add(`${PREFIX.tabs}-tab-focusd`);
+
+        if (!siblingsChange) return;
 
         siblings(tabsTab).forEach((o) => {
             o.classList.remove(`${PREFIX.tabs}-tab-active`);
@@ -287,19 +311,24 @@ class Tabs implements Config {
         });
     }
 
-    private _changePane(args: [Element, number, string?, Element?]): void {
-        const [paneContainer, idx, animated, pane] = args;
+    private _changePane(args: [boolean, Element, number, string?, Element?]): void {
+        const [closable, paneContainer, idx, animated, pane] = args;
 
-        const translateX = idx * 100;
-        setCss(paneContainer, 'transform', `translateX(-${translateX}%)`);
+        // 如果选项卡启用了可关闭功能，则不使用动画切换，这为了减少 tab 删除操作的工作量
+        if (!closable) {
+            const translateX = idx * 100;
+            setCss(paneContainer, 'transform', `translateX(-${translateX}%)`);
+        }
 
+        // 是否要一并更改面板项
         if (!pane) return;
 
-        if (animated === 'false') setCss(pane, 'display', 'block');
+        setCss(pane, 'display', 'block');
         setCss(pane, 'visibility', 'visible');
 
         siblings(pane).forEach((o) => {
-            if (animated === 'false') setCss(o, 'display', 'none');
+            if (animated === 'false' || closable) setCss(o, 'display', 'none');
+
             setCss(o, 'visibility', 'hidden');
         });
     }
