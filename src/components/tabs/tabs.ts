@@ -1,3 +1,4 @@
+import { type, validComps } from '../../utils';
 import {
     $el,
     bind,
@@ -10,6 +11,21 @@ import {
     siblings
 } from '../../dom-utils';
 import PREFIX from '../prefix';
+import { warn } from '../../mixins';
+
+interface Config {
+    config(
+        el: string
+    ): {
+        activeKey: string;
+        events: ({ onClick, onTabRemove }: TabsEvents) => void;
+    };
+}
+
+interface TabsEvents {
+    onClick: () => void;
+    onTabRemove: () => void;
+}
 
 interface TabsAttrs {
     defaultActivekey: string;
@@ -27,7 +43,7 @@ interface TabsPaneAttrs {
     disabled: boolean;
 }
 
-class Tabs {
+class Tabs implements Config {
     readonly VERSION: string;
     private components: any;
 
@@ -37,10 +53,57 @@ class Tabs {
         this._create(this.components);
     }
 
+    public config(
+        el: string
+    ): {
+        activeKey: string;
+        events({ onClick, onTabRemove }: TabsEvents): void;
+    } {
+        const target = $el(el);
+
+        validComps(target, 'tabs');
+
+        return {
+            get activeKey() {
+                return target.dataset.activeKey;
+            },
+
+            set activeKey(newVal: string) {
+                if (!type.isStr(newVal)) return;
+
+                const TabPane: Element | null = target.querySelector(
+                    `r-tab-pane[data-pane-key="${newVal}"]`
+                );
+
+                if (!TabPane) {
+                    warn('The current tab panel set to be active does not exist');
+                    return;
+                }
+
+                target.dataset.activeKey = newVal;
+
+                setCss(TabPane, 'display', 'block');
+                setCss(TabPane, 'visibility', 'visible');
+
+                siblings(TabPane).forEach((o: Element) => {
+                    setCss(o, 'display', 'none');
+                    setCss(o, 'visibility', 'hidden');
+                });
+            },
+
+            events({ onClick, onTabRemove }) {
+                //
+            }
+        };
+    }
+
     private _create(components: NodeListOf<Element>): void {
         components.forEach((node) => {
             const tabPanes = node.querySelectorAll('r-tab-pane');
             const { defaultActivekey, size, type, closable, animated } = this._attrs(node);
+
+            // @ts-ignore
+            node.dataset.activeKey = defaultActivekey;
 
             this._setType(node, type);
             this._setSize(node, type, size);
@@ -110,7 +173,7 @@ class Tabs {
             setCss(pane, 'display', `${animated === 'true' ? 'block' : 'none'}`);
 
             this._setPaneKey(pane, key, idx);
-            this._setActivePane([TabPaneContainer!, pane, activekey, idx, animated]);
+            this._setActive([TabPaneContainer!, TabsTab, pane, activekey, idx, animated]);
 
             this._handleToggle([TabsTab, pane, idx, disabled, animated]);
             this._handleRemove(TabsTab, pane, idx);
@@ -128,9 +191,7 @@ class Tabs {
 
         const TabsTab = createElem('div');
 
-        TabsTab.className = `${PREFIX.tabs}-tab ${
-            activekey === key ? `${PREFIX.tabs}-tab-active ${PREFIX.tabs}-tab-focused` : ''
-        }`;
+        TabsTab.className = `${PREFIX.tabs}-tab`;
 
         setHtml(TabsTab, content);
 
@@ -163,9 +224,9 @@ class Tabs {
         tabElm.appendChild(CloseIcon);
     }
 
-    private _setTabDisabled(tabELm: Element, disabled: boolean): void {
+    private _setTabDisabled(tabsTab: Element, disabled: boolean): void {
         if (!disabled) return;
-        tabELm.classList.add(`${PREFIX.tabs}-tab-disabled`);
+        tabsTab.classList.add(`${PREFIX.tabs}-tab-disabled`);
     }
 
     private _setPaneKey(pane: Element, key: string, idx: number): void {
@@ -174,17 +235,18 @@ class Tabs {
         pane.dataset.paneKey = !key ? idx : key;
     }
 
-    private _setActivePane(args: [Element, Element, string, number, string]): void {
-        const [paneContainer, pane, activekey, idx, animated] = args;
+    private _setActive(args: [Element, Element, Element, string, number, string]): void {
+        const [paneContainer, tabsTab, pane, activekey, idx, animated] = args;
 
         // @ts-ignore
-        const isEqual = pane.dataset.paneKey === activekey;
-
-        setCss(pane, 'visibility', `${isEqual ? 'visible' : 'hidden'}`);
+        const isEqual = activekey === pane.dataset.paneKey;
 
         if (isEqual) {
+            this._changeTab(tabsTab);
             this._changePane([paneContainer, idx]);
         }
+
+        setCss(pane, 'visibility', `${isEqual ? 'visible' : 'hidden'}`);
 
         if (animated === 'false') {
             setCss(pane, 'display', `${isEqual ? 'block' : 'none'}`);
@@ -192,57 +254,54 @@ class Tabs {
     }
 
     private _handleToggle(args: [Element, Element, number, boolean, string]): void {
-        const [tabELm, pane, idx, disabled, animated] = args;
+        const [tabsTab, pane, idx, disabled, animated] = args;
 
-        bind(tabELm, 'click', () => {
+        bind(tabsTab, 'click', () => {
             if (disabled) return false;
 
-            this._changeTab(tabELm);
+            this._changeTab(tabsTab);
             this._changePane([pane.parentElement!, idx, animated, pane]);
         });
     }
 
-    private _handleRemove(tabELm: Element, pane: Element, idx: number): void {
-        const TabClose = tabELm.querySelector(`.${PREFIX.tabs}-close`);
+    private _handleRemove(tabsTab: Element, pane: Element, idx: number): void {
+        const TabClose = tabsTab.querySelector(`.${PREFIX.tabs}-close`);
 
         if (!TabClose) return;
 
         bind(TabClose, 'click', (e: Event) => {
             e.stopPropagation();
-
-            tabELm.remove();
+            // TODO
+            tabsTab.remove();
             pane.remove();
         });
     }
 
-    private _changeTab(tabELm: Element): void {
-        tabELm.classList.add(`${PREFIX.tabs}-tab-active`);
-        tabELm.classList.add(`${PREFIX.tabs}-tab-focusd`);
+    private _changeTab(tabsTab: Element): void {
+        tabsTab.classList.add(`${PREFIX.tabs}-tab-active`);
+        tabsTab.classList.add(`${PREFIX.tabs}-tab-focusd`);
 
-        siblings(tabELm).forEach((o) => {
+        siblings(tabsTab).forEach((o) => {
             o.classList.remove(`${PREFIX.tabs}-tab-active`);
             o.classList.remove(`${PREFIX.tabs}-tab-focusd`);
         });
     }
 
-    private _changePane(args: [Element, number, string?, Element?, boolean?]): void {
-        const [paneContainer, idx, animated, pane, remove] = args;
+    private _changePane(args: [Element, number, string?, Element?]): void {
+        const [paneContainer, idx, animated, pane] = args;
 
         const translateX = idx * 100;
-
         setCss(paneContainer, 'transform', `translateX(-${translateX}%)`);
 
-        if (pane) {
-            if (animated === 'false') setCss(pane, 'display', 'block');
+        if (!pane) return;
 
-            setCss(pane, 'visibility', 'visible');
+        if (animated === 'false') setCss(pane, 'display', 'block');
+        setCss(pane, 'visibility', 'visible');
 
-            siblings(pane).forEach((o) => {
-                if (animated === 'false') setCss(o, 'display', 'none');
-
-                setCss(o, 'visibility', 'hidden');
-            });
-        }
+        siblings(pane).forEach((o) => {
+            if (animated === 'false') setCss(o, 'display', 'none');
+            setCss(o, 'visibility', 'hidden');
+        });
     }
 
     private _attrs(node: Element): TabsAttrs {
