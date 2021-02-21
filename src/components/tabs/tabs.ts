@@ -58,8 +58,8 @@ class Tabs {
     }
 
     private _setSize(node: Element, type: string, size: string): void {
-        if (type !== 'line') return;
-        node.classList.add(`${PREFIX.tabs}-${size}`);
+        if (type !== 'line' || size !== 'small') return;
+        node.classList.add(`${PREFIX.tabs}-mini`);
     }
 
     private _setNoAnimation(node: Element, animated: string): void {
@@ -110,9 +110,10 @@ class Tabs {
             setCss(pane, 'display', `${animated === 'true' ? 'block' : 'none'}`);
 
             this._setPaneKey(pane, key, idx);
-            this._setActivePane([TabPaneContainer!, pane, activekey, key, idx, animated]);
+            this._setActivePane([TabPaneContainer!, pane, activekey, idx, animated]);
 
             this._handleToggle([TabsTab, pane, idx, disabled, animated]);
+            this._handleRemove(TabsTab, pane, idx);
 
             Fragment.appendChild(pane);
 
@@ -173,16 +174,21 @@ class Tabs {
         pane.dataset.paneKey = !key ? idx : key;
     }
 
-    private _setActivePane(args: [Element, Element, string, string, number, string]): void {
-        const [paneContainer, pane, activekey, key, idx, animated] = args;
+    private _setActivePane(args: [Element, Element, string, number, string]): void {
+        const [paneContainer, pane, activekey, idx, animated] = args;
 
-        if (animated === 'false') {
-            setCss(pane, 'display', `${activekey === key ? 'block' : 'none'}`);
+        // @ts-ignore
+        const isEqual = pane.dataset.paneKey === activekey;
+
+        setCss(pane, 'visibility', `${isEqual ? 'visible' : 'hidden'}`);
+
+        if (isEqual) {
+            this._changePane([paneContainer, idx]);
         }
 
-        setCss(pane, 'visibility', `${activekey === key ? 'visible' : 'hidden'}`);
-
-        if (activekey === key) this._changePane([paneContainer, idx]);
+        if (animated === 'false') {
+            setCss(pane, 'display', `${isEqual ? 'block' : 'none'}`);
+        }
     }
 
     private _handleToggle(args: [Element, Element, number, boolean, string]): void {
@@ -196,6 +202,19 @@ class Tabs {
         });
     }
 
+    private _handleRemove(tabELm: Element, pane: Element, idx: number): void {
+        const TabClose = tabELm.querySelector(`.${PREFIX.tabs}-close`);
+
+        if (!TabClose) return;
+
+        bind(TabClose, 'click', (e: Event) => {
+            e.stopPropagation();
+
+            tabELm.remove();
+            pane.remove();
+        });
+    }
+
     private _changeTab(tabELm: Element): void {
         tabELm.classList.add(`${PREFIX.tabs}-tab-active`);
         tabELm.classList.add(`${PREFIX.tabs}-tab-focusd`);
@@ -206,10 +225,11 @@ class Tabs {
         });
     }
 
-    private _changePane(args: [Element, number, string?, Element?]): void {
-        const [paneContainer, idx, animated, pane] = args;
+    private _changePane(args: [Element, number, string?, Element?, boolean?]): void {
+        const [paneContainer, idx, animated, pane, remove] = args;
 
         const translateX = idx * 100;
+
         setCss(paneContainer, 'transform', `translateX(-${translateX}%)`);
 
         if (pane) {
@@ -238,7 +258,7 @@ class Tabs {
     private _paneAttrs(pane: Element): TabsPaneAttrs {
         return {
             tab: getStrTypeAttr(pane, 'tab', ''),
-            key: getStrTypeAttr(pane, 'key', '0'),
+            key: getStrTypeAttr(pane, 'key', ''),
             icon: getStrTypeAttr(pane, 'icon', ''),
             closable: getStrTypeAttr(pane, 'closable', 'true'),
             disabled: getBooleanTypeAttr(pane, 'disabled')
