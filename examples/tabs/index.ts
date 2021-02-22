@@ -7,4 +7,7 @@ export default function tabsTest(): void {
             console.log(key);
         }
     });
+    // setTimeout(() => {
+    //     tabs.config('#a').activeKey = '2';
+    // }, 1500);
 }

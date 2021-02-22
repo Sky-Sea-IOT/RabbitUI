@@ -11,7 +11,6 @@ import {
     siblings
 } from '../../dom-utils';
 import PREFIX from '../prefix';
-import { warn } from '../../mixins';
 
 interface Config {
     config(
@@ -59,12 +58,14 @@ class Tabs implements Config {
         activeKey: string;
         events({ onClick, onTabRemove }: TabsEvents): void;
     } {
-        const target = $el(el);
+        const target = $el(el) as HTMLElement;
 
         validComps(target, 'tabs');
 
-        const TabTabs: NodeListOf<Element> = target.querySelectorAll(`.${PREFIX.tabs}-tab`);
-        const TabPanes: NodeListOf<Element> = target.querySelectorAll('r-tab-pane');
+        const TabTabs = target.querySelectorAll(`.${PREFIX.tabs}-tab`);
+        const TabPanes = target.querySelectorAll('r-tab-pane');
+
+        const { _changeTab, _changePane } = Tabs.prototype;
 
         return {
             get activeKey() {
@@ -74,21 +75,13 @@ class Tabs implements Config {
             set activeKey(newVal: string) {
                 if (!type.isStr(newVal)) return;
 
-                const TabPane: Element | null = target.querySelector(
-                    `r-tab-pane[data-pane-key="${newVal}"]`
-                );
+                TabPanes.forEach((pane, i) => {
+                    const p = pane as HTMLElement;
 
-                if (!TabPane) {
-                    warn('The current tab panel set to be active does not exist');
-                    return;
-                }
+                    if (newVal !== p.dataset.paneKey) return;
 
-                setCss(TabPane, 'display', 'block');
-                setCss(TabPane, 'visibility', 'visible');
-
-                siblings(TabPane).forEach((o: Element) => {
-                    setCss(o, 'display', 'none');
-                    setCss(o, 'visibility', 'hidden');
+                    _changeTab(TabTabs[i], true);
+                    _changePane([false, p.parentElement!, i, 'true', p]);
                 });
             },
 
@@ -97,8 +90,8 @@ class Tabs implements Config {
                     const tabClose = tab.querySelector(`.${PREFIX.tabs}-close`);
 
                     const clickEv = () => {
-                        // @ts-ignore
-                        const key: string = TabPanes[i].dataset.paneKey;
+                        const TabPane = TabPanes[i] as HTMLElement;
+                        const key = TabPane.dataset.paneKey;
 
                         onClick && type.isFn(onClick, key);
 
@@ -172,8 +165,11 @@ class Tabs implements Config {
     ): void {
         const [node, panes, activekey, type, animated, closable] = args;
 
+        const TabNavWrap = node.querySelector(`.${PREFIX.tabs}-nav-wrap`);
+        const TabNavScroll = node.querySelector(`.${PREFIX.tabs}-nav-scroll`);
         const TabNav = node.querySelector(`.${PREFIX.tabs}-nav`);
         const TabPaneContainer = node.querySelector(`.${PREFIX.tabs}-content`);
+
         const Fragment = document.createDocumentFragment();
 
         panes.forEach((pane, idx) => {
@@ -197,6 +193,8 @@ class Tabs implements Config {
 
             removeAttrs(pane, ['key', 'tab', 'icon', 'disabled', 'closable']);
         });
+
+        this._showArrow(TabNavWrap!, TabNav!, TabNavScroll!);
 
         TabPaneContainer?.appendChild(Fragment);
     }
@@ -287,7 +285,10 @@ class Tabs implements Config {
          * @param elm2 tabs的面板
          */
         const changeActive = (elm1: Element, elm2: Element) => {
-            this._changeTab(elm1, false);
+            if (tabsTab.classList.contains(`${PREFIX.tabs}-tab-active`)) {
+                this._changeTab(elm1, false);
+            }
+
             setCss(elm2, 'display', 'block');
             setCss(elm2, 'visibility', 'visible');
         };
@@ -312,20 +313,6 @@ class Tabs implements Config {
             e.stopPropagation();
             removeEv();
         });
-    }
-
-    // TODO 当选项标签溢出时能够左右滚动切换标签的功能
-
-    private _handleNavScroll(): void {
-        //
-    }
-
-    private _scrollPrev(): void {
-        //
-    }
-
-    private _scrollNext(): void {
-        //
     }
 
     private _changeTab(tabsTab: Element, siblingsChange = true): void {
@@ -360,6 +347,47 @@ class Tabs implements Config {
 
             setCss(o, 'visibility', 'hidden');
         });
+    }
+
+    private _showArrow(tabNavWrap: Element, tabNav: Element, tabNavScroll: Element): void {
+        const navWidth = this._getNavWidth(tabNav);
+        const navScrollWidth = this._getNavScrollWidth(tabNavScroll);
+
+        if (navWidth > navScrollWidth) {
+            tabNavWrap.classList.add(`${PREFIX.tabs}-nav-scrollable`);
+
+            tabNavWrap
+                .querySelector(`.${PREFIX.tabs}-nav-prev`)
+                ?.classList.remove(`${PREFIX.tabs}-nav-scroll-disabled`);
+
+            tabNavWrap
+                .querySelector(`.${PREFIX.tabs}-nav-next`)
+                ?.classList.remove(`${PREFIX.tabs}-nav-scroll-disabled`);
+        }
+    }
+
+    // TODO 当选项标签溢出时能够左右滚动切换标签的功能
+
+    private _handleNavScroll(tabNav: Element, tabNavScroll: Element): void {
+        //
+    }
+
+    private _scrollPrev(): void {
+        //
+    }
+
+    private _scrollNext(): void {
+        //
+    }
+
+    private _getNavScrollWidth(tabNavScroll: Element): number {
+        const tns = tabNavScroll as HTMLElement;
+        return tns.offsetWidth;
+    }
+
+    private _getNavWidth(tabNav: Element): number {
+        const tn = tabNav as HTMLElement;
+        return tn.offsetWidth;
     }
 
     private _attrs(node: Element): TabsAttrs {
