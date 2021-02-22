@@ -23,8 +23,8 @@ interface Config {
 }
 
 interface TabsEvents {
-    onClick: () => void;
-    onTabRemove: () => void;
+    onClick?: (key?: string) => void;
+    onTabRemove?: (key?: string) => void;
 }
 
 interface TabsAttrs {
@@ -63,9 +63,12 @@ class Tabs implements Config {
 
         validComps(target, 'tabs');
 
+        const TabTabs: NodeListOf<Element> = target.querySelectorAll(`.${PREFIX.tabs}-tab`);
+        const TabPanes: NodeListOf<Element> = target.querySelectorAll('r-tab-pane');
+
         return {
             get activeKey() {
-                return target.dataset.activeKey;
+                return '0';
             },
 
             set activeKey(newVal: string) {
@@ -80,8 +83,6 @@ class Tabs implements Config {
                     return;
                 }
 
-                target.dataset.activeKey = newVal;
-
                 setCss(TabPane, 'display', 'block');
                 setCss(TabPane, 'visibility', 'visible');
 
@@ -92,7 +93,24 @@ class Tabs implements Config {
             },
 
             events({ onClick, onTabRemove }) {
-                //
+                TabTabs.forEach((tab, i) => {
+                    const tabClose = tab.querySelector(`.${PREFIX.tabs}-close`);
+
+                    const clickEv = () => {
+                        // @ts-ignore
+                        const key: string = TabPanes[i].dataset.paneKey;
+
+                        onClick && type.isFn(onClick, key);
+
+                        if (!tabClose) return;
+                        onTabRemove && type.isFn(onTabRemove, key);
+                    };
+
+                    bind(tab, 'click', clickEv);
+
+                    if (!tabClose) return;
+                    bind(tabClose, 'click', clickEv);
+                });
             }
         };
     }
@@ -101,9 +119,6 @@ class Tabs implements Config {
         components.forEach((node) => {
             const tabPanes = node.querySelectorAll('r-tab-pane');
             const { defaultActivekey, size, type, closable, animated } = this._attrs(node);
-
-            // @ts-ignore
-            node.dataset.activeKey = defaultActivekey;
 
             this._setType(node, type);
             this._setSize(node, type, size);
@@ -299,15 +314,29 @@ class Tabs implements Config {
         });
     }
 
+    // TODO 当选项标签溢出时能够左右滚动切换标签的功能
+
+    private _handleNavScroll(): void {
+        //
+    }
+
+    private _scrollPrev(): void {
+        //
+    }
+
+    private _scrollNext(): void {
+        //
+    }
+
     private _changeTab(tabsTab: Element, siblingsChange = true): void {
         tabsTab.classList.add(`${PREFIX.tabs}-tab-active`);
-        tabsTab.classList.add(`${PREFIX.tabs}-tab-focusd`);
+        tabsTab.classList.add(`${PREFIX.tabs}-tab-focused`);
 
         if (!siblingsChange) return;
 
         siblings(tabsTab).forEach((o) => {
             o.classList.remove(`${PREFIX.tabs}-tab-active`);
-            o.classList.remove(`${PREFIX.tabs}-tab-focusd`);
+            o.classList.remove(`${PREFIX.tabs}-tab-focused`);
         });
     }
 
