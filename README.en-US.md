@@ -15,15 +15,15 @@ RabbitUI
 
 ### Features
 
+- Elegant, concise, and huge and bloated people look dazzling structure Say goodbye
+
 - It does not rely on any third party framework, and is written based on native JavaScript
 
-- Elegant, concise, semantic, and normative modular HTML code
+- Custom tags that use small amounts of HTML code and are semantically readable
 
 - Can be used directly in Vue, React, or other existing projects
 
 - Rich components and features to meet most site scenarios
-
-- Friendly API, free and flexible use of space
 
 - Careful, beautiful UI
 
