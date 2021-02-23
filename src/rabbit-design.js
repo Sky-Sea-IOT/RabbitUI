@@ -17,8 +17,9 @@ import Progress from './components/progress';
 import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
+import Tabs from './components/tabs';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
-export { Alert, Avatar, BackTop, Badge, Button, Card, Collapse, Divider, Drawer, Dropdown, Loading, Message, Modal, Notice, Poptip, Progress, Spin, Steps, Switch, Time, Timeline, Tooltip };
+export { Alert, Avatar, BackTop, Badge, Button, Card, Collapse, Divider, Drawer, Dropdown, Loading, Message, Modal, Notice, Poptip, Progress, Spin, Steps, Switch, Tabs, Time, Timeline, Tooltip };
 //# sourceMappingURL=rabbit-design.js.map

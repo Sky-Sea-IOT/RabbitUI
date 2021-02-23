@@ -12,6 +12,7 @@
   overflow: hidden;
   color: @text-color;
   .clearfix();
+
 }
 
 .@{tabs-prefix-cls} {
@@ -26,9 +27,19 @@
         line-height: @line-height-base;
         font-size: @font-size-base;
         white-space: nowrap;
-        overflow: hidden;
         position: relative;
         .clearfix();
+        
+        // 设置溢出滚动条样式
+        ::-webkit-scrollbar {
+            height: 4px;
+            background-color: #fff;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background-color: @border-color-base;
+        }
     }
 
     &-nav-container:focus {
@@ -45,12 +56,7 @@
 
     &-nav-wrap {
         position: relative;
-        overflow: hidden;
-    }
-
-    &-nav-scroll {
-        overflow: hidden;
-        white-space: nowrap;
+        overflow-x: auto;
     }
 
     &-nav-right{
@@ -67,22 +73,6 @@
         i{
             font-size: 16px;
         }
-    }
-
-    &-nav-prev{
-        left: 0;
-    }
-
-    &-nav-next{
-        right: 0;
-    }
-
-    &-nav-scrollable{
-        padding: 0 32px;
-    }
-
-    &-nav-scroll-disabled{
-        display: none;
     }
 
     &-nav {
@@ -170,7 +160,7 @@
         border-bottom: 0;
         border-radius: @btn-border-radius @btn-border-radius 0 0;
         transition: all 0.3s @ease-in-out;
-        background: @table-thead-bg;
+        background: @background-color-base;
     }
     &-card > &-bar &-tab-active {
         height: 32px;

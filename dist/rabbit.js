@@ -6019,8 +6019,8 @@ var prefixCls = 'rab-';
     poptip: prefixCls + "poptip",
     noticeChild: prefixCls + "notice-notice",
     progress: prefixCls + "progress",
-    rate: prefixCls + "rate",
     switch: prefixCls + "switch",
+    tabs: prefixCls + "tabs",
     spin: prefixCls + "spin",
     steps: prefixCls + "steps",
     time: prefixCls + "time",
@@ -6484,7 +6484,7 @@ function siblings(elem) {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 115 modules ***!
+  !*** ./src/index.ts + 117 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -6520,6 +6520,7 @@ __webpack_require__.d(rabbit_design_namespaceObject, {
   "Spin": function() { return components_spin; },
   "Steps": function() { return components_steps; },
   "Switch": function() { return components_switch; },
+  "Tabs": function() { return components_tabs; },
   "Time": function() { return components_time; },
   "Timeline": function() { return components_timeline; },
   "Tooltip": function() { return components_tooltip; }
@@ -12401,6 +12402,259 @@ var Switch = /** @class */ (function () {
 
 /* harmony default export */ var components_switch = (switch_switch);
 
+;// CONCATENATED MODULE: ./src/components/tabs/tabs.ts
+
+
+
+var Tabs = /** @class */ (function () {
+    function Tabs() {
+        this.VERSION = '1.0';
+        this.components = (0,dom_utils.$el)('r-tabs', { all: true });
+        this._create(this.components);
+    }
+    Tabs.prototype.config = function (el) {
+        var target = (0,dom_utils.$el)(el);
+        validComps(target, 'tabs');
+        var TabTabs = target.querySelectorAll("." + prefix.default.tabs + "-tab");
+        var TabPanes = target.querySelectorAll('r-tab-pane');
+        var _a = Tabs.prototype, _changeTab = _a._changeTab, _changePane = _a._changePane;
+        return {
+            get activeKey() {
+                return '0';
+            },
+            set activeKey(newVal) {
+                if (!isStr(newVal))
+                    return;
+                TabPanes.forEach(function (pane, i) {
+                    var p = pane;
+                    if (newVal !== p.dataset.paneKey)
+                        return;
+                    _changeTab(TabTabs[i], true);
+                    _changePane([false, p.parentElement, i, 'true', p]);
+                });
+            },
+            events: function (_a) {
+                var onClick = _a.onClick, onTabRemove = _a.onTabRemove;
+                TabTabs.forEach(function (tab, i) {
+                    var tabClose = tab.querySelector("." + prefix.default.tabs + "-close");
+                    var clickEv = function () {
+                        var TabPane = TabPanes[i];
+                        var key = TabPane.dataset.paneKey;
+                        onClick && isFn(onClick, key);
+                        if (!tabClose)
+                            return;
+                        onTabRemove && isFn(onTabRemove, key);
+                    };
+                    (0,dom_utils.bind)(tab, 'click', clickEv);
+                    if (!tabClose)
+                        return;
+                    (0,dom_utils.bind)(tabClose, 'click', clickEv);
+                });
+            }
+        };
+    };
+    Tabs.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var tabPanes = node.querySelectorAll('r-tab-pane');
+            var _a = _this._attrs(node), defaultActivekey = _a.defaultActivekey, size = _a.size, type = _a.type, closable = _a.closable, animated = _a.animated;
+            _this._setType(node, type);
+            _this._setSize(node, type, size);
+            _this._setNoAnimation(node, animated);
+            _this._setBodyTemplate(node);
+            _this._setTabPane([node, tabPanes, defaultActivekey, type, animated, closable]);
+            (0,dom_utils.removeAttrs)(node, ['defaultActivekey', 'type', 'size', 'closable', 'animated']);
+        });
+    };
+    Tabs.prototype._setType = function (node, type) {
+        if (type !== 'card')
+            return;
+        node.classList.add(prefix.default.tabs + "-" + type);
+    };
+    Tabs.prototype._setSize = function (node, type, size) {
+        if (type !== 'line' || size !== 'small')
+            return;
+        node.classList.add(prefix.default.tabs + "-mini");
+    };
+    Tabs.prototype._setNoAnimation = function (node, animated) {
+        if (animated === 'true')
+            return;
+        node.classList.add(prefix.default.tabs + "-no-animation");
+    };
+    Tabs.prototype._setBodyTemplate = function (node) {
+        var template = "\n          <div class=\"" + prefix.default.tabs + "-bar\">\n              <div tabindex=\"0\" class=\"" + prefix.default.tabs + "-nav-container\">\n                  <div class=\"" + prefix.default.tabs + "-nav-wrap\">\n                     <div class=\"" + prefix.default.tabs + "-nav\"></div>\n                  </div>\n              </div>\n          </div>\n          <div class=\"" + prefix.default.tabs + "-content " + prefix.default.tabs + "-content-animated\"></div>";
+        (0,dom_utils.setHtml)(node, template);
+    };
+    Tabs.prototype._setTabPane = function (args) {
+        var _this = this;
+        var node = args[0], panes = args[1], activekey = args[2], type = args[3], animated = args[4], closable = args[5];
+        var TabNav = node.querySelector("." + prefix.default.tabs + "-nav");
+        var TabPaneContainer = node.querySelector("." + prefix.default.tabs + "-content");
+        var Fragment = document.createDocumentFragment();
+        panes.forEach(function (pane, idx) {
+            var _a = _this._paneAttrs(pane), key = _a.key, tab = _a.tab, icon = _a.icon, separateClose = _a.closable, disabled = _a.disabled;
+            var TabsTab = _this._setTab(TabNav, tab);
+            _this._setTabIcon(TabsTab, icon);
+            _this._setTabClosable([TabsTab, type, closable, separateClose]);
+            _this._setTabDisabled(TabsTab, disabled);
+            (0,dom_utils.setCss)(pane, 'display', "" + (animated === 'true' ? 'block' : 'none'));
+            _this._setPaneKey(pane, key, idx);
+            _this._setActive([closable, TabPaneContainer, TabsTab, pane, activekey, idx, animated]);
+            _this._handleToggle([closable, TabsTab, pane, idx, disabled, animated]);
+            _this._handleRemove(TabsTab, pane);
+            Fragment.appendChild(pane);
+            (0,dom_utils.removeAttrs)(pane, ['key', 'tab', 'icon', 'disabled', 'closable']);
+        });
+        TabPaneContainer === null || TabPaneContainer === void 0 ? void 0 : TabPaneContainer.appendChild(Fragment);
+    };
+    Tabs.prototype._setTab = function (tabsNav, content) {
+        var TabsTab = (0,dom_utils.createElem)('div');
+        TabsTab.className = prefix.default.tabs + "-tab";
+        (0,dom_utils.setHtml)(TabsTab, content);
+        tabsNav.appendChild(TabsTab);
+        return TabsTab;
+    };
+    Tabs.prototype._setTabIcon = function (tabElm, icon) {
+        if (!icon)
+            return;
+        var Icon = (0,dom_utils.createElem)('icon');
+        Icon.className = prefix.default.icon + " " + prefix.default.icon + "-" + icon;
+        tabElm.prepend(Icon);
+    };
+    Tabs.prototype._setTabClosable = function (args) {
+        var tabElm = args[0], type = args[1], closable = args[2], separateClose = args[3];
+        if (!closable || type !== 'card')
+            return;
+        var CloseIcon = (0,dom_utils.createElem)('icon');
+        CloseIcon.className = prefix.default.icon + " " + prefix.default.icon + "-ios-close " + prefix.default.tabs + "-close";
+        // 单独设置当前选项是否可以关闭页签
+        if (separateClose === 'false')
+            return;
+        tabElm.appendChild(CloseIcon);
+    };
+    Tabs.prototype._setTabDisabled = function (tabsTab, disabled) {
+        if (!disabled)
+            return;
+        tabsTab.classList.add(prefix.default.tabs + "-tab-disabled");
+    };
+    Tabs.prototype._setPaneKey = function (pane, key, idx) {
+        // 当前面板的 key 如果不填则默认为其索引值
+        // @ts-ignore
+        pane.dataset.paneKey = !key ? idx : key;
+    };
+    Tabs.prototype._setActive = function (args) {
+        var closable = args[0], paneContainer = args[1], tabsTab = args[2], pane = args[3], activekey = args[4], idx = args[5], animated = args[6];
+        // @ts-ignore
+        var isEqual = activekey === pane.dataset.paneKey;
+        if (isEqual) {
+            this._changeTab(tabsTab);
+            this._changePane([closable, paneContainer, idx]);
+        }
+        (0,dom_utils.setCss)(pane, 'visibility', "" + (isEqual ? 'visible' : 'hidden'));
+        if (animated === 'false') {
+            (0,dom_utils.setCss)(pane, 'display', "" + (isEqual ? 'block' : 'none'));
+        }
+    };
+    Tabs.prototype._handleToggle = function (args) {
+        var _this = this;
+        var closable = args[0], tabsTab = args[1], pane = args[2], idx = args[3], disabled = args[4], animated = args[5];
+        (0,dom_utils.bind)(tabsTab, 'click', function () {
+            if (disabled)
+                return false;
+            _this._changeTab(tabsTab);
+            _this._changePane([closable, pane.parentElement, idx, animated, pane]);
+        });
+    };
+    Tabs.prototype._handleRemove = function (tabsTab, pane) {
+        var _this = this;
+        var TabClose = tabsTab.querySelector("." + prefix.default.tabs + "-close");
+        if (!TabClose)
+            return;
+        /**
+         * @param elm1 tabs的选项
+         * @param elm2 tabs的面板
+         */
+        var changeActive = function (elm1, elm2) {
+            if (tabsTab.classList.contains(prefix.default.tabs + "-tab-active")) {
+                _this._changeTab(elm1, false);
+            }
+            (0,dom_utils.setCss)(elm2, 'display', 'block');
+            (0,dom_utils.setCss)(elm2, 'visibility', 'visible');
+        };
+        var removeEv = function () {
+            var prevTab = tabsTab.previousElementSibling;
+            var nextTab = tabsTab.nextElementSibling;
+            var prevPane = pane.previousElementSibling;
+            var nextPane = pane.nextElementSibling;
+            if (nextTab && nextPane) {
+                changeActive(nextTab, nextPane);
+            }
+            else if (prevTab && prevPane) {
+                changeActive(prevTab, prevPane);
+            }
+            tabsTab.remove();
+            pane.remove();
+        };
+        (0,dom_utils.bind)(TabClose, 'click', function (e) {
+            e.stopPropagation();
+            removeEv();
+        });
+    };
+    Tabs.prototype._changeTab = function (tabsTab, siblingsChange) {
+        if (siblingsChange === void 0) { siblingsChange = true; }
+        tabsTab.classList.add(prefix.default.tabs + "-tab-active");
+        tabsTab.classList.add(prefix.default.tabs + "-tab-focused");
+        if (!siblingsChange)
+            return;
+        (0,dom_utils.siblings)(tabsTab).forEach(function (o) {
+            o.classList.remove(prefix.default.tabs + "-tab-active");
+            o.classList.remove(prefix.default.tabs + "-tab-focused");
+        });
+    };
+    Tabs.prototype._changePane = function (args) {
+        var closable = args[0], paneContainer = args[1], idx = args[2], animated = args[3], pane = args[4];
+        // 如果选项卡启用了可关闭功能，则不使用动画切换，这为了减少 tab 删除操作的工作量
+        if (!closable) {
+            var translateX = idx * 100;
+            (0,dom_utils.setCss)(paneContainer, 'transform', "translateX(-" + translateX + "%)");
+        }
+        // 是否要一并更改面板项
+        if (!pane)
+            return;
+        (0,dom_utils.setCss)(pane, 'display', 'block');
+        (0,dom_utils.setCss)(pane, 'visibility', 'visible');
+        (0,dom_utils.siblings)(pane).forEach(function (o) {
+            if (animated === 'false' || closable)
+                (0,dom_utils.setCss)(o, 'display', 'none');
+            (0,dom_utils.setCss)(o, 'visibility', 'hidden');
+        });
+    };
+    Tabs.prototype._attrs = function (node) {
+        return {
+            defaultActivekey: (0,dom_utils.getStrTypeAttr)(node, 'defaultActivekey', '0'),
+            type: (0,dom_utils.getStrTypeAttr)(node, 'type', 'line'),
+            size: (0,dom_utils.getStrTypeAttr)(node, 'size', 'default'),
+            animated: (0,dom_utils.getStrTypeAttr)(node, 'animated', 'true'),
+            closable: (0,dom_utils.getBooleanTypeAttr)(node, 'closable')
+        };
+    };
+    Tabs.prototype._paneAttrs = function (pane) {
+        return {
+            tab: (0,dom_utils.getStrTypeAttr)(pane, 'tab', ''),
+            key: (0,dom_utils.getStrTypeAttr)(pane, 'key', ''),
+            icon: (0,dom_utils.getStrTypeAttr)(pane, 'icon', ''),
+            closable: (0,dom_utils.getStrTypeAttr)(pane, 'closable', 'true'),
+            disabled: (0,dom_utils.getBooleanTypeAttr)(pane, 'disabled')
+        };
+    };
+    return Tabs;
+}());
+/* harmony default export */ var tabs = (Tabs);
+
+;// CONCATENATED MODULE: ./src/components/tabs/index.ts
+
+/* harmony default export */ var components_tabs = (tabs);
+
 // EXTERNAL MODULE: ./src/components/time/time.ts
 var time = __webpack_require__("./src/components/time/time.ts");
 ;// CONCATENATED MODULE: ./src/components/time/index.ts
@@ -12686,12 +12940,15 @@ var Tooltip = /** @class */ (function () {
 
 
 
+
 ;// CONCATENATED MODULE: ./src/styles/index.less
 // extracted by mini-css-extract-plugin
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
+// export default Rabbit;
+// 当需要打包时请使用下面的导出，并在打包之后恢复注释
 // @ts-ignore
 /* harmony default export */ var src = (window.Rabbit = rabbit_design_namespaceObject);
 

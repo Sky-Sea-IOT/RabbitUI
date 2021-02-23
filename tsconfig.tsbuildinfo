@@ -151,6 +151,11 @@
         "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
         "affectsGlobalScope": true
       },
+      "./src/images.d.ts": {
+        "version": "f5765a98fc28e4468fde2802c47227da6105c293ecc066cceb341a141dc2574f",
+        "signature": "f5765a98fc28e4468fde2802c47227da6105c293ecc066cceb341a141dc2574f",
+        "affectsGlobalScope": false
+      },
       "./node_modules/tslib/tslib.d.ts": {
         "version": "4576b4e61049f5ffd7c9e935cf88832e089265bdb15ffc35077310042cbbbeea",
         "signature": "4576b4e61049f5ffd7c9e935cf88832e089265bdb15ffc35077310042cbbbeea",
@@ -347,8 +352,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/prefix.ts": {
-        "version": "009ae8c8c0b2989eb6d5d0fda9cf6384d249e61bbc05bf55b1cce5e5fac4f6a5",
-        "signature": "d77a4e6a959381962d7b76cadefc65c204c8e3f37f9215c8a7547c88655498f8",
+        "version": "a6b132e1ed341a247d7dd481efdba741fd19e6a20138c94e2721a9e7edb65239",
+        "signature": "4d85cdbf02bf41f2f03f58da9bb2bff6fc1c242388740da7aaca97c20746af5a",
         "affectsGlobalScope": false
       },
       "./src/components/alert/alert.ts": {
@@ -541,6 +546,16 @@
         "signature": "54b35d8c5351938696ddbfd85bb4ae25d5c6252462d0a7abb8bfbf2375a0d76c",
         "affectsGlobalScope": false
       },
+      "./src/components/tabs/tabs.ts": {
+        "version": "5bc2beda7c181e3023b235e9a9f75dbf6efc168597ef36ec111f2d7f10b1f7b7",
+        "signature": "42a13b554813a0d6a73fae712553bb7d65d0aab5abf3359904e3eaf76ebc4958",
+        "affectsGlobalScope": false
+      },
+      "./src/components/tabs/index.ts": {
+        "version": "13493ed8c69ebac1a3f4172b45b6a0e0b2beb4e868291bc113c7f26546d28fbb",
+        "signature": "13493ed8c69ebac1a3f4172b45b6a0e0b2beb4e868291bc113c7f26546d28fbb",
+        "affectsGlobalScope": false
+      },
       "./node_modules/moment/ts3.1-typings/moment.d.ts": {
         "version": "f97edc4d3b4dd0b32766e9633086497565c37657fb591cc84a35864db4bc2fc5",
         "signature": "f97edc4d3b4dd0b32766e9633086497565c37657fb591cc84a35864db4bc2fc5",
@@ -577,13 +592,13 @@
         "affectsGlobalScope": false
       },
       "./src/rabbit-design.ts": {
-        "version": "fa082ec305a4226e775dfc59b5d600d7478480ad4c13284e85a09af1d3a5520a",
-        "signature": "b86e79b2e1ba4348a7969bfcaf63660f23588e814f800d1c3a4b086be6dddc09",
+        "version": "f8a5d157cc172c773e4e5ea30b0987161c13a0b28dfeb5bf454bc540c0aff52c",
+        "signature": "b7fef67f85615d2d8e983864ce48127734e6dec5103c7b14d96e5de8fac28774",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "c0655e78e50b511528eaad6c8b08d46482827e2d4e1f72ebe2beddaff1cfb619",
-        "signature": "0b38eb4d51fc75c9dcaaa383167847a1a0282a15063b3f4349628d39ad93f545",
+        "version": "8dba5de92bf59161c0920820c2c543a56fc3812ad636087f590d06066e06d502",
+        "signature": "2ec38789a49751baf083f48672848bf505dbc4ed8cb607e82f6e8d4b4c40fa2c",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/anymatch/index.d.ts": {
@@ -1517,6 +1532,14 @@
         "./src/dom-utils/index.ts",
         "./src/utils/index.ts"
       ],
+      "./src/components/tabs/index.ts": [
+        "./src/components/tabs/tabs.ts"
+      ],
+      "./src/components/tabs/tabs.ts": [
+        "./src/components/prefix.ts",
+        "./src/dom-utils/index.ts",
+        "./src/utils/index.ts"
+      ],
       "./src/components/time/index.ts": [
         "./src/components/time/time.ts"
       ],
@@ -1596,6 +1619,7 @@
         "./src/components/spin/index.ts",
         "./src/components/steps/index.ts",
         "./src/components/switch/index.ts",
+        "./src/components/tabs/index.ts",
         "./src/components/time/index.ts",
         "./src/components/timeline/index.ts",
         "./src/components/tooltip/index.ts"
@@ -2031,6 +2055,9 @@
       "./src/components/switch/index.ts": [
         "./src/components/switch/switch.ts"
       ],
+      "./src/components/tabs/index.ts": [
+        "./src/components/tabs/tabs.ts"
+      ],
       "./src/components/time/index.ts": [
         "./src/components/time/time.ts"
       ],
@@ -2080,6 +2107,7 @@
         "./src/components/spin/index.ts",
         "./src/components/steps/index.ts",
         "./src/components/switch/index.ts",
+        "./src/components/tabs/index.ts",
         "./src/components/time/index.ts",
         "./src/components/timeline/index.ts",
         "./src/components/tooltip/index.ts"
@@ -3021,6 +3049,8 @@
       "./src/components/steps/steps.ts",
       "./src/components/switch/index.ts",
       "./src/components/switch/switch.ts",
+      "./src/components/tabs/index.ts",
+      "./src/components/tabs/tabs.ts",
       "./src/components/time/index.ts",
       "./src/components/time/time.ts",
       "./src/components/timeline/index.ts",
@@ -3034,6 +3064,7 @@
       "./src/dom-utils/remove-attrs.ts",
       "./src/dom-utils/siblings.ts",
       "./src/dom-utils/slide.ts",
+      "./src/images.d.ts",
       "./src/index.ts",
       "./src/mixins/arrow.ts",
       "./src/mixins/cb-promise.ts",

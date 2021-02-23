@@ -143,15 +143,7 @@ class Tabs implements Config {
           <div class="${PREFIX.tabs}-bar">
               <div tabindex="0" class="${PREFIX.tabs}-nav-container">
                   <div class="${PREFIX.tabs}-nav-wrap">
-                      <span class="${PREFIX.tabs}-nav-prev ${PREFIX.tabs}-nav-scroll-disabled">
-                          <i class="${PREFIX.icon} ${PREFIX.icon}-ios-arrow-back"></i>
-                      </span>
-                      <span class="${PREFIX.tabs}-nav-next ${PREFIX.tabs}-nav-scroll-disabled">
-                          <i class="${PREFIX.icon} ${PREFIX.icon}-ios-arrow-forward"></i>
-                      </span>
-                      <div class="${PREFIX.tabs}-nav-scroll">
-                          <div class="${PREFIX.tabs}-nav"></div>
-                      </div>
+                     <div class="${PREFIX.tabs}-nav"></div>
                   </div>
               </div>
           </div>
@@ -165,8 +157,6 @@ class Tabs implements Config {
     ): void {
         const [node, panes, activekey, type, animated, closable] = args;
 
-        const TabNavWrap = node.querySelector(`.${PREFIX.tabs}-nav-wrap`);
-        const TabNavScroll = node.querySelector(`.${PREFIX.tabs}-nav-scroll`);
         const TabNav = node.querySelector(`.${PREFIX.tabs}-nav`);
         const TabPaneContainer = node.querySelector(`.${PREFIX.tabs}-content`);
 
@@ -193,8 +183,6 @@ class Tabs implements Config {
 
             removeAttrs(pane, ['key', 'tab', 'icon', 'disabled', 'closable']);
         });
-
-        this._showArrow(TabNavWrap!, TabNav!, TabNavScroll!);
 
         TabPaneContainer?.appendChild(Fragment);
     }
@@ -347,47 +335,6 @@ class Tabs implements Config {
 
             setCss(o, 'visibility', 'hidden');
         });
-    }
-
-    private _showArrow(tabNavWrap: Element, tabNav: Element, tabNavScroll: Element): void {
-        const navWidth = this._getNavWidth(tabNav);
-        const navScrollWidth = this._getNavScrollWidth(tabNavScroll);
-
-        if (navWidth > navScrollWidth) {
-            tabNavWrap.classList.add(`${PREFIX.tabs}-nav-scrollable`);
-
-            tabNavWrap
-                .querySelector(`.${PREFIX.tabs}-nav-prev`)
-                ?.classList.remove(`${PREFIX.tabs}-nav-scroll-disabled`);
-
-            tabNavWrap
-                .querySelector(`.${PREFIX.tabs}-nav-next`)
-                ?.classList.remove(`${PREFIX.tabs}-nav-scroll-disabled`);
-        }
-    }
-
-    // TODO 当选项标签溢出时能够左右滚动切换标签的功能
-
-    private _handleNavScroll(tabNav: Element, tabNavScroll: Element): void {
-        //
-    }
-
-    private _scrollPrev(): void {
-        //
-    }
-
-    private _scrollNext(): void {
-        //
-    }
-
-    private _getNavScrollWidth(tabNavScroll: Element): number {
-        const tns = tabNavScroll as HTMLElement;
-        return tns.offsetWidth;
-    }
-
-    private _getNavWidth(tabNav: Element): number {
-        const tn = tabNav as HTMLElement;
-        return tn.offsetWidth;
     }
 
     private _attrs(node: Element): TabsAttrs {

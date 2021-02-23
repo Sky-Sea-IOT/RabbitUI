@@ -18,8 +18,8 @@ declare const _default: {
     poptip: string;
     noticeChild: string;
     progress: string;
-    rate: string;
     switch: string;
+    tabs: string;
     spin: string;
     steps: string;
     time: string;
