@@ -14,6 +14,7 @@ import Modal from './components/modal';
 import Notice from './components/notice';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
+import Result from './components/result';
 import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
@@ -39,6 +40,7 @@ export {
     Notice,
     Poptip,
     Progress,
+    Result,
     Spin,
     Steps,
     Switch,

@@ -6019,6 +6019,7 @@ var prefixCls = 'rab-';
     poptip: prefixCls + "poptip",
     noticeChild: prefixCls + "notice-notice",
     progress: prefixCls + "progress",
+    result: prefixCls + "result",
     switch: prefixCls + "switch",
     tabs: prefixCls + "tabs",
     spin: prefixCls + "spin",
@@ -6484,7 +6485,7 @@ function siblings(elem) {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 117 modules ***!
+  !*** ./src/index.ts + 122 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -6517,6 +6518,7 @@ __webpack_require__.d(rabbit_design_namespaceObject, {
   "Notice": function() { return components_notice; },
   "Poptip": function() { return components_poptip; },
   "Progress": function() { return components_progress; },
+  "Result": function() { return components_result; },
   "Spin": function() { return components_spin; },
   "Steps": function() { return components_steps; },
   "Switch": function() { return components_switch; },
@@ -12026,6 +12028,112 @@ var Progress = /** @class */ (function () {
 
 /* harmony default export */ var components_progress = (progress);
 
+;// CONCATENATED MODULE: ./assets/result-403.svg
+/* harmony default export */ var result_403 = (".././fonts/result-403.svg");
+;// CONCATENATED MODULE: ./assets/result-404.svg
+/* harmony default export */ var result_404 = (".././fonts/result-404.svg");
+;// CONCATENATED MODULE: ./assets/result-500.svg
+/* harmony default export */ var result_500 = (".././fonts/result-500.svg");
+;// CONCATENATED MODULE: ./src/components/result/result.ts
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+
+
+
+
+var Result = /** @class */ (function () {
+    function Result() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-result', { all: true });
+        this._create(this.components);
+    }
+    Result.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var _a = _this._attrs(node), status = _a.status, title = _a.title, subTitle = _a.subTitle, icon = _a.icon, extra = _a.extra;
+            var oldChild = node.firstElementChild;
+            _this._setMainTemplate(node);
+            _this._setStatus(node, status);
+            _this._setTitle(node, title, subTitle);
+            _this._setExtraContent(node, extra);
+            _this._setComplexDesc(node, oldChild);
+            _this._setCustomIcon(node, icon);
+            (0,dom_utils.removeAttrs)(node, ['title', 'subtitle', 'status', 'icon', 'extra']);
+        });
+    };
+    Result.prototype._setMainTemplate = function (node) {
+        var template = "\n          <div class=\"" + prefix.default.result + "-icon\">\n             <i class=\"" + prefix.default.icon + "\"></i>\n          </div>\n          <div class=\"" + prefix.default.result + "-title\"></div>\n          <div class=\"" + prefix.default.result + "-subtitle\"></div> \n          <div class=\"" + prefix.default.result + "-content\"></div>\n          <div class=\"" + prefix.default.result + "-extra\"></div>\n        ";
+        (0,dom_utils.setHtml)(node, template);
+    };
+    Result.prototype._setStatus = function (node, status) {
+        node.classList.add(prefix.default.result + "-" + status);
+        var ResultIcon = node.querySelector("." + prefix.default.result + "-icon");
+        var I = ResultIcon.querySelector('i');
+        var iconType = this._getStatusIcon(status);
+        var otherStatus = ['403', '404', '500'];
+        if (otherStatus.includes(status)) {
+            ResultIcon.classList.add(prefix.default.result + "-image");
+            ResultIcon.removeChild(I);
+            (0,dom_utils.setHtml)(ResultIcon, "<img src=\"" + iconType + "\" alt=\"result\" />");
+        }
+        else {
+            I.classList.add(prefix.default.icon + "-" + iconType);
+        }
+    };
+    Result.prototype._setTitle = function (node, title, subTitle) {
+        var ResultTitle = node.querySelector("." + prefix.default.result + "-title");
+        var ResultSubTitle = node.querySelector("." + prefix.default.result + "-subtitle");
+        (0,dom_utils.setHtml)(ResultTitle, title);
+        (0,dom_utils.setHtml)(ResultSubTitle, subTitle);
+    };
+    Result.prototype._setExtraContent = function (node, content) {
+        var ResultExtra = node.querySelector("." + prefix.default.result + "-extra");
+        (0,dom_utils.setHtml)(ResultExtra, content);
+    };
+    Result.prototype._setCustomIcon = function (node, icon) {
+        if (!icon)
+            return;
+        var ResultIcon = node.querySelector("." + prefix.default.result + "-icon > i");
+        ResultIcon.className = prefix.default.icon + " " + prefix.default.icon + "-" + icon;
+    };
+    Result.prototype._setComplexDesc = function (node, child) {
+        var ResultContent = node.querySelector("." + prefix.default.result + "-content");
+        if (!child) {
+            node.removeChild(ResultContent);
+            return;
+        }
+        ResultContent === null || ResultContent === void 0 ? void 0 : ResultContent.appendChild(child);
+    };
+    Result.prototype._getStatusIcon = function (status) {
+        var icons = {
+            info: 'ios-alert',
+            success: 'ios-checkmark-circle',
+            warning: 'ios-warning',
+            error: 'ios-close-circle',
+            '403': result_403,
+            '404': result_404,
+            '500': result_500
+        };
+        // @ts-ignore
+        return icons[status] || icons.info;
+    };
+    Result.prototype._attrs = function (node) {
+        return {
+            status: (0,dom_utils.getStrTypeAttr)(node, 'status', 'info'),
+            icon: (0,dom_utils.getStrTypeAttr)(node, 'icon', ''),
+            title: (0,dom_utils.getStrTypeAttr)(node, 'title', ''),
+            extra: (0,dom_utils.getStrTypeAttr)(node, 'extra', ''),
+            subTitle: (0,dom_utils.getStrTypeAttr)(node, 'subtitle', '')
+        };
+    };
+    return Result;
+}());
+/* harmony default export */ var result = (Result);
+
+;// CONCATENATED MODULE: ./src/components/result/index.ts
+
+/* harmony default export */ var components_result = (result);
+
 ;// CONCATENATED MODULE: ./src/components/spin/spin.ts
 
 
@@ -12941,14 +13049,13 @@ var Tooltip = /** @class */ (function () {
 
 
 
+
 ;// CONCATENATED MODULE: ./src/styles/index.less
 // extracted by mini-css-extract-plugin
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
-// export default Rabbit;
-// 当需要打包时请使用下面的导出，并在打包之后恢复注释
 // @ts-ignore
 /* harmony default export */ var src = (window.Rabbit = rabbit_design_namespaceObject);
 

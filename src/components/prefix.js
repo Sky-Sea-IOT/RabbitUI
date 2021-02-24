@@ -19,6 +19,7 @@ export default {
     poptip: prefixCls + "poptip",
     noticeChild: prefixCls + "notice-notice",
     progress: prefixCls + "progress",
+    result: prefixCls + "result",
     switch: prefixCls + "switch",
     tabs: prefixCls + "tabs",
     spin: prefixCls + "spin",
