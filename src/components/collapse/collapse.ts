@@ -22,16 +22,6 @@ interface Config {
     };
 }
 
-interface CollapseAttrs {
-    key: string;
-    title: string;
-    ghost: boolean;
-    simple: boolean;
-    accordion: boolean;
-    hideArrow: boolean;
-    defaultactivekey: string | number | string[] | number[];
-}
-
 class Collapse implements Config {
     readonly VERSION: string;
     private components: any;
@@ -265,7 +255,7 @@ class Collapse implements Config {
         }
     }
 
-    private _attrs(node: Element): CollapseAttrs {
+    private _attrs(node: Element) {
         return {
             key: getStrTypeAttr(node, 'key', ''),
             title: getStrTypeAttr(node, 'title', ''),

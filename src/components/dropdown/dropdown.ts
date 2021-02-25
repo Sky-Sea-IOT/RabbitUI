@@ -23,11 +23,6 @@ interface Config {
     };
 }
 
-interface DropdownAttrs {
-    trigger: 'hover' | 'click' | 'contextMenu';
-    placement: string;
-}
-
 const defalutDpdDelay = 100;
 
 let dpdShowTimer: any;
@@ -205,7 +200,7 @@ class Dropdown implements Config {
         }
     }
 
-    private _attrs(node: Element): DropdownAttrs {
+    private _attrs(node: Element) {
         return {
             trigger: getStrTypeAttr(node, 'trigger', 'hover'),
             placement: getStrTypeAttr(node, 'placement', 'bottom')

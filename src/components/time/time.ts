@@ -2,14 +2,6 @@ import moment from 'moment';
 import PREFIX from '../prefix';
 import { $el, getNumTypeAttr, getStrTypeAttr, removeAttrs, setText } from '../../dom-utils';
 
-interface TimeAttrs {
-    time: string;
-    type: 'relative' | 'date' | 'datetime';
-    hash: string;
-    locale: string;
-    interval: number;
-}
-
 class Time {
     readonly VERSION: string;
     private components: any;
@@ -70,7 +62,7 @@ class Time {
         node.addEventListener('click', () => (window.location.hash = hash));
     }
 
-    private _attrs(node: Element): TimeAttrs {
+    private _attrs(node: Element) {
         return {
             time: getStrTypeAttr(node, 'time', ''),
             type: getStrTypeAttr(node, 'type', 'relative'),

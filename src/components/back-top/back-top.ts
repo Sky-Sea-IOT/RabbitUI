@@ -1,13 +1,6 @@
 import { $el, bind, getNumTypeAttr, removeAttrs, setCss, setHtml } from '../../dom-utils';
 import PREFIX from '../prefix';
 
-interface BackTopAttrs {
-    right: number;
-    bottom: number;
-    height: number;
-    duration: number;
-}
-
 class BackTop {
     readonly VERSION: string;
     private components: any;
@@ -107,7 +100,7 @@ class BackTop {
         scroll(from, to, step);
     }
 
-    private _attrs(node: Element): BackTopAttrs {
+    private _attrs(node: Element) {
         return {
             right: getNumTypeAttr(node, 'right', 30),
             bottom: getNumTypeAttr(node, 'bottom', 30),

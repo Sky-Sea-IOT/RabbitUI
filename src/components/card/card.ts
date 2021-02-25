@@ -18,12 +18,6 @@ interface PublicMethods {
     };
 }
 
-interface CardAttrs {
-    title: string;
-    extra: string;
-    shadow: boolean;
-}
-
 class Card implements PublicMethods {
     readonly VERSION: string;
     private components: any;
@@ -124,7 +118,7 @@ class Card implements PublicMethods {
         }
     }
 
-    private _attrs(node: Element): CardAttrs {
+    private _attrs(node: Element) {
         return {
             title: getStrTypeAttr(node, 'title', ''),
             extra: getStrTypeAttr(node, 'extra', ''),

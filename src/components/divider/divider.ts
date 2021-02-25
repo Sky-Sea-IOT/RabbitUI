@@ -1,13 +1,6 @@
 import PREFIX from '../prefix';
 import { $el, createElem, getBooleanTypeAttr, getStrTypeAttr, removeAttrs } from '../../dom-utils';
 
-interface DividerAttrs {
-    type: 'horizontal' | 'vertical';
-    orientation: 'left' | 'right' | 'center';
-    dashed: boolean;
-    plain: boolean;
-}
-
 class Divider {
     readonly VERSION: string;
     private components: any;
@@ -67,7 +60,7 @@ class Divider {
         node.appendChild(DividerText);
     }
 
-    private _attrs(node: Element): DividerAttrs {
+    private _attrs(node: Element) {
         return {
             type: getStrTypeAttr(node, 'type', 'horizontal'),
             orientation: getStrTypeAttr(node, 'orientation', 'center'),

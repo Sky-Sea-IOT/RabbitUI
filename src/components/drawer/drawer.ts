@@ -26,20 +26,6 @@ interface Config {
     };
 }
 
-interface DrawerAttes {
-    title: string;
-    width: string;
-    height: string;
-    placement: 'top' | 'left' | 'right' | 'bottom';
-    mask: boolean;
-    inner: boolean;
-    visible: boolean;
-    closable: boolean;
-    scrollable: boolean;
-    lockScroll: boolean;
-    maskClosable: 'true' | 'false';
-}
-
 class Drawer implements Config {
     readonly VERSION: string;
     private components: any;
@@ -360,7 +346,7 @@ class Drawer implements Config {
         }, 490);
     }
 
-    private _attrs(node: Element): DrawerAttes {
+    private _attrs(node: Element) {
         return {
             title: getStrTypeAttr(node, 'title', ''),
             width: getStrTypeAttr(node, 'width', '256px'),

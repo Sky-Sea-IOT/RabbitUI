@@ -29,24 +29,6 @@ interface Config {
     };
 }
 
-interface ModalAttrs {
-    mask: 'true' | 'false';
-    width: string;
-    title: string;
-    okText: string;
-    closable: 'true' | 'false';
-    className: string;
-    cancelText: string;
-    maskClosable: 'true' | 'false';
-    zIndex: number;
-    visable: boolean;
-    loading: boolean;
-    scrollable: boolean;
-    lockScroll: boolean;
-    fullscreen: boolean;
-    footerHide: boolean;
-}
-
 const RABBIT_BTN = new Button();
 
 class Modal implements Config {
@@ -407,7 +389,7 @@ class Modal implements Config {
         };
     }
 
-    private _attrs(node: Element): ModalAttrs {
+    private _attrs(node: Element) {
         return {
             mask: getStrTypeAttr(node, 'mask', 'true'),
             width: getStrTypeAttr(node, 'width', '520px'),

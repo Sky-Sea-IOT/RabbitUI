@@ -26,22 +26,6 @@ interface TabsEvents {
     onTabRemove?: (key?: string) => void;
 }
 
-interface TabsAttrs {
-    defaultActivekey: string;
-    type: 'line' | 'card';
-    size: string;
-    animated: string;
-    closable: boolean;
-}
-
-interface TabsPaneAttrs {
-    tab: string;
-    key: string;
-    icon: string;
-    closable: string;
-    disabled: boolean;
-}
-
 class Tabs implements Config {
     readonly VERSION: string;
     private components: any;
@@ -337,7 +321,7 @@ class Tabs implements Config {
         });
     }
 
-    private _attrs(node: Element): TabsAttrs {
+    private _attrs(node: Element) {
         return {
             defaultActivekey: getStrTypeAttr(node, 'defaultActivekey', '0'),
             type: getStrTypeAttr(node, 'type', 'line'),
@@ -347,7 +331,7 @@ class Tabs implements Config {
         };
     }
 
-    private _paneAttrs(pane: Element): TabsPaneAttrs {
+    private _paneAttrs(pane: Element) {
         return {
             tab: getStrTypeAttr(pane, 'tab', ''),
             key: getStrTypeAttr(pane, 'key', ''),
