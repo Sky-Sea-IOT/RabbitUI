@@ -22,6 +22,7 @@ import tabsTest from './tabs';
 import timeTest from './time';
 import timelineTest from './timeline';
 import tooltipTest from './tooltip';
+import skeletonTest from './skeleton';
 
 // alertTest();
 // avatarTest();
@@ -39,7 +40,8 @@ import tooltipTest from './tooltip';
 // noticeTest();
 // poptipTest();
 // progressTest();
-resultTest();
+// resultTest();
+skeletonTest();
 // stepsTest();
 // spinTest();
 // switchTest();

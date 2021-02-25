@@ -15,6 +15,7 @@ import Notice from './components/notice';
 import Poptip from './components/poptip';
 import Progress from './components/progress';
 import Result from './components/result';
+import Skeleton from './components/skeleton';
 import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
@@ -41,6 +42,7 @@ export {
     Poptip,
     Progress,
     Result,
+    Skeleton,
     Spin,
     Steps,
     Switch,

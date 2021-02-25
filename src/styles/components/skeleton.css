@@ -1,0 +1,93 @@
+r-skeleton {
+  display: table;
+  width: 100%;
+}
+.rab-skeleton-header,
+.rab-skeleton-content {
+  display: table-cell;
+  vertical-align: top;
+}
+.rab-skeleton-header {
+  padding-right: 16px;
+}
+.rab-skeleton-header .rab-skeleton-avatar {
+  display: inline-block;
+  vertical-align: top;
+  background: #f2f2f2;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+.rab-skeleton-header .rab-skeleton-avatar-large {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+.rab-skeleton-header .rab-skeleton-avatar-small {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+.rab-skeleton-header .rab-skeleton-avatar.rab-skeleton-avatar-circle {
+  border-radius: 50%;
+}
+.rab-skeleton-header .rab-skeleton-avatar.rab-skeleton-avatar-square {
+  border-radius: 0;
+}
+.rab-skeleton-content {
+  width: 100%;
+}
+.rab-skeleton-content .rab-skeleton-title {
+  width: 100%;
+  height: 16px;
+  margin-top: 16px;
+  background: #f2f2f2;
+}
+.rab-skeleton-content .rab-skeleton-paragraph {
+  padding: 0;
+}
+.rab-skeleton-content .rab-skeleton-paragraph li {
+  width: 100%;
+  height: 16px;
+  list-style: none;
+  background: #f2f2f2;
+}
+.rab-skeleton-content .rab-skeleton-paragraph li:last-child:not(:first-child):not(:nth-child(2)) {
+  width: 61%;
+}
+.rab-skeleton-content .rab-skeleton-paragraph li + li {
+  margin-top: 16px;
+}
+.rab-skeleton-content .rab-skeleton-title + .rab-skeleton-paragraph {
+  margin-top: 24px;
+}
+.rab-skeleton-with-avatar .rab-skeleton-content .rab-skeleton-title {
+  margin-top: 12px;
+}
+.rab-skeleton-with-avatar .rab-skeleton-content .rab-skeleton-title + .rab-skeleton-paragraph {
+  margin-top: 28px;
+}
+.rab-skeleton-active .rab-skeleton-header .rab-skeleton-avatar,
+.rab-skeleton-active .rab-skeleton-content .rab-skeleton-title,
+.rab-skeleton-active .rab-skeleton-content .rab-skeleton-paragraph > li {
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+  -webkit-animation: rab-skeleton-loading 1.4s ease infinite;
+  animation: rab-skeleton-loading 1.4s ease infinite;
+}
+@-webkit-keyframes rab-skeleton-loading {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}
+@keyframes rab-skeleton-loading {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}
