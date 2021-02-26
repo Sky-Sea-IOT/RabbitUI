@@ -14,4 +14,3 @@ export default function removeAttrs(elem, attrs) {
             : null;
     }
 }
-//# sourceMappingURL=remove-attrs.js.map

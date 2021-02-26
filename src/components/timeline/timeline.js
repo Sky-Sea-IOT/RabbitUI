@@ -59,4 +59,3 @@ var Timeline = /** @class */ (function () {
     return Timeline;
 }());
 export default Timeline;
-//# sourceMappingURL=timeline.js.map

@@ -241,4 +241,3 @@ var Poptip = /** @class */ (function () {
     return Poptip;
 }());
 export default Poptip;
-//# sourceMappingURL=poptip.js.map

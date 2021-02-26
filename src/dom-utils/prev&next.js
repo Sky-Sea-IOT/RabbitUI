@@ -30,4 +30,3 @@ export function nextAll(el) {
     }
     return nextChildren;
 }
-//# sourceMappingURL=prev&next.js.map

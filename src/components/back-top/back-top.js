@@ -88,4 +88,3 @@ var BackTop = /** @class */ (function () {
     return BackTop;
 }());
 export default BackTop;
-//# sourceMappingURL=back-top.js.map

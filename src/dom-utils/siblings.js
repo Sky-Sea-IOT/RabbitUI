@@ -9,4 +9,3 @@ export default function siblings(elem) {
     }
     return r;
 }
-//# sourceMappingURL=siblings.js.map

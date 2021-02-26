@@ -37,4 +37,3 @@ export default function CssTransition(elem, _a) {
         }, timeout);
     }
 }
-//# sourceMappingURL=css-transition.js.map

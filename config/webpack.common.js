@@ -10,8 +10,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/,
                 loader: 'babel-loader',
                 options: {
@@ -58,17 +57,15 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|webp)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'images/[name].[ext]',
-                            // 小于 2k 的图片转成 base64 编码
-                            limit: 2024,
-                            publicPath: '../'
-                        }
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'images/[name].[ext]',
+                        // 小于 2k 的图片转成 base64 编码
+                        limit: 2024,
+                        publicPath: '../'
                     }
-                ]
+                }]
             },
             {
                 test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/i,

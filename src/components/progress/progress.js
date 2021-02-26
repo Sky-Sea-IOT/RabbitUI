@@ -160,4 +160,3 @@ var Progress = /** @class */ (function () {
     return Progress;
 }());
 export default Progress;
-//# sourceMappingURL=progress.js.map

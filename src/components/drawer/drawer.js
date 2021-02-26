@@ -262,4 +262,3 @@ var Drawer = /** @class */ (function () {
     return Drawer;
 }());
 export default Drawer;
-//# sourceMappingURL=drawer.js.map

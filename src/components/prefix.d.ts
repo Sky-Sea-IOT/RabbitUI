@@ -19,6 +19,7 @@ declare const _default: {
     noticeChild: string;
     progress: string;
     result: string;
+    skeleton: string;
     switch: string;
     tabs: string;
     spin: string;

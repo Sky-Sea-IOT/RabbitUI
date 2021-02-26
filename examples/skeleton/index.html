@@ -30,45 +30,47 @@
     </div>
 
     <div class="example">
-        <r-skeleton avatar="true" paragraph-row="4"></r-skeleton>
+        <r-skeleton avatar="true" paragraph-rows="4"></r-skeleton>
     </div>
 
     <div class="example">
-        <r-skeleton title-width="50" paragraph-width="[40,60,80,100]" avatar-shape="square"></r-skeleton>
+        <r-skeleton paragraph-width="[60,80,100]"></r-skeleton>
     </div>
 
     <div class="example">
         <r-skeleton active="true"></r-skeleton>
+        <br />
+        <r-skeleton active="true" avatar="true"></r-skeleton>
     </div>
 
     <div class="example">
-        <r-skeleton style="display: none"></r-skeleton>
+        <r-skeleton style="display: none" id="demoSkeleton"></r-skeleton>
         <div class="article">
-            <div>
+            <div class="content">
                 <h3>Vue.js, the progressive javascript framework</h3>
                 <p>
                     An incrementally adoptable ecosystem that scales between a library and a full-featured framework. Blazing Fast Virtual DOM Minimal Optimization Efforts
                 </p>
             </div>
-            <button type="button" class="rab-btn">显示骨架图</button>
+            <button type="button" class="rab-btn" onclick="toggle(this)">显示骨架图</button>
         </div>
-    </div>
 
-    <div class="example">
-        <r-skeleton class="rab-skeleton-with-avatar">
-            <div class="rab-skeleton-header">
-                <span class="rab-skeleton-avatar rab-skeleton-avatar-large rab-skeleton-avatar-circle"></span>
-            </div>
-            <div class="rab-skeleton-content">
-                <h3 class="rab-skeleton-title" style="width: 50%"></h3>
-                <ul class="rab-skeleton-paragraph">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-        </r-skeleton>
+        <script>
+            const skeleton = document.querySelector('#demoSkeleton');
+            const content = document.querySelector('.content');
+
+            toggle = (_this) => {
+                skeleton.style.display = '';
+                content.style.display = 'none';
+                _this.setAttribute('disabled', 'true');
+
+                setTimeout(() => {
+                    skeleton.style.display = 'none';
+                    content.style.display = '';
+                    _this.removeAttribute('disabled');
+                }, 3000);
+            };
+        </script>
     </div>
 </body>
 

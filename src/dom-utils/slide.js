@@ -139,4 +139,3 @@ export default window.Slider = (function () {
     // 返回Slider对象
     return Slider;
 })();
-//# sourceMappingURL=slide.js.map

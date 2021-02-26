@@ -171,4 +171,3 @@ var $LoadingBar = /** @class */ (function () {
     return $LoadingBar;
 }());
 export default $LoadingBar;
-//# sourceMappingURL=loading-bar.js.map

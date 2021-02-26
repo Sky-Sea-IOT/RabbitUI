@@ -110,4 +110,3 @@ var Switch = /** @class */ (function () {
     return Switch;
 }());
 export default Switch;
-//# sourceMappingURL=switch.js.map

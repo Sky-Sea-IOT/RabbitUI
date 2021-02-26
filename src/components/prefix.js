@@ -20,6 +20,7 @@ export default {
     noticeChild: prefixCls + "notice-notice",
     progress: prefixCls + "progress",
     result: prefixCls + "result",
+    skeleton: prefixCls + "skeleton",
     switch: prefixCls + "switch",
     tabs: prefixCls + "tabs",
     spin: prefixCls + "spin",
@@ -28,4 +29,3 @@ export default {
     timeline: prefixCls + "timeline",
     tooltip: prefixCls + "tooltip"
 };
-//# sourceMappingURL=prefix.js.map

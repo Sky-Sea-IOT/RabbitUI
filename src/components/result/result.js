@@ -92,4 +92,3 @@ var Result = /** @class */ (function () {
     return Result;
 }());
 export default Result;
-//# sourceMappingURL=result.js.map

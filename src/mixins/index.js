@@ -6,4 +6,3 @@ import usePromiseCallback from './cb-promise';
 import clickOutside from './click-outside';
 import * as _Popper from './tooltip';
 export { warn, _arrow, CssTransition, Scrollable, usePromiseCallback, clickOutside, _Popper };
-//# sourceMappingURL=index.js.map

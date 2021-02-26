@@ -31,4 +31,3 @@ export function unbind(obj, type, callback) {
         obj.detachEvent("on" + type, callback);
     }
 }
-//# sourceMappingURL=bind.js.map

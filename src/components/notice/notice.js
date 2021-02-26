@@ -223,4 +223,3 @@ var $Notice = /** @class */ (function () {
     return $Notice;
 }());
 export default $Notice;
-//# sourceMappingURL=notice.js.map

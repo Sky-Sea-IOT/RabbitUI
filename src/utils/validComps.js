@@ -10,4 +10,3 @@ export default function validComps(target, compName) {
         throw new Error("The configured component was selected incorrectly. It is not a " + compName + " component");
     }
 }
-//# sourceMappingURL=validComps.js.map

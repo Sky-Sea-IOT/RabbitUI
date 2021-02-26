@@ -195,4 +195,3 @@ var Collapse = /** @class */ (function () {
     return Collapse;
 }());
 export default Collapse;
-//# sourceMappingURL=collapse.js.map

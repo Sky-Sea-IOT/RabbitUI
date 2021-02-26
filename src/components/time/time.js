@@ -67,4 +67,3 @@ var Time = /** @class */ (function () {
     return Time;
 }());
 export default Time;
-//# sourceMappingURL=time.js.map

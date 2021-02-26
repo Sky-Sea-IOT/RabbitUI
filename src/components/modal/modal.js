@@ -297,4 +297,3 @@ var Modal = /** @class */ (function () {
     return Modal;
 }());
 export default Modal;
-//# sourceMappingURL=modal.js.map

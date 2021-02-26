@@ -212,4 +212,3 @@ var Badge = /** @class */ (function () {
     return Badge;
 }());
 export default Badge;
-//# sourceMappingURL=badge.js.map

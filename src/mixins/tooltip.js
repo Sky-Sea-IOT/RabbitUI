@@ -50,4 +50,3 @@ export function handleHoverShowAndHideEvents(_a) {
         unbind(reference, 'mouseenter', showEv);
     }
 }
-//# sourceMappingURL=tooltip.js.map

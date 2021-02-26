@@ -113,4 +113,3 @@ var Avatar = /** @class */ (function () {
     return Avatar;
 }());
 export default Avatar;
-//# sourceMappingURL=avatar.js.map

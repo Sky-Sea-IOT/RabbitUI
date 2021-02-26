@@ -55,4 +55,3 @@ export function getArrTypeAttr(node, attrName) {
     var array = JSON.parse(attr);
     return array;
 }
-//# sourceMappingURL=elem.js.map

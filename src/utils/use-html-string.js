@@ -8,4 +8,3 @@ import { setHtml, setText } from '../dom-utils';
 export default function isUseHTMLString(elem, content, use) {
     use ? setHtml(elem, content) : setText(elem, content);
 }
-//# sourceMappingURL=use-html-string.js.map

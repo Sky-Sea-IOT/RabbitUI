@@ -197,8 +197,8 @@
         "affectsGlobalScope": false
       },
       "./src/dom-utils/index.ts": {
-        "version": "3ce52236a0baaddb264f9d900a1a33c9f31aabbe8d8917b8ab5551425649f3b7",
-        "signature": "66971770c47cf6530a37f677c84c8345605289a296f1960d9ac6c148db63c2e5",
+        "version": "3d8ab1471414b108bde6b2bdb1d5d43f9218ca996e4863145fb6c75e3190b429",
+        "signature": "03cf93df6d6c56da0ec719cdfc58a82746321575e85c9625a4be8be5301feb2b",
         "affectsGlobalScope": false
       },
       "./src/mixins/arrow.ts": {
@@ -352,8 +352,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/prefix.ts": {
-        "version": "243d30fcd166ee33e9c063666e38204c220436dd2dd709a4153c7494d5326c1f",
-        "signature": "5a2c8af5eefb7b782c54a12a147ec3d79965824afae2221c61fdfa0dec4b1c86",
+        "version": "d4dff0cd7a48beb36637b819ca19ac0a5976ae1b1936fb55159ea9084f667add",
+        "signature": "40a5302864eaa7c263e4eeaf0db70729f3977d2150aa56cf914be784f9140f8f",
         "affectsGlobalScope": false
       },
       "./src/components/alert/alert.ts": {
@@ -377,7 +377,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/back-top/back-top.ts": {
-        "version": "d36c37fc06bf9871563dd6c0c9775ed23e62372b707e498911222a6c466ac0d0",
+        "version": "d1bdd0295a510210a13cd180087357e78892220b7f3864016d7719d33977dd00",
         "signature": "777539f8e991422f32598f9cbddf5ce685005778fde399d05fb462eeb1408ec4",
         "affectsGlobalScope": false
       },
@@ -407,7 +407,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/card/card.ts": {
-        "version": "dd33726e4c8d99a3d953791aba311556d51cf811aae8b070f708c429f164cd51",
+        "version": "e68a978d246345a07cd2ab5c17b86e44d0d767f1724722fbda685fab30cf4d21",
         "signature": "4e4d4c380b490f358dc014023728e35c432bafd415d977881934647dbfb584e3",
         "affectsGlobalScope": false
       },
@@ -417,7 +417,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/collapse/collapse.ts": {
-        "version": "8ad3ad3142a77a0daa9e6343a43f0f129746596a0bb82ba3ba8309ffddc0146b",
+        "version": "3c42363c9ea690893692f436a9fca988b836536d1f26e2aaa97d4de5a8e6697d",
         "signature": "aadf593014afdb79a5cc96124db428c7811c4520eb16f9ead577786084390465",
         "affectsGlobalScope": false
       },
@@ -427,7 +427,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/divider/divider.ts": {
-        "version": "196f0dfb11de16b4c6f4d96809d20880dd1fe3f5d00579b1c90448b976ed340a",
+        "version": "085577c81d084519b5ef6ee2e577fd0827c59e0342f878ada25429a7bc9e7503",
         "signature": "4350cb871975f9b3202c8b7a680ebf456e722c211396b7be63a482e00fe564fc",
         "affectsGlobalScope": false
       },
@@ -437,7 +437,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/drawer/drawer.ts": {
-        "version": "5616fbc96cf2c730ef72397860c8408a149b0af3c84ace2a9ecbca0532e9b952",
+        "version": "690b003c0aa8489682a87b63a7ba7fe51b76c23a71bba2aaa970cb9acdf49b5c",
         "signature": "43f90b8ad757d20f4608891ed0ee9fa68cc8762a66316a6e29a817df21f8b0d8",
         "affectsGlobalScope": false
       },
@@ -447,7 +447,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/dropdown/dropdown.ts": {
-        "version": "2a3cef478cf8f533bf7e865f8e99106af5916459491b5697569f345f044a94b3",
+        "version": "3b3272ac48f2962f894c0f327cd249ace4db20241f388a4e64a8f188c6d8d5c5",
         "signature": "f7ea07eb6b1fbb8206b56d7b307614b5a01f2cd4eca8074d089bc2f891ed97b4",
         "affectsGlobalScope": false
       },
@@ -477,7 +477,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/modal/modal.ts": {
-        "version": "4a9e444a773947eeb78b09fb9d04bad84d67251212c84c5bfc4fee5af37f1539",
+        "version": "c348aa62fa74bbbffb8566757300de9e4adfe0bdac1c4bf21e555edbc34de3f3",
         "signature": "9134234d69fdcdfd85e479b39631457d235570342fabf637ddda6042216e802b",
         "affectsGlobalScope": false
       },
@@ -526,6 +526,16 @@
         "signature": "2e44f1646c4ed7561a9c35e3d9f4a410cdf3b45980574a5aaea0f4d5be990c0a",
         "affectsGlobalScope": false
       },
+      "./src/components/skeleton/skeleton.ts": {
+        "version": "0fb7415cd0450bfb84d21b89d81d871ee9957f8f6210b67b14f7410df4bd25a1",
+        "signature": "1efb165521dbe8e1811e4feda704a0630622ef9d7801ee02f5bd284ded3d8ba8",
+        "affectsGlobalScope": false
+      },
+      "./src/components/skeleton/index.ts": {
+        "version": "08214caaff128e32cbe0990b3b36259a7ccbb39c3c9f919ae42c9ea4c817da04",
+        "signature": "08214caaff128e32cbe0990b3b36259a7ccbb39c3c9f919ae42c9ea4c817da04",
+        "affectsGlobalScope": false
+      },
       "./src/components/spin/spin.ts": {
         "version": "ce637ab8435db16d619cf98b767a7a27fb1a2c43e1c5c904e1bbaae51e4d08bf",
         "signature": "27f86a563d0564586f557fd08f335a433ab649998f13d6703c5f2313a198e4b3",
@@ -557,7 +567,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/tabs/tabs.ts": {
-        "version": "5bc2beda7c181e3023b235e9a9f75dbf6efc168597ef36ec111f2d7f10b1f7b7",
+        "version": "4cb6402f1a756f3b07c4b5536ca65662a802a8af1d8d8df51869ef1231b911b0",
         "signature": "42a13b554813a0d6a73fae712553bb7d65d0aab5abf3359904e3eaf76ebc4958",
         "affectsGlobalScope": false
       },
@@ -572,7 +582,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/time/time.ts": {
-        "version": "765eb2e3ddc41560c866e782c2586cd3b8d014b441c4c6cec50c37cf6610422c",
+        "version": "6d8446fe7ea8258750644bb5e834a428140040392d5943c0ddc0d6c9fd8acc41",
         "signature": "226e96cd67b3f7ebb632e2b5012051f24abd6e96a6abefe5f075baf63d20bd4d",
         "affectsGlobalScope": false
       },
@@ -602,8 +612,8 @@
         "affectsGlobalScope": false
       },
       "./src/rabbit-design.ts": {
-        "version": "2904a09f80f16e602be31b522b4675ce72c223716cb6a2d9662d400fff9b8059",
-        "signature": "3bf9b283f997eb899fd4268bf97c6d338eaf836d42fd889e636bcafee15f1535",
+        "version": "224df54e109b4666b114934e805cedfd11b7e5c270f7987d887813d062f48e5f",
+        "signature": "c1ade3bdebb683d7c249d62124d901ed174319bc29e78734724240ee5ed326b9",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -1009,7 +1019,7 @@
       "experimentalDecorators": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "baseUrl": "./",
       "lib": [
         "lib.es5.d.ts",
@@ -1524,6 +1534,13 @@
         "./src/dom-utils/index.ts",
         "./src/images.d.ts"
       ],
+      "./src/components/skeleton/index.ts": [
+        "./src/components/skeleton/skeleton.ts"
+      ],
+      "./src/components/skeleton/skeleton.ts": [
+        "./src/components/prefix.ts",
+        "./src/dom-utils/index.ts"
+      ],
       "./src/components/spin/index.ts": [
         "./src/components/spin/spin.ts"
       ],
@@ -1635,6 +1652,7 @@
         "./src/components/poptip/index.ts",
         "./src/components/progress/index.ts",
         "./src/components/result/index.ts",
+        "./src/components/skeleton/index.ts",
         "./src/components/spin/index.ts",
         "./src/components/steps/index.ts",
         "./src/components/switch/index.ts",
@@ -2068,6 +2086,9 @@
       "./src/components/result/index.ts": [
         "./src/components/result/result.ts"
       ],
+      "./src/components/skeleton/index.ts": [
+        "./src/components/skeleton/skeleton.ts"
+      ],
       "./src/components/spin/index.ts": [
         "./src/components/spin/spin.ts"
       ],
@@ -2127,6 +2148,7 @@
         "./src/components/poptip/index.ts",
         "./src/components/progress/index.ts",
         "./src/components/result/index.ts",
+        "./src/components/skeleton/index.ts",
         "./src/components/spin/index.ts",
         "./src/components/steps/index.ts",
         "./src/components/switch/index.ts",
@@ -3003,14 +3025,14 @@
         [
           {
             "file": "./src/components/collapse/collapse.ts",
-            "start": 9208,
+            "start": 3553,
             "length": 16,
-            "code": 2322,
+            "code": 2345,
             "category": 1,
             "messageText": {
-              "messageText": "Type '(string | number)[]' is not assignable to type 'string | number | string[] | number[]'.",
+              "messageText": "Argument of type '(string | number)[]' is not assignable to parameter of type 'string | number | string[] | number[]'.",
               "category": 1,
-              "code": 2322,
+              "code": 2345,
               "next": [
                 {
                   "messageText": "Type '(string | number)[]' is not assignable to type 'string[]'.",
@@ -3032,17 +3054,26 @@
                   ]
                 }
               ]
-            },
-            "relatedInformation": [
-              {
-                "file": "./src/components/collapse/collapse.ts",
-                "start": 714,
-                "length": 16,
-                "messageText": "The expected type comes from property 'defaultactivekey' which is declared here on type 'CollapseAttrs'",
-                "category": 3,
-                "code": 6500
-              }
-            ]
+            }
+          },
+          {
+            "file": "./src/components/collapse/collapse.ts",
+            "start": 3736,
+            "length": 16,
+            "code": 2345,
+            "category": 1,
+            "messageText": {
+              "messageText": "Argument of type '(string | number)[]' is not assignable to parameter of type 'string | number | string[] | number[]'.",
+              "category": 1,
+              "code": 2345,
+              "next": [
+                {
+                  "messageText": "Type '(string | number)[]' is not assignable to type 'string[]'.",
+                  "category": 1,
+                  "code": 2322
+                }
+              ]
+            }
           }
         ]
       ],
@@ -3068,6 +3099,8 @@
       "./src/components/progress/progress.ts",
       "./src/components/result/index.ts",
       "./src/components/result/result.ts",
+      "./src/components/skeleton/index.ts",
+      "./src/components/skeleton/skeleton.ts",
       "./src/components/spin/index.ts",
       "./src/components/spin/spin.ts",
       "./src/components/steps/index.ts",

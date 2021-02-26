@@ -44,4 +44,3 @@ export function destroyElemByKey(options) {
     var target = document.querySelector("[" + prefixKey + "-key=\"" + key + "\"]");
     target ? destroyElem(target, options) : warn("The key value is invalid --> \"" + key + "\"");
 }
-//# sourceMappingURL=destroy.js.map

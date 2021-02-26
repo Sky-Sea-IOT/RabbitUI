@@ -41,4 +41,3 @@ var Spin = /** @class */ (function () {
     return Spin;
 }());
 export default Spin;
-//# sourceMappingURL=spin.js.map

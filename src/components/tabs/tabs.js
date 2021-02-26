@@ -245,4 +245,3 @@ var Tabs = /** @class */ (function () {
     return Tabs;
 }());
 export default Tabs;
-//# sourceMappingURL=tabs.js.map

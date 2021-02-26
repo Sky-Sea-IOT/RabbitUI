@@ -8,6 +8,7 @@ import {
     setText,
     getStrTypeAttr,
     getNumTypeAttr,
+    getArrTypeAttr,
     getBooleanTypeAttr
 } from './elem';
 
@@ -31,5 +32,6 @@ export {
     slider,
     getStrTypeAttr,
     getNumTypeAttr,
+    getArrTypeAttr,
     getBooleanTypeAttr
 };

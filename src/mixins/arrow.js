@@ -59,4 +59,3 @@ export function toggleUpdate(popper, updateMode, reference, delay) {
     }
     setArrow();
 }
-//# sourceMappingURL=arrow.js.map

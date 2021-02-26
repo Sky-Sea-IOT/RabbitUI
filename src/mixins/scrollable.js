@@ -23,4 +23,3 @@ export default function scrollable(_a) {
         }
     }
 }
-//# sourceMappingURL=scrollable.js.map

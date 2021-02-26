@@ -33,4 +33,3 @@ export var isObj = function (r) {
 export var isArr = function (r) {
     return r.constructor === Array ? true : errMsg('array', typeOf(r));
 };
-//# sourceMappingURL=check-type.js.map

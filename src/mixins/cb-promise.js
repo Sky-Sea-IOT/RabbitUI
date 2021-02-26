@@ -26,4 +26,3 @@ function promiseCb(duration) {
         duration === 0 ? clearTimeout(timer) : timer;
     });
 }
-//# sourceMappingURL=cb-promise.js.map

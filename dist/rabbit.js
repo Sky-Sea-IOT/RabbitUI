@@ -6020,6 +6020,7 @@ var prefixCls = 'rab-';
     noticeChild: prefixCls + "notice-notice",
     progress: prefixCls + "progress",
     result: prefixCls + "result",
+    skeleton: prefixCls + "skeleton",
     switch: prefixCls + "switch",
     tabs: prefixCls + "tabs",
     spin: prefixCls + "spin",
@@ -6212,6 +6213,7 @@ __webpack_require__.d(__webpack_exports__, {
   "$el": function() { return /* reexport */ elem.$el; },
   "bind": function() { return /* reexport */ bind; },
   "createElem": function() { return /* reexport */ elem.createElem; },
+  "getArrTypeAttr": function() { return /* reexport */ elem.getArrTypeAttr; },
   "getBooleanTypeAttr": function() { return /* reexport */ elem.getBooleanTypeAttr; },
   "getNumTypeAttr": function() { return /* reexport */ elem.getNumTypeAttr; },
   "getStrTypeAttr": function() { return /* reexport */ elem.getStrTypeAttr; },
@@ -6485,7 +6487,7 @@ function siblings(elem) {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 122 modules ***!
+  !*** ./src/index.ts + 124 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -6519,6 +6521,7 @@ __webpack_require__.d(rabbit_design_namespaceObject, {
   "Poptip": function() { return components_poptip; },
   "Progress": function() { return components_progress; },
   "Result": function() { return components_result; },
+  "Skeleton": function() { return components_skeleton; },
   "Spin": function() { return components_spin; },
   "Steps": function() { return components_steps; },
   "Switch": function() { return components_switch; },
@@ -12134,6 +12137,121 @@ var Result = /** @class */ (function () {
 
 /* harmony default export */ var components_result = (result);
 
+;// CONCATENATED MODULE: ./src/components/skeleton/skeleton.ts
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+
+var Skeleton = /** @class */ (function () {
+    function Skeleton() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-skeleton', { all: true });
+        this._create(this.components);
+    }
+    Skeleton.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var _a = _this._attrs(node), active = _a.active, title = _a.title, paragraph = _a.paragraph, avatar = _a.avatar, titleWidth = _a.titleWidth, paragraphRows = _a.paragraphRows, paragraphWidth = _a.paragraphWidth, avatarSize = _a.avatarSize, avatarShape = _a.avatarShape;
+            _this._setActive(node, active);
+            _this._setMainTemplate(node);
+            _this._setTitle(node, title, titleWidth);
+            _this._showParagraph(node, paragraph, paragraphRows, paragraphWidth);
+            _this._showAvatar(node, avatar, avatarSize, avatarShape);
+            (0,dom_utils.removeAttrs)(node, [
+                'active',
+                'title',
+                'paragraph',
+                'avatar',
+                'title-width',
+                'paragraph-width',
+                'paragraph-rows',
+                'avatar-shape',
+                'avatar-size'
+            ]);
+        });
+    };
+    Skeleton.prototype._setActive = function (node, active) {
+        if (!active)
+            return;
+        node.classList.add(prefix.default.skeleton + "-active");
+    };
+    Skeleton.prototype._setMainTemplate = function (node) {
+        var template = "\n        <div class=\"" + prefix.default.skeleton + "-content\">\n            <h3 class=\"" + prefix.default.skeleton + "-title\" style=\"width: 38%\"></h3>\n            <ul class=\"" + prefix.default.skeleton + "-paragraph\">\n                <li></li>\n                <li></li>\n                <li></li>\n            </ul>\n        </div>\n        ";
+        (0,dom_utils.setHtml)(node, template);
+    };
+    Skeleton.prototype._setTitle = function (node, isShow, width) {
+        var Title = node.querySelector("." + prefix.default.skeleton + "-title");
+        this._setTitleWidth(Title, width);
+        if (isShow === 'false') {
+            node.removeChild(Title);
+        }
+    };
+    Skeleton.prototype._setTitleWidth = function (titleElm, titleWidth) {
+        (0,dom_utils.setCss)(titleElm, 'width', titleWidth + "%");
+    };
+    Skeleton.prototype._showParagraph = function (node, isShow, rows, rowsWidth) {
+        var Paragraph = node.querySelector("." + prefix.default.skeleton + "-paragraph");
+        this._setParagraphRows(Paragraph, rows);
+        this._setParagraphRowsWidth(Paragraph, rowsWidth);
+        if (isShow === 'false') {
+            node.removeChild(Paragraph);
+        }
+    };
+    Skeleton.prototype._setParagraphRows = function (pgELm, rows) {
+        if (!rows)
+            return;
+        var Fragment = document.createDocumentFragment();
+        var i = 0;
+        for (; i < rows; i++) {
+            var Row = (0,dom_utils.createElem)('li');
+            Fragment.appendChild(Row);
+        }
+        (0,dom_utils.setHtml)(pgELm, '');
+        pgELm.appendChild(Fragment);
+    };
+    Skeleton.prototype._setParagraphRowsWidth = function (pgELm, width) {
+        if (typeof width === 'number') {
+            (0,dom_utils.setCss)(pgELm.querySelector("." + prefix.default.skeleton + "-paragraph > li"), 'width', width + "%");
+        }
+        if (Array.isArray(width) && width.length) {
+            var Rows = pgELm.querySelectorAll("." + prefix.default.skeleton + "-paragraph > li");
+            var i = 0;
+            for (; i < width.length; i++) {
+                var rowWidth = width[i];
+                var Row = Rows[i];
+                Row ? (0,dom_utils.setCss)(Row, 'width', rowWidth + "%") : null;
+            }
+        }
+    };
+    Skeleton.prototype._showAvatar = function (node, avatar, size, shape) {
+        if (!avatar)
+            return;
+        var template = "\n        <div class=\"" + prefix.default.skeleton + "-header\">\n        <span class=\"" + prefix.default.skeleton + "-avatar " + prefix.default.skeleton + "-avatar-" + size + " " + prefix.default.skeleton + "-avatar-" + shape + "\"></span>\n        </div>\n        ";
+        node.insertAdjacentHTML('afterbegin', template);
+        node.classList.add(prefix.default.skeleton + "-with-avatar");
+        (0,dom_utils.setCss)(node.querySelector("." + prefix.default.skeleton + "-title"), 'width', '50%');
+    };
+    Skeleton.prototype._attrs = function (node) {
+        return {
+            active: (0,dom_utils.getBooleanTypeAttr)(node, 'active'),
+            avatar: (0,dom_utils.getBooleanTypeAttr)(node, 'avatar'),
+            title: (0,dom_utils.getStrTypeAttr)(node, 'title', 'true'),
+            paragraph: (0,dom_utils.getStrTypeAttr)(node, 'paragraph', 'true'),
+            avatarSize: (0,dom_utils.getStrTypeAttr)(node, 'avatar-size', 'large'),
+            avatarShape: (0,dom_utils.getStrTypeAttr)(node, 'avatar-shape', 'circle'),
+            titleWidth: (0,dom_utils.getNumTypeAttr)(node, 'title-width'),
+            paragraphWidth: (0,dom_utils.getNumTypeAttr)(node, 'paragraph-width', 0) ||
+                (0,dom_utils.getArrTypeAttr)(node, 'paragraph-width'),
+            paragraphRows: (0,dom_utils.getNumTypeAttr)(node, 'paragraph-rows')
+        };
+    };
+    return Skeleton;
+}());
+/* harmony default export */ var skeleton = (Skeleton);
+
+;// CONCATENATED MODULE: ./src/components/skeleton/index.ts
+
+/* harmony default export */ var components_skeleton = (skeleton);
+
 ;// CONCATENATED MODULE: ./src/components/spin/spin.ts
 
 
@@ -13024,6 +13142,7 @@ var Tooltip = /** @class */ (function () {
 /* harmony default export */ var components_tooltip = (tooltip);
 
 ;// CONCATENATED MODULE: ./src/rabbit-design.ts
+
 
 
 
