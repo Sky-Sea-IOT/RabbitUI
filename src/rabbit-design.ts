@@ -4,6 +4,7 @@ import BackTop from './components/back-top';
 import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
+import Carousel from './components/carousel';
 import Collapse from './components/collapse';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
@@ -31,6 +32,7 @@ export {
     Badge,
     Button,
     Card,
+    Carousel,
     Collapse,
     Divider,
     Drawer,
