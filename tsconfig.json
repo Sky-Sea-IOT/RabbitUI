@@ -7,7 +7,7 @@
         "module": "es2015",
         "strict": true,
         "jsx": "preserve",
-        "declaration": true,
+        "declaration": false,
         "incremental": true,
         "importHelpers": true,
         "moduleResolution": "node",

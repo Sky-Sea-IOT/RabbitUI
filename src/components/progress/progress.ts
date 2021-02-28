@@ -71,12 +71,12 @@ class Progress implements Config {
             this._createChildNodes(node);
 
             removeAttrs(node, [
-                'rb-percent',
-                'rb-show-text',
-                'rb-text-inside',
-                'rb-stroke-width',
-                'rb-stroke-color',
-                'rb-success-percent'
+                'percent',
+                'show-text',
+                'text-inside',
+                'stroke-width',
+                'stroke-color',
+                'success-percent'
             ]);
         });
     }
