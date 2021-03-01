@@ -30,7 +30,7 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.join(__dirname, '../examples/dist/index.html'),
-            template: path.join(__dirname, '../examples/skeleton/index.html')
+            template: path.join(__dirname, '../examples/carousel/index.html')
         }),
         new FriendlyErrorsPlugin()
     ]

@@ -7,6 +7,7 @@ export default {
     badge: `${prefixCls}badge`,
     button: `${prefixCls}btn`,
     card: `${prefixCls}card`,
+    carousel: `${prefixCls}carousel`,
     collapse: `${prefixCls}collapse`,
     divider: `${prefixCls}divider`,
     drawer: `${prefixCls}drawer`,
