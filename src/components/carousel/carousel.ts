@@ -26,7 +26,7 @@ class Carousel {
             const items = node.children;
             const { dots, arrow, current } = this._attrs(node);
 
-            this._setItem(items, node, current);
+            this._createItem(items, node, current);
             this._setMainTemplate(node, arrow, dots);
             this._handleArrowClick(node, arrow);
 
@@ -58,28 +58,40 @@ class Carousel {
         setHtml(node, template);
     }
 
-    private _setItem(items: HTMLCollection, node: Element, current: string): void {
-        const Fragment = document.createDocumentFragment();
+    private _createItem(items: HTMLCollection, node: Element, current: string): void {
+        const Fragment1 = document.createDocumentFragment();
+        const Fragment2 = document.createDocumentFragment();
 
         [...items].forEach((item, idx) => {
             setTimeout(() => {
                 const CarouselItem = createElem('div') as HTMLElement;
+                const CarouselDot = this._createIndicators();
 
                 CarouselItem.className = `${PREFIX.carousel}-item`;
                 CarouselItem.dataset.idx = `${idx}`;
 
                 CarouselItem.appendChild(item);
-                Fragment.appendChild(CarouselItem);
+                Fragment1.appendChild(CarouselItem);
+                Fragment2.appendChild(CarouselDot);
             }, 0);
         });
 
         setTimeout(() => {
             const CarouselList = node.querySelector(`.${PREFIX.carousel}-list`);
-            CarouselList?.appendChild(Fragment);
+            const CarouselDots = node.querySelector(`.${PREFIX.carousel}-dots`);
+
+            CarouselList?.appendChild(Fragment1);
+            CarouselDots?.appendChild(Fragment2);
 
             const currentItem = CarouselList?.querySelector(`[data-idx="${current}"]`);
             currentItem?.classList.add('active');
         }, 0);
+    }
+
+    private _createIndicators(): HTMLElement {
+        const CarouselDot = createElem('li');
+        setHtml(CarouselDot, '<button type="button"></button>');
+        return CarouselDot;
     }
 
     private _autoPlay(autoplay: boolean, speed: number): void {
