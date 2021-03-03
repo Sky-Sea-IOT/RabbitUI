@@ -4,7 +4,6 @@ import BackTop from './components/back-top';
 import Badge from './components/badge';
 import Button from './components/button';
 import Card from './components/card';
-import Carousel from './components/carousel';
 import Collapse from './components/collapse';
 import Divider from './components/divider';
 import Drawer from './components/drawer';
@@ -21,6 +20,7 @@ import Spin from './components/spin';
 import Steps from './components/steps';
 import Switch from './components/switch';
 import Tabs from './components/tabs';
+import Tag from './components/tag';
 import Time from './components/time';
 import Timeline from './components/timeline';
 import Tooltip from './components/tooltip';
@@ -32,7 +32,6 @@ export {
     Badge,
     Button,
     Card,
-    Carousel,
     Collapse,
     Divider,
     Drawer,
@@ -49,6 +48,7 @@ export {
     Steps,
     Switch,
     Tabs,
+    Tag,
     Time,
     Timeline,
     Tooltip
