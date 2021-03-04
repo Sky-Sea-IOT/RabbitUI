@@ -25,6 +25,7 @@ export default {
     skeleton: `${prefixCls}skeleton`,
     switch: `${prefixCls}switch`,
     tabs: `${prefixCls}tabs`,
+    tag: `${prefixCls}tag`,
     spin: `${prefixCls}spin`,
     steps: `${prefixCls}steps`,
     time: `${prefixCls}time`,

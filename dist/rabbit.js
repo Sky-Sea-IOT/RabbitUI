@@ -6006,6 +6006,7 @@ var prefixCls = 'rab-';
     badge: prefixCls + "badge",
     button: prefixCls + "btn",
     card: prefixCls + "card",
+    carousel: prefixCls + "carousel",
     collapse: prefixCls + "collapse",
     divider: prefixCls + "divider",
     drawer: prefixCls + "drawer",
@@ -6023,6 +6024,7 @@ var prefixCls = 'rab-';
     skeleton: prefixCls + "skeleton",
     switch: prefixCls + "switch",
     tabs: prefixCls + "tabs",
+    tag: prefixCls + "tag",
     spin: prefixCls + "spin",
     steps: prefixCls + "steps",
     time: prefixCls + "time",
@@ -6487,7 +6489,7 @@ function siblings(elem) {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 124 modules ***!
+  !*** ./src/index.ts + 126 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -6526,6 +6528,7 @@ __webpack_require__.d(rabbit_design_namespaceObject, {
   "Steps": function() { return components_steps; },
   "Switch": function() { return components_switch; },
   "Tabs": function() { return components_tabs; },
+  "Tag": function() { return components_tag; },
   "Time": function() { return components_time; },
   "Timeline": function() { return components_timeline; },
   "Tooltip": function() { return components_tooltip; }
@@ -11910,12 +11913,12 @@ var Progress = /** @class */ (function () {
         components.forEach(function (node) {
             _this._createChildNodes(node);
             (0,dom_utils.removeAttrs)(node, [
-                'rb-percent',
-                'rb-show-text',
-                'rb-text-inside',
-                'rb-stroke-width',
-                'rb-stroke-color',
-                'rb-success-percent'
+                'percent',
+                'show-text',
+                'text-inside',
+                'stroke-width',
+                'stroke-color',
+                'success-percent'
             ]);
         });
     };
@@ -12632,6 +12635,7 @@ var Switch = /** @class */ (function () {
 
 
 
+
 var Tabs = /** @class */ (function () {
     function Tabs() {
         this.VERSION = '1.0';
@@ -12713,7 +12717,7 @@ var Tabs = /** @class */ (function () {
     };
     Tabs.prototype._setTabPane = function (args) {
         var _this = this;
-        var node = args[0], panes = args[1], activekey = args[2], type = args[3], animated = args[4], closable = args[5];
+        var _a = __read(args, 6), node = _a[0], panes = _a[1], activekey = _a[2], type = _a[3], animated = _a[4], closable = _a[5];
         var TabNav = node.querySelector("." + prefix.default.tabs + "-nav");
         var TabPaneContainer = node.querySelector("." + prefix.default.tabs + "-content");
         var Fragment = document.createDocumentFragment();
@@ -12748,7 +12752,7 @@ var Tabs = /** @class */ (function () {
         tabElm.prepend(Icon);
     };
     Tabs.prototype._setTabClosable = function (args) {
-        var tabElm = args[0], type = args[1], closable = args[2], separateClose = args[3];
+        var _a = __read(args, 4), tabElm = _a[0], type = _a[1], closable = _a[2], separateClose = _a[3];
         if (!closable || type !== 'card')
             return;
         var CloseIcon = (0,dom_utils.createElem)('icon');
@@ -12769,7 +12773,7 @@ var Tabs = /** @class */ (function () {
         pane.dataset.paneKey = !key ? idx : key;
     };
     Tabs.prototype._setActive = function (args) {
-        var closable = args[0], paneContainer = args[1], tabsTab = args[2], pane = args[3], activekey = args[4], idx = args[5], animated = args[6];
+        var _a = __read(args, 7), closable = _a[0], paneContainer = _a[1], tabsTab = _a[2], pane = _a[3], activekey = _a[4], idx = _a[5], animated = _a[6];
         // @ts-ignore
         var isEqual = activekey === pane.dataset.paneKey;
         if (isEqual) {
@@ -12783,7 +12787,7 @@ var Tabs = /** @class */ (function () {
     };
     Tabs.prototype._handleToggle = function (args) {
         var _this = this;
-        var closable = args[0], tabsTab = args[1], pane = args[2], idx = args[3], disabled = args[4], animated = args[5];
+        var _a = __read(args, 6), closable = _a[0], tabsTab = _a[1], pane = _a[2], idx = _a[3], disabled = _a[4], animated = _a[5];
         (0,dom_utils.bind)(tabsTab, 'click', function () {
             if (disabled)
                 return false;
@@ -12838,7 +12842,7 @@ var Tabs = /** @class */ (function () {
         });
     };
     Tabs.prototype._changePane = function (args) {
-        var closable = args[0], paneContainer = args[1], idx = args[2], animated = args[3], pane = args[4];
+        var _a = __read(args, 5), closable = _a[0], paneContainer = _a[1], idx = _a[2], animated = _a[3], pane = _a[4];
         // 如果选项卡启用了可关闭功能，则不使用动画切换，这为了减少 tab 删除操作的工作量
         if (!closable) {
             var translateX = idx * 100;
@@ -12880,6 +12884,166 @@ var Tabs = /** @class */ (function () {
 ;// CONCATENATED MODULE: ./src/components/tabs/index.ts
 
 /* harmony default export */ var components_tabs = (tabs);
+
+;// CONCATENATED MODULE: ./src/components/tag/tag.ts
+
+
+
+
+var Tag = /** @class */ (function () {
+    function Tag() {
+        this.VERSION = '1.0';
+        this.components = (0,dom_utils.$el)('r-tag', { all: true });
+        this._create(this.components);
+    }
+    Tag.prototype.config = function (el) {
+        var target = (0,dom_utils.$el)(el);
+        validComps(target, 'tag');
+        var CloseIcon = target.querySelector("." + prefix.default.icon + "-ios-close");
+        var $this = target;
+        var checked;
+        return {
+            events: function (_a) {
+                var onClose = _a.onClose, onChange = _a.onChange;
+                (0,dom_utils.bind)(target, 'click', function () {
+                    checked = target.dataset.checked === 'true' ? true : false;
+                    onChange && isFn(onChange, checked);
+                });
+                if (!CloseIcon)
+                    return;
+                (0,dom_utils.bind)(CloseIcon, 'click', function (e) {
+                    e.stopPropagation();
+                    onClose && isFn(onClose, $this);
+                });
+            }
+        };
+    };
+    Tag.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var _a = _this._attrs(node), type = _a.type, size = _a.size, color = _a.color, checked = _a.checked, checkable = _a.checkable, closable = _a.closable;
+            _this._setBasicTemplate(node);
+            _this._setType(node, type);
+            _this._setIsChecked(node, checked);
+            _this._setSize(node, size);
+            _this._setColor(node, type, checkable, color);
+            _this._setClosable(node, closable);
+            _this._setCheckable(node, checkable);
+            _this._handleClose(node, closable);
+            (0,dom_utils.removeAttrs)(node, ['type', 'size', 'color', 'checked', 'checkable', 'closable']);
+        });
+    };
+    Tag.prototype._setBasicTemplate = function (node) {
+        var content = (0,dom_utils.setHtml)(node);
+        (0,dom_utils.setHtml)(node, "<span class=\"" + prefix.default.tag + "-text\">" + content + "</span>");
+    };
+    Tag.prototype._setType = function (node, type) {
+        if (type)
+            node.classList.add(prefix.default.tag + "-" + type);
+        if (type === 'dot') {
+            node.insertAdjacentHTML('afterbegin', "<span class=\"" + prefix.default.tag + "-dot-inner\"></span>");
+        }
+    };
+    Tag.prototype._setIsChecked = function (node, checkable) {
+        if (checkable !== 'true')
+            return;
+        node.classList.add(prefix.default.tag + "-checked");
+    };
+    Tag.prototype._setColor = function (node, type, checkable, color) {
+        var _defaultColors = this._defaultColors;
+        var isUseDefaultColor = _defaultColors().includes(color);
+        var TagText = node.querySelector("." + prefix.default.tag + "-text");
+        if (!color)
+            return;
+        if (isUseDefaultColor) {
+            node.classList.add(prefix.default.tag + "-" + color);
+        }
+        else {
+            (0,dom_utils.setCss)(node, 'background', "" + color);
+            (0,dom_utils.setCss)(node, 'borderColor', "" + color);
+        }
+        if (color !== 'default' && type !== 'dot' && type !== 'border' && !checkable) {
+            TagText === null || TagText === void 0 ? void 0 : TagText.classList.add(prefix.default.tag + "-color-white");
+        }
+        if (isUseDefaultColor && type === 'border') {
+            TagText === null || TagText === void 0 ? void 0 : TagText.classList.add(prefix.default.tag + "-color-" + color);
+        }
+        else {
+            (0,dom_utils.setCss)(TagText, 'color', "" + color);
+        }
+    };
+    Tag.prototype._setSize = function (node, size) {
+        if (!size)
+            return;
+        node.classList.add(prefix.default.tag + "-size-" + size);
+    };
+    Tag.prototype._setClosable = function (node, closable) {
+        if (!closable)
+            return;
+        node.classList.add(prefix.default.tag + "-closable");
+        node.insertAdjacentHTML('beforeend', "<i class=\"" + prefix.default.icon + " " + prefix.default.icon + "-ios-close\"></i>");
+    };
+    Tag.prototype._setCheckable = function (node, checkable) {
+        if (!checkable)
+            return;
+        node.classList.remove(prefix.default.tag + "-checked");
+        var TagText = node.querySelector("." + prefix.default.tag + "-text");
+        (0,dom_utils.bind)(node, 'click', function () {
+            var isChecked = node.classList.contains(prefix.default.tag + "-checked");
+            // @ts-ignore
+            node.dataset.checked = !isChecked;
+            node.classList[isChecked ? 'remove' : 'add'](prefix.default.tag + "-checked");
+            TagText === null || TagText === void 0 ? void 0 : TagText.classList[isChecked ? 'remove' : 'add'](prefix.default.tag + "-color-white");
+        });
+    };
+    Tag.prototype._handleClose = function (node, closable) {
+        if (!closable)
+            return;
+        var CloseIcon = node.querySelector("." + prefix.default.icon + "-ios-close");
+        (0,dom_utils.bind)(CloseIcon, 'click', function () {
+            destroyElem(node, { fadeOut: true });
+        });
+    };
+    Tag.prototype._defaultColors = function () {
+        var COLORS = [
+            'default',
+            'primary',
+            'success',
+            'warning',
+            'error',
+            'blue',
+            'green',
+            'red',
+            'yellow',
+            'pink',
+            'magenta',
+            'volcano',
+            'orange',
+            'gold',
+            'lime',
+            'cyan',
+            'geekblue',
+            'purple'
+        ];
+        return COLORS;
+    };
+    Tag.prototype._attrs = function (node) {
+        return {
+            type: (0,dom_utils.getStrTypeAttr)(node, 'type', ''),
+            size: (0,dom_utils.getStrTypeAttr)(node, 'size', ''),
+            color: (0,dom_utils.getStrTypeAttr)(node, 'color', 'default'),
+            checked: (0,dom_utils.getStrTypeAttr)(node, 'checked', 'true'),
+            closable: (0,dom_utils.getBooleanTypeAttr)(node, 'closable'),
+            checkable: (0,dom_utils.getBooleanTypeAttr)(node, 'checkable')
+        };
+    };
+    return Tag;
+}());
+/* harmony default export */ var tag = (Tag);
+
+;// CONCATENATED MODULE: ./src/components/tag/index.ts
+
+/* harmony default export */ var components_tag = (tag);
 
 // EXTERNAL MODULE: ./src/components/time/time.ts
 var time = __webpack_require__("./src/components/time/time.ts");
@@ -13142,6 +13306,7 @@ var Tooltip = /** @class */ (function () {
 /* harmony default export */ var components_tooltip = (tooltip);
 
 ;// CONCATENATED MODULE: ./src/rabbit-design.ts
+
 
 
 
