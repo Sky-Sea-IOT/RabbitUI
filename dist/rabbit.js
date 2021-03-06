@@ -6004,6 +6004,7 @@ var prefixCls = 'rab-';
     avatar: prefixCls + "avatar",
     backtop: prefixCls + "back-top",
     badge: prefixCls + "badge",
+    breadcrumb: prefixCls + "breadcrumb",
     button: prefixCls + "btn",
     card: prefixCls + "card",
     carousel: prefixCls + "carousel",
@@ -6011,6 +6012,7 @@ var prefixCls = 'rab-';
     divider: prefixCls + "divider",
     drawer: prefixCls + "drawer",
     dropdown: prefixCls + "dropdown",
+    inputNumber: prefixCls + "input-number",
     icon: prefixCls + "icon",
     loadingBar: prefixCls + "loading-bar",
     message: prefixCls + "message",
@@ -6489,7 +6491,7 @@ function siblings(elem) {
 
 /***/ "./src/index.ts":
 /*!************************************!*\
-  !*** ./src/index.ts + 126 modules ***!
+  !*** ./src/index.ts + 128 modules ***!
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -6510,6 +6512,7 @@ __webpack_require__.d(rabbit_design_namespaceObject, {
   "Avatar": function() { return components_avatar; },
   "BackTop": function() { return components_back_top; },
   "Badge": function() { return components_badge; },
+  "Breadcrumb": function() { return components_breadcrumb; },
   "Button": function() { return components_button; },
   "Card": function() { return components_card; },
   "Collapse": function() { return components_collapse; },
@@ -9552,6 +9555,53 @@ var Badge = /** @class */ (function () {
 ;// CONCATENATED MODULE: ./src/components/badge/index.ts
 
 /* harmony default export */ var components_badge = (badge);
+
+;// CONCATENATED MODULE: ./src/components/breadcrumb/breadcrumb.ts
+
+
+var Breadcrumb = /** @class */ (function () {
+    function Breadcrumb() {
+        this.VERSION = 'v1.0';
+        this.components = (0,dom_utils.$el)('r-breadcrumb', { all: true });
+        this._create(this.components);
+    }
+    Breadcrumb.prototype._create = function (components) {
+        var _this = this;
+        components.forEach(function (node) {
+            var separator = _this._attrs(node).separator;
+            _this._createItem(node, separator);
+            (0,dom_utils.removeAttrs)(node, ['separator']);
+        });
+    };
+    Breadcrumb.prototype._createItem = function (node, separator) {
+        var children = node.children;
+        var Fragment = document.createDocumentFragment();
+        Array.from(children).forEach(function (child) {
+            var Wrapper = (0,dom_utils.createElem)('span');
+            var Separator = (0,dom_utils.createElem)('span');
+            Separator.className = prefix.default.breadcrumb + "-item-separator";
+            // 设置分隔符
+            (0,dom_utils.setHtml)(Separator, "" + separator);
+            child.classList.add(prefix.default.breadcrumb + "-item-link");
+            // 初始化为行内块样式
+            (0,dom_utils.setCss)(child, 'display', 'inline-block');
+            Wrapper.append(child, Separator);
+            Fragment.appendChild(Wrapper);
+        });
+        node.appendChild(Fragment);
+    };
+    Breadcrumb.prototype._attrs = function (node) {
+        return {
+            separator: (0,dom_utils.getStrTypeAttr)(node, 'separator', '/')
+        };
+    };
+    return Breadcrumb;
+}());
+/* harmony default export */ var breadcrumb = (Breadcrumb);
+
+;// CONCATENATED MODULE: ./src/components/breadcrumb/index.ts
+
+/* harmony default export */ var components_breadcrumb = (breadcrumb);
 
 ;// CONCATENATED MODULE: ./src/components/button/button.ts
 
@@ -13306,6 +13356,7 @@ var Tooltip = /** @class */ (function () {
 /* harmony default export */ var components_tooltip = (tooltip);
 
 ;// CONCATENATED MODULE: ./src/rabbit-design.ts
+
 
 
 

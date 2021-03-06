@@ -2,6 +2,7 @@ import Alert from './components/alert';
 import Avatar from './components/avatar';
 import BackTop from './components/back-top';
 import Badge from './components/badge';
+import Breadcrumb from './components/breadcrumb';
 import Button from './components/button';
 import Card from './components/card';
 import Collapse from './components/collapse';
@@ -30,6 +31,7 @@ export {
     Avatar,
     BackTop,
     Badge,
+    Breadcrumb,
     Button,
     Card,
     Collapse,
